@@ -1,18 +1,20 @@
 
 window.addEventListener('load', () => {
     var carousel3d = document.querySelector('.carousel');
-
     initCarousel(carousel3d);
 
 });
 
-function initCarousel(root) {
-    let figure = root.querySelector('figure');
+function rotateCarousel(theta, imageIndex, figure) {
+    figure.style.transform = `rotateY(${imageIndex * -theta}rad)`;
+}
+
+
+function initCarousel(parent) {
+    let figure = parent.querySelector('figure');
     let nav = document.querySelector('.carousel-nav');
     let images = figure.children;
     let n = images.length;
-    let gap = root.dataset.gap || 0;
-    let bfc = 'bfc' in root.dataset;
 
     let theta =  2 * Math.PI / n;
     let currImage = 0;
@@ -26,20 +28,20 @@ function initCarousel(root) {
 
     function setupCarousel(n, s) {
         var apothem = s / (2 * Math.tan(Math.PI / n));
-        
+
         figure.style.transformOrigin = `50% 50% ${- apothem}px`;
 
         for (var i = 0; i < n; i++)
-            images[i].style.padding = `${gap}px`;
+            images[i].style.padding = `0`;
         for (i = 1; i < n; i++) {
             images[i].style.transformOrigin = `50% 50% ${- apothem}px`;
             images[i].style.transform = `rotateY(${i * theta}rad)`;
         }
-        if (bfc)
-            for (i = 0; i < n; i++)
-                 images[i].style.backfaceVisibility = 'hidden';
+        for (i = 0; i < n; i++) {
+            images[i].style.backfaceVisibility = 'hidden';
+        }
         
-        rotateCarousel(currImage);
+        rotateCarousel(theta, currImage, figure);
     }
 
     function setupNavigation() {
@@ -59,13 +61,12 @@ function initCarousel(root) {
                 currImage--;
             }
             
-            rotateCarousel(currImage);
+            rotateCarousel(theta, currImage, figure);
         }
-            
-    }
-
-    function rotateCarousel(imageIndex) {
-        figure.style.transform = `rotateY(${imageIndex * -theta}rad)`;
     }
     
+    setInterval(function() {
+        setupCarousel(n, parseFloat(getComputedStyle(images[0]).width));
+    }, 60);
+
 }

@@ -143,13 +143,11 @@ code {
 .carousel-container {
     display: flex;
     flex-direction: column;
-    height: 500px;
+    height: 700px;
     justify-content: center;
 }
 
 /*///////////////////////////////////////////////////////////////////////////////////*/
-
-
 
 .carousel {
   padding: 20px;
