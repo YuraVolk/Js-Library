@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
 
 function initCarousel(root) {
     let figure = root.querySelector('figure');
-    let nav = root.querySelector('.carousel-nav');
+    let nav = document.querySelector('.carousel-nav');
     let images = figure.children;
     let n = images.length;
     let gap = root.dataset.gap || 0;
