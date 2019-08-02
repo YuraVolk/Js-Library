@@ -164,20 +164,20 @@ code {
   flex: 0 0 auto;
 }
 
-.carousel figure {
+.carousel-figure {
   margin: 0;
   width: 40%;
   transform-style: preserve-3d;
   transition: transform 0.5s;
 }
 
-.carousel figure img {
+.carousel-figure img {
   width: 100%;
   box-sizing: border-box;
   padding: 0 0px;
 }
 
-.carousel figure img:not(:first-of-type) {
+.figure__img:not(:first-of-type) {
   position: absolute;
   left: 0;
   top: 0;
@@ -199,11 +199,6 @@ code {
   letter-spacing: 1px;
   padding: 5px 10px;
 }
-
-
-
-
-
 
 /*///////////////////////////////////////////////////////////////////////////////////*/
 
