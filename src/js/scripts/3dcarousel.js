@@ -6,7 +6,7 @@ window.addEventListener('load', () => {
 });
 
 function rotateCarousel(theta, imageIndex, figure) {
-    figure.style.transform = `rotateY(${imageIndex * -theta}rad)`;
+    figure.style.transform = "rotateY(" + imageIndex * -theta + "rad)";
 }
 
 
@@ -29,14 +29,15 @@ function initCarousel(parent) {
     function setupCarousel(n, s) {
         var apothem = s / (2 * Math.tan(Math.PI / n));
 
-        figure.style.transformOrigin = `50% 50% ${- apothem}px`;
+        figure.style.transformOrigin = "50% 50% " + -apothem + "px";
 
-        for (var i = 0; i < n; i++)
-            images[i].style.padding = `0`;
-        for (i = 1; i < n; i++) {
-            images[i].style.transformOrigin = `50% 50% ${- apothem}px`;
-            images[i].style.transform = `rotateY(${i * theta}rad)`;
+        for (var i = 0; i < n; i++) {
+            images[i].style.padding = "0";
+        }for (i = 1; i < n; i++) {
+            images[i].style.transformOrigin = "50% 50% " + -apothem + "px";
+            images[i].style.transform = "rotateY(" + i * theta + "rad)";
         }
+        
         for (i = 0; i < n; i++) {
             images[i].style.backfaceVisibility = 'hidden';
         }
