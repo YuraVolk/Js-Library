@@ -156,6 +156,7 @@ code {
   display: flex;
   flex-direction: column;
   align-items: center;
+  /*height: 870px; Vertical carousel ONLY*/
 }
 
 .carousel > * {
@@ -167,6 +168,7 @@ code {
   width: 40%;
   transform-style: preserve-3d;
   transition: transform 0.5s;
+  /*margin-top: 120px; Vertical carousel ONLY*/
 }
 
 .carousel-figure img {

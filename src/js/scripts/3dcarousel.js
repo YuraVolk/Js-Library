@@ -2,13 +2,12 @@
 window.addEventListener('load', () => {
     var carousel3d = document.querySelector('.carousel');
     initCarousel(carousel3d);
-
 });
 
 function rotateCarousel(theta, imageIndex, figure) {
+    //figure.style.transform = "rotateX(" + imageIndex * -theta + "rad)"  VERTICAL CAROUSEL ONLY;
     figure.style.transform = "rotateY(" + imageIndex * -theta + "rad)";
 }
-
 
 function initCarousel(parent) {
     let figure = parent.querySelector('figure');
@@ -19,6 +18,11 @@ function initCarousel(parent) {
     let theta =  2 * Math.PI / n;
     let currImage = 0;
     
+    /*setupCarousel(n, parseFloat(getComputedStyle(images[0]).height));
+    window.addEventListener('resize', () => { 
+        setupCarousel(n, parseFloat(getComputedStyle(images[0]).height)) 
+    }); VERTICAL CAROUSEL ONLY*/
+
     setupCarousel(n, parseFloat(getComputedStyle(images[0]).width));
     window.addEventListener('resize', () => { 
         setupCarousel(n, parseFloat(getComputedStyle(images[0]).width)) 
@@ -35,7 +39,9 @@ function initCarousel(parent) {
             images[i].style.padding = "0";
         }for (i = 1; i < n; i++) {
             images[i].style.transformOrigin = "50% 50% " + -apothem + "px";
+            //images[i].style.transform = "rotateX(" + i * theta + "rad)"  VERTICAL CAROUSEL ONLY;
             images[i].style.transform = "rotateY(" + i * theta + "rad)";
+            images[i].style.padding = "0";
         }
         
         for (i = 0; i < n; i++) {
@@ -67,7 +73,8 @@ function initCarousel(parent) {
     }
     
     setInterval(function() {
+        //setupCarousel(n, parseFloat(getComputedStyle(images[0]).height))  VERTICAL CAROUSEL ONLY;
         setupCarousel(n, parseFloat(getComputedStyle(images[0]).width));
-    }, 60);
+    }, 160);
 
 }

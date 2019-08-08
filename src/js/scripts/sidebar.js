@@ -20,13 +20,12 @@ document.addEventListener('click', e => {
         document.querySelector('body').style = 'margin: 0';
     }
 })
-
 document.addEventListener('mousemove', e => {
     if (e.clientX < 5) {
         document.querySelector('.sidenav').style = 'display: block';
         document.querySelector('body').style = 'margin-left: 300px';
     }
-})
+});
 
 document.querySelector('.sidenav').style = 'display: none';
 document.querySelector('body').style = 'margin: 0';
