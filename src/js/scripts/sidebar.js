@@ -8,10 +8,11 @@ Array.from(document.getElementsByTagName('section')).forEach(elMain => {
             break;
         }
     }
+
 });
 
 array.forEach(el => {
-    document.querySelector('.sidenav').insertAdjacentHTML('beforeend', '<a href="#' + el + '">' + el + '</a>');
+    document.querySelector('.sidenav').insertAdjacentHTML('beforeend', '<a href="#' + el.replace(/ /g,'') + '">' + el + '</a>');
 });
 
 document.addEventListener('click', e => {

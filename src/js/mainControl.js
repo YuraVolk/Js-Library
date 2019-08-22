@@ -1,5 +1,4 @@
-//Library currently has 9 scripts finished
-// 72 Scripts total written
+//Library currently has 17 scripts finished
 
 markups = [
     `
@@ -599,19 +598,23 @@ markups = [
         });</code></pre>
     `,`
     <pre><code>
-    
+  
 window.addEventListener('load', () => {
     var carousel3d = document.querySelector('.carousel');
-    initCarousel(carousel3d);
-
+  
+    initCarousel(carousel3d, true);
 });
 
-function rotateCarousel(theta, imageIndex, figure) {
-    figure.style.transform = "rotateY(" + imageIndex * -theta + "rad)";
+function rotateCarousel(theta, imageIndex, figure, isntVertical) {
+    //figure.style.transform = "rotateX(" + imageIndex * -theta + "rad)"  VERTICAL CAROUSEL ONLY;
+    if (isntVertical) {  
+        figure.style.transform = "rotateY(" + imageIndex * -theta + "rad)";
+    } else {
+        figure.style.transform = "rotateX(" + imageIndex * -theta + "rad)";
+    }
 }
 
-
-function initCarousel(parent) {
+function initCarousel(parent, isntVertical) {
     let figure = parent.querySelector('figure');
     let nav = document.querySelector('.carousel-nav');
     let images = figure.children;
@@ -620,11 +623,23 @@ function initCarousel(parent) {
     let theta =  2 * Math.PI / n;
     let currImage = 0;
     
-    setupCarousel(n, parseFloat(getComputedStyle(images[0]).width));
+    /*setupCarousel(n, parseFloat(getComputedStyle(images[0]).height));
     window.addEventListener('resize', () => { 
-        setupCarousel(n, parseFloat(getComputedStyle(images[0]).width)) 
-    });
-
+        setupCarousel(n, parseFloat(getComputedStyle(images[0]).height)) 
+    }); VERTICAL CAROUSEL ONLY*/
+   
+    if (isntVertical) {
+        setupCarousel(n, parseFloat(getComputedStyle(images[0]).width));
+        window.addEventListener('resize', () => { 
+            setupCarousel(n, parseFloat(getComputedStyle(images[0]).width)) 
+        });
+    } else {
+        setupCarousel(n, parseFloat(getComputedStyle(images[0]).height));
+        window.addEventListener('resize', () => { 
+            setupCarousel(n, parseFloat(getComputedStyle(images[0]).height)) 
+        });
+    }
+    
     setupNavigation();
 
     function setupCarousel(n, s) {
@@ -636,14 +651,20 @@ function initCarousel(parent) {
             images[i].style.padding = "0";
         }for (i = 1; i < n; i++) {
             images[i].style.transformOrigin = "50% 50% " + -apothem + "px";
-            images[i].style.transform = "rotateY(" + i * theta + "rad)";
+            //images[i].style.transform = "rotateX(" + i * theta + "rad)"  VERTICAL CAROUSEL ONLY;
+            if (isntVertical) {
+                images[i].style.transform = "rotateY(" + i * theta + "rad)";
+            } else {
+                images[i].style.transform = "rotateX(" + i * theta + "rad)";
+            }
+            images[i].style.padding = "0";
         }
         
         for (i = 0; i < n; i++) {
             images[i].style.backfaceVisibility = 'hidden';
         }
         
-        rotateCarousel(theta, currImage, figure);
+        rotateCarousel(theta, currImage, figure, isntVertical);
     }
 
     function setupNavigation() {
@@ -659,31 +680,525 @@ function initCarousel(parent) {
             if (t.classList.contains('next')) {
                 currImage++;
             }
-            else {
+            else if (t.classList.contains('prev')) {
                 currImage--;
+            } else if (t.classList.contains('switch3d')) {
+                isntVertical = !isntVertical;
+                if (isntVertical) {
+                    parent.style.height = 'auto';
+                    figure.style.marginTop = 0;
+                } else {
+                    parent.style.height = '870px';
+                    figure.style.marginTop = '120px';
+                }
             }
             
-            rotateCarousel(theta, currImage, figure);
+            rotateCarousel(theta, currImage, figure, isntVertical);
         }
     }
-    
+
     setInterval(function() {
-        setupCarousel(n, parseFloat(getComputedStyle(images[0]).width));
-    }, 60);
+        //setupCarousel(n, parseFloat(getComputedStyle(images[0]).height))  VERTICAL CAROUSEL ONLY;
+        if (isntVertical) { 
+            setupCarousel(n, parseFloat(getComputedStyle(images[0]).width));
+        } else {
+            setupCarousel(n, parseFloat(getComputedStyle(images[0]).height));
+        }
+    }, 160);
 
 }
     </code></pre>
+    `,
     `
+    <pre><code>
+    var index = 0;
+    var amount = 0;
+    var currTransl = [];
+    var translationComplete = true;
+    var moveOffset = 0;
+    
+    var transitionCompleted = function(){
+        translationComplete = true;
+    }
+    
+    var carousel = document.getElementById('carousel');
+    amount = document.getElementsByClassName("slide").length;
+    moveOffset = parseInt(window.getComputedStyle(document.getElementById('carousel-container')).width, 10);
+    carousel.style.width = (amount * moveOffset) + 'px';
+    for(var i = 0; i < amount; i++) {
+        currTransl[i] = -moveOffset;
+        document.getElementsByClassName("slide")[i].addEventListener("transitionend", transitionCompleted, true);                    
+        document.getElementsByClassName("slide")[i].addEventListener("webkitTransitionEnd", transitionCompleted, true);                    
+        document.getElementsByClassName("slide")[i].addEventListener("oTransitionEnd", transitionCompleted, true);                    
+        document.getElementsByClassName("slide")[i].addEventListener("MSTransitionEnd", transitionCompleted, true);                  
+    }
+    
+    carousel.insertBefore(carousel.children[4], carousel.children[0]);
+    
+    function changeSlides(isNext) {
+        if(translationComplete === true) {
+            translationComplete = false;
+            if (isNext) {
+                var outerIndex = (index) % amount;
+                index++;
+            } else {
+                index--;
+                if (index == -1) {
+                    index = amount-1;
+                }
+                var outerIndex = (index) % amount;
+            }
+    
+            for (var i = 0; i < amount; i++) {
+                var slide = document.getElementsByClassName("slide")[i];    
+                slide.style.opacity = '1';    
+                if (isNext) {
+                    slide.style.transform = 'translateX('+(currTransl[i]-moveOffset)+'px)';
+                    currTransl[i] = currTransl[i]-moveOffset;
+                } else {
+                    slide.style.transform = 'translateX('+(currTransl[i]+moveOffset)+'px)';
+                    currTransl[i] = currTransl[i]+moveOffset;
+                }
+            }
+    
+            var outerSlide = document.getElementsByClassName("slide")[outerIndex];
+            outerSlide.style.opacity = '0';
+            if (isNext) {
+                outerSlide.style.transform = 'translateX('+(currTransl[outerIndex]+(moveOffset*amount))+'px)';
+                currTransl[outerIndex] = currTransl[outerIndex]+moveOffset*(amount);
+            } else {
+                outerSlide.style.transform = 'translateX('+(currTransl[outerIndex]-(moveOffset*amount))+'px)';
+                currTransl[outerIndex] = currTransl[outerIndex]-moveOffset*(amount);
+            }
+        }
+    }
+    
+    document.addEventListener('click', (event) => { 
+        if (event.target.classList[1] === 'previous') {
+            changeSlides(false);
+        }
+        if (event.target.classList[1] === 'nextSlide') {
+            changeSlides(true);
+        }
+    }, true);
+    </code></pre>
+    `,
+    `
+    <pre><code>
+    
+    var sections = Array.from(document.querySelectorAll('.accordion'));
+
+    sections.forEach(el => {
+        el.classList.add("hidden");
+    });
+
+    function switchAccordion(target) {
+        if (target.classList[1] === "hidden") {
+            sections.forEach(el => {
+                el.classList.add("hidden");
+            });
+            target.classList.remove("hidden");
+        } else {
+            target.classList.add("hidden");
+        }
+    }
+
+    document.addEventListener('click', event => { 
+        if (event.target.parentNode.classList[0] === "accordion") {
+            switchAccordion(event.target.parentNode);
+        }
+    });
+    </code></pre>
+    `,
+    `
+    <pre><code>
+    let isTyping = false;
+
+    var markups = [
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit,\nsed do eiusmod tempor incididunt ut labore et dolore\nmagna aliqua. Ut enim ad minim veniam, quis nostrud\nexercitation ullamco laboris nisi ut aliquip ex ea\ncommodo consequat.", 
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit,\nsed do eiusmod tempor incididunt ut labore et dolore\nmagna aliqua. Ut enim ad minim veniam, quis nostrud\nexercitation ullamco laboris nisi ut aliquip ex ea\ncommodo consequat. Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit, sed do eiusmod tempor \nincididunt ut labore et dolore magna aliqua. Ut enim ad \nminim veniam, quis nostrud exercitation ullamco laboris \nnisi ut aliquip ex ea commodo consequat."
+    ];
+
+    function startTyping(content, el, letterUniq) {
+        var index = 0;
+        if (letterUniq) {
+            el.textContent = '';
+        }
+        while (index <= content.length) {
+            (function(index) {
+                setTimeout(function() {
+                    if (!letterUniq) {
+                        el.textContent = content.substr(0, index);
+                    } else {
+                        el.insertAdjacentHTML('beforeend', "<span class=\"animationWave\">" + content.charAt(index) + "</span>");
+                    }
+
+                    if (index >= content.length) {
+                    isTyping = false;
+                    }
+                }, 35 * index);
+            })(index++);
+        }
+    }
+
+    document.addEventListener('click', event => {
+        if(event.target.classList[1] === "typeButton--1") {
+            if (!isTyping) {
+                isTyping = true;
+                startTyping(markups[0], document.querySelector('.self-typing-1'), false);
+            }
+        }
+        if(event.target.classList[1] === "typeButton--2") {
+            if (!isTyping) {
+                isTyping = true;
+                startTyping(markups[1], document.querySelector('.self-typing-2'), true);
+            }
+        }
+    });
+    </code></pre>
+    `,
+    `<pre><code>
+    let phrases = [
+        'This text transforms   ',
+        'into other texts       ',
+        'no jQuery or any plugin',
+        'just pure javascript   ',
+        'Cool, right?            '
+    ];
+    
+    const phrasesLastLetters = [];
+    let isRebulding1 = false;
+    
+    function setCharAt(str,index,char) {
+        if(index > str.length-1) return str;
+    
+        return str.substr(0,index) + char + str.substr(index+1);
+    }
+    
+    function moderateLists() {
+        phrases.forEach(el => {
+            phrasesLastLetters.push(el.charAt(0));
+        });
+    }
+    
+    function rebuildTextFinal(el, phrase, nextPhrase) {
+    
+        let firstLetter = nextPhrase.charAt(0);
+        let newText = phrase;
+        let isDone = false;
+    
+        for (var i = 0; (i < nextPhrase.length - 1 && !isDone); i++) {
+            (function(i) {
+                setTimeout(function() {
+                    newText = setCharAt(newText, i - 1, nextPhrase.charAt(i));
+                    setTimeout(function() {
+                        if (i < phrase.length - 1) {
+                            newText = setCharAt(newText, i - 1, nextPhrase.charAt(i - 1));
+                        } 
+                    }, 25 * i); 
+                    if (i > 1) {
+                        newText = newText.replace(newText.charAt(1), nextPhrase.charAt(1));     
+                    }
+                    if (i > 4) {
+                        newText = newText.replace(newText.charAt(3), nextPhrase.charAt(3));     
+                        newText = newText.replace(newText.charAt(2), nextPhrase.charAt(2));     
+                    }
+                    if (!isDone) {
+                        newText =  newText.replace(newText.charAt(0), firstLetter);
+                        el.textContent = '' + newText;
+                    }
+                    if (!(i < nextPhrase.length - 1)) {
+                        el.textContent = nextPhrase;
+                        isDone = true;
+                    }
+                }, 75 * i);
+              
+            })(index++);
+        }
+    }
+    
+    
+    moderateLists();
+    let element, index, phraseNext;
+    let gI = -1;
+    
+    let inter;
+    
+    document.addEventListener('click', event => { 
+        if (event.target.classList[1] === 'cipherButton--0') {
+            isRebulding1 = true;
+            inter = window.setInterval(() => {
+                if (gI === phrases.length - 1) {
+                    gI = 0;
+                } else {
+                    gI++;
+                }
+                element = document.querySelector('.rebuildingText--0');
+                index = (gI);
+                if (gI === phrases.length - 1) {
+                    phraseNext = phrases[0];
+                } else {
+                    phraseNext = phrases[gI + 1];
+                }
+    
+                rebuildTextFinal(element, phrases[index], phraseNext);
+            }, 3670);
+        }
+        if (event.target.classList[1] === 'cipherButton--1') {
+            if (typeof inter !== 'undefined') {
+                window.clearInterval(inter);
+            }
+        }
+    });
+    </code></pre>`,
+    `<pre><code>
+    let nextPhrase = 'into text that is reciphered';
+    const phrases = ['This text rechipers', 'into text that is reciphered', 'still no jQuery or any other plugin', 'It IS cool'];
+    let isRebuilding = false;
+
+    function cipherLetter(el, newLetter, isTimed) {
+        const symbols = ['!', '"', '#', '$', '%', '*', '0', '1', ':', ';', '?', '@', '[', ']', '\\', '~', "'", '/', '{', '}', '|', '&', '(', ')', '-', '<', '>'];
+        let changeNumber;
+        if (!isTimed) {
+            changeNumber = Math.round(Math.random() * (44 - 6) + 6);
+        } else {
+            changeNumber = Math.round(Math.random() * (14 - 6) + 6);
+        }
+        let isDone = false;
+        var index = 0;
+        setTimeout(function() {
+            while (index <= changeNumber) { 
+                (function(index) {
+                    setTimeout(function() {
+                        if (!isDone) {
+                            let symbol = symbols[Math.floor(Math.random() * symbols.length)];
+                            el.textContent = symbol;
+                        }
+                        if (!(index < changeNumber)) {
+                            isDone = true;
+                            el.textContent = newLetter;
+                            el.classList.remove('changed');
+                        }
+                    }, 65 * index);
+                })(index++);
+            }
+        }, Math.random() * 1000);
+    }
+
+    function splitText(el, nextPhraseLength) {
+        const oldText = el.textContent;
+        el.textContent = '';
+        for (var i = 0; i < oldText.length; i++) {
+            el.insertAdjacentHTML('beforeend', '<span>' + oldText.charAt(i) + '</span>');
+        }
+        if (nextPhraseLength > oldText.length) {
+            for (var i = 0; i < nextPhraseLength - oldText.length; i++) {
+                el.insertAdjacentHTML('beforeend', '<span></span>');
+            }
+        }
+    }
+
+    function recipherText(children, nextText) {
+        children.forEach((el, i) => {
+            if (!(el.textContent == nextText.charAt(i))) {
+                el.classList.add('changed');
+                if (el.textContent.length === 0) {
+                    setTimeout(function() {
+                        cipherLetter(el, nextText.charAt(i), true);
+                    }, 45 * i);
+                } else {
+                    cipherLetter(el, nextText.charAt(i), false);
+                }
+            }
+        });
+    }
+
+    let element = document.querySelector('.rebuildingText--1');
+    let inter;
+    let gI = -1;
+
+    document.addEventListener('click', event => { 
+    
+        if (event.target.classList[1] === 'scrambleButton--0') {
+            isRebuilding = true;
+            inter = window.setInterval(() => {
+                if (gI === phrases.length - 1) {
+                    gI = 0;
+                } else {
+                    gI++;
+                }
+                let index = (gI);
+                if (gI === phrases.length - 1) {
+                    nextPhrase = phrases[0];
+                } else {
+                    nextPhrase = phrases[gI + 1];
+                }
+                element.textContent = phrases[index];
+            
+                splitText(element, nextPhrase.length);
+                recipherText(Array.from(element.childNodes), nextPhrase);
+            }, 7680);
+        }
+        if (event.target.classList[1] === 'scrambleButton--1') {
+            if (typeof inter !== 'undefined') {
+                window.clearInterval(inter);
+            }
+        }
+    });
+    </code></pre>`,
+    `<pre><code>
+    class Item {
+        constructor(image) {
+            image.item = this;
+            this.image = image;
+            this.fullWidth = image.width;
+            this.fullHeight = image.height;
+            this.alt = image.alt;
+            this.title = image.title;
+            image.style.position = 'absolute';
+            this.moveTo = function (x, y, scale) {
+                this.width = this.fullWidth * scale;
+                this.height = this.fullHeight * scale;
+                this.x = x;
+                this.y = y;
+                this.scale = scale;
+                var style = this.image.style;
+                style.width = this.width + "px";
+                style.left = x + "px";
+                style.top = y + "px";
+                style.zIndex = "" + (scale * 100) | 0;
+            };
+        }
+    }
+    
+    class Carousel {
+        constructor(container, options) {
+            var self = this;
+            this.items = [];
+            let item = container;
+            this.xCentre = (options.xPos === null) ? item.offsetWidth * 0.5 : options.xPos;
+            this.yCentre = (options.yPos === null) ? item.offsetHeight * 0.1 : options.yPos;
+            this.xRadius = (options.xRadius === null) ? item.offsetWidth / 2.3 : options.xRadius;
+            this.yRadius = (options.yRadius === null) ? item.offsetHeight / 6 : options.yRadius;
+            this.farScale = options.farScale;
+            this.rotation = this.destRotation = Math.PI / 2;
+            this.speed = options.speed;
+            this.frameTimer = 0;
+            this.rotateItem = function (itemIndex, rotation) {
+                var item = this.items[itemIndex];
+                var sin = Math.sin(rotation);
+                var farScale = this.farScale;
+                var scale = farScale + ((1 - farScale) * (sin + 1) * 0.5);
+                item.moveTo(this.xCentre + (scale * ((Math.cos(rotation) * this.xRadius) - (item.fullWidth * 0.5))), this.yCentre + (scale * sin * this.yRadius), scale);
+            };
+            this.render = function () {
+                var count = this.items.length;
+                var spacing = 2 * Math.PI / count;
+                var radians = this.rotation;
+                for (var i = 0; i < count; i++) {
+                    this.rotateItem(i, radians);
+                    radians += spacing;
+                }
+            };
+            this.playFrame = function () {
+                var change = this.destRotation - this.rotation;
+                if (Math.abs(change) <= 0) {
+                    this.rotation = this.destRotation;
+                    clearTimeout(this.frameTimer);
+                    this.frameTimer = 0;
+                }
+                else {
+                    this.rotation += change * this.speed;
+                    this.scheduleNextFrame();
+                }
+                this.render();
+            };
+            this.scheduleNextFrame = function () {
+                this.frameTimer = setTimeout(function () { self.playFrame(); }, 32);
+            };
+            this.itemsRotated = function () {
+                return this.items.length * ((Math.PI / 2) - this.rotation) / (2 * Math.PI);
+            };
+            this.floatIndex = function () {
+                var floatIndex = this.itemsRotated() % this.items.length;
+                return (floatIndex < 0) ? floatIndex + this.items.length : floatIndex;
+            };
+            this.nearestIndex = function () {
+                return Math.round(this.floatIndex()) % this.items.length;
+            };
+            this.go = function (count) {
+                this.destRotation += (2 * Math.PI / this.items.length) * count;
+                if (this.frameTimer === 0)
+                    this.scheduleNextFrame();
+            };
+            var images = item.querySelectorAll('.carouselm-item');
+            document.addEventListener('click', e => {
+                if (e.target.classList[1] == 'carousel-menu-left') {
+                    self.go(-1);
+                }
+                if (e.target.classList[1] == 'carousel-menu-right') {
+                    self.go(1);
+                }
+            });
+            this.finishInit = function () {
+                clearInterval(this.initTimer);
+                for (var i = 0; i < images.length; i++) {
+                    this.items.push(new Item(images[i]));
+                }
+                this.render();
+            };
+            this.initTimer = setInterval(function () { self.finishInit(); }, 50);
+        }
+    }
+    
+    
+    window.onload = function () {
+        const options = {
+            xPos: null,
+            yPos: 42,
+            xRadius: null,
+            yRadius: 48,
+            farScale: 0.5,
+            speed: 0.13
+        };
+    
+        new Carousel(document.querySelector('#carouselm'), options);
+    };
+    </code></pre>`,
+    `<pre><code>
+    document.querySelector('.zoom-container').addEventListener('mousemove', function (e) {
+        let style = document.querySelector('.zoom__hover').style;
+        let x = e.pageX - this.offsetLeft;
+        let y = e.pageY - this.offsetTop;
+        let imgWidth = document.querySelector('.zoom__image').width;
+        let imgHeight = document.querySelector('.zoom__image').height;
+        let xMove = ((x / imgWidth) * 100);
+        let yMove = ((y / imgHeight) * 100);
+    
+        if (x > (.01 * imgWidth)) {
+            xMove += (.15 * xMove);
+        };
+    
+        if (y >= (.01 * imgHeight)) {
+            yMove += (.15 * yMove);
+        };
+        
+        style.backgroundPositionX = (xMove - 9) + '%';
+        style.backgroundPositionY = (yMove - 9) + '%';
+        style.left = (x - 34) + 'px';
+        style.top = (y - 34) + 'px';
+    }, false);    
+    </code></pre>`
 ];
 
 document.addEventListener('click', event => {
     if (event.target.parentNode.classList[0] === 'block__btn') {
         let nodeList = Array.from(document.querySelector(`.${event.target.parentNode.classList[1]}`).parentNode.childNodes);
-
+     
         const markEl = nodeList[nodeList.length - 2];
-        const markUp = markups[`.${event.target.parentNode.classList[1]}`.slice(-1)];
+        const markUp = markups[`.${event.target.parentNode.classList[1]}`.replace(/\D/g,'')];
         const btn = document.querySelector(`.${event.target.parentNode.classList[1]}`).parentNode.childNodes[3];
-
+        
         if (btn.classList[2] === 'active') {
             btn.classList.remove('active');
             while (markEl.firstChild) {

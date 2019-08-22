@@ -39,10 +39,10 @@ body {
 
 .filter__slider-btn {
     padding: 8px 18px;
-    border: 3px solid #f4f4f4;
-    background: transparent;
+    border: 3px solid #333333;
+    background: #313131;
     border-radius: 5px;
-    color: #8c8c8c;
+    color: #f5f5f5;
     font-size: 14px;
     line-height: 21px;
     font-family: "Montserrat Light";
@@ -59,6 +59,11 @@ body {
 .filter-wrap {
     background-color: #efef6e;
 }
+
+.label {
+  display: block;
+}
+
 
 .block__caption {
     font-family: "Raleway ExtraBold";
@@ -147,9 +152,54 @@ code {
     justify-content: center;
 }
 
+
 /*///////////////////////////////////////////////////////////////////////////////////*/
 
-.carousel {
+
+#carousel-container{
+	width: 370px;
+	height: 220px;
+	position: relative;
+  margin: 50px auto;
+  outline: 3px #333333 dashed;
+}
+#carousel-container > div:first-child{
+	overflow: hidden;
+	max-width: 100%;
+	margin: 0;
+}
+#carousel{
+	position: relative;
+	width: 5000px;
+	height: 220px;
+    padding: 0;
+    margin: 0;
+}
+
+.animate{
+	-webkit-transition-duration: .5s;
+    -moz-transition-duration: .5s;
+    -o-transition-duration: .5s;
+    transition-duration: .5s;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    -o-transition-property: -o-transform;
+    transition-property: transform;
+}
+.slide {
+    list-style: none;
+	position: relative;
+	float: left;
+	transform: translateX(-370px)
+}
+
+.align {
+  margin: 15px auto;
+}
+
+/*///////////////////////////////////////////////////////////////////////////////////*/
+
+.tdcarousel {
   padding: 20px;
   perspective: 500px;
   overflow: hidden;
@@ -158,7 +208,7 @@ code {
   align-items: center;
 }
 
-.carousel > * {
+.tdcarousel > * {
   flex: 0 0 auto;
 }
 
@@ -185,7 +235,7 @@ code {
   display: flex;
   justify-content: space-between;
   margin: 20px auto;
-  width: 300px;
+  width: 500px;
 }
 
 .carousel-nav button {
@@ -577,4 +627,105 @@ input[type=range] {
 
 .close {
   display: none;
+}
+
+.accordion {
+  width: 600px;
+  /*max-height: 500px;*/
+  overflow: hidden;
+  border: 3px solid #333333;
+  background-color: #4d4c4d;
+  border-top: 0;
+  transition: max-height 0.4s linear;
+}
+
+.hidden {
+  max-height: 40px;
+}
+
+.accordion:first-of-type {
+  border-top: 3px solid #333333;
+}
+
+.accordion__content {
+  padding: 20px;
+  transition: max-height 0.2s linear forwards;
+  color: antiquewhite;
+}
+
+.accordion__heading {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  background-color: lightcoral;
+  color: #e6e6e6;
+}
+
+.animationWave {
+  color: #333333;
+  animation: 0.5s color infinite;
+}
+
+@keyframes color {
+  50% {
+    color: rgb(87, 187, 157);
+  }
+}
+
+.changed {
+  color: #4d4c4d;
+}
+
+
+#carouselm {
+  width: 100%;
+  height: 460px;
+  position: relative;
+  overflow: hidden;
+}
+
+#picker {
+  cursor: crosshair;
+}
+
+.zoom-container {
+  position: relative;
+  width: 370px;
+  height: 220px;
+  margin-bottom: 15px;
+}
+
+.zoom__image {
+  width: 100%;
+  box-sizing: border-box;
+  height: auto;
+  border: 16px #333 solid;
+}
+
+.zoom__image:hover, 
+.zoom__image:active {
+  cursor: zoom-in;
+  display: block;
+}
+
+.zoom__hover {
+  width: 60px;
+  height: 60px;
+  background: url('../img/slide0.png') no-repeat #FFF;
+  box-shadow: 0 5px 10px -2px rgba(0,0,0,0.3);
+  pointer-events: none;
+  position: absolute;
+  opacity: 0;
+  z-index: 99;
+  display: block;
+  transition: opacity .2s;
+  overflow: hidden;
+  transform: scale(1.5);
+}
+
+.zoom__image:hover + .zoom__hover, 
+.zoom__image:active + .zoom__hover {
+  opacity: 1;
 }
