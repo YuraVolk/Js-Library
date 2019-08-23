@@ -16,11 +16,14 @@ function switchAccordion(target) {
         sections.forEach(el => {
             el.classList.add("hidden");
             el.style.maxHeight = "";
+            el.style.cursor = "pointer";
         });
+        target.childNodes[1].style.cursor = "n-resize";
         target.style.maxHeight = widths[sections.indexOf(target)] + 40 + 'px';
         target.classList.remove("hidden");
     } else {
         target.style.maxHeight = "";
+        target.childNodes[1].style.cursor = "pointer";
         target.classList.add("hidden");
     }
 }

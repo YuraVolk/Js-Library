@@ -15,11 +15,15 @@ function addEventListen(panel) {
         var changePosition = function(event) {
             panel.style.left = initX + event.clientX - mousePressX + 'px';
             panel.style.top = initY + event.clientY - mousePressY + 'px';
+            panel.style.cursor = "-webkit-grabbing";
+            panel.style.cursor = "grabbing";
         }
         
         panel.addEventListener('mousemove', changePosition, false);
 
         window.addEventListener('mouseup', function() {
+            panel.style.cursor = "-webkit-grab";
+            panel.style.cursor = "grab";
             panel.removeEventListener('mousemove', changePosition, false);
         }, false);
 

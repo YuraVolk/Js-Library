@@ -12,17 +12,17 @@
     }
 
     function ideasSwitchIdeaSrc(n, x) {
-       x[1].src = "img/slide" + n + ".png";
+       x[1].src = "img/slide" + n + ".webp";
 
         if (n === 5) {
-            x[2].src = "img/slide" + 0 + ".png";
+            x[2].src = "img/slide" + 0 + ".webp";
         } else {
-            x[2].src = "img/slide" + (n + 1) + ".png";
+            x[2].src = "img/slide" + (n + 1) + ".webp";
         }
         if (n === 0) {
-            x[0].src = "img/slide" + 5 + ".png";
+            x[0].src = "img/slide" + 5 + ".webp";
         } else {
-            x[0].src = "img/slide" + (n - 1) + ".png";
+            x[0].src = "img/slide" + (n - 1) + ".webp";
         }
     }
 

@@ -11,7 +11,7 @@ function initColorPicker() {
 
     var image = new Image(256, 256);
     image.onload = () => canvasContext.drawImage(image, 0, 0, image.width, image.height); 
-    image.src = "picker.png";
+    image.src = "picker.webp";
     canvasEl.onmousedown = function(mouseEvent) {
       var imgData = canvasContext.getImageData(mouseEvent.offsetX, mouseEvent.offsetY, 1, 1);
       rgba = imgData.data;

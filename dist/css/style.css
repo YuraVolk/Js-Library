@@ -713,7 +713,7 @@ input[type=range] {
 .zoom__hover {
   width: 60px;
   height: 60px;
-  background: url('../img/slide0.png') no-repeat #FFF;
+  background: url('../img/slide0.webp') no-repeat #FFF;
   box-shadow: 0 5px 10px -2px rgba(0,0,0,0.3);
   pointer-events: none;
   position: absolute;
@@ -728,4 +728,17 @@ input[type=range] {
 .zoom__image:hover + .zoom__hover, 
 .zoom__image:active + .zoom__hover {
   opacity: 1;
+}
+
+.modalButton,
+.block__arrow,
+.popup__close,
+.nav,
+.accordion__heading {
+  cursor: pointer;
+}
+
+.floatingPanel {
+  cursor: -webkit-grab; 
+  cursor: grab;
 }
