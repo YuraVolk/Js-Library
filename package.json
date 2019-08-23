@@ -8,7 +8,7 @@
     "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development --open"
   },
-  "author": "",
+  "author": "Yuri Volkovskiy",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.5.5",
