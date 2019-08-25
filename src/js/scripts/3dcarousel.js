@@ -20,7 +20,6 @@ function initCarousel(parent, isntVertical) {
     
     let images = Array.from(figure.querySelectorAll('.figure__img'));
     let n = images.length;
-    console.log(images);
     let theta =  2 * Math.PI / n;
     let currImage = 0;
     
