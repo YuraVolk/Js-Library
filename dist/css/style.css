@@ -202,43 +202,69 @@ code {
 .tdcarousel {
   padding: 20px;
   perspective: 500px;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
+  width: auto;
+  height: 100%;
   flex-direction: column;
   align-items: center;
 }
 
 .tdcarousel > * {
   flex: 0 0 auto;
+  margin: 0 auto;
 }
 
 .carousel-figure {
   margin: 0;
   width: 40%;
   transform-style: preserve-3d;
+  transition: transform-style 0.5s;
   transition: transform 0.5s;
 }
 
-.carousel-figure img {
+.carousel-figure picture {
   width: 100%;
-  box-sizing: border-box;
+  height: auto;
+  box-sizing: margin-box;
   padding: 0 0px;
+  position: relative;
+}
+
+.figure__img {
+  width: 100%;
+  height: auto;
+  box-sizing: margin-box;
+  padding: 0 0px;
+  position: relative;
+}
+
+.carousel-figure picture:not(:first-of-type) {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0 auto;
+  padding: 0 auto;
 }
 
 .figure__img:not(:first-of-type) {
   position: absolute;
   left: 0;
   top: 0;
+  margin: 0 auto;
+  padding: 0 auto;
 }
 
 .carousel-nav {
   display: flex;
   justify-content: space-between;
   margin: 20px auto;
+  padding: 0;
   width: 500px;
 }
 
 .carousel-nav button {
+  animation: none;
   flex: 0 0 auto;
   color: #676767;
   font-weight: 2000;
@@ -741,4 +767,20 @@ input[type=range] {
 .floatingPanel {
   cursor: -webkit-grab; 
   cursor: grab;
+}
+
+picture {
+  display: inline;
+}
+
+source {
+  display: inline;
+}
+
+picture img {
+  display: inline;
+}
+
+.carousel-figure div {
+  display: inline;
 }

@@ -15,11 +15,12 @@ function rotateCarousel(theta, imageIndex, figure, isntVertical) {
 }
 
 function initCarousel(parent, isntVertical) {
-    let figure = parent.querySelector('figure');
+    let figure = parent.querySelector('div');
     let nav = document.querySelector('.carousel-nav');
-    let images = figure.children;
+    
+    let images = Array.from(figure.querySelectorAll('.figure__img'));
     let n = images.length;
-
+    console.log(images);
     let theta =  2 * Math.PI / n;
     let currImage = 0;
     
