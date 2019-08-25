@@ -202,30 +202,40 @@ code {
 .tdcarousel {
   padding: 20px;
   perspective: 500px;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
+  width: auto;
+  height: 100%;
   flex-direction: column;
   align-items: center;
 }
 
 .tdcarousel > * {
   flex: 0 0 auto;
+  margin: 0 auto;
 }
 
 .carousel-figure {
   margin: 0;
-  width: 40%;	
-  transform-style: preserve-3d;	 
+  width: 40%;
+  transform-style: preserve-3d;
+  transition: transform-style 0.5s;
   transition: transform 0.5s;
 }
 
 .carousel-figure picture {
-  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  box-sizing: margin-box;
   padding: 0 0px;
+  position: relative;
 }
 
 .figure__img {
+  width: 100%;
+  height: auto;
   padding: 0 0px;
+  position: relative;
 }
 
 .carousel-figure picture:not(:first-of-type) {
@@ -237,7 +247,9 @@ code {
 .figure__img:not(:first-of-type) {
   position: absolute;
   left: 0;
-  top: 0;	
+  top: 0;
+  margin: 0 auto;
+  padding: 0 auto;
 }
 
 .carousel-nav {
