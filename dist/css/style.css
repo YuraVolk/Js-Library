@@ -781,3 +781,29 @@ picture img {
 .carousel-figure div {
   display: inline;
 }
+
+.scrollable {
+  width: 800px;
+  height: 500px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  border: 3px solid #333333;
+  position: relative;
+}
+
+.headerScroll--bottom {
+  position: sticky;
+  top: 0;
+  background-color: #e6e6e6;
+  z-index: 999;
+}
+
+.hide {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+}
+
+.relative {
+  position: relative;
+}

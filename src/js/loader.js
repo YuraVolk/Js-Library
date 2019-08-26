@@ -15,5 +15,6 @@ import './scripts/rebuildingText';
 import './scripts/cipheringText';
 import './scripts/3dcarouselMenu';
 import './scripts/zoomer';
+import './scripts/stickyHeader';
 
 import './mainControl';
