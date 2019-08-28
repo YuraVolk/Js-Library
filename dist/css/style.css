@@ -830,3 +830,20 @@ picture img {
   border: 3px solid #2390bb;
   box-sizing: border-box;
 }
+
+.scroll-select {
+  cursor: n-resize;
+  scrollbar-width: none;
+}
+
+.scroll-select::-webkit-scrollbar { 
+  display: none; 
+} 
+
+.scroll-select::-ms-scrollbar { 
+  display: none; 
+} 
+
+.scroll-select::-o-scrollbar { 
+  display: none; 
+} 
