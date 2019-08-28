@@ -1,3 +1,5 @@
+"use strict"; 
+
 document.querySelector('.zoom-container').addEventListener('mousemove', function (e) {
     let style = document.querySelector('.zoom__hover').style;
     let x = e.pageX - this.offsetLeft;

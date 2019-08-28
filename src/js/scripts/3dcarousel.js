@@ -1,3 +1,4 @@
+"use strict"; 
 
 window.addEventListener('load', () => {
     var carousel3d = document.querySelector('.tdcarousel');

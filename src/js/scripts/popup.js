@@ -1,3 +1,5 @@
+"use strict"; 
+
 let scroll, timeLeft, isActive;
 
 function showPopup(popup) {

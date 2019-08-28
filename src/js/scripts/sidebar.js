@@ -1,3 +1,5 @@
+"use strict"; 
+
 const array = [];
 
 Array.from(document.getElementsByTagName('section')).forEach(elMain => {
@@ -25,7 +27,7 @@ document.addEventListener('click', e => {
 document.addEventListener('mousemove', e => {
     if (e.clientX < 5) {
         document.querySelector('.sidenav').style = 'display: block';
-        document.querySelector('body').style = 'margin-left: 300px';
+        document.querySelector('body').style = 'margin-left: 19%';
     }
 })
 

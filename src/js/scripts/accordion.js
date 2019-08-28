@@ -1,3 +1,4 @@
+"use strict"; 
 
 var sections = Array.from(document.querySelectorAll('.accordion'));
 const widths = [];
