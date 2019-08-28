@@ -11,9 +11,9 @@ function scrollDir(event) {
     }
 
     if (delta < 0) {
-        return true; //* down
+        return true;
     } else if (delta > 0) {
-        return false; //* up
+        return false;
     }
 }
 
