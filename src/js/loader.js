@@ -18,5 +18,6 @@ import './scripts/zoomer';
 import './scripts/stickyHeader';
 import './scripts/upcomingWindow';
 import './scripts/onePageScroll';
+import './scripts/calculator';
 
 import './mainControl';
