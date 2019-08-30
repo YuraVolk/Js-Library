@@ -1498,6 +1498,7 @@ function initCarousel(parent, isntVertical) {
         ? Navigator 
         ? Initiations
             ! Observers are not included
+            ? Only server side information and server context
     * Event listeners 
         * Click listener
         * Scroll, wheel, mousemove
@@ -1511,6 +1512,16 @@ function initCarousel(parent, isntVertical) {
     * Shared Array Buffer
         ? Connect code parts to main bundle
         ! If can be replaced easily, do not use SAB
+    
+    Lower is my principles, not structure
+    //Window naming
+    //Cacheless Objects
+    *DRY Principle is important over all
+    //Feature detection, not browser detection
+    //Inline event handlers
+    *If error is unavoidable, use try/catch or promise
+
+    * Yuriy Volkovkiy
 */
 
 document.addEventListener('click', event => {

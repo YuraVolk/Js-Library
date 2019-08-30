@@ -89,9 +89,7 @@ function removeSymbol() {
     }
 }
 
-function addPrefix(prefix, endPrefix) {
-    const symbols = ['+', '-', '*', '%', '/'];
-
+function insertPrefix(symbols, prefix, endPrefix) {
     if (symbols.includes(operations[curNum - 1]) && operations[curNum].length === 0) {
         operations.splice(-2, 1);
     }
@@ -101,6 +99,17 @@ function addPrefix(prefix, endPrefix) {
         operations.push("");
     }
     curNum = operations.length - 1;
+}
+
+function addPrefix(prefix, endPrefix = "") {
+    const symbols = ['+', '-', '*', '%', '/'];
+    if (prefix !== '1 / ') {
+        insertPrefix(symbols, prefix, endPrefix);
+    } else {
+        if (operations[curNum] !== "0" && evaluateEquation() !== 0) {
+            insertPrefix(symbols, prefix, endPrefix);
+        }
+    }
 }
 
 document.addEventListener('click', (e) => {
@@ -131,13 +140,13 @@ document.addEventListener('click', (e) => {
             changePosNeg();
         }
         if (classEl === 'calculator__btn--square') {
-            addPrefix('Math.sqrt', "");
+            addPrefix('Math.sqrt');
         }
         if (classEl === 'calculator__btn--sqr') {
             addPrefix('Math.pow', ",2");
         }
         if (classEl === 'calculator__btn--partial') {
-            addPrefix('1 / ', "");
+            addPrefix('1 / ');
         }
         if (classEl === 'calculator__btn--delete') {
             removeSymbol();
