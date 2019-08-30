@@ -77,7 +77,22 @@ function removeSymbol() {
     }
 }
 
+function formatNumber() {
+    let str = res.toString().replace(/Math.sqrt/g, "\u221A");
+    str = str.replace(/,2/g, "\u00B2");
+    str = str.replace(/Math.pow/g, "");
+    str = str.replace(/\//g, "\u00F7");
+    str = str.replace(/\*/g, "\u00D7");
+    str = str.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+    return str;
+}
+
 function addPrefix(prefix, endPrefix) {
+    const symbols = ['+', '-', '*', '%', '/'];
+
+    if (symbols.includes(operations[curNum - 1]) && operations[curNum].length === 0) {
+        operations.splice(-2, 1);
+    }
     operations.splice(operations[curNum - 1], 0, prefix + "("); 
     operations.push(endPrefix + ")");
     if (!(operations[operations.length - 1] === "")) {
@@ -120,7 +135,7 @@ document.addEventListener('click', (e) => {
             addPrefix('Math.pow', ",2");
         }
         if (classEl === 'calculator__btn--partial') {
-            addPrefix('1/', "");
+            addPrefix('1 / ', "");
         }
         if (classEl === 'calculator__btn--delete') {
             removeSymbol();
@@ -136,7 +151,7 @@ document.addEventListener('click', (e) => {
         if (classEl === 'calculator__btn--equal') {
             res = evaluateEquation();
         }
-        element.textContent = res;
+        element.textContent = formatNumber();
     }
 });
 
