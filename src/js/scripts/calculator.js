@@ -3,12 +3,17 @@ let res = "0";
 let curNum = 0;
 let element = document.querySelector('.calculator__result');
 
-function renderNum(classEl) {
+function renderNum(classEl) { 
     if (operations[curNum] === "0") {
         operations[curNum] = "";
     }
-    operations[curNum] += classEl[classEl.length - 1];
-
+    if (operations[curNum - 1]) {
+        if (!(classEl[classEl.length - 1] === "0" && operations[curNum - 1] === '/') && (operations[curNum - 1] !== ')')) { 
+            operations[curNum] += classEl[classEl.length - 1];
+        }
+    } else {
+        operations[curNum] += classEl[classEl.length - 1];
+    }
 }
 
 function addFraction() {
@@ -17,40 +22,73 @@ function addFraction() {
     }
 }
 
+function changePosNeg() {
+    if (operations[curNum].indexOf('-') > -1) {
+        operations[curNum] = (Math.abs(operations[curNum])).toString();
+    } else {
+        operations[curNum] = (-Math.abs(operations[curNum])).toString();
+    }
+}
+
+function insertSymbol(symbol) {
+    curNum++;
+    operations[curNum] = symbol;
+    curNum++;
+    operations[curNum] = "";
+}
+
 function addSymbol(symbol) {
     if (operations.length > 1) {
-        if (!isNaN(operations[operations.length - 1]) && operations[operations.length - 1].length !== 0) {
-            curNum++;
-            operations[curNum] = symbol;
-            curNum++;
-            operations[curNum] = "";
+        if (!isNaN(operations[operations.length - 1]) && operations[operations.length - 1].length !== 0) { 
+            insertSymbol(symbol);
+        } else if (operations[curNum - 1] === ')') {
+            insertSymbol(symbol);
         }
     } else {
-        curNum++;
-        operations[curNum] = symbol;
-        curNum++;
-        operations[curNum] = "";
+        insertSymbol(symbol);
     }
 }
 
 function evaluateEquation() {
     if (operations.length > 1) {
-        //* Get array to be ready to use
+        let result;
         if (!(typeof operations[operations.length - 2] === 'number') && (operations[operations.length - 1].length === 0)) {
-            operations.splice(-2,1);
+            if (!(operations[operations.length - 2].indexOf(')') > -1)) {
+                operations.splice(-2,1);
+            }
         }
         if (operations[operations.length - 1].length === 0) {
             operations.pop();
         }
-        res = eval(operations.join(" "));
-        operations = [res + ""];
-        element.textContent = res;
+        curNum = 0;
+        result = eval(operations.join(" "));
+        operations.length = 0;
+        operations = [result + ""];
+        return result;
     }
+}
+
+function removeSymbol() {
+    if (operations[curNum].length > 0) {
+        operations[curNum] = operations[curNum].slice(0, -1);
+        if (operations[curNum] === "") {
+            operations[curNum] = "0";
+        }
+    }
+}
+
+function addPrefix(prefix, endPrefix) {
+    operations.splice(operations[curNum - 1], 0, prefix + "("); 
+    operations.push(endPrefix + ")");
+    if (!(operations[operations.length - 1] === "")) {
+        operations.push("");
+    }
+    curNum = operations.length - 1;
 }
 
 document.addEventListener('click', (e) => {
     if (e.target.classList[0] === 'calculator__btn') {
-        const classEl = e.target.classList[1]; //* Init Important
+        const classEl = e.target.classList[1]; 
         if (!isNaN(classEl[classEl.length - 1])) {
             renderNum(classEl);
         } 
@@ -72,13 +110,33 @@ document.addEventListener('click', (e) => {
         if (classEl === 'calculator__btn--modulus') {
             addSymbol('%');
         }
-        if (classEl === 'calculator__btn--ce') {
+        if (classEl === 'calculator__btn--plusminus') {
+            changePosNeg();
+        }
+        if (classEl === 'calculator__btn--square') {
+            addPrefix('Math.sqrt', "");
+        }
+        if (classEl === 'calculator__btn--sqr') {
+            addPrefix('Math.pow', ",2");
+        }
+        if (classEl === 'calculator__btn--partial') {
+            addPrefix('1/', "");
+        }
+        if (classEl === 'calculator__btn--delete') {
+            removeSymbol();
+        }
+        if (classEl === 'calculator__btn--c') {
+            curNum = 0;
             operations = ["0"];
         }
-        res = operations.join(" ");
-        element.textContent = res;
-        if (classEl === 'calculator__btn--equal') {
-            evaluateEquation('+');
+        if (classEl === 'calculator__btn--ce') {
+            operations[curNum] = "0";
         }
+        res = operations.join(" ");
+        if (classEl === 'calculator__btn--equal') {
+            res = evaluateEquation();
+        }
+        element.textContent = res;
     }
 });
+
