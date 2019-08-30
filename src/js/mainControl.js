@@ -1470,6 +1470,49 @@ function initCarousel(parent, isntVertical) {
     </code></pre>`
 ];
 
+/*
+    Order of initializations.
+    * Variables
+        * Constant Arrays
+        * Arrays
+            ! Only active operations.
+            ? If about two variables, use two lets.
+        * Let and Constants
+        * Var 
+            ? Can be used to work more effectively with timeout loops
+            ! Use must be really TASK SPECIFIC
+        * Presets
+            ? Use is needed only if two classes are connected
+    * Functions
+        * IIFES
+            ! Only inner module pattern or timed closure
+        * Classes
+        * Function Expressions
+            ? Use with closures, IIFES connections and event formats
+            ? Const only declaration
+        * Function Declarations
+    * Standalone code
+        ? Timeouts
+        ? Onloads
+            ! Service Worker is IIFE
+        ? Navigator 
+        ? Initiations
+            ! Observers are not included
+    * Event listeners 
+        * Click listener
+        * Scroll, wheel, mousemove
+        * Task Aligned
+            ? Other event listeners
+        * Custom
+            ! Event listener MUST be complex and passive
+        * MutationObservers
+            ! Use only when information is changed.
+        * Passive event listeners
+    * Shared Array Buffer
+        ? Connect code parts to main bundle
+        ! If can be replaced easily, do not use SAB
+*/
+
 document.addEventListener('click', event => {
     if (event.target.parentNode.classList[0] === 'block__btn') {
         let nodeList = Array.from(document.querySelector(`.${event.target.parentNode.classList[1]}`).parentNode.childNodes);

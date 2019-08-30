@@ -3,6 +3,18 @@ let res = "0";
 let curNum = 0;
 let element = document.querySelector('.calculator__result');
 
+const formatNumber = function() {
+    if (res) {
+        let str = res.toString().replace(/Math.sqrt/g, "\u221A");
+        str = str.replace(/,2/g, "\u00B2");
+        str = str.replace(/Math.pow/g, "");
+        str = str.replace(/\//g, "\u00F7");
+        str = str.replace(/\*/g, "\u00D7");
+        str = str.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+        return str;
+    }
+}
+
 function renderNum(classEl) { 
     if (operations[curNum] === "0") {
         operations[curNum] = "";
@@ -75,16 +87,6 @@ function removeSymbol() {
             operations[curNum] = "0";
         }
     }
-}
-
-function formatNumber() {
-    let str = res.toString().replace(/Math.sqrt/g, "\u221A");
-    str = str.replace(/,2/g, "\u00B2");
-    str = str.replace(/Math.pow/g, "");
-    str = str.replace(/\//g, "\u00F7");
-    str = str.replace(/\*/g, "\u00D7");
-    str = str.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-    return str;
 }
 
 function addPrefix(prefix, endPrefix) {
