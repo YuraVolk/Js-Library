@@ -1514,6 +1514,9 @@ function initCarousel(parent, isntVertical) {
     * Shared Array Buffer
         ? Connect code parts to main bundle
         ! If can be replaced easily, do not use SAB
+    * Other code
+      ? Any other code
+    * Debugger
     * Export
         ! Only one export per file
 */

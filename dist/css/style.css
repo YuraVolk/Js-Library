@@ -719,7 +719,8 @@ input[type=range]:focus {
 }
 
 
-#carouselm {
+#carouselm,
+#carouselStar {
   width: 100%;
   height: 460px;
   position: relative;
@@ -874,7 +875,7 @@ picture img {
 }
 
 .calculator__btn {
-  width: 100%; 
+  width: 100%;
   height: 100%;
   font-weight: 200;
   font-size: 22px;
@@ -905,11 +906,11 @@ picture img {
 }
 
 .calculator__result::-webkit-scrollbar {
-  width: 0px; 
+  width: 0px;
   background: transparent;
 }
 
 .calculator__result::-o-scrollbar {
-  width: 0px; 
+  width: 0px;
   background: transparent;
 }
