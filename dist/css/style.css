@@ -912,3 +912,30 @@ picture img {
   width: 0px;
   background: transparent;
 }
+
+.toInvert {
+  background-color: #ffffff;
+  filter: invert(0%);
+  transition: background-color 0.3s cubic-bezier(0.895, 0.03, 0.685, 0.22), filter 0.3s cubic-bezier(0.895, 0.03, 0.685, 0.22), color 0.3s ease-out;
+  transition-delay: 250ms;
+}
+
+.toInvert img {
+  filter: brightness(100%);
+  transition: filter 0.3s ease;
+  transition-delay: 250ms;
+}
+
+.inverted {
+  background-color: #333333;
+  color: #e6e6e6;
+  filter: invert(8.56%);
+}
+
+.inverted hr {
+  color: #e6e6e6;
+}
+
+.inverted img {
+  filter: brightness(125%);
+}

@@ -19,5 +19,6 @@ import './scripts/stickyHeader';
 import './scripts/upcomingWindow';
 import './scripts/onePageScroll';
 import './scripts/calculator';
+import './scripts/screenInvert';
 
 import './mainControl';
