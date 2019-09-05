@@ -1,4 +1,4 @@
-//Library currently has 22 scripts finished
+//Library currently has 23 scripts finished
 
 markups = [
   `
@@ -1514,9 +1514,9 @@ function initCarousel(parent, isntVertical) {
       const el = document.querySelector('.autocomplete-items');
       for (var i = 0; i < countries.length; i++) {
         if (countries[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-        el.insertAdjacentHTML('beforeend', '<div class="item-set">\n<span><strong>' +
+        el.insertAdjacentHTML('beforeend', '<div class="item-set"><span><strong>' +
               countries[i].substr(0, val.length) + '</strong>' + countries[i].substr(val.length) +
-            '</span>\n<input class="autoInput" type="hidden" value="' + countries[i] + '">\n </div>');
+            '</span><input class="autoInput" type="hidden" value="' + countries[i] + '"> </div>');
         }
       }
     });
