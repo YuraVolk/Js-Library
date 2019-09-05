@@ -1501,6 +1501,54 @@ function initCarousel(parent, isntVertical) {
         }
       }
     });
+    </code></pre>`,
+    `<pre><code>
+    let autoInput = document.querySelector('.autocomplete-input');
+    autoInput.addEventListener("input", function (e) {
+      const val = this.value;
+      closeAllLists();
+      if (!val) {
+        return false;
+      }
+      this.parentNode.insertAdjacentHTML('afterbegin', '<div id="autocomplete-list" class="autocomplete-items"></div>');
+      const el = document.querySelector('.autocomplete-items');
+      for (var i = 0; i < countries.length; i++) {
+        if (countries[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+        el.insertAdjacentHTML('beforeend', '<div class="item-set">\n<span><strong>' +
+              countries[i].substr(0, val.length) + '</strong>' + countries[i].substr(val.length) +
+            '</span>\n<input class="autoInput" type="hidden" value="' + countries[i] + '">\n </div>');
+        }
+      }
+    });
+    autoInput.addEventListener("keydown", function (e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+    });
+
+    function closeAllLists(target) {
+      const list = document.getElementsByClassName("autocomplete-items");
+      for (var i = 0; i < list.length; i++) {
+        if (target != list[i] && target != autoInput) {
+          list[i].remove();
+        }
+      }
+    }
+
+    document.addEventListener("click", function (e) {
+      if (e.target.parentNode.classList[0] === 'item-set') {
+        autoInput.value = e.target.parentNode.childNodes[3].value;
+      }
+      if (e.target.parentNode.parentNode.classList) {
+        if (e.target.parentNode.parentNode.classList[0] === 'item-set') {
+          autoInput.value = e.target.parentNode.parentNode.childNodes[3].value;
+        }
+      }
+      if (e.target.classList[0] === 'item-set') {
+        autoInput.value = e.target.childNodes[3].value;
+      }
+      closeAllLists(e.target);
+    });
+
     </code></pre>`
 ];
 
