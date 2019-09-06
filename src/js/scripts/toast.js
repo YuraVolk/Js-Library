@@ -4,15 +4,7 @@ function showToast() {
   if (isHidden === 0) {
     isHidden = 1;
     const wrap = document.querySelector('.toast-wrap');
-    wrap.insertAdjacentHTML('afterbegin', `<div class="toast">
-    <div class="justify">
-      <span>Some Toast Content Here</span>
-      <div class="flexbox-toast">
-        <button class="modalButton closeToast">OK</button>
-        <button class="modalButton closeToast">Cancel</button>
-      </div>
-    </div>
-  </div>`);
+    wrap.insertAdjacentHTML('afterbegin', "<div class=\"toast\">\n    <div class=\"justify\">\n      <span>Some Toast Content Here</span>\n      <div class=\"flexbox-toast\">\n        <button class=\"modalButton closeToast\">OK</button>\n        <button class=\"modalButton closeToast\">Cancel</button>\n      </div>\n    </div>\n  </div>");
   }
 }
 
