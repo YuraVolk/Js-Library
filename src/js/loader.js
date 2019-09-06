@@ -22,5 +22,6 @@ import './scripts/calculator';
 import './scripts/screenInvert';
 import './scripts/autocomplete';
 import './scripts/imageComparsion';
+import './scripts/toast';
 
 import './mainControl';

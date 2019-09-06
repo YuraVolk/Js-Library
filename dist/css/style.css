@@ -109,6 +109,17 @@ code {
   }
 }
 
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(75%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
 
 .slider {
   display: flex;
@@ -1002,3 +1013,40 @@ picture img {
   background-color: #333333;
   border-radius: 50%;
 }
+
+.toast {
+  position: fixed;
+  bottom: -150px;
+  left: 25%;
+  width: 50%;
+  background-color: blueviolet;
+  opacity: 0.95;
+  padding: 8px;
+  border-radius: 25px;
+  height: 200px;
+  color: #e6e6e6;
+  z-index: 9999;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  box-sizing: border-box;
+  padding-top: 16px;
+  animation: slide-up 0.8s ease-out;
+  transition: bottom 0.8s ease-in;
+}
+
+.justify {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flexbox-toast {
+  display: flex;
+  justify-content: space-around;
+  width: 200px;
+}
+
+.flexbox-toast button {
+  height: 20px;
+  padding: 15px;
+  box-sizing: border-box;
+}
+

@@ -12,7 +12,7 @@ function compareImages(img, index, length) {
   slider = document.createElement("DIV");
   slider.setAttribute("class", "comparsion-slider");
   img.parentElement.insertBefore(slider, img);
-  slider.style.top = (height / 2) -  (slider.offsetHeight /2) + "px";
+  slider.style.top = (height / 2) -  (slider.offsetHeight / 2) + "px";
   slider.style.left = (width - ((width /  length) * (index + 1))) - (slider.offsetWidth / 2) + "px";
   slider.addEventListener("mousedown", slideReady);
   window.addEventListener("mouseup", slideFinish);
