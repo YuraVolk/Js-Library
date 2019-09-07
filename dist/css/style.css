@@ -1050,3 +1050,89 @@ picture img {
   box-sizing: border-box;
 }
 
+.gallery {
+  text-align: center;
+  width: 370px;
+  margin: 0 auto;
+  border: 3px solid #333333;
+  height: 220px;
+}
+
+.gallery-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.gallery-inner > .gallery-item {
+  position: relative;
+  display: none;
+  animation: 0.5s ease-in-out;
+}
+
+.gallery-inner > .gallery-item--active,
+.gallery-inner > .gallery-item--next {
+  display: block;
+}
+
+.gallery-inner > .gallery-item--next {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.gallery-inner > .gallery-item--to-left {
+  animation-name: left;
+}
+
+.gallery-inner > .gallery-item--from-right {
+  animation-name: right;
+}
+
+.gallery-inner > .gallery-item--to-right {
+  animation-name: right;
+  animation-direction: reverse;
+}
+
+.gallery-inner > .gallery-item--from-left {
+  animation-name: left;
+  animation-direction: reverse;
+}
+
+.gallery-indicators li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+  border: 1px solid #333333;
+  border-radius: 10px;
+}
+
+.indicator-active {
+  background-color: #2390bb;
+}
+
+.gallery-indicators {
+  width: 100px;
+  margin: 15px auto;
+}
+
+
+@keyframes left {
+  from {
+    left: 0;
+  }
+  to {
+    left: -100%;
+  }
+}
+
+@keyframes right {
+  from {
+    left: 100%;
+  }
+  to {
+    left: 0;
+  }
+}
+

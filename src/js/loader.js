@@ -23,5 +23,6 @@ import './scripts/screenInvert';
 import './scripts/autocomplete';
 import './scripts/imageComparsion';
 import './scripts/toast';
+import './scripts/gallery';
 
 import './mainControl';
