@@ -1,6 +1,6 @@
 const slider = document.getElementById('categorySlider');
-const slideList = slider.getElementsByClassName('js-slide-list')[0];
-const slideListItems = slider.querySelectorAll('.slide-list__item');
+const slideList = document.querySelector('.gallery__slides');
+const slideListItems = slider.querySelectorAll('.gallery-list__item');
 const slideWidth = slideListItems[0].offsetWidth;
 const slidesLength = slideListItems.length;
 let current = 1;
@@ -22,7 +22,7 @@ function clickArrowButton(el) {
 
 function clickPagerItem(el) {
   const slideIndex = el.classList[1][el.classList[1].length - 1];
-  const targetSlide = slider.querySelector('.slide-list__item--' + slideIndex);
+  const targetSlide = slider.querySelector('.gallery-list__item--' + slideIndex);
   const pos = parseInt(slideList.style.left) || 0;
   const newPos = Math.round(targetSlide.offsetLeft / targetSlide.offsetWidth) * 100 * -1;
 
@@ -83,8 +83,8 @@ slideList.insertBefore(lastSlideClone, firstSlide);
 
 
 document.addEventListener('click', e => {
-  if (e.target.classList[1] === 'slider__button--prev' ||
-    e.target.classList[1] === 'slider__button--next') {
+  if (e.target.classList[1] === 'gallery__button--prev' ||
+    e.target.classList[1] === 'gallery__button--next') {
     clickArrowButton(e.target);
   }
   if (e.target.classList[0] === 'gallery-indicator') {
