@@ -68,6 +68,10 @@ function checkCurrentSlide() {
     current = (current === 0) ? slidesLength : 1;
     slideList.style.left = (-1 * current * 100) + '%';
   }
+  Array.from(document.querySelectorAll('.gallery-indicator')).forEach((el) => {
+    el.classList.remove('indicator-active');
+  });
+  document.querySelector('.gallery-indicator--' + (current - 1)).classList.add('indicator-active');
 }
 
 const firstSlide = slideListItems[0];
@@ -91,3 +95,4 @@ document.addEventListener('click', e => {
     clickPagerItem(e.target);
   }
 });
+
