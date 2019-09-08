@@ -1,4 +1,4 @@
-//Library currently has 25 scripts finished
+//Library currently has 26 scripts finished
 
 markups = [
   `

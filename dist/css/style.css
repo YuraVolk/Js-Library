@@ -1050,56 +1050,6 @@ picture img {
   box-sizing: border-box;
 }
 
-.gallery {
-  text-align: center;
-  width: 370px;
-  margin: 0 auto;
-  border: 3px solid #333333;
-  height: 220px;
-  background-color: #333333;
-}
-
-.gallery-inner {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-.gallery-inner > .gallery-item {
-  position: relative;
-  display: none;
-  animation: 0.5s ease-in-out;
-}
-
-.gallery-inner > .gallery-item--active,
-.gallery-inner > .gallery-item--next {
-  display: block;
-}
-
-.gallery-inner > .gallery-item--next {
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
-
-.gallery-inner > .gallery-item--to-left {
-  animation-name: left;
-}
-
-.gallery-inner > .gallery-item--from-right {
-  animation-name: right;
-}
-
-.gallery-inner > .gallery-item--to-right {
-  animation-name: right;
-  animation-direction: reverse;
-}
-
-.gallery-inner > .gallery-item--from-left {
-  animation-name: left;
-  animation-direction: reverse;
-}
-
 .gallery-indicators li {
   display: inline-block;
   width: 10px;
@@ -1118,22 +1068,88 @@ picture img {
   margin: 15px auto;
 }
 
-
-@keyframes left {
-  from {
-    left: 0;
-  }
-  to {
-    left: -100%;
-  }
+.slider {
+  color: #444;
+  position: relative;
+  width: 30%;
+  height: 300px;
+  margin: 0 auto;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
-@keyframes right {
-  from {
-    left: 100%;
-  }
-  to {
-    left: 0;
-  }
+.slider__viewport {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
 }
 
+.slider__slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  font-size: 0;
+  white-space: nowrap;
+  line-height: 1;
+  z-index: 10;
+}
+
+.slider__button {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+}
+
+.slider__button--prev {
+  left: 10px;
+}
+
+.slider__button--next {
+  right: 10px;
+}
+
+.slide-list__item {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  transition: left .4s;
+  background-color: #fff;
+}
+
+.slide-list__content-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.slider-pager {
+  width: 200px;
+  margin: 0 auto;
+}
+
+.slider-pager__item {
+  border: none;
+  border-radius: 50%;
+  width: 2rem;
+  line-height: 2rem;
+  padding: 0;
+  margin: 0 5px;
+  background-color: #ffffff;
+}
