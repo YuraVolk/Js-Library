@@ -26,5 +26,6 @@ import './scripts/toast';
 import './scripts/gallery';
 import './scripts/magnifier';
 import './scripts/parallax';
+import './scripts/countdown';
 
 import './mainControl';
