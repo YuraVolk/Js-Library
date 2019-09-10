@@ -24,5 +24,6 @@ import './scripts/autocomplete';
 import './scripts/imageComparsion';
 import './scripts/toast';
 import './scripts/gallery';
+import './scripts/magnifier';
 
 import './mainControl';

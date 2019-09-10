@@ -52,13 +52,26 @@ function animate(pos, newPos, element) {
     }
     const delta = Math.pow(progress, 2);
     step(delta, pos, newPos, element);
-
     if (progress === 1) {
+      updateSlide();
       clearInterval(idle);
       animating = false;
       checkCurrentSlide();
     }
   }, 20);
+}
+
+function updateSlide() {
+  Array.from(document.querySelectorAll('.gallery-indicator')).forEach((el) => {
+    el.classList.remove('indicator-active');
+  });
+  if (current === 0) {
+    document.querySelector('.gallery-indicator--' + (slidesLength - 1)).classList.add('indicator-active');
+  } else if (slidesLength === (current - 1)) {
+    document.querySelector('.gallery-indicator--0').classList.add('indicator-active');
+  } else {
+    document.querySelector('.gallery-indicator--' + (current - 1)).classList.add('indicator-active');
+  }
 }
 
 function checkCurrentSlide() {
@@ -68,10 +81,6 @@ function checkCurrentSlide() {
     current = (current === 0) ? slidesLength : 1;
     slideList.style.left = (-1 * current * 100) + '%';
   }
-  Array.from(document.querySelectorAll('.gallery-indicator')).forEach((el) => {
-    el.classList.remove('indicator-active');
-  });
-  document.querySelector('.gallery-indicator--' + (current - 1)).classList.add('indicator-active');
 }
 
 const firstSlide = slideListItems[0];
