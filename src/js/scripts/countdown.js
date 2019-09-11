@@ -4,36 +4,36 @@ let distance = finishDate - current;
 
 const element = document.querySelector('.date');
 
-let yearDesc = 'years';
-let daysDesc = 'days';
-let hoursDesc = 'hours';
-let minutesDesc = 'minutes';
-let secondsDesc = 'seconds';
-
 function updateTime() {
+  let yearDesc = 'years';
+  let daysDesc = 'days';
+  let hoursDesc = 'hours';
+  let minutesDesc = 'minutes';
+  let secondsDesc = 'seconds';
+
   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const days = Math.floor(distance / (1000 * 60 * 60 * 24) - (Math.floor((distance / (1000 * 60 * 60 * 24)) / 356) * 356));
   const years = Math.floor((distance / (1000 * 60 * 60 * 24)) / 356);
 
-  if (years === 1) {
+  if (years.toString().slice(-1) === '1') {
     yearDesc = 'year';
   }
-  if (days === 1) {
+  if (days.toString().slice(-1) === '1') {
     daysDesc = 'day';
   }
-  if (hours === 1) {
+  if (hours.toString().slice(-1) === '1') {
     hoursDesc = 'hour';
   }
-  if (minutes === 1) {
+  if (minutes.toString().slice(-1) === '1') {
     minutesDesc = 'minute';
   }
-  if (seconds === 1) {
+  if (seconds.toString().slice(-1) === 1) {
     secondsDesc = 'second';
   }
 
-  element.textContent = (years <= 0 ? '' : years + ' ' + yearDesc) + ' ' + (days <= 0 ? '' : days + ' ' + daysDesc) + ' ' + (hours <= 0 ? '' : hours + ' ' + hoursDesc) + ' ' + (minutes <= 0 ? '' : minutes + ' ' + minutesDesc) + ' ' + (seconds <= 0 ? 'END' : seconds + ' ' + secondsDesc);
+  element.textContent = (years <= 0 ? '' : years + ' ' + yearDesc) + ' ' + (days <= 0 ? '' : days + ' ' + daysDesc) + ' ' + (hours <= 0 ? '' : hours + ' ' + hoursDesc) + ' ' + (minutes <= 0 ? '' : minutes + ' ' + minutesDesc) + ' ' + (seconds <= 0 ? '0 seconds' : seconds + ' ' + secondsDesc);
 }
 
 window.setInterval(() => {
