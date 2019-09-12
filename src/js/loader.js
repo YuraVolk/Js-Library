@@ -27,5 +27,6 @@ import './scripts/gallery';
 import './scripts/magnifier';
 import './scripts/parallax';
 import './scripts/countdown';
+import './scripts/tableFiltering';
 
 import './mainControl';
