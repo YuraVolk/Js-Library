@@ -656,6 +656,8 @@ input[type=range]:focus {
   -webkit-animation: slide-left 0.4s ease;
           animation: slide-left 0.4s ease;
   padding-top: 20px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
   overflow-y: scroll;
 }
 
@@ -1356,4 +1358,74 @@ picture img {
 
 .select-filtering {
   position: absolute;
+}
+
+label {
+  display: block;
+  padding: 4px;
+}
+
+.password {
+  width: 320px;
+  box-shadow: #4d4c4d 2px 0 1px 1px;
+  padding: 12px;
+}
+
+.password > label {
+  width: 310px;
+  margin-bottom: 12px;
+}
+
+.password-submit {
+  display: block;
+  background-color: #f2f2f2;
+  border: 2px solid #818181;
+}
+
+.password > label.correct {
+  background: transparent;
+  border: 1px solid rgb(91, 168, 101);
+  background-color: rgb(121, 196, 47);
+}
+
+.password > label.wrong {
+  background-color: rgb(252, 189, 189);
+  border: 1px solid #72040d;
+  background-color: rgb(247, 29, 29);
+}
+
+.password > label > input {
+  width: 120px;
+  float: right;
+}
+
+.password > label > input::placeholder {
+  color: #e6e6e6;
+  font-size: 12px;
+}
+
+.main {
+  background-color: #bfbfbf;
+}
+
+.toPass {
+  margin-left: 30px;
+  position: relative;
+}
+
+.toPass::before {
+  position: absolute;
+  content: "";
+  width: 10px;
+  height: 10px;
+  left: -20px;
+  top: 3px;
+}
+
+.toPass.wrong::before {
+  background-color: rgb(247, 29, 29);
+}
+
+.toPass.correct::before {
+  background-color: rgb(121, 196, 47);
 }
