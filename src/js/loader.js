@@ -28,5 +28,6 @@ import './scripts/magnifier';
 import './scripts/parallax';
 import './scripts/countdown';
 import './scripts/tableFiltering';
+import './scripts/validation';
 
 import './mainControl';

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="#333">
-    <title>BAS</title>
+    <title>JS Library</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="manifest" href="manifest.json">
 </head>
@@ -1576,18 +1576,17 @@
                     <input class="password-check" type="password" placeholder="Your password...">
                   </label>
                   <div class="password__passed">
-                    <p class="toPass wrong">Has at least 11 symbols</p>
+                    <p class="toPass wrong">Has at least 6 symbols</p>
                     <p class="toPass wrong">Contains special character (_, %, ^, et.c.)</p>
                     <p class="toPass wrong">Has both numbers and letters</p>
                     <p class="toPass wrong">Doesn't use common pattern (Qwerty, et.c)</p>
-                    <p class="toPass wrong">Password is not a name</p>
                     <p class="toPass wrong">Has at least 2 upper case letters</p>
                   </div>
-                  <label class="wrong">
+                  <label class="main wrong">
                     <span>Reenter your password: </span>
                     <input class="password-second" type="password" placeholder="Your password...">
                   </label>
-                  <input type="submit" class="password-submit">
+                  <input type="submit" class="password-submit" disabled>
                 </form>
             </div>
         </div>

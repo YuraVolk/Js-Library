@@ -1380,6 +1380,7 @@ label {
   display: block;
   background-color: #f2f2f2;
   border: 2px solid #818181;
+  cursor: pointer;
 }
 
 .password > label.correct {
@@ -1420,6 +1421,7 @@ label {
   height: 10px;
   left: -20px;
   top: 3px;
+  background-color: #4d4c4d;
 }
 
 .toPass.wrong::before {
@@ -1428,4 +1430,9 @@ label {
 
 .toPass.correct::before {
   background-color: rgb(121, 196, 47);
+}
+
+.password-submit:disabled {
+  cursor: not-allowed;
+  background-color: #4d4c4d;
 }
