@@ -153,14 +153,30 @@ rangeVideo[1].value = "0";
 rangeAudio[3].value = "100";
 rangeAudio[1].value = "100";
 
+
 modifyRange(styledRanges, false);
 modifyRange(audioRanges, true);
 
 document.addEventListener('click', function (event) {
-
   if ('.' + event.target.classList[0] === '.button-play') {
     if (!videoPlays) {
-      startVideo();
+      startVideo()
+    }
+  }
+  if (event.target.firstChild) {
+    if ('.' + event.target.children[0].classList[0] === '.button-play') {
+      if (!videoPlays) {
+        startVideo()
+      }
+    }
+    if ('.' + event.target.children[0].classList[0] === '.button-stop') {
+      pauseVideo();
+    }
+    if ('.' + event.target.children[0].classList[0] === '.button-reset') {
+      resetVideoTime();
+    }
+    if ('.' + event.target.children[0].classList[0] === '.button-mute') {
+      switchMute();
     }
   }
   if ('.' + event.target.classList[0] === '.button-stop') {

@@ -1,5 +1,3 @@
-"use strict";
-
 const array = [];
 
 Array.prototype.slice.call(document.getElementsByTagName('section')).forEach(elMain => {
