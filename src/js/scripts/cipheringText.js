@@ -82,7 +82,7 @@ document.addEventListener('click', event => {
       element.textContent = phrases[index];
 
       splitText(element, nextPhrase.length);
-      recipherText(Array.from(element.childNodes), nextPhrase);
+      recipherText(Array.prototype.slice.call(element.childNodes), nextPhrase);
     }, 7680);
   }
   if (event.target.classList[1] === 'scrambleButton--1') {

@@ -62,7 +62,7 @@ function animate(pos, newPos, element) {
 }
 
 function updateSlide() {
-  Array.from(document.querySelectorAll('.gallery-indicator')).forEach((el) => {
+  Array.prototype.slice.call(document.querySelectorAll('.gallery-indicator')).forEach((el) => {
     el.classList.remove('indicator-active');
   });
   if (current === 0) {

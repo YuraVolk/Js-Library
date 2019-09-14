@@ -14,17 +14,17 @@ function plusDivsOuter(n) {
 }
 
 function ideasSwitchIdeaSrc(n, x) {
-  x[1].src = "img/slide" + n + ".webp";
+  x[1].src = "img/slide" + n + ".png";
 
   if (n === 5) {
-    x[2].src = "img/slide" + 0 + ".webp";
+    x[2].src = "img/slide" + 0 + ".png";
   } else {
-    x[2].src = "img/slide" + (n + 1) + ".webp";
+    x[2].src = "img/slide" + (n + 1) + ".png";
   }
   if (n === 0) {
-    x[0].src = "img/slide" + 5 + ".webp";
+    x[0].src = "img/slide" + 5 + ".png";
   } else {
-    x[0].src = "img/slide" + (n - 1) + ".webp";
+    x[0].src = "img/slide" + (n - 1) + ".png";
   }
 }
 

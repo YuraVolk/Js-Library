@@ -2,7 +2,7 @@
 
 const array = [];
 
-Array.from(document.getElementsByTagName('section')).forEach(elMain => {
+Array.prototype.slice.call(document.getElementsByTagName('section')).forEach(elMain => {
   for (let el of document.getElementsByTagName('h1')) {
 
     if (elMain.contains(el)) {

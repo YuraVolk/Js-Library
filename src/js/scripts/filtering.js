@@ -1,6 +1,6 @@
 function filterDivs(toLeave) {
 
-  Array.from(document.querySelectorAll('.filterEl')).forEach(function (element, i) {
+  Array.prototype.slice.call(document.querySelectorAll('.filterEl')).forEach(function (element, i) {
 
     if (toLeave != 'all') {
       if (document.querySelectorAll('.filterEl')[i].classList[2] != toLeave) {
@@ -15,14 +15,14 @@ function filterDivs(toLeave) {
 }
 
 function removeClassName(className, mod) {
-  Array.from(document.querySelectorAll(className)).forEach(function (el, i) {
-    Array.from(document.querySelectorAll(className))[i].classList.remove(mod);
+  Array.prototype.slice.call(document.querySelectorAll(className)).forEach(function (el, i) {
+    Array.prototype.slice.call(document.querySelectorAll(className))[i].classList.remove(mod);
   });
 }
 
 function showDivFiltering(pressedButton) {
   removeClassName('.filter__slider-btn', 'filter-btnActive');
-  Array.from(document.querySelectorAll('.filter__slider-btn'))[pressedButton].classList.add('filter-btnActive');
+  Array.prototype.slice.call(document.querySelectorAll('.filter__slider-btn'))[pressedButton].classList.add('filter-btnActive');
   switch (pressedButton) {
     case '0':
       filterDivs('all');

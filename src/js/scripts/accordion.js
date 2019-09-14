@@ -1,9 +1,9 @@
 "use strict";
 
-var sections = Array.from(document.querySelectorAll('.accordion'));
+var sections = Array.prototype.slice.call(document.querySelectorAll('.accordion'));
 const widths = [];
 
-Array.from(document.querySelectorAll('.accordion__content')).forEach(el => {
+Array.prototype.slice.call(document.querySelectorAll('.accordion__content')).forEach(el => {
   widths.push(el.offsetHeight);
 });
 

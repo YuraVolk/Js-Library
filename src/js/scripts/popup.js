@@ -14,7 +14,7 @@ function showPopup(popup) {
 }
 
 function hidePopup() {
-  Array.from(document.querySelectorAll('.popup')).forEach(el => {
+  Array.prototype.slice.call(document.querySelectorAll('.popup')).forEach(el => {
     if (el.classList[3] === 'renew' && el.style.display === 'block') {
       isActive = true;
     }

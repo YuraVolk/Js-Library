@@ -19,7 +19,7 @@ function initCarousel(parent, isntVertical) {
   let figure = parent.querySelector('div');
   let nav = document.querySelector('.carousel-nav');
 
-  let images = Array.from(figure.querySelectorAll('.figure__img'));
+  let images = Array.prototype.slice.call(figure.querySelectorAll('.figure__img'));
   let n = images.length;
   let theta = 2 * Math.PI / n;
   let currImage = 0;

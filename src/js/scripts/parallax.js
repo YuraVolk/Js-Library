@@ -9,7 +9,7 @@ window.requestAnimFrame = (function(){
 
 const effect = 1.968; // Эффект дрожания и расстояния. Оптимальное значение. Не ставить меньше 1
 const newH = window.innerHeight / effect; //Радиус паралакса
-const parallaxes = [].slice.call(document.querySelectorAll('[data-parallax]')); //элементы по data-parallax. [].slice - костыль для ie. Он не поддерживает Array.from()
+const parallaxes = [].slice.call(document.querySelectorAll('[data-parallax]')); //элементы по data-parallax. [].slice - костыль для ie. Он не поддерживает
 
 parallaxes.forEach(function(el) {
   var clientOffsets = el.getBoundingClientRect();
