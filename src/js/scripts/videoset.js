@@ -71,14 +71,12 @@ function modifyRange(audioRanges, isTime) {
       }
 
     }
-    thumbRange.oninput = function (thumbRange, trackRange) {
-      return function (e) {
-        trackRange.value = thumbRange.value;
-        if (!isTime) {
-          setVideoTime(trackRange.value * getVideoDuration() / 100);
-        }
-      };
-    }(thumbRange, trackRange);
+    thumbRange.addEventListener('input', () => {
+      trackRange.value = thumbRange.value;
+      if (!isTime) {
+        setVideoTime(trackRange.value * getVideoDuration() / 100);
+      }
+    });
   }
 }
 
@@ -163,7 +161,7 @@ document.addEventListener('click', function (event) {
       startVideo()
     }
   }
-  if (event.target.firstChild) {
+  if (event.target.children[0]) {
     if ('.' + event.target.children[0].classList[0] === '.button-play') {
       if (!videoPlays) {
         startVideo()

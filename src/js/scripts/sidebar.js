@@ -29,5 +29,7 @@ document.addEventListener('mousemove', e => {
   }
 })
 
+
+
 document.querySelector('.sidenav').style = 'display: none';
 document.querySelector('body').style = 'margin: 0';

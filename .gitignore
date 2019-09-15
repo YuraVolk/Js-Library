@@ -1,3 +1,4 @@
 node_modules/
 Test-Repo.git/
 .vscode
+dist/js/bundle.js

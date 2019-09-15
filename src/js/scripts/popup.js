@@ -23,7 +23,7 @@ function hidePopup() {
 
   document.body.style.position = '';
   document.body.style.top = '';
-
+  console.log(scroll);
   window.scrollTo(0, scroll.slice(0, -2));
 }
 
@@ -75,6 +75,6 @@ document.addEventListener('click', e => {
 });
 
 window.addEventListener('scroll', () => {
-  document.documentElement.style.setProperty('--scroll-y', window.scrollY + 'px');
+  document.documentElement.style.setProperty('--scroll-y', window.pageYOffset + 'px');
 });
 
