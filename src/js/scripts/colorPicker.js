@@ -8,10 +8,14 @@ function initColorPicker() {
   var canvasEl = document.getElementById('picker');
   var canvasContext = canvasEl.getContext('2d');
   var image = new Image(256, 256);
-  image.src = "picker.webp";
+
+  if (canvasEl.toDataURL('image/webp').indexOf('data:image/webp') == 0) {
+    image.src = "picker.webp";
+  } else {
+    image.src = "picker.jpg";
+  }
+
   image.onload = () => canvasContext.drawImage(image, 0, 0, image.width, image.height);
-
-
   canvasEl.onmousedown = function (mouseEvent) {
     var imgData = canvasContext.getImageData(mouseEvent.offsetX, mouseEvent.offsetY, 1, 1);
     rgba = imgData.data;
@@ -65,25 +69,34 @@ function modifyRange(audioRanges) {
       }
     }
 
-    thumbRange.oninput = function (thumbRange, trackRange) {
-      return function (e) {
+    thumbRange.addEventListener('input', () => {
         trackRange.value = thumbRange.value;
         changeOpacity(trackRange.value);
         changeColor(rgba, opacityGlobal);
-      };
-    }(thumbRange, trackRange);
+    });
+
+    if (navigator.userAgent.indexOf("MSIE ") > -1 || navigator.userAgent.indexOf("Trident/") > -1) {
+      thumbRange.addEventListener('change', () => {
+          trackRange.value = thumbRange.value;
+          changeOpacity(trackRange.value);
+          changeColor(rgba, opacityGlobal);
+      });
+    }
   }
 }
 
 function changeOpacity(opacity) {
-  document.querySelector('.opacity').style = "opacity: " + opacity / 100;
-
+  const opacityDiv = document.querySelector('.opacity');
+  opacityDiv.style.opacity = opacity / 100;
   opacityGlobal = opacity / 100;
 }
 
 function changeColor(rgba, opacity) {
-  document.querySelector('.picker-back').style = "background-color: " + "rgba(" + rgba[0] + ", " + rgba[1] + ", " + rgba[2] + ", " + opacity + ")";
-  document.querySelector('.rgba').textContent = " is " + rgba[0] + ", " + rgba[1] + ", " + rgba[2] + ", " + opacity;
+  const pickerBack = document.querySelector('.picker-back');
+  const pickerRgba = document.querySelector('.rgba');
+
+  pickerBack.style.backgroundColor = "rgba(" + rgba[0] + ", " + rgba[1] + ", " + rgba[2] + ", " + opacity + ")";
+  pickerRgba.textContent = " is " + rgba[0] + ", " + rgba[1] + ", " + rgba[2] + ", " + opacity;
 
   const RGBA = {
     red: rgba[0],
