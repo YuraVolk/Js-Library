@@ -7,7 +7,6 @@ window.addEventListener('load', () => {
 });
 
 function rotateCarousel(theta, imageIndex, figure, isntVertical) {
-  //figure.style.transform = "rotateX(" + imageIndex * -theta + "rad)"  VERTICAL CAROUSEL ONLY;
   if (isntVertical) {
     figure.style.transform = "rotateY(" + imageIndex * -theta + "rad)";
   } else {
@@ -18,16 +17,10 @@ function rotateCarousel(theta, imageIndex, figure, isntVertical) {
 function initCarousel(parent, isntVertical) {
   let figure = parent.querySelector('div');
   let nav = document.querySelector('.carousel-nav');
-
   let images = Array.prototype.slice.call(figure.querySelectorAll('.figure__img'));
   let n = images.length;
   let theta = 2 * Math.PI / n;
   let currImage = 0;
-
-  /*setupCarousel(n, parseFloat(getComputedStyle(images[0]).height));
-  window.addEventListener('resize', () => {
-      setupCarousel(n, parseFloat(getComputedStyle(images[0]).height))
-  }); VERTICAL CAROUSEL ONLY*/
 
   if (isntVertical) {
     setupCarousel(n, parseFloat(getComputedStyle(images[0]).width));
@@ -52,7 +45,7 @@ function initCarousel(parent, isntVertical) {
       images[i].style.padding = "0";
     } for (i = 1; i < n; i++) {
       images[i].style.transformOrigin = "50% 50% " + -apothem + "px";
-      //images[i].style.transform = "rotateX(" + i * theta + "rad)"  VERTICAL CAROUSEL ONLY;
+
       if (isntVertical) {
         images[i].style.transform = "rotateY(" + i * theta + "rad)";
       } else {
@@ -63,7 +56,7 @@ function initCarousel(parent, isntVertical) {
 
     for (i = 0; i < n; i++) {
       images[i].style.backfaceVisibility = 'hidden';
-      //images[i].style.padding = '30px';
+      images[i].style.opacity = 0.99999;
     }
 
     rotateCarousel(theta, currImage, figure, isntVertical);
@@ -100,7 +93,6 @@ function initCarousel(parent, isntVertical) {
   }
 
   setInterval(function () {
-    //setupCarousel(n, parseFloat(getComputedStyle(images[0]).height))  VERTICAL CAROUSEL ONLY;
     if (isntVertical) {
       setupCarousel(n, parseFloat(getComputedStyle(images[0]).width));
     } else {
