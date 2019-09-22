@@ -7,10 +7,11 @@ let opacityGlobal = 1;
 function initColorPicker() {
   var canvasEl = document.getElementById('picker');
   var canvasContext = canvasEl.getContext('2d');
-
   var image = new Image(256, 256);
-  image.onload = () => canvasContext.drawImage(image, 0, 0, image.width, image.height);
   image.src = "picker.webp";
+  image.onload = () => canvasContext.drawImage(image, 0, 0, image.width, image.height);
+
+
   canvasEl.onmousedown = function (mouseEvent) {
     var imgData = canvasContext.getImageData(mouseEvent.offsetX, mouseEvent.offsetY, 1, 1);
     rgba = imgData.data;

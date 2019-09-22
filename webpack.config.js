@@ -14,7 +14,10 @@ module.exports = {
     },
     devServer: {
       contentBase: './dist',
-      disableHostCheck: true
+      disableHostCheck: true,
+      staticOptions: {
+        redirect: true
+      }
     },
     plugins: [
       new HtmlWebpackPlugin({

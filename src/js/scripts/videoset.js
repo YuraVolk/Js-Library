@@ -71,12 +71,22 @@ function modifyRange(audioRanges, isTime) {
       }
 
     }
+
     thumbRange.addEventListener('input', () => {
       trackRange.value = thumbRange.value;
       if (!isTime) {
         setVideoTime(trackRange.value * getVideoDuration() / 100);
       }
     });
+
+    if (navigator.userAgent.indexOf("MSIE ") > -1 || navigator.userAgent.indexOf("Trident/") > -1) {
+      thumbRange.addEventListener('change', () => {
+        trackRange.value = thumbRange.value;
+        if (!isTime) {
+          setVideoTime(trackRange.value * getVideoDuration() / 100);
+        }
+      });
+    }
   }
 }
 

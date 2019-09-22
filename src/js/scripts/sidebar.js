@@ -1,14 +1,15 @@
 const array = [];
 
+const body = document.querySelector('body');
+const sidenav = document.querySelector('.sidenav');
+
 Array.prototype.slice.call(document.getElementsByTagName('section')).forEach(elMain => {
   for (let el of document.getElementsByTagName('h1')) {
-
     if (elMain.contains(el)) {
       array.push(el.textContent);
       break;
     }
   }
-
 });
 
 array.forEach(el => {
@@ -17,19 +18,17 @@ array.forEach(el => {
 
 document.addEventListener('click', e => {
   if (e.target.classList[0] === 'nav__close') {
-    document.querySelector('.sidenav').style = 'display: none';
-    document.querySelector('body').style = 'margin: 0';
+    sidenav.classList.add('navbar-hidden');
+    body.classList.add('hidden');
   }
-})
+});
 
 document.addEventListener('mousemove', e => {
   if (e.clientX < 5) {
-    document.querySelector('.sidenav').style = 'display: block';
-    document.querySelector('body').style = 'margin-left: 19%';
+    sidenav.classList.remove('navbar-hidden');
+    body.classList.remove('hidden');
   }
-})
+});
 
-
-
-document.querySelector('.sidenav').style = 'display: none';
-document.querySelector('body').style = 'margin: 0';
+sidenav.classList.add('navbar-hidden');
+body.classList.add('hidden');

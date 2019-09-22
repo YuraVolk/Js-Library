@@ -5,8 +5,16 @@
 }
 
 body {
-  margin-left: 300px;
+  margin-left: 19%;
   overflow-x: hidden;
+}
+
+body.hidden{
+  margin: 0;
+}
+
+.navbar-hidden {
+  display: none;
 }
 
 .markup {
