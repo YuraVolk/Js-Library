@@ -1,6 +1,5 @@
-"use strict";
+let scroll, timeLeft, isActive, toScroll;
 
-let scroll, timeLeft, isActive;
 
 function showPopup(popup) {
   isActive = false;
@@ -23,8 +22,8 @@ function hidePopup() {
 
   document.body.style.position = '';
   document.body.style.top = '';
-  console.log(scroll);
-  window.scrollTo(0, scroll.slice(0, -2));
+
+  window.scrollTo(0, toScroll);
 }
 
 function initTiming(popup) {
@@ -49,11 +48,10 @@ function initTiming(popup) {
 }
 
 function stopScroll() {
-  const scrollY = document.documentElement.style.getPropertyValue('--scroll-y');
-  scroll = scrollY;
-  const body = document.body;
+  const body = document.querySelector('body');
+  toScroll = scroll;
   body.style.position = 'fixed';
-  body.style.top = "-" + scrollY;
+  body.style.top = "-" + scroll + 'px';
 }
 
 let timing = setInterval(function () {
@@ -75,6 +73,7 @@ document.addEventListener('click', e => {
 });
 
 window.addEventListener('scroll', () => {
-  document.documentElement.style.setProperty('--scroll-y', window.pageYOffset + 'px');
+  scroll = window.pageYOffset;
 });
 
+toScroll = window.pageYOffset;
