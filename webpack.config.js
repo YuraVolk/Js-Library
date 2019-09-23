@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -35,6 +36,22 @@ module.exports = {
         threshold: 10240,
         minRatio: 0.7
       })
-    ]
+    ],
+    optimization: {
+      moduleIds: 'hashed',
+      chunkIds: 'total-size',
+      mangleWasmImports: true,
+      minimizer: [
+        new TerserPlugin({
+          test: /\.js(\?.*)?$/i,
+          terserOptions: {
+            mangle: true,
+            ie11: false,
+            ie8: false,
+            safari10: true
+          }
+        }),
+      ],
+    }
   };
 
