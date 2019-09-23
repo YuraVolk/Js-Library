@@ -2091,14 +2091,13 @@ function updateTime() {
         ! Only one export per file
 */
 
-
 document.addEventListener('click', event => {
-  if (event.target.parentNode.classList[0] === 'block__btn') {
-    let nodeList = Array.from(document.querySelector(`.${event.target.parentNode.classList[1]}`).parentNode.childNodes);
+  if (event.target.parentNode.parentNode.classList[0] === 'block__btn') {
+    let nodeList = Array.from(document.querySelector(`.${event.target.parentNode.parentNode.classList[1]}`).parentNode.childNodes);
 
     const markEl = nodeList[nodeList.length - 2];
-    const markUp = markups[`.${event.target.parentNode.classList[1]}`.replace(/\D/g, '')];
-    const btn = document.querySelector(`.${event.target.parentNode.classList[1]}`).parentNode.childNodes[3];
+    const markUp = markups[`.${event.target.parentNode.parentNode.classList[1]}`.replace(/\D/g, '')];
+    const btn = document.querySelector(`.${event.target.parentNode.parentNode.classList[1]}`).parentNode.childNodes[3];
 
     if (btn.classList[2] === 'active') {
       btn.classList.remove('active');

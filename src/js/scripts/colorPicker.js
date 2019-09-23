@@ -74,14 +74,6 @@ function modifyRange(audioRanges) {
         changeOpacity(trackRange.value);
         changeColor(rgba, opacityGlobal);
     });
-
-    if (navigator.userAgent.indexOf("MSIE ") > -1 || navigator.userAgent.indexOf("Trident/") > -1) {
-      thumbRange.addEventListener('change', () => {
-          trackRange.value = thumbRange.value;
-          changeOpacity(trackRange.value);
-          changeColor(rgba, opacityGlobal);
-      });
-    }
   }
 }
 

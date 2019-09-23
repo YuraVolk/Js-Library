@@ -5,9 +5,7 @@ const BrotliPlugin = require('brotli-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: [
-      '@babel/polyfill', './src/js/loader.js'
-    ],
+    entry: ['./src/js/loader.js'],
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'js/bundle.js'
@@ -37,20 +35,6 @@ module.exports = {
         threshold: 10240,
         minRatio: 0.7
       })
-    ],
-    module: {
-      rules: [
-        {
-          test: /\.m?js$/,
-          exclude: /(node_modules|bower_components)/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env']
-            }
-          }
-        }
-      ]
-    }
+    ]
   };
 

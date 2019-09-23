@@ -1,8 +1,18 @@
-"use strict";
-
+function testWebP() {
+  return new Promise(res => {
+    const webP = new Image();
+    webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+    webP.onload = webP.onerror = function () {
+      res(webP.height === 2);
+    };
+  })
+};
+let webP = false;
 
 let ideasSlideIndex = 0;
-ideasShowDivs(ideasSlideIndex);
+setTimeout(() => {
+  ideasShowDivs(ideasSlideIndex);
+}, 120);
 
 function ideasPlusDivs(n) {
   ideasShowDivs(ideasSlideIndex += n);
@@ -14,23 +24,39 @@ function plusDivsOuter(n) {
 }
 
 function ideasSwitchIdeaSrc(n, x) {
-  x[1].src = "img/slide" + n + ".png";
+  if (webP) {
+    x[1].src = "img/slide" + n + ".webp";
 
-  if (n === 5) {
-    x[2].src = "img/slide" + 0 + ".png";
+    if (n === 5) {
+      x[2].src = "img/slide" + 0 + ".webp";
+    } else {
+      x[2].src = "img/slide" + (n + 1) + ".webp";
+    }
+    if (n === 0) {
+      x[0].src = "img/slide" + 5 + ".webp";
+    } else {
+      x[0].src = "img/slide" + (n - 1) + ".webp";
+    }
   } else {
-    x[2].src = "img/slide" + (n + 1) + ".png";
+    x[1].src = "img/slide" + n + ".png";
+
+    if (n === 5) {
+      x[2].src = "img/slide" + 0 + ".png";
+    } else {
+      x[2].src = "img/slide" + (n + 1) + ".png";
+    }
+    if (n === 0) {
+      x[0].src = "img/slide" + 5 + ".png";
+    } else {
+      x[0].src = "img/slide" + (n - 1) + ".png";
+    }
   }
-  if (n === 0) {
-    x[0].src = "img/slide" + 5 + ".png";
-  } else {
-    x[0].src = "img/slide" + (n - 1) + ".png";
-  }
+
 }
 
 function ideasShowDivs(n) {
   let x = document.getElementsByClassName('Slider');
-
+  ideasSwitchIdeaSrc(n, x);
   if (ideasSlideIndex !== -1) {
 
     if (ideasSlideIndex !== 6) {
@@ -63,3 +89,11 @@ document.addEventListener('click', event => {
     }
   }
 });
+
+
+testWebP().then((hasWebP) => {
+  if (hasWebP) {
+    webP = true;
+  }
+});
+
