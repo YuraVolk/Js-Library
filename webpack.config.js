@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const devMode = process.env.NODE_ENV !== 'production';
 const webpack = require('webpack');
 
 module.exports = {
@@ -39,6 +41,10 @@ module.exports = {
       test: /\.js$|\.css$|\.html$/,
       threshold: 10240,
       minRatio: 0.7
+    }),
+    new MiniCssExtractPlugin({
+      filename: devMode ? '[name].css' : '[name].[hash].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
     })
   ],
   optimization: {
@@ -48,6 +54,7 @@ module.exports = {
     minimizer: [
       new TerserPlugin({
         test: /\.js(\?.*)?$/i,
+        exclude: /node_modules/,
         terserOptions: {
           mangle: true,
           ie11: false,
@@ -58,17 +65,41 @@ module.exports = {
         }
       })
     ]
-  }/*,
+  },
   module: {
     rules: [
-      {
+       /*{
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader'
         }
+      },*/
+      {
+        test: /\.less$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development'
+            }
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              sourceMap: true,
+              noIeCompat: true
+            }
+          }
+        ]
       }
     ]
-  }*/
+  }
 };
-

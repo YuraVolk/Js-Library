@@ -1,3 +1,5 @@
+require('../less/main-styles.less');
+
 import './scripts/carousel';
 import './scripts/filtering';
 import './scripts/pagination';
