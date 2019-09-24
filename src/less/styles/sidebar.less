@@ -7,5 +7,58 @@
   text-decoration: none;
   color: #818181;
   display: block;
+  font-size: 17px;
 }
 
+.sidenav {
+  height: 100%;
+  width: 19%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111111;
+  overflow-x: hidden;
+  -webkit-animation: slide-left 0.4s ease;
+          animation: slide-left 0.4s ease;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+
+.sidenav a:hover {
+  background-color: #00435a;
+}
+
+.sidenav a:active {
+  background-color: #00435a;
+}
+
+.sidenav a:focus {
+  background-color: #00435a;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+
+  .sidenav a {
+    font-size: 17px;
+  }
+}
+
+.black {
+  background-color: #000000;
+  width: 106px;
+  margin: 0;
+  height: 106px;
+}
+
+.nav__close {
+  display: block;
+  float: right;
+  margin-right: 15px;
+  cursor: pointer;
+}
