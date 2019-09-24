@@ -1,14 +1,17 @@
+@color_1: #ffffff;
+@background_color_1: #cccccc;
+
 .flexbox {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   width: 970px;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 .tabs {
@@ -16,7 +19,7 @@
   width: 340px;
   border: 2px solid #676767;
   -webkit-animation: slide-down 0.4s ease;
-          animation: slide-down 0.4s ease;
+  animation: slide-down 0.4s ease;
 }
 
 .tabs-btn {
@@ -30,11 +33,11 @@
   border: 2px solid #676767;
   margin-left: 30px;
   margin-top: 10px;
-}
 
-.tab:hover {
-  padding: 5px 10px;
-  border: 0;
-  background-color: #cccccc;
-  color: #ffffff;
+  &:hover {
+    padding: 5px 10px;
+    border: 0;
+    background-color: @background_color_1;
+    color: @color_1;
+  }
 }

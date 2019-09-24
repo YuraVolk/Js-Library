@@ -1,21 +1,25 @@
+@color_1: #e6e6e6;
+@font_family_1: Verdana, Geneva, Tahoma, sans-serif;
+@background_color_1: blueviolet;
+
 .toast {
   position: fixed;
   bottom: -150px;
   left: 25%;
   width: 50%;
-  background-color: blueviolet;
+  background-color: @background_color_1;
   opacity: 0.95;
   padding: 8px;
   border-radius: 25px;
   height: 200px;
-  color: #e6e6e6;
+  color: @color_1;
   z-index: 9999;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: @font_family_1;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   padding-top: 16px;
   -webkit-animation: slide-up 0.8s ease-out;
-          animation: slide-up 0.8s ease-out;
+  animation: slide-up 0.8s ease-out;
   -webkit-transition: bottom 0.8s ease-in;
   transition: bottom 0.8s ease-in;
 }
@@ -25,13 +29,13 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: space-around;
   width: 200px;
-}
 
-.flexbox-toast button {
-  height: 20px;
-  padding: 15px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  button {
+    height: 20px;
+    padding: 15px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
 }

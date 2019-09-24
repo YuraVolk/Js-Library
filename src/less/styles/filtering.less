@@ -1,20 +1,22 @@
-
+@color_1: #f5f5f5;
+@font_family_1: "Montserrat Light";
+@background_color_1: #cecece;
+@background_color_2: #efef6e;
 
 .filter {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   margin: 0 auto;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   width: 1210px;
   margin-bottom: 60px;
-
 }
 
 .filterEl {
@@ -23,7 +25,7 @@
   margin-bottom: 60px;
   margin-right: 30px;
   position: relative;
-  background-color: #cecece;
+  background-color: @background_color_1;
 }
 
 .filter__slider-btn {
@@ -31,10 +33,10 @@
   border: 3px solid #333333;
   background: #313131;
   border-radius: 5px;
-  color: #f5f5f5;
+  color: @color_1;
   font-size: 14px;
   line-height: 21px;
-  font-family: "Montserrat Light";
+  font-family: @font_family_1;
 }
 
 .filter__slider {
@@ -42,13 +44,13 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   width: 600px;
   margin: 0 auto;
   margin-bottom: 40px;
 }
 
 .filter-wrap {
-  background-color: #efef6e;
+  background-color: @background_color_2;
 }

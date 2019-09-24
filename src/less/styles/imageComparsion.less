@@ -1,16 +1,18 @@
-.comparsion-image img {
-  display:block;
-  width: 350px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  height: 200px;
-}
+@background_color_1: #333333;
 
 .comparsion-image {
+  img {
+    display: block;
+    width: 350px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 200px;
+  }
+
   position: absolute;
   width: auto;
   height: auto;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 .comparsion-wrap {
@@ -26,6 +28,6 @@
   cursor: ew-resize;
   width: 40px;
   height: 40px;
-  background-color: #333333;
+  background-color: @background_color_1;
   border-radius: 50%;
 }

@@ -1,56 +1,51 @@
+@color_1: #818181;
+@background_color_1: #111111;
+@background_color_2: #00435a;
+@background_color_3: #000000;
+
 .navbar-hidden {
   display: none;
 }
 
-.sidenav a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  color: #818181;
-  display: block;
-  font-size: 17px;
-}
-
 .sidenav {
+  a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    color: @color_1;
+    display: block;
+    font-size: 17px;
+
+    &:hover {
+      background-color: @background_color_2;
+    }
+
+    &:active {
+      background-color: @background_color_2;
+    }
+
+    &:focus {
+      background-color: @background_color_2;
+    }
+  }
+
   height: 100%;
   width: 19%;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111111;
+  background-color: @background_color_1;
   overflow-x: hidden;
   -webkit-animation: slide-left 0.4s ease;
-          animation: slide-left 0.4s ease;
+  animation: slide-left 0.4s ease;
   padding-top: 20px;
   padding-bottom: 20px;
   box-sizing: border-box;
   overflow-y: scroll;
 }
 
-.sidenav a:hover {
-  background-color: #00435a;
-}
-
-.sidenav a:active {
-  background-color: #00435a;
-}
-
-.sidenav a:focus {
-  background-color: #00435a;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {
-    padding-top: 15px;
-  }
-
-  .sidenav a {
-    font-size: 17px;
-  }
-}
-
 .black {
-  background-color: #000000;
+  background-color: @background_color_3;
   width: 106px;
   margin: 0;
   height: 106px;
@@ -61,4 +56,14 @@
   float: right;
   margin-right: 15px;
   cursor: pointer;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+
+    a {
+      font-size: 17px;
+    }
+  }
 }

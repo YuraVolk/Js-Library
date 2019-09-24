@@ -1,8 +1,4 @@
-.animationWave {
-  color: #333333;
-  -webkit-animation: 0.5s color infinite;
-          animation: 0.5s color infinite;
-}
+@color_1: #333333;
 
 @-webkit-keyframes color {
   50% {
@@ -14,4 +10,10 @@
   50% {
     color: rgb(87, 187, 157);
   }
+}
+
+.animationWave {
+  color: @color_1;
+  -webkit-animation: 0.5s color infinite;
+  animation: 0.5s color infinite;
 }

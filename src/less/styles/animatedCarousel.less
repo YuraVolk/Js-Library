@@ -4,12 +4,14 @@
   position: relative;
   margin: 50px auto;
   outline: 3px #333333 dashed;
-}
 
-#carousel-container>div:first-child {
-  overflow: hidden;
-  max-width: 100%;
-  margin: 0;
+  >div {
+    &:first-child {
+      overflow: hidden;
+      max-width: 100%;
+      margin: 0;
+    }
+  }
 }
 
 #carousel {
@@ -34,5 +36,5 @@
   list-style: none;
   position: relative;
   -webkit-transform: translateX(-370px);
-          transform: translateX(-370px)
+  transform: translateX(-370px);
 }

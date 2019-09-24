@@ -1,32 +1,33 @@
+@color_1: #ffffff;
+@background_color_1: #2390bb;
+@background_color_2: #00435a;
+
 .floatingPanel {
   display: none;
-  background-color: #2390bb;
+  background-color: @background_color_1;
   position: fixed;
   top: 500px;
   left: 500px;
   width: 200px;
   height: 200px;
   z-index: 5;
-  color: #ffffff;
+  color: @color_1;
   font-size: 12px;
   line-height: 22px;
   border: 5px solid #676767;
   text-align: center;
+  cursor: -webkit-grab;
+  cursor: grab;
 }
 
 .panel__caption {
   font-weight: bold;
   padding: 10px;
-  background-color: #00435a;
+  background-color: @background_color_2;
   font-size: 17px;
 }
 
 .floatingPanel--1 {
   position: -webkit-sticky;
   position: sticky;
-}
-
-.floatingPanel {
-  cursor: -webkit-grab;
-  cursor: grab;
 }
