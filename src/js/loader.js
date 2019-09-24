@@ -1,16 +1,20 @@
 require('../less/main-styles.less');
 
 import './scripts/carousel';
+require('../less/styles/carousel.less');
 import './scripts/filtering';
+require('../less/styles/filtering.less');
 import './scripts/pagination';
 import './scripts/videoset';
 import './scripts/tabs';
 import './scripts/colorPicker';
 import './scripts/sidebar';
+require('../less/styles/sidebar.less');
 import './scripts/floating';
 import './scripts/popup';
 import './scripts/3dcarousel';
 import './scripts/animatedCarousel';
+require('../less/styles/animatedCarousel.less');
 import './scripts/accordion';
 import './scripts/typer';
 import './scripts/rebuildingText';
