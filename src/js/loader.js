@@ -56,8 +56,11 @@ require('../less/styles/magnifier.less');
 import './scripts/parallax';
 require('../less/styles/parallax.less');
 import './scripts/countdown';
+require('../less/styles/countdown.less');
 import './scripts/tableFiltering';
+require('../less/styles/tableFiltering.less');
 import './scripts/validation';
+require('../less/styles/validation.less');
 import './scripts/perspectiveCarousel';
 
 import './mainControl';
