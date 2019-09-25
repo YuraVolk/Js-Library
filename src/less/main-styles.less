@@ -1,7 +1,5 @@
-@color_1: #000000;
-@color_2: #676767;
-@font_family_1: "Raleway ExtraBold";
-@font_family_2: "Montserrat Regular";
+@import "settings/fonts";
+@import "settings/colors";
 
 @-webkit-keyframes slide-down {
   0% {
@@ -88,7 +86,7 @@
 }
 
 .block {
-  outline: 5px dashed #cecece;
+  outline: 5px dashed @outline_light;
   padding: 50px 50px;
   margin: 50px 20px;
 }
@@ -103,21 +101,21 @@ body.hidden {
 }
 
 .block__caption {
-  font-family: @font_family_1;
+  font-family: @caption;
 }
 
 .block__info {
   font-size: 22px;
   line-height: 44px;
   width: 700px;
-  font-family: @font_family_2;
+  font-family: @info;
 }
 
 code {
   font-size: 24px;
   line-height: 30px;
-  color: @color_1;
-  font-family: @font_family_2;
+  color: @content_dark;
+  font-family: @info;
   -webkit-animation: slide-down 0.4s ease;
   animation: slide-down 0.4s ease;
 }
@@ -140,7 +138,7 @@ code {
 }
 
 .markup {
-  outline: 7px solid #cccccc;
+  outline: 7px solid @outline_dark;
   padding: 30px 30px;
   margin: 10px 10px;
   -webkit-animation-duration: 4s;
@@ -150,10 +148,10 @@ code {
 }
 
 .modalButton {
-  color: @color_2;
+  color: @decorator;
   font-weight: 2000;
   text-transform: uppercase;
-  background: #efef6e;
+  background: @modal_button;
   padding: 20px;
   border-radius: 5px;
   display: block;
@@ -169,36 +167,21 @@ code {
   height: 300px;
 }
 
-.block__arrow {
-  cursor: pointer;
-}
-
-.popup__close {
-  cursor: pointer;
-}
-
-.nav {
-  cursor: pointer;
-}
-
-.accordion__heading {
-  cursor: pointer;
-}
-
-.calculator__btn {
+.block__arrow,
+.popup__close,
+.nav,
+.accordion__heading,
+.calculator__btn  {
   cursor: pointer;
 }
 
 picture {
   display: inline;
 
-  img {
+  img,
+  source {
     display: inline;
   }
-}
-
-source {
-  display: inline;
 }
 
 .carousel-figure {
@@ -212,7 +195,7 @@ source {
   height: 500px;
   overflow-x: hidden;
   overflow-y: scroll;
-  border: 3px solid #333333;
+  border: 3px solid @main;
   position: relative;
 }
 

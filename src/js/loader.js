@@ -1,3 +1,6 @@
+require('../less/settings/colors.less');
+require('../less/settings/fonts.less');
+
 require('../less/main-styles.less');
 
 import './scripts/carousel';
