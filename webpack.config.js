@@ -9,7 +9,7 @@ const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
-  entry: [/*'@babel/polyfill', */'./src/js/loader.js'],
+  entry: [/*IE*/ /*'@babel/polyfill',*/'./src/js/loader.js'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/bundle.js'
@@ -68,13 +68,13 @@ module.exports = {
   },
   module: {
     rules: [
-       /*{
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
-      },*/
+      /*{ // IE
+       test: /\.js$/,
+       exclude: /node_modules/,
+       use: {
+         loader: 'babel-loader'
+       }
+     },*/
       {
         test: /\.less$/,
         exclude: /node_modules/,
