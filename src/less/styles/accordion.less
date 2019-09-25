@@ -1,19 +1,16 @@
-@color_1: antiquewhite;
-@color_2: #e6e6e6;
-@background_color_1: #4d4c4d;
-@background_color_2: lightcoral;
+@import "../settings/colors";
 
 .accordion {
   width: 600px;
   overflow: hidden;
-  border: 3px solid #333333;
-  background-color: @background_color_1;
+  border: 3px solid @main;
+  background-color: @action;
   border-top: 0;
   -webkit-transition: max-height 0.4s linear;
   transition: max-height 0.4s linear;
 
   &:first-of-type {
-    border-top: 3px solid #333333;
+    border-top: 3px solid @main;
   }
 }
 
@@ -25,7 +22,7 @@
   padding: 20px;
   -webkit-transition: max-height 0.2s linear forwards;
   transition: max-height 0.2s linear forwards;
-  color: @color_1;
+  color: @subcontent_caption;
 }
 
 .accordion__heading {
@@ -34,6 +31,6 @@
   display: block;
   padding: 10px 20px;
   text-decoration: none;
-  background-color: @background_color_2;
-  color: @color_2;
+  background-color: @subcontent_background;
+  color: @main-white;
 }

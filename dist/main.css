@@ -142,28 +142,18 @@ code {
   width: 300px;
   height: 300px;
 }
-.block__arrow {
-  cursor: pointer;
-}
-.popup__close {
-  cursor: pointer;
-}
-.nav {
-  cursor: pointer;
-}
-.accordion__heading {
-  cursor: pointer;
-}
+.block__arrow,
+.popup__close,
+.nav,
+.accordion__heading,
 .calculator__btn {
   cursor: pointer;
 }
 picture {
   display: inline;
 }
-picture img {
-  display: inline;
-}
-source {
+picture img,
+picture source {
   display: inline;
 }
 .carousel-figure div {
@@ -744,7 +734,7 @@ input[type=range]:focus {
   padding: 20px;
   -webkit-transition: max-height 0.2s linear forwards;
   transition: max-height 0.2s linear forwards;
-  color: antiquewhite;
+  color: #faebd7;
 }
 .accordion__heading {
   position: relative;
@@ -752,7 +742,7 @@ input[type=range]:focus {
   display: block;
   padding: 10px 20px;
   text-decoration: none;
-  background-color: lightcoral;
+  background-color: #f08080;
   color: #e6e6e6;
 }
 
