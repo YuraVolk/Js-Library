@@ -1,9 +1,7 @@
-@color_1: #e6e6e6;
-@background_color_1: #ffffff;
-@background_color_2: #333333;
+@import "../settings/colors";
 
 .toInvert {
-  background-color: @background_color_1;
+  background-color: @background_main;
   -webkit-filter: invert(0%);
   filter: invert(0%);
   -webkit-transition: background-color 0.3s cubic-bezier(0.895, 0.03, 0.685, 0.22), color 0.3s ease-out, -webkit-filter 0.3s cubic-bezier(0.895, 0.03, 0.685, 0.22);
@@ -26,13 +24,13 @@
 }
 
 .inverted {
-  background-color: @background_color_2;
-  color: @color_1;
+  background-color: @main;
+  color: @main-white;
   -webkit-filter: invert(8.56%);
   filter: invert(8.56%);
 
   hr {
-    color: @color_1;
+    color: @main-white;
   }
 
   img {

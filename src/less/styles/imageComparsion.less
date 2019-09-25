@@ -1,4 +1,4 @@
-@background_color_1: #333333;
+@import "../settings/colors";
 
 .comparsion-image {
   img {
@@ -16,7 +16,7 @@
 }
 
 .comparsion-wrap {
-  border: 8px solid #333333;
+  border: 8px solid @main;
   width: 350px;
   height: 200px;
   position: relative;
@@ -28,6 +28,6 @@
   cursor: ew-resize;
   width: 40px;
   height: 40px;
-  background-color: @background_color_1;
+  background-color: @main;
   border-radius: 50%;
 }

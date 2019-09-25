@@ -1,3 +1,5 @@
+@import "../settings/colors";
+
 @color_1: #818181;
 @background_color_1: #111111;
 @background_color_2: #00435a;
@@ -11,20 +13,14 @@
   a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    color: @color_1;
+    color: @standard;
     display: block;
     font-size: 17px;
 
-    &:hover {
-      background-color: @background_color_2;
-    }
-
+    &:hover,
+    &:focus,
     &:active {
-      background-color: @background_color_2;
-    }
-
-    &:focus {
-      background-color: @background_color_2;
+      background-color: @selected;
     }
   }
 
@@ -34,7 +30,7 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: @background_color_1;
+  background-color: @main-black;
   overflow-x: hidden;
   -webkit-animation: slide-left 0.4s ease;
   animation: slide-left 0.4s ease;
@@ -45,7 +41,7 @@
 }
 
 .black {
-  background-color: @background_color_3;
+  background-color: @content_dark;
   width: 106px;
   margin: 0;
   height: 106px;

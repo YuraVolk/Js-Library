@@ -1,20 +1,18 @@
-@color_1: #ffffff;
-@background_color_1: #2390bb;
-@background_color_2: #00435a;
+@import "../settings/colors";
 
 .floatingPanel {
   display: none;
-  background-color: @background_color_1;
+  background-color: @block;
   position: fixed;
   top: 500px;
   left: 500px;
   width: 200px;
   height: 200px;
   z-index: 5;
-  color: @color_1;
+  color: @background_main;
   font-size: 12px;
   line-height: 22px;
-  border: 5px solid #676767;
+  border: 5px solid @decorator;
   text-align: center;
   cursor: -webkit-grab;
   cursor: grab;
@@ -23,7 +21,7 @@
 .panel__caption {
   font-weight: bold;
   padding: 10px;
-  background-color: @background_color_2;
+  background-color: @selected;
   font-size: 17px;
 }
 

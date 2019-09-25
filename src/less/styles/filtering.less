@@ -1,9 +1,5 @@
 @import "../settings/colors";
-
-@color_1: #f5f5f5;
-@font_family_1: "Montserrat Light";
-@background_color_1: #cecece;
-@background_color_2: #efef6e;
+@import "../settings/fonts";
 
 .filter {
   display: -webkit-box;
@@ -27,7 +23,7 @@
   margin-bottom: 60px;
   margin-right: 30px;
   position: relative;
-  background-color: @background_color_1;
+  background-color: @outline_light;
 }
 
 .filter__slider-btn {
@@ -35,10 +31,10 @@
   border: 3px solid #333333;
   background: #313131;
   border-radius: 5px;
-  color: @color_1;
+  color: @content_light;
   font-size: 14px;
   line-height: 21px;
-  font-family: @font_family_1;
+  font-family: @subinfo;
 }
 
 .filter__slider {
@@ -54,5 +50,5 @@
 }
 
 .filter-wrap {
-  background-color: @background_color_2;
+  background-color: @modal_button;
 }

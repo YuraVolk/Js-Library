@@ -1,4 +1,4 @@
-@color_1: #676767;
+@import "../settings/colors";
 
 .buttons {
   display: -webkit-box;
@@ -11,10 +11,10 @@
 }
 
 .buttons__button {
-  color: @color_1;
+  color: @decorator;
   font-weight: 2000;
   text-transform: uppercase;
-  background: #efef6e;
+  background: @modal_button;
   padding: 20px;
   border-radius: 5px;
   display: block;
