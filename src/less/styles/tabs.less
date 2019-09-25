@@ -1,5 +1,4 @@
-@color_1: #ffffff;
-@background_color_1: #cccccc;
+@import "../settings/colors";
 
 .flexbox {
   display: -webkit-box;
@@ -17,27 +16,27 @@
 .tabs {
   padding: 20px 20px;
   width: 340px;
-  border: 2px solid #676767;
+  border: 2px solid @decorator;
   -webkit-animation: slide-down 0.4s ease;
   animation: slide-down 0.4s ease;
 }
 
 .tabs-btn {
-  border: 1px solid #676767;
+  border: 1px solid @decorator;
   border-radius: 4px;
   max-width: 340px;
 }
 
 .tab {
   background: transparent;
-  border: 2px solid #676767;
+  border: 2px solid @decorator;
   margin-left: 30px;
   margin-top: 10px;
 
   &:hover {
     padding: 5px 10px;
     border: 0;
-    background-color: @background_color_1;
-    color: @color_1;
+    background-color: @outline_dark;
+    color: @background_main;
   }
 }

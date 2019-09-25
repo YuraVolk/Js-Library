@@ -1,19 +1,19 @@
-@color_1: #333333;
+@import "../settings/colors";
 
 @-webkit-keyframes color {
   50% {
-    color: rgb(87, 187, 157);
+    color: @glow;
   }
 }
 
 @keyframes color {
   50% {
-    color: rgb(87, 187, 157);
+    color: @glow;
   }
 }
 
 .animationWave {
-  color: @color_1;
+  color: @main;
   -webkit-animation: 0.5s color infinite;
   animation: 0.5s color infinite;
 }

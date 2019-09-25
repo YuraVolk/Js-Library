@@ -1,20 +1,19 @@
-@color_1: #e6e6e6;
-@font_family_1: Verdana, Geneva, Tahoma, sans-serif;
-@background_color_1: blueviolet;
+@import "../settings/colors";
+@import "../settings/fonts";
 
 .toast {
   position: fixed;
   bottom: -150px;
   left: 25%;
   width: 50%;
-  background-color: @background_color_1;
+  background-color: @snackbar;
   opacity: 0.95;
   padding: 8px;
   border-radius: 25px;
   height: 200px;
-  color: @color_1;
+  color: @main-white;
   z-index: 9999;
-  font-family: @font_family_1;
+  font-family: @flat;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding-top: 16px;
