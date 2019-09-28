@@ -65,5 +65,6 @@ require('../less/styles/tableFiltering.less');
 import './scripts/validation';
 require('../less/styles/validation.less');
 import './scripts/perspectiveCarousel';
+require('../less/styles/perspectiveCarousel.less');
 
 import './mainControl';
