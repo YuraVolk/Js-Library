@@ -103,15 +103,12 @@ class Carousel {
 }
 
 
-window.onload = function () {
-  const options = {
-    xPos: null,
-    yPos: 112,
-    xRadius: null,
-    yRadius: 128,
-    farScale: 0.9,
-    speed: 0.11
-  };
-
-  new Carousel(document.querySelector('#carouselm'), options);
+const options = {
+  xPos: null,
+  yPos: 112,
+  xRadius: null,
+  yRadius: 128,
+  farScale: 0.9,
+  speed: 0.11
 };
+new Carousel(document.querySelector('#carouselm'), options);

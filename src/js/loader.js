@@ -66,5 +66,7 @@ import './scripts/validation';
 require('../less/styles/validation.less');
 import './scripts/perspectiveCarousel';
 require('../less/styles/perspectiveCarousel.less');
+import './scripts/customSelect';
+require('../less/styles/customSelect.less');
 
 import './mainControl';

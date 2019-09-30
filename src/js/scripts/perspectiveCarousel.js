@@ -208,6 +208,19 @@ class PerspectiveCarousel {
         setTimeout(() => {
           itemAnimationComplete(item, newPosition);
         }, 300);
+      } else {
+        item.dataset.currentPosition = newPosition;
+        if (item.dataset.oldPosition === 0 || !item.dataset.oldPosition) {
+          performCalculations(item, newPosition);
+          Object.assign(item.style, {
+            left: item.dataset.left + 'px',
+            width: item.dataset.width + 'px',
+            height: item.dataset.height + 'px',
+            top: item.dataset.top + 'px',
+            opacity: item.dataset.opacity,
+            zIndex: item.dataset.depth
+          });
+        }
       }
     }
 
@@ -234,18 +247,12 @@ class PerspectiveCarousel {
       }
     }
 
-    function rotateCarousel(rotations) {
+    function rotateCarousel() {
       if (data.currentlyMoving === false) {
         data.currentCenterItem.classList.remove(options.activeClassName);
         data.currentlyMoving = true;
         data.itemsAnimating = 0;
-        data.carouselRotationsLeft ++;
-        if (options.quickerForFurther === true) {
-          if (rotations > 1) {
-            data.currentSpeed = options.speed;
-          }
-          data.currentSpeed = (data.currentSpeed < 100) ? 100 : data.currentSpeed;
-        }
+        data.carouselRotationsLeft++;
         for (let i = 0; i < data.totalItems; i++) {
           const item = data.items[i];
           const currentPosition = parseInt(item.dataset.currentPosition, 10);
@@ -310,7 +317,6 @@ class PerspectiveCarousel {
           data.currentDirection = 'forward';
         }
       }
-      rotateCarousel(1);
     }
     this.reload = function (newOptions) {
       const preset = {
@@ -320,8 +326,9 @@ class PerspectiveCarousel {
         horizonOffset: 0,
         horizonOffsetMultiplier: 1,
         sizeMultiplier: 0.7,
-        opacityMultiplier: 1,
+        opacityMultiplier: 0.87,
         horizon: 0,
+        speed: 300,
         flankingItems: 2,
         linkHandling: 2,
         autoPlay: 0,
@@ -360,11 +367,11 @@ class PerspectiveCarousel {
     document.addEventListener('click', (e) => {
       if (e.target.classList[1] === 'perspective-left') {
         data.currentDirection = 'backward';
-        rotateCarousel(1);
+        rotateCarousel();
       }
       if (e.target.classList[1] === 'perspective-right') {
         data.currentDirection = 'forward';
-        rotateCarousel(1);
+        rotateCarousel();
       }
       if (e.target.classList[1] === 'perspective-switch') {
         if (options.orientation === 'vertical') {
@@ -372,7 +379,7 @@ class PerspectiveCarousel {
         } else {
           options.orientation = 'vertical';
         }
-        rotateCarousel(1);
+        rotateCarousel();
       }
     });
   }
