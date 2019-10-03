@@ -49,12 +49,12 @@ class PerspectiveCarousel {
 
     function setOriginalItemDimensions() {
       Array.from(options.parent.querySelectorAll('img')).forEach(function (el) {
-        if (el.dataset.originalWidth == undefined || options.forcedImageWidth > 0) {
+        if (el.dataset.originalWidth == void 0 || options.forcedImageWidth > 0) {
           el.style.display = '';
           el.dataset.originalWidth = el.clientWidth;
           el.style.display = 'none';
         }
-        if (el.dataset.originalHeight == undefined || options.forcedImageHeight > 0) {
+        if (el.dataset.originalHeight == void 0 || options.forcedImageHeight > 0) {
           el.style.display = '';
           el.dataset.originalHeight = el.clientHeight;
           el.style.display = 'none';
@@ -226,7 +226,7 @@ class PerspectiveCarousel {
 
     function itemAnimationComplete(item, newPosition) {
       data.itemsAnimating--;
-      item.dataset.currentPosition = newPosition;;
+      item.dataset.currentPosition = newPosition;
       if (newPosition === 0) {
         data.currentCenterItem = item;
       }
@@ -234,7 +234,7 @@ class PerspectiveCarousel {
         data.carouselRotationsLeft -= 1;
         data.currentlyMoving = false;
         if (data.carouselRotationsLeft > 0) {
-          rotateCarousel(0);
+          rotateCarousel();
         } else {
           data.currentSpeed = options.speed;
           data.currentCenterItem.classList.add(options.activeClassName);
@@ -329,9 +329,7 @@ class PerspectiveCarousel {
         opacityMultiplier: 0.87,
         horizon: 0,
         speed: 300,
-        flankingItems: 2,
-        linkHandling: 2,
-        autoPlay: 0,
+        flankingItems: 3,
         orientation: 'horizontal',
         activeClassName: 'carousel-center',
         preloadImages: true,
@@ -356,11 +354,9 @@ class PerspectiveCarousel {
       });
     };
     this.next = function () {
-      options.autoPlay = 0;
       moveOnce('forward');
     };
     this.prev = function () {
-      options.autoPlay = 0;
       moveOnce('backward');
     };
     this.reload(startingOptions);
