@@ -1,54 +1,52 @@
-var x, i, j, selElmnt;
+var x, i, j;
 x = document.getElementsByClassName("custom__select");
 
 for (i = 0; i < x.length; i++) {
-  selElmnt = x[i].getElementsByTagName("select")[0];
+  const select = x[i].querySelector('select');
   x[i].insertAdjacentHTML('beforeend', `
     <div class="select-selected">
-      ${selElmnt.options[selElmnt.selectedIndex].innerHTML}
+      ${select.options[select.selectedIndex].innerHTML}
     </div>
   `);
   const a = x[i].lastElementChild;
-  b = document.createElement("DIV");
-  b.setAttribute("class", "select-items select-hide");
   x[i].insertAdjacentHTML('beforeend', `
     <div class="select-items select-hide"></div>
   `);
   var b = x[i].lastElementChild;
-  for (j = 1; j < selElmnt.length; j++) {
+  for (j = 1; j < select.length; j++) {
     b.insertAdjacentHTML('beforeend', `
-    <div>${selElmnt.options[j].innerHTML}</div>
+    <div>${select.options[j].innerHTML}</div>
     `);
     let c = b.lastElementChild;
-    c.addEventListener("click", function() {
-        const s = this.parentNode.parentNode.querySelectorAll("select")[0];
-        const h = this.parentNode.previousElementSibling;
+    c.addEventListener("click", function(event) {
+        const s = event.target.parentNode.parentNode.querySelectorAll("select")[0];
+        const h = event.target.parentNode.previousElementSibling;
         for (let i = 0; i < s.length; i++) {
-          if (s.options[i].innerHTML == this.innerHTML) {
+          if (s.options[i].innerHTML == event.target.innerHTML) {
             s.selectedIndex = i;
-            h.innerHTML = this.innerHTML;
-            const y = Array.from(this.parentNode.querySelectorAll(".same-as-selected"));
+            h.innerHTML = event.target.innerHTML;
+            const y = Array.from(event.target.parentNode.querySelectorAll(".same-as-selected"));
             y.forEach((el) => el.removeAttribute("class"));
-            this.classList.add("same-as-selected");
+            event.target.classList.add("same-as-selected");
             break;
           }
         }
     });
   }
-  a.addEventListener("click", function(e) {
-      e.stopPropagation();
-      closeAllSelect(this);
-      this.nextElementSibling.classList.toggle("select-hide");
-      this.classList.toggle("select-arrow-active");
+  a.addEventListener("click", function(event) {
+      event.stopPropagation();
+      closeAllSelect(event.target);
+      event.target.nextElementSibling.classList.toggle("select-hide");
+      event.target.classList.toggle("select-arrow-active");
     });
 }
 
-function closeAllSelect(elmnt) {
+function closeAllSelect(el) {
   var x, y, i, arrNo = [];
   x = document.getElementsByClassName("select-items");
   y = document.getElementsByClassName("select-selected");
   for (i = 0; i < y.length; i++) {
-    if (elmnt == y[i]) {
+    if (el == y[i]) {
       arrNo.push(i)
     } else {
       y[i].classList.remove("select-arrow-active");
