@@ -1,44 +1,35 @@
-var x, i, j;
-x = document.getElementsByClassName("custom__select");
+const x = document.getElementsByClassName("custom__select");
 
-for (i = 0; i < x.length; i++) {
+for (let i = 0; i < x.length; i++) {
   const select = x[i].querySelector('select');
-  x[i].insertAdjacentHTML('beforeend', `
-    <div class="select-selected">
-      ${select.options[select.selectedIndex].innerHTML}
-    </div>
-  `);
+  x[i].insertAdjacentHTML('beforeend', "\n    <div class=\"select-selected\">\n      " + select.options[select.selectedIndex].innerHTML + "\n    </div>\n  ");
   const a = x[i].lastElementChild;
-  x[i].insertAdjacentHTML('beforeend', `
-    <div class="select-items select-hide"></div>
-  `);
+  x[i].insertAdjacentHTML('beforeend', "\n    <div class=\"select-items select-hide\"></div>\n  ");
   var b = x[i].lastElementChild;
-  for (j = 1; j < select.length; j++) {
-    b.insertAdjacentHTML('beforeend', `
-    <div>${select.options[j].innerHTML}</div>
-    `);
+  for (let j = 1; j < select.length; j++) {
+    b.insertAdjacentHTML('beforeend', "\n    <div>" + select.options[j].innerHTML + "</div>\n    ");
     let c = b.lastElementChild;
-    c.addEventListener("click", function(event) {
-        const s = event.target.parentNode.parentNode.querySelectorAll("select")[0];
-        const h = event.target.parentNode.previousElementSibling;
-        for (let i = 0; i < s.length; i++) {
-          if (s.options[i].innerHTML == event.target.innerHTML) {
-            s.selectedIndex = i;
-            h.innerHTML = event.target.innerHTML;
-            const y = Array.from(event.target.parentNode.querySelectorAll(".same-as-selected"));
-            y.forEach((el) => el.removeAttribute("class"));
-            event.target.classList.add("same-as-selected");
-            break;
-          }
+    c.addEventListener("click", function (event) {
+      const selectTest = event.target.parentNode.parentNode.querySelectorAll("select")[0];
+      const toTest = event.target.parentNode.previousElementSibling;
+      for (let i = 0; i < selectTest.length; i++) {
+        if (selectTest.options[i].innerHTML == event.target.innerHTML) {
+          selectTest.selectedIndex = i;
+          toTest.innerHTML = event.target.innerHTML;
+          const options = Array.from(event.target.parentNode.querySelectorAll(".same-as-selected"));
+          options.forEach((el) => el.removeAttribute("class"));
+          event.target.classList.add("same-as-selected");
+          break;
         }
+      }
     });
   }
-  a.addEventListener("click", function(event) {
-      event.stopPropagation();
-      closeAllSelect(event.target);
-      event.target.nextElementSibling.classList.toggle("select-hide");
-      event.target.classList.toggle("select-arrow-active");
-    });
+  a.addEventListener("click", function (event) {
+    event.stopPropagation();
+    closeAllSelect(event.target);
+    event.target.nextElementSibling.classList.toggle("select-hide");
+    event.target.classList.toggle("select-arrow-active");
+  });
 }
 
 function closeAllSelect(el) {
