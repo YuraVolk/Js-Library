@@ -1232,3 +1232,76 @@ input[type=range]:focus {
   background-color: #79c42f;
 }
 
+.perspective-carousel {
+  width: 80%;
+  height: 300px;
+  display: relative;
+  margin: 300px auto;
+}
+.perspective-carousel > img {
+  transition: 0.3s linear left, 0.3s linear width, 0.3s linear height, 0.3s linear top;
+}
+
+.custom__select {
+  position: relative;
+  font-family: Arial;
+  width: 150px;
+}
+.custom__select > select {
+  display: none;
+}
+.select-selected {
+  background-color: DodgerBlue;
+}
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+.select-items div,
+.select-selected {
+  color: #ffffff;
+  padding: 3px 12px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+  user-select: none;
+}
+.select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+.select-hide {
+  display: none;
+}
+.select-items div:hover,
+.same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.register {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.register > fieldset {
+  width: 200px;
+}
+.register > * {
+  margin-bottom: 8px;
+  padding: 5px;
+}
+

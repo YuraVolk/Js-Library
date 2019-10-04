@@ -4,6 +4,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const JavaScriptObfuscator = require('webpack-obfuscator');
 const devMode = process.env.NODE_ENV !== 'production';
 const webpack = require('webpack');
 
@@ -45,6 +46,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
+    }),
+    new JavaScriptObfuscator({
+      rotateUnicodeArray: true
     })
   ],
   optimization: {
