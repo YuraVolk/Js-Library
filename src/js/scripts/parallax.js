@@ -5,27 +5,27 @@ window.requestAnimFrame = (function(){
           function( callback ){
             window.setTimeout(callback, 1000 / 60);
           };
-})(); //префикс для браузеров старых
+})();
 
-const effect = 1.968; // Эффект дрожания и расстояния. Оптимальное значение. Не ставить меньше 1
-const newH = window.innerHeight / effect; //Радиус паралакса
-const parallaxes = [].slice.call(document.querySelectorAll('[data-parallax]')); //элементы по data-parallax. [].slice - костыль для ie. Он не поддерживает
+const effect = 1.968;
+const newH = window.innerHeight / effect;
+const parallaxes = [].slice.call(document.querySelectorAll('[data-parallax]'));
 
 parallaxes.forEach(function(el) {
   var clientOffsets = el.getBoundingClientRect();
   el.animationOffset = clientOffsets.top + window.pageYOffset;
   el.speed = el.dataset.speed;
   el.margin = el.dataset.marginBottom;
-}); //дать всем параметры
+});
 
 function move() {
-  const scrollPoint = window.pageYOffset; //место скролла. Если контейнер ограниченный есть (div а внутри паралакс) заменить window на него.
+  const scrollPoint = window.pageYOffset;
 
   parallaxes.forEach(function(el) {
-    if ((scrollPoint > (el.animationOffset - newH * 2) && scrollPoint < (el.animationOffset + newH))) { // проверить зону действия
-      const point = (scrollPoint - (el.animationOffset - newH)) / el.speed - (el.margin || 0); //найти нужное для паралакса место
+    if ((scrollPoint > (el.animationOffset - newH * 2) && scrollPoint < (el.animationOffset + newH))) {
+      const point = (scrollPoint - (el.animationOffset - newH)) / el.speed - (el.margin || 0);
       const up = point + 'px';
-      el.style.webkitTransform = 'translateY(' + up + ')'; //Задать его всем браузероам
+      el.style.webkitTransform = 'translateY(' + up + ')';
       el.style.MozTransform = 'translateY(' + up + ')';
       el.style.msTransform = 'translateY(' + up + ')';
       el.style.OTransform = 'translateY(' + up + ')';
@@ -34,7 +34,7 @@ function move() {
     }
 
   });
-  window.requestAnimationFrame(move); //рекурсия
+  window.requestAnimationFrame(move);
 }
 
 window.requestAnimationFrame(move);

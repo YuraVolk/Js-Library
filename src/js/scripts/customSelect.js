@@ -24,6 +24,7 @@ for (let i = 0; i < x.length; i++) {
       }
     });
   }
+
   a.addEventListener("click", function (event) {
     event.stopPropagation();
     closeAllSelect(event.target);

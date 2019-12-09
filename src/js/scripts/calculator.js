@@ -165,4 +165,3 @@ document.addEventListener('click', (e) => {
     element.textContent = formatNumber();
   }
 });
-

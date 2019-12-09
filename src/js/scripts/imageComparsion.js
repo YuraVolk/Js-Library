@@ -15,15 +15,15 @@ function compareImages(img, index, length) {
   slider.style.top = (height / 2) -  (slider.offsetHeight / 2) + "px";
   slider.style.left = (width - ((width /  length) * (index + 1))) - (slider.offsetWidth / 2) + "px";
   slider.addEventListener("mousedown", slideReady);
-  window.addEventListener("mouseup", slideFinish);
+  window.addEventListener("mouseup", slideFinish, {passive: true});
   slider.addEventListener("touchstart", slideReady);
-  window.addEventListener("touchstop", slideFinish);
+  window.addEventListener("touchstop", slideFinish, {passive: true});
   slide(width - ((width /  length) * (index + 1)));
   function slideReady(event) {
     event.preventDefault();
     clicked = 1;
-    window.addEventListener("mousemove", slideMove);
-    window.addEventListener("touchmove", slideMove);
+    window.addEventListener("mousemove", slideMove, {passive: true});
+    window.addEventListener("touchmove", slideMove, {passive: true});
   }
   function slideFinish() {
     clicked = 0;

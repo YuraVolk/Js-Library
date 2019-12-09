@@ -17,6 +17,7 @@ function scrollDir(event) {
   }
 }
 
+
 function easeInOutQuad(t, b, c, d) {
   t /= d / 2;
   if (t < 1) return c / 2 * t * t + b;
@@ -31,7 +32,7 @@ function smoothScrollTo(element, to, duration) {
     currentTime = 0,
     increment = 5;
 
-  var animateScroll = function () {
+  var animateScroll = function() {
     currentTime += increment;
     var val = easeInOutQuad(currentTime, start, change, duration);
     element.scrollTop = val;
@@ -42,6 +43,7 @@ function smoothScrollTo(element, to, duration) {
       isScrolling = false;
     }
   };
+
   animateScroll();
 }
 
@@ -82,3 +84,4 @@ document.querySelector('.scroll-select').addEventListener('wheel', (e) => {
     }
   }
 });
+

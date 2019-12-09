@@ -328,7 +328,7 @@ class PerspectiveCarousel {
         sizeMultiplier: 0.7,
         opacityMultiplier: 0.87,
         horizon: 0,
-        speed: 300,
+        speed: 280,
         flankingItems: 3,
         orientation: 'horizontal',
         activeClassName: 'carousel-center',
