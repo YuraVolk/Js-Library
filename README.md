@@ -20,3 +20,6 @@ All solutions are created with pure (vanilla) JavaScript.
 
 ## Security Policy 
 [Security Policy](https://github.com/YuraVolk/Js-Library/blob/master/SECURITY.md) for this library.
+
+## Contributing Guidelines
+[Contributing Guidelines](https://github.com/YuraVolk/Js-Library/blob/master/CONTRIBUTING.md) for this library.
