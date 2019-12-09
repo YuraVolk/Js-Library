@@ -17,3 +17,4 @@ These are packages that were
 fixed manually: 
 - [x] serialize-javascript
 - [x] compression-webpack-plugin
+- [x] less-loader
