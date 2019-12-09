@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 function filterDivs(toLeave) {
 
   Array.prototype.slice.call(document.querySelectorAll('.filterEl')).forEach(function (element, i) {

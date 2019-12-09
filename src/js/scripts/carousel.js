@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 function testWebP() {
   return new Promise(res => {
     const webP = new Image();

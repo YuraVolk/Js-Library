@@ -1,3 +1,4 @@
+//Created by Yury Volkovskiy
 let videoPlays, isMute = true, prevVideoVolume;
 var styledRanges = document.getElementsByClassName('styled_range');
 var rangeVideo = styledRanges[0].childNodes;

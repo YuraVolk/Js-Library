@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 "use strict";
 
 var sections = Array.prototype.slice.call(document.querySelectorAll('.accordion'));

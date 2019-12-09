@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 window.requestAnimFrame = (function(){
   return  window.requestAnimationFrame       ||
           window.webkitRequestAnimationFrame ||

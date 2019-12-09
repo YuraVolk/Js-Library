@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 "use strict";
 
 window.addEventListener('load', () => {

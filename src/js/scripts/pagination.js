@@ -1,3 +1,4 @@
+//Created by Yury Volkovskiy
 let page = 1;
 
 function buttonPress(modifier, firstPage = 1, lastPage = 12) {

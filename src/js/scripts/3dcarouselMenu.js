@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 class Item {
   constructor(image) {
     image.item = this;

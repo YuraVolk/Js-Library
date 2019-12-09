@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 let isTyping = false;
 
 var markups = [

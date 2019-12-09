@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 let scroll, timeLeft, isActive, toScroll;
 
 

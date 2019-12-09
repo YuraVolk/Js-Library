@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 let nextPhrase = 'into text that is reciphered';
 const phrases = ['This text rechipers', 'into text that is reciphered', 'still no jQuery or any other plugin', 'It IS cool'];
 let isRebuilding = false;

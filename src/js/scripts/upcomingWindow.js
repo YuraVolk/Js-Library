@@ -1,3 +1,4 @@
+//Created by Yury Volkovskiy
 function isInViewport(el) {
   const bounding = el.getBoundingClientRect();
   return (

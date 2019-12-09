@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 var opacityRanges = document.getElementsByClassName('opacity_range');
 var rangeOpacity = opacityRanges[0].childNodes;
 var rgba = [132, 46, 153, 1];

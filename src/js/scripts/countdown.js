@@ -1,3 +1,6 @@
+//Created by Yury Volkovskiy
+
+
 const finishDate = new Date('May 6, 2021 11:00:00').getTime();
 let current = new Date().getTime();
 let distance = finishDate - current;

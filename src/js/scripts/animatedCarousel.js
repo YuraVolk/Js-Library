@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 var index = 0;
 var amount = 0;
 var currTransl = [];

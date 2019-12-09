@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 let operations = ["0"];
 let res = "0";
 let curNum = 0;

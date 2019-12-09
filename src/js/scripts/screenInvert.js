@@ -1,3 +1,4 @@
+//Created by Yury Volkovskiy
 
 
 let modeTarget = document.querySelector('.toInvert');

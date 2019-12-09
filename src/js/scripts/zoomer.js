@@ -1,3 +1,4 @@
+//Created by Yury Volkovskiy
 "use strict";
 
 document.querySelector('.zoom-container').addEventListener('mousemove', function (e) {

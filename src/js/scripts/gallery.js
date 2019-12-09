@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 const slider = document.getElementById('categorySlider');
 const slideList = document.querySelector('.gallery__slides');
 const slideListItems = slider.querySelectorAll('.gallery-list__item');

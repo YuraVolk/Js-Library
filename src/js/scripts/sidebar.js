@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 const array = [];
 
 const body = document.querySelector('body');

@@ -1,3 +1,4 @@
+//Created by Yury Volkovskiy
 
 var floatingPanel = document.querySelector('.floatingPanel');
 var floatingPanel1 = document.querySelector('.floatingPanel--1');

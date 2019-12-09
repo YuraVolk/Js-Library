@@ -1,3 +1,6 @@
+//Created by Yury Volkovskiy
+
+
 if (/%3C[^%3E]*%3E/g.test(window.location.href)) {
      window.location.href = 'http://localhost:8080/';
 }

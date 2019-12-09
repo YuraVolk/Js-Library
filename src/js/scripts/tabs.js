@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 const changeTab = function (tabNumber) {
   const tabToSave = document.querySelector(`.tabs--${tabNumber}`);
   Array.prototype.slice.call(document.querySelectorAll('.tabs')).forEach(el => {

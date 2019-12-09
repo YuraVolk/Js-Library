@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 let phrases = [
   'This text transforms   ',
   'into other texts       ',

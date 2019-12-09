@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 class PerspectiveCarousel {
   constructor(startingOptions) {
     let options = {};

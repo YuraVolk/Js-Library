@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 const x = document.querySelectorAll(".comparsion-image--other");
 
 for (var i = 0; i < x.length; i++) {

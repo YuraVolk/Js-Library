@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 let selectedItem = 0;
 let isScrolling = false;
 const items = Array.prototype.slice.call(document.querySelectorAll('.scroll-item'));

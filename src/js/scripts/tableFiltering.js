@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 const filters = [];
 
 const table = document.querySelector('.table-filtering');

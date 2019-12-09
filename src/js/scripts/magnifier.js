@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 const zoom = 2;
 
 const img = document.querySelector('.magnifier-image');

@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 let bounding;
 let topE = document.querySelector('.headerScroll--top');
 let bottomE = document.querySelector('.headerScroll--bottom');

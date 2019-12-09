@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 const x = document.getElementsByClassName("custom__select");
 
 for (let i = 0; i < x.length; i++) {

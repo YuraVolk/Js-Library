@@ -1,3 +1,5 @@
+//Created by Yury Volkovskiy
+
 let isHidden = 0;
 
 function showToast() {
