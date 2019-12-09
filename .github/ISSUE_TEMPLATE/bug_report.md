@@ -11,11 +11,18 @@ assignees: ''
 A clear and concise description of what the bug is.
 
 **To Reproduce**
-Steps to reproduce the behavior:
+You should describe, how to reproduce
+the bug. 
+Something like: 
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
 4. See error
+Or: 
+1. Run '...'
+2. Scroll to '...'
+3. Click on '...'
+4. Error
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
@@ -36,3 +43,7 @@ If applicable, add screenshots to help explain your problem.
 
 **Additional context**
 Add any other context about the problem here.
+
+***Links***
+Add any links to similar problems,
+connected with the issue.
