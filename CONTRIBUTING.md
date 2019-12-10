@@ -26,10 +26,10 @@ Description of what can collaborators do:
 | *Edit Wiki* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | *Manage and fix security issues* | :x: | :white_check_mark: | :white_check_mark: |
 | *Setup Actions* | :x: | :white_check_mark: | :white_check_mark: |
-| *Merge Branches* | :x: | :white_check_mark: | :white_check_mark: |
+| *Manage dependecies*  | :x: | :white_check_mark: | :white_check_mark: |
+| *Merge Branches* | :x: | :x: | :white_check_mark: |
 | *Create milestones* | :x: | :white_check_mark: | :white_check_mark: |
 | *Draft new releases*  | :x: | :white_check_mark: | :white_check_mark: |
-| *Manage dependecies*  | :x: | :x: | :white_check_mark: |
 | *Local repository access*  | :x: | :x: | :white_check_mark: |
 | *Request advisory withdraw* | :x: | :x: | :white_check_mark: |
 | *Create projects* | :x: | :x: | :white_check_mark: |
