@@ -17,9 +17,6 @@ Description of what can collaborators do:
 
 | Abilities | Collaborator | Trusted Collaborator | Managers |
 | --- | --- | --- | --- |
-| *Create issues* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| *Create pull requests* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| *Label issues and pulls* |  :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | *Close issues and pulls* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | *Create Branches* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | *Create files* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
