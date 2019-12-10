@@ -15,20 +15,27 @@ in Code of Conduct.
 ## Collaborator Guildelines
 Description of what can collaborators do:
 
-| Abilities | User | Collaborator | Trusted Collaborator|
+| Abilities | Collaborator | Trusted Collaborator | Managers |
 | --- | --- | --- | --- |
 | *Create issues* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | *Create pull requests* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| *Label issues and pulls* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| *Close issues and pulls* | :x: | :white_check_mark: | :white_check_mark: |
-| *Create Branches* | :x: | :white_check_mark: | :white_check_mark: |
-| *Create files* | :x: | :white_check_mark: | :white_check_mark: |
-| *Edit and delete files* | :x: | Via pull only | :white_check_mark: |
-| *Merge pull requests* | :x: | :white_check_mark: | :white_check_mark: |
-| *Manage projects* | :x: | :white_check_mark: | :white_check_mark: |
-| *Edit Wiki* | :x: | :white_check_mark: | :white_check_mark: |
-| *Manage and fix security issues* | :x: | :x: | :white_check_mark: |
-| *Setup Actions* | :x: | :x: | :white_check_mark: |
-| *Merge Branches* | :x: | :x: | :white_check_mark: |
-| *Create milestones* | :x: | :x: | :white_check_mark: |
-| *Draft new releases* | :x: | :x: | :white_check_mark: |
+| *Label issues and pulls* |  :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| *Close issues and pulls* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| *Create Branches* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| *Create files* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| *Edit and delete files* | Via pull only | :white_check_mark: | :white_check_mark: |
+| *Merge pull requests* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| *Manage projects* |  :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| *Edit Wiki* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| *Manage and fix security issues* | :x: | :white_check_mark: | :white_check_mark: |
+| *Setup Actions* | :x: | :white_check_mark: | :white_check_mark: |
+| *Merge Branches* | :x: | :white_check_mark: | :white_check_mark: |
+| *Create milestones* | :x: | :white_check_mark: | :white_check_mark: |
+| *Draft new releases*  | :x: | :white_check_mark: | :white_check_mark: |
+| *Create workflows*  | :x: | :x: | :white_check_mark: |
+| *Create and edit templates*  | :x: | :x: | :white_check_mark: |
+| *Manage dependecies*  | :x: | :x: | :white_check_mark: |
+| *Local repository access*  | :x: | :x: | :white_check_mark: |
+| *Request advisory withdraw* | :x: | :x: | :white_check_mark: |
+| *Create projects* | :x: | :x: | :white_check_mark: |
+| *Close milestones* | :x: | :x: | :white_check_mark: |
