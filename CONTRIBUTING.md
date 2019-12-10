@@ -29,10 +29,9 @@ Description of what can collaborators do:
 | *Merge Branches* | :x: | :white_check_mark: | :white_check_mark: |
 | *Create milestones* | :x: | :white_check_mark: | :white_check_mark: |
 | *Draft new releases*  | :x: | :white_check_mark: | :white_check_mark: |
-| *Create workflows*  | :x: | :x: | :white_check_mark: |
-| *Create and edit templates*  | :x: | :x: | :white_check_mark: |
 | *Manage dependecies*  | :x: | :x: | :white_check_mark: |
 | *Local repository access*  | :x: | :x: | :white_check_mark: |
 | *Request advisory withdraw* | :x: | :x: | :white_check_mark: |
 | *Create projects* | :x: | :x: | :white_check_mark: |
 | *Close milestones* | :x: | :x: | :white_check_mark: |
+| *Assign asignees* | :x: | :x: | :white_check_mark: |
