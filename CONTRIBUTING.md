@@ -15,3 +15,20 @@ in Code of Conduct.
 ## Collaborator Guildelines
 Description of what can collaborators do:
 
+| Abilities | User | Collaborator | Trusted Collaborator|
+| --- | --- | --- | --- |
+| *Create issues* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| *Create pull requests* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| *Label issues and pulls* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| *Close issues and pulls* | :x: | :white_check_mark: | :white_check_mark: |
+| *Create Branches* | :x: | :white_check_mark: | :white_check_mark: |
+| *Create files* | :x: | :white_check_mark: | :white_check_mark: |
+| *Edit and delete files* | :x: | Via pull only | :white_check_mark: |
+| *Merge pull requests* | :x: | :white_check_mark: | :white_check_mark: |
+| *Manage projects* | :x: | :white_check_mark: | :white_check_mark: |
+| *Edit Wiki* | :x: | :white_check_mark: | :white_check_mark: |
+| *Manage and fix security issues* | :x: | :x: | :white_check_mark: |
+| *Setup Actions* | :x: | :x: | :white_check_mark: |
+| *Merge Branches* | :x: | :x: | :white_check_mark: |
+| *Create milestones* | :x: | :x: | :white_check_mark: |
+| *Draft new releases* | :x: | :x: | :white_check_mark: |
