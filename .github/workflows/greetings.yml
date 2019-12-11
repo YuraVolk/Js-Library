@@ -1,0 +1,13 @@
+name: Greetings
+
+on: [pull_request, issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: 'You have created your first issue! Now you create fork and pull request, and continue commenting issue.'' first issue'
+        pr-message: 'You have created your first pull request! If we will not understand request, review of changes will be requested.'' first pr'
