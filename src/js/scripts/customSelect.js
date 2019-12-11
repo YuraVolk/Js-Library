@@ -12,6 +12,9 @@ for (let i = 0; i < x.length; i++) {
     b.insertAdjacentHTML('beforeend', "\n    <div>" + select.options[j].innerHTML + "</div>\n    ");
     let c = b.lastElementChild;
     c.addEventListener("click", function (event) {
+      if (window.getComputedStyle(event.target.parentNode).getPropertyValue("opacity") == 0) {
+        return;
+      }
       const selectTest = event.target.parentNode.parentNode.querySelectorAll("select")[0];
       const toTest = event.target.parentNode.previousElementSibling;
       for (let i = 0; i < selectTest.length; i++) {
