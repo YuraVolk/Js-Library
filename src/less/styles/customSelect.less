@@ -45,13 +45,20 @@
   left: 0;
   right: 0;
   z-index: 99;
+  opacity: 1;
+  transition: opacity 0.2s linear;
 }
 
 .select-hide {
-  display: none;
+  opacity: 0;
 }
 
 .select-items div:hover,
 .same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+
+.select-arrow-active {
+  background-color: darkcyan;
 }

@@ -32,6 +32,7 @@ function updateTime() {
   if (minutes.toString().slice(-1) === '1') {
     minutesDesc = 'minute';
   }
+
   if (seconds.toString().slice(-1) === 1) {
     secondsDesc = 'second';
   }
