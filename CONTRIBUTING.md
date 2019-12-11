@@ -25,7 +25,7 @@ Description of what can collaborators do:
 | *Manage projects* |  :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | *Edit Wiki* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | *Manage and fix security issues* | :x: | :white_check_mark: | :white_check_mark: |
-| *Create projects* | :x: | :white_check_mark: | | :white_check_mark: |
+| *Create projects* | :x: | :white_check_mark: | :white_check_mark: |
 | *Manage dependecies*  | :x: | :white_check_mark: | :white_check_mark: |
 | *Create milestones* | :x: | :white_check_mark: | :white_check_mark: |
 | *Draft new releases*  | :x: | :white_check_mark: | :white_check_mark: |
