@@ -801,7 +801,7 @@ input[type=range]:focus {
 .zoom__hover {
   width: 60px;
   height: 60px;
-  background: url(./img/slide0.png) no-repeat #ffffff;
+  background: url(img/slide0.png) no-repeat #ffffff;
   -webkit-box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.3);
   box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.3);
   pointer-events: none;
@@ -1273,7 +1273,6 @@ input[type=range]:focus {
   padding: 3px 12px;
   border: 1px solid transparent;
   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-  cursor: pointer;
   user-select: none;
 }
 .select-items {
@@ -1283,11 +1282,13 @@ input[type=range]:focus {
   left: 0;
   right: 0;
   z-index: 99;
+  cursor: pointer;
   opacity: 1;
   transition: opacity 0.2s linear;
 }
 .select-hide {
   opacity: 0;
+  visibility: hidden;
 }
 .select-items div:hover,
 .same-as-selected {
