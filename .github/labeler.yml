@@ -1,12 +1,8 @@
 semantic:
   - src/**/*.index.html
   
-improvement:
-  - src/js/*
-  - src/js/**/*
-  
-css idea:
-  - src/less/*
-  - src/less/**/*
-  
-  
+improvement: src/js/*
+
+css idea: src/less/*
+
+invalid: src/js/scripts/*
