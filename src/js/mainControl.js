@@ -2486,6 +2486,7 @@ function updateTime() {
     </code></pre>`
 ];
 
+
 /*
     Order of initializations.
     * Imports
@@ -2560,11 +2561,11 @@ document.addEventListener('click', event => {
   }
 });
 
-
+/*
 updateView = () => {
   Array.from(document.querySelectorAll('.markup')).forEach(el => {
     el.style.boxShadow = `inset 0 0 100px #797979`;
   });
-}
+}*/
 
 updateView();

@@ -123,6 +123,7 @@ code {
   animation-duration: 4s;
   -webkit-animation: slide-down 0.8s ease;
   animation: slide-down 0.8s ease;
+  box-shadow: inset 0 0 100px #797979;
 }
 .modalButton {
   color: #676767;
