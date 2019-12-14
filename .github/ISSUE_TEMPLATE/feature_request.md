@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for a new scruot
+about: 'Suggest an idea '
 title: ''
 labels: ''
 assignees: ''
