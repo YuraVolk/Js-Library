@@ -125,6 +125,12 @@ code {
   animation: slide-down 0.8s ease;
   box-shadow: inset 0 0 100px #797979;
 }
+.markup code,
+.markup pre {
+  width: 100%;
+  font-size: 1em;
+  overflow-x: scroll;
+}
 .modalButton {
   color: #676767;
   font-weight: 2000;
@@ -181,6 +187,53 @@ label {
   padding: 4px;
 }
 
+.btn {
+  box-sizing: border-box;
+  display: inline-block;
+  max-width: 100%;
+  margin: 0;
+  padding: 20px;
+  white-space: nowrap;
+  user-select: none;
+  font-family: inherit;
+  font-size: 1em;
+  line-height: 1em;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  text-transform: none;
+  color: #222222;
+  background-color: #cccccc;
+  background-image: none;
+  border-radius: 5px;
+  border: 0;
+  cursor: pointer;
+  /*используется для оформления svg в кнопке только для Библитеки*/
+}
+.btn:hover {
+  text-decoration: none;
+}
+.btn > svg {
+  display: block;
+}
+.btn--arrow {
+  margin-top: 12px;
+  padding: 0;
+  background: transparent;
+  fill: #ff4d4d;
+  border: #cccccc 2px solid;
+  border-radius: 5px;
+}
+.btn--arrow:hover {
+  fill: #ff4d4d;
+}
+.btn--arrow:active {
+  fill: #b30000;
+}
+
 .slider {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -194,7 +247,7 @@ label {
   outline: #cecece solid 5px;
 }
 
-.filter {
+.filter__list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -208,8 +261,10 @@ label {
   box-sizing: border-box;
   width: 92%;
   margin-bottom: 60px;
+  padding-left: 0;
+  list-style-type: none;
 }
-.filterEl {
+.item__inner {
   width: 367px;
   height: 335px;
   margin-bottom: 60px;
@@ -217,18 +272,9 @@ label {
   position: relative;
   background-color: #cecece;
 }
-.filter__slider-btn {
-  padding: 8px 18px;
-  border: 3px solid #333333;
-  background: #313131;
-  border-radius: 5px;
-  color: #f5f5f5;
-  font-size: 14px;
-  line-height: 21px;
-  font-family: "Montserrat Light";
-}
-.filter__slider {
+.filter__controls-list {
   display: -webkit-box;
+  padding-left: 0;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
@@ -237,9 +283,7 @@ label {
   width: 54%;
   margin: 0 auto;
   margin-bottom: 40px;
-}
-.filter-wrap {
-  background-color: #efef6e;
+  list-style-type: none;
 }
 
 .buttons {

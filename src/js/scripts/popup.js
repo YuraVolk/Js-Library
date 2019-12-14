@@ -1,7 +1,13 @@
 //Created by Yury Volkovskiy
+const data = {
+  POPUP: 'popup',
+  RENEWING_POPUP: 'popup--3',
+  STOP_POPUP_RENEW: 'closePopup',
+  CLOSE_POPUP: 'popup__close',
+  SHOW_POPUP: 'popupButton'
+};
 
 let scroll, timeLeft, isActive, toScroll;
-
 
 function showPopup(popup) {
   isActive = false;
@@ -15,7 +21,7 @@ function showPopup(popup) {
 }
 
 function hidePopup() {
-  Array.prototype.slice.call(document.querySelectorAll('.popup')).forEach(el => {
+  Array.prototype.slice.call(document.querySelectorAll(`.${data.POPUP}`)).forEach(el => {
     if (el.classList[3] === 'renew' && el.style.display === 'block') {
       isActive = true;
     }
@@ -58,18 +64,18 @@ function stopScroll() {
 
 let timing = setInterval(function () {
   if (isActive) {
-    showPopup(document.querySelector('.popup--3'));
+    showPopup(document.querySelector(`.${data.RENEWING_POPUP}`));
   }
 }, 15000);
 
 document.addEventListener('click', e => {
-  if (e.target.classList[1] === 'popupButton') {
-    showPopup(document.querySelector(".popup--" + e.target.classList[2].slice(-1)));
+  if (e.target.classList[1] === data.SHOW_POPUP) {
+    showPopup(document.querySelector(`.${data.POPUP}--` + e.target.classList[2].slice(-1)));
   }
-  if (e.target.classList[0] === 'popup__close') {
+  if (e.target.classList[0] === data.CLOSE_POPUP) {
     hidePopup();
   }
-  if (e.target.classList[1] === 'closePopup') {
+  if (e.target.classList[1] === data.STOP_POPUP_RENEW) {
     isActive = false;
   }
 });

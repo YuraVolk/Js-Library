@@ -11,19 +11,19 @@ const data = {
     RGB: 'rgb',
     HEX: 'hex'
   },
-  COLOR_POCKER_BACKGROUND: 'picker-back',
+  COLOR_PICKER_BACKGROUND: 'picker-back',
   COLOR_PICKER: 'picker',
   OPACITY_BACKGROUND: 'opacity'
 };
 
-var opacityRanges = document.getElementsByClassName('opacity_range');
+var opacityRanges = document.getElementsByClassName(data.OPACITY_RANGE.WRAP);
 var rangeOpacity = opacityRanges[0].childNodes;
 var rgba = [132, 46, 153, 1];
 
 let opacityGlobal = 1;
 
 function initColorPicker() {
-  var canvasEl = document.getElementById('picker');
+  var canvasEl = document.getElementById(data.COLOR_PICKER);
   var canvasContext = canvasEl.getContext('2d');
   var image = new Image(256, 256);
 
@@ -57,7 +57,7 @@ function toHex(red, green, blue) {
   var g = rgbToHex(green);
   var b = rgbToHex(blue);
 
-  document.querySelector('.hex').textContent = '#' + r + g + b;
+  document.querySelector(`.${data.CODES.HEX}`).textContent = '#' + r + g + b;
   return '#' + r + g + b;
 }
 
@@ -68,7 +68,7 @@ function rgbaToRgb(RGBA) {
   var green = Math.round((RGBA.alpha * (RGBA.green / 255) + (alpha * (0 / 255))) * 255);
   var blue = Math.round((RGBA.alpha * (RGBA.blue / 255) + (alpha * (0 / 255))) * 255);
 
-  document.querySelector('.rgb').textContent = 'is : ' + red + ', ' + green + ', ' + blue;
+  document.querySelector(`.${data.CODES.RGB}`).textContent = 'is : ' + red + ', ' + green + ', ' + blue;
 
   toHex(red, green, blue);
 }
@@ -80,9 +80,9 @@ function modifyRange(audioRanges) {
     for (var j = 0; j < audioRanges[i].children.length; j++) {
       var child = audioRanges[i].children[j];
 
-      if (child.className === 'thumb_opacity') {
+      if (child.className === data.OPACITY_RANGE.THUMB) {
         var thumbRange = child;
-      } else if (child.className === 'track_opacity') {
+      } else if (child.className === data.OPACITY_RANGE.TRACK) {
         var trackRange = child;
       }
     }
@@ -96,14 +96,14 @@ function modifyRange(audioRanges) {
 }
 
 function changeOpacity(opacity) {
-  const opacityDiv = document.querySelector('.opacity');
+  const opacityDiv = document.querySelector(`.${data.OPACITY_BACKGROUND}`);
   opacityDiv.style.opacity = opacity / 100;
   opacityGlobal = opacity / 100;
 }
 
 function changeColor(rgba, opacity) {
-  const pickerBack = document.querySelector('.picker-back');
-  const pickerRgba = document.querySelector('.rgba');
+  const pickerBack = document.querySelector(`.${data.COLOR_PICKER_BACKGROUND}`);
+  const pickerRgba = document.querySelector(`.${data.CODES.RGBA}`);
 
   pickerBack.style.backgroundColor = "rgba(" + rgba[0] + ", " + rgba[1] + ", " + rgba[2] + ", " + opacity + ")";
   pickerRgba.textContent = " is " + rgba[0] + ", " + rgba[1] + ", " + rgba[2] + ", " + opacity;

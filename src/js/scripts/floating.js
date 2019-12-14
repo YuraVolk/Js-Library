@@ -12,10 +12,10 @@ const data = {
   ]
 }
 
-var floatingPanel = document.querySelector('.floatingPanel');
-var floatingPanel1 = document.querySelector('.floatingPanel--1');
+var floatingPanel = document.querySelector(`.${data.FLOATING_PANELS[0].CLASS}`);
+var floatingPanel1 = document.querySelector(`.${data.FLOATING_PANELS[1].CLASS}`);
 
-let arePanels = [false, false, false];
+let arePanels = [false, false];
 
 function addEventListen(panel) {
   var initX, initY, mousePressX, mousePressY;
@@ -53,11 +53,11 @@ function toggleFloatingWindow(i, panel, btn) {
 }
 
 document.addEventListener('click', e => {
-  if (e.target.classList[1] === 'modalButton--1') {
+  if (e.target.classList[1] === data.FLOATING_PANELS[0].OPEN_BUTTON) {
     toggleFloatingWindow(0, floatingPanel, e.target);
     addEventListen(floatingPanel);
   }
-  if (e.target.classList[1] === 'modalButton--2') {
+  if (e.target.classList[1] === data.FLOATING_PANELS[1].OPEN_BUTTON) {
     toggleFloatingWindow(1, floatingPanel1, e.target);
     addEventListen(floatingPanel1);
   }
