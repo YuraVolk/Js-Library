@@ -1,4 +1,16 @@
 //Created by Yury Volkovskiy
+const data = {
+  FLOATING_PANELS: [
+    {
+      CLASS: 'floatingPanel',
+      OPEN_BUTTON: 'modalButton--1'
+    },
+    {
+      CLASS: 'floatingPanel--1',
+      OPEN_BUTTON: 'modalButton--2'
+    }
+  ]
+}
 
 var floatingPanel = document.querySelector('.floatingPanel');
 var floatingPanel1 = document.querySelector('.floatingPanel--1');

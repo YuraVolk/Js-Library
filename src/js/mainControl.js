@@ -2539,20 +2539,25 @@ function updateTime() {
 */
 
 document.addEventListener('click', event => {
-  if (event.target.parentNode.parentNode.classList[0] === 'block__btn') {
-    let nodeList = Array.from(document.querySelector(`.${event.target.parentNode.parentNode.classList[1]}`).parentNode.childNodes);
+
+  if (event.target.parentNode.classList[1] === 'btn--arrow') {
+
+    let nodeList = Array.from(document.querySelector(`#${event.target.parentNode.id}`).parentNode.childNodes);
 
     const markEl = nodeList[nodeList.length - 2];
-    const markUp = markups[`.${event.target.parentNode.parentNode.classList[1]}`.replace(/\D/g, '')];
-    const btn = document.querySelector(`.${event.target.parentNode.parentNode.classList[1]}`).parentNode.childNodes[3];
 
-    if (btn.classList[2] === 'active') {
-      btn.classList.remove('active');
+    const markUp = markups[`#${event.target.parentNode.id}`.replace(/\D/g, '')];
+
+    const btn = document.querySelector(`#${event.target.parentNode.id}`).parentNode.childNodes[3];
+
+
+    if (btn.classList[2] === 'btn--active') {
+      btn.classList.remove('btn--active');
       while (markEl.firstChild) {
         markEl.removeChild(markEl.firstChild);
       }
     } else {
-      btn.classList.add('active');
+      btn.classList.add('btn--active');
       markEl.insertAdjacentHTML('afterbegin', markUp);
     }
   }

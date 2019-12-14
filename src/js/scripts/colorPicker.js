@@ -1,5 +1,21 @@
 //Created by Yury Volkovskiy
 
+const data = {
+  OPACITY_RANGE: {
+    WRAP: 'opacity_range',
+    THUMB: 'thumb_opacity',
+    TRACK: 'track_opacity'
+  },
+  CODES: {
+    RGBA: 'rgba',
+    RGB: 'rgb',
+    HEX: 'hex'
+  },
+  COLOR_POCKER_BACKGROUND: 'picker-back',
+  COLOR_PICKER: 'picker',
+  OPACITY_BACKGROUND: 'opacity'
+};
+
 var opacityRanges = document.getElementsByClassName('opacity_range');
 var rangeOpacity = opacityRanges[0].childNodes;
 var rgba = [132, 46, 153, 1];

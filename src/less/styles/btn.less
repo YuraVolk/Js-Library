@@ -35,12 +35,27 @@
     //background-color: darken($gray--light, 10%);
   }
 
-  &:active {
-    //color: $color-active;
-  }
 
   /*используется для оформления svg в кнопке только для Библитеки*/
   > svg {
-    background: #222222;
+    //background: #222222;
+    display: block;
+  }
+
+  &--arrow {
+    margin-top: 12px;
+    padding: 0;
+    background: transparent;
+    fill: lighten(red, 15%);
+    border: #cccccc 2px solid;
+    border-radius: 5px;
+
+    &:hover {
+      fill: lighten(red, 15%);
+    }
+
+    &:active {
+      fill: darken(red, 15%);
+    }
   }
 }
