@@ -5,7 +5,6 @@ const data = {
   FILTER_BUTTON_ACTIVE: "filter__controls-btn"
 };
 
-
 function filterDivs(toLeave) {
   Array.prototype.slice.call(document.querySelectorAll(`.${data.FILTER_ITEM}`)).forEach(function (element, i) {
 

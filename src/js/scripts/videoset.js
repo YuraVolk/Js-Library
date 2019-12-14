@@ -1,9 +1,32 @@
 //Created by Yury Volkovskiy
+const data = {
+  RANGES: {
+    TIME_RANGE: {
+        WRAP: 'styled_range',
+        TRACK: 'track_range',
+        THUMB: 'thumb_range'
+    },
+    VOLUME_RANGE: {
+      WRAP: 'ver_range',
+      TRACK: 'track_ver',
+      THUMB: 'thumb_ver'
+    }
+  },
+  BUTTONS: {
+    PLAY: 'button-play',
+    STOP: 'button-stop',
+    RESTART: 'button-reset',
+    MUTE: 'button-mute'
+  },
+  VIDEO: 'video__presentation',
+  VIDEO_CURRENT_TIME: 'video__time'
+};
+
 let videoPlays, isMute = true, prevVideoVolume;
-var styledRanges = document.getElementsByClassName('styled_range');
+var styledRanges = document.getElementsByClassName(data.RANGES.TIME_RANGE.WRAP);
 var rangeVideo = styledRanges[0].childNodes;
 
-var audioRanges = document.getElementsByClassName('ver_range');
+var audioRanges = document.getElementsByClassName(data.RANGES.VOLUME_RANGE.WRAP);
 var rangeAudio = audioRanges[0].childNodes;
 
 function toMinuteSecond(number) {
@@ -23,26 +46,26 @@ function toMinuteSecond(number) {
 }
 
 function setVideoTime(time) {
-  const video = document.querySelector('.video__presentation');
+  const video = document.querySelector(`.${data.VIDEO}`);
 
   video.currentTime = time;
   updateVideoTime();
 }
 
 function getVideoDuration() {
-  const video = document.querySelector('.video__presentation');
+  const video = document.querySelector(`.${data.VIDEO}`);
 
   return video.duration;
 }
 
 function pauseVideo() {
   videoPlays = false;
-  document.querySelector('.video__presentation').pause();
+  document.querySelector(`.${data.VIDEO}`).pause();
 }
 
 function startVideo() {
   videoPlays = false;
-  document.querySelector('.video__presentation').play();
+  document.querySelector(`.${data.VIDEO}`).play();
 }
 
 function equalizeRange(videoTime, videoDuration, range) {
@@ -58,15 +81,15 @@ function modifyRange(audioRanges, isTime) {
       var child = audioRanges[i].children[j];
 
       if (isTime) {
-        if (child.className === 'thumb_ver') {
+        if (child.className === data.RANGES.VOLUME_RANGE.THUMB) {
           var thumbRange = child;
-        } else if (child.className === 'track_ver') {
+        } else if (child.className === data.RANGES.VOLUME_RANGE.TRACK) {
           var trackRange = child;
         }
       } else {
-        if (child.className === 'thumb_range') {
+        if (child.className === data.RANGES.TIME_RANGE.THUMB) {
           var thumbRange = child;
-        } else if (child.className === 'track_range') {
+        } else if (child.className === data.RANGES.TIME_RANGE.TRACK) {
           var trackRange = child;
         }
       }
@@ -82,7 +105,7 @@ function modifyRange(audioRanges, isTime) {
   }
 }
 
-document.querySelector('.video__presentation').onended = function (e) {
+document.querySelector(`.${data.VIDEO}`).onended = function (e) {
   videoPlays = false;
 };
 
@@ -90,11 +113,11 @@ function changeVolume() {
   let vol = rangeAudio[1].value / 100;
 
   if (isMute) {
-    document.querySelector('.video__presentation').volume = vol;
+    document.querySelector(`.${data.VIDEO}`).volume = vol;
   }
 }
 
-document.querySelector('.video__presentation').onplaying = function () {
+document.querySelector(`.${data.VIDEO}`).onplaying = function () {
   videoPlays = true;
 
   setInterval(() => {
@@ -105,7 +128,7 @@ document.querySelector('.video__presentation').onplaying = function () {
 }
 
 function switchMute() {
-  const video = document.querySelector('.video__presentation');
+  const video = document.querySelector(`.${data.VIDEO}`);
 
   if (isMute) {
     let vol = rangeAudio[1].value / 100;
@@ -131,14 +154,14 @@ setInterval(() => {
 }, 200);
 
 function updateVideoTime() {
-  const video = document.querySelector('.video__presentation');
-  document.querySelector('.video__time').textContent = toMinuteSecond(Math.floor(video.duration - video.currentTime));
+  const video = document.querySelector(`.${data.VIDEO}`);
+  document.querySelector(`.${data.VIDEO_CURRENT_TIME}`).textContent = toMinuteSecond(Math.floor(video.duration - video.currentTime));
 
   equalizeRange(video.currentTime, video.duration, rangeVideo);
 }
 
 function resetVideoTime() {
-  const video = document.querySelector('.video__presentation');
+  const video = document.querySelector(`.${data.VIDEO}`);
 
   videoPlays = false;
 
@@ -158,34 +181,34 @@ modifyRange(styledRanges, false);
 modifyRange(audioRanges, true);
 
 document.addEventListener('click', function (event) {
-  if ('.' + event.target.classList[0] === '.button-play') {
+  if (event.target.classList[0] === data.BUTTONS.PLAY) {
     if (!videoPlays) {
       startVideo()
     }
   }
   if (event.target.children[0]) {
-    if ('.' + event.target.children[0].classList[0] === '.button-play') {
+    if (event.target.children[0].classList[0] === data.BUTTONS.PLAY) {
       if (!videoPlays) {
         startVideo()
       }
     }
-    if ('.' + event.target.children[0].classList[0] === '.button-stop') {
+    if (event.target.children[0].classList[0] === data.BUTTONS.STOP) {
       pauseVideo();
     }
-    if ('.' + event.target.children[0].classList[0] === '.button-reset') {
+    if (event.target.children[0].classList[0] === data.BUTTONS.RESTART) {
       resetVideoTime();
     }
-    if ('.' + event.target.children[0].classList[0] === '.button-mute') {
+    if (event.target.children[0].classList[0] === data.BUTTONS.MUTE) {
       switchMute();
     }
   }
-  if ('.' + event.target.classList[0] === '.button-stop') {
+  if (event.target.classList[0] === data.BUTTONS.STOP) {
     pauseVideo();
   }
-  if ('.' + event.target.classList[0] === '.button-reset') {
+  if (event.target.classList[0] === data.BUTTONS.RESTART) {
     resetVideoTime();
   }
-  if ('.' + event.target.classList[0] === '.button-mute') {
+  if (event.target.classList[0] === data.BUTTONS.MUTE) {
     switchMute();
   }
 });
