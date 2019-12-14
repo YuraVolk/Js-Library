@@ -1,17 +1,22 @@
 //Created by Yury Volkovskiy
+const data = {
+  FILTER_ITEM: "filter__item",
+  FILTER_BUTTON: "filter__controls-btn",
+  FILTER_BUTTON_ACTIVE: "filter__controls-btn"
+};
+
 
 function filterDivs(toLeave) {
-
-  Array.prototype.slice.call(document.querySelectorAll('.filterEl')).forEach(function (element, i) {
+  Array.prototype.slice.call(document.querySelectorAll(`.${data.FILTER_ITEM}`)).forEach(function (element, i) {
 
     if (toLeave != 'all') {
-      if (document.querySelectorAll('.filterEl')[i].classList[2] != toLeave) {
-        document.querySelectorAll('.filterEl')[i].style.display = 'none';
+      if (!document.querySelectorAll(`.${data.FILTER_ITEM}`)[i].classList[1].endsWith(toLeave)) {
+        document.querySelectorAll(`.${data.FILTER_ITEM}`)[i].style.display = 'none';
       } else {
-        document.querySelectorAll('.filterEl')[i].style.display = 'block';
+        document.querySelectorAll(`.${data.FILTER_ITEM}`)[i].style.display = 'block';
       }
     } else {
-      document.querySelectorAll('.filterEl')[i].style.display = 'block';
+      document.querySelectorAll(`.${data.FILTER_ITEM}`)[i].style.display = 'block';
     }
   });
 }
@@ -23,8 +28,8 @@ function removeClassName(className, mod) {
 }
 
 function showDivFiltering(pressedButton) {
-  removeClassName('.filter__slider-btn', 'filter-btnActive');
-  Array.prototype.slice.call(document.querySelectorAll('.filter__slider-btn'))[pressedButton].classList.add('filter-btnActive');
+  removeClassName(`.${data.FILTER_BUTTON}`, `.${data.FILTER_BUTTON_ACTIVE}`);
+  Array.prototype.slice.call(document.querySelectorAll(`.${data.FILTER_BUTTON}`))[pressedButton].classList.add(`.${data.FILTER_BUTTON_ACTIVE}`);
   switch (pressedButton) {
     case '0':
       filterDivs('all');
@@ -46,9 +51,8 @@ function showDivFiltering(pressedButton) {
 
 
 document.addEventListener('click', event => {
-  if (`.${event.target.classList[0]}` === '.filter__slider-btn') {
-    pressedButton = document.activeElement.classList[1].slice(-1);
-
+  if (Array.from(event.target.classList).includes(data.FILTER_BUTTON)) {
+    pressedButton = document.activeElement.classList[2].slice(-1);
     showDivFiltering(pressedButton);
   }
 });

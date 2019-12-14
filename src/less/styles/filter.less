@@ -1,7 +1,7 @@
 @import "../settings/colors";
 @import "../settings/fonts";
 
-.filter {
+.filter__list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -15,9 +15,11 @@
   box-sizing: border-box;
   width: 92%;
   margin-bottom: 60px;
+  padding-left: 0;
+  list-style-type: none;
 }
 
-.filterEl {
+.item__inner {
   width: 367px;
   height: 335px;
   margin-bottom: 60px;
@@ -26,19 +28,9 @@
   background-color: @outline_light;
 }
 
-.filter__slider-btn {
-  padding: 8px 18px;
-  border: 3px solid #333333;
-  background: #313131;
-  border-radius: 5px;
-  color: @content_light;
-  font-size: 14px;
-  line-height: 21px;
-  font-family: @subinfo;
-}
-
-.filter__slider {
+.filter__controls-list {
   display: -webkit-box;
+  padding-left: 0;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
@@ -47,8 +39,5 @@
   width: 54%;
   margin: 0 auto;
   margin-bottom: 40px;
-}
-
-.filter-wrap {
-  background-color: @modal_button;
+  list-style-type: none;
 }

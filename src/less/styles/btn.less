@@ -1,0 +1,46 @@
+.btn {
+  box-sizing: border-box;
+  display: inline-block;
+  max-width: 100%;
+  margin: 0;
+  padding: 20px;
+  white-space: nowrap;
+  user-select: none;
+  font-family: inherit;
+  font-size: 1em;
+  line-height: 1em;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  text-transform: none;
+  color: #222222;
+  background-color: #cccccc;
+  background-image: none;
+  border-radius: 5px;
+  // border: 1px solid $gray-lighter;
+  border: 0;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: none;
+    //color: $text-color;
+    //background-color: darken($gray--light, 10%);
+  }
+
+  &:focus {
+    //color: $text-color;
+    //background-color: darken($gray--light, 10%);
+  }
+
+  &:active {
+    //color: $color-active;
+  }
+
+  /*используется для оформления svg в кнопке только для Библитеки*/
+  > svg {
+    background: #222222;
+  }
+}

@@ -2555,17 +2555,5 @@ document.addEventListener('click', event => {
       btn.classList.add('active');
       markEl.insertAdjacentHTML('afterbegin', markUp);
     }
-
-    updateView();
-
   }
 });
-
-/*
-updateView = () => {
-  Array.from(document.querySelectorAll('.markup')).forEach(el => {
-    el.style.boxShadow = `inset 0 0 100px #797979`;
-  });
-}*/
-
-updateView();
