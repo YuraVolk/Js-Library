@@ -1,5 +1,12 @@
 //Created by Yury Volkovskiy
 
+const data = {
+  CAROUSEL: 'carouselm',
+  ITEM: 'carouselm-item',
+  BUTTON_LEFT: 'carousel-menu-left',
+  BUTTON_RIGHT: 'carousel-menu-right'
+};
+
 class Item {
   constructor(image) {
     image.item = this;
@@ -84,12 +91,12 @@ class Carousel {
       if (this.frameTimer === 0)
         this.scheduleNextFrame();
     };
-    var images = item.querySelectorAll('.carouselm-item');
+    var images = item.querySelectorAll(`.${data.ITEM}`);
     document.addEventListener('click', e => {
-      if (e.target.classList[1] == 'carousel-menu-left') {
+      if (e.target.classList[1] == data.BUTTON_LEFT) {
         self.go(-1);
       }
-      if (e.target.classList[1] == 'carousel-menu-right') {
+      if (e.target.classList[1] == data.BUTTON_RIGHT) {
         self.go(1);
       }
     });
@@ -113,4 +120,7 @@ const options = {
   farScale: 0.9,
   speed: 0.11
 };
-new Carousel(document.querySelector('#carouselm'), options);
+
+window.addEventListener("load", () => {
+  new Carousel(document.querySelector(`#${data.CAROUSEL}`), options);
+});

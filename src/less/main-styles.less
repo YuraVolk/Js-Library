@@ -93,7 +93,6 @@
 
 body {
   margin-left: 19%;
-  overflow-x: hidden;
 }
 
 body.hidden {
@@ -131,6 +130,19 @@ code {
   display: inline-flex;
   -ms-flex-pack: distribute;
   justify-content: space-around;
+}
+
+.flexbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 970px;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 .relative {
@@ -198,6 +210,10 @@ picture {
   }
 }
 
+.hideOverflow {
+  overflow-x: hidden;
+}
+
 .scrollable {
   width: 800px;
   height: 500px;
@@ -217,6 +233,15 @@ picture {
 }
 
 label {
+  display: block;
+  padding: 4px;
+}
+
+.inline {
+  display: inline;
+}
+
+.label {
   display: block;
   padding: 4px;
 }

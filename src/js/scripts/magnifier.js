@@ -1,25 +1,30 @@
 //Created by Yury Volkovskiy
 
-const zoom = 2;
+let width, height, img, zoom, glass;
 
-const img = document.querySelector('.magnifier-image');
+window.addEventListener("load", () => {
+  zoom = 2;
 
-img.parentNode.insertAdjacentHTML('afterbegin', '<div class="magnifier-glass"></div>');
-const glass = document.querySelector('.magnifier-glass');
+  img = document.querySelector('.magnifier-image');
 
-glass.style.backgroundImage = "url('" + img.src + "')";
-glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
-const width = glass.offsetWidth / 2;
-const height = glass.offsetHeight / 2;
+  img.parentNode.insertAdjacentHTML('afterbegin', '<div class="magnifier-glass"></div>');
+  glass = document.querySelector('.magnifier-glass');
 
-glass.addEventListener("mousemove", moveMagnifier);
-img.addEventListener("mousemove", moveMagnifier);
-glass.addEventListener("touchmove", moveMagnifier);
-img.addEventListener("touchmove", moveMagnifier);
+  glass.style.backgroundImage = "url('" + img.src + "')";
+  glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
+  width = glass.offsetWidth / 2;
+  height = glass.offsetHeight / 2;
+
+  glass.addEventListener("mousemove", moveMagnifier);
+  img.addEventListener("mousemove", moveMagnifier);
+  glass.addEventListener("touchmove", moveMagnifier);
+  img.addEventListener("touchmove", moveMagnifier);
+});
+
 
 function moveMagnifier(event) {
   event.preventDefault();
-  let {x, y} = getCursorPos(event);
+  let { x, y } = getCursorPos(event);
   if (x > img.width - (width / zoom)) {
     x = img.width - (width / zoom);
   }

@@ -1,12 +1,18 @@
 //Created by Yury Volkovskiy
 "use strict";
 
-document.querySelector('.zoom-container').addEventListener('mousemove', function (e) {
-  let style = document.querySelector('.zoom__hover').style;
+const data = {
+  ZOOM_WRAP: 'zoom-container',
+  ZOOM_IMAGE: 'zoom__image',
+  ZOOM: 'zoom__hover'
+};
+
+document.querySelector(`.${data.ZOOM_WRAP}`).addEventListener('mousemove', function (e) {
+  let style = document.querySelector(`.${data.ZOOM}`).style;
   let x = e.pageX - this.offsetLeft;
   let y = e.pageY - this.offsetTop;
-  let imgWidth = document.querySelector('.zoom__image').width;
-  let imgHeight = document.querySelector('.zoom__image').height;
+  let imgWidth = document.querySelector(`.${data.ZOOM_IMAGE}`).width;
+  let imgHeight = document.querySelector(`.${data.ZOOM_IMAGE}`).height;
   let xMove = ((x / imgWidth) * 100);
   let yMove = ((y / imgHeight) * 100);
 

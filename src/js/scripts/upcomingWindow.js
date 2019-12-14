@@ -1,4 +1,6 @@
 //Created by Yury Volkovskiy
+const upcomingWindow = 'upcome';
+
 function isInViewport(el) {
   const bounding = el.getBoundingClientRect();
   return (
@@ -9,7 +11,7 @@ function isInViewport(el) {
   );
 };
 
-const el = document.querySelector('.upcome');
+const el = document.querySelector(`.${upcomingWindow}`);
 let bounding;
 var isScrolling;
 

@@ -1,5 +1,11 @@
 //Created by Yury Volkovskiy
 
+const data = {
+  START_REBUILD_BUTTON: 'cipherButton--0',
+  STOP_REBUILD_BUTTON: 'cipherButton--1',
+  TEXT: 'rebuildingText--0'
+};
+
 let phrases = [
   'This text transforms   ',
   'into other texts       ',
@@ -67,7 +73,7 @@ let gI = -1;
 let inter;
 
 document.addEventListener('click', event => {
-  if (event.target.classList[1] === 'cipherButton--0') {
+  if (event.target.classList[1] === data.START_REBUILD_BUTTON) {
     isRebulding1 = true;
     inter = window.setInterval(() => {
       if (gI === phrases.length - 1) {
@@ -75,7 +81,7 @@ document.addEventListener('click', event => {
       } else {
         gI++;
       }
-      element = document.querySelector('.rebuildingText--0');
+      element = document.querySelector(`.${data.TEXT}`);
       index = (gI);
       if (gI === phrases.length - 1) {
         phraseNext = phrases[0];
@@ -86,7 +92,7 @@ document.addEventListener('click', event => {
       rebuildTextFinal(element, phrases[index], phraseNext);
     }, 3670);
   }
-  if (event.target.classList[1] === 'cipherButton--1') {
+  if (event.target.classList[1] === data.STOP_REBUILD_BUTTON) {
     if (typeof inter !== 'undefined') {
       window.clearInterval(inter);
     }

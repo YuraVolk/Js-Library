@@ -2,8 +2,18 @@
 
 "use strict";
 
+const data = {
+  CAROUSEL: 'tdcarousel',
+  ITEM: 'figure__img',
+  CONTROLS: 'carousel-nav',
+  CAROUSEL_INNER: 'div',
+  BUTTON_NEXT: 'next',
+  BUTTON_PREV: 'prev',
+  BUTTON_SWITCH_ORIENTATION: 'switch3d'
+};
+
 window.addEventListener('load', () => {
-  var carousel3d = document.querySelector('.tdcarousel');
+  var carousel3d = document.querySelector(`.${data.CAROUSEL}`);
 
   initCarousel(carousel3d, true);
 });
@@ -17,9 +27,9 @@ function rotateCarousel(theta, imageIndex, figure, isntVertical) {
 }
 
 function initCarousel(parent, isntVertical) {
-  let figure = parent.querySelector('div');
-  let nav = document.querySelector('.carousel-nav');
-  let images = Array.prototype.slice.call(figure.querySelectorAll('.figure__img'));
+  let figure = parent.querySelector(data.CAROUSEL_INNER);
+  let nav = document.querySelector(`.${data.CONTROLS}`);
+  let images = Array.prototype.slice.call(figure.querySelectorAll(`.${data.ITEM}`));
   let n = images.length;
   let theta = 2 * Math.PI / n;
   let currImage = 0;
@@ -74,12 +84,12 @@ function initCarousel(parent, isntVertical) {
       if (t.tagName.toUpperCase() != 'BUTTON')
         return;
 
-      if (t.classList.contains('next')) {
+      if (t.classList.contains(data.BUTTON_NEXT)) {
         currImage++;
       }
-      else if (t.classList.contains('prev')) {
+      else if (t.classList.contains(data.BUTTON_PREV)) {
         currImage--;
-      } else if (t.classList.contains('switch3d')) {
+      } else if (t.classList.contains(data.BUTTON_SWITCH_ORIENTATION)) {
         isntVertical = !isntVertical;
         if (isntVertical) {
           parent.style.height = 'auto';

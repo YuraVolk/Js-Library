@@ -1,8 +1,13 @@
 //Created by Yury Volkovskiy
 
+const data = {
+  CONTAINER: 'scroll-select',
+  SLIDE: 'scroll-item'
+};
+
 let selectedItem = 0;
 let isScrolling = false;
-const items = Array.prototype.slice.call(document.querySelectorAll('.scroll-item'));
+const items = Array.prototype.slice.call(document.querySelectorAll(`.${data.SLIDE}`));
 
 function scrollDir(event) {
   let delta;
@@ -63,7 +68,7 @@ function scrollToSlide(dir) {
   }
 }
 
-document.querySelector('.scroll-select').addEventListener('wheel', (e) => {
+document.querySelector(`.${data.CONTAINER}`).addEventListener('wheel', (e) => {
   e.preventDefault();
   if (scrollDir(e)) {
     if (selectedItem >= items.length - 1) {

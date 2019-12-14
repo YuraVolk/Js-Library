@@ -1,5 +1,12 @@
 //Created by Yury Volkovskiy
 
+const data = {
+  START_REBUILD_BUTTON: 'scrambleButton--0',
+  STOP_REBUILD_BUTTON: 'scrambleButton--1',
+  TEXT: 'rebuildingText--1'
+};
+
+
 let nextPhrase = 'into text that is reciphered';
 const phrases = ['This text rechipers', 'into text that is reciphered', 'still no jQuery or any other plugin', 'It IS cool'];
 let isRebuilding = false;
@@ -61,13 +68,13 @@ function recipherText(children, nextText) {
   });
 }
 
-let element = document.querySelector('.rebuildingText--1');
+let element = document.querySelector(`.${data.TEXT}`);
 let inter;
 let gI = -1;
 
 document.addEventListener('click', event => {
 
-  if (event.target.classList[1] === 'scrambleButton--0') {
+  if (event.target.classList[1] === data.START_REBUILD_BUTTON) {
     isRebuilding = true;
     inter = window.setInterval(() => {
       if (gI === phrases.length - 1) {
@@ -87,7 +94,7 @@ document.addEventListener('click', event => {
       recipherText(Array.prototype.slice.call(element.childNodes), nextPhrase);
     }, 7680);
   }
-  if (event.target.classList[1] === 'scrambleButton--1') {
+  if (event.target.classList[1] === data.STOP_REBUILD_BUTTON) {
     if (typeof inter !== 'undefined') {
       window.clearInterval(inter);
     }

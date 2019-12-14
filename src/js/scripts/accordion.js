@@ -2,10 +2,16 @@
 
 "use strict";
 
-var sections = Array.prototype.slice.call(document.querySelectorAll('.accordion'));
+const data = {
+  ACCORDION_WRAP: 'accordion',
+  ACCORDION_CONTENT: 'accordion__content',
+  ACCORDION_HEADER: 'accordion__heading'
+};
+
+var sections = Array.prototype.slice.call(document.querySelectorAll(`.${data.ACCORDION_WRAP}`));
 const widths = [];
 
-Array.prototype.slice.call(document.querySelectorAll('.accordion__content')).forEach(el => {
+Array.prototype.slice.call(document.querySelectorAll(`.${data.ACCORDION_CONTENT}`)).forEach(el => {
   widths.push(el.offsetHeight);
 });
 
@@ -32,7 +38,7 @@ function switchAccordion(target) {
 }
 
 document.addEventListener('click', event => {
-  if (event.target.classList[0] === "accordion__heading") {
+  if (event.target.classList[0] === data.ACCORDION_HEADER) {
     switchAccordion(event.target.parentNode);
   }
 });
