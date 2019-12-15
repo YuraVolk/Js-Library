@@ -1,8 +1,8 @@
 //Created by Yury Volkovskiy
 const data = {
-  BUTTON_LEFT: 'buttons__button--left',
-  BUTTON_RIGHT: 'buttons__button--right',
-  BUTTON: 'buttons__button'
+  BUTTON_LEFT: 'pagination__button--left',
+  BUTTON_RIGHT: 'pagination__button--right',
+  BUTTON: 'pagination__button'
 };
 
 let page = 1;
