@@ -2,18 +2,18 @@
 
 const data = {
   OPACITY_RANGE: {
-    WRAP: 'opacity_range',
-    THUMB: 'thumb_opacity',
-    TRACK: 'track_opacity'
+    WRAP: 'color-picker__opacity-range',
+    THUMB: 'opacity-range__thumb',
+    TRACK: 'opacity-range__track'
   },
   CODES: {
-    RGBA: 'rgba',
-    RGB: 'rgb',
-    HEX: 'hex'
+    RGBA: 'color-code--rgba',
+    RGB: 'color-code--rgb',
+    HEX: 'color-code--hex'
   },
-  COLOR_PICKER_BACKGROUND: 'picker-back',
-  COLOR_PICKER: 'picker',
-  OPACITY_BACKGROUND: 'opacity'
+  COLOR_PICKER_BACKGROUND: 'color-picker__current-color',
+  COLOR_PICKER: 'color-picker__canvas',
+  OPACITY_BACKGROUND: 'color-picker__background'
 };
 
 var opacityRanges = document.getElementsByClassName(data.OPACITY_RANGE.WRAP);

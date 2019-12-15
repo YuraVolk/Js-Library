@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!--Review this file -->
 <head>
     <meta charset="utf-8">
     <meta name="Description" content="This is my (Yuriy Volkovskiy) javascript library.">
@@ -185,9 +184,9 @@
         3. Change number of pages. <br>
       </p>
       <div class="pagination-buttons">
-        <button class="pagination__button pagination__button--left">Go to page </button><!--Review this file -->
+        <button class="pagination__button pagination__button--left">Go to page </button>
         <button class="pagination__button pagination__button--right">Go to page 1</button>
-      </div><!--Review this file -->
+      </div>
         <button class="btn  btn--arrow" id="btn2">
           <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
         </button>
@@ -212,47 +211,47 @@
       </p>
 
       <div class="videoset">
-        <video class="videoset__video"><!--Review this file -->
+        <video class="videoset__video">
           <source src="https://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_640_3MG.mp4" type="video/mp4">
         </video>
         <div class="videoset__controls">
-          <div class="videoset__controls_time"><!--Review this file -->
+          <label class="videoset__controls_time">
             <span class="videoset__current-time-label">Time: </span>
-            <div class="videoset__time-range"><!--Review this file --> 
+            <span class="videoset__time-range">
               <input type="range" class="time-range__track" />
               <input type="range" class="time-range__thumb" />
-              <span class="videoset__current-time">00:06</span> <!--Review this file -->
-            </div>
-          </div>
-          <div class="videoset__controls_volume">
+            </span>
+            <span class="videoset__current-time">00:06</span>
+          </label>
+          <label class="videoset__controls_volume">
             <span class="vidoset__volume-label">Volume: </span>
-            <div class="videoset__volume-range"><!--Review this file -->
+            <span class="videoset__volume-range">
               <input type="range" class="volume-range__track" />
               <input type="range" class="volume-range__thumb" />
-            </div>
-          </div><!--Review this file --> 
+            </span>
+          </label>
           <ul class="videoset__controls_buttons">
             <li class="videoset__controls-button">
-              <button class="videoset__button videoset__button--play"> <!--Review this file -->
+              <button class="videoset__button videoset__button--play">
                 <img alt="Play" src="img/play.png" loading="lazy">
               </button>
             </li>
             <li class="videoset__controls-button">
-              <button class="videoset__button videoset__button--stop"> <!--Review this file -->
+              <button class="videoset__button videoset__button--stop">
                 <img alt="Pause" src="img/pause.png" loading="lazy">
               </button>
             </li>
             <li class="videoset__controls-button">
-              <button class="videoset__button videoset__button--reset"> <!--Review this file -->
+              <button class="videoset__button videoset__button--reset">
                 <img alt="Reset" src="img/reset.png" loading="lazy">
               </button>
             </li>
             <li class="videoset__controls-button">
-              <button class="videoset__button videoset__button--mute"> <!--Review this file -->
+              <button class="videoset__button videoset__button--mute">
                 <img alt="Mute" src="img/volume.png" loading="lazy">
               </button>
             </li>
-          </ul> <!--Review this file -->
+          </ul>
         </div>
       </div>
 
@@ -282,24 +281,29 @@
         2. Add more tabs.<br>
       </p>
 
-      <div>
-        <div class="tabs-btn">
-          <button class="tab tab--0">Tab 1</button>
-          <button class="tab tab--1">Tab 2</button>
-          <button class="tab tab--2">Tab 3</button>
-        </div>
-
-        <div>
-          <div class="tabs tabs--0">
-            <h2>tab 1</h2>
-          </div>
-          <div class="tabs tabs--1">
-            <h2>tab 2</h2>
-          </div>
-          <div class="tabs tabs--2">
-            <h2>tab 3</h2>
-          </div>
-        </div>
+      <div class="tabs">
+        <ul class="tabs__controls">
+          <li class="tab__link tab__link--0">Tab 1</li>
+          <li class="tab__link tab__link--1">Tab 2</li>
+          <li class="tab__link tab__link--2">Tab 3</li>
+        </ul>
+        <ul class="tabs__list">
+          <li class="tabs__list-item">
+            <div class="tab tab--0">
+              <h2>tab 1</h2>
+            </div>
+          </li>
+          <li class="tabs__list-item">
+            <div class="tab tab--1">
+              <h2>tab 2</h2>
+            </div>
+          </li>
+          <li class="tabs__list-item">
+            <div class="tab tab--2">
+              <h2>tab 3</h2>
+            </div>
+          </li>
+        </ul>
       </div>
 
       <button class="btn  btn--arrow" id="btn4">
@@ -326,41 +330,33 @@
         <br>
         USAGE: <br>
         1. Change output names to needed. !important<br>
-      </p>
+        </p>
 
-      <div>
-        <div class="flex ">
-          <div class="opacity-border">
-            <div class="opacity">
-              <canvas id="picker" width="245" height="245"></canvas>
+        <div class="color-picker flex">
+          <div class="color-picker__border">
+            <div class="color-picker__background">
+              <canvas id="color-picker__canvas" width="245" height="245"></canvas>
             </div>
           </div>
-          <div>
-            <div class="black">
-              <div class="picker-back"></div>
+          <div class="color-picker__info">
+            <div class="color-picker__current-color_background">
+              <div class="color-picker__current-color"></div>
             </div>
-            <br>
-            <br>
-            <span>Opacity: </span>
-            <div class="opacity_range">
-              <input type="range" class="track_opacity" />
-              <input type="range" class="thumb_opacity" />
-            </div>
-            <br>
-            <span>Hex Code: </span>
-            <span class="hex"></span>
-            <br>
-            <span>RGBA </span>
-            <span class="rgba"></span>
-            <br>
-            <span>RGB: </span>
-            <span class="rgb"></span>
+            <label class="color-picker__opacity">
+              <span class="color-picker__opacity-label">Opacity: </span>
+              <span class="color-picker__opacity-range">
+                <input type="range" class="opacity-range__track" />
+                <input type="range" class="opacity-range__thumb" />
+              </span>
+            </label>
+            <p>Hex code: <span class="color-code color-code--hex"></span></p>
+            <p>RGBA: <span class="color-code color-code--rgba"></span></p>
+            <p>RGB: <span class="color-code color-code--rgb"></span></p>
           </div>
         </div>
-      </div>
 
 
-      <button class="btn  btn--arrow" id="btn5">
+        <button class="btn  btn--arrow" id="btn5">
 
         <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
           <path
@@ -1848,4 +1844,3 @@
     <span>&copy; Yuriy Volkovskiy</span>
 
 </body>
-<!--Review this file -->
