@@ -1,0 +1,97 @@
+@import "../settings/colors";
+
+.color-picker__opacity-range {
+  display: block;
+  position: relative;
+  padding: 10px;
+}
+
+.color-picker input[type=range] {
+  -webkit-appearance: none;
+  width: 270px;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.opacity-range__track {
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 7.5px;
+    border: 2px solid @content_dark;
+    background: @content_dark;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 2px solid @content_dark;
+  }
+
+  pointer-events: none;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: transparent;
+    height: 1px;
+    width: 1px;
+    -webkit-box-shadow: -560px 0 0 560px @filled_area;
+    box-shadow: -560px 0 0 560px @filled_area;
+  }
+}
+
+.opacity-range__thumb {
+  &::-webkit-slider-runnable-track {
+    background: transparent;
+    cursor: pointer;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border-radius: 20px;
+    height: 18px;
+    width: 18px;
+    background: @decorator;
+    cursor: pointer;
+    margin: -5px 0px 0px 0px;
+  }
+}
+
+.color-picker__current-color {
+  border: 3px solid @content_dark;
+  width: 100px;
+  height: 100px;
+}
+
+.color-picker__background {
+  width: 245px;
+  height: 245px;
+}
+
+.color-picker__border {
+  border: 3px solid @content_dark;
+  background-color: @content_dark;
+  width: 245px;
+  height: 245px;
+}
+
+#color-picker__canvas {
+  cursor: crosshair;
+}
+
+.color-picker__current-color_background {
+  background-color: @content_dark;
+  width: 103px;
+  height: 103px;
+  margin-bottom: 15px;
+}
+
+.color-picker p {
+  margin: 3px 0;
+}

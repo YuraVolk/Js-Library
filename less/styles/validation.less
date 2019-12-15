@@ -1,0 +1,76 @@
+@import "../settings/colors";
+
+.password {
+  width: 320px;
+  box-shadow: @action 2px 0 1px 1px;
+  padding: 12px;
+
+  >label {
+    width: 310px;
+    margin-bottom: 12px;
+
+    >input {
+      width: 120px;
+      float: right;
+
+      &::placeholder {
+        color: @main-white;
+        font-size: 12px;
+      }
+    }
+  }
+
+  >label.correct {
+    background: transparent;
+    border: 1px solid @passed-decorator;
+    background-color: @passed;
+  }
+
+  >label.wrong {
+    border: 1px solid @failed-decorator;
+    background-color: @failed;
+  }
+}
+
+.password-submit {
+  display: block;
+  background-color: @even_row;
+  border: 2px solid @shadow;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: @action;
+  }
+}
+
+.main {
+  background-color: @content_main;
+}
+
+.toPass {
+  margin-left: 30px;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    content: "";
+    width: 10px;
+    height: 10px;
+    left: -20px;
+    top: 3px;
+    background-color: @action;
+  }
+}
+
+.toPass.wrong {
+  &::before {
+    background-color: @failed;
+  }
+}
+
+.toPass.correct {
+  &::before {
+    background-color: @passed;
+  }
+}

@@ -1,0 +1,55 @@
+@import "../settings/colors";
+
+.table-filtering {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 60%;
+  border: 1px solid @row;
+
+  th {
+    text-align: left;
+    padding: 16px;
+  }
+
+  td {
+    text-align: left;
+    padding: 16px;
+  }
+
+  tr {
+    &:nth-child(even) {
+      background-color: @even_row;
+    }
+  }
+}
+
+.option--hidden {
+  display: none;
+}
+
+.select-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.option {
+  width: 130px;
+  background-color: @block;
+  padding: 4px;
+  border: 1px solid @main-light;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.chooser {
+  width: 130px;
+  padding: 4px;
+  background-color: @main;
+  color: @main-white;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.select-filtering {
+  position: absolute;
+}
