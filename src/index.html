@@ -210,37 +210,48 @@
         3. Everything other at point. <br>
       </p>
 
-      <div class="flexbox">
-        <video class="video__presentation">
+      <div class="videoset">
+        <video class="videoset__video">
           <source src="https://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_640_3MG.mp4" type="video/mp4">
         </video>
-        <div>
-          <span>Time: </span>
-          <div class="styled_range">
-            <input type="range" class="track_range" />
-            <input type="range" class="thumb_range" />
-            <span class="video__time">00:06</span>
+        <div class="videoset__controls">
+          <div class="videoset__controls_time">
+            <span class="videoset__current-time-label">Time: </span>
+            <div class="videoset__time-range">
+              <input type="range" class="time-range__track" />
+              <input type="range" class="time-range__thumb" />
+              <span class="videoset__current-time">00:06</span>
+            </div>
           </div>
-          <span>Volume: </span>
-          <div class="ver_range">
-            <input type="range" class="track_ver" />
-            <input type="range" class="thumb_ver" />
+          <div class="videoset__controls_volume">
+            <span class="vidoset__volume-label">Volume: </span>
+            <div class="videoset__volume-range">
+              <input type="range" class="volume-range__track" />
+              <input type="range" class="volume-range__thumb" />
+            </div>
           </div>
-
-          <div class="btn-placeholder">
-            <button class="video-btn">
-              <img class="button-play" alt="Play" src="img/play.png" loading="lazy">
-            </button>
-            <button class="video-btn">
-              <img class="button-stop" alt="Pause" src="img/pause.png" loading="lazy">
-            </button>
-            <button class="video-btn">
-              <img class="button-reset" alt="Reset" src="img/reset.png" loading="lazy">
-            </button>
-            <button class="video-btn">
-              <img class="button-mute" alt="Reset" src="img/volume.png" loading="lazy">
-            </button>
-          </div>
+          <ul class="videoset__controls_buttons">
+            <li class="videoset__controls-button">
+              <button class="videoset__button videoset__button--play">
+                <img alt="Play" src="img/play.png" loading="lazy">
+              </button>
+            </li>
+            <li class="videoset__controls-button">
+              <button class="videoset__button videoset__button--stop">
+                <img alt="Pause" src="img/pause.png" loading="lazy">
+              </button>
+            </li>
+            <li class="videoset__controls-button">
+              <button class="videoset__button videoset__button--reset">
+                <img alt="Reset" src="img/reset.png" loading="lazy">
+              </button>
+            </li>
+            <li class="videoset__controls-button">
+              <button class="videoset__button videoset__button--mute">
+                <img alt="Mute" src="img/volume.png" loading="lazy">
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
 

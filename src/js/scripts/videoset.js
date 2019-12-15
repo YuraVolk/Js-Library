@@ -2,24 +2,24 @@
 const data = {
   RANGES: {
     TIME_RANGE: {
-        WRAP: 'styled_range',
-        TRACK: 'track_range',
-        THUMB: 'thumb_range'
+        WRAP: 'videoset__time-range',
+        TRACK: 'time-range__track',
+        THUMB: 'time-range__thumb'
     },
     VOLUME_RANGE: {
-      WRAP: 'ver_range',
-      TRACK: 'track_ver',
-      THUMB: 'thumb_ver'
+      WRAP: 'videoset__volume-range',
+      TRACK: 'volume-range__track',
+      THUMB: 'volume-range__thumb'
     }
   },
   BUTTONS: {
-    PLAY: 'button-play',
-    STOP: 'button-stop',
-    RESTART: 'button-reset',
-    MUTE: 'button-mute'
+    PLAY: 'videoset__button--play',
+    STOP: 'videoset__button--stop',
+    RESTART: 'videoset__button--reset',
+    MUTE: 'videoset__button--mute'
   },
-  VIDEO: 'video__presentation',
-  VIDEO_CURRENT_TIME: 'video__time'
+  VIDEO: 'videoset__video',
+  VIDEO_CURRENT_TIME: 'videoset__current-time'
 };
 
 let videoPlays, isMute = true, prevVideoVolume;
@@ -176,16 +176,22 @@ rangeVideo[1].value = "0";
 rangeAudio[3].value = "100";
 rangeAudio[1].value = "100";
 
-
 modifyRange(styledRanges, false);
 modifyRange(audioRanges, true);
 
+window.addEventListener("load", () => {
+  updateVideoTime();
+});
+
 document.addEventListener('click', function (event) {
-  if (event.target.classList[0] === data.BUTTONS.PLAY) {
+  console.log(event.target.parentNode);
+  if (event.target.classList.contains(data.BUTTONS.PLAY) ||
+      event.target.parentNode.classList.contains(data.BUTTONS.PLAY)) {
     if (!videoPlays) {
       startVideo()
     }
   }
+
   if (event.target.children[0]) {
     if (event.target.children[0].classList[0] === data.BUTTONS.PLAY) {
       if (!videoPlays) {
@@ -202,13 +208,16 @@ document.addEventListener('click', function (event) {
       switchMute();
     }
   }
-  if (event.target.classList[0] === data.BUTTONS.STOP) {
+  if (event.target.classList.contains(data.BUTTONS.STOP) ||
+  event.target.parentNode.classList.contains(data.BUTTONS.STOP)) {
     pauseVideo();
   }
-  if (event.target.classList[0] === data.BUTTONS.RESTART) {
+  if (event.target.classList.contains(data.BUTTONS.RESTART) ||
+  event.target.parentNode.classList.contains(data.BUTTONS.RESTART)) {
     resetVideoTime();
   }
-  if (event.target.classList[0] === data.BUTTONS.MUTE) {
+  if (event.target.classList.contains(data.BUTTONS.MUTE) ||
+  event.target.parentNode.classList.contains(data.BUTTONS.MUTE)) {
     switchMute();
   }
 });
