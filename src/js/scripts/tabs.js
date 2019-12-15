@@ -1,8 +1,8 @@
 //Created by Yury Volkovskiy
 
 const data = {
-  TABS: 'tabs',
-  TAB: 'tab'
+  TABS: 'tab',
+  TAB: 'tab__link'
 }
 
 const changeTab = function (tabNumber) {
