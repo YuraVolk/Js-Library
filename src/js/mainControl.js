@@ -2548,9 +2548,7 @@ document.addEventListener('click', event => {
 
     const markUp = markups[`#${event.target.parentNode.id}`.replace(/\D/g, '')];
 
-    const btn = document.querySelector(`#${event.target.parentNode.id}`).parentNode.childNodes[3];
-
-
+    const btn = document.querySelector(`#${event.target.parentNode.id}`).parentNode.children[3];
     if (btn.classList[2] === 'btn--active') {
       btn.classList.remove('btn--active');
       while (markEl.firstChild) {

@@ -383,6 +383,12 @@ class PerspectiveCarousel {
   }
 };
 
+const data = {
+  LEFT: 'perspective-left',
+  RIGHT: 'perspective-right',
+  SWITCH_ORIENTATION: 'perspective-switch'
+};
+
 window.onload = () => {
   new PerspectiveCarousel();
 }
