@@ -437,7 +437,6 @@
             <strong>Example 1</strong>
           </li>
         </ul>
-
       </div>
 
       <button class="btn  btn--arrow" id="btn7">
@@ -454,72 +453,74 @@
 
     <a id="PopupWindowonJS"></a>
     <section class="block">
-                <h1 class="block__caption">Popup Window on JS</h1>
-                <p class="block__info">
-                    Popup windows are used almost everywhere -
-                    cookies, sponsorship, ad, blocks, etc.
-                    Only problem in implementation is
-                    stopping the scrollbar and making
-                    ability to make these popups infinitely.
-                    It is flexible, no usage manipulation
-                    or editing totally required.
-                </p>
-                <div class="flexbox">
-                    <button class="modalButton popupButton popupButton--1">Open Popup 1</button>
-                    <button class="modalButton popupButton popupButton--2">Open Popup 2</button>
-                    <button class="modalButton popupButton popupButton--3">Open Popup 3</button>
-                    <button class="modalButton closePopup">Stop Timing of Popup 3</button>
-                </div>
-                <div class="popup popup--1">
-                    <div class="popup__content">
-                        <div>
-                            <picture>
-                                <source type="image/webp" srcset="img/close.webp">
-                                <img src="img/close.png" alt="Close Symbol" class="popup__close" width="10" height="10" loading="lazy">
-                            </picture>
-                        </div>
-                        <p>Sample popup. This is a template
-                            for making different popups.
-                        </p>
-                    </div>
-                </div>
-                <div class="popup popup--2 time">
-                    <div class="popup__content">
-                        <div class="close">
-                            <img src="img/close.png" alt="Close Symbol" class="popup__close" width="10" height="10" loading="lazy">
-                        </div>
-                        <div>
-                            <span>You can close in </span>
-                            <span class="timer">6</span>
-                        </div>
-                        <p>This is possible ad popup example.
-                            You can only close it through
-                            5 or more seconds total.
-                        </p>
-                    </div>
-                </div>
-                <div class="popup popup--3 time renew">
-                    <div class="popup__content">
-                        <div class="close">
-                            <img src="img/close.png" alt="Close Symbol" class="popup__close" width="10" height="10" loading="lazy">
-                        </div>
-                        <div>
-                            <span>You can close in </span>
-                            <span class="timer">6</span>
-                        </div>
-                        <p>This is renewing popup.
-                            It will show again if you
-                            won't disable it. 15 seconds
-                            is current set timeout.
-                        </p>
-                    </div>
-                </div>
-        <button class="btn  btn--arrow" id="btn8">
-          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
-        </button>
-        <div class="markup markup--9">
+      <h1 class="block__caption">Popup Window on JS</h1>
+      <p class="block__info">
+        Popup windows are used almost everywhere -
+        cookies, sponsorship, ad, blocks, etc.
+        Only problem in implementation is
+        stopping the scrollbar and making
+        ability to make these popups infinitely.
+        It is flexible, no usage manipulation
+        or editing totally required.
+      </p>
 
+      <div class="popups">
+        <div class="popup__controls">
+          <button class="btn popup-btn popup-btn--1">Open Popup 1</button>
+          <button class="btn popup-btn popup-btn--2">Open Popup 2</button>
+          <button class="btn popup-btn popup-btn--3">Open Popup 3</button>
+          <button class="btn closePopup">Stop Timing of Popup 3</button>
         </div>
+        <ul class="popup__list">
+          <li class="popup popup--1">
+            <div class="popup__content">
+              <div class="popup__close-wrap">
+                <img src="img/close.png" alt="Close Symbol" class="popup__close" width="10" height="10" loading="lazy">
+              </div>
+              <p>
+                Sample popup. This is a template
+                for making different popups.
+              </p>
+            </div>
+          </li>
+          <li class="popup popup--2 popup--timed">
+            <div class="popup__content">
+              <div class="popup__close-wrap">
+                <img src="img/close.png" alt="Close Symbol" class="popup__close" width="10" height="10" loading="lazy">
+              </div>
+              <p>You can close in <span class="popup__timer">6</span></p>
+              <p>
+                This is possible ad popup example.
+                You can only close it through
+                5 or more seconds total.
+              </p>
+            </div>
+          </li>
+          <li class="popup popup--3 popup--timed popup--renewing">
+            <div class="popup__content">
+              <div class="popup__close-wrap">
+                <img src="img/close.png" alt="Close Symbol" class="popup__close" width="10" height="10" loading="lazy">
+              </div>
+              <p>You can close in <span class="popup__timer">6</span></p>
+              <p>This is renewing popup.
+                It will show again if you
+                won't disable it. 15 seconds
+                is current set timeout.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <button class="btn  btn--arrow" id="btn8">
+        <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z">
+          </path>
+        </svg>
+      </button>
+      <div class="markup markup--9">
+
+      </div>
     </section>
 
     <a id="Responsive3DCarouselonJS"></a>
