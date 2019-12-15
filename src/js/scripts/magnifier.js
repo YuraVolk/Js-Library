@@ -1,14 +1,19 @@
 //Created by Yury Volkovskiy
 
+const data = {
+  IMAGE: 'magnifier-image',
+  GLASS: 'magnifier-glass'
+}
+
 let width, height, img, zoom, glass;
 
 window.addEventListener("load", () => {
   zoom = 2;
 
-  img = document.querySelector('.magnifier-image');
+  img = document.querySelector(`.${data.IMAGE}`);
 
-  img.parentNode.insertAdjacentHTML('afterbegin', '<div class="magnifier-glass"></div>');
-  glass = document.querySelector('.magnifier-glass');
+  img.parentNode.insertAdjacentHTML('afterbegin', `<div class="${data.GLASS}"></div>`);
+  glass = document.querySelector(`.${data.GLASS}`);
 
   glass.style.backgroundImage = "url('" + img.src + "')";
   glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";

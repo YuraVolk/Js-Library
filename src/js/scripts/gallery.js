@@ -1,8 +1,17 @@
 //Created by Yury Volkovskiy
+const data = {
+  SLIDER: 'categorySlider',
+  SLIDES: 'gallery__slides',
+  SLIDE: 'gallery-list__item',
+  GALLERY_INDICATOR: 'gallery-indicator',
+  ACTIVE_INDICATOR: 'indicator-active',
+  LEFT_BTN: 'gallery__button--prev',
+  RIGHT_BTN: 'gallery__button--next'
+};
 
-const slider = document.getElementById('categorySlider');
-const slideList = document.querySelector('.gallery__slides');
-const slideListItems = slider.querySelectorAll('.gallery-list__item');
+const slider = document.getElementById(data.SLIDER);
+const slideList = document.querySelector(`.${data.SLIDES}`);
+const slideListItems = slider.querySelectorAll(`.${data.SLIDE}`);
 const slideWidth = slideListItems[0].offsetWidth;
 const slidesLength = slideListItems.length;
 let current = 1;
@@ -24,7 +33,7 @@ function clickArrowButton(el) {
 
 function clickPagerItem(el) {
   const slideIndex = el.classList[1][el.classList[1].length - 1];
-  const targetSlide = slider.querySelector('.gallery-list__item--' + slideIndex);
+  const targetSlide = slider.querySelector(`.${data.SLIDE}--` + slideIndex);
   const pos = parseInt(slideList.style.left) || 0;
   const newPos = Math.round(targetSlide.offsetLeft / targetSlide.offsetWidth) * 100 * -1;
 
@@ -64,15 +73,15 @@ function animate(pos, newPos, element) {
 }
 
 function updateSlide() {
-  Array.prototype.slice.call(document.querySelectorAll('.gallery-indicator')).forEach((el) => {
-    el.classList.remove('indicator-active');
+  Array.prototype.slice.call(document.querySelectorAll(`.${data.GALLERY_INDICATOR}`)).forEach((el) => {
+    el.classList.remove(data.ACTIVE_INDICATOR);
   });
   if (current === 0) {
-    document.querySelector('.gallery-indicator--' + (slidesLength - 1)).classList.add('indicator-active');
+    document.querySelector(`.${data.GALLERY_INDICATOR}--` + (slidesLength - 1)).classList.add(data.ACTIVE_INDICATOR);
   } else if (slidesLength === (current - 1)) {
-    document.querySelector('.gallery-indicator--0').classList.add('indicator-active');
+    document.querySelector(`.${data.GALLERY_INDICATOR}--0`).classList.add(data.ACTIVE_INDICATOR);
   } else {
-    document.querySelector('.gallery-indicator--' + (current - 1)).classList.add('indicator-active');
+    document.querySelector(`.${data.GALLERY_INDICATOR}--` + (current - 1)).classList.add(data.ACTIVE_INDICATOR);
   }
 }
 
@@ -98,11 +107,11 @@ slideList.insertBefore(lastSlideClone, firstSlide);
 
 
 document.addEventListener('click', e => {
-  if (e.target.classList[1] === 'gallery__button--prev' ||
-    e.target.classList[1] === 'gallery__button--next') {
+  if (e.target.classList[1] === data.LEFT_BTN ||
+    e.target.classList[1] === data.RIGHT_BTN) {
     clickArrowButton(e.target);
   }
-  if (e.target.classList[0] === 'gallery-indicator') {
+  if (e.target.classList[0] === data.GALLERY_INDICATOR) {
     clickPagerItem(e.target);
   }
 });

@@ -1,7 +1,11 @@
 //Created by Yury Volkovskiy
+const data = {
+  TO_INVERT_CONTAINER: 'toInvert',
+  TO_INVERT: 'invert',
+  INVERTED: 'inverted'
+}
 
-
-let modeTarget = document.querySelector('.toInvert');
+let modeTarget = document.querySelector(`.${data.TO_INVERT_CONTAINER}`);
 let mode = lightOrDark(getComputedStyle(modeTarget).backgroundColor);
 
 function lightOrDark(color) {
@@ -23,13 +27,13 @@ function lightOrDark(color) {
 
 
 document.addEventListener('click', (e) => {
-  if (e.target.classList[1] === 'invert') {
+  if (e.target.classList[1] === data.TO_INVERT) {
     if (mode === 'light') {
       mode = 'dark';
-      modeTarget.classList.add('inverted');
+      modeTarget.classList.add(data.INVERTED);
     } else {
       mode = 'light';
-      modeTarget.classList.remove('inverted');
+      modeTarget.classList.remove(data.INVERTED);
     }
   }
 });

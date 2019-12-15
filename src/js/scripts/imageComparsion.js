@@ -1,6 +1,10 @@
 //Created by Yury Volkovskiy
+const data = {
+  COMPARISON_IMG: 'comparsion-image--other',
+  COMPARISON_SLIDER: 'comparsion-slider'
+};
 
-const x = document.querySelectorAll(".comparsion-image--other");
+const x = document.querySelectorAll(`.${data.COMPARISON_IMG}`);
 
 for (var i = 0; i < x.length; i++) {
   compareImages(x[i], i, x.length + 1);
@@ -12,7 +16,7 @@ function compareImages(img, index, length) {
   const height = img.offsetHeight;
   img.style.width = (width /  length) + "px";
   slider = document.createElement("DIV");
-  slider.setAttribute("class", "comparsion-slider");
+  slider.setAttribute("class", data.COMPARISON_SLIDER);
   img.parentElement.insertBefore(slider, img);
   slider.style.top = (height / 2) -  (slider.offsetHeight / 2) + "px";
   slider.style.left = (width - ((width /  length) * (index + 1))) - (slider.offsetWidth / 2) + "px";
