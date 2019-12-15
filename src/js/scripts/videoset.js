@@ -184,40 +184,41 @@ window.addEventListener("load", () => {
 });
 
 document.addEventListener('click', function (event) {
-  console.log(event.target.parentNode);
-  if (event.target.classList.contains(data.BUTTONS.PLAY) ||
+  if (event.target.classList.length > 0) {
+    if (event.target.classList.contains(data.BUTTONS.PLAY) ||
       event.target.parentNode.classList.contains(data.BUTTONS.PLAY)) {
-    if (!videoPlays) {
-      startVideo()
-    }
-  }
-
-  if (event.target.children[0]) {
-    if (event.target.children[0].classList[0] === data.BUTTONS.PLAY) {
       if (!videoPlays) {
         startVideo()
       }
     }
-    if (event.target.children[0].classList[0] === data.BUTTONS.STOP) {
+
+    if (event.target.children[0]) {
+      if (event.target.children[0].classList[0] === data.BUTTONS.PLAY) {
+        if (!videoPlays) {
+          startVideo()
+        }
+      }
+      if (event.target.children[0].classList[0] === data.BUTTONS.STOP) {
+        pauseVideo();
+      }
+      if (event.target.children[0].classList[0] === data.BUTTONS.RESTART) {
+        resetVideoTime();
+      }
+      if (event.target.children[0].classList[0] === data.BUTTONS.MUTE) {
+        switchMute();
+      }
+    }
+    if (event.target.classList.contains(data.BUTTONS.STOP) ||
+      event.target.parentNode.classList.contains(data.BUTTONS.STOP)) {
       pauseVideo();
     }
-    if (event.target.children[0].classList[0] === data.BUTTONS.RESTART) {
+    if (event.target.classList.contains(data.BUTTONS.RESTART) ||
+      event.target.parentNode.classList.contains(data.BUTTONS.RESTART)) {
       resetVideoTime();
     }
-    if (event.target.children[0].classList[0] === data.BUTTONS.MUTE) {
+    if (event.target.classList.contains(data.BUTTONS.MUTE) ||
+      event.target.parentNode.classList.contains(data.BUTTONS.MUTE)) {
       switchMute();
     }
-  }
-  if (event.target.classList.contains(data.BUTTONS.STOP) ||
-  event.target.parentNode.classList.contains(data.BUTTONS.STOP)) {
-    pauseVideo();
-  }
-  if (event.target.classList.contains(data.BUTTONS.RESTART) ||
-  event.target.parentNode.classList.contains(data.BUTTONS.RESTART)) {
-    resetVideoTime();
-  }
-  if (event.target.classList.contains(data.BUTTONS.MUTE) ||
-  event.target.parentNode.classList.contains(data.BUTTONS.MUTE)) {
-    switchMute();
   }
 });
