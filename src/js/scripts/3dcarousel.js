@@ -3,13 +3,13 @@
 "use strict";
 
 const data = {
-  CAROUSEL: 'tdcarousel',
-  ITEM: 'figure__img',
-  CONTROLS: 'carousel-nav',
-  CAROUSEL_INNER: 'div',
-  BUTTON_NEXT: 'next',
-  BUTTON_PREV: 'prev',
-  BUTTON_SWITCH_ORIENTATION: 'switch3d'
+  CAROUSEL: 'threed-carousel',
+  ITEM: 'threed-carousel__items-item',
+  CONTROLS: 'threed-carousel__controls',
+  CAROUSEL_INNER: 'threed-carousel__items',
+  BUTTON_NEXT: 'threed-carousel__next',
+  BUTTON_PREV: 'threed-carousel__prev',
+  BUTTON_SWITCH_ORIENTATION: 'threed-carousel__switch3d'
 };
 
 window.addEventListener('load', () => {
@@ -27,7 +27,7 @@ function rotateCarousel(theta, imageIndex, figure, isntVertical) {
 }
 
 function initCarousel(parent, isntVertical) {
-  let figure = parent.querySelector(data.CAROUSEL_INNER);
+  let figure = parent.querySelector(`.${data.CAROUSEL_INNER}`);
   let nav = document.querySelector(`.${data.CONTROLS}`);
   let images = Array.prototype.slice.call(figure.querySelectorAll(`.${data.ITEM}`));
   let n = images.length;
@@ -86,8 +86,7 @@ function initCarousel(parent, isntVertical) {
 
       if (t.classList.contains(data.BUTTON_NEXT)) {
         currImage++;
-      }
-      else if (t.classList.contains(data.BUTTON_PREV)) {
+      } else if (t.classList.contains(data.BUTTON_PREV)) {
         currImage--;
       } else if (t.classList.contains(data.BUTTON_SWITCH_ORIENTATION)) {
         isntVertical = !isntVertical;
