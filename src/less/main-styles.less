@@ -93,6 +93,7 @@
 
 body {
   margin-left: 19%;
+  overflow-x: hidden;
 }
 
 body.hidden {
@@ -181,12 +182,6 @@ code {
   cursor: pointer;
 }
 
-.cont {
-  position: relative;
-  width: 300px;
-  height: 300px;
-}
-
 .block__arrow,
 .popup__close,
 .nav,
@@ -210,10 +205,6 @@ picture {
   }
 }
 
-.hideOverflow {
-  overflow-x: hidden;
-}
-
 .scrollable {
   width: 800px;
   height: 500px;
@@ -223,29 +214,7 @@ picture {
   position: relative;
 }
 
-.justify {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-
 label {
   display: block;
   padding: 4px;
-}
-
-.label {
-  display: block;
-  padding: 4px;
-}
-
-.inline {
-  display: inline;
-}
-
-.blockElement {
-  display: block;
 }
