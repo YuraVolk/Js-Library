@@ -2,12 +2,12 @@
 const data = {
   FLOATING_PANELS: [
     {
-      CLASS: 'floatingPanel',
-      OPEN_BUTTON: 'modalButton--1'
+      CLASS: 'list__floating-panel--0',
+      OPEN_BUTTON: 'floating-panel__button--0'
     },
     {
-      CLASS: 'floatingPanel--1',
-      OPEN_BUTTON: 'modalButton--2'
+      CLASS: 'list__floating-panel--1',
+      OPEN_BUTTON: 'floating-panel__button--1'
     }
   ]
 }

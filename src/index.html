@@ -354,10 +354,7 @@
             <p>RGB: <span class="color-code color-code--rgb"></span></p>
           </div>
         </div>
-
-
         <button class="btn  btn--arrow" id="btn5">
-
         <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
           <path
             d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z">
@@ -415,31 +412,34 @@
         2. Add cross to close.<br>
         2. Inner content of button to be modified.<br>
       </p>
-      <div class="flexbox">
-        <button class="modalButton modalButton--1">Open Floating Window 1</button>
-        <button class="modalButton modalButton--2">Open Floating Window 2</button>
+      <div class="floating-panels">
+        <button class="btn floating-panel__button--0">Open Floating Window 1</button>
+        <button class="btn floating-panel__button--1">Open Floating Window 2</button>
+        <ul class="panels__list">
+          <li class="list__floating-panel list__floating-panel--0">
+              <h1 class="floating-panel__caption">Floating Panel 1</h1>
+              <p>
+                It is most written in jQuery.
+                Current versions are written
+                in pure javascript. Cross-browser
+                supported. Very useful.
+              </p>
+              <strong>Example 1</strong>
+          </li>
+          <li class="list__floating-panel list__floating-panel--1 list__floating-panel--sticky">
+            <h1 class="floating-panel__caption">Floating Panel 2</h1>
+            <p>
+              Another panel that sticks
+              to end of container. It
+              uses rare CSS property:
+              position: sticky
+            </p>
+            <strong>Example 1</strong>
+          </li>
+        </ul>
+
       </div>
-      <div class="floatingPanel floatingPanel--0">
-        <h1 class="panel__caption">Floating Panel 1</h1>
-        <p>
-          It is most written in jQuery.
-          Current versions are written
-          in pure javascript. Cross-browser
-          supported. Very useful.
-        </p>
-        <strong>Example 1</strong>
-      </div>
-      <div class="floatingPanel floatingPanel--1">
-        <h1 class="panel__caption">Floating Panel 2</h1>
-        <p>
-          A bit lower it can have some
-          content like section or
-          anything else. It will create
-          a good effect with rarely
-          used css style - sticky.
-        </p>
-        <strong>Example 2</strong>
-      </div>
+
       <button class="btn  btn--arrow" id="btn7">
         <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
           <path
