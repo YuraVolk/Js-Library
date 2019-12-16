@@ -31,6 +31,7 @@ require('../less/styles/accordion.less');
 import './scripts/typer';
 require('../less/styles/typer.less');
 import './scripts/rebuildingText';
+require('../less/styles/bubbletext.less');
 import './scripts/cipheringText';
 require('../less/styles/cipheringText.less');
 import './scripts/3dcarouselMenu';

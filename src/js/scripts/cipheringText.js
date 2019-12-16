@@ -1,9 +1,9 @@
 //Created by Yury Volkovskiy
 
 const data = {
-  START_REBUILD_BUTTON: 'scrambleButton--0',
-  STOP_REBUILD_BUTTON: 'scrambleButton--1',
-  TEXT: 'rebuildingText--1'
+  START_REBUILD_BUTTON: 'start-cipher-btn',
+  STOP_REBUILD_BUTTON: 'stop-cipher-btn',
+  TEXT: 'ciphering__text'
 };
 
 
@@ -56,7 +56,7 @@ function splitText(el, nextPhraseLength) {
 function recipherText(children, nextText) {
   children.forEach((el, i) => {
     if (!(el.textContent == nextText.charAt(i))) {
-      el.classList.add('changed');
+      el.classList.add('ciphering-text__letter--changed');
       if (el.textContent.length === 0) {
         setTimeout(function () {
           cipherLetter(el, nextText.charAt(i), true);

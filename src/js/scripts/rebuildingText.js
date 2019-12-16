@@ -1,9 +1,9 @@
 //Created by Yury Volkovskiy
 
 const data = {
-  START_REBUILD_BUTTON: 'cipherButton--0',
-  STOP_REBUILD_BUTTON: 'cipherButton--1',
-  TEXT: 'rebuildingText--0'
+  START_REBUILD_BUTTON: 'start-bubbling__btn',
+  STOP_REBUILD_BUTTON: 'stop-bubbling__btn',
+  TEXT: 'bubble__text'
 };
 
 let phrases = [
