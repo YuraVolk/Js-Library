@@ -1,8 +1,8 @@
 //Created by Yury Volkovskiy
 
 const data = {
-  CONTAINER: 'scroll-select',
-  SLIDE: 'scroll-item'
+  CONTAINER: 'one-page-scroll',
+  SLIDE: 'one-page-scroll__slide'
 };
 
 let selectedItem = 0;
