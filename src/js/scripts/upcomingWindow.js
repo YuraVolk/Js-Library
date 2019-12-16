@@ -1,5 +1,5 @@
 //Created by Yury Volkovskiy
-const upcomingWindow = 'upcome';
+const upcomingWindow = 'upcoming-window';
 
 function isInViewport(el) {
   const bounding = el.getBoundingClientRect();
