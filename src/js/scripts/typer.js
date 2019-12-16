@@ -9,15 +9,15 @@ var markups = [
 const data = {
   TEXTS: [
     {
-      START_TYPING_BUTTON: 'typeButton--1',
-      ELEMENT: 'self-typing-1',
+      START_TYPING_BUTTON: 'start-typing__btn--1',
+      ELEMENT: 'typing__text--1',
     },
     {
-      START_TYPING_BUTTON: 'typeButton--2',
-      ELEMENT: 'self-typing-2',
+      START_TYPING_BUTTON: 'start-typing__btn--2',
+      ELEMENT: 'typing__text--2',
     }
   ],
-  ANIMATION_WAVE: 'animationWave'
+  ANIMATION_WAVE: 'typing__text--glowing'
 };
 
 function startTyping(content, el, letterUniq) {
@@ -46,13 +46,15 @@ document.addEventListener('click', event => {
   if (event.target.classList[1] === data.TEXTS[0].START_TYPING_BUTTON) {
     if (!isTyping) {
       isTyping = true;
-      startTyping(markups[0], document.querySelector(`.${data.TEXTS[0].ELEMENT}`), false);
+      const element = document.querySelector(`.${data.TEXTS[0].ELEMENT}`);
+      startTyping(markups[0], element, element.classList.contains("typing__text--glow"));
     }
   }
   if (event.target.classList[1] === data.TEXTS[1].START_TYPING_BUTTON) {
     if (!isTyping) {
       isTyping = true;
-      startTyping(markups[1], document.querySelector(`.${data.TEXTS[1].ELEMENT}`), true);
+      const element = document.querySelector(`.${data.TEXTS[1].ELEMENT}`);
+      startTyping(markups[1], element, element.classList.contains("typing__text--glow"));
     }
   }
 });

@@ -1,4 +1,5 @@
 @import "../settings/colors";
+@import "../settings/fonts";
 
 @-webkit-keyframes color {
   50% {
@@ -12,8 +13,15 @@
   }
 }
 
-.animationWave {
+.typing__text--glowing {
   color: @main;
   -webkit-animation: 0.5s color infinite;
   animation: 0.5s color infinite;
+}
+
+.typing__text {
+  font-size: 22px;
+  line-height: 44px;
+  width: 90%;
+  font-family: @info;
 }
