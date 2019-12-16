@@ -1,26 +1,35 @@
 @import "../settings/colors";
 
+.color-picker {
+  width: 470px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 270px;
+    background: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
 .color-picker__opacity-range {
   display: block;
   position: relative;
   padding: 10px;
-}
-
-.color-picker input[type=range] {
-  -webkit-appearance: none;
-  width: 270px;
-  background: transparent;
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  &::-webkit-slider-thumb {
-    -webkit-appearance: none;
-  }
-
-  &:focus {
-    outline: none;
-  }
 }
 
 .opacity-range__track {
