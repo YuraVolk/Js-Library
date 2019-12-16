@@ -1,8 +1,8 @@
 //Created by Yury Volkovskiy
 
 const data = {
-  CAROUSEL: 'carouselm',
-  ITEM: 'carouselm-item',
+  CAROUSEL: 'carousel-menu__list',
+  ITEM: 'carousel-menu__image',
   BUTTON_LEFT: 'carousel-menu-left',
   BUTTON_RIGHT: 'carousel-menu-right'
 };
@@ -33,6 +33,7 @@ class Item {
 
 class Carousel {
   constructor(container, options) {
+
     var self = this;
     this.items = [];
     let item = container;
