@@ -1,8 +1,8 @@
 //Created by Yury Volkovskiy
 const data = {
-  TO_INVERT_CONTAINER: 'toInvert',
-  TO_INVERT: 'invert',
-  INVERTED: 'inverted'
+  TO_INVERT_CONTAINER: 'invertable-content',
+  TO_INVERT: 'invert-content__btn',
+  INVERTED: 'invertable-content--inverted'
 }
 
 let modeTarget = document.querySelector(`.${data.TO_INVERT_CONTAINER}`);
