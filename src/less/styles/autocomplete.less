@@ -1,6 +1,6 @@
 @import "../settings/colors";
 
-.autocomplete-input {
+.autocomplete__input {
   width: 260px;
   height: 40px;
   background-color: @background_select;
@@ -8,11 +8,14 @@
   opacity: 0.5;
 }
 
-.autocomplete-wrap {
+.autocomplete {
   position: relative;
 }
 
 .autocomplete-items {
+  padding-left: 0;
+  list-style-type: none;
+  margin: 0;
   position: absolute;
   border: 1px solid @select_item;
   border: none;
@@ -24,7 +27,7 @@
   max-height: 200px;
   overflow-y: scroll;
 
-  div {
+  li {
     padding: 10px;
     cursor: pointer;
     background-color: @background_main;
