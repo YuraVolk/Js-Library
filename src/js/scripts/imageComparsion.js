@@ -1,7 +1,7 @@
 //Created by Yury Volkovskiy
 const data = {
-  COMPARISON_IMG: 'comparsion-image--other',
-  COMPARISON_SLIDER: 'comparsion-slider'
+  COMPARISON_IMG: 'comparsion-image--comparison',
+  COMPARISON_SLIDER: 'comparsion-slider__toddler'
 };
 
 const x = document.querySelectorAll(`.${data.COMPARISON_IMG}`);

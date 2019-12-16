@@ -6,7 +6,7 @@ for (let i = 0; i < x.length; i++) {
   const select = x[i].querySelector('select');
   x[i].insertAdjacentHTML('beforeend', "\n    <div class=\"select-selected\">\n      " + select.options[select.selectedIndex].innerHTML + "\n    </div>\n  ");
   const a = x[i].lastElementChild;
-  x[i].insertAdjacentHTML('beforeend', "\n    <div class=\"select-items select-hide\"></div>\n  ");
+  x[i].insertAdjacentHTML('beforeend', "\n    <div class=\"select-items select-hidden\"></div>\n  ");
   var b = x[i].lastElementChild;
   for (let j = 1; j < select.length; j++) {
     b.insertAdjacentHTML('beforeend', "\n    <div>" + select.options[j].innerHTML + "</div>\n    ");
@@ -33,7 +33,7 @@ for (let i = 0; i < x.length; i++) {
   a.addEventListener("click", function (event) {
     event.stopPropagation();
     closeAllSelect(event.target);
-    event.target.nextElementSibling.classList.toggle("select-hide");
+    event.target.nextElementSibling.classList.toggle("select-hidden");
     event.target.classList.toggle("select-arrow-active");
   });
 }
@@ -51,7 +51,7 @@ function closeAllSelect(el) {
   }
   for (i = 0; i < x.length; i++) {
     if (arrNo.indexOf(i)) {
-      x[i].classList.add("select-hide");
+      x[i].classList.add("select-hidden");
     }
   }
 }
