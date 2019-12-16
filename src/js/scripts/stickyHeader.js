@@ -1,8 +1,8 @@
 //Created by Yury Volkovskiy
 const data = {
-  HEADER_NORMAL: 'headerScroll--top',
-  HEADER_SCROLL: 'headerScroll--bottom',
-  HIDDEN: 'hide'
+  HEADER_NORMAL: 'sticky-header--normal',
+  HEADER_SCROLL: 'sticky-header--sticked',
+  HIDDEN: 'sticky-header--hidden'
 }
 
 let bounding;

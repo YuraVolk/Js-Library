@@ -993,76 +993,77 @@
 
         </div>
     </section>
-
     <a id="StickyHeaderonJS"></a>
     <section class="block">
-                <h1 class="block__caption">Sticky Header on JS</h1>
-                <p class="block__info">
-                    Sticky header is ultra useful in many
-                    websites. It is medium to implement.
-                    Main problem is bug fixing. It is also
-                    mostly written only in jQuery.<br>
-                    <br>
-                    USAGE: <br>
-                    1. Change container !important<br>
-                </p>
-                <div class="scrollable">
-                    <div class="headerScroll headerScroll--top">
-                        <hr><br>
-                        <span>Menu Text</span>
-                        <ul class="buttons">
-                            <li>Menu Item 1</li>
-                            <li>Menu Item 2</li>
-                            <li>Menu Item 3</li>
-                        </ul>
-                        <hr>
-                    </div>
-                    <div class="headerScroll headerScroll--bottom hide">
-                        <hr><br>
-                        <span>Menu Text Of Same Menu</span>
-                        <ul class="buttons">
-                            <li>Menu Item 1</li>
-                            <li>Menu Item 2</li>
-                            <li>Menu Item 3</li>
-                        </ul>
-                        <hr>
-                    </div>
-                    <p class="block__info">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Fermentum dui faucibus in
-                        ornare. Cras tincidunt lobortis feugiat vivamus at
-                        augue. Tincidunt dui ut ornare lectus sit amet est
-                        placerat. Hac habitasse platea dictumst quisque
-                        sagittis purus sit. Arcu dictum varius duis at
-                        consectetur lorem donec massa. Orci eu lobortis
-                        elementum nibh tellus. Vitae suscipit tellus mauris
-                        a diam. Donec adipiscing tristique risus nec feugiat
-                        in fermentum posuere. Varius vel pharetra vel turpis
-                        nunc eget. Odio euismod lacinia at quis risus. Mi in
-                        nulla posuere sollicitudin aliquam ultrices sagittis.
-                        Nam aliquam sem et tortor consequat id porta. Laoreet
-                        sit amet cursus sit amet dictum sit amet. At erat
-                        pellentesque adipiscing commodo elit at imperdiet dui.
-                        Nam at lectus urna duis convallis convallis tellus id
-                        interdum. Tellus id interdum velit laoreet id. Fames ac
-                        turpis egestas sed tempus urna et pharetra. Vitae et
-                        leo duis ut diam quam nulla porttitor massa. Tristique
-                        senectus et netus et malesuada fames ac. Mauris sit
-                        amet massa vitae tortor condimentum lacinia quis vel
-                    </p>
-                </div>
-        <button class="btn  btn--arrow" id="btn17">
-          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
-        </button>
-        <div class="markup markup--18">
-
+      <h1 class="block__caption">Sticky Header on JS</h1>
+      <p class="block__info">
+        Sticky header is ultra useful in many
+        websites. It is medium to implement.
+        Main problem is bug fixing. It is also
+        mostly written only in jQuery.<br>
+        <br>
+        USAGE: <br>
+        1. Change container !important<br>
+      </p>
+      <div class="scrollable-block">
+        <div class="sticky-header sticky-header--normal">
+          <span>Menu Text</span>
+          <ul class="sticky-header__items">
+            <li class="sticky-header__item">Menu Item 1</li>
+            <li class="sticky-header__item">Menu Item 2</li>
+            <li class="sticky-header__item">Menu Item 3</li>
+          </ul>
+          <hr>
         </div>
+        <div class="sticky-header sticky-header--sticked sticky-header--hidden">
+          <span>Menu Text Of Same Menu</span>
+          <ul class="sticky-header__items">
+            <li class="sticky-header__item">Menu Item 1</li>
+            <li class="sticky-header__item">Menu Item 2</li>
+            <li class="sticky-header__item">Menu Item 3</li>
+          </ul>
+          <hr>
+        </div>
+        <p class="sticky-header__dummy-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing
+          elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna aliqua. Fermentum dui faucibus in
+          ornare. Cras tincidunt lobortis feugiat vivamus at
+          augue. Tincidunt dui ut ornare lectus sit amet est
+          placerat. Hac habitasse platea dictumst quisque
+          sagittis purus sit. Arcu dictum varius duis at
+          consectetur lorem donec massa. Orci eu lobortis
+          elementum nibh tellus. Vitae suscipit tellus mauris
+          a diam. Donec adipiscing tristique risus nec feugiat
+          in fermentum posuere. Varius vel pharetra vel turpis
+          nunc eget. Odio euismod lacinia at quis risus. Mi in
+          nulla posuere sollicitudin aliquam ultrices sagittis.
+          Nam aliquam sem et tortor consequat id porta. Laoreet
+          sit amet cursus sit amet dictum sit amet. At erat
+          pellentesque adipiscing commodo elit at imperdiet dui.
+          Nam at lectus urna duis convallis convallis tellus id
+          interdum. Tellus id interdum velit laoreet id. Fames ac
+          turpis egestas sed tempus urna et pharetra. Vitae et
+          leo duis ut diam quam nulla porttitor massa. Tristique
+          senectus et netus et malesuada fames ac. Mauris sit
+          amet massa vitae tortor condimentum lacinia quis vel
+        </p>
+      </div>
+      <button class="btn  btn--arrow" id="btn17">
+        <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z">
+          </path>
+        </svg>
+      </button>
+      <div class="markup markup--18">
+
+      </div>
     </section>
 
     <a id="UpcomingScrollingImageonJS"></a>
     <section class="block">
-                <h1 class="block__caption">Upcoming Scrolling Image on JS</h1>
+      <h1 class="block__caption">Upcoming Scrolling Image on JS</h1>
                 <p class="block__info">
                     Same as popup window, it is very
                     annoyed and informational to users.
@@ -1075,7 +1076,7 @@
                     1. Change container<br>
                     2. Change top number in javascript !important<br>
                 </p>
-                <div class="scrollable">
+                <div class="scrollable-block">
                     <div class="upcome">
                         This message upcomes to the user.
                         Even if you scroll down.
@@ -1141,7 +1142,7 @@
                     1. Change container<br>
                     2. Change animation<br>
                 </p>
-                <div class="scrollable scroll-select">
+                <div class="scrollable-block scroll-select">
                     <div class="scroll-item scroll-item--0">
                         <br>
                         <hr>
@@ -1247,7 +1248,7 @@
                 <br>
                 <button class="modalButton invert">Switch modes.</button>
                 <br>
-                <div class="scrollable block__info toInvert">
+                <div class="scrollable-block block__info toInvert">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                     sed do eiusmod tempor incididunt ut labore et dolore
                     magna aliqua. Condimentum mattis pellentesque id nibh

@@ -1,15 +1,21 @@
 @import "../settings/colors";
 
-.headerScroll--bottom {
+.sticky-header--sticked {
   position: -webkit-sticky;
-  position: sticky;
+  position: sticky; //In real world app replace with fixed
   top: 0;
   background-color: @main-white;
   z-index: 999;
 }
 
-.hide {
+.sticky-header--hidden {
   visibility: hidden;
   position: absolute;
   top: 0;
+}
+
+.sticky-header__dummy-text {
+  font-size: 26px;
+  line-height: 38px;
+  font-family: @action;
 }
