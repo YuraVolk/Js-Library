@@ -19,13 +19,10 @@
         .buttons,
         .tabs-btn,
         .tabs,
-        .flex > div,
         nav,
-        .flexbox,
         .tdcarousel-container,
         #carousel-container,
         #carouselm,
-        .buttons.align,
         .zoom__hover,
         .comparsion-wrap,
         .toastButton,
@@ -332,7 +329,7 @@
         1. Change output names to needed. !important<br>
         </p>
 
-        <div class="color-picker flex">
+        <div class="color-picker">
           <div class="color-picker__border">
             <div class="color-picker__background">
               <canvas id="color-picker__canvas" width="245" height="245"></canvas>
@@ -660,9 +657,9 @@
                         </ul>
                     </div>
                 </div>
-                <div id="controls" class="buttons align">
-                    <button class="modalButton previous" id="prev">Previous</button>
-                    <button class="modalButton nextSlide" id="next">Next</button>
+                <div id="controls" class="buttons">
+                    <button class="btn previous" id="prev">Previous</button>
+                    <button class="btn nextSlide" id="next">Next</button>
                 </div>
 
         <button class="btn  btn--arrow" id="btn10">
@@ -820,12 +817,10 @@
                     1. Change list to needed !important<br>
                     2. Fix some rare unusual transforms<br>
                 </p>
-                <div>
-                  <div class="flexbox">
-                    <button class="modalButton cipherButton--0">Start Scrambling.</button>
-                    <button class="modalButton cipherButton--1">Stop Scrambling.</button>
-                </div>
-                <p class="rebuildingText--0 block__info">This text transforms </p>
+                <div class="bubble__effect">
+                  <p class="bubble__text">This text transforms</p>
+                  <button class="btn start-bubbling__btn">Start Scrambling.</button>
+                  <button class="btn stop-bubbling__btn">Stop Scrambling.</button>
                 </div>
 
         <button class="btn  btn--arrow" id="btn13">
@@ -849,16 +844,11 @@
                     USAGE: <br>
                     1. Change list to needed !important<br>
                 </p>
-                <div>
-                  <span class="rebuildingText--1 block__info">This text rechipers</span>
-                  <br>
-                  <br>
-                  <div class="flexbox">
-                      <button class="modalButton scrambleButton--0">Start Scrambling.</button>
-                      <button class="modalButton scrambleButton--1">Stop Scrambling.</button>
-                  </div>
+                <div class="ciphering__effect">
+                  <p class="ciphering__text">This text rechipers</p>
+                  <button class="btn start-cipher-btn">Start Scrambling.</button>
+                  <button class="btn stop-cipher-btn">Stop Scrambling.</button>
                 </div>
-
         <button class="btn  btn--arrow" id="btn14">
           <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
         </button>
@@ -869,82 +859,104 @@
 
     <a id="Responsive3DCarouselMenuonJS"></a>
     <section class="block">
-                <h1 class="block__caption">Responsive 3D Carousel Menu on JS</h1>
-                <p class="block__info">
-                    It is all made with just one single
-                    jQuery plugin, and still it is very
-                    popular as a carousel. I've made
-                    this one without libray or any other
-                    plugin. This is carousel is also
-                    responsive, but can't be displayed
-                    in mobile devices by no way.
-                    It was hard to implement carousel.<br>
-                    <br>
-                    USAGE: <br>
-                    1. Change images !important<br>
-                    2. Add more images<br>
-                    3. Change Carousel settings.<br>
-                    4. Change javascript selectors !important<br>
-                </p>
-                <div>
-                <div id="carouselm">
-                    <picture>
-                        <source type="image/webp" srcset="img/slide0.webp">
-                        <img class="carouselm-item" src="img/slide0.png" alt="re-re" loading="lazy">
-                    </picture>
-                    <picture>
-                        <source type="image/webp" srcset="img/slide1.webp">
-                        <img class="carouselm-item" src="img/slide1.png" alt="re-re" loading="lazy">
-                    </picture>
-                    <picture>
-                        <source type="image/webp" srcset="img/slide2.webp">
-                        <img class="carouselm-item" src="img/slide2.png" alt="re-re" loading="lazy">
-                    </picture>
-                    <picture>
-                        <source type="image/webp" srcset="img/slide3.webp">
-                        <img class="carouselm-item" src="img/slide3.png" alt="re-re" loading="lazy">
-                    </picture>
-                    <picture>
-                        <source type="image/webp" srcset="img/slide4.webp">
-                        <img class="carouselm-item" src="img/slide4.png" alt="re-re" loading="lazy">
-                    </picture>
-                    <picture>
-                        <source type="image/webp" srcset="img/slide5.webp">
-                        <img class="carouselm-item" src="img/slide5.png" alt="re-re" loading="lazy">
-                    </picture>
-                    <picture>
-                        <source type="image/webp" srcset="img/slide0.webp">
-                        <img class="carouselm-item" src="img/slide0.png" alt="re-re" loading="lazy">
-                    </picture>
-                    <picture>
-                        <source type="image/webp" srcset="img/slide1.webp">
-                        <img class="carouselm-item" src="img/slide1.png" alt="re-re" loading="lazy">
-                    </picture>
-                    <picture>
-                        <source type="image/webp" srcset="img/slide2.webp">
-                        <img class="carouselm-item" src="img/slide2.png" alt="re-re" loading="lazy">
-                    </picture>
-                    <picture>
-                        <source type="image/webp" srcset="img/slide3.webp">
-                        <img class="carouselm-item" src="img/slide3.png" alt="re-re" loading="lazy">
-                    </picture>
-                    <picture>
-                        <source type="image/webp" srcset="img/slide4.webp">
-                        <img class="carouselm-item" src="img/slide4.png" alt="re-re" loading="lazy">
-                    </picture>
-                    <picture>
-                        <source type="image/webp" srcset="img/slide5.webp">
-                        <img class="carouselm-item" src="img/slide5.png" alt="re-re" loading="lazy">
-                    </picture>
-                </div>
-                <br>
-                <br>
-                <div class="buttons align">
-                    <button class="modalButton carousel-menu-left">Left</button>
-                    <button class="modalButton carousel-menu-right">Right</button>
-                </div>
-              </div>
-        <button class="btn  btn--arrow" id="btn15">
+      <h1 class="block__caption">Responsive 3D Carousel Menu on JS</h1>
+      <p class="block__info">
+        It is all made with just one single
+        jQuery plugin, and still it is very
+        popular as a carousel. I've made
+        this one without libray or any other
+        plugin. This is carousel is also
+        responsive, but can't be displayed
+        in mobile devices by no way.
+        It was hard to implement carousel.<br>
+        <br>
+        USAGE: <br>
+        1. Change images !important<br>
+        2. Add more images<br>
+        3. Change Carousel settings.<br>
+        4. Change javascript selectors !important<br>
+      </p>
+      <div class="carousel-menu">
+          <ul id="carousel-menu__list">
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide0.webp">
+                <img class="carousel-menu__image" src="img/slide0.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide1.webp">
+                <img class="carousel-menu__image" src="img/slide1.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide2.webp">
+                <img class="carousel-menu__image" src="img/slide1.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide3.webp">
+                <img class="carousel-menu__image" src="img/slide3.png" alt="re-re" loading="lazy">
+              </picture>
+            </li class="carousel-menu__item">
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide4.webp">
+                <img class="carousel-menu__image" src="img/slide4.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide5.webp">
+                <img class="carousel-menu__image" src="img/slide5.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide0.webp">
+                <img class="carousel-menu__image" src="img/slide0.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide1.webp">
+                <img class="carousel-menu__image" src="img/slide1.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide2.webp">
+                <img class="carousel-menu__image" src="img/slide1.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide3.webp">
+                <img class="carousel-menu__image" src="img/slide3.png" alt="re-re" loading="lazy">
+              </picture>
+            </li class="carousel-menu__item">
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide4.webp">
+                <img class="carousel-menu__image" src="img/slide4.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide5.webp">
+                <img class="carousel-menu__image" src="img/slide5.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+          </ul>
+        <div class="carousel-menu__controls">
+          <button class="btn carousel-menu-left">Left</button>
+          <button class="btn carousel-menu-right">Right</button>
+        </div>
+      </div>
+      <button class="btn  btn--arrow" id="btn15">
           <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
         </button>
         <div class="markup markup--16">
@@ -978,76 +990,77 @@
 
         </div>
     </section>
-
     <a id="StickyHeaderonJS"></a>
     <section class="block">
-                <h1 class="block__caption">Sticky Header on JS</h1>
-                <p class="block__info">
-                    Sticky header is ultra useful in many
-                    websites. It is medium to implement.
-                    Main problem is bug fixing. It is also
-                    mostly written only in jQuery.<br>
-                    <br>
-                    USAGE: <br>
-                    1. Change container !important<br>
-                </p>
-                <div class="scrollable">
-                    <div class="headerScroll headerScroll--top">
-                        <hr><br>
-                        <span>Menu Text</span>
-                        <ul class="buttons">
-                            <li>Menu Item 1</li>
-                            <li>Menu Item 2</li>
-                            <li>Menu Item 3</li>
-                        </ul>
-                        <hr>
-                    </div>
-                    <div class="headerScroll headerScroll--bottom hide">
-                        <hr><br>
-                        <span>Menu Text Of Same Menu</span>
-                        <ul class="buttons">
-                            <li>Menu Item 1</li>
-                            <li>Menu Item 2</li>
-                            <li>Menu Item 3</li>
-                        </ul>
-                        <hr>
-                    </div>
-                    <p class="block__info">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Fermentum dui faucibus in
-                        ornare. Cras tincidunt lobortis feugiat vivamus at
-                        augue. Tincidunt dui ut ornare lectus sit amet est
-                        placerat. Hac habitasse platea dictumst quisque
-                        sagittis purus sit. Arcu dictum varius duis at
-                        consectetur lorem donec massa. Orci eu lobortis
-                        elementum nibh tellus. Vitae suscipit tellus mauris
-                        a diam. Donec adipiscing tristique risus nec feugiat
-                        in fermentum posuere. Varius vel pharetra vel turpis
-                        nunc eget. Odio euismod lacinia at quis risus. Mi in
-                        nulla posuere sollicitudin aliquam ultrices sagittis.
-                        Nam aliquam sem et tortor consequat id porta. Laoreet
-                        sit amet cursus sit amet dictum sit amet. At erat
-                        pellentesque adipiscing commodo elit at imperdiet dui.
-                        Nam at lectus urna duis convallis convallis tellus id
-                        interdum. Tellus id interdum velit laoreet id. Fames ac
-                        turpis egestas sed tempus urna et pharetra. Vitae et
-                        leo duis ut diam quam nulla porttitor massa. Tristique
-                        senectus et netus et malesuada fames ac. Mauris sit
-                        amet massa vitae tortor condimentum lacinia quis vel
-                    </p>
-                </div>
-        <button class="btn  btn--arrow" id="btn17">
-          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
-        </button>
-        <div class="markup markup--18">
-
+      <h1 class="block__caption">Sticky Header on JS</h1>
+      <p class="block__info">
+        Sticky header is ultra useful in many
+        websites. It is medium to implement.
+        Main problem is bug fixing. It is also
+        mostly written only in jQuery.<br>
+        <br>
+        USAGE: <br>
+        1. Change container !important<br>
+      </p>
+      <div class="scrollable-block">
+        <div class="sticky-header sticky-header--normal">
+          <span>Menu Text</span>
+          <ul class="sticky-header__items">
+            <li class="sticky-header__item">Menu Item 1</li>
+            <li class="sticky-header__item">Menu Item 2</li>
+            <li class="sticky-header__item">Menu Item 3</li>
+          </ul>
+          <hr>
         </div>
+        <div class="sticky-header sticky-header--sticked sticky-header--hidden">
+          <span>Menu Text Of Same Menu</span>
+          <ul class="sticky-header__items">
+            <li class="sticky-header__item">Menu Item 1</li>
+            <li class="sticky-header__item">Menu Item 2</li>
+            <li class="sticky-header__item">Menu Item 3</li>
+          </ul>
+          <hr>
+        </div>
+        <p class="scrollable-block__dummy-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing
+          elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna aliqua. Fermentum dui faucibus in
+          ornare. Cras tincidunt lobortis feugiat vivamus at
+          augue. Tincidunt dui ut ornare lectus sit amet est
+          placerat. Hac habitasse platea dictumst quisque
+          sagittis purus sit. Arcu dictum varius duis at
+          consectetur lorem donec massa. Orci eu lobortis
+          elementum nibh tellus. Vitae suscipit tellus mauris
+          a diam. Donec adipiscing tristique risus nec feugiat
+          in fermentum posuere. Varius vel pharetra vel turpis
+          nunc eget. Odio euismod lacinia at quis risus. Mi in
+          nulla posuere sollicitudin aliquam ultrices sagittis.
+          Nam aliquam sem et tortor consequat id porta. Laoreet
+          sit amet cursus sit amet dictum sit amet. At erat
+          pellentesque adipiscing commodo elit at imperdiet dui.
+          Nam at lectus urna duis convallis convallis tellus id
+          interdum. Tellus id interdum velit laoreet id. Fames ac
+          turpis egestas sed tempus urna et pharetra. Vitae et
+          leo duis ut diam quam nulla porttitor massa. Tristique
+          senectus et netus et malesuada fames ac. Mauris sit
+          amet massa vitae tortor condimentum lacinia quis vel
+        </p>
+      </div>
+      <button class="btn  btn--arrow" id="btn17">
+        <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z">
+          </path>
+        </svg>
+      </button>
+      <div class="markup markup--18">
+
+      </div>
     </section>
 
     <a id="UpcomingScrollingImageonJS"></a>
     <section class="block">
-                <h1 class="block__caption">Upcoming Scrolling Image on JS</h1>
+      <h1 class="block__caption">Upcoming Scrolling Image on JS</h1>
                 <p class="block__info">
                     Same as popup window, it is very
                     annoyed and informational to users.
@@ -1060,13 +1073,12 @@
                     1. Change container<br>
                     2. Change top number in javascript !important<br>
                 </p>
-                <div class="scrollable">
-                    <div class="upcome">
+                <div class="scrollable-block">
+                    <div class="upcoming-window">
                         This message upcomes to the user.
                         Even if you scroll down.
                     </div>
-                    <p class="block__info">
-                        <br><br>
+                    <p class="scrollable-block__dummy-text">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore
                         magna aliqua. Condimentum mattis pellentesque id nibh
@@ -1126,34 +1138,18 @@
                     1. Change container<br>
                     2. Change animation<br>
                 </p>
-                <div class="scrollable scroll-select">
-                    <div class="scroll-item scroll-item--0">
-                        <br>
-                        <hr>
-                        <p class="block__info">First slide. Scroll down....</p>
-                        <br>
-                        <hr>
+                <div class="scrollable-block one-page-scroll">
+                    <div class="one-page-scroll__slide one-page-scroll__slide--0">
+                        <p class="one-page-scroll__slide-heading">First slide. Scroll down....</p>
                     </div>
-                    <div class="scroll-item scroll-item--1">
-                        <br>
-                        <hr>
-                        <p class="block__info">Second slide.</p>
-                        <br>
-                        <hr>
+                    <div class="one-page-scroll__slide one-page-scroll__slide--1">
+                        <p class="one-page-scroll__slide-heading">Second slide.</p>
                     </div>
-                    <div class="scroll-item scroll-item--2">
-                        <br>
-                        <hr>
-                        <p class="block__info">Third slide.</p>
-                        <br>
-                        <hr>
+                    <div class="one-page-scroll__slide one-page-scroll__slide--2">
+                        <p class="one-page-scroll__slide-heading">Third slide.</p>
                     </div>
-                    <div class="scroll-item scroll-item--3">
-                        <br>
-                        <hr>
-                        <p class="block__info">Fourth slide. Scroll up....</p>
-                        <br>
-                        <hr>
+                    <div class="one-page-scroll__slide one-page-scroll__slide--3">
+                        <p class="one-page-scroll__slide-heading">Fourth slide. Scroll up....</p>
                     </div>
                 </div>
         <button class="btn  btn--arrow" id="btn19">
@@ -1229,45 +1225,36 @@
                     1. Change target !important <br>
                     2. Correct algorithm to site settings <br>
                 </p>
-                <br>
-                <button class="modalButton invert">Switch modes.</button>
-                <br>
-                <div class="scrollable block__info toInvert">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua. Condimentum mattis pellentesque id nibh
-                    tortor. Lacinia at quis risus sed vulputate odio ut. Eget
-                    mi proin sed libero enim sed. A scelerisque purus semper
-                    eget duis at tellus. Mattis ullamcorper velit sed
-                    ullamcorper morbi. At augue eget arcu dictum varius duis
-                    at consectetur lorem. Pellentesque nec nam aliquam sem
-                    et tortor consequat id porta. Auctor eu augue ut lectus
-                    arcu bibendum at varius. Quam pellentesque nec nam
-                    aliquam sem. Urna duis convallis convallis tellus id.
-                    Egestas erat imperdiet sed euismod nisi. Commodo sed
-                    egestas egestas fringilla. Nibh sit amet commodo nulla.
-                    Aliquam malesuada bibendum arcu vitae elementum curabitur
-                    vitae nunc sed. Viverra accumsan in nisl nisi. Neque
-                    ornare aenean euismod elementum nisi quis eleifend.
-                    <br>
+
+                <div class="scrollable-block invertable-content">
+                    <button class="btn invert-content__btn">Switch modes.</button>
+                    <button class="btn">Dummy button.</button>
+                    <hr>
+                    <p class="scrollable-block__dummy-text">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore
+                      magna aliqua. Condimentum mattis pellentesque id nibh
+                      tortor. Lacinia at quis risus sed vulputate odio ut. Eget
+                      mi proin sed libero enim sed. A scelerisque purus semper
+                      eget duis at tellus. Mattis ullamcorper velit sed
+                      ullamcorper morbi. At augue eget arcu dictum varius duis
+                      at consectetur lorem. Pellentesque nec nam aliquam sem
+                      et tortor consequat id porta. Auctor eu augue ut lectus
+                      arcu bibendum at varius. Quam pellentesque nec nam
+                      aliquam sem. Urna duis convallis convallis tellus id.
+                      Egestas erat imperdiet sed euismod nisi. Commodo sed
+                      egestas egestas fringilla. Nibh sit amet commodo nulla.
+                      Aliquam malesuada bibendum arcu vitae elementum curabitur
+                      vitae nunc sed. Viverra accumsan in nisl nisi. Neque
+                      ornare aenean euismod elementum nisi quis eleifend.
+                    </p>
                     <hr>
                     <picture>
                       <source type="image/webp" srcset="img/slide1.webp">
-                      <img class="carouselm-item" srcset="img/slide1.png" alt="re-re" loading="lazy">
+                      <img srcset="img/slide1.png" alt="re-re" loading="lazy" width="300" height="180">
                     </picture>
-                    <br>
-                    <hr>
-                    <button class="btn">Test</button>
-                    <button class="btn">Test</button>
-                    <button class="btn">Test</button>
-                    <button class="btn">Test</button>
-                    <button class="btn">Test</button>
-                    <button class="btn">Test</button>
-                    <button class="btn">Test</button>
-                    <button class="btn">Test</button>
-                    <button class="btn">Test</button>
-                    </div>
-                    </div>
+                </div>
+              </div>
         <button class="btn  btn--arrow" id="btn21">
           <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
         </button>
@@ -1289,9 +1276,9 @@
                     1. Change list
                 </p>
                 <form autocomplete="off">
-                    <div class="autocomplete-wrap">
-                        <input class="autocomplete-input" type="text" placeholder="Your country..." autocomplete="off">
-                    </div>
+                    <label class="autocomplete">
+                        <input class="autocomplete__input" type="text" placeholder="Your country..." autocomplete="off">
+                    </label>
                 </form>
         <button class="btn  btn--arrow" id="btn22">
           <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
@@ -1315,26 +1302,26 @@
                     USAGE: <br>
                     1. Change classes !important
                 </p>
-                <div class="comparsion-wrap">
-                    <div class="comparsion-image">
+                <div class="comparsion-slider">
+                    <div class="comparsion-slider__image">
                         <picture>
                             <source type="image/webp" srcset="img/slide0.webp">
                             <img src="img/slide0.png" alt="Comparsion Slide" loading="lazy">
                         </picture>
                     </div>
-                    <div class="comparsion-image comparsion-image--other">
+                    <div class="comparsion-slider__image comparsion-image--comparison">
                         <picture>
                             <source type="image/webp" srcset="img/slide1.webp">
                             <img src="img/slide1.png" alt="Comparsion Slide" loading="lazy">
                         </picture>
                     </div>
-                    <div class="comparsion-image comparsion-image--other">
+                    <div class="comparsion-slider__image comparsion-image--comparison">
                         <picture>
                             <source type="image/webp" srcset="img/slide2.webp">
                             <img src="img/slide2.png" alt="Comparsion Slide" loading="lazy">
                         </picture>
                     </div>
-                    <div class="comparsion-image comparsion-image--other">
+                    <div class="comparsion-slider__image comparsion-image--comparison">
                         <picture>
                             <source type="image/webp" srcset="img/slide3.webp">
                             <img src="img/slide3.png" alt="Comparsion Slide" loading="lazy">
@@ -1361,12 +1348,9 @@
                     USAGE: <br>
                     1. Change classes !important
                 </p>
-                <div>
-                  <button class="modalButton toastButton">Show Toast.</button>
-                  <div class="toast-wrap">
-
-                  </div>
-                  </div>
+                <div class="toast-wrap">
+                  <button class="btn open-toast__button">Show Toast.</button>
+                </div>
 
         <button class="btn  btn--arrow" id="btn24">
           <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
@@ -1453,9 +1437,9 @@
                     <li class="gallery-indicator gallery-indicator--4"></li>
                     <li class="gallery-indicator gallery-indicator--5"></li>
                 </ul>
-                <div class="buttons align">
-                    <button class="modalButton gallery__button--prev">Left</button>
-                    <button class="modalButton gallery__button--next">Right</button>
+                <div class="buttons">
+                    <button class="btn gallery__button--prev">Left</button>
+                    <button class="btn gallery__button--next">Right</button>
                 </div>
               </div>
         <button class="btn  btn--arrow" id="btn25">
@@ -1727,10 +1711,10 @@
                     <img src="img/slide5.png" alt="Slide Image" loading="lazy">
                     <img src="img/slide5.png" alt="Slide Image" loading="lazy">
                 </div>
-                <div class="flexbox align">
-                    <button class="modalButton perspective-left">Left</button>
-                    <button class="modalButton perspective-right">Right</button>
-                    <button class="modalButton perspective-switch">Switch Orientation</button>
+                <div class="perspective-carousel__controls">
+                    <button class="btn perspective-left">Left</button>
+                    <button class="btn perspective-right">Right</button>
+                    <button class="btn perspective-switch">Switch Orientation</button>
                 </div>
                 </div>
         <button class="btn  btn--arrow" id="btn31">
