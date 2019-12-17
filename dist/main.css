@@ -803,7 +803,7 @@ label {
 .zoom__hover {
   width: 60px;
   height: 60px;
-  background: url(/img/slide0.png) no-repeat #ffffff;
+  background: url(img/slide0.png) no-repeat #ffffff;
   -webkit-box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.3);
   box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.3);
   pointer-events: none;
