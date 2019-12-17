@@ -1,15 +1,15 @@
 //Created by Yury Volkovskiy
 const data = {
-  SLIDER: 'categorySlider',
-  SLIDES: 'gallery__slides',
+  SLIDER: 'gallery',
+  SLIDES: 'gallery-list',
   SLIDE: 'gallery-list__item',
-  GALLERY_INDICATOR: 'gallery-indicator',
-  ACTIVE_INDICATOR: 'indicator-active',
+  GALLERY_INDICATOR: 'gallery-toggle',
+  ACTIVE_INDICATOR: 'gallery-toggle--active',
   LEFT_BTN: 'gallery__button--prev',
   RIGHT_BTN: 'gallery__button--next'
 };
 
-const slider = document.getElementById(data.SLIDER);
+const slider = document.querySelector(`.${data.SLIDER}`);
 const slideList = document.querySelector(`.${data.SLIDES}`);
 const slideListItems = slider.querySelectorAll(`.${data.SLIDE}`);
 const slideWidth = slideListItems[0].offsetWidth;
@@ -109,7 +109,12 @@ slideList.insertBefore(lastSlideClone, firstSlide);
 document.addEventListener('click', e => {
   if (e.target.classList[1] === data.LEFT_BTN ||
     e.target.classList[1] === data.RIGHT_BTN) {
-    clickArrowButton(e.target);
+    if (e.target.classList[1] === data.LEFT_BTN && current == 1) {
+      clickArrowButton(e.target);
+    } else {
+      clickArrowButton(e.target);
+    }
+
   }
   if (e.target.classList[0] === data.GALLERY_INDICATOR) {
     clickPagerItem(e.target);
