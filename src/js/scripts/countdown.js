@@ -5,7 +5,7 @@ const finishDate = new Date('May 6, 2021 11:00:00').getTime();
 let current = new Date().getTime();
 let distance = finishDate - current;
 
-const element = document.querySelector('.date');
+const element = document.querySelector('.countdown');
 
 function updateTime() {
   let yearDesc = 'years';
