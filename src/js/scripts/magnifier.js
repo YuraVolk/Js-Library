@@ -1,8 +1,8 @@
 //Created by Yury Volkovskiy
 
 const data = {
-  IMAGE: 'magnifier-image',
-  GLASS: 'magnifier-glass'
+  IMAGE: 'magnifier__image',
+  GLASS: 'magnifier__glass'
 }
 
 let width, height, img, zoom, glass;
