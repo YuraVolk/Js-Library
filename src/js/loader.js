@@ -24,8 +24,6 @@ import './scripts/popup';
 require('../less/styles/popup.less');
 import './scripts/3dcarousel';
 require('../less/styles/3dcarousel.less');
-import './scripts/animatedCarousel';
-require('../less/styles/animatedCarousel.less');
 import './scripts/accordion';
 require('../less/styles/accordion.less');
 import './scripts/typer';

@@ -1,12 +1,12 @@
 //Created by Yury Volkovskiy
 const data = {
-  TABLE: 'table-filtering',
-  TABLE_HEADINGS: 'table-filters',
-  INPUT: 'filtering-input',
-  OPTION_HIDDEN: 'option--hidden',
-  OPTION: 'option',
-  CURRENT_OPTION: 'chooser',
-  SELECT: 'select-filtering'
+  TABLE: 'jobs-table',
+  TABLE_HEADINGS: 'jobs-table__headers',
+  INPUT: 'table-filtering__input',
+  OPTION_HIDDEN: 'table-filtering__select-option--hidden',
+  OPTION: 'table-filtering__select-option',
+  CURRENT_OPTION: 'table-filtering__select-current',
+  SELECT: 'table-filtering__select-options'
 };
 
 const filters = [];

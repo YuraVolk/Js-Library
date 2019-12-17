@@ -1,6 +1,6 @@
 @import "../settings/colors";
 
-.table-filtering {
+.jobs-table {
   border-collapse: separate;
   border-spacing: 0;
   width: 60%;
@@ -23,16 +23,16 @@
   }
 }
 
-.option--hidden {
+.table-filtering__select-option--hidden {
   display: none;
 }
 
-.select-wrap {
+.table-filtering__select {
   position: relative;
   display: inline-block;
 }
 
-.option {
+.table-filtering__select-option {
   width: 130px;
   background-color: @block;
   padding: 4px;
@@ -41,7 +41,7 @@
   box-sizing: border-box;
 }
 
-.chooser {
+.table-filtering__select-current {
   width: 130px;
   padding: 4px;
   background-color: @main;
@@ -50,6 +50,6 @@
   margin: 0;
 }
 
-.select-filtering {
+.table-filtering__select-options  {
   position: absolute;
 }
