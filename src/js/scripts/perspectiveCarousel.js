@@ -332,7 +332,7 @@ class PerspectiveCarousel {
         speed: 280,
         flankingItems: 3,
         orientation: 'horizontal',
-        activeClassName: 'carousel-center',
+        activeClassName: 'perspective-carousel__image--center',
         preloadImages: true,
         forcedImageWidth: 0,
         forcedImageHeight: 0,
@@ -341,7 +341,7 @@ class PerspectiveCarousel {
         clickedCenter: function () { },
         movingFromCenter: function () { },
         movedFromCenter: function () { },
-        parent: document.querySelector('.perspective-carousel')
+        parent: document.querySelector('.perspective-carousel__images')
       };
       options = extend({}, preset, newOptions);
       initializeCarouselData();
@@ -362,15 +362,15 @@ class PerspectiveCarousel {
     };
     this.reload(startingOptions);
     document.addEventListener('click', (e) => {
-      if (e.target.classList[1] === 'perspective-left') {
+      if (e.target.classList[1] === 'perspective-carousel__left') {
         data.currentDirection = 'backward';
         rotateCarousel();
       }
-      if (e.target.classList[1] === 'perspective-right') {
+      if (e.target.classList[1] === 'perspective-carousel__right') {
         data.currentDirection = 'forward';
         rotateCarousel();
       }
-      if (e.target.classList[1] === 'perspective-switch') {
+      if (e.target.classList[1] === 'perspective-carousel__switch3d') {
         if (options.orientation === 'vertical') {
           options.orientation = 'horizontal';
         } else {
@@ -380,12 +380,6 @@ class PerspectiveCarousel {
       }
     });
   }
-};
-
-const data = {
-  LEFT: 'perspective-left',
-  RIGHT: 'perspective-right',
-  SWITCH_ORIENTATION: 'perspective-switch'
 };
 
 window.onload = () => {
