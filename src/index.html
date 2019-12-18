@@ -1576,23 +1576,23 @@
                     3. Change test requirements <br>
                     4. Add another tests (if needed)
                 </p>
-                <form autocomplete="false" class="password">
-                    <label class="main">
+                <form autocomplete="false" class="password-validation">
+                    <label class="validation__password">
                         <span>Enter your password: </span>
-                        <input class="password-check" type="text" placeholder="Your password...">
+                        <input class="password__input" type="text" placeholder="Your password...">
                     </label>
-                    <div class="password__passed">
-                        <p class="toPass wrong">Has at least 6 symbols</p>
-                        <p class="toPass wrong">Contains special character (_, %, ^, et.c.)</p>
-                        <p class="toPass wrong">Has both numbers and letters</p>
-                        <p class="toPass wrong">Doesn't use common pattern (Qwerty, et.c)</p>
-                        <p class="toPass wrong">Has at least 2 upper case letters</p>
+                    <div class="validation__tests">
+                        <p class="validation__test validation__test--wrong">Has at least 6 symbols</p>
+                        <p class="validation__test validation__test--wrong">Contains special character (_, %, ^, et.c.)</p>
+                        <p class="validation__test validation__test--wrong">Has both numbers and letters</p>
+                        <p class="validation__test validation__test--wrong">Doesn't use common pattern (Qwerty, et.c)</p>
+                        <p class="validation__test validation__test--wrong">Has at least 2 upper case letters</p>
                     </div>
-                    <label class="main wrong">
+                    <label class="validation__password-check validation__test--wrong">
                         <span>Reenter your password: </span>
-                        <input class="password-second" type="text" placeholder="Your password...">
+                        <input class="password-check__input" type="text" placeholder="Your password...">
                     </label>
-                    <input type="submit" class="password-submit" disabled>
+                    <input type="submit" class="validation__submit-btn" disabled>
                 </form>
         <button class="btn  btn--arrow" id="btn30">
           <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>

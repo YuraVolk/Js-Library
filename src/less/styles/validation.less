@@ -1,6 +1,6 @@
 @import "../settings/colors";
 
-.password {
+.password-validation {
   width: 320px;
   box-shadow: @action 2px 0 1px 1px;
   padding: 12px;
@@ -20,57 +20,59 @@
     }
   }
 
-  >label.correct {
+  >label.validation__test--correct {
     background: transparent;
     border: 1px solid @passed-decorator;
     background-color: @passed;
   }
 
-  >label.wrong {
+  >label.validation__test--wrong {
     border: 1px solid @failed-decorator;
     background-color: @failed;
   }
-}
 
-.password-submit {
-  display: block;
-  background-color: @even_row;
-  border: 2px solid @shadow;
-  cursor: pointer;
+  .validation__submit-btn {
+    display: block;
+    background-color: @even_row;
+    border: 2px solid @shadow;
+    cursor: pointer;
 
-  &:disabled {
-    cursor: not-allowed;
-    background-color: @action;
+    &:disabled {
+      cursor: not-allowed;
+      background-color: @action;
+    }
+  }
+
+  .validation__password,
+  .validation__password-check {
+    background-color: @content_main;
+  }
+
+  .validation__test  {
+    margin-left: 30px;
+    position: relative;
+
+    &::before {
+      position: absolute;
+      content: "";
+      width: 10px;
+      height: 10px;
+      left: -20px;
+      top: 3px;
+      background-color: @action;
+    }
+  }
+
+  .validation__test.validation__test--wrong {
+    &::before {
+      background-color: @failed;
+    }
+  }
+
+  .validation__test.validation__test--correct {
+    &::before {
+      background-color: @passed;
+    }
   }
 }
 
-.main {
-  background-color: @content_main;
-}
-
-.toPass {
-  margin-left: 30px;
-  position: relative;
-
-  &::before {
-    position: absolute;
-    content: "";
-    width: 10px;
-    height: 10px;
-    left: -20px;
-    top: 3px;
-    background-color: @action;
-  }
-}
-
-.toPass.wrong {
-  &::before {
-    background-color: @failed;
-  }
-}
-
-.toPass.correct {
-  &::before {
-    background-color: @passed;
-  }
-}
