@@ -57,7 +57,7 @@ function ideasSwitchIdeaSrc(n, x) {
 }
 
 function ideasShowDivs(n) {
-  let x = document.getElementsByClassName('Slider');
+  let x = document.getElementsByClassName('standard-carousel__item-inner');
   ideasSwitchIdeaSrc(n, x);
   if (ideasSlideIndex !== -1) {
 
@@ -82,11 +82,11 @@ function ideasShowDivs(n) {
 
 
 document.addEventListener('click', event => {
-  if (`.${event.target.parentNode.classList[0]}` === '.slider-item') {
-    if (`.${event.target.parentNode.classList[1]}` === '.slider-item--left') {
+  if (event.target.parentNode.classList[0] === 'standard-carousel__item') {
+    if (`.${event.target.parentNode.classList[1]}` === '.standard-carousel__item--left') {
       ideasPlusDivs(-1);
     }
-    if (`.${event.target.parentNode.classList[1]}` === '.slider-item--right') {
+    if (`.${event.target.parentNode.classList[1]}` === '.standard-carousel__item--right') {
       ideasPlusDivs(1);
     }
   }
