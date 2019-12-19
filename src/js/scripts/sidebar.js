@@ -15,22 +15,22 @@ Array.prototype.slice.call(document.getElementsByTagName('section')).forEach(elM
 });
 
 array.forEach(el => {
-  document.querySelector('.sidenav').insertAdjacentHTML('beforeend', '<a href="#' + el.replace(/ /g, '') + '">' + el + '</a>');
+  document.querySelector('.sidenav__items').insertAdjacentHTML('beforeend', '<li class="sidenav__items-link"><a href="#' + el.replace(/ /g, '') + '">' + el + '</a></li>');
 });
 
 document.addEventListener('click', e => {
-  if (e.target.classList[0] === 'nav__close') {
-    sidenav.classList.add('navbar-hidden');
-    body.classList.add('hidden');
+  if (e.target.classList[0] === 'sidenav__close') {
+    sidenav.classList.add('sidenav--hidden');
+    body.classList.add('sidenav--hidden');
   }
 });
 
 document.addEventListener('mousemove', e => {
   if (e.clientX < 5) {
-    sidenav.classList.remove('navbar-hidden');
-    body.classList.remove('hidden');
+    sidenav.classList.remove('sidenav--hidden');
+    body.classList.remove('sidenav--hidden');
   }
 });
 
-sidenav.classList.add('navbar-hidden');
-body.classList.add('hidden');
+sidenav.classList.add('sidenav--hidden');
+body.classList.add('sidenav--hidden');
