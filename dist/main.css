@@ -81,7 +81,7 @@ body {
   margin-left: 19%;
   overflow-x: hidden;
 }
-body.hidden {
+body.sidenav--hidden {
   margin: 0;
 }
 .block__caption {
@@ -195,7 +195,7 @@ label {
   fill: #b30000;
 }
 
-.slider {
+.standard-carousel {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -203,8 +203,10 @@ label {
   -ms-flex-pack: justify;
   justify-content: space-between;
   width: 1200px;
+  padding-left: 0;
+  list-style-type: none;
 }
-.slider-item {
+.standard-carousel__item {
   outline: #cecece solid 5px;
 }
 
@@ -470,10 +472,6 @@ label {
   margin: 3px 0;
 }
 
-.navbar-hidden {
-  display: none;
-  overflow-x: hidden;
-}
 .sidenav {
   height: 100%;
   width: 19%;
@@ -490,25 +488,27 @@ label {
   box-sizing: border-box;
   overflow-y: scroll;
 }
-.sidenav a {
+.sidenav.sidenav--hidden {
+  display: none;
+  overflow-x: hidden;
+}
+.sidenav .sidenav__items {
+  padding-left: 0;
+  list-style-type: none;
+}
+.sidenav .sidenav__items a {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   color: #818181;
   display: block;
   font-size: 17px;
 }
-.sidenav a:hover,
-.sidenav a:focus,
-.sidenav a:active {
+.sidenav .sidenav__items a:hover,
+.sidenav .sidenav__items a:focus,
+.sidenav .sidenav__items a:active {
   background-color: #00435a;
 }
-.black {
-  background-color: #000000;
-  width: 106px;
-  margin: 0;
-  height: 106px;
-}
-.nav__close {
+.sidenav__close {
   display: block;
   float: right;
   margin-right: 15px;
@@ -1207,50 +1207,51 @@ label {
   position: absolute;
 }
 
-.password {
+.password-validation {
   width: 320px;
   box-shadow: #4d4c4d 2px 0 1px 1px;
   padding: 12px;
 }
-.password > label {
+.password-validation > label {
   width: 310px;
   margin-bottom: 12px;
 }
-.password > label > input {
+.password-validation > label > input {
   width: 120px;
   float: right;
 }
-.password > label > input::placeholder {
+.password-validation > label > input::placeholder {
   color: #e6e6e6;
   font-size: 12px;
 }
-.password > label.correct {
+.password-validation > label.validation__test--correct {
   background: transparent;
   border: 1px solid #5ba865;
   background-color: #79c42f;
 }
-.password > label.wrong {
+.password-validation > label.validation__test--wrong {
   border: 1px solid #72040d;
   background-color: #f71d1d;
 }
-.password-submit {
+.password-validation .validation__submit-btn {
   display: block;
   background-color: #f2f2f2;
   border: 2px solid #818181;
   cursor: pointer;
 }
-.password-submit:disabled {
+.password-validation .validation__submit-btn:disabled {
   cursor: not-allowed;
   background-color: #4d4c4d;
 }
-.main {
+.password-validation .validation__password,
+.password-validation .validation__password-check {
   background-color: #bfbfbf;
 }
-.toPass {
+.password-validation .validation__test {
   margin-left: 30px;
   position: relative;
 }
-.toPass::before {
+.password-validation .validation__test::before {
   position: absolute;
   content: "";
   width: 10px;
@@ -1259,20 +1260,20 @@ label {
   top: 3px;
   background-color: #4d4c4d;
 }
-.toPass.wrong::before {
+.password-validation .validation__test.validation__test--wrong::before {
   background-color: #f71d1d;
 }
-.toPass.correct::before {
+.password-validation .validation__test.validation__test--correct::before {
   background-color: #79c42f;
 }
 
-.perspective-carousel {
+.perspective-carousel__images {
   width: 80%;
   height: 300px;
   display: relative;
   margin: 300px auto;
 }
-.perspective-carousel > img {
+.perspective-carousel__images > img {
   transition: 0.3s linear left, 0.3s linear width, 0.3s linear height, 0.3s linear top;
 }
 
