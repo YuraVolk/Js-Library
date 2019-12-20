@@ -18,3 +18,4 @@ fixed manually:
 - [x] serialize-javascript
 - [x] compression-webpack-plugin
 - [x] less-loader
+- [x] clean-css
