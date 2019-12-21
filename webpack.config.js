@@ -12,11 +12,11 @@ module.exports = {
   mode: 'development',
   entry: [/*IE*/ /*'@babel/polyfill',*/'./src/js/loader.js'],
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'docs'),
     filename: 'js/bundle.js'
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: './docs',
     disableHostCheck: true,
     staticOptions: {
       redirect: true
