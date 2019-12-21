@@ -9,7 +9,7 @@ You should rely on latest version.
 After finding a vulnerability,
 you should give vulnerable element.
 Any screenshots, if applicable.
-If issue is happening only
+If issue is happenning only
 with specific type of input,
 attach this input here. 
 
