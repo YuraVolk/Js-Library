@@ -1,0 +1,40 @@
+@import "../settings/colors";
+
+.invertable-content {
+  background-color: @background_main;
+  -webkit-filter: invert(0%);
+  filter: invert(0%);
+  -webkit-transition: background-color 0.3s cubic-bezier(0.895, 0.03, 0.685, 0.22), color 0.3s ease-out, -webkit-filter 0.3s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  transition: background-color 0.3s cubic-bezier(0.895, 0.03, 0.685, 0.22), color 0.3s ease-out, -webkit-filter 0.3s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  transition: background-color 0.3s cubic-bezier(0.895, 0.03, 0.685, 0.22), filter 0.3s cubic-bezier(0.895, 0.03, 0.685, 0.22), color 0.3s ease-out;
+  transition: background-color 0.3s cubic-bezier(0.895, 0.03, 0.685, 0.22), filter 0.3s cubic-bezier(0.895, 0.03, 0.685, 0.22), color 0.3s ease-out, -webkit-filter 0.3s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  -webkit-transition-delay: 250ms;
+  transition-delay: 250ms;
+
+  img {
+    -webkit-filter: brightness(100%);
+    filter: brightness(100%);
+    -webkit-transition: -webkit-filter 0.3s ease;
+    transition: -webkit-filter 0.3s ease;
+    transition: filter 0.3s ease;
+    transition: filter 0.3s ease, -webkit-filter 0.3s ease;
+    -webkit-transition-delay: 250ms;
+    transition-delay: 250ms;
+  }
+}
+
+.invertable-content--inverted {
+  background-color: @main;
+  color: @main-white;
+  -webkit-filter: invert(8.56%);
+  filter: invert(8.56%);
+
+  hr {
+    color: @main-white;
+  }
+
+  img {
+    -webkit-filter: brightness(125%);
+    filter: brightness(125%);
+  }
+}

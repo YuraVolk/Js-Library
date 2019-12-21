@@ -1,0 +1,41 @@
+@import "../settings/colors";
+
+.accordions {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.accordion {
+  width: 600px;
+  overflow: hidden;
+  border: 3px solid @main;
+  background-color: @action;
+  border-top: 0;
+  -webkit-transition: max-height 0.4s linear;
+  transition: max-height 0.4s linear;
+
+  &:first-of-type {
+    border-top: 3px solid @main;
+  }
+}
+
+.hidden {
+  max-height: 40px;
+}
+
+.accordion__content {
+  padding: 20px;
+  -webkit-transition: max-height 0.2s linear forwards;
+  transition: max-height 0.2s linear forwards;
+  color: @subcontent_caption;
+}
+
+.accordion__heading {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  background-color: @subcontent_background;
+  color: @main-white;
+}
