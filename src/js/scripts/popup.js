@@ -4,7 +4,10 @@ const data = {
   RENEWING_POPUP: 'popup--3',
   STOP_POPUP_RENEW: 'closePopup',
   CLOSE_POPUP: 'popup__close',
-  SHOW_POPUP: 'popup-btn'
+  SHOW_POPUP: 'popup-btn',
+  POPUP_TIMED: 'popup--timed',
+  POPUP_RENEWING: 'popup--renewing',
+  POPUP_TIMER: 'popup__timer'
 };
 
 let scroll, timeLeft, isActive, toScroll;
@@ -15,14 +18,14 @@ function showPopup(popup) {
     popup.style.display = 'block';
     stopScroll();
   }
-  if (popup.classList.contains('popup--timed')) {
+  if (popup.classList.contains(data.POPUP_TIMED)) {
     initTiming(popup);
   }
 }
 
 function hidePopup() {
   Array.prototype.slice.call(document.querySelectorAll(`.${data.POPUP}`)).forEach(el => {
-    if (el.classList.contains("popup--renewing") && el.style.display === 'block') {
+    if (el.classList.contains(data.POPUP_RENEWING) && el.style.display === 'block') {
       isActive = true;
     }
     el.style.display = 'none';
@@ -38,7 +41,7 @@ function initTiming(popup) {
   const pop = popup;
 
   timeLeft = 6;
-  pop.querySelector(".popup__timer").textContent = 6;
+  pop.querySelector(`.${data.POPUP_TIMER}`).textContent = 6;
 
   pop.childNodes[1].childNodes[1].style.display = 'none';
   pop.childNodes[1].childNodes[3].style.display = 'block';
@@ -46,7 +49,7 @@ function initTiming(popup) {
   var interval = setInterval(function () {
     timeLeft--;
 
-    pop.querySelector(".popup__timer").textContent = timeLeft;
+    pop.querySelector(`.${data.POPUP_TIMER}`).textContent = timeLeft;
     if (timeLeft < 1) {
       clearInterval(interval);
       pop.childNodes[1].childNodes[1].style.display = 'block';
