@@ -17,7 +17,8 @@ const data = {
       ELEMENT: 'typing__text--2',
     }
   ],
-  ANIMATION_WAVE: 'typing__text--glowing'
+  ANIMATION_WAVE: 'typing__text--glowing',
+  ANIMATED: 'typing__text--glow'
 };
 
 function startTyping(content, el, letterUniq) {
@@ -47,14 +48,14 @@ document.addEventListener('click', event => {
     if (!isTyping) {
       isTyping = true;
       const element = document.querySelector(`.${data.TEXTS[0].ELEMENT}`);
-      startTyping(markups[0], element, element.classList.contains("typing__text--glow"));
+      startTyping(markups[0], element, element.classList.contains(data.ANIMATED));
     }
   }
   if (event.target.classList[1] === data.TEXTS[1].START_TYPING_BUTTON) {
     if (!isTyping) {
       isTyping = true;
       const element = document.querySelector(`.${data.TEXTS[1].ELEMENT}`);
-      startTyping(markups[1], element, element.classList.contains("typing__text--glow"));
+      startTyping(markups[1], element, element.classList.contains(data.ANIMATED));
     }
   }
 });

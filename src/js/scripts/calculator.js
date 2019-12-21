@@ -1,9 +1,28 @@
 //Created by Yury Volkovskiy
 
+const data = {
+  BUTTON_CLASS: 'calculator__btn',
+  BUTTON_FRACTION: 'calculator__btn--fraction',
+  BUTTON_PLUS: 'calculator__btn--plus',
+  BUTTON_MINUS: 'calculator__btn--minus',
+  BUTTON_MULTIPLY: 'calculator__btn--multiply',
+  BUTTON_DIVIDE: 'calculator__btn--divide',
+  BUTTON_MODULUS: 'calculator__btn--modulus',
+  BUTTON_SQUARE: 'calculator__btn--sqr',
+  BUTTON_SQUARE_ROOT: 'calculator__btn--square',
+  BUTTON_C: 'calculator__btn--c',
+  BUTTON_CE: 'calculator__btn--ce',
+  BUTTON_NEGATE: 'calculator__btn--plusminus',
+  BUTTON_PARTIAL: 'calculator__btn--partial',
+  BUTTON_DELETE_SYMBOL: 'calculator__btn--delete',
+  BUTTON_EQUAL: 'calculator__btn--equal',
+  RESULT: 'calculator__result'
+};
+
 let operations = ["0"];
 let res = "0";
 let curNum = 0;
-let element = document.querySelector('.calculator__result');
+let element = document.querySelector(`.${data.RESULT}`);
 
 const formatNumber = function () {
   if (res) {
@@ -115,53 +134,53 @@ function addPrefix(prefix, endPrefix = "") {
 }
 
 document.addEventListener('click', (e) => {
-  if (e.target.classList[0] === 'calculator__btn') {
+  if (e.target.classList[0] === data.BUTTON_CLASS) {
     const classEl = e.target.classList[1];
     if (!isNaN(classEl[classEl.length - 1])) {
       renderNum(classEl);
     }
-    if (classEl === 'calculator__btn--fraction') {
+    if (classEl === data.BUTTON_FRACTION) {
       addFraction();
     }
-    if (classEl === 'calculator__btn--plus') {
+    if (classEl === data.BUTTON_PLUS) {
       addSymbol('+');
     }
-    if (classEl === 'calculator__btn--minus') {
+    if (classEl === data.BUTTON_MINUS) {
       addSymbol('-');
     }
-    if (classEl === 'calculator__btn--multiply') {
+    if (classEl === data.BUTTON_MULTIPLY) {
       addSymbol('*');
     }
-    if (classEl === 'calculator__btn--divide') {
+    if (classEl === data.BUTTON_DIVIDE) {
       addSymbol('/');
     }
-    if (classEl === 'calculator__btn--modulus') {
+    if (classEl === data.BUTTON_MODULUS) {
       addSymbol('%');
     }
-    if (classEl === 'calculator__btn--plusminus') {
+    if (classEl === data.BUTTON_NEGATE) {
       changePosNeg();
     }
-    if (classEl === 'calculator__btn--square') {
+    if (classEl === data.BUTTON_SQUARE_ROOT) {
       addPrefix('Math.sqrt');
     }
-    if (classEl === 'calculator__btn--sqr') {
+    if (classEl === data.BUTTON_SQUARE) {
       addPrefix('Math.pow', ",2");
     }
-    if (classEl === 'calculator__btn--partial') {
+    if (classEl === data.BUTTON_PARTIAL) {
       addPrefix('1 / ');
     }
-    if (classEl === 'calculator__btn--delete') {
+    if (classEl === data.BUTTON_DELETE_SYMBOL) {
       removeSymbol();
     }
-    if (classEl === 'calculator__btn--c') {
+    if (classEl === data.BUTTON_C) {
       curNum = 0;
       operations = ["0"];
     }
-    if (classEl === 'calculator__btn--ce') {
+    if (classEl === data.BUTTON_CE) {
       operations[curNum] = "0";
     }
     res = operations.join(" ");
-    if (classEl === 'calculator__btn--equal') {
+    if (classEl === data.BUTTON_EQUAL) {
       res = evaluateEquation();
     }
     element.textContent = formatNumber();

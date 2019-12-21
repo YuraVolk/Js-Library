@@ -1,5 +1,12 @@
 //Created by Yury Volkovskiy
 
+const data = {
+  SLIDE_CONTENT: 'standard-carousel__item-inner',
+  SLIDE: 'standard-carousel__item',
+  SLIDE_LEFT: 'standard-carousel__item--left',
+  SLIDE_RIGHT: 'standard-carousel__item--right'
+};
+
 function testWebP() {
   return new Promise(res => {
     const webP = new Image();
@@ -57,7 +64,7 @@ function ideasSwitchIdeaSrc(n, x) {
 }
 
 function ideasShowDivs(n) {
-  let x = document.getElementsByClassName('standard-carousel__item-inner');
+  let x = document.getElementsByClassName(data.SLIDE_CONTENT);
   ideasSwitchIdeaSrc(n, x);
   if (ideasSlideIndex !== -1) {
 
@@ -82,11 +89,11 @@ function ideasShowDivs(n) {
 
 
 document.addEventListener('click', event => {
-  if (event.target.parentNode.classList[0] === 'standard-carousel__item') {
-    if (`.${event.target.parentNode.classList[1]}` === '.standard-carousel__item--left') {
+  if (event.target.parentNode.classList[0] === data.SLIDE) {
+    if (`.${event.target.parentNode.classList[1]}` === `.${data.SLIDE_LEFT}`) {
       ideasPlusDivs(-1);
     }
-    if (`.${event.target.parentNode.classList[1]}` === '.standard-carousel__item--right') {
+    if (`.${event.target.parentNode.classList[1]}` === `.${data.SLIDE_RIGHT}`) {
       ideasPlusDivs(1);
     }
   }
