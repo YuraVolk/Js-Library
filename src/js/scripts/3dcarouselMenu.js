@@ -15,6 +15,7 @@ class Item {
     this.fullHeight = image.height;
     this.alt = image.alt;
     this.title = image.title;
+
     image.style.position = 'absolute';
     this.moveTo = function (x, y, scale) {
       this.width = this.fullWidth * scale;
@@ -28,7 +29,10 @@ class Item {
       style.top = y + "px";
       style.zIndex = "" + (scale * 100) | 0;
     };
+
   }
+
+
 }
 
 class Carousel {

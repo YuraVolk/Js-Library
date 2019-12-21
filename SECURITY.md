@@ -6,11 +6,21 @@ You should rely on latest version.
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+After finding a vulnerability,
+you should give vulnerable element.
+Any screenshots, if applicable.
+If issue is happening only
+with specific type of input,
+attach this input here. 
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+All security issues will
+be fixed as fast as possible.
+If issue will not be fixed
+in 24 hours, advisory will
+be created and further information
+will be needed. Fixing security
+issues mentioned in published
+advisories will be priority 1.
 
 ## Excluded
 These are packages that were

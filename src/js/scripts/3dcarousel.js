@@ -15,9 +15,8 @@ const data = {
 window.addEventListener('load', () => {
   var carousel3d = document.querySelector(`.${data.CAROUSEL}`);
 
-  initCarousel(carousel3d, true);
+  initCarousel(carousel3d);
 });
-
 
 /**
  *
@@ -40,6 +39,11 @@ function rotateCarousel(theta, imageIndex, figure, isntVertical) {
  * @param {boolean} isntVertical Is carousel vertical.
  */
 function initCarousel(parent, isntVertical) {
+  if (isntVertical == undefined) {
+    isntVertical = true;
+
+  }
+
   let figure = parent.querySelector(`.${data.CAROUSEL_INNER}`);
   let nav = document.querySelector(`.${data.CONTROLS}`);
   let images = Array.prototype.slice.call(figure.querySelectorAll(`.${data.ITEM}`));
