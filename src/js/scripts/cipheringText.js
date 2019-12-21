@@ -3,7 +3,8 @@
 const data = {
   START_REBUILD_BUTTON: 'start-cipher-btn',
   STOP_REBUILD_BUTTON: 'stop-cipher-btn',
-  TEXT: 'ciphering__text'
+  TEXT: 'ciphering__text',
+  CHANGING_LETTER: 'ciphering-text__letter--changed'
 };
 
 
@@ -32,7 +33,7 @@ function cipherLetter(el, newLetter, isTimed) {
           if (!(index < changeNumber)) {
             isDone = true;
             el.textContent = newLetter;
-            el.classList.remove('changed');
+            el.classList.remove(data.CHANGING_LETTER);
           }
         }, 65 * index);
       })(index++);
@@ -56,7 +57,7 @@ function splitText(el, nextPhraseLength) {
 function recipherText(children, nextText) {
   children.forEach((el, i) => {
     if (!(el.textContent == nextText.charAt(i))) {
-      el.classList.add('ciphering-text__letter--changed');
+      el.classList.add(data.CHANGING_LETTER);
       if (el.textContent.length === 0) {
         setTimeout(function () {
           cipherLetter(el, nextText.charAt(i), true);

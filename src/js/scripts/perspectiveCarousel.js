@@ -319,6 +319,7 @@ class PerspectiveCarousel {
         }
       }
     }
+
     this.reload = function (newOptions) {
       const preset = {
         startingItem: 1,
@@ -341,8 +342,12 @@ class PerspectiveCarousel {
         clickedCenter: function () { },
         movingFromCenter: function () { },
         movedFromCenter: function () { },
-        parent: document.querySelector('.perspective-carousel__images')
+        parent: document.querySelector('.perspective-carousel__images'),
+        leftButton: 'perspective-carousel__left',
+        rightButton: 'perspective-carousel__right',
+        switchOrientationButton: 'perspective-carousel__switch3d'
       };
+
       options = extend({}, preset, newOptions);
       initializeCarouselData();
       Array.from(options.parent.querySelectorAll('img')).forEach((el) => el.style.display = 'none');
@@ -354,30 +359,38 @@ class PerspectiveCarousel {
         setupStarterRotation();
       });
     };
+
     this.next = function () {
       moveOnce('forward');
     };
+
     this.prev = function () {
       moveOnce('backward');
     };
+
     this.reload(startingOptions);
+
     document.addEventListener('click', (e) => {
-      if (e.target.classList[1] === 'perspective-carousel__left') {
+      if (e.target.classList[1] === options.leftButton) {
         data.currentDirection = 'backward';
         rotateCarousel();
       }
-      if (e.target.classList[1] === 'perspective-carousel__right') {
+      if (e.target.classList[1] === options.rightButton) {
         data.currentDirection = 'forward';
         rotateCarousel();
       }
-      if (e.target.classList[1] === 'perspective-carousel__switch3d') {
-        if (options.orientation === 'vertical') {
-          options.orientation = 'horizontal';
-        } else {
-          options.orientation = 'vertical';
+
+      if (options.switchOrientationButton != null) {
+        if (e.target.classList[1] === options.switchOrientationButton) {
+          if (options.orientation === 'vertical') {
+            options.orientation = 'horizontal';
+          } else {
+            options.orientation = 'vertical';
+          }
+          rotateCarousel();
         }
-        rotateCarousel();
       }
+
     });
   }
 };
