@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="Description" content="This is my (Yuriy Volkovskiy) javascript library.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#333">
+    <title>JS Library</title>
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+    <noscript>
+      <style>
+        .slider,
+        .filter__slider,
+        .buttons,
+        .tabs-btn,
+        .tabs,
+        nav,
+        .tdcarousel-container,
+        #carousel-container,
+        #carouselm,
+        .zoom__hover,
+        .comparsion-wrap,
+        .toastButton,
+        .gallery,
+        .select-wrap,
+        .password > label:last-of-type,
+        .password > div,
+        .perspective-carousel,
+        .markup,
+        .block__btn,
+        .gallery-indicators,
+        .calculator,
+        .invert,
+        .filtering-input {
+          display: none;
+        }
+
+        body {
+          margin-left: 0;
+        }
+
+        .custom__select > select {
+          display: block;
+        }
+
+      </style>
+    </noscript>
+    <aside class="sidenav">
+        <img src="img/close.png" alt="Close Symbol" class="sidenav__close" width="10" height="10">
+        <ul class="sidenav__items"></ul>
+    </aside>
+    <a id="2.5DCarouselonJS"></a>
+    <section class="block">
+      <h1 class="block__caption">2.5D Carousel on JS</h1>
+      <p class="block__info">
+        This 2.5D Carousel is used in making non-3D
+        sliders. It can be added infinite amount of
+        elements. Just change the numbers.
+
+        USAGE: <br>
+        1. Switch "ideasSlider" to your needed img class !important<br>
+        2. Change all of img to needed img file.<br>
+        3. Add anything other after end. <br>
+      </p>
+      <ul class="standard-carousel">
+        <li class="standard-carousel__item standard-carousel__item--left">
+          <img class="standard-carousel__item-inner" src="img/slide0.webp" alt="Slide" loading="lazy">
+        </li>
+        <li class="standard-carousel__item">
+          <img class="standard-carousel__item-inner" src="img/slide1.webp" alt="Slide" loading="lazy">
+        </li>
+        <li class="standard-carousel__item standard-carousel__item--right">
+          <img class="standard-carousel__item-inner" src="img/slide2.webp" alt="Slide" loading="lazy">
+        </li>
+      </ul>
+      <button class="btn btn--arrow" id="btn0">
+        <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z">
+          </path>
+        </svg>
+      </button>
+      <div class="markup markup--1">
+
+      </div>
+    </section>
+
+    <a id="FilteringonJS"></a>
+    <section class="block">
+      <h1 class="block__caption">Filtering on JS</h1>
+      <p class="block__info">
+        It can be used in order to filter elements.
+        To be filtered filter must have
+        a needed classList with its tag (sort tag)<br>
+        <br>
+        USAGE: <br>
+        1. Change class names to needed !important<br>
+        2. Change 'all' to something else. <br>
+        3. Change switch statement !important<br>
+      </p>
+      <div class="filter">
+        <div id='filter__controls' class="filter__controls">
+          <ul class="filter__controls-list">
+            <li class="filter__controls-item">
+              <button class="btn filter__controls-btn filter__controls-btn--0 filter__controls-btn--active">All</button>
+            </li>
+            <li class="filter__controls-item">
+              <button class="btn filter__controls-btn filter__controls-btn--1">Tag 1</button>
+            </li>
+            <li class="filter__controls-item">
+              <button class="btn filter__controls-btn filter__controls-btn--2">Tag 2</button>
+            </li>
+            <li class="filter__controls-item">
+              <button class="btn filter__controls-btn filter__controls-btn--3">Tag 3</button>
+            </li>
+            <li class="filter__controls-item">
+              <button class="btn filter__controls-btn filter__controls-btn--4">Tag 4</button>
+            </li>
+          </ul>
+        </div>
+        <ul class="filter__list">
+          <li class="filter__item filter__item--tag1">
+            <div class="item__inner">
+              Tag 1
+            </div>
+          </li>
+          <li class="filter__item filter__item--tag6">
+            <div class="item__inner">
+              Tag 6
+            </div>
+          </li>
+          <li class="filter__item filter__item--tag5">
+            <div class="item__inner">
+              Tag 5
+            </div>
+          </li>
+          <li class="filter__item filter__item--tag1">
+            <div class="item__inner">
+              Tag 1
+            </div>
+          </li>
+          <li class="filter__item filter__item--tag2">
+            <div class="item__inner">
+              Tag 2
+            </div>
+          </li>
+          <li class="filter__item filter__item--tag3">
+            <div class="item__inner">
+              Tag 3
+            </div>
+          </li>
+        </ul>
+      </div>
+      <button class="btn  btn--arrow" id="btn1" aria-label="Назначение кнопки">
+        <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z">
+          </path>
+        </svg>
+      </button>
+      <div class="markup markup--2">
+      </div>
+    </section>
+
+    <a id="PaginationonJS"></a>
+    <section class="block">
+
+      <h1 class="block__caption">Pagination on JS</h1>
+      <p class="block__info">
+        Simple page support.
+        Page must be defined in outer
+        block scope.<br>
+        <br>
+        USAGE: <br>
+        1. Change ".buttons" to needed class name !important<br>
+        2. Change default arguments.<br>
+        3. Change number of pages. <br>
+      </p>
+      <div class="pagination-buttons">
+        <button class="pagination__button pagination__button--left">Go to page </button>
+        <button class="pagination__button pagination__button--right">Go to page 1</button>
+      </div>
+        <button class="btn  btn--arrow" id="btn2">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--3">
+
+        </div>
+    </section>
+
+    <a id="VideosetonJS"></a>
+    <section class="block">
+      <h1 class="block__caption">Videoset on JS</h1>
+      <p class="block__info">
+        Simple as it seems, hard to implement.
+        Useful only for designing videos
+        on websites.<br>
+        <br>
+        USAGE: <br>
+        1. Change everything linked to video to
+        needer class names. !important<br>
+        2. Add more buttons.<br>
+        3. Everything other at point. <br>
+      </p>
+
+      <div class="videoset">
+        <video class="videoset__video">
+          <source src="https://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_640_3MG.mp4" type="video/mp4">
+        </video>
+        <div class="videoset__controls">
+          <label class="videoset__controls_time">
+            <span class="videoset__current-time-label">Time: </span>
+            <span class="videoset__time-range">
+              <input type="range" class="time-range__track" />
+              <input type="range" class="time-range__thumb" />
+            </span>
+            <span class="videoset__current-time">00:06</span>
+          </label>
+          <label class="videoset__controls_volume">
+            <span class="vidoset__volume-label">Volume: </span>
+            <span class="videoset__volume-range">
+              <input type="range" class="volume-range__track" />
+              <input type="range" class="volume-range__thumb" />
+            </span>
+          </label>
+          <ul class="videoset__controls_buttons">
+            <li class="videoset__controls-button">
+              <button class="videoset__button videoset__button--play">
+                <img alt="Play" src="img/play.png" loading="lazy">
+              </button>
+            </li>
+            <li class="videoset__controls-button">
+              <button class="videoset__button videoset__button--stop">
+                <img alt="Pause" src="img/pause.png" loading="lazy">
+              </button>
+            </li>
+            <li class="videoset__controls-button">
+              <button class="videoset__button videoset__button--reset">
+                <img alt="Reset" src="img/reset.png" loading="lazy">
+              </button>
+            </li>
+            <li class="videoset__controls-button">
+              <button class="videoset__button videoset__button--mute">
+                <img alt="Mute" src="img/volume.png" loading="lazy">
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="btn  btn--arrow" id="btn3">
+        <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z">
+          </path>
+        </svg>
+      </button>
+      <div class="markup markup--4">
+
+      </div>
+    </section>
+
+    <a id="TabsonJS"></a>
+    <section class="block">
+
+      <h1 class="block__caption">Tabs on JS</h1>
+      <p class="block__info">
+        Straightforward and useful, animated
+        tabs on JS. Very common in use,
+        easy to implement.<br>
+        <br>
+        USAGE: <br>
+        1. Change class names to needed. !important<br>
+        2. Add more tabs.<br>
+      </p>
+
+      <div class="tabs">
+        <ul class="tabs__controls">
+          <li class="tab__link tab__link--0">Tab 1</li>
+          <li class="tab__link tab__link--1">Tab 2</li>
+          <li class="tab__link tab__link--2">Tab 3</li>
+        </ul>
+        <ul class="tabs__list">
+          <li class="tabs__list-item">
+            <div class="tab tab--0">
+              <h2>tab 1</h2>
+            </div>
+          </li>
+          <li class="tabs__list-item">
+            <div class="tab tab--1">
+              <h2>tab 2</h2>
+            </div>
+          </li>
+          <li class="tabs__list-item">
+            <div class="tab tab--2">
+              <h2>tab 3</h2>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <button class="btn  btn--arrow" id="btn4">
+        <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z">
+          </path>
+        </svg>
+      </button>
+      <div class="markup markup--5">
+
+      </div>
+    </section>
+
+    <a id="CustomCanvasColorPickeronJS"></a>
+    <section class="block">
+
+      <h1 class="block__caption">Custom Canvas Color Picker on JS</h1>
+      <p class="block__info">
+        This is created because input type = color, looks
+        different in most browsers. The only way to do it
+        is to implement stable version. Ultra flexible
+        for editing.<br>
+        <br>
+        USAGE: <br>
+        1. Change output names to needed. !important<br>
+        </p>
+
+        <div class="color-picker">
+          <div class="color-picker__border">
+            <div class="color-picker__background">
+              <canvas id="color-picker__canvas" width="245" height="245"></canvas>
+            </div>
+          </div>
+          <div class="color-picker__info">
+            <div class="color-picker__current-color_background">
+              <div class="color-picker__current-color"></div>
+            </div>
+            <label class="color-picker__opacity">
+              <span class="color-picker__opacity-label">Opacity: </span>
+              <span class="color-picker__opacity-range">
+                <input type="range" class="opacity-range__track" />
+                <input type="range" class="opacity-range__thumb" />
+              </span>
+            </label>
+            <p>Hex code: <span class="color-code color-code--hex"></span></p>
+            <p>RGBA: <span class="color-code color-code--rgba"></span></p>
+            <p>RGB: <span class="color-code color-code--rgb"></span></p>
+          </div>
+        </div>
+        <button class="btn  btn--arrow" id="btn5">
+        <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z">
+          </path>
+        </svg>
+      </button>
+      <div class="markup markup--6">
+
+      </div>
+    </section>
+
+    <a id="SectionSideNavbaronJS"></a>
+    <section class="block">
+      <h1 class="block__caption">Section Side Navbar on JS</h1>
+      <p class="block__info">
+        Can be seen on side.
+        Flexible and automatically generated
+        by the rule that section must own
+        heading. Needs no modification.
+        No usage absolutely required.
+        Still not that easy to implement,
+        medium in implementation.
+        Hover with mouse on left side in
+        order to show bar. It can be
+        scrolled down. Also moves content
+        300px to the left by margin.
+      </p>
+      <button class="btn  btn--arrow" id="btn6">
+        <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z">
+          </path>
+        </svg>
+      </button>
+      <div class="markup markup--7">
+
+      </div>
+    </section>
+
+    <a id="FloatingWindowsonJS"></a>
+    <section class="block">
+      <h1 class="block__caption">Floating Windows on JS</h1>
+      <p class="block__info">
+        Making one floating window is not
+        hard, more however transform into
+        huge problems. Every button must
+        have a storage of the mouse x + y,
+        and its x + y in different variables.
+        It is useful and used in some sites.
+        It is not easy to implement correct
+        remove event listener function.<br>
+        <br>
+        USAGE: <br>
+        1. Add needed show of button. !important<br>
+        2. Add cross to close.<br>
+        2. Inner content of button to be modified.<br>
+      </p>
+      <div class="floating-panels">
+        <button class="btn floating-panel__button--0">Open Floating Window 1</button>
+        <button class="btn floating-panel__button--1">Open Floating Window 2</button>
+        <ul class="panels__list">
+          <li class="list__floating-panel list__floating-panel--0">
+              <h1 class="floating-panel__caption">Floating Panel 1</h1>
+              <p>
+                It is most written in jQuery.
+                Current versions are written
+                in pure javascript. Cross-browser
+                supported. Very useful.
+              </p>
+              <strong>Example 1</strong>
+          </li>
+          <li class="list__floating-panel list__floating-panel--1 list__floating-panel--sticky">
+            <h1 class="floating-panel__caption">Floating Panel 2</h1>
+            <p>
+              Another panel that sticks
+              to end of container. It
+              uses rare CSS property:
+              position: sticky
+            </p>
+            <strong>Example 1</strong>
+          </li>
+        </ul>
+      </div>
+
+      <button class="btn  btn--arrow" id="btn7">
+        <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z">
+          </path>
+        </svg>
+      </button>
+      <div class="markup markup--8">
+
+      </div>
+    </section>
+
+    <a id="PopupWindowonJS"></a>
+    <section class="block">
+      <h1 class="block__caption">Popup Window on JS</h1>
+      <p class="block__info">
+        Popup windows are used almost everywhere -
+        cookies, sponsorship, ad, blocks, etc.
+        Only problem in implementation is
+        stopping the scrollbar and making
+        ability to make these popups infinitely.
+        It is flexible, no usage manipulation
+        or editing totally required.
+      </p>
+
+      <div class="popups">
+        <div class="popup__controls">
+          <button class="btn popup-btn popup-btn--1">Open Popup 1</button>
+          <button class="btn popup-btn popup-btn--2">Open Popup 2</button>
+          <button class="btn popup-btn popup-btn--3">Open Popup 3</button>
+          <button class="btn closePopup">Stop Timing of Popup 3</button>
+        </div>
+        <ul class="popup__list">
+          <li class="popup popup--1">
+            <div class="popup__content">
+              <div class="popup__close-wrap">
+                <img src="img/close.png" alt="Close Symbol" class="popup__close" width="10" height="10" loading="lazy">
+              </div>
+              <p>
+                Sample popup. This is a template
+                for making different popups.
+              </p>
+            </div>
+          </li>
+          <li class="popup popup--2 popup--timed">
+            <div class="popup__content">
+              <div class="popup__close-wrap">
+                <img src="img/close.png" alt="Close Symbol" class="popup__close" width="10" height="10" loading="lazy">
+              </div>
+              <p>You can close in <span class="popup__timer">6</span></p>
+              <p>
+                This is possible ad popup example.
+                You can only close it through
+                5 or more seconds total.
+              </p>
+            </div>
+          </li>
+          <li class="popup popup--3 popup--timed popup--renewing">
+            <div class="popup__content">
+              <div class="popup__close-wrap">
+                <img src="img/close.png" alt="Close Symbol" class="popup__close" width="10" height="10" loading="lazy">
+              </div>
+              <p>You can close in <span class="popup__timer">6</span></p>
+              <p>This is renewing popup.
+                It will show again if you
+                won't disable it. 15 seconds
+                is current set timeout.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <button class="btn  btn--arrow" id="btn8">
+        <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z">
+          </path>
+        </svg>
+      </button>
+      <div class="markup markup--9">
+
+      </div>
+    </section>
+
+    <a id="Responsive3DCarouselonJS"></a>
+    <section class="block">
+                <h1 class="block__caption">Responsive 3D Carousel on JS</h1>
+                <p class="block__info">
+                    This is a responsive carousel. Automatically
+                    generated and self-generated. Even thought
+                    script is`nt the longest, it is still
+                    very hard to write. Fully cross-browser.<br>
+                    <br>
+                    USAGE: <br>
+                    1. Switch class names to needed !important<br>
+                    2. Change design, angles and math.<br>
+                    3. Add anything other after end. <br>
+                </p>
+                <div class="threed-carousel-container">
+                    <div class="threed-carousel">
+                        <div class="threed-carousel__items">
+                            <picture>
+                                <source type="image/webp" srcset="img/slide0.png">
+                                <img class="threed-carousel__items-item" srcset="img/slide0.png" alt="re-re" loading="lazy">
+                            </picture>
+                            <picture>
+                                <source type="image/webp" srcset="img/slide0.png">
+                                <img class="threed-carousel__items-item" srcset="img/slide0.png" alt="re-re" loading="lazy">
+                            </picture>
+                            <picture>
+                                <source type="image/webp" srcset="img/slide0.png">
+                                <img class="threed-carousel__items-item" srcset="img/slide0.png" alt="re-re" loading="lazy">
+                            </picture>
+                            <picture>
+                                <source type="image/webp" srcset="img/slide0.png">
+                                <img class="threed-carousel__items-item" srcset="img/slide0.png" alt="re-re" loading="lazy">
+                            </picture>
+                            <picture>
+                                <source type="image/webp" srcset="img/slide0.png">
+                                <img class="threed-carousel__items-item" srcset="img/slide0.png" alt="re-re" loading="lazy">
+                            </picture>
+                            <picture>
+                                <source type="image/webp" srcset="img/slide0.png">
+                                <img class="threed-carousel__items-item" srcset="img/slide0.png" alt="re-re" loading="lazy">
+                            </picture>
+                            <picture>
+                                <source type="image/webp" srcset="img/slide0.png">
+                                <img class="threed-carousel__items-item" srcset="img/slide0.png" alt="re-re" loading="lazy">
+                            </picture>
+                            <picture>
+                                <source type="image/webp" srcset="img/slide0.png">
+                                <img class="threed-carousel__items-item" srcset="img/slide0.png" alt="re-re" loading="lazy">
+                            </picture>
+                            <picture>
+                                <source type="image/webp" srcset="img/slide0.png">
+                                <img class="threed-carousel__items-item" srcset="img/slide0.png" alt="re-re" loading="lazy">
+                            </picture>
+                            <picture>
+                                <source type="image/webp" srcset="img/slide0.png">
+                                <img class="threed-carousel__items-item" srcset="img/slide0.png" alt="re-re" loading="lazy">
+                            </picture>
+                            <picture>
+                                <source type="image/webp" srcset="img/slide0.png">
+                                <img class="threed-carousel__items-item" srcset="img/slide0.png" alt="re-re" loading="lazy">
+                            </picture>
+                            <picture>
+                                <source type="image/webp" srcset="img/slide0.png">
+                                <img class="threed-carousel__items-item" srcset="img/slide0.png" alt="re-re" loading="lazy">
+                            </picture>
+                        </div>
+                    </div>
+                    <div class="threed-carousel__controls">
+                        <button class="threed-carousel__prev">Prev</button>
+                        <button class="threed-carousel__next">Next</button>
+                        <button class="threed-carousel__switch3d">Switch Carousel Type</button>
+                    </div>
+                </div>
+        <button class="btn  btn--arrow" id="btn9">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--10">
+
+        </div>
+    </section>
+
+    <a id="AccordiononJS"></a>
+    <section class="block">
+      <h1 class="block__caption">Accordion on JS</h1>
+      <p class="block__info">
+        Even though it is not hard to implement,
+        it still takes quite a time to style,
+        transition and add some other very
+        useful effects to make it work as
+        intended. Accordions are very used
+        in modern web development.<br>
+        <br>
+        USAGE:<br>
+        1. Add more accordions.
+      </p>
+      <ul class="accordions">
+        <li class="accordion">
+          <span class="accordion__heading">Accordion 1</span>
+          <div class="accordion__content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.
+          </div>
+        </li>
+        <li class="accordion">
+          <span class="accordion__heading">Accordion 2</span>
+          <div class="accordion__content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.
+          </div>
+        </li>
+        <li class="accordion">
+          <span class="accordion__heading">Accordion 3</span>
+          <div class="accordion__content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.
+          </div>
+        </li>
+        <li class="accordion">
+          <span class="accordion__heading">Accordion 4</span>
+          <div class="accordion__content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.
+          </div>
+        </li>
+      </ul>
+
+      <button class="btn  btn--arrow" id="btn11">
+        <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z">
+          </path>
+        </svg>
+      </button>
+      <div class="markup markup--12">
+
+      </div>
+      </section>
+
+      <a id="SelfEditingTextonJS"></a>
+      <section class="block">
+        <h1 class="block__caption">Self Editing Text on JS</h1>
+        <p class="block__info">
+          Making this automatically typed text was
+          quite not easy. Some very specific and
+          rare technics were used in order to
+          make this beautiful text style in pure
+          javascript.<br>
+          <br>
+          USAGE: <br>
+          1. Change text to needed !important<br>
+          2. Change text activation method !important<br>
+        </p>
+        <div class="typing-texts">
+          <button class="btn start-typing__btn--1">Start typing 1.</button>
+          <button class="btn start-typing__btn--2">Start typing 2.</button>
+          <p class="typing__text typing__text--1">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.
+          </p>
+          <hr>
+          <p class="typing__text typing__text--2 typing__text--glow">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad
+            minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </div>
+        <button class="btn  btn--arrow" id="btn12">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--13">
+
+        </div>
+    </section>
+
+    <a id="BubbleTextonJS"></a>
+    <section class="block">
+                <h1 class="block__caption">Bubble Text on JS</h1>
+                <p class="block__info">
+                    Bubble text effect is not that
+                    easy, but the effect is worth it.
+                    There were many bugs I needed to
+                    fix in order to make it work.<br>
+                    <br>
+                    USAGE: <br>
+                    1. Change list to needed !important<br>
+                    2. Fix some rare unusual transforms<br>
+                </p>
+                <div class="bubble__effect">
+                  <p class="bubble__text">This text transforms</p>
+                  <button class="btn start-bubbling__btn">Start Scrambling.</button>
+                  <button class="btn stop-bubbling__btn">Stop Scrambling.</button>
+                </div>
+
+        <button class="btn  btn--arrow" id="btn13">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--14">
+
+        </div>
+    </section>
+
+    <a id="ScramblingTextonJS"></a>
+    <section class="block">
+                <h1 class="block__caption">Scrambling Text on JS</h1>
+                <p class="block__info">
+                    Scrambling or ciphering text is also
+                    an extraordinary effect with text.
+                    It is however easier to implement
+                    than bubble text. It is straightforward
+                    and very cool looking.<br>
+                    <br>
+                    USAGE: <br>
+                    1. Change list to needed !important<br>
+                </p>
+                <div class="ciphering__effect">
+                  <p class="ciphering__text">This text rechipers</p>
+                  <button class="btn start-cipher-btn">Start Scrambling.</button>
+                  <button class="btn stop-cipher-btn">Stop Scrambling.</button>
+                </div>
+        <button class="btn  btn--arrow" id="btn14">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--15">
+
+        </div>
+    </section>
+
+    <a id="Responsive3DCarouselMenuonJS"></a>
+    <section class="block">
+      <h1 class="block__caption">Responsive 3D Carousel Menu on JS</h1>
+      <p class="block__info">
+        It is all made with just one single
+        jQuery plugin, and still it is very
+        popular as a carousel. I've made
+        this one without libray or any other
+        plugin. This is carousel is also
+        responsive, but can't be displayed
+        in mobile devices by no way.
+        It was hard to implement carousel.<br>
+        <br>
+        USAGE: <br>
+        1. Change images !important<br>
+        2. Add more images<br>
+        3. Change Carousel settings.<br>
+        4. Change javascript selectors !important<br>
+      </p>
+      <div class="carousel-menu">
+          <ul id="carousel-menu__list">
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide0.webp">
+                <img class="carousel-menu__image" src="img/slide0.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide1.webp">
+                <img class="carousel-menu__image" src="img/slide1.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide2.webp">
+                <img class="carousel-menu__image" src="img/slide1.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide3.webp">
+                <img class="carousel-menu__image" src="img/slide3.png" alt="re-re" loading="lazy">
+              </picture>
+            </li class="carousel-menu__item">
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide4.webp">
+                <img class="carousel-menu__image" src="img/slide4.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide5.webp">
+                <img class="carousel-menu__image" src="img/slide5.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide0.webp">
+                <img class="carousel-menu__image" src="img/slide0.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide1.webp">
+                <img class="carousel-menu__image" src="img/slide1.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide2.webp">
+                <img class="carousel-menu__image" src="img/slide1.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide3.webp">
+                <img class="carousel-menu__image" src="img/slide3.png" alt="re-re" loading="lazy">
+              </picture>
+            </li class="carousel-menu__item">
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide4.webp">
+                <img class="carousel-menu__image" src="img/slide4.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+            <li class="carousel-menu__item">
+              <picture>
+                <source type="image/webp" srcset="img/slide5.webp">
+                <img class="carousel-menu__image" src="img/slide5.png" alt="re-re" loading="lazy">
+              </picture>
+            </li>
+          </ul>
+        <div class="carousel-menu__controls">
+          <button class="btn carousel-menu-left">Left</button>
+          <button class="btn carousel-menu-right">Right</button>
+        </div>
+      </div>
+      <button class="btn  btn--arrow" id="btn15">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--16">
+
+        </div>
+    </section>
+
+    <a id="ImageZoomonJS"></a>
+    <section class="block">
+                <h1 class="block__caption">Image Zoom on JS</h1>
+                <p class="block__info">
+                    Image zoom on hover is quite popular
+                    on a large amount of sites. It is
+                    quite easy to make it, but the effect
+                    still remains great. This script
+                    behaves in a bit more complex way.<br>
+                    <br>
+                    USAGE: <br>
+                    1. Change CSS !important<br>
+                    2. Change JS scaling pixels !important<br>
+                </p>
+            </div>
+            <div class="zoom-container">
+                <img src="img/slide0.png" alt="Zoom Image" class="zoom__image" loading="lazy">
+                <div class="zoom__hover"></div>
+            </div>
+        <button class="btn  btn--arrow" id="btn16">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--17">
+
+        </div>
+    </section>
+    <a id="StickyHeaderonJS"></a>
+    <section class="block">
+      <h1 class="block__caption">Sticky Header on JS</h1>
+      <p class="block__info">
+        Sticky header is ultra useful in many
+        websites. It is medium to implement.
+        Main problem is bug fixing. It is also
+        mostly written only in jQuery.<br>
+        <br>
+        USAGE: <br>
+        1. Change container !important<br>
+      </p>
+      <div class="scrollable-block">
+        <div class="sticky-header sticky-header--normal">
+          <span>Menu Text</span>
+          <ul class="sticky-header__items">
+            <li class="sticky-header__item">Menu Item 1</li>
+            <li class="sticky-header__item">Menu Item 2</li>
+            <li class="sticky-header__item">Menu Item 3</li>
+          </ul>
+          <hr>
+        </div>
+        <div class="sticky-header sticky-header--sticked sticky-header--hidden">
+          <span>Menu Text Of Same Menu</span>
+          <ul class="sticky-header__items">
+            <li class="sticky-header__item">Menu Item 1</li>
+            <li class="sticky-header__item">Menu Item 2</li>
+            <li class="sticky-header__item">Menu Item 3</li>
+          </ul>
+          <hr>
+        </div>
+        <p class="scrollable-block__dummy-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing
+          elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna aliqua. Fermentum dui faucibus in
+          ornare. Cras tincidunt lobortis feugiat vivamus at
+          augue. Tincidunt dui ut ornare lectus sit amet est
+          placerat. Hac habitasse platea dictumst quisque
+          sagittis purus sit. Arcu dictum varius duis at
+          consectetur lorem donec massa. Orci eu lobortis
+          elementum nibh tellus. Vitae suscipit tellus mauris
+          a diam. Donec adipiscing tristique risus nec feugiat
+          in fermentum posuere. Varius vel pharetra vel turpis
+          nunc eget. Odio euismod lacinia at quis risus. Mi in
+          nulla posuere sollicitudin aliquam ultrices sagittis.
+          Nam aliquam sem et tortor consequat id porta. Laoreet
+          sit amet cursus sit amet dictum sit amet. At erat
+          pellentesque adipiscing commodo elit at imperdiet dui.
+          Nam at lectus urna duis convallis convallis tellus id
+          interdum. Tellus id interdum velit laoreet id. Fames ac
+          turpis egestas sed tempus urna et pharetra. Vitae et
+          leo duis ut diam quam nulla porttitor massa. Tristique
+          senectus et netus et malesuada fames ac. Mauris sit
+          amet massa vitae tortor condimentum lacinia quis vel
+        </p>
+      </div>
+      <button class="btn  btn--arrow" id="btn17">
+        <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z">
+          </path>
+        </svg>
+      </button>
+      <div class="markup markup--18">
+
+      </div>
+    </section>
+
+    <a id="UpcomingScrollingImageonJS"></a>
+    <section class="block">
+      <h1 class="block__caption">Upcoming Scrolling Image on JS</h1>
+                <p class="block__info">
+                    Same as popup window, it is very
+                    annoyed and informational to users.
+                    However, it is medium to implement,
+                    but is very common in websites.
+                    It is also flexible and can be
+                    at any website in any variant.<br>
+                    <br>
+                    USAGE: <br>
+                    1. Change container<br>
+                    2. Change top number in javascript !important<br>
+                </p>
+                <div class="scrollable-block">
+                    <div class="upcoming-window">
+                        This message upcomes to the user.
+                        Even if you scroll down.
+                    </div>
+                    <p class="scrollable-block__dummy-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Condimentum mattis pellentesque id nibh
+                        tortor. Lacinia at quis risus sed vulputate odio ut. Eget
+                        mi proin sed libero enim sed. A scelerisque purus semper
+                        eget duis at tellus. Mattis ullamcorper velit sed
+                        ullamcorper morbi. At augue eget arcu dictum varius duis
+                        at consectetur lorem. Pellentesque nec nam aliquam sem
+                        et tortor consequat id porta. Auctor eu augue ut lectus
+                        arcu bibendum at varius. Quam pellentesque nec nam
+                        aliquam sem. Urna duis convallis convallis tellus id.
+                        Egestas erat imperdiet sed euismod nisi. Commodo sed
+                        egestas egestas fringilla. Nibh sit amet commodo nulla.
+                        Aliquam malesuada bibendum arcu vitae elementum curabitur
+                        vitae nunc sed. Viverra accumsan in nisl nisi. Neque
+                        ornare aenean euismod elementum nisi quis eleifend.
+                        Mattis aliquam faucibus purus in massa tempor. In est ante
+                        in nibh mauris cursus mattis molestie. Euismod nisi porta
+                        lorem mollis aliquam ut porttitor leo a. Vitae semper quis
+                        lectus nulla at volutpat diam ut. Tristique risus nec feugiat
+                        in fermentum posuere urna nec tincidunt. Ac placerat vestibulum
+                        lectus mauris. Semper quis lectus nulla at volutpat diam ut.
+                        Pellentesque diam volutpat commodo sed. Neque laoreet
+                        suspendisse interdum consectetur libero id faucibus. In mollis
+                        nunc sed id semper risus in hendrerit. Viverra nam libero
+                        justo laoreet sit amet cursus sit amet. Fringilla phasellus
+                        faucibus scelerisque eleifend. Et sollicitudin ac orci phasellus.
+                        At ultrices mi tempus imperdiet nulla malesuada. Mi eget mauris
+                        pharetra et. Imperdiet nulla malesuada pellentesque elit eget
+                        gravida cum sociis. Sed adipiscing diam donec adipiscing tristique.
+                        Eget sit amet tellus cras adipiscing. Felis eget nunc lobortis
+                        mattis aliquam faucibus purus in massa. Eleifend donec pretium
+                        vulputate sapien nec sagittis aliquam malesuada bibendum.
+                    </p>
+                </div>
+        <button class="btn  btn--arrow" id="btn18">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--19">
+
+        </div>
+    </section>
+
+    <a id="OnePageScrollonJS"></a>
+    <section class="block">
+                <h1 class="block__caption">One Page Scroll on JS</h1>
+                <p class="block__info">
+                    One page scroll, or another name is
+                    full page scroll is very popular
+                    in websites. It is also used in
+                    website presentation, but still
+                    written with jQuery. My version
+                    is written without jQuery or framework.
+                    It is medium to implement.<br>
+                    <br>
+                    USAGE: <br>
+                    1. Change container<br>
+                    2. Change animation<br>
+                </p>
+                <div class="scrollable-block one-page-scroll">
+                    <div class="one-page-scroll__slide one-page-scroll__slide--0">
+                        <p class="one-page-scroll__slide-heading">First slide. Scroll down....</p>
+                    </div>
+                    <div class="one-page-scroll__slide one-page-scroll__slide--1">
+                        <p class="one-page-scroll__slide-heading">Second slide.</p>
+                    </div>
+                    <div class="one-page-scroll__slide one-page-scroll__slide--2">
+                        <p class="one-page-scroll__slide-heading">Third slide.</p>
+                    </div>
+                    <div class="one-page-scroll__slide one-page-scroll__slide--3">
+                        <p class="one-page-scroll__slide-heading">Fourth slide. Scroll up....</p>
+                    </div>
+                </div>
+        <button class="btn  btn--arrow" id="btn19">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--20">
+
+        </div>
+    </section>
+
+    <a id="AdvancedCalculatoronJS"></a>
+    <section class="block">
+                <h1 class="block__caption">Advanced Calculator on JS</h1>
+                <p class="block__info">
+                    This calculator fully initiates
+                    normal Windows Calculator main
+                    functionality. It was about hard
+                    to write. It was also problematic
+                    to make all buttons look like
+                    intended. <br>
+                    <br>
+                    USAGE: <br>
+                    1. Remove buttons if needed.<br>
+                    2. Change icons. <br>
+                    2. Filter output as needed. <br>
+                </p>
+                <div class="calculator">
+                    <span class="calculator__btn calculator__result">0</span>
+                    <button class="calculator__btn calculator__btn--modulus">%</button>
+                    <button class="calculator__btn calculator__btn--square">&radic;</button>
+                    <button class="calculator__btn calculator__btn--sqr">x<sup>2</sup></button>
+                    <button class="calculator__btn calculator__btn--partial"><sup>1</sup>&#8725;&#8339;</button>
+                    <button class="calculator__btn calculator__btn--ce">CE</button>
+                    <button class="calculator__btn calculator__btn--c">C</button>
+                    <button class="calculator__btn calculator__btn--delete">&#8678;</button>
+                    <button class="calculator__btn calculator__btn--divide">&divide;</button>
+                    <button class="calculator__btn calculator__btn--7 calculator__btn--num">7</button>
+                    <button class="calculator__btn calculator__btn--8 calculator__btn--num">8</button>
+                    <button class="calculator__btn calculator__btn--9 calculator__btn--num">9</button>
+                    <button class="calculator__btn calculator__btn--multiply">&times;</button>
+                    <button class="calculator__btn calculator__btn--4 calculator__btn--num">4</button>
+                    <button class="calculator__btn calculator__btn--5 calculator__btn--num">5</button>
+                    <button class="calculator__btn calculator__btn--6 calculator__btn--num">6</button>
+                    <button class="calculator__btn calculator__btn--minus">-</button>
+                    <button class="calculator__btn calculator__btn--1 calculator__btn--num">1</button>
+                    <button class="calculator__btn calculator__btn--2 calculator__btn--num">2</button>
+                    <button class="calculator__btn calculator__btn--3 calculator__btn--num">3</button>
+                    <button class="calculator__btn calculator__btn--plus">+</button>
+                    <button class="calculator__btn calculator__btn--plusminus">&plusmn;</button>
+                    <button class="calculator__btn calculator__btn--0 calculator__btn--num">0</button>
+                    <button class="calculator__btn calculator__btn--fraction">.</button>
+                    <button class="calculator__btn calculator__btn--equal">=</button>
+                </div>
+        <button class="btn  btn--arrow" id="btn20">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--21">
+
+        </div>
+    </section>
+
+    <a id="SmartScreenInvertonJS"></a>
+    <section class="block">
+                <h1 class="block__caption">Smart Screen Invert on JS</h1>
+                <p class="block__info">
+                    Screen invert is used in many
+                    websites. Main problem was
+                    to figure out, whether screen
+                    is already dark or not. This
+                    version is flexible.<br>
+                    <br>
+                    USAGE: <br>
+                    1. Change target !important <br>
+                    2. Correct algorithm to site settings <br>
+                </p>
+
+                <div class="scrollable-block invertable-content">
+                    <button class="btn invert-content__btn">Switch modes.</button>
+                    <button class="btn">Dummy button.</button>
+                    <hr>
+                    <p class="scrollable-block__dummy-text">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore
+                      magna aliqua. Condimentum mattis pellentesque id nibh
+                      tortor. Lacinia at quis risus sed vulputate odio ut. Eget
+                      mi proin sed libero enim sed. A scelerisque purus semper
+                      eget duis at tellus. Mattis ullamcorper velit sed
+                      ullamcorper morbi. At augue eget arcu dictum varius duis
+                      at consectetur lorem. Pellentesque nec nam aliquam sem
+                      et tortor consequat id porta. Auctor eu augue ut lectus
+                      arcu bibendum at varius. Quam pellentesque nec nam
+                      aliquam sem. Urna duis convallis convallis tellus id.
+                      Egestas erat imperdiet sed euismod nisi. Commodo sed
+                      egestas egestas fringilla. Nibh sit amet commodo nulla.
+                      Aliquam malesuada bibendum arcu vitae elementum curabitur
+                      vitae nunc sed. Viverra accumsan in nisl nisi. Neque
+                      ornare aenean euismod elementum nisi quis eleifend.
+                    </p>
+                    <hr>
+                    <picture>
+                      <source type="image/webp" srcset="img/slide1.webp">
+                      <img srcset="img/slide1.png" alt="re-re" loading="lazy" width="300" height="180">
+                    </picture>
+                </div>
+              </div>
+        <button class="btn  btn--arrow" id="btn21">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--22">
+
+        </div>
+    </section>
+
+    <a id="AutocompleteListonJS"></a>
+    <section class="block">
+                <h1 class="block__caption">Autocomplete List on JS</h1>
+                <p class="block__info">
+                    Autocomplete is very used in
+                    forms, selections. It is hard
+                    to implement. Result must
+                    check if first letters match.<br>
+                    <br>
+                    USAGE: <br>
+                    1. Change list
+                </p>
+                <form autocomplete="off">
+                    <label class="autocomplete">
+                        <input class="autocomplete__input" type="text" placeholder="Your country..." autocomplete="off">
+                    </label>
+                </form>
+        <button class="btn  btn--arrow" id="btn22">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--23">
+
+        </div>
+    </section>
+
+    <a id="ImageComparsiononJS"></a>
+    <section class="block">
+                <h1 class="block__caption">Image Comparsion on JS</h1>
+                <p class="block__info">
+                    Image comparsion is quite
+                    effective technic to show
+                    multiple images. Main
+                    problem was to implement
+                    N number of images in
+                    comparsion slider. <br>
+                    <br>
+                    USAGE: <br>
+                    1. Change classes !important
+                </p>
+                <div class="comparsion-slider">
+                    <div class="comparsion-slider__image">
+                        <picture>
+                            <source type="image/webp" srcset="img/slide0.webp">
+                            <img src="img/slide0.png" alt="Comparsion Slide" loading="lazy">
+                        </picture>
+                    </div>
+                    <div class="comparsion-slider__image comparsion-image--comparison">
+                        <picture>
+                            <source type="image/webp" srcset="img/slide1.webp">
+                            <img src="img/slide1.png" alt="Comparsion Slide" loading="lazy">
+                        </picture>
+                    </div>
+                    <div class="comparsion-slider__image comparsion-image--comparison">
+                        <picture>
+                            <source type="image/webp" srcset="img/slide2.webp">
+                            <img src="img/slide2.png" alt="Comparsion Slide" loading="lazy">
+                        </picture>
+                    </div>
+                    <div class="comparsion-slider__image comparsion-image--comparison">
+                        <picture>
+                            <source type="image/webp" srcset="img/slide3.webp">
+                            <img src="img/slide3.png" alt="Comparsion Slide" loading="lazy">
+                        </picture>
+                    </div>
+                </div>
+        <button class="btn  btn--arrow" id="btn23">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--24">
+
+        </div>
+    </section>
+
+    <a id="ToastonJS"></a>
+    <section class="block">
+                <h1 class="block__caption">Toast on JS</h1>
+                <p class="block__info">
+                    Toast is quite easy to
+                    implement and is really
+                    used in sites. From cookies
+                    to the notifactions. <br>
+                    <br>
+                    USAGE: <br>
+                    1. Change classes !important
+                </p>
+                <div class="toast-wrap">
+                  <button class="btn open-toast__button">Show Toast.</button>
+                </div>
+
+        <button class="btn  btn--arrow" id="btn24">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--25">
+
+        </div>
+    </section>
+
+    <a id="CarouselGalleryonJS"></a>
+    <section class="block">
+                <h1 class="block__caption">Carousel Gallery on JS</h1>
+                <p class="block__info">
+                    Carousel gallery main difference
+                    is ability to go on any slide.
+                    It is much more used than carousel
+                    background. Main problem was to
+                    fix a lot of bugs. It was about
+                    hard to implement. <br>
+                    <br>
+                    USAGE: <br>
+                    1. Change classes !important
+                </p>
+                <div>
+                <div id="categorySlider" class="gallery">
+                    <div class="gallery-inner">
+                        <ul class="gallery-list">
+                            <li class="gallery-list__item gallery-list__item--0">
+                                <div class="gallery-list__item-content">
+                                    <picture>
+                                        <source type="image/webp" srcset="img/slide0.webp">
+                                        <img src="img/slide0.png" alt="Slide Image">
+                                    </picture>
+                                </div>
+                            </li>
+                            <li class="gallery-list__item gallery-list__item--1">
+                                <div class="gallery-list__item-content">
+                                    <picture>
+                                        <source type="image/webp" srcset="img/slide1.webp">
+                                        <img src="img/slide1.png" alt="Slide Image">
+                                    </picture>
+                                </div>
+                            </li>
+                            <li class="gallery-list__item gallery-list__item--2">
+                                <div class="gallery-list__item-content">
+                                    <picture>
+                                        <source type="image/webp" srcset="img/slide2.webp">
+                                        <img src="img/slide2.png" alt="Slide Image">
+                                    </picture>
+                                </div>
+                            </li>
+                            <li class="gallery-list__item gallery-list__item--3">
+                                <div class="gallery-list__item-content">
+                                    <picture>
+                                        <source type="image/webp" srcset="img/slide3.webp">
+                                        <img src="img/slide3.png" alt="Slide Image">
+                                    </picture>
+                                </div>
+                            </li>
+                            <li class="gallery-list__item gallery-list__item--4">
+                                <div class="gallery-list__item-content">
+                                    <picture>
+                                        <source type="image/webp" srcset="img/slide4.webp">
+                                        <img src="img/slide4.png" alt="Slide Image">
+                                    </picture>
+                                </div>
+                            </li>
+                            <li class="gallery-list__item gallery-list__item--5">
+                                <div class="gallery-list__item-content">
+                                    <picture>
+                                        <source type="image/webp" srcset="img/slide5.webp">
+                                        <img src="img/slide5.png" alt="Slide Image">
+                                    </picture>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <ul class="gallery__toggles">
+                    <li class="gallery-toggle gallery-toggle--0 gallery-toggle--active"></li>
+                    <li class="gallery-toggle gallery-toggle--1"></li>
+                    <li class="gallery-toggle gallery-toggle--2"></li>
+                    <li class="gallery-toggle gallery-toggle--3"></li>
+                    <li class="gallery-toggle gallery-toggle--4"></li>
+                    <li class="gallery-toggle gallery-toggle--5"></li>
+                </ul>
+                <button class="btn gallery__button--prev">Left</button>
+                <button class="btn gallery__button--next">Right</button>
+              </div>
+        <button class="btn  btn--arrow" id="btn25">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--26">
+
+        </div>
+    </section>
+
+    <a id="AdvancedMagnifieronJS"></a>
+    <section class="block">
+                <h1 class="block__caption">Advanced Magnifier on JS</h1>
+                <p class="block__info">
+                    Magnifier, as brother of
+                    the image zoom is used to
+                    zoom image. The only and
+                    main difference is the
+                    zoom calculation style.
+                    That's why they use box and
+                    circle often. <br>
+                    <br>
+                    USAGE: <br>
+                    1. Change constants <br>
+                    2. Change classes !important <br>
+                </p>
+                <div class="magnifier-container">
+                    <picture>
+                        <source type="image/webp" srcset="img/slide0.webp">
+                        <img class="magnifier__image" src="img/slide0.png" alt="Zoom Image" loading="lazy">
+                    </picture>
+                </div>
+        <button class="btn  btn--arrow" id="btn26">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--27">
+
+        </div>
+    </section>
+
+    <a id="ParallaxonJS"></a>
+    <section class="block">
+      <h1 class="block__caption">Parallax on JS</h1>
+      <p class="block__info">
+        Parallax became really popular
+        in these days. It is a website
+        trend everyone uses. However,
+        pure CSS version is not supported
+        by Edge and IE. So this one is
+        made with JS and animation frame. <br>
+        <br>
+        USAGE: <br>
+        1. Change constants <br>
+        2. Change classes !important <br>
+        3. Change container
+      </p>
+      <div class="parallax">
+        <p class="parallax__info parallax__info--spaced">Parallax is lower</p>
+        <h1 data-parallax data-speed="3" data-margin-bottom="360">This is a parallax example</h1>
+        <p data-parallax data-speed="2.7" data-margin-bottom="350" class="parallax__info">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Condimentum mattis pellentesque id nibh
+          tortor. Lacinia at quis risus sed vulputate odio ut. Eget
+          mi proin sed libero enim sed. A scelerisque purus semper
+          eget duis at tellus.
+        </p>
+        <p class="parallax__info">
+          Test and bug purposes.
+          Lorem ipsum dolor sit amet, consectetur adipiscing
+          elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna aliqua. Fermentum dui faucibus in
+          ornare. Cras tincidunt lobortis feugiat vivamus at
+          augue. Tincidunt dui ut ornare lectus sit amet est
+          placerat. Hac habitasse platea dictumst quisque
+          sagittis purus sit. Arcu dictum varius duis at
+          consectetur lorem donec massa. Orci eu lobortis
+          elementum nibh tellus. Vitae suscipit tellus mauris
+          a diam. Donec adipiscing tristique risus nec feugiat
+          in fermentum posuere. Varius vel pharetra vel turpis
+          nunc eget. Odio euismod lacinia at quis risus. Mi in
+          nulla posuere sollicitudin aliquam ultrices sagittis.
+          Nam aliquam sem et tortor consequat id porta. Laoreet
+          sit amet cursus sit amet dictum sit amet. At erat
+          pellentesque adipiscing commodo elit at imperdiet dui.
+          Nam at lectus urna duis convallis convallis tellus id
+          interdum. Tellus id interdum velit laoreet id. Fames ac
+          turpis egestas sed tempus urna et pharetra. Vitae et
+          leo duis ut diam quam nulla porttitor massa. Tristique
+          senectus et netus et malesuada fames ac. Mauris sit
+          amet massa vitae tortor condimentum lacinia quis vel
+        </p>
+      </div>
+
+      <button class="btn  btn--arrow" id="btn27">
+        <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z">
+          </path>
+        </svg>
+      </button>
+      <div class="markup markup--28">
+
+      </div>
+
+    </section>
+
+    <a id="CountdownonJS"></a>
+    <section class="block">
+                <h1 class="block__caption">Countdown on JS</h1>
+                <p class="block__info">
+                    Countdown is used in many
+                    sites, mostly shops and course
+                    catalogs. Countdowns work exactly
+                    as needed and make impression
+                    on user to react quickly. <br>
+                    <br>
+                    USAGE: <br>
+                    1. Change time !important <br>
+                </p>
+                <p class="countdown">Sorry, but countdown works only with JS enabled</p>
+        <button class="btn  btn--arrow" id="btn28">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--29">
+
+        </div>
+    </section>
+
+    <a id="TableMulti-FilteringonJS"></a>
+    <section class="block">
+                <h1 class="block__caption">Table Multi-Filtering on JS</h1>
+                <p class="block__info">
+                    Table Multi-Filtering is a
+                    technic to sort tables by
+                    any category. It is medium
+                    in implementation, but quite
+                    commonly used. <br>
+                    <br>
+                    USAGE: <br>
+                    1. Change classes !important <br>
+                    2. Make one filter only
+                </p>
+              <div class="table-filtering">
+                <div class="table-filtering__select">
+                    <p class="table-filtering__select-current">Name</p>
+                    <div class="table-filtering__select-options table-filtering__select-option--hidden"></div>
+                </div>
+                <input type="text" class="table-filtering__input" placeholder="Input text....">
+                <table class="jobs-table">
+                    <tr class="jobs-table__headers">
+                        <th class="jobs-table__header">Name</th>
+                        <th class="jobs-table__header">Country</th>
+                        <th class="jobs-table__header">Speciality</th>
+                    </tr>
+                    <tr class="jobs-table__rows">
+                        <td class="jobs-table__item">John</td>
+                        <td class="jobs-table__item">Austria</td>
+                        <td class="jobs-table__item">Designer</td>
+                    </tr>
+                    <tr class="jobs-table__rows">
+                        <td class="jobs-table__item">Mary</td>
+                        <td class="jobs-table__item">Ireland</td>
+                        <td class="jobs-table__item">Architector</td>
+                    </tr>
+                    <tr class="jobs-table__rows">
+                        <td class="jobs-table__item">Jane</td>
+                        <td class="jobs-table__item">Australia</td>
+                        <td class="jobs-table__item">Game Developer</td>
+                    </tr>
+                    <tr class="jobs-table__rows">
+                        <td class="jobs-table__item">Mark</td>
+                        <td class="jobs-table__item">Russia</td>
+                        <td class="jobs-table__item">QA Tester</td>
+                    </tr>
+                    <tr class="jobs-table__rows">
+                        <td class="jobs-table__item">Paul</td>
+                        <td class="jobs-table__item">France</td>
+                        <td class="jobs-table__item">Backend Developer</td>
+                    </tr>
+                </table>
+              </div>
+        <button class="btn  btn--arrow" id="btn29">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--30">
+
+        </div>
+    </section>
+
+    <a id="AdvancedPasswordValidationonJS"></a>
+    <section class="block">
+                <h1 class="block__caption">Advanced Password Validation on JS</h1>
+                <p class="block__info">
+                    Password validation is used
+                    in almost every single registration.
+                    It prevents user from typing
+                    too easy and uncomplicated
+                    password. It is mostly based
+                    on iteration and regex-es. <br>
+                    <br>
+                    USAGE: <br>
+                    1. Change classes !important <br>
+                    2. Delete unused tests <br>
+                    3. Change test requirements <br>
+                    4. Add another tests (if needed)
+                </p>
+                <form autocomplete="false" class="password-validation">
+                    <label class="validation__password">
+                        <span>Enter your password: </span>
+                        <input class="password__input" type="text" placeholder="Your password...">
+                    </label>
+                    <div class="validation__tests">
+                        <p class="validation__test validation__test--wrong">Has at least 6 symbols</p>
+                        <p class="validation__test validation__test--wrong">Contains special character (_, %, ^, et.c.)</p>
+                        <p class="validation__test validation__test--wrong">Has both numbers and letters</p>
+                        <p class="validation__test validation__test--wrong">Doesn't use common pattern (Qwerty, et.c)</p>
+                        <p class="validation__test validation__test--wrong">Has at least 2 upper case letters</p>
+                    </div>
+                    <label class="validation__password-check validation__test--wrong">
+                        <span>Reenter your password: </span>
+                        <input class="password-check__input" type="text" placeholder="Your password...">
+                    </label>
+                    <input type="submit" class="validation__submit-btn" disabled>
+                </form>
+        <button class="btn  btn--arrow" id="btn30">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--31">
+
+        </div>
+    </section>
+
+    <a id="PerspectiveSlideCarouselonJS"></a>
+    <section class="block">
+                <h1 class="block__caption">Perspective Slide Carousel on JS</h1>
+                <p class="block__info">
+                    This type of script is used
+                    almost in every carousel-based
+                    site. Main problem was to make
+                    it uncrashable, and avoid
+                    third party libraries. It is
+                    ultra customizable, has lots
+                    of settings with understandable
+                    names. This script was really
+                    hard to implement, due to hard
+                    absolute position calculations.<br>
+                    <br>
+                    USAGE: <br>
+                    1. Change classes !important <br>
+                    2. Change settings
+                </p>
+                <div class="perspective-carousel">
+                  <div class="perspective-carousel__images">
+                    <img src="img/slide1.png" alt="Slide Image" loading="lazy">
+                    <img src="img/slide2.png" alt="Slide Image" loading="lazy">
+                    <img src="img/slide3.png" alt="Slide Image" loading="lazy">
+                    <img src="img/slide4.png" alt="Slide Image" loading="lazy">
+                    <img src="img/slide5.png" alt="Slide Image" loading="lazy">
+                    <img src="img/slide5.png" alt="Slide Image" loading="lazy">
+                    <img src="img/slide5.png" alt="Slide Image" loading="lazy">
+                    <img src="img/slide5.png" alt="Slide Image" loading="lazy">
+                    <img src="img/slide1.png" alt="Slide Image" loading="lazy">
+                    <img src="img/slide2.png" alt="Slide Image" loading="lazy">
+                    <img src="img/slide3.png" alt="Slide Image" loading="lazy">
+                    <img src="img/slide4.png" alt="Slide Image" loading="lazy">
+                    <img src="img/slide5.png" alt="Slide Image" loading="lazy">
+                    <img src="img/slide5.png" alt="Slide Image" loading="lazy">
+                    <img src="img/slide5.png" alt="Slide Image" loading="lazy">
+                    <img src="img/slide5.png" alt="Slide Image" loading="lazy">
+                  </div>
+                  <div class="perspective-carousel__controls">
+                      <button class="btn perspective-carousel__left">Left</button>
+                      <button class="btn perspective-carousel__right">Right</button>
+                      <button class="btn perspective-carousel__switch3d">Switch Orientation</button>
+                  </div>
+                </div>
+        <button class="btn  btn--arrow" id="btn31">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--32">
+
+        </div>
+    </section>
+
+    <a id="CustomSelectonJS"></a>
+    <section class="block">
+                <h1 class="block__caption">Custom Select on JS</h1>
+                <p class="block__info">
+                  Select option cannot be styled
+                  with pure CSS. A JS variant is
+                  needed. Main aim is to replace
+                  normal select element by JS
+                  implementation. <br>
+                  <br>
+                  USAGE: <br>
+                  1. Change classes !important <br>
+                  2. Add blocked items
+                </p>
+                <div class="custom__select">
+                  <select>
+                    <option class="custom__select-option">Test to select...</option>
+                    <option class="custom__select-option">Test 2</option>
+                    <option class="custom__select-option">Test 3</option>
+                    <option class="custom__select-option">Test 4</option>
+                    <option class="custom__select-option">Test 5</option>
+                    <option class="custom__select-option">Test 6</option>
+                  </select>
+                </div>
+        <button class="btn  btn--arrow" id="btn32">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+
+        <div class="markup markup--33">
+
+        </div>
+    </section>
+
+    <a id="RegistrationonJS"></a>
+    <section class="block">
+                <h1 class="block__caption">Registration on JS</h1>
+                <p class="block__info">
+
+                </p>
+                <form method="POST" class="register">
+                  <fieldset class="register_fieldset">
+                    <label>
+                      <span>Name: </span>
+                      <input type="text" required class="register_name">
+                    </label>
+                    <label>
+                      <span>Last name: </span>
+                      <input type="text" required>
+                    </label>
+                    <label>
+                      <span>Patronymic: </span>
+                      <input type="text">
+                    </label>
+                  </fieldset>
+                  <fieldset class="register_fieldset">
+                    <label>
+                      <span>Postal code: </span>
+                      <input type="number">
+                    </label>
+                    <label>
+                      <span>Date of birth: </span>
+                      <input type="date" required>
+                    </label>
+                    <label>
+                      <span>Country (script already exists): </span>
+                      <input type="text" required>
+                    </label>
+                  </fieldset>
+                  <fieldset class="register_fieldset">
+                    <label>
+                      <span>Email: </span>
+                      <input type="email" required>
+                    </label>
+                    <label>
+                      <span>Password (script already exists): </span>
+                      <input type="password" required autocomplete="current-password">
+                    </label>
+                  </fieldset>
+                  <fieldset>
+                    <label>
+                      <span>Gender (script already exists): </span>
+                      <select>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                      </select>
+                    </label>
+                    <label>
+                      <span>Username: </span>
+                      <input type="text" required autocomplete="username">
+                    </label>
+                    <label>
+                      <span>Telephone: </span>
+                      <input type="tel" required>
+                    </label>
+                  </fieldset>
+                  <button>Submit</button>
+                </form>
+        <button class="btn  btn--arrow" id="btn33">
+          <svg width="50" height="30" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
+        </button>
+        <div class="markup markup--34">
+
+        </div>
+    </section>
+
+    <span>&copy; Yuriy Volkovskiy</span>
+
+</body>

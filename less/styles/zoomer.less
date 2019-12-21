@@ -1,0 +1,54 @@
+@import "../settings/colors";
+
+.zoom-container {
+  position: relative;
+  width: 370px;
+  height: 220px;
+  margin-bottom: 15px;
+}
+
+.zoom__image {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: auto;
+  border: 16px #333 solid;
+
+  &:hover {
+    cursor: -webkit-zoom-in;
+    cursor: zoom-in;
+    display: block;
+  }
+
+  &:active {
+    cursor: -webkit-zoom-in;
+    cursor: zoom-in;
+    display: block;
+  }
+
+  &:hover&+.zoom__hover {
+    opacity: 1;
+  }
+
+  &:active&+.zoom__hover {
+    opacity: 1;
+  }
+}
+
+.zoom__hover {
+  width: 60px;
+  height: 60px;
+  background: url(/img/slide0.png) no-repeat @background_main;
+  -webkit-box-shadow: 0 5px 10px -2px @shadow-medium;
+  box-shadow: 0 5px 10px -2px @shadow-medium;
+  pointer-events: none;
+  position: absolute;
+  opacity: 0;
+  z-index: 99;
+  display: block;
+  -webkit-transition: opacity .2s;
+  transition: opacity .2s;
+  overflow: hidden;
+  -webkit-transform: scale(1.5);
+  transform: scale(1.5);
+}
