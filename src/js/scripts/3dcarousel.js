@@ -18,6 +18,14 @@ window.addEventListener('load', () => {
   initCarousel(carousel3d, true);
 });
 
+
+/**
+ *
+ * @param {number}  theta        Theta value used for calculations.
+ * @param {number}  imageIndex   Index of current image.
+ * @param {Node}    figure       Container of images.
+ * @param {boolean} isntVertical Is carousel vertical.
+ */
 function rotateCarousel(theta, imageIndex, figure, isntVertical) {
   if (isntVertical) {
     figure.style.transform = "rotateY(" + imageIndex * -theta + "rad)";
@@ -26,6 +34,11 @@ function rotateCarousel(theta, imageIndex, figure, isntVertical) {
   }
 }
 
+/**
+ *
+ * @param {Node}    parent       Container of carousel.
+ * @param {boolean} isntVertical Is carousel vertical.
+ */
 function initCarousel(parent, isntVertical) {
   let figure = parent.querySelector(`.${data.CAROUSEL_INNER}`);
   let nav = document.querySelector(`.${data.CONTROLS}`);
@@ -48,6 +61,16 @@ function initCarousel(parent, isntVertical) {
 
   setupNavigation();
 
+  /**
+   * Summary. Sets up carousel default position.
+   * Description. Sets all default css properties,
+   *              percentages and opacities.
+   * @access private
+   * @see rotateCarousel
+   * @since 1.2.0
+   * @param {number} n Number of images.
+   * @param {number} s Size of every image.
+   */
   function setupCarousel(n, s) {
     var apothem = s / (2 * Math.tan(Math.PI / n));
 
@@ -74,6 +97,13 @@ function initCarousel(parent, isntVertical) {
     rotateCarousel(theta, currImage, figure, isntVertical);
   }
 
+  /**
+   * Summary. Add listeners for buttons.
+   * Description. Changes carousel styles
+   *              based on button pressed.
+   * @see rotateCarousel
+   * @fires onClick
+   */
   function setupNavigation() {
     nav.addEventListener('click', onClick, true);
 
@@ -103,6 +133,10 @@ function initCarousel(parent, isntVertical) {
     }
   }
 
+  /**
+   * Summary. Rerenders carousel.
+   * @access private
+   */
   setInterval(function () {
     if (isntVertical) {
       setupCarousel(n, parseFloat(getComputedStyle(images[0]).width));
@@ -110,5 +144,4 @@ function initCarousel(parent, isntVertical) {
       setupCarousel(n, parseFloat(getComputedStyle(images[0]).height));
     }
   }, 160);
-
 }
