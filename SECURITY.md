@@ -26,7 +26,7 @@ advisories will be priority 1.
 
 ### Type of issue
 Check one of these.
-- [] DoS
+- [x] DoS
 - [] DDoS
 - [] XSS
 - [] Other (write type of issue below)
