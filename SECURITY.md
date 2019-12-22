@@ -34,7 +34,7 @@ Check one of these.
 ### How to exploit vulnerability
 Give a video, screenshots
 of how to exploit vulnerability,
-and vulnerable element is.
+and what vulnerable element is.
 
 ### Workarounds
 If there are workarounds,
