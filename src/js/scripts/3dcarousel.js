@@ -41,7 +41,6 @@ function rotateCarousel(theta, imageIndex, figure, isntVertical) {
 function initCarousel(parent, isntVertical) {
   if (isntVertical == undefined) {
     isntVertical = true;
-
   }
 
   let figure = parent.querySelector(`.${data.CAROUSEL_INNER}`);
@@ -69,9 +68,12 @@ function initCarousel(parent, isntVertical) {
    * Summary. Sets up carousel default position.
    * Description. Sets all default css properties,
    *              percentages and opacities.
-   * @access private
-   * @see rotateCarousel
+   * @access    private
+   * @see       rotateCarousel
+   * @memberof  initCarousel
+   *
    * @since 1.2.0
+   *
    * @param {number} n Number of images.
    * @param {number} s Size of every image.
    */
@@ -105,8 +107,9 @@ function initCarousel(parent, isntVertical) {
    * Summary. Add listeners for buttons.
    * Description. Changes carousel styles
    *              based on button pressed.
-   * @see rotateCarousel
-   * @fires onClick
+   * @memberof initCarousel
+   * @see      rotateCarousel
+   * @fires    onClick
    */
   function setupNavigation() {
     nav.addEventListener('click', onClick, true);

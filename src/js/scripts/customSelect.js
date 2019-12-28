@@ -1,13 +1,12 @@
 //Created by Yury Volkovskiy
 
 const data = {
-  SELECT: 'custom__select',
-  SELECT_CURRENT: 'select-selected',
-  SELECT_OPTION: 'custom__select-option',
-  SELECT_OPTIONS: 'select-items',
-  SELECT_OPTIONS_HIDDEN: 'select-hidden',
-  SELECT_OPTION_CURRENT: 'same-as-selected',
-  SELECT_OPEN: 'select-arrow-active'
+  SELECT: 'custom-select',
+  SELECT_CURRENT: 'custom-select__selected',
+  SELECT_OPTIONS: 'custom-select__items',
+  SELECT_OPTIONS_HIDDEN: 'custom-select__items--hidden',
+  SELECT_OPTION_CURRENT: 'custom-select__items--selected',
+  SELECT_OPEN: 'custom-select--open'
 };
 
 const x = document.getElementsByClassName(data.SELECT);

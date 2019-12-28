@@ -31,8 +31,6 @@ class Item {
     };
 
   }
-
-
 }
 
 class Carousel {
