@@ -1287,6 +1287,7 @@ label {
 }
 .custom-select__selected {
   background-color: DodgerBlue;
+  border-radius: 20px;
 }
 .custom-select__selected:after {
   position: absolute;
@@ -1302,7 +1303,11 @@ label {
   border-color: transparent transparent #fff transparent;
   top: 7px;
 }
-.custom-select__items div,
+.custom-select__selected.custom-select--open {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.custom-select__item,
 .custom-select__selected {
   color: #ffffff;
   padding: 3px 12px;
@@ -1320,18 +1325,25 @@ label {
   cursor: pointer;
   opacity: 1;
   transition: opacity 0.2s linear;
+  padding-left: 0;
+  list-style-type: none;
+  margin: 0;
 }
 .custom-select__items--hidden {
   opacity: 0;
   cursor: default;
   z-index: -9999;
 }
-.custom-select__items div:hover,
-.custom-select__items--selected {
+.custom-select__item:hover,
+.custom-select__item--selected {
   background-color: rgba(0, 0, 0, 0.1);
 }
 .custom-select--open {
   background-color: darkcyan;
+}
+.custom-select__items:last-child {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .register {

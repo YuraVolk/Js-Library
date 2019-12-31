@@ -1,0 +1,69 @@
+@import "../settings/colors";
+
+@color_1: #818181;
+@background_color_1: #111111;
+@background_color_2: #00435a;
+@background_color_3: #000000;
+
+
+
+.sidenav {
+
+  &.sidenav--hidden {
+    display: none;
+    overflow-x: hidden;
+  }
+
+  .sidenav__items {
+    padding-left: 0;
+    list-style-type: none;
+
+    a {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      color: @standard;
+      display: block;
+      font-size: 17px;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: @selected;
+      }
+    }
+  }
+
+  height: 100%;
+  width: 19%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: @main-black;
+  overflow-x: hidden;
+  -webkit-animation: slide-left 0.4s ease;
+  animation: slide-left 0.4s ease;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+
+
+.sidenav__close {
+  display: block;
+  float: right;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+
+    a {
+      font-size: 17px;
+    }
+  }
+}
+

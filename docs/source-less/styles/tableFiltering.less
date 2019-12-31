@@ -1,0 +1,55 @@
+@import "../settings/colors";
+
+.jobs-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 60%;
+  border: 1px solid @row;
+
+  th {
+    text-align: left;
+    padding: 16px;
+  }
+
+  td {
+    text-align: left;
+    padding: 16px;
+  }
+
+  tr {
+    &:nth-child(even) {
+      background-color: @even_row;
+    }
+  }
+}
+
+.table-filtering__select-option--hidden {
+  display: none;
+}
+
+.table-filtering__select {
+  position: relative;
+  display: inline-block;
+}
+
+.table-filtering__select-option {
+  width: 130px;
+  background-color: @block;
+  padding: 4px;
+  border: 1px solid @main-light;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.table-filtering__select-current {
+  width: 130px;
+  padding: 4px;
+  background-color: @main;
+  color: @main-white;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.table-filtering__select-options  {
+  position: absolute;
+}

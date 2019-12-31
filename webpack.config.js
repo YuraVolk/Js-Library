@@ -5,6 +5,7 @@ const BrotliPlugin = require('brotli-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const JavaScriptObfuscator = require('webpack-obfuscator');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
 const webpack = require('webpack');
 
@@ -49,7 +50,18 @@ module.exports = {
     }),
     new JavaScriptObfuscator({
       rotateUnicodeArray: true
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: 'src/less/styles',
+        to: 'source-css',
+        copyUnmodified: true
+      },
+      {
+        from: 'src/js/scripts',
+        to: 'source-js'
+      }
+    ])
   ],
   optimization: {
     moduleIds: 'hashed',
