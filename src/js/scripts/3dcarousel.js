@@ -19,6 +19,7 @@ window.addEventListener('load', () => {
 });
 
 /**
+ * Summary. Rotates carousel.
  *
  * @param {number}  theta        Theta value used for calculations.
  * @param {number}  imageIndex   Index of current image.
@@ -34,6 +35,7 @@ function rotateCarousel(theta, imageIndex, figure, isntVertical) {
 }
 
 /**
+ * Summary. Creates 3D carousel
  *
  * @param {Node}    parent       Container of carousel.
  * @param {boolean} isntVertical Is carousel vertical.

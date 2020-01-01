@@ -8,6 +8,7 @@ const data = {
   ACCORDION_HEADER: 'accordion__heading'
 };
 
+// Adding all accordions to list
 var sections = Array.prototype.slice.call(document.querySelectorAll(`.${data.ACCORDION_WRAP}`));
 const widths = [];
 
@@ -20,6 +21,13 @@ sections.forEach(el => {
   el.style.maxHeight = "";
 });
 
+/**
+ * Summary. Open clicked accordion and close others.
+ *
+ * @fires data.ACCORDION_HEADER#click
+ *
+ * @param {Node} target Accordion header that was pressed
+ */
 function switchAccordion(target) {
   if (target.classList[1] === "hidden") {
     sections.forEach(el => {
