@@ -172,7 +172,7 @@ label {
   border-radius: 5px;
   border: 0;
   cursor: pointer;
-  /*используется для оформления svg в кнопке только для Библитеки*/
+  transition: background-color 0.5s linear;
 }
 .btn:hover {
   text-decoration: none;
@@ -193,6 +193,14 @@ label {
 }
 .btn--arrow:active {
   fill: #b30000;
+}
+.btn.positive {
+  background-color: chartreuse;
+  border: lawngreen 3px solid;
+}
+.btn.negative {
+  background-color: firebrick;
+  border: orangered 3px solid;
 }
 
 .standard-carousel {
