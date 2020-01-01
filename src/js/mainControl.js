@@ -61,10 +61,20 @@ document.addEventListener('click', event => {
       }
       const val = event.target.textContent;
 
-      try {
 
+      try {
         if (event.target.classList[1] === "copy-html__btn") {
-          copyToClipboard(scripts[num].html);
+          if (num != 6) {
+            copyToClipboard(scripts[num].html);
+          } else {
+
+            copyToClipboard(`
+            <aside class="sidenav">
+              <img src="img/close.png" alt="Close Symbol" class="sidenav__close" width="10" height="10">
+              <ul class="sidenav__items"></ul>
+            </aside>`);
+          }
+
         } else if (event.target.classList[1] === "copy-css__btn") {
           copyToClipboard(scripts[num].css)
         } else {
@@ -119,12 +129,13 @@ const Script = {
   }
 };
 
-const scripts = new Array();
+const scripts = new Array(200);
+
+const area = document.createElement("textarea");
+area.classList = "textarea-clipboard";
+document.body.appendChild(area);
 
 function copyToClipboard(str) {
-  const area = document.createElement("textarea");
-  area.classList = "textarea-clipboard"
-  document.body.appendChild(area)
   area.value = str;
   area.select();
   document.execCommand("copy");
@@ -157,8 +168,15 @@ async function createScript(js_path, css_path, html_index) {
   script.css = css;
   script.js = js;
 
-  scripts.push(script)
+  scripts[html_index] = script;
 }
 
 createScript("source-js/carousel.js", "source-css/carousel.less", 0);
 createScript("source-js/filtering.js", "source-css/filter.less", 1);
+createScript("source-js/pagination.js", "source-css/pagination.less", 2);
+createScript("source-js/videoset.js", "source-css/videoset.less", 3);
+createScript("source-js/tabs.js", "source-css/tabs.less", 4);
+createScript("source-js/colorPicker.js", "source-css/colorPicker.less", 5);
+createScript("source-js/sidebar.js", "source-css/sidebar.less", 6);
+createScript("source-js/floating.js", "source-css/floating.less", 7);
+createScript("source-js/3dcarousel.js", "source-css/3dcarousel.less", 8);
