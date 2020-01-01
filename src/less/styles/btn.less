@@ -20,19 +20,15 @@
   background-color: #cccccc;
   background-image: none;
   border-radius: 5px;
-  // border: 1px solid $gray-lighter;
   border: 0;
   cursor: pointer;
+  transition: background-color 0.5s linear;
 
   &:hover {
     text-decoration: none;
-    //color: $text-color;
-    //background-color: darken($gray--light, 10%);
   }
 
-  /*используется для оформления svg в кнопке только для Библитеки*/
   > svg {
-    //background: #222222;
     display: block;
   }
 
@@ -52,4 +48,15 @@
       fill: darken(red, 15%);
     }
   }
+}
+
+.btn.positive {
+  background-color: chartreuse;
+  border: lawngreen 3px solid;
+}
+
+
+.btn.negative {
+  background-color: firebrick;
+  border: orangered 3px solid;
 }

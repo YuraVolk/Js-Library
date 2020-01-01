@@ -60,6 +60,10 @@ module.exports = {
       {
         from: 'src/js/scripts',
         to: 'source-js'
+      },
+      {
+        from: 'src/test.json',
+        to: 'test.json'
       }
     ])
   ],

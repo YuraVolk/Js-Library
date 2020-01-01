@@ -2539,25 +2539,113 @@ function updateTime() {
 */
 
 document.addEventListener('click', event => {
-
-  if (event.target.parentNode.classList[1] === 'btn--arrow') {
-
-    let nodeList = Array.from(document.querySelector(`#${event.target.parentNode.id}`).parentNode.childNodes);
-
-    const markEl = nodeList[nodeList.length - 2];
-
-    const markUp = markups[`#${event.target.parentNode.id}`.replace(/\D/g, '')];
-
-    const btn = document.querySelector(`#${event.target.parentNode.id}`).parentNode.children[3];
-    if (btn.classList[2] === 'btn--active') {
-      btn.classList.remove('btn--active');
-      while (markEl.firstChild) {
-        markEl.removeChild(markEl.firstChild);
+  if (event.target.classList[1]) {
+    if (event.target.classList[1] === "copy-html__btn" ||
+        event.target.classList[1] === "copy-css__btn" ||
+        event.target.classList[1] === "copy-js__btn") {
+      const num = event.target.classList[2][event.target.classList[2].length - 1];
+      if (event.target.classList.contains("positive") ||
+          event.target.classList.contains("negative")) {
+            return;
       }
-    } else {
-      btn.classList.add('btn--active');
-      markEl.insertAdjacentHTML('afterbegin', markUp);
+      const val = event.target.textContent;
+
+      try {
+
+        if (event.target.classList[1] === "copy-html__btn") {
+          copyToClipboard(scripts[num].html);
+        } else if (event.target.classList[1] === "copy-css__btn") {
+          copyToClipboard(scripts[num].css)
+        } else {
+          copyToClipboard(scripts[num].js)
+        }
+
+        event.target.innerHTML = "Success!";
+        event.target.classList.add("positive");
+        setTimeout(() => {
+          event.target.innerHTML = val;
+          event.target.classList.remove("positive");
+          event.target.classList.remove("negative");
+        }, 1000);
+      } catch (e) {
+        event.target.innerHTML = "Failure!";
+        event.target.classList.add("negative");
+        setTimeout(() => {
+          event.target.innerHTML = val;
+          event.target.classList.remove("positive");
+          event.target.classList.remove("negative");
+        }, 3000);
+      }
+
     }
   }
 });
 
+
+const Script = {
+  set html(path) {
+    this.html_path = path;
+  },
+
+  set css(path) {
+    this.css_path = path;
+  },
+
+  set js(path) {
+    this.js_path = path;
+  },
+
+  get html() {
+    return this.html_path;
+  },
+
+  get css() {
+    return this.css_path;
+  },
+
+  get js() {
+    return this.js_path;
+  }
+};
+
+const scripts = new Array();
+
+function copyToClipboard(str) {
+  const area = document.createElement("textarea");
+  document.body.appendChild(area)
+  area.value = str;
+  area.select();
+  document.execCommand("copy");
+}
+
+
+async function xmlHTTP(path) {
+  return new Promise((resolve, reject) => {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if(xhttp.readyState === 4 && xhttp.status == 200){
+            const result = xhttp.responseText;
+            resolve(result);
+        }
+    }
+
+    xhttp.open('GET', path);
+    xhttp.send();
+  });
+}
+
+async function createScript(js_path, css_path, html_index) {
+  const css = await xmlHTTP(css_path);
+  const js = await xmlHTTP(js_path);
+  const container = document.querySelectorAll("section")[html_index];
+  const html = container.children[container.children.length - 2].outerHTML;
+
+  const script = Object.create(Script);
+  script.html = html;
+  script.css = css;
+  script.js = js;
+
+  scripts.push(script)
+}
+
+createScript("source-js/carousel.js", "source-css/carousel.less", 0);
