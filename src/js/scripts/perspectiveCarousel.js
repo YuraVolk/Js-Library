@@ -398,5 +398,3 @@ class PerspectiveCarousel {
 window.onload = () => {
   new PerspectiveCarousel();
 }
-
-

@@ -7,6 +7,12 @@ let distance = finishDate - current;
 
 const element = document.querySelector('.countdown');
 
+/**
+ * Summary. Subtract one second and display the time.
+ * Description. Get the current time, subtract one
+ *              second and display it in user-friendly
+ *              format in HTML.
+ */
 function updateTime() {
   let yearDesc = 'years';
   let daysDesc = 'days';

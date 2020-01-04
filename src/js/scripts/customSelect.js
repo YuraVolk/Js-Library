@@ -12,6 +12,14 @@ const data = {
 
 const x = document.getElementsByClassName(data.SELECT);
 
+/**
+ * Summary. Make all selects custom and stylable.
+ * Description. Add divs to every select
+ *              and add proper classes.
+ *              Initialize all default
+ *              settings and insert
+ *              divs to HTML.
+ */
 for (let i = 0; i < x.length; i++) {
   const select = x[i].querySelector('select');
 
@@ -43,7 +51,9 @@ for (let i = 0; i < x.length; i++) {
     });
   }
 
-
+  /**
+   * Summary. Add click listeners for select options.
+   */
   a.addEventListener("click", function (event) {
     event.stopPropagation();
     closeAllSelect(event.target);
@@ -52,6 +62,11 @@ for (let i = 0; i < x.length; i++) {
   });
 }
 
+/**
+ * Summary. Hide all selects.
+ *
+ * @param {*} el Clicked select
+ */
 function closeAllSelect(el) {
   var x, y, i, arrNo = [];
   x = document.getElementsByClassName(data.SELECT_OPTIONS);

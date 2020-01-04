@@ -5,9 +5,9 @@ const data = {
   FILTER_BUTTON_ACTIVE: "filter__controls-btn"
 };
 
+
 function filterDivs(toLeave) {
   Array.prototype.slice.call(document.querySelectorAll(`.${data.FILTER_ITEM}`)).forEach(function (element, i) {
-
     if (toLeave != 'all') {
       if (!document.querySelectorAll(`.${data.FILTER_ITEM}`)[i].classList[1].endsWith(toLeave)) {
         document.querySelectorAll(`.${data.FILTER_ITEM}`)[i].style.display = 'none';
@@ -25,6 +25,7 @@ function removeClassName(className, mod) {
     Array.prototype.slice.call(document.querySelectorAll(className))[i].classList.remove(mod);
   });
 }
+
 
 function showDivFiltering(pressedButton) {
   removeClassName(`.${data.FILTER_BUTTON}`, `.${data.FILTER_BUTTON_ACTIVE}`);

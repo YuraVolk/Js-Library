@@ -29,6 +29,11 @@ var rangeVideo = styledRanges[0].childNodes;
 var audioRanges = document.getElementsByClassName(data.RANGES.VOLUME_RANGE.WRAP);
 var rangeAudio = audioRanges[0].childNodes;
 
+/**
+ * Summary. Convert given time to HH/MM/SS
+ *
+ * @param {*} number Time left before end of video
+ */
 function toMinuteSecond(number) {
   number = parseInt(number, 10);
 
@@ -45,6 +50,11 @@ function toMinuteSecond(number) {
   return minutes + ':' + seconds;
 }
 
+/**
+ * Summary. Set current time of video
+ *
+ * @param {Number} time New time of video
+ */
 function setVideoTime(time) {
   const video = document.querySelector(`.${data.VIDEO}`);
 
@@ -52,27 +62,50 @@ function setVideoTime(time) {
   updateVideoTime();
 }
 
+/**
+ * Summary. Return video duration
+ *
+ * @return {Number} Duration of video
+ */
 function getVideoDuration() {
   const video = document.querySelector(`.${data.VIDEO}`);
 
   return video.duration;
 }
 
+/**
+ * Summary. Pause video.
+ */
 function pauseVideo() {
   videoPlays = false;
   document.querySelector(`.${data.VIDEO}`).pause();
 }
 
+/**
+ * Summary. Start video / unpause video.
+ */
 function startVideo() {
   videoPlays = false;
   document.querySelector(`.${data.VIDEO}`).play();
 }
 
+/**
+ * Summary. Set value of ranges so they match current video time.
+ *
+ * @param {Number} videoTime     Current video time
+ * @param {Number} videoDuration Duration of video
+ * @param {Node}   range         Range with current video time
+ */
 function equalizeRange(videoTime, videoDuration, range) {
   range[3].value = videoTime * 100 / videoDuration;
   range[1].value = videoTime * 100 / videoDuration;
 }
 
+/**
+ *
+ * @param {Array}   audioRanges
+ * @param {Boolean} isTime
+ */
 function modifyRange(audioRanges, isTime) {
   for (var i = 0; i < audioRanges.length; i++) {
     var thumbRange = null, trackRange = null;
