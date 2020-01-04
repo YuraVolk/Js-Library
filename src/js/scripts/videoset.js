@@ -102,9 +102,15 @@ function equalizeRange(videoTime, videoDuration, range) {
 }
 
 /**
+ * Summary. Make ranges stylable and change video settings.
+ * Description. Add progress bars to ranges,
+ *              take the position of range,
+ *              modify video time and volume.
  *
- * @param {Array}   audioRanges
- * @param {Boolean} isTime
+ * @listens input
+ *
+ * @param {Array}   audioRanges Ranges to control video
+ * @param {Boolean} isTime      Is current range responds for time or not
  */
 function modifyRange(audioRanges, isTime) {
   for (var i = 0; i < audioRanges.length; i++) {
@@ -126,7 +132,6 @@ function modifyRange(audioRanges, isTime) {
           var trackRange = child;
         }
       }
-
     }
 
     thumbRange.addEventListener('input', () => {
@@ -138,10 +143,17 @@ function modifyRange(audioRanges, isTime) {
   }
 }
 
+/**
+ * Summary. Identify that video ended.
+ * @fires onended
+ */
 document.querySelector(`.${data.VIDEO}`).onended = function (e) {
   videoPlays = false;
 };
 
+/**
+ * Summary. Set volume of video
+ */
 function changeVolume() {
   let vol = rangeAudio[1].value / 100;
 
@@ -150,9 +162,12 @@ function changeVolume() {
   }
 }
 
+/**
+ * Summary. Identify that video started.
+ * @fires onplaying
+ */
 document.querySelector(`.${data.VIDEO}`).onplaying = function () {
   videoPlays = true;
-
   setInterval(() => {
     if (videoPlays) {
       updateVideoTime();
@@ -160,6 +175,9 @@ document.querySelector(`.${data.VIDEO}`).onplaying = function () {
   }, 50);
 }
 
+/**
+ * Summary. Mute or unmute video.
+ */
 function switchMute() {
   const video = document.querySelector(`.${data.VIDEO}`);
 
@@ -186,6 +204,11 @@ setInterval(() => {
   }
 }, 200);
 
+/**
+ * Summary. Set current video time.
+ * @see toMinuteSecond
+ * @see equalizeRange
+ */
 function updateVideoTime() {
   const video = document.querySelector(`.${data.VIDEO}`);
   document.querySelector(`.${data.VIDEO_CURRENT_TIME}`).textContent = toMinuteSecond(Math.floor(video.duration - video.currentTime));
@@ -193,6 +216,9 @@ function updateVideoTime() {
   equalizeRange(video.currentTime, video.duration, rangeVideo);
 }
 
+/**
+ * Summary. Reset video time to zero.
+ */
 function resetVideoTime() {
   const video = document.querySelector(`.${data.VIDEO}`);
 
@@ -216,6 +242,10 @@ window.addEventListener("load", () => {
   updateVideoTime();
 });
 
+/**
+ * Summary. Add event listeners for controls of video.
+ * @listens click
+ */
 document.addEventListener('click', function (event) {
   if (event.target.classList.length > 0) {
     if (event.target.classList.contains(data.BUTTONS.PLAY) ||
