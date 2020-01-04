@@ -22,6 +22,10 @@ let testsData = [];
 
 var timeout = null;
 
+/**
+ * Summary. Reset all tests.
+ * Description. Mark all tests as not applied to current password.
+ */
 function reset() {
   tests.forEach((element) => {
     element.classList.remove(data.WRONG);
@@ -29,24 +33,33 @@ function reset() {
   });
 }
 
+/**
+ * Summary. Check whether some special symbol
+ *          is contained within the input.
+ */
 function checkPattern() {
   return symbols.some((el) => {
     return password.value.indexOf(el) > -1;
   });
 }
 
+/**
+ * Summary. Check for common password pattern.
+ */
 function checkPassword() {
-  let newPass = password.value;
+  let newPass = password.value.toLowerCase();
   symbols.forEach((el) => {
     newPass = newPass.replace(el, '');
   });
   newPass = newPass.replace(/[0-9]/g, '');
   return common.some((el) => {
-    return el === newPass;
+    return el.toLowerCase() === newPass;
   })
 }
 
-
+/**
+ * Summary. Count number of uppercase letters in password.
+ */
 function countUpperCase() {
   let count = 0;
   const patternCase = new RegExp(/[A-Z]/);
@@ -58,22 +71,24 @@ function countUpperCase() {
   return count;
 }
 
-
+/**
+ * Summary. Run all tests for password security.
+ */
 function makeTests() {
   const patternLetter = new RegExp(/[*a-zA-Z]/);
   const patternNumber = new RegExp(/[*0-9]/);
-  testsData[0] = password.value.length >= 6 ? data.CORRECT : data.WRONG;
+  testsData[0] = password.value.length >= 6 ? data.CORRECT : data.WRONG; //Check for length
   tests[0].classList.add(testsData[0]);
-  testsData[1] = checkPattern() ? data.CORRECT : data.WRONG;
+  testsData[1] = checkPattern() ? data.CORRECT : data.WRONG; //Check for special char
   tests[1].classList.add(testsData[1]);
-  testsData[2] = (patternLetter.test(password.value)) && (patternNumber.test(password.value)) ? data.CORRECT : data.WRONG;
+  testsData[2] = (patternLetter.test(password.value)) && (patternNumber.test(password.value)) ? data.CORRECT : data.WRONG; //Test for numbers and letters
   tests[2].classList.add(testsData[2]);
-  testsData[3] = checkPassword() ? data.WRONG : data.CORRECT;
+  testsData[3] = checkPassword() ? data.WRONG : data.CORRECT; //Check for common pattern
   tests[3].classList.add(testsData[3]);
-  testsData[4] = countUpperCase() >= 2 ? data.CORRECT : data.WRONG;
+  testsData[4] = countUpperCase() >= 2 ? data.CORRECT : data.WRONG; //Check for 2 uppercase letters
   tests[4].classList.add(testsData[4]);
   if (tests[5].children[1].value.length !== 0) {
-    testsData[5] = tests[5].children[1].value === password.value ? data.CORRECT : data.WRONG;
+    testsData[5] = tests[5].children[1].value === password.value ? data.CORRECT : data.WRONG; //Check for password equality
     tests[5].classList.add(testsData[5]);
   }
   if (testsData.every((el) => el === data.CORRECT)) {
@@ -92,6 +107,10 @@ tests.forEach((el) => {
 
 reset();
 
+/**
+ * Summary. Run or reset tests.
+ * @fires input
+ */
 rootForm.addEventListener('input', () => {
   if (timeout !== null) {
     clearTimeout(timeout);
@@ -104,7 +123,10 @@ rootForm.addEventListener('input', () => {
   }, 600);
 });
 
-
+/**
+ * Summary. Prevent spaces in password.
+ * @listens keydown
+ */
 rootForm.addEventListener('keydown', (e) => {
   if (e.keyCode === 32) {
     e.preventDefault();

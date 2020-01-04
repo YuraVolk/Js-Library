@@ -1,6 +1,11 @@
 //Created by Yury Volkovskiy
 const upcomingWindow = 'upcoming-window';
 
+/**
+ * Summary. Check whether in screen or not.
+ *
+ * @param {Node} el Upcoming window
+ */
 function isInViewport(el) {
   const bounding = el.getBoundingClientRect();
   return (
@@ -15,6 +20,12 @@ const el = document.querySelector(`.${upcomingWindow}`);
 let bounding;
 var isScrolling;
 
+/**
+ * Summary. Check if window is in screen, and show it to user.
+ *
+ * @see isInViewport
+ * @listens scroll
+ */
 el.parentNode.addEventListener('scroll', () => {
   window.clearTimeout(isScrolling);
   isScrolling = setTimeout(function () {
