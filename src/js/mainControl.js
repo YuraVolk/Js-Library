@@ -175,7 +175,6 @@ async function createScript(js_path, css_path, html_index) {
   scripts[html_index] = script;
 }
 
-createScript("source-js/carousel.js", "source-css/carousel.less", 0);
 createScript("source-js/filtering.js", "source-css/filter.less", 1);
 createScript("source-js/pagination.js", "source-css/pagination.less", 2);
 createScript("source-js/videoset.js", "source-css/videoset.less", 3);

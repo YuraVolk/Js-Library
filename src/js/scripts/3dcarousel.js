@@ -109,6 +109,7 @@ function initCarousel(parent, isntVertical) {
    * Summary. Add listeners for buttons.
    * Description. Changes carousel styles
    *              based on button pressed.
+   *
    * @memberof initCarousel
    * @see      rotateCarousel
    * @fires    onClick

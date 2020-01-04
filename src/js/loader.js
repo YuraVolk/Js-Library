@@ -4,8 +4,6 @@ require('../less/settings/fonts.less');
 require('../less/main-styles.less');
 require('../less/styles/btn.less');
 
-import './scripts/carousel';
-require('../less/styles/carousel.less');
 import './scripts/filtering';
 require('../less/styles/filter.less');
 import './scripts/pagination';

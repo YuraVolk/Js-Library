@@ -22,6 +22,12 @@ var rgba = [132, 46, 153, 1];
 
 let opacityGlobal = 1;
 
+/**
+ * Summary. Initialize color picker.
+ * Description. Add image to color picker,
+ *              test for WebP, and set the
+ *              default settings.
+ */
 function initColorPicker() {
   var canvasEl = document.getElementById(data.COLOR_PICKER);
   var canvasContext = canvasEl.getContext('2d');
@@ -42,17 +48,34 @@ function initColorPicker() {
   }
 }
 
-function rgbToHex(rgb) {
-  var hex = Number(rgb).toString(16);
 
-  if (hex.length < 2) {
-    hex = "0" + hex;
-  }
-
-  return hex;
-};
-
+/**
+ * Summary. Convert RGB to HEX
+ *
+ * @param {*} red   Red color (0-256)
+ * @param {*} green Green color (0-256)
+ * @param {*} blue  Blue color (0-256)
+ */
 function toHex(red, green, blue) {
+  /**
+  * Summary. Helper function to convert RGB to HEX
+  *
+  * @memberof toHex
+  * @access private
+  *
+  * @param {*} rgb RGB color
+  */
+  function rgbToHex(rgb) {
+    var hex = Number(rgb).toString(16);
+
+    if (hex.length < 2) {
+      hex = "0" + hex;
+    }
+
+    return hex;
+  };
+
+
   var r = rgbToHex(red);
   var g = rgbToHex(green);
   var b = rgbToHex(blue);
@@ -61,6 +84,11 @@ function toHex(red, green, blue) {
   return '#' + r + g + b;
 }
 
+/**
+ * Summary. Convert RGBA to RGB
+ *
+ * @param {Object} RGBA RGB alpha
+ */
 function rgbaToRgb(RGBA) {
   alpha = 1 - RGBA.alpha;
 
@@ -73,6 +101,11 @@ function rgbaToRgb(RGBA) {
   toHex(red, green, blue);
 }
 
+/**
+ * Summary. Add progress bars to ranges
+ *
+ * @param {Array} audioRanges Range input elements
+ */
 function modifyRange(audioRanges) {
   for (var i = 0; i < audioRanges.length; i++) {
     var thumbRange = null, trackRange = null;
@@ -95,12 +128,29 @@ function modifyRange(audioRanges) {
   }
 }
 
+/**
+ * Summary. Change current opacity.
+ *
+ * @param {Number} opacity New opacity
+ */
 function changeOpacity(opacity) {
   const opacityDiv = document.querySelector(`.${data.OPACITY_BACKGROUND}`);
   opacityDiv.style.opacity = opacity / 100;
   opacityGlobal = opacity / 100;
 }
 
+/**
+ * Summary. Set the picked color.
+ * Description. Get the picked color,
+ *              display it to user,
+ *              calculate and display
+ *              its color codes.
+ *
+ * @see rgbaToRgb
+ *
+ * @param {*} rgba
+ * @param {*} opacity
+ */
 function changeColor(rgba, opacity) {
   const pickerBack = document.querySelector(`.${data.COLOR_PICKER_BACKGROUND}`);
   const pickerRgba = document.querySelector(`.${data.CODES.RGBA}`);

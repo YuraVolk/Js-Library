@@ -25,7 +25,7 @@ let curNum = 0;
 let element = document.querySelector(`.${data.RESULT}`);
 
 /**
- * Summary. Format calculation in better format.
+ * Summary. Format calculation.
  * Description. Replace javascript operations
  *              with UTF-8 symbols and adding
  *              dots separators to large numbers.
@@ -74,7 +74,7 @@ function addFraction() {
 
 /**
  * Summary. If number is positive, make it negative,
- *          otherwise if number if negative make it
+ *          otherwise if number is negative make it
  *          positive.
  */
 function changePosNeg() {
@@ -100,7 +100,7 @@ function insertSymbol(symbol) {
 /**
  * Summary. Add operation symbol given as parameter.
  * Description. Add operation symbol given as parameter,
- *              and validate the calculation afte
+ *              and validate the calculation.
  *              (12 -+ 3 is invalid)
  *
  * @see insertSymbol
