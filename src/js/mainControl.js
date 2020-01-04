@@ -54,7 +54,7 @@ document.addEventListener('click', event => {
     if (event.target.classList[1] === "copy-html__btn" ||
         event.target.classList[1] === "copy-css__btn" ||
         event.target.classList[1] === "copy-js__btn") {
-      const num = event.target.classList[2][event.target.classList[2].length - 1];
+      const num = event.target.classList[2].match(/\d+$/)[0];
       if (event.target.classList.contains("positive") ||
           event.target.classList.contains("negative")) {
             return;
@@ -64,15 +64,14 @@ document.addEventListener('click', event => {
 
       try {
         if (event.target.classList[1] === "copy-html__btn") {
-          if (num != 6) {
-            copyToClipboard(scripts[num].html);
-          } else {
-
+          if (num == 6) {
             copyToClipboard(`
             <aside class="sidenav">
               <img src="img/close.png" alt="Close Symbol" class="sidenav__close" width="10" height="10">
               <ul class="sidenav__items"></ul>
             </aside>`);
+          } else {
+            copyToClipboard(scripts[num].html);
           }
 
         } else if (event.target.classList[1] === "copy-css__btn") {
@@ -102,6 +101,11 @@ document.addEventListener('click', event => {
   }
 });
 
+let virtualDocument;
+
+(async () => {
+  virtualDocument = document.createRange().createContextualFragment(await xmlHTTP("source-html/source.html"));
+})();
 
 const Script = {
   set html(path) {
@@ -160,7 +164,7 @@ async function xmlHTTP(path) {
 async function createScript(js_path, css_path, html_index) {
   const css = await xmlHTTP(css_path);
   const js = await xmlHTTP(js_path);
-  const container = document.querySelectorAll("section")[html_index];
+  const container = virtualDocument.querySelectorAll("section")[html_index];
   const html = container.children[container.children.length - 2].outerHTML;
 
   const script = Object.create(Script);
@@ -179,4 +183,27 @@ createScript("source-js/tabs.js", "source-css/tabs.less", 4);
 createScript("source-js/colorPicker.js", "source-css/colorPicker.less", 5);
 createScript("source-js/sidebar.js", "source-css/sidebar.less", 6);
 createScript("source-js/floating.js", "source-css/floating.less", 7);
-createScript("source-js/3dcarousel.js", "source-css/3dcarousel.less", 8);
+createScript("source-js/popup.js", "source-css/popup.less", 8);
+createScript("source-js/3dcarousel.js", "source-css/3dcarousel.less", 9);
+createScript("source-js/accordion.js", "source-css/accordion.less", 10);
+createScript("source-js/typer.js", "source-css/typer.less", 11);
+createScript("source-js/rebuildingText.js", "source-css/bubbletext.less", 12);
+createScript("source-js/cipheringText.js", "source-css/cipheringText.less", 13);
+createScript("source-js/3dcarouselMenu.js", "source-css/3dcarouselMenu.less", 14);
+createScript("source-js/zoomer.js", "source-css/zoomer.less", 15);
+createScript("source-js/stickyHeader.js", "source-css/stickyHeader.less", 16);
+createScript("source-js/upcomingWindow.js", "source-css/upcomingWindow.less", 17);
+createScript("source-js/onePageScroll.js", "source-css/onePageScroll.less", 18);
+createScript("source-js/calculator.js", "source-css/calculator.less", 19);
+createScript("source-js/screenInvert.js", "source-css/screenInvert.less", 20);
+createScript("source-js/autocomplete.js", "source-css/autocomplete.less", 21);
+createScript("source-js/imageComparsion.js", "source-css/imageComparsion.less", 22);
+createScript("source-js/toast.js", "source-css/toast.less", 23);
+createScript("source-js/gallery.js", "source-css/gallery.less", 24);
+createScript("source-js/magnifier.js", "source-css/magnifier.less", 25);
+createScript("source-js/parallax.js", "source-css/parallax.less", 26);
+createScript("source-js/countdown.js", "source-css/countdown.less", 27);
+createScript("source-js/tableFiltering.js", "source-css/tableFiltering.less", 28);
+createScript("source-js/validation.js", "source-css/validation.less", 29);
+createScript("source-js/perspectiveCarousel.js", "source-css/perspectiveCarousel.less", 30);
+createScript("source-js/customSelect.js", "source-css/customSelect.less", 31);

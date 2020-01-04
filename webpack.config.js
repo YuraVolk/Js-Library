@@ -62,8 +62,8 @@ module.exports = {
         to: 'source-js'
       },
       {
-        from: 'src/test.json',
-        to: 'test.json'
+        from: 'src/index.html',
+        to: 'source-html/source.html'
       }
     ])
   ],
