@@ -11,7 +11,6 @@ const data = {
  *              and check, whether it contains
  *              given tag (toLeave), or not.
  *              If not, hide item. Otherwise show.
- *
  * @param {String} toLeave Tag items with which should be leaved
  */
 function filterDivs(toLeave) {

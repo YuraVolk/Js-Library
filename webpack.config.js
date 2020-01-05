@@ -6,6 +6,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const JavaScriptObfuscator = require('webpack-obfuscator');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const EncodingPlugin = require('webpack-encoding-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
 const webpack = require('webpack');
 
@@ -65,7 +66,12 @@ module.exports = {
         from: 'src/index.html',
         to: 'source-html/source.html'
       }
-    ])
+    ]),
+    new EncodingPlugin({
+      exclude: /node_modules/,
+      test: /(\.js|\.css|\.less)($|\?)/i,
+      encoding: 'utf8'
+    })
   ],
   optimization: {
     moduleIds: 'hashed',
