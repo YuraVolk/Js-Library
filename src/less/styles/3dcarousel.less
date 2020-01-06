@@ -1,5 +1,6 @@
 @import "../settings/colors";
 
+// 3D carousel container
 .threed-carousel {
   padding: 20px;
   -webkit-perspective: 500px;
@@ -26,6 +27,7 @@
   }
 }
 
+// List of 3D carousel images
 .threed-carousel__items {
   margin: 0;
   width: 40%;
@@ -40,6 +42,7 @@
   transition: transform 0.5s;
   transition: transform 0.5s, -webkit-transform 0.5s;
 
+  // 3D carousel image
   picture {
     width: 100%;
     height: auto;
@@ -56,6 +59,7 @@
   }
 }
 
+// 3D carousel image
 .threed-carousel__items-item {
   width: 100%;
   height: auto;
@@ -71,6 +75,7 @@
   }
 }
 
+// 3D carousel controls
 .threed-carousel__controls {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -82,6 +87,7 @@
   padding: 0;
   width: 500px;
 
+  // 3D carousel control button (left, right, switch orientation)
   button {
     -webkit-animation: none;
     animation: none;

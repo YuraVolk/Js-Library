@@ -1,5 +1,6 @@
 @import "../settings/colors";
 
+// Color picker container
 .color-picker {
   width: 470px;
   display: -webkit-inline-box;
@@ -8,6 +9,7 @@
   -ms-flex-pack: distribute;
   justify-content: space-around;
 
+  // Color picker opacity range
   input[type=range] {
     -webkit-appearance: none;
     width: 270px;
@@ -26,12 +28,14 @@
   }
 }
 
+// Color picker opacity range container
 .color-picker__opacity-range {
   display: block;
   position: relative;
   padding: 10px;
 }
 
+// Color picker opacity range styles
 .opacity-range__track {
   &::-webkit-slider-runnable-track {
     width: 100%;
@@ -55,6 +59,7 @@
   }
 }
 
+// Thumb of opacity range in color picker
 .opacity-range__thumb {
   &::-webkit-slider-runnable-track {
     background: transparent;
@@ -72,17 +77,20 @@
   }
 }
 
+// Current user picked color
 .color-picker__current-color {
   border: 3px solid @content_dark;
   width: 100px;
   height: 100px;
 }
 
+// Background of picked color
 .color-picker__background {
   width: 245px;
   height: 245px;
 }
 
+// Border with background for opacity in color picker
 .color-picker__border {
   border: 3px solid @content_dark;
   background-color: @content_dark;
@@ -90,10 +98,13 @@
   height: 245px;
 }
 
+// Canvas in color picker
 #color-picker__canvas {
   cursor: crosshair;
 }
 
+
+// Color picker background
 .color-picker__current-color_background {
   background-color: @content_dark;
   width: 103px;
@@ -101,6 +112,7 @@
   margin-bottom: 15px;
 }
 
+// Color picker color codes display
 .color-picker p {
   margin: 3px 0;
 }
