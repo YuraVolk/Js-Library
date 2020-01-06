@@ -8,6 +8,11 @@ const data = {
 let modeTarget = document.querySelector(`.${data.TO_INVERT_CONTAINER}`);
 let mode = lightOrDark(getComputedStyle(modeTarget).backgroundColor);
 
+/**
+ * Summary. Determine whether given color is dark or light.
+ *
+ * @param {*} color Color
+ */
 function lightOrDark(color) {
   var r, g, b, hsp;
   if (color.match(/^rgb/)) {
@@ -25,7 +30,11 @@ function lightOrDark(color) {
   return hsp > 127.5 ? 'light' : 'dark';
 }
 
-
+/**
+ * Summary. Switch from light theme to dark theme and vice versa.
+ *
+ * @listens click
+ */
 document.addEventListener('click', (e) => {
   if (e.target.classList[1] === data.TO_INVERT) {
     if (mode === 'light') {

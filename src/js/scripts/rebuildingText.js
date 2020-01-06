@@ -17,20 +17,34 @@ let phrases = [
 const phrasesLastLetters = [];
 let isRebulding1 = false;
 
+/**
+ * Summary. Helper function to set character at index of string.
+ *
+ * @param {String} str   Original string
+ * @param {Number} index Index of new character
+ * @param {String} char  New character
+ */
 function setCharAt(str, index, char) {
   if (index > str.length - 1) return str;
 
   return str.substr(0, index) + char + str.substr(index + 1);
 }
 
+// Initialize arrays
 function moderateLists() {
   phrases.forEach(el => {
     phrasesLastLetters.push(el.charAt(0));
   });
 }
 
+/**
+ * Summary. Smoothly rebuild text of HTML element from one to another.
+ *
+ * @param {Node}   el         HTML text element
+ * @param {String} phrase     Current content of element
+ * @param {String} nextPhrase New content of element
+ */
 function rebuildTextFinal(el, phrase, nextPhrase) {
-
   let firstLetter = nextPhrase.charAt(0);
   let newText = phrase;
   let isDone = false;
@@ -72,6 +86,11 @@ let gI = -1;
 
 let inter;
 
+/**
+ * Summary. Handle clicks on buttons.
+ *
+ * @listens click
+ */
 document.addEventListener('click', event => {
   if (event.target.classList[1] === data.START_REBUILD_BUTTON) {
     isRebulding1 = true;

@@ -12,6 +12,7 @@ const data = {
 
 let scroll, timeLeft, isActive, toScroll;
 
+// Show popup
 function showPopup(popup) {
   isActive = false;
   if (popup.style.display != 'block') {
@@ -23,6 +24,7 @@ function showPopup(popup) {
   }
 }
 
+// Hide popup
 function hidePopup() {
   Array.prototype.slice.call(document.querySelectorAll(`.${data.POPUP}`)).forEach(el => {
     if (el.classList.contains(data.POPUP_RENEWING) && el.style.display === 'block') {
@@ -37,6 +39,11 @@ function hidePopup() {
   window.scrollTo(0, toScroll);
 }
 
+/**
+ * Summary. Start countdown on popup.
+ *
+ * @param {Node} popup Popup window
+ */
 function initTiming(popup) {
   const pop = popup;
 
@@ -58,6 +65,7 @@ function initTiming(popup) {
   }, 1000);
 }
 
+// Prevent scrolling and set current scroll
 function stopScroll() {
   const body = document.querySelector('body');
   toScroll = scroll;
@@ -65,12 +73,18 @@ function stopScroll() {
   body.style.top = "-" + scroll + 'px';
 }
 
+// Show popup again
 let timing = setInterval(function () {
   if (isActive) {
     showPopup(document.querySelector(`.${data.RENEWING_POPUP}`));
   }
 }, 15000);
 
+/**
+ * Summary. Handle clicks on buttons.
+ *
+ * @listens click
+ */
 document.addEventListener('click', e => {
   if (e.target.classList[1] === data.SHOW_POPUP) {
     showPopup(document.querySelector(`.${data.POPUP}--` + e.target.classList[2].slice(-1)));
