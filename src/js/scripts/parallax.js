@@ -13,6 +13,7 @@ const effect = 1.968;
 const newH = window.innerHeight / effect;
 const parallaxes = [].slice.call(document.querySelectorAll('[data-parallax]'));
 
+//Initialize parallaxes by data-parallax
 parallaxes.forEach(function(el) {
   var clientOffsets = el.getBoundingClientRect();
   el.animationOffset = clientOffsets.top + window.pageYOffset;
@@ -20,6 +21,11 @@ parallaxes.forEach(function(el) {
   el.margin = el.dataset.marginBottom;
 });
 
+/*
+ * Summary. Control movement of parallaxes.
+ * Change their positions with accordance
+ * to current scroll position of user.
+ */
 function move() {
   const scrollPoint = window.pageYOffset;
 

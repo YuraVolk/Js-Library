@@ -12,6 +12,7 @@ const array = [];
 const body = document.querySelector('body');
 const sidenav = document.querySelector(`.${data.NAV}`);
 
+// Initialize sections and their headers.
 Array.prototype.slice.call(document.getElementsByTagName('section')).forEach(elMain => {
   for (let el of document.getElementsByTagName('h1')) {
     if (elMain.contains(el)) {
@@ -21,6 +22,7 @@ Array.prototype.slice.call(document.getElementsByTagName('section')).forEach(elM
   }
 });
 
+// Add all headings to navigation.
 array.forEach(el => {
   document.querySelector(`.${data.LINKS}`).insertAdjacentHTML('beforeend', `<li class="${data.LINK}"><a href="#` + el.replace(/ /g, '') + '">' + el + '</a></li>');
 });
