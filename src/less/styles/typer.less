@@ -1,6 +1,7 @@
 @import "../settings/colors";
 @import "../settings/fonts";
 
+// Glowing animation
 @-webkit-keyframes color {
   50% {
     color: @glow;
@@ -13,12 +14,14 @@
   }
 }
 
+// Glowing letter
 .typing__text--glowing {
   color: @main;
   -webkit-animation: 0.5s color infinite;
   animation: 0.5s color infinite;
 }
 
+// Self-typing text with custom text
 .typing__text {
   font-size: 22px;
   line-height: 44px;

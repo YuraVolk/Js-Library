@@ -1,5 +1,6 @@
 @import "../settings/colors";
 
+// Table that will be filtered
 .jobs-table {
   border-collapse: separate;
   border-spacing: 0;
@@ -23,15 +24,18 @@
   }
 }
 
+// Hidden table element
 .table-filtering__select-option--hidden {
   display: none;
 }
 
+// Table filtering select
 .table-filtering__select {
   position: relative;
   display: inline-block;
 }
 
+// Table filtering select option
 .table-filtering__select-option {
   width: 130px;
   background-color: @block;
@@ -41,6 +45,7 @@
   box-sizing: border-box;
 }
 
+// Current table filter
 .table-filtering__select-current {
   width: 130px;
   padding: 4px;
@@ -50,6 +55,7 @@
   margin: 0;
 }
 
-.table-filtering__select-options  {
+// List of filter select options
+.table-filtering__select-options {
   position: absolute;
 }
