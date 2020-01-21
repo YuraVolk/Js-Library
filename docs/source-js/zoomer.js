@@ -7,6 +7,14 @@ const data = {
   ZOOM: 'zoom__hover'
 };
 
+/**
+ * Summary. Create a zoom on mouseover.
+ * Description. Create a zoom and align it
+ *              and its background to create
+ *              zoom effect.
+ *
+ * @fires mousemove
+ */
 document.querySelector(`.${data.ZOOM_WRAP}`).addEventListener('mousemove', function (e) {
   let style = document.querySelector(`.${data.ZOOM}`).style;
   let x = e.pageX - this.offsetLeft;

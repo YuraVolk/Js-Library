@@ -7,6 +7,13 @@ const data = {
 
 let width, height, img, zoom, glass;
 
+/**
+ * Summary. Initialize magnifier.
+ * Description. Set default values, select images
+ *              and attach event listeners.
+ *
+ * @fires load
+ */
 window.addEventListener("load", () => {
   zoom = 2;
 
@@ -26,10 +33,15 @@ window.addEventListener("load", () => {
   img.addEventListener("touchmove", moveMagnifier);
 });
 
-
+/**
+ * Summary. Handle movement of magnifier.
+ *
+ * @fires mousemove
+ *
+ * @param {MouseEvent} event Mouse move event
+ */
 function moveMagnifier(event) {
   event.preventDefault();
-  let { x, y } = getCursorPos(event);
   if (x > img.width - (width / zoom)) {
     x = img.width - (width / zoom);
   }
@@ -47,6 +59,12 @@ function moveMagnifier(event) {
   glass.style.backgroundPosition = "-" + ((x * zoom) - width) + "px -" + ((y * zoom) - height) + "px";
 }
 
+/**
+ * Summary. Helper function to get x and y coordinates
+ *          of mouse.
+ *
+ * @param {MouseEvent} event Mouse move event
+ */
 function getCursorPos(event) {
   let x = 0;
   let y = 0;

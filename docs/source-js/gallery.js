@@ -19,6 +19,13 @@ slideList.style.left = '-' + (current * 100) + '%';
 let direction;
 let animating = false;
 
+/**
+ * Summary. Handle clicks on carousel left/right buttons.
+ * Description. Move slides of carousel left or
+ *              right depending on clicked button.
+ *
+ * @param {Node} el Clicked button
+ */
 function clickArrowButton(el) {
   let direction = el.classList[1].slice(-4);
   const pos = parseInt(slideList.style.left) || 0;
@@ -31,6 +38,13 @@ function clickArrowButton(el) {
   }
 }
 
+/**
+ * Summary. Handle clicks on carousel slide toggles.
+ * Description. Go to nth carousel item
+ *              depending on pressed toggle.
+ *
+ * @param {Node} el Pressed toggle
+ */
 function clickPagerItem(el) {
   const slideIndex = el.classList[1][el.classList[1].length - 1];
   const targetSlide = slider.querySelector(`.${data.SLIDE}--` + slideIndex);
@@ -43,16 +57,40 @@ function clickPagerItem(el) {
   }
 }
 
+/**
+ * Summary. Function to handle carousel animation.
+ *
+ * @param {Node}   element Carousel
+ * @param {Number} pos     Current position of slides in carousel
+ * @param {Number} newPos  New position of slides in carousel
+ */
 function slideTo(element, pos, newPos) {
   animating = true;
   animate(pos, newPos, element);
 }
 
+/**
+ * Summary. Helper function to smoothly
+ *          carousel to left or right.
+ *
+ * @param {Number} delta   Value of new position relative to animation
+ * @param {Number} pos     Current position of slides in carousel
+ * @param {Number} newPos  New position of slides in carousel
+ * @param {Node}   element Carousel
+ */
 function step(delta, pos, newPos, element) {
   const direction = pos > newPos ? 1 : -1
   element.style.left = pos + Math.abs(newPos - pos) * delta * direction * -1 + '%';
 }
 
+/**
+ * Summary. Smoothly animate slide transition in carousel.
+ *
+ * @see step
+ * @param {Number} pos     Current position of slides in carousel
+ * @param {Number} newPos  New position of slides in carousel
+ * @param {Node}   element Carousel
+ */
 function animate(pos, newPos, element) {
   const start = new Date();
   const idle = setInterval(function () {
@@ -72,6 +110,10 @@ function animate(pos, newPos, element) {
   }, 20);
 }
 
+
+/**
+ * Summary. Update carousel current toggle.
+ */
 function updateSlide() {
   Array.prototype.slice.call(document.querySelectorAll(`.${data.GALLERY_INDICATOR}`)).forEach((el) => {
     el.classList.remove(data.ACTIVE_INDICATOR);
@@ -85,6 +127,11 @@ function updateSlide() {
   }
 }
 
+/**
+ * Summary. Perform check whether current slide is correct.
+ * Description. If slide is not in its final position,
+ *              move it to it.
+ */
 function checkCurrentSlide() {
   let cycle = false;
   cycle = !!(current === 0 || current > slidesLength)
@@ -105,7 +152,11 @@ lastSlideClone.classList.remove(lastSlideClone.classList[1]);
 slideList.appendChild(firstSlideClone);
 slideList.insertBefore(lastSlideClone, firstSlide);
 
-
+/**
+ * Summary. Listen for clicks on buttons.
+ *
+ * @listens click
+ */
 document.addEventListener('click', e => {
   if (e.target.classList[1] === data.LEFT_BTN ||
     e.target.classList[1] === data.RIGHT_BTN) {

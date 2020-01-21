@@ -7,6 +7,13 @@ const data = {
 
 let page = 1;
 
+/**
+ * Summary. Change current page.
+ *
+ * @param {String} modifier      Class of clicked button
+ * @param {Number} [firstPage=1] First page
+ * @param {Number} [lastPage=12] Last page
+ */
 function buttonPress(modifier, firstPage = 1, lastPage = 12) {
   if (modifier === data.BUTTON_LEFT) {
     if (page !== firstPage) {
@@ -20,11 +27,33 @@ function buttonPress(modifier, firstPage = 1, lastPage = 12) {
   displayButtons(page);
 }
 
+/**
+ * Summary. Change text of pagination buttons so they
+ *          accord to current page.
+ */
 function numOnButton() {
   document.querySelector(`.${data.BUTTON_LEFT}`).textContent = 'Go to page ' + (page - 1);
   document.querySelector(`.${data.BUTTON_RIGHT}`).textContent = 'Go to page ' + (page + 1);
 }
 
+/**
+ * Summary. Show or hide buttons if current page
+ *          is first or last.
+ *
+ * @example
+ * Current page = 1
+ * First page = 1
+ * First button is hidden
+ *
+ * @example
+ * Current page = 12
+ * First page = 12
+ * Second button is hidden
+ *
+ * @param {Number} curPage   Current page
+ * @param {Number} firstPage First page
+ * @param {Number} lastPage  Last page
+ */
 function displayButtons(curPage, firstPage = 1, lastPage = 12) {
   if (curPage === firstPage) {
     document.querySelector(`.${data.BUTTON_LEFT}`).style.display = 'none';
@@ -40,6 +69,11 @@ function displayButtons(curPage, firstPage = 1, lastPage = 12) {
   numOnButton();
 }
 
+/**
+ * Summary. Handle clicks on pagination buttons.
+ *
+ * @listens click
+ */
 document.addEventListener('click', event => {
   if (`.${event.target.parentNode.classList[0]}` === `.${data.BUTTON}`) {
     buttonPress(event.target.parentNode.classList[1]);

@@ -137,7 +137,8 @@ function evaluateEquation() {
       operations.pop();
     }
     curNum = 0;
-    result = eval(operations.join(" "));
+    const resultPredicate = new Function("return " + operations.join(" "));
+    result = resultPredicate();
     operations.length = 0;
     operations = [result + ""];
     return result;

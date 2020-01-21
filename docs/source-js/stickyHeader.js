@@ -8,6 +8,12 @@ const data = {
 let bounding;
 let topE = document.querySelector(`.${data.HEADER_NORMAL}`);
 let bottomE = document.querySelector(`.${data.HEADER_SCROLL}`);
+
+/**
+ * Summary. Make header either sticky
+ *          or not depending on whether
+ *          it is in screen or not.
+ */
 topE.parentNode.onscroll = () => {
   setTimeout(() => {
     bounding = topE.getBoundingClientRect();

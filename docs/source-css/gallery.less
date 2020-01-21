@@ -1,6 +1,8 @@
 @import "../settings/colors";
 
+// Gallery items controls
 .gallery__toggles {
+  // Gallery items toggle
   li {
     display: inline-block;
     width: 10px;
@@ -14,10 +16,12 @@
   margin: 15px auto;
 }
 
+// Active items toggle
 .gallery-toggle--active {
   background-color: @block;
 }
 
+// Container of carousel
 .gallery {
   position: relative;
   width: 370px;
@@ -25,6 +29,7 @@
   margin: 0 auto;
 }
 
+// Inner content of carousel
 .gallery-inner {
   position: relative;
   overflow: hidden;
@@ -32,6 +37,7 @@
   height: 100%;
 }
 
+// List of slides
 .gallery-list {
   position: relative;
   width: 100%;
@@ -45,6 +51,7 @@
   z-index: 10;
 }
 
+// Slide
 .gallery-list__item {
   position: relative;
   display: inline-block;
@@ -56,6 +63,7 @@
   transition: left 0.4s;
 }
 
+// Inner content of slide
 .gallery-list__item-content {
   position: absolute;
   top: 0;

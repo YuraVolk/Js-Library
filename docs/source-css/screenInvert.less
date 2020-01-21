@@ -1,5 +1,6 @@
 @import "../settings/colors";
 
+// Any element that can be inverted
 .invertable-content {
   background-color: @background_main;
   -webkit-filter: invert(0%);
@@ -11,8 +12,10 @@
   -webkit-transition-delay: 250ms;
   transition-delay: 250ms;
 
+  // Image that can be inverted
   img {
     -webkit-filter: brightness(100%);
+    // Rest brightness filter
     filter: brightness(100%);
     -webkit-transition: -webkit-filter 0.3s ease;
     transition: -webkit-filter 0.3s ease;
@@ -23,16 +26,19 @@
   }
 }
 
+// Inverted colors modifier
 .invertable-content--inverted {
   background-color: @main;
   color: @main-white;
   -webkit-filter: invert(8.56%);
   filter: invert(8.56%);
 
+  // Hr tag will become from gray to white
   hr {
     color: @main-white;
   }
 
+  // Images should be a little brighter
   img {
     -webkit-filter: brightness(125%);
     filter: brightness(125%);

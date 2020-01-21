@@ -1,9 +1,53 @@
 //Created by Yury Volkovskiy
+
+/**
+ * Short description. Main engine of the carousel.
+ *
+ * @class
+ *
+ * @access public
+ * @global
+ */
 class PerspectiveCarousel {
+  /**
+   * @constructor
+   * @constructs window.PerspectiveCarousel
+   *
+   * @param startingOptions
+   * @type Variables
+   *
+   * @property {Number}   startingItem            Center image of carousel
+   * @property {Number}   separation              Distance between images
+   * @property {Number}   separationMultiplier    Multiplier of separation for 3D effect
+   * @property {Number}   horizonOffset           Offset of items horizontally
+   * @property {Number}   horizonOffsetMultiplier Multiplier of horizon offset
+   * @property {Number}   sizeMultiplier          Multiplier of size of images
+   * @property {Number}   opacityMultiplier       Multiplier of opacity of images
+   * @property {Number}   horizon                 Horizontal position of images
+   * @property {Number}   speed                   Speed of transition between slides in carousel
+   * @property {Number}   flankingItems           Number of images shown in left/right sides of carousel
+   * @property {String}   orientation             Orientation of carousel (horizontal / vertical)
+   * @property {String}   activeClassName         Class name of center image
+   * @property {Boolean}  preloadImages           Should images be pre-loaded or not
+   * @property {Number}   forcedImageWidth        Maximum image width
+   * @property {Number}   forcedImageHeight       Maximum image height
+   * @property {Function} movingToCenter          No-operational function firing when image is moving to center
+   * @property {Function} movedToCenter           No-operational function firing when image has moved to center
+   * @property {Function} clickedCenter           No-operational function firing when center image was clicked
+   * @property {Function} movingFromCenter        No-operational function firing when image is moving away from center
+   * @property {Function} movedFromCenter         No-operational function firing when image has moved away from center
+   * @property {Node}     parent                  HTML container element for carousel
+   * @property {String}   leftButton              Class of button "Left"
+   * @property {String}   rightButton             Class of button "Right"
+   * @property {String}   switchOrientationButton Class of button that switches orientation of carousel
+   */
   constructor(startingOptions) {
     let options = {};
     let data = {};
 
+    /**
+     * @member {Object}
+     */
     function initializeCarouselData() {
       const parentStyle = window.getComputedStyle(options.parent);
       data = {
@@ -29,6 +73,11 @@ class PerspectiveCarousel {
       });
     }
 
+    /**
+     * Summary. Pre-load all images.
+     *
+     * @param {Object} callback Function that gets executed when all images are loaded.
+     */
     function preload(callback) {
       if (options.preloadImages === false) {
         callback();
@@ -39,7 +88,9 @@ class PerspectiveCarousel {
       const totalImages = imageElements.length;
       imageElements.forEach(function (el) {
         el.setAttribute('src', el.getAttribute('src'));
+        el.style.display = "none";
         el.onload = () => {
+          el.style.display = "";
           loadedImages += 1;
           if (loadedImages === totalImages) {
             callback();
@@ -48,6 +99,9 @@ class PerspectiveCarousel {
       });
     }
 
+    /**
+     * Summary. Set images width and height.
+     */
     function setOriginalItemDimensions() {
       Array.from(options.parent.querySelectorAll('img')).forEach(function (el) {
         if (el.dataset.originalWidth == void 0 || options.forcedImageWidth > 0) {
@@ -63,6 +117,9 @@ class PerspectiveCarousel {
       });
     }
 
+    /**
+     * Summary. Force image width and height if enabled.
+     */
     function forceImageDimensionsIfEnabled() {
       if (options.forcedImageWidth && options.forcedImageHeight) {
         Array.from(options.parent.querySelectorAll('img')).forEach(function (el) {
@@ -72,6 +129,14 @@ class PerspectiveCarousel {
       }
     }
 
+    /**
+     * Summary. Re-calculate all variables so they can be used
+     *          further in carousel calculations.
+     * Description. Re-calculate distance, offsets,
+     *              items opacities when carousel has
+     *              moved. After movement all variables
+     *              should be recalculated.
+     */
     function preCalculatePositionProperties() {
       data.calculations[0] = {
         distance: 0,
@@ -102,6 +167,12 @@ class PerspectiveCarousel {
       }
     }
 
+    /**
+     * Summary. Initialize carousel.
+     * Description. Set all default properties,
+     *              initialize images width and
+     *              height. Initialize carousel.
+     */
     function setupCarousel() {
       data.items = Array.from(options.parent.querySelectorAll('img'));
       if (options.horizon === 0) {
@@ -133,6 +204,12 @@ class PerspectiveCarousel {
       });
     }
 
+    /**
+     * Summary. Initialize default carousel position.
+     * Description. Prepare carousel, initialize
+     *              all images, and set carousel
+     *              default position.
+     */
     function setupStarterRotation() {
       options.startingItem = (options.startingItem === 0) ? Math.round(data.totalItems / 2) : options.startingItem;
       data.rightItemsCount = Math.ceil((data.totalItems - 1) / 2);
@@ -154,6 +231,12 @@ class PerspectiveCarousel {
       }
     }
 
+    /**
+     * Summary. Perform calculations for new positions of image.
+     *
+     * @param {Node}   item        Image
+     * @param {Number} newPosition New position of image relative to carousel
+     */
     function performCalculations(item, newPosition) {
       const newDistanceFromCenter = Math.abs(newPosition);
       if (newDistanceFromCenter < options.flankingItems + 1) {
@@ -194,6 +277,12 @@ class PerspectiveCarousel {
       item.dataset.opacity = newOpacity;
     }
 
+    /**
+     * Summary. Move image to position.
+     *
+     * @param {Node}   item        Image
+     * @param {Number} newPosition New position of image relative to carousel
+     */
     function moveItem(item, newPosition) {
       if (Math.abs(newPosition) <= options.flankingItems + 1) {
         performCalculations(item, newPosition);
@@ -225,6 +314,14 @@ class PerspectiveCarousel {
       }
     }
 
+    /**
+     * Summary. Handle image animation stop.
+     *
+     * @access private
+     *
+     * @param {Node}   item        Image
+     * @param {Number} newPosition New position of image relative to carousel
+     */
     function itemAnimationComplete(item, newPosition) {
       data.itemsAnimating--;
       item.dataset.currentPosition = newPosition;
@@ -248,6 +345,9 @@ class PerspectiveCarousel {
       }
     }
 
+    /**
+     * Summary. Rotate carousel.
+     */
     function rotateCarousel() {
       if (data.currentlyMoving === false) {
         data.currentCenterItem.classList.remove(options.activeClassName);
@@ -274,6 +374,14 @@ class PerspectiveCarousel {
         }
       }
     }
+
+    /**
+     * Summary. Merge 2 objects in one.
+     *
+     * @access private
+     *
+     * @param {Object} out Object
+     */
     function extend(out) {
       for (var i = 1; i < arguments.length; i++) {
         if (!arguments[i]) {
@@ -288,6 +396,10 @@ class PerspectiveCarousel {
       return out;
     };
 
+    /**
+     * Summary. Helper function to get next item from center of carousel.
+     * @access private
+     */
     function nextItemFromCenter() {
       var next = data.currentCenterItem.next();
       if (next.length <= 0) {
@@ -297,6 +409,10 @@ class PerspectiveCarousel {
       return next;
     }
 
+     /**
+     * Summary. Helper function to get previous item from center of carousel.
+     * @access private
+     */
     function prevItemFromCenter() {
       var prev = data.currentCenterItem.prev();
       if (prev.length <= 0) {
@@ -306,6 +422,14 @@ class PerspectiveCarousel {
       return prev;
     }
 
+    /**
+     * Summary. Handle user-given functions.
+     *
+     * @enum movingFromCenter, movingToCenter
+     * @access private
+     *
+     * @param {String} direction Direction of carousel rotation
+     */
     function moveOnce(direction) {
       if (data.currentlyMoving === false) {
         data.previousCenterItem = data.currentCenterItem;
@@ -370,6 +494,9 @@ class PerspectiveCarousel {
 
     this.reload(startingOptions);
 
+    /**
+     * Summary. Handle clicks on carousel controls.
+     */
     document.addEventListener('click', (e) => {
       if (e.target.classList[1] === options.leftButton) {
         data.currentDirection = 'backward';
@@ -398,5 +525,3 @@ class PerspectiveCarousel {
 window.onload = () => {
   new PerspectiveCarousel();
 }
-
-

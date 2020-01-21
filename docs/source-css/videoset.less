@@ -1,5 +1,6 @@
 @import "../settings/colors";
 
+// Videoset wrap
 .videoset {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -13,6 +14,7 @@
   justify-content: space-between;
 }
 
+// Videoset volume and audio ranges
 .videoset__time-range,
 .videoset__volume-range {
   position: relative;
@@ -20,6 +22,7 @@
   display: block;
 }
 
+// Styles for volume and audio ranges
 .videoset input[type=range] {
   -webkit-appearance: none;
   width: 270px;
@@ -37,6 +40,7 @@
   }
 }
 
+// Styles for volume and audio ranges
 .time-range__track,
 .volume-range__track {
   &::-webkit-slider-runnable-track {
@@ -77,11 +81,13 @@
   }
 }
 
+// Videoset control button
 .videoset__button {
   border: 0;
   background: transparent;
 }
 
+// Videoset list of control buttons
 .videoset__controls_buttons {
   list-style-type: none;
   padding-left: 0;

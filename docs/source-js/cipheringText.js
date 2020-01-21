@@ -12,6 +12,18 @@ let nextPhrase = 'into text that is reciphered';
 const phrases = ['This text rechipers', 'into text that is reciphered', 'still no jQuery or any other plugin', 'It IS cool'];
 let isRebuilding = false;
 
+/**
+ * Summary. Change one letter to another.
+ * Description. Change letter to random number
+ *              of ASCII symbols, after what
+ *              letter is either deleted or
+ *              changed to the new letter.
+ *
+ * @param {Node} el             HTML letter element
+ * @param {String}    newLetter New letter
+ * @param {Boolean}    isTimed  Boolean indicating speed of transitioning
+ *                              from one letter to another
+ */
 function cipherLetter(el, newLetter, isTimed) {
   const symbols = ['!', '"', '#', '$', '%', '*', '0', '1', ':', ';', '?', '@', '[', ']', '\\', '~', "'", '/', '{', '}', '|', '&', '(', ')', '-', '<', '>'];
   let changeNumber;
@@ -41,6 +53,15 @@ function cipherLetter(el, newLetter, isTimed) {
   }, Math.random() * 1000);
 }
 
+/**
+ * Summary. Split text to editable elements.
+ * Description. Split text into spans,
+ *              and append these spans to element.
+ *              Spans can now be edited.
+ *
+ * @param {Node}   el               Element that should be splitted into elements
+ * @param {Number} nextPhraseLength Length of new text
+ */
 function splitText(el, nextPhraseLength) {
   const oldText = el.textContent;
   el.textContent = '';
@@ -54,6 +75,16 @@ function splitText(el, nextPhraseLength) {
   }
 }
 
+/**
+ * Summary. Smoothly transition one text into another.
+ * Description. Change text using ciphering
+ *              effect into another text.
+ *
+ * @see cipherLetter
+ *
+ * @param {*} children
+ * @param {*} nextText
+ */
 function recipherText(children, nextText) {
   children.forEach((el, i) => {
     if (!(el.textContent == nextText.charAt(i))) {

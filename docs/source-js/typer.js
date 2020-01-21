@@ -21,6 +21,13 @@ const data = {
   ANIMATED: 'typing__text--glow'
 };
 
+/**
+ * Summary. Starts slowly typing text in given HTML element
+ *
+ * @param {String}  content    Content that given HTML element should type
+ * @param {Node}    el         HTML element that should start typing its content
+ * @param {Boolean} letterUniq Should letters be glowing or not
+ */
 function startTyping(content, el, letterUniq) {
   var index = 0;
   if (letterUniq) {
@@ -43,6 +50,11 @@ function startTyping(content, el, letterUniq) {
   }
 }
 
+/**
+ * Summary. Listens for clicks on buttons, and starts typing.
+ *
+ * @listens click
+ */
 document.addEventListener('click', event => {
   if (event.target.classList[1] === data.TEXTS[0].START_TYPING_BUTTON) {
     if (!isTyping) {

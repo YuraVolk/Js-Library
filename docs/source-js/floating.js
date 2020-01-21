@@ -17,6 +17,18 @@ var floatingPanel1 = document.querySelector(`.${data.FLOATING_PANELS[1].CLASS}`)
 
 let arePanels = [false, false];
 
+/**
+ * Summary. Control floating panels drag and drop.
+ * Description. Add event listeners for floating
+ *              panels and control their dragging
+ *              and dropping.
+ *
+ * @since 1.2.0
+ * @listens mousedown
+ * @fires mousemove
+ *
+ * @param {Node} panel
+ */
 function addEventListen(panel) {
   var initX, initY, mousePressX, mousePressY;
 
@@ -40,6 +52,13 @@ function addEventListen(panel) {
   }, false);
 }
 
+/**
+ * Summary. Show or hide floating panel.
+ *
+ * @param {Number}            i     Index of floating panel
+ * @param {Node}              panel Floating panel
+ * @param {HTMLButtonElement} btn   Pressed button
+ */
 function toggleFloatingWindow(i, panel, btn) {
   if (arePanels[i] === false) {
     arePanels[i] = true;
@@ -52,6 +71,11 @@ function toggleFloatingWindow(i, panel, btn) {
   }
 }
 
+/**
+ * Summary. Listen for clicks on buttons.
+ *
+ * @listens click
+ */
 document.addEventListener('click', e => {
   if (e.target.classList[1] === data.FLOATING_PANELS[0].OPEN_BUTTON) {
     toggleFloatingWindow(0, floatingPanel, e.target);

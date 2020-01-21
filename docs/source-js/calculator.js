@@ -24,7 +24,13 @@ let res = "0";
 let curNum = 0;
 let element = document.querySelector(`.${data.RESULT}`);
 
-const formatNumber = function () {
+/**
+ * Summary. Format calculation.
+ * Description. Replace javascript operations
+ *              with UTF-8 symbols and adding
+ *              dots separators to large numbers.
+ */
+const formatNumber = function() {
   if (res) {
     let str = res.toString().replace(/Math.sqrt/g, "\u221A");
     str = str.replace(/,2/g, "\u00B2");
@@ -36,6 +42,14 @@ const formatNumber = function () {
   }
 }
 
+/**
+ * Summary. Add number to current calculation.
+ * Description. Add number to current calculation
+ *              and validate, whether is operation valid
+ *              (34.54 / 0 for example is invalid)
+ *
+ * @param {NodeList} classEl Class of pressed button to determine what number button is
+ */
 function renderNum(classEl) {
   if (operations[curNum] === "0") {
     operations[curNum] = "";
@@ -49,12 +63,20 @@ function renderNum(classEl) {
   }
 }
 
+/**
+ * Summary. Make number fractional by adding dot to end.
+ */
 function addFraction() {
   if (!(operations[curNum].indexOf('.') > -1)) {
     operations[curNum] += '.';
   }
 }
 
+/**
+ * Summary. If number is positive, make it negative,
+ *          otherwise if number is negative make it
+ *          positive.
+ */
 function changePosNeg() {
   if (operations[curNum].indexOf('-') > -1) {
     operations[curNum] = (Math.abs(operations[curNum])).toString();
@@ -63,6 +85,11 @@ function changePosNeg() {
   }
 }
 
+/**
+ * Summary. Add operation symbol given as parameter.
+ *
+ * @param {String} symbol Operation symbol (+, *, /, -)
+ */
 function insertSymbol(symbol) {
   curNum++;
   operations[curNum] = symbol;
@@ -70,6 +97,16 @@ function insertSymbol(symbol) {
   operations[curNum] = "";
 }
 
+/**
+ * Summary. Add operation symbol given as parameter.
+ * Description. Add operation symbol given as parameter,
+ *              and validate the calculation.
+ *              (12 -+ 3 is invalid)
+ *
+ * @see insertSymbol
+ *
+ * @param {*} symbol Operation symbol (+, *, /, -)
+ */
 function addSymbol(symbol) {
   if (operations.length > 1) {
     if (!isNaN(operations[operations.length - 1]) && operations[operations.length - 1].length !== 0) {
@@ -82,6 +119,12 @@ function addSymbol(symbol) {
   }
 }
 
+/**
+ * Summary. Calculate result.
+ * Description. Get result of calculation,
+ *              prepare it for evaluation
+ *              and evaluate it.
+ */
 function evaluateEquation() {
   if (operations.length > 1) {
     let result;
@@ -94,13 +137,17 @@ function evaluateEquation() {
       operations.pop();
     }
     curNum = 0;
-    result = eval(operations.join(" "));
+    const resultPredicate = new Function("return " + operations.join(" "));
+    result = resultPredicate();
     operations.length = 0;
     operations = [result + ""];
     return result;
   }
 }
 
+/**
+ * Summary. Remove last symbol of calculation.
+ */
 function removeSymbol() {
   if (operations[curNum].length > 0) {
     operations[curNum] = operations[curNum].slice(0, -1);
@@ -110,19 +157,38 @@ function removeSymbol() {
   }
 }
 
-function insertPrefix(symbols, prefix, endPrefix) {
-  if (symbols.includes(operations[curNum - 1]) && operations[curNum].length === 0) {
-    operations.splice(-2, 1);
-  }
-  operations.splice(operations[curNum - 1], 0, prefix + "(");
-  operations.push(endPrefix + ")");
-  if (!(operations[operations.length - 1] === "")) {
-    operations.push("");
-  }
-  curNum = operations.length - 1;
-}
 
+/**
+ * Summary. Wrap current calculation with a function.
+ * Description. Function wraps current calculation
+ *              with mathematic operation like
+ *              power or square root.
+ *
+ * @see addPrefix
+ *
+ * @param {String} prefix         Start of given function (Math.pow for example)
+ * @param {String} [endPrefix=''] End of given function (,2 for example)
+ */
 function addPrefix(prefix, endPrefix = "") {
+  /**
+   * @memberof addPrefix
+   *
+   * @param {Array} symbols   Array of possible operation symbols (+,-,*,/)
+   * @param {String} prefix    Start of given function
+   * @param {String} endPrefix End of given function
+   */
+  function insertPrefix(symbols) {
+    if (symbols.includes(operations[curNum - 1]) && operations[curNum].length === 0) {
+      operations.splice(-2, 1);
+    }
+    operations.splice(operations[curNum - 1], 0, prefix + "(");
+    operations.push(endPrefix + ")");
+    if (!(operations[operations.length - 1] === "")) {
+      operations.push("");
+    }
+    curNum = operations.length - 1;
+  }
+
   const symbols = ['+', '-', '*', '%', '/'];
   if (prefix !== '1 / ') {
     insertPrefix(symbols, prefix, endPrefix);
@@ -133,6 +199,11 @@ function addPrefix(prefix, endPrefix = "") {
   }
 }
 
+/**
+ * Summary. Listen for clicks on buttons.
+ *
+ * @listens click
+ */
 document.addEventListener('click', (e) => {
   if (e.target.classList[0] === data.BUTTON_CLASS) {
     const classEl = e.target.classList[1];
@@ -185,6 +256,4 @@ document.addEventListener('click', (e) => {
     }
     element.textContent = formatNumber();
   }
-
-
 });

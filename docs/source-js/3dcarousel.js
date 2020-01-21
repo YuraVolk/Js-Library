@@ -19,11 +19,12 @@ window.addEventListener('load', () => {
 });
 
 /**
+ * Summary. Rotates carousel.
  *
- * @param {number}  theta        Theta value used for calculations.
- * @param {number}  imageIndex   Index of current image.
+ * @param {Number}  theta        Theta value used for calculations.
+ * @param {Number}  imageIndex   Index of current image.
  * @param {Node}    figure       Container of images.
- * @param {boolean} isntVertical Is carousel vertical.
+ * @param {Boolean} isntVertical Is carousel vertical.
  */
 function rotateCarousel(theta, imageIndex, figure, isntVertical) {
   if (isntVertical) {
@@ -34,9 +35,10 @@ function rotateCarousel(theta, imageIndex, figure, isntVertical) {
 }
 
 /**
+ * Summary. Creates 3D carousel
  *
  * @param {Node}    parent       Container of carousel.
- * @param {boolean} isntVertical Is carousel vertical.
+ * @param {Boolean} isntVertical Is carousel vertical.
  */
 function initCarousel(parent, isntVertical) {
   if (isntVertical == undefined) {
@@ -74,8 +76,8 @@ function initCarousel(parent, isntVertical) {
    *
    * @since 1.2.0
    *
-   * @param {number} n Number of images.
-   * @param {number} s Size of every image.
+   * @param {Number} n Number of images.
+   * @param {Number} s Size of every image.
    */
   function setupCarousel(n, s) {
     var apothem = s / (2 * Math.tan(Math.PI / n));
@@ -107,6 +109,7 @@ function initCarousel(parent, isntVertical) {
    * Summary. Add listeners for buttons.
    * Description. Changes carousel styles
    *              based on button pressed.
+   *
    * @memberof initCarousel
    * @see      rotateCarousel
    * @fires    onClick
