@@ -23,5 +23,3 @@ All solutions are created with pure (vanilla) JavaScript.
 
 ## Contributing Guidelines
 [Contributing Guidelines](https://github.com/YuraVolk/Js-Library/blob/master/CONTRIBUTING.md) for this library.
-
-P.S. This is a very important file.
