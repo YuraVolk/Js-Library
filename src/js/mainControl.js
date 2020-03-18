@@ -164,7 +164,7 @@ async function xmlHTTP(path) {
 async function createScript(js_path, css_path, html_index) {
   const css = await xmlHTTP(css_path);
   const js = await xmlHTTP(js_path);
-  const container = virtualDocument.querySelectorAll("section")[html_index];
+  const container = virtualDocument.querySelectorAll("section")[html_index-1];
   const html = container.children[container.children.length - 2].outerHTML;
 
   const script = Object.create(Script);

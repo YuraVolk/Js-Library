@@ -803,7 +803,7 @@ label {
 .zoom__hover {
   width: 60px;
   height: 60px;
-  background: url(/img/slide0.png) no-repeat #ffffff;
+  background: url(img/slide0.png) no-repeat #ffffff;
   -webkit-box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.3);
   box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.3);
   pointer-events: none;
@@ -1299,11 +1299,11 @@ label {
   border: 6px solid transparent;
   border-color: #fff transparent transparent transparent;
 }
-.custom-select__selected.custom-select--open:after {
+.custom-select__selected.custom-select__selected--open:after {
   border-color: transparent transparent #fff transparent;
   top: 7px;
 }
-.custom-select__selected.custom-select--open {
+.custom-select__selected.custom-select__selected--open {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -1338,25 +1338,12 @@ label {
 .custom-select__item--selected {
   background-color: rgba(0, 0, 0, 0.1);
 }
-.custom-select--open {
+.custom-select__selected--open {
   background-color: darkcyan;
 }
 .custom-select__items:last-child {
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   overflow: hidden;
-}
-
-.register {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-.register > fieldset {
-  width: 200px;
-}
-.register > * {
-  margin-bottom: 8px;
-  padding: 5px;
 }
 
