@@ -41,6 +41,7 @@ window.addEventListener("load", () => {
  * @param {MouseEvent} event Mouse move event
  */
 function moveMagnifier(event) {
+  let {x, y} = getCursorPos(event);
   event.preventDefault();
   if (x > img.width - (width / zoom)) {
     x = img.width - (width / zoom);
