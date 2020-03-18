@@ -6,7 +6,7 @@ const data = {
   SELECT_OPTIONS: 'custom-select__items',
   SELECT_OPTIONS_HIDDEN: 'custom-select__items--hidden',
   SELECT_OPTION_CURRENT: 'custom-select__item--selected',
-  SELECT_OPEN: 'custom-select--open',
+  SELECT_OPEN: 'custom-select__selected--open',
   SELECT_OPTION: 'custom-select__item'
 };
 
