@@ -87,7 +87,7 @@ document.addEventListener("click", function (e) {
     }
   }
   if (e.target.classList[0] === data.ITEMS) {
-    autoInput.value = e.target.childNodes[3].value;
+    autoInput.value = e.target.childNodes[1].textContent + e.target.childNodes[2].textContent;
   }
   closeAllLists(e.target);
 });
