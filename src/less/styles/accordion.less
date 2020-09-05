@@ -1,4 +1,4 @@
-@import "../settings/colors";
+
 
 // Container of accordions
 .accordions {
@@ -10,15 +10,15 @@
 .accordion {
   width: 600px;
   overflow: hidden;
-  border: 3px solid @main;
-  background-color: @action;
+  border: 3px solid #333333;
+  background-color: #4d4c4d;
   border-top: 0;
   -webkit-transition: max-height 0.4s linear;
   transition: max-height 0.4s linear;
 
   // First accordion
   &:first-of-type {
-    border-top: 3px solid @main;
+    border-top: 3px solid #333333;
   }
 }
 
@@ -32,7 +32,7 @@
   padding: 20px;
   -webkit-transition: max-height 0.2s linear forwards;
   transition: max-height 0.2s linear forwards;
-  color: @subcontent_caption;
+  color: #faebd7;
 }
 
 // Heading of accordion
@@ -42,6 +42,6 @@
   display: block;
   padding: 10px 20px;
   text-decoration: none;
-  background-color: @subcontent_background;
-  color: @main-white;
+  background-color: #f08080;
+  color: #e6e6e6;
 }

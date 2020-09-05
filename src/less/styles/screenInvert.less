@@ -1,8 +1,7 @@
-@import "../settings/colors";
 
 // Any element that can be inverted
 .invertable-content {
-  background-color: @background_main;
+  background-color: #ffffff;
   -webkit-filter: invert(0%);
   filter: invert(0%);
   -webkit-transition: background-color 0.3s cubic-bezier(0.895, 0.03, 0.685, 0.22), color 0.3s ease-out, -webkit-filter 0.3s cubic-bezier(0.895, 0.03, 0.685, 0.22);
@@ -28,14 +27,14 @@
 
 // Inverted colors modifier
 .invertable-content--inverted {
-  background-color: @main;
-  color: @main-white;
+  background-color: #333333;
+  color: #e6e6e6;
   -webkit-filter: invert(8.56%);
   filter: invert(8.56%);
 
   // Hr tag will become from gray to white
   hr {
-    color: @main-white;
+    color: #e6e6e6;
   }
 
   // Images should be a little brighter
