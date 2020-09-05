@@ -38,7 +38,7 @@
     "http-proxy": "^1.18.1",
     "marked": "^0.8.2",
     "minimist": "^1.2.5",
-    "serialize-javascript": "^2.1.2",
+    "serialize-javascript": "^3.1.0",
     "webpack-encoding-plugin": "^0.3.1"
   }
 }
