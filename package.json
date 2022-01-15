@@ -36,7 +36,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "clean-css": "^4.2.3",
     "http-proxy": "^1.18.1",
-    "marked": "^0.8.2",
+    "marked": "^4.0.10",
     "minimist": "^1.2.5",
     "serialize-javascript": "^2.1.2",
     "webpack-encoding-plugin": "^0.3.1"
