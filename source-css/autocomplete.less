@@ -1,0 +1,40 @@
+
+
+// Autocomplete input
+.autocomplete__input {
+  width: 260px;
+  height: 40px;
+  background-color: #e2e2e2;
+  border: 2px solid #333333;
+  opacity: 0.5;
+}
+
+// Autocomplete items container
+.autocomplete {
+  position: relative;
+}
+
+// Autocomplete items
+.autocomplete-items {
+  padding-left: 0;
+  list-style-type: none;
+  margin: 0;
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border: none;
+  z-index: 9999;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 260px;
+  max-height: 200px;
+  overflow-y: scroll;
+
+  // Autocomplete item
+  li {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #ffffff;
+    border-bottom: 1px solid #d4d4d4;
+  }
+}

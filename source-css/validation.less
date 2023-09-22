@@ -1,0 +1,86 @@
+@import "../settings/colors";
+
+// Password validation wrap
+.password-validation {
+  width: 320px;
+  box-shadow: @action 2px 0 1px 1px;
+  padding: 12px;
+
+  >label {
+    width: 310px;
+    margin-bottom: 12px;
+
+    >input {
+      width: 120px;
+      float: right;
+
+      &::placeholder {
+        color: @main-white;
+        font-size: 12px;
+      }
+    }
+  }
+
+  // Passed password identity check
+  >label.validation__test--correct {
+    background: transparent;
+    border: 1px solid @passed-decorator;
+    background-color: @passed;
+  }
+
+  // Failed password identity check
+  >label.validation__test--wrong {
+    border: 1px solid @failed-decorator;
+    background-color: @failed;
+  }
+
+  // Button to submit password
+  .validation__submit-btn {
+    display: block;
+    background-color: @even_row;
+    border: 2px solid @shadow;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: @action;
+    }
+  }
+
+  // Password inputs
+  .validation__password,
+  .validation__password-check {
+    background-color: @content_main;
+  }
+
+  // Validation test
+  .validation__test  {
+    margin-left: 30px;
+    position: relative;
+
+    &::before {
+      position: absolute;
+      content: "";
+      width: 10px;
+      height: 10px;
+      left: -20px;
+      top: 3px;
+      background-color: @action;
+    }
+  }
+
+  // Failed validation test
+  .validation__test.validation__test--wrong {
+    &::before {
+      background-color: @failed;
+    }
+  }
+
+  // Passed validation test
+  .validation__test.validation__test--correct {
+    &::before {
+      background-color: @passed;
+    }
+  }
+}
+
