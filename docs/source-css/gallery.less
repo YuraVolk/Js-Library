@@ -1,0 +1,75 @@
+@import "../settings/colors";
+
+// Gallery items controls
+.gallery__toggles {
+  // Gallery items toggle
+  li {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+    border: 1px solid @main;
+    border-radius: 10px;
+  }
+
+  width: 100px;
+  margin: 15px auto;
+}
+
+// Active items toggle
+.gallery-toggle--active {
+  background-color: @block;
+}
+
+// Container of carousel
+.gallery {
+  position: relative;
+  width: 370px;
+  height: 220px;
+  margin: 0 auto;
+}
+
+// Inner content of carousel
+.gallery-inner {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+// List of slides
+.gallery-list {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
+  list-style-type: none;
+  font-size: 0;
+  white-space: nowrap;
+  line-height: 1;
+  z-index: 10;
+}
+
+// Slide
+.gallery-list__item {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-transition: left 0.4s;
+  transition: left 0.4s;
+}
+
+// Inner content of slide
+.gallery-list__item-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}

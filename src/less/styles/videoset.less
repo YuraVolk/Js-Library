@@ -1,0 +1,95 @@
+@import "../settings/colors";
+
+// Videoset wrap
+.videoset {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 970px;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+// Videoset volume and audio ranges
+.videoset__time-range,
+.videoset__volume-range {
+  position: relative;
+  padding: 10px;
+  display: block;
+}
+
+// Styles for volume and audio ranges
+.videoset input[type=range] {
+  -webkit-appearance: none;
+  width: 270px;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// Styles for volume and audio ranges
+.time-range__track,
+.volume-range__track {
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 7.5px;
+    background: @content_dark;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  pointer-events: none;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: transparent;
+    height: 1px;
+    width: 1px;
+    -webkit-box-shadow: -560px 0 0 560px @filled_area;
+    box-shadow: -560px 0 0 560px @filled_area;
+  }
+}
+
+.time-range__thumb,
+.volume-range__thumb {
+  &::-webkit-slider-runnable-track {
+    background: transparent;
+    cursor: pointer;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border-radius: 20px;
+    height: 18px;
+    width: 18px;
+    background: @decorator;
+    cursor: pointer;
+    margin: -5px 0px 0px 0px;
+  }
+}
+
+// Videoset control button
+.videoset__button {
+  border: 0;
+  background: transparent;
+}
+
+// Videoset list of control buttons
+.videoset__controls_buttons {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+}

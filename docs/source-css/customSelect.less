@@ -1,0 +1,92 @@
+// Container for custom select
+.custom-select {
+  position: relative;
+  font-family: Arial;
+  width: 150px;
+}
+
+// Standard non-styling select
+.custom-select>select {
+  display: none;
+}
+
+// Custom select header
+.custom-select__selected {
+  background-color: DodgerBlue;
+  border-radius: 20px;
+}
+
+// Custom select arrow
+.custom-select__selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+// Custom select open arrow
+.custom-select__selected.custom-select__selected--open:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+// Custom select open
+.custom-select__selected.custom-select__selected--open {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+// Custom select option
+.custom-select__item,
+.custom-select__selected {
+  color: #ffffff;
+  padding: 3px 12px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  user-select: none;
+}
+
+// All options of custom select
+.custom-select__items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.2s linear;
+  padding-left: 0;
+  list-style-type: none;
+  margin: 0;
+}
+
+// Custom select closed
+.custom-select__items--hidden {
+  opacity: 0;
+ // visibility: hidden;
+ cursor: default;
+ z-index: -9999;
+}
+
+.custom-select__item:hover,
+.custom-select__item--selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+
+.custom-select__selected--open {
+  background-color: darkcyan;
+}
+
+// Border rounding effect
+.custom-select__items:last-child {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  overflow: hidden;
+}
