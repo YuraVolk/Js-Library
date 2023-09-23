@@ -1,4 +1,5 @@
-//Created by Yury Volkovskiy
+import pickerWebp from "/src/img/picker.webp";
+import pickerJPG from "/src/img/picker.webp";
 
 const data = {
   OPACITY_RANGE: {
@@ -34,9 +35,9 @@ function initColorPicker() {
   var image = new Image(256, 256);
 
   if (canvasEl.toDataURL('image/webp').indexOf('data:image/webp') == 0) {
-    image.src = "picker.webp";
+    image.src = pickerWebp;
   } else {
-    image.src = "picker.jpg";
+    image.src = pickerJPG;
   }
 
   image.onload = () => canvasContext.drawImage(image, 0, 0, image.width, image.height);
@@ -90,7 +91,7 @@ function toHex(red, green, blue) {
  * @param {Object} RGBA RGB alpha
  */
 function rgbaToRgb(RGBA) {
-  alpha = 1 - RGBA.alpha;
+  const alpha = 1 - RGBA.alpha;
 
   var red = Math.round((RGBA.alpha * (RGBA.red / 255) + (alpha * (0 / 255))) * 255);
   var green = Math.round((RGBA.alpha * (RGBA.green / 255) + (alpha * (0 / 255))) * 255);
@@ -171,5 +172,7 @@ function changeColor(rgba, opacity) {
 initColorPicker();
 modifyRange(opacityRanges);
 
-rangeOpacity[1].value = "100";
-rangeOpacity[3].value = "100";
+try {
+  rangeOpacity[1].value = "100";
+  rangeOpacity[3].value = "100";
+} catch { }
