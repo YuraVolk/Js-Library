@@ -2,13 +2,11 @@
   "name": "library",
   "version": "1.0.0",
   "description": "",
-  "main": "mainConrol.js",
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development --open"
   },
   "author": "Yuri Volkovskiy",
-  "license": "ISC",
   "devDependencies": {
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",

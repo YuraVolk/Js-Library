@@ -86,7 +86,9 @@ function initCarousel(parent, isntVertical) {
 
     for (var i = 0; i < n; i++) {
       images[i].style.padding = "0";
-    } for (i = 1; i < n; i++) {
+    }
+
+    for (i = 1; i < n; i++) {
       images[i].style.transformOrigin = "50% 50% " + -apothem + "px";
 
       if (isntVertical) {
