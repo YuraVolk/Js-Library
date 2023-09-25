@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
@@ -14,27 +13,11 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: './src/index.html',
+      template: './src/entry/entryLit.html',
     }),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: 'src/less/styles',
-          to: 'source-css'
-        },
-        {
-          from: 'src/js/scripts',
-          to: 'source-js'
-        },
-        {
-          from: 'src/index.html',
-          to: 'source-html/source.html'
-        }
-      ]
     })
   ],
   module: {

@@ -1,5 +1,5 @@
-import pickerWebp from "/src/img/picker.webp";
-import pickerJPG from "/src/img/picker.webp";
+import pickerWebp from "/src/assets/img/picker.webp";
+import pickerJPG from "/src/assets/img/picker.webp";
 
 const data = {
   OPACITY_RANGE: {
