@@ -10,9 +10,11 @@
     "emitDecoratorMetadata": true,
     "lib": ["DOM"],
     "target": "ESNext",
+    "moduleResolution": "Bundler",
     "typeRoots": [
       "./node_modules/@types",
       "src/modules/global.d.ts"
-    ]
+    ],
+    "useDefineForClassFields": false
   }
 }

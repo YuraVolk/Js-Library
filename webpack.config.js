@@ -5,7 +5,7 @@ const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   mode: 'development',
-  entry: ['./src/js/loader.js'],
+  entry: ['./src/js/loader.js', './src/modules/base.ts'],
   output: {
     path: path.resolve(__dirname, 'docs'),
     filename: 'js/bundle.js'
@@ -20,8 +20,16 @@ module.exports = {
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
     })
   ],
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /\.html$/i,
         loader: "html-loader",
