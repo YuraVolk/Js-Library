@@ -2,19 +2,29 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
+const glob = require('glob');
+
+const litHtmlFiles = glob.sync('./src/docs/lit/*.html');
+const litHtmlPlugins = litHtmlFiles.map((file) => {
+  return new HtmlWebpackPlugin({
+    template: file,
+    filename: file.replace(/^\.\/src\/docs\/lit\//, 'lit/'),
+  });
+});
 
 module.exports = {
   mode: 'development',
-  entry: ['./src/js/loader.js', './src/modules/base.ts'],
+  entry: ['./src/modules/litEntry.ts'],
   output: {
     path: path.resolve(__dirname, 'docs'),
     filename: 'js/bundle.js'
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: './src/entry/entryLit.html',
+      filename: 'lit/index.html',
+      template: './src/docs/entryLit.html',
     }),
+    ...litHtmlPlugins,
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css'

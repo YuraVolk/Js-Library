@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --open"
+    "build:lit": "webpack --mode production --config webpack/webpack.config.lit.js",
+    "build": "npm run build:lit",
+    "start:lit": "webpack-dev-server --mode development --open --config webpack/webpack.config.lit.js"
   },
   "author": "Yuri Volkovskiy",
   "devDependencies": {

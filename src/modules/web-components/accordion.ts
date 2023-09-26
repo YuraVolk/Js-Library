@@ -21,34 +21,37 @@ export class AccordionComponent extends LitElement {
     }
 
     .accordion {
-      width: 600px;
+      width: 100%;
       overflow: hidden;
-      border: 3px solid #333333;
-      background-color: #4d4c4d;
-      border-top: 0;
+      background-color: #000000;
+      border-radius: .4rem;
       -webkit-transition: max-height 0.4s linear;
       transition: max-height 0.4s linear;
     }
 
-    .accordion:first-of-type {
-      border-top: 3px solid #333333;
+    .accordion:not(:last-child) {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
     }
 
     .accordion__content {
-      padding: 20px;
+      color: #fff;
+      font-size: 15px;
+      padding: 2rem;
       -webkit-transition: max-height 0.2s linear forwards;
       transition: max-height 0.2s linear forwards;
-      color: #faebd7;
     }
 
     .accordion__heading {
       position: relative;
       z-index: 1;
       display: block;
-      padding: 10px 20px;
+      font-size: 1.6rem;
+      color: rgba(255,255,255,.8);
       text-decoration: none;
-      background-color: #f08080;
-      color: #e6e6e6;
+      background-color: #000000;
+      padding: 0.25rem 1rem;
+      text-transform: uppercase;
+      font-family: Segoe UI;
     }
   `;
 

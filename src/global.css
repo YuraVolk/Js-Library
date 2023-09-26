@@ -1,0 +1,45 @@
+body {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  background: linear-gradient(161deg, rgb(6, 5, 5) 14%, rgb(23, 15, 41) 79%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  font-family: Helvetica, Segoe UI, Arial, sans-serif;
+}
+
+.header {
+  min-width: 95vw;
+  height: 50px;
+  flex: 1 1 0;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.navigation {
+  width: 210px;
+  height: calc(100vh - 50px);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.main {
+  max-width: calc(100% - 210px - 6rem);
+  height: calc(100vh - 50px - 6rem);
+  margin: 1rem;
+  padding: 2rem;
+  flex-grow: 1;
+  color: #cacaca;
+  background: rgba(22, 22, 22, 0.525);
+  border-radius: 10px;
+  mix-blend-mode: hard-light;
+  overflow-y: auto;
+}
+
+.heading {
+  font-weight: 800;
+  font-size: 2.25em;
+  margin-top: 0;
+  margin-bottom: .8888889em;
+  line-height: 1.1111111;
+  letter-spacing: -.025em;
+}
