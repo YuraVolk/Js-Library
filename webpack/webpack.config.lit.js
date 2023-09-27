@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
 const glob = require('glob');
 
-const litHtmlFiles = glob.sync('./src/docs/lit/*.html');
+const litHtmlFiles = glob.sync('./src/docs/lit/**/*.html');
 const litHtmlPlugins = litHtmlFiles.map((file) => {
   return new HtmlWebpackPlugin({
     template: file,
