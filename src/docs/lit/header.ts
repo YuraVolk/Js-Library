@@ -9,13 +9,15 @@ export class HeaderComponent extends LitElement {
       align-items: center;
       justify-content: space-around;
       height: 50px;
+      box-sizing: border-box;
       color: #fff;
       font-family: Helvetica, Segoe UI, Arial, sans-serif;
-      padding: 1rem;
+      padding: 2rem 1rem 1rem;
     }
 
     @media (max-width: 700px) {
       .navigation {
+        height: auto;
         justify-content: flex-start;
         flex-direction: column;
       }

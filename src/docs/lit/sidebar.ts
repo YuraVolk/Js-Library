@@ -1,6 +1,6 @@
 import links from "../data/sidebar.json";
 import { LitElement, css, html } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 
 @customElement("sidebar-component")
 export class SidebarComponent extends LitElement {
@@ -98,6 +98,19 @@ export class SidebarComponent extends LitElement {
       opacity: 0.6;
     }
 
+    .list-sublist__item--active {
+      width: 100%;
+      margin-left: 0;
+      padding-left: 2.25rem;
+      border-left: rgb(255, 112, 127) 2px solid;
+      padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+      background-color: #ff2a5130;
+    }
+
+    .list-sublist__item--active .list-sublist__item-link::before {
+      content: none;
+    }
+
     .list-sublist__item-link::before {
       position: absolute;
       left: -1.25rem;
@@ -115,6 +128,9 @@ export class SidebarComponent extends LitElement {
       opacity: 0.75;
     }
   `;
+
+  @property()
+  activeLink: string;
 
   render() {
     return html`
@@ -146,7 +162,7 @@ export class SidebarComponent extends LitElement {
                 <div class="list-sublist-wrap">
                   <ul class="list-sublist">
                     ${links.map(({ name, link }) => {
-                      return html`<li class="list-sublist__item">
+                      return html`<li class="list-sublist__item ${name === this.activeLink ? "list-sublist__item--active" : ""}">
                         <a class="list-sublist__item-link" href="${link}"
                           >${name}</a
                         >

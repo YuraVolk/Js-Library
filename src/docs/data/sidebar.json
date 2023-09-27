@@ -2,7 +2,11 @@
   "components": [
     {
       "name": "Accordion",
-      "link": "/lit/accordion.html"
+      "link": "/lit/accordion"
+    },
+    {
+      "name": "Backface Carousel",
+      "link": "/lit/backface-carousel"
     }
   ]
 }

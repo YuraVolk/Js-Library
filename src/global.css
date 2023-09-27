@@ -44,6 +44,17 @@ body {
   letter-spacing: -.025em;
 }
 
+*::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 10px;
+  background-color: #222;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(164, 123, 203);
+  border-radius: 10px;
+}
+
 @media (max-width: 800px) {
   .navigation {
     width: 100%;
