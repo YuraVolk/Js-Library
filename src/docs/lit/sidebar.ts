@@ -29,6 +29,12 @@ export class SidebarComponent extends LitElement {
       font-family: Helvetica, Segoe UI, Arial, system-ui;
     }
 
+    @media (max-width: 800px) {
+      .wrap {
+        flex-direction: row;
+      }
+    }
+
     * {
       transition: all 0.1s ease-in;
     }

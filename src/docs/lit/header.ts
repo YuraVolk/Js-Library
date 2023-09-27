@@ -11,6 +11,14 @@ export class HeaderComponent extends LitElement {
       height: 50px;
       color: #fff;
       font-family: Helvetica, Segoe UI, Arial, sans-serif;
+      padding: 1rem;
+    }
+
+    @media (max-width: 700px) {
+      .navigation {
+        justify-content: flex-start;
+        flex-direction: column;
+      }
     }
 
     .navigation__name {
