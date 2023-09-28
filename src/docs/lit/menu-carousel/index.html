@@ -17,14 +17,23 @@
     <sidebar-component activeLink="Menu Carousel"></sidebar-component>
   </aside>
   <main class="main">
-    <h1 class="heading">Backface Carousel</h1>
+    <h1 class="heading">Menu Carousel</h1>
     <p>
-      The backface carousel component represents a 3D-style carousel that appears as a 3D shape with its contents being
-      equal-size items. Any item can be of any content within the carousel, ranging from simple images to complex HTML
-      structures. The items are inserted directly into the carousel as children nodes without any configuration. The carousel
-      exposes methods to be easily controllable, and supports both vertical and horizontal placement.
+      The menu carousel component represents a 3D carousel in which items are rotated around a circular area
+      that can be defined and whose X/Y dimensions can be changed by user. The carousel accepts a variety of
+      configuration options:
+    <ul>
+      <li>xPos, automatically re-calculated on resize by default.</li>
+      <li>yPos, defines Y size of carousel.</li>
+      <li>xRadius, defines inner circle X radius.</li>
+      <li>yRadius, defines inner circle Y radius.</li>
+      <li>farScale, defines the scale between elements, allowing farther elements to appear smaller.</li>
+      <li>speed, defines the animation speed.</li>
+    </ul>
+    Carousel accepts HTML children as images, and requires user to do minimal CSS setup such as position: relative and
+    width/height properties on carousel.
     </p>
-    <menu-carousel-component>
+    <menu-carousel-component farScale="0.6">
       <div class="carousel">
         <img class="carousel-item" src="/src/assets/img/slide1.png" alt="Example Image">
         <img class="carousel-item" src="/src/assets/img/slide0.png" alt="Example Image">
