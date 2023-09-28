@@ -36,13 +36,33 @@ class Item {
 @customElement("menu-carousel-component")
 export class MenuCarouselComponent extends LitElement {
   static styles = css`
-    .carousel {
-      width: 100%;
-      height: 460px;
+    .carousel-controls {
       position: relative;
-      overflow: hidden;
-      padding-left: 0;
-      list-style-type: none;
+      z-index: 1;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-controls__next-button {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 7.5px 0 7.5px 13px;
+      border-color: transparent transparent transparent #fff;
+      background: none;
+      cursor: pointer;
+    }
+
+    .carousel-controls__previous-button {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 7.5px 13px 7.5px 0;
+      border-color: transparent #fff transparent transparent;
+      background: none;
+      cursor: pointer;
     }
   `;
 
@@ -73,22 +93,23 @@ export class MenuCarouselComponent extends LitElement {
   @property({ type: Number })
   speed = 0.11;
 
-  protected rotateItem(itemIndex: number, rotation: number) {
+  private boundEventListener!: (this: Window, ev: UIEvent) => unknown;
 
+  protected rotateItem(itemIndex: number, rotation: number) {
     const item = this._items[itemIndex];
     const sin = Math.sin(rotation);
     const scale = this.farScale + (1 - this.farScale) * (sin + 1) * 0.5;
     item.moveTo(
       this.xPos +
         scale * (Math.cos(rotation) * this.xRadius - item.fullWidth / 2),
-      this.yPos + (scale * sin * this.yRadius),
+      this.yPos + scale * sin * this.yRadius,
       scale
     );
   }
 
   protected carouselRender() {
     const count = this._items.length;
-    const spacing = 2 * Math.PI / count;
+    const spacing = (2 * Math.PI) / count;
     let radians = this._rotation;
     for (let i = 0; i < count; i++) {
       this.rotateItem(i, radians);
@@ -110,10 +131,11 @@ export class MenuCarouselComponent extends LitElement {
       this._rotation += change * this.speed;
       this.scheduleNextFrame();
     }
+    this.carouselRender();
   }
 
   protected go(count: number) {
-    this._destRotation += (2 * Math.PI / this._items.length) * count;
+    this._destRotation += ((2 * Math.PI) / this._items.length) * count;
     if (this._frameTimer === 0) this.scheduleNextFrame();
   }
 
@@ -124,15 +146,53 @@ export class MenuCarouselComponent extends LitElement {
   setupCarousel() {
     this._carousel = this.querySelector(".carousel");
     this._images = Array.from(this.querySelectorAll(".carousel-item"));
+    for (const image of this._images) {
+      image.removeAttribute("style");
+    }
+
     this.xPos ??= this._carousel.offsetWidth * 0.5;
     this.yPos ??= this._carousel.offsetHeight * 0.1;
     this.xRadius ??= this._carousel.offsetWidth / 2.3;
     this.yRadius ??= this._carousel.offsetHeight / 6;
-    this._items = this._images.map(item => new Item(item));
+    this._items = this._images.map((item) => new Item(item));
     this.carouselRender();
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    this.boundEventListener = () => {
+      this.xRadius = this.xPos = undefined;
+      this.setupCarousel();
+    };
+    window.addEventListener("resize", this.boundEventListener);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener("resize", this.boundEventListener);
+  }
+
+  protected goBack() {
+    this.go(-1);
+  }
+
+  protected goForward() {
+    this.go(1);
+  }
+
   render() {
-    return html`<slot></slot>`
+    return html`
+      <slot></slot>
+      <div class="carousel-controls">
+        <button
+          class="carousel-controls__previous-button"
+          @click="${this.goBack}"
+        ></button>
+        <button
+          class="carousel-controls__next-button"
+          @click="${this.goForward}"
+        ></button>
+      </div>
+    `;
   }
 }
