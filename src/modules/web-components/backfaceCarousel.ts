@@ -1,5 +1,11 @@
-import { LitElement, PropertyValueMap, css, html } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { LitElement, css, html } from "lit";
+import {
+  customElement,
+  property,
+  state,
+  query,
+  queryAll,
+} from "lit/decorators.js";
 
 @customElement("backface-carousel-component")
 export class BackfaceCarouselComponent extends LitElement {
@@ -70,7 +76,7 @@ export class BackfaceCarouselComponent extends LitElement {
       width: 0;
       height: 0;
       border-style: solid;
-      border-width: 7.5px 0 7.5px 13.0px;
+      border-width: 7.5px 0 7.5px 13px;
       border-color: transparent transparent transparent #fff;
       background: none;
       cursor: pointer;
@@ -80,7 +86,7 @@ export class BackfaceCarouselComponent extends LitElement {
       width: 0;
       height: 0;
       border-style: solid;
-      border-width: 7.5px 13.0px 7.5px 0;
+      border-width: 7.5px 13px 7.5px 0;
       border-color: transparent #fff transparent transparent;
       background: none;
       cursor: pointer;
@@ -101,16 +107,24 @@ export class BackfaceCarouselComponent extends LitElement {
   @state()
   private _currentItem = 0;
 
+  @query(".carousel-items")
+  _carouselWrap: HTMLElement;
+  @queryAll(".carousel-item")
+  _carouselItem: HTMLElement[];
+
   private boundEventListener!: (this: Window, ev: UIEvent) => unknown;
 
-  @property({ type: Boolean, converter: {
-    fromAttribute: (value) => {
-      return Boolean(Number(value));
+  @property({
+    type: Boolean,
+    converter: {
+      fromAttribute: (value) => {
+        return Boolean(Number(value));
+      },
+      toAttribute: (value) => {
+        return String(value);
+      },
     },
-    toAttribute: (value) => {
-      return String(value);
-    }
-  } })
+  })
   isHorizontal = true;
 
   connectedCallback() {
@@ -135,15 +149,12 @@ export class BackfaceCarouselComponent extends LitElement {
   }
 
   protected rotateCarousel(newCurrentImage: number) {
-    const carouselWrap = this.shadowRoot.querySelector<HTMLElement>(".carousel-items"),
-      items = Array.from(
-        this.shadowRoot.querySelectorAll<HTMLElement>(".carousel-item")
-      );
+    const items = Array.from(this._carouselItem);
     const length = items.length,
       theta = (2 * Math.PI) / length;
-    carouselWrap.style.transform = `rotate${this.isHorizontal ? "Y" : "X"}(${
-      newCurrentImage * -theta
-    }rad)`;
+    this._carouselWrap.style.transform = `rotate${
+      this.isHorizontal ? "Y" : "X"
+    }(${newCurrentImage * -theta}rad)`;
     this._currentItem = newCurrentImage;
   }
 
@@ -157,10 +168,7 @@ export class BackfaceCarouselComponent extends LitElement {
   }
 
   setupCarousel() {
-    const carouselWrap = this.shadowRoot.querySelector<HTMLElement>(".carousel-items"),
-      items = Array.from(
-        this.shadowRoot.querySelectorAll<HTMLElement>(".carousel-item")
-      );
+    const items = Array.from(this._carouselItem);
 
     const length = items.length,
       theta = (2 * Math.PI) / length,
@@ -168,7 +176,7 @@ export class BackfaceCarouselComponent extends LitElement {
         getComputedStyle(items[0])[this.isHorizontal ? "width" : "height"]
       );
     const apothem = size / (2 * Math.tan(Math.PI / length));
-    carouselWrap.style.transformOrigin = `50% 50% ${-apothem}px`;
+    this._carouselWrap.style.transformOrigin = `50% 50% ${-apothem}px`;
 
     for (let i = 0; i < length; i++) {
       items[i].style.padding = "0";
@@ -185,7 +193,7 @@ export class BackfaceCarouselComponent extends LitElement {
   render() {
     return html`
       <div>
-        <div class="carousel ${!this.isHorizontal ? 'carousel--vertical' : ''}">
+        <div class="carousel ${!this.isHorizontal ? "carousel--vertical" : ""}">
           <ul class="carousel-items">
             ${this._elements.map((element) => {
               return html`<li class="carousel-item">${element}</li>`;
@@ -193,9 +201,20 @@ export class BackfaceCarouselComponent extends LitElement {
           </ul>
         </div>
         <div class="carousel-controls">
-          <button class="carousel-controls__previous-button" @click="${this.previousSlide}"></button>
-          <button class="carousel-controls__perspective-button" @click="${this.switchPerspective}">switch</button>
-          <button class="carousel-controls__next-button" @click="${this.nextSlide}"></button>
+          <button
+            class="carousel-controls__previous-button"
+            @click="${this.previousSlide}"
+          ></button>
+          <button
+            class="carousel-controls__perspective-button"
+            @click="${this.switchPerspective}"
+          >
+            switch
+          </button>
+          <button
+            class="carousel-controls__next-button"
+            @click="${this.nextSlide}"
+          ></button>
         </div>
       </div>
     `;

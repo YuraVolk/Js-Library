@@ -7,6 +7,10 @@
     {
       "name": "Backface Carousel",
       "link": "/lit/backface-carousel"
+    },
+    {
+      "name": "Menu Carousel",
+      "link": "/lit/menu-carousel"
     }
   ]
 }
