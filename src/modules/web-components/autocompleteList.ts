@@ -3,6 +3,33 @@ import { customElement, property, state } from "lit/decorators.js";
 
 @customElement("autocomplete-list-component")
 export class AutocompleteListComponent extends LitElement {
+  static styles = css`
+    .autocomplete-items {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      overflow-y: scroll;
+      width: 100%;
+      max-height: 200px;
+      padding-left: 0;
+      margin: 0;
+      list-style-type: none;
+    }
+
+    .autocomplete-item {
+      padding: 10px;
+      cursor: pointer;
+      background-color: #ffffff;
+      border-bottom: 1px solid #d4d4d4;
+    }
+
+    .autocomplete-wrap {
+      position: relative;
+    }
+  `;
+
   @property({ type: Array, converter: {
     fromAttribute: (value): string[] => {
       if (value === null) return [];
@@ -64,12 +91,14 @@ export class AutocompleteListComponent extends LitElement {
 
   render() {
     return html`
-      <slot></slot>
-      ${this._isListOpened && this._filteredOptions.length ? html`<ul class="autocomplete-items">
-        ${this._filteredOptions.map(option => {
-          return html`<li class="autocomplete-item" @click="${() => { this.setInputValue(option); }}">${option}</li>`;
-        })}
-      </ul>` : ""}
+      <div class="autocomplete-wrap">
+        <slot></slot>
+        ${this._isListOpened && this._filteredOptions.length ? html`<ul class="autocomplete-items">
+          ${this._filteredOptions.map(option => {
+            return html`<li class="autocomplete-item" @click="${() => { this.setInputValue(option); }}">${option}</li>`;
+          })}
+        </ul>` : ""}
+      </div>
     `;
   }
 }
