@@ -19,23 +19,60 @@
   <main class="main">
     <h1 class="heading">Menu Carousel</h1>
     <p>
-      The menu carousel component represents a 3D carousel in which items are rotated around a circular area
-      that can be defined and whose X/Y dimensions can be changed by user. The carousel accepts a variety of
-      configuration options:
-    <ul>
-      <li>xPos, automatically re-calculated on resize by default.</li>
-      <li>yPos, defines Y size of carousel.</li>
-      <li>xRadius, defines inner circle X radius.</li>
-      <li>yRadius, defines inner circle Y radius.</li>
-      <li>farScale, defines the scale between elements, allowing farther elements to appear smaller.</li>
-      <li>speed, defines the animation speed.</li>
-    </ul>
-    Carousel accepts HTML children as images, and requires user to do minimal CSS setup such as position: relative and
-    width/height properties on carousel.
+      e Ciphering Text Component is a custom element that allows you to display text in a ciphered manner.
+      It takes an array of strings and displays them one by one, with each string being ciphered and revealed gradually.
+      This component adds an interesting visual effect to your web application or website.
+    <ol>
+      <li>Custom Element Definition: The CipheringTextComponent class is defined as a custom element using the
+        @customElement decorator.</li>
+      <li>Property Declarations: The class defines several properties using the @property decorator. These properties
+        define the behavior and configuration of the Ciphering Text Component. They include strings, repetitions,
+        interval, typingSpeed, and characters.</li>
+      <li>Helper Methods: The class defines several helper methods to handle the ciphering and animation logic. These
+        methods include validateElement, generateNextStrings, splitText, cipherLetter, cipherText, onInterval,
+        connectedCallback, and disconnectedCallback.</li>
+      <li>Render Method: The render method is implemented to define the HTML template for the custom element. In this
+        case, it simply renders a slot element, which allows you to insert content into the component.</li>
+
+    </ol>
     </p>
     <ciphering-text-component strings="Carousel accepts;Now this is different">
       <pre class="ciphering-text">Test text</pre>
     </ciphering-text-component>
+    <p>
+    <h2>Code Examples</h2>
+    Here are some code examples to demonstrate how to use the Ciphering Text Component:
+
+    <h3>Basic Usage:</h3>
+    <ciphering-text-component strings="Hello;World" repetitions="2" interval="3000" typingSpeed="45">
+      <pre class="ciphering-text">Observe this text.</pre>
+    </ciphering-text-component>
+    <pre>
+        <code>
+          &lt;ciphering-text-component strings=&quot;Hello;World&quot; repetitions=&quot;2&quot; interval=&quot;3000&quot; typingSpeed=&quot;45&quot;&gt;
+            &lt;pre&gt;&lt;/pre&gt;
+          &lt;/ciphering-text-component&gt;
+        </code>
+      </pre>
+    In this example, the Ciphering Text Component is used to display the strings "Hello" and "World" in a ciphered
+    manner. The strings will be repeated twice with an interval of 3 seconds between repetitions. The typing speed is
+    set to 45 characters per second. The pre element is used as the target element for displaying the ciphered text.
+
+    <h3>Custom Characters:</h3>
+    <ciphering-text-component strings="Hello;World" repetitions="2" interval="3000" typingSpeed="45"
+      characters="ABCDEFGHIJKLMNOPQRSTUVWXYZ">
+      <pre class="ciphering-text">Observe this text.</pre>
+    </ciphering-text-component>
+    <pre>
+        <code>
+          &lt;ciphering-text-component strings=&quot;Hello;World&quot; repetitions=&quot;2&quot; interval=&quot;3000&quot; typingSpeed=&quot;45&quot; characters=&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;&gt;
+            &lt;pre&gt;&lt;/pre&gt;
+          &lt;/ciphering-text-component&gt;
+        </code>
+      </pre>
+    In this example, the Ciphering Text Component is configured to use custom characters for ciphering the text. The
+    characters are set to "ABCDEFGHIJKLMNOPQRSTUVWXYZ", which means the ciphered text will only contain uppercase
+    letters.</p>
   </main>
 </body>
 
