@@ -5,6 +5,10 @@
       "link": "/lit/accordion"
     },
     {
+      "name": "Autocomplete Input",
+      "link": "/lit/autocomplete-list"
+    },
+    {
       "name": "Backface Carousel",
       "link": "/lit/backface-carousel"
     },
