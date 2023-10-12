@@ -108,9 +108,9 @@ export class BackfaceCarouselComponent extends LitElement {
   private _currentItem = 0;
 
   @query(".carousel-items")
-  _carouselWrap: HTMLElement;
+  _carouselWrap!: HTMLElement;
   @queryAll(".carousel-item")
-  _carouselItem: HTMLElement[];
+  _carouselItem!: HTMLElement[];
 
   private boundEventListener!: (this: Window, ev: UIEvent) => unknown;
 

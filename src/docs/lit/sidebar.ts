@@ -130,7 +130,7 @@ export class SidebarComponent extends LitElement {
   `;
 
   @property()
-  activeLink: string;
+  activeLink = "";
 
   render() {
     return html`

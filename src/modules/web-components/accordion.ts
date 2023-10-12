@@ -1,6 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
+import { assertNonUndefined } from "../utils";
 
 interface AccordionHTMLCollection extends HTMLCollection {
   [index: number]: HTMLElement;
@@ -64,6 +65,7 @@ export class AccordionComponent extends LitElement {
 
   @property({ type: Array, converter: {
     fromAttribute: (value): boolean[] => {
+      if (value === null) return [];
       const result = value.split(",").map(v => v === "true" || v === "1");
       return result;
     },
@@ -103,6 +105,7 @@ export class AccordionComponent extends LitElement {
 
   protected updateWidths() {
     this._widths.length = this._headerHeights.length = 0;
+    assertNonUndefined(this.shadowRoot);
     for (const listItem of Array.from(
       this.shadowRoot.children[0].children
     ).filter<AccordionSection>(

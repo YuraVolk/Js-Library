@@ -6,11 +6,17 @@ import {
   query,
   queryAll,
 } from "lit/decorators.js";
+import { assertNonUndefinedDevOnly } from "../utils";
 
 class Item {
   image: HTMLElement;
   fullWidth: number;
   fullHeight: number;
+  width?: number;
+  height?: number;
+  x?: number;
+  y?: number;
+  scale?: number;
   moveTo: (x: number, y: number, scale: number) => void;
 
   constructor(image: HTMLElement) {
@@ -28,7 +34,7 @@ class Item {
       style.width = this.width + "px";
       style.left = x + "px";
       style.top = y + "px";
-      style.zIndex = (scale * 100) | 0;
+      style.zIndex = String((scale * 100) | 0);
     };
   }
 }
@@ -67,9 +73,9 @@ export class MenuCarouselComponent extends LitElement {
   `;
 
   @state()
-  _carousel: HTMLElement;
+  _carousel!: HTMLElement;
   @state()
-  _images: HTMLElement[];
+  _images!: HTMLElement[];
 
   @state()
   _rotation = Math.PI / 2;
@@ -78,7 +84,7 @@ export class MenuCarouselComponent extends LitElement {
   @state()
   _frameTimer = 0;
   @state()
-  _items: Item[];
+  _items!: Item[];
 
   @property({ type: Number })
   xPos?: number;
@@ -99,6 +105,8 @@ export class MenuCarouselComponent extends LitElement {
     const item = this._items[itemIndex];
     const sin = Math.sin(rotation);
     const scale = this.farScale + (1 - this.farScale) * (sin + 1) * 0.5;
+    assertNonUndefinedDevOnly(this.xPos);
+    assertNonUndefinedDevOnly(this.xRadius);
     item.moveTo(
       this.xPos +
         scale * (Math.cos(rotation) * this.xRadius - item.fullWidth / 2),
@@ -144,7 +152,9 @@ export class MenuCarouselComponent extends LitElement {
   }
 
   setupCarousel() {
-    this._carousel = this.querySelector(".carousel");
+    const carousel = this.querySelector<HTMLElement>(".carousel");
+    if (!carousel) return;
+    this._carousel = carousel;
     this._images = Array.from(this.querySelectorAll(".carousel-item"));
     for (const image of this._images) {
       image.removeAttribute("style");
