@@ -74,6 +74,7 @@ export class CipheringTextComponent extends LitElement {
             if (index >= changeNumber) {
               isDone = true;
               element.textContent = newLetter;
+              element.removeAttribute("data-ciphering-text-in-progress");
             }
           }, speed * index);
         })(index++);
@@ -92,6 +93,7 @@ export class CipheringTextComponent extends LitElement {
     for (const element of newElements) {
       Array.from(element.children).forEach((element, i) => {
         if (element.textContent === toText[i]) return;
+        element.setAttribute("data-ciphering-text-in-progress", "");
         speeds.push(this.cipherLetter({ element, newLetter: toText[i], i, delayed: element.textContent?.length === 0 }));
       });
     }
