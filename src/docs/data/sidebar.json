@@ -19,6 +19,10 @@
     {
       "name": "Menu Carousel",
       "link": "/lit/menu-carousel"
+    },
+    {
+      "name": "Custom Range Input",
+      "link": "/lit/range-input"
     }
   ]
 }

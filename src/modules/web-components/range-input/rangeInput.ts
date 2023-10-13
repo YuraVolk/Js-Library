@@ -136,13 +136,17 @@ export class RangeInputComponent extends LitElement {
 
   private boundEventListener!: (this: Window, ev: Event) => unknown;
 
-  protected onValueChange(event: Event) {
-    assertDevOnly(event.target instanceof HTMLInputElement);
-    this._value = Number(event.target.value);
+  protected setGradientStyle() {
     const progress = (this._value / this.maximum) * 100;
     this._gradientStyle = {
       background: `linear-gradient(to right, ${this.thumbColor} ${progress}%, ${this.trackColor} ${progress}%)`
     };
+  }
+
+  private onValueChange(event: Event) {
+    assertDevOnly(event.target instanceof HTMLInputElement);
+    this._value = Number(event.target.value);
+    this.setGradientStyle();
   }
 
   connectedCallback(): void {
@@ -150,6 +154,7 @@ export class RangeInputComponent extends LitElement {
     this.boundEventListener = (event) => { this.onValueChange(event) };
     this._value = this.defaultValue;
     this.rangeSlider.then((result) => {
+      this.setGradientStyle();
       result.addEventListener("input", this.boundEventListener);
     });
   }
