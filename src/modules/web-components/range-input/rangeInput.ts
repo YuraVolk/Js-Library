@@ -2,7 +2,7 @@ import { LitElement, css, html } from "lit";
 import { customElement, property, state, queryAsync } from "lit/decorators.js";
 import { assertDevOnly } from "../../utils";
 import { styleMap } from 'lit/directives/style-map.js';
-import { thumbStyles } from "./styles";
+import { defaultActiveColor, defaultHoverColor, thumbStyles } from "./styles";
 
 @customElement("range-input-component")
 export class RangeInputComponent extends LitElement {
@@ -29,16 +29,28 @@ export class RangeInputComponent extends LitElement {
       ${thumbStyles}
     }
 
-    .range-slider__input::-webkit-slider-thumb:hover,
-    .range-slider__input::-moz-range-thumb:hover {
-      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 3)) var(--hoverColor, rgba(255,85,0, .1));
+    .range-slider__input::-webkit-slider-thumb:hover {
+      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 3)) var(--hoverColor, ${defaultHoverColor});
     }
 
-    .range-slider__input:active::-webkit-slider-thumb,
-    .range-slider__input:active::-moz-range-thumb,
-    .range-slider__input:focus::-webkit-slider-thumb,
+    .range-slider__input::-moz-range-thumb:hover {
+      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 3)) var(--hoverColor, ${defaultHoverColor});
+    }
+
+    .range-slider__input:active::-webkit-slider-thumb {
+      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 6)) var(--activeColor, ${defaultActiveColor});
+    }
+
+    .range-slider__input:active::-moz-range-thumb {
+      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 6)) var(--activeColor, ${defaultActiveColor});
+    }
+
+    .range-slider__input:focus::-webkit-slider-thumb {
+      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 6)) var(--activeColor, ${defaultActiveColor});
+    }
+
     .range-slider__input:focus::-moz-range-thumb {
-      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 6)) var(--activeColor, rgba(255,85,0, .2));
+      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 6)) var(--activeColor, ${defaultActiveColor});
     }
 
     .wrap {
@@ -108,9 +120,9 @@ export class RangeInputComponent extends LitElement {
   @property({ type: String })
   thumbColor = "#f50";
   @property({ type: String })
-  hoverColor = "rgba(255,85,0, .1)";
+  hoverColor = defaultHoverColor;
   @property({ type: String })
-  activeColor = "rgba(255,85,0, .2)";
+  activeColor = defaultActiveColor;
   @property({ type: String })
   valueSize = "25px";
 

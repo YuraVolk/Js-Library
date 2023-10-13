@@ -1,7 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
-import { assertNonUndefined } from "../utils";
+import { assertNonUndefined } from "../../utils";
 
 interface AccordionHTMLCollection extends HTMLCollection {
   [index: number]: HTMLElement;

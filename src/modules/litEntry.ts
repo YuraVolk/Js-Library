@@ -1,9 +1,9 @@
-import "./web-components/accordion";
-import "./web-components/backfaceCarousel";
-import "./web-components/menuCarousel";
-import "./web-components/autocompleteList";
-import "./web-components/cipheringText";
-import "./web-components/colorPicker";
+import "./web-components/accordion/accordion";
+import "./web-components/backface-carousel/backfaceCarousel";
+import "./web-components/menu-carousel/menuCarousel";
+import "./web-components/autocomplete-list/autocompleteList";
+import "./web-components/ciphering-text/cipheringText";
+import "./web-components/color-picker/colorPicker";
 import "./web-components/range-input/rangeInput";
 
 import "../docs/lit/sidebar";

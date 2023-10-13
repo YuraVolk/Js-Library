@@ -9,3 +9,5 @@ export const thumbStyles = css`
   transition: 0.35s ease-in-out;
 `;
 
+export const defaultActiveColor = css`rgba(255,85,0, .6)`;
+export const defaultHoverColor = css`rgba(255,85,0, .3)`;

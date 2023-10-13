@@ -6,7 +6,7 @@ import {
   query,
   queryAll,
 } from "lit/decorators.js";
-import { assertNonUndefinedDevOnly } from "../utils";
+import { assertNonUndefinedDevOnly } from "../../utils";
 
 class Item {
   image: HTMLElement;
