@@ -8,6 +8,12 @@ import {
 } from "lit/decorators.js";
 import { assertNonUndefinedDevOnly } from "../../utils";
 
+declare global {
+  interface HTMLElementTagNameMap {
+    "menu-carousel-component": MenuCarouselComponent;
+  }
+}
+
 class Item {
   image: HTMLElement;
   fullWidth: number;

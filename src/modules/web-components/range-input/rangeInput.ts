@@ -4,6 +4,12 @@ import { assertDevOnly } from "../../utils";
 import { styleMap } from 'lit/directives/style-map.js';
 import { defaultActiveColor, defaultHoverColor, thumbStyles } from "./styles";
 
+declare global {
+  interface HTMLElementTagNameMap {
+    "range-input-component": RangeInputComponent;
+  }
+}
+
 @customElement("range-input-component")
 export class RangeInputComponent extends LitElement {
   private uiRangeID = crypto.randomUUID();
@@ -143,7 +149,7 @@ export class RangeInputComponent extends LitElement {
     };
   }
 
-  private onValueChange(event: Event) {
+  protected onValueChange(event: Event) {
     assertDevOnly(event.target instanceof HTMLInputElement);
     this._value = Number(event.target.value);
     this.setGradientStyle();

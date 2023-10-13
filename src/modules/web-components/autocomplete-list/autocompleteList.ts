@@ -1,6 +1,12 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 
+declare global {
+  interface HTMLElementTagNameMap {
+    "autocomplete-list-component": AutocompleteListComponent;
+  }
+}
+
 @customElement("autocomplete-list-component")
 export class AutocompleteListComponent extends LitElement {
   static styles = css`

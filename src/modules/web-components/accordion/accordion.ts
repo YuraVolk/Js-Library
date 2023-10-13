@@ -12,6 +12,12 @@ interface AccordionSection extends HTMLLIElement {
   children: AccordionHTMLCollection;
 }
 
+declare global {
+  interface HTMLElementTagNameMap {
+    "accordion-component": AccordionComponent;
+  }
+}
+
 @customElement("accordion-component")
 export class AccordionComponent extends LitElement {
   static styles = css`

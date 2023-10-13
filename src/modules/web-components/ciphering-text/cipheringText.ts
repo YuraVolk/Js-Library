@@ -1,6 +1,12 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 
+declare global {
+  interface HTMLElementTagNameMap {
+    "ciphering-text-component": CipheringTextComponent;
+  }
+}
+
 @customElement("ciphering-text-component")
 export class CipheringTextComponent extends LitElement {
   private static validateElement(element: HTMLElement) {

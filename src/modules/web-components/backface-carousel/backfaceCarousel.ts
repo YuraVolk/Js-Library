@@ -7,6 +7,12 @@ import {
   queryAll,
 } from "lit/decorators.js";
 
+declare global {
+  interface HTMLElementTagNameMap {
+    "backface-carousel-component": BackfaceCarouselComponent;
+  }
+}
+
 @customElement("backface-carousel-component")
 export class BackfaceCarouselComponent extends LitElement {
   static styles = css`

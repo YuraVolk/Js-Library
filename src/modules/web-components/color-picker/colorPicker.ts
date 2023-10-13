@@ -1,6 +1,12 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 
+declare global {
+  interface HTMLElementTagNameMap {
+    "color-picker-component": ColorPickerComponent;
+  }
+}
+
 @customElement("color-picker-component")
 export class ColorPickerComponent extends LitElement {
   @property({ type: String })
