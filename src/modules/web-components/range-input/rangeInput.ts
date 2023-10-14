@@ -136,6 +136,8 @@ export class RangeInputComponent extends LitElement {
   _value = 0;
   @state()
   protected _gradientStyle = {};
+  @state()
+  _onUpdateListener?: (newValue: number) => void;
 
   @queryAsync(".range-slider__input")
   rangeSlider!: Promise<HTMLInputElement>;
@@ -153,6 +155,7 @@ export class RangeInputComponent extends LitElement {
     assertDevOnly(event.target instanceof HTMLInputElement);
     this._value = Number(event.target.value);
     this.setGradientStyle();
+    this._onUpdateListener?.(this._value);
   }
 
   connectedCallback(): void {

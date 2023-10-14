@@ -1,5 +1,8 @@
 import { LitElement, css, html } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { customElement, property, queryAsync } from "lit/decorators.js";
+import { assertNonUndefined } from "../../utils";
+import { RangeInputComponent } from "../range-input/rangeInput";
+import { styleMap } from "lit/directives/style-map.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -9,42 +12,137 @@ declare global {
 
 @customElement("color-picker-component")
 export class ColorPickerComponent extends LitElement {
+  private static rgbaConverter = {
+    fromAttribute: (string: string | null) => {
+      const array = string?.split(",");
+      return array && array.length === 4 && array.every(e => typeof e === "number") ? array.map(Number) : [0, 0, 0, 100];
+    },
+    toAttribute: (array: number[]) => array.join(",")
+  };
+
+  static styles = css`
+    .wrap {
+      max-width: 670px;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+
+    .color-picker-wrap {
+      max-width: var(--width);
+      max-height: var(--height);
+      border: 3px solid #000000;
+      background-color: #000000;
+    }
+
+    .color-picker {
+      max-width: inherit;
+      max-height: inherit;
+    }
+
+    .color-picker__canvas {
+      cursor: crosshair;
+    }
+
+    .current-color-wrap {
+      width: calc(var(--width) / 2);
+      height: calc(var(--height) / 2);
+      border: 3px solid #000000;
+    }
+
+    .current-color {
+      width: 100%;
+      height: 100%;
+    }
+
+    .info {
+      width: 235px;
+    }
+
+    p {
+      margin: 3px 0;
+    }
+  `;
+
   @property({ type: String })
   imageUrl = "";
   @property({ type: Number })
   width = 245;
   @property({ type: Number })
   height = 245;
+  @property({ converter: ColorPickerComponent.rgbaConverter })
+  backgroundColor = [0, 0, 0, 1];
+  @property({ converter: ColorPickerComponent.rgbaConverter })
+  rgba = [0, 0, 0, 1];
 
-  @state()
-  _hexCode = "";
-  @state()
-  _rgbaCode = "";
-  @state()
-  _rgb = "";
+  private convertOpacityToBackground() {
+    const alpha = 1 - this.rgba[3] / 100, baseAlpha = this.rgba[3] / 100;
+    return this.rgba.map((c, i) => i === 3 ? 1 : Math.round(alpha * this.backgroundColor[i] + (baseAlpha * c) * 100));
+  }
+
+  getHex() {
+    return "#" + this.convertOpacityToBackground().slice(0, -1)
+      .map(color => Number(color).toString(16).padStart(2, "0")).join("");
+  }
+
+  getRGB() {
+    return `rgb(${this.convertOpacityToBackground().slice(0, -1).join(", ")})`;
+  }
+
+  getRGBA() {
+    return `rgba(${this.rgba.join(", ")})`;
+  }
+
+  @queryAsync("#opacity-range")
+  private opacityRange!: Promise<RangeInputComponent>;
+  @queryAsync("canvas")
+  private canvasElement!: Promise<HTMLCanvasElement>;
+
+  protected initColorPicker() {
+    this.canvasElement.then(canvas => {
+      const ctx = canvas.getContext("2d");
+      assertNonUndefined(ctx);
+      const image = new Image(this.width, this.height);
+      image.src = this.imageUrl;
+      image.onload = () => ctx.drawImage(image, 0, 0, image.width, image.height);
+      canvas.addEventListener("mousedown", (e) => {
+        this.rgba = [...ctx.getImageData(e.offsetX, e.offsetY, 1, 1).data.slice(0, -1), this.rgba[3]];
+      });
+    });
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.initColorPicker();
+    this.opacityRange.then(range => range._onUpdateListener = (value) => {
+      this.rgba = [...this.rgba.slice(0, -1), value];
+    });
+  }
 
   render() {
     return html`
-      <div class="color-picker">
-        <div class="color-picker__border">
-          <div class="color-picker__background">
-            <canvas id="color-picker__canvas" width="245" height="245"></canvas>
+      <div class="wrap" style="--width: ${this.width}px; --height: ${this.height}px">
+        <div class="color-picker-wrap">
+          <div class="color-picker">
+            <canvas class="color-picker__canvas" width="${this.width}" height="${this.height}"></canvas>
           </div>
         </div>
-        <div class="color-picker__info">
-          <div class="color-picker__current-color_background">
-            <div class="color-picker__current-color"></div>
+        <div class="info">
+          <div class="current-color-wrap">
+            <div class="current-color" style=${styleMap({ backgroundColor: this.getRGB() })}></div>
           </div>
-          <label class="color-picker__opacity">
-            <span class="color-picker__opacity-label">Opacity: </span>
-            <span class="color-picker__opacity-range">
-              <input type="range" class="opacity-range__track" />
-              <input type="range" class="opacity-range__thumb" />
-            </span>
-          </label>
-          <p>Hex code: <span class="color-code color-code--hex"></span></p>
-          <p>RGBA: <span class="color-code color-code--rgba"></span></p>
-          <p>RGB: <span class="color-code color-code--rgb"></span></p>
+          <range-input-component
+            id="opacity-range"
+            maximum="1"
+            step="0.01"
+            ticks="0,100"
+            label="Opacity:"
+            defaultValue="1"
+          ></range-input-component>
+          <p>Hex code: ${this.getHex()}</p>
+          <p>RGBA: ${this.getRGBA()}</p>
+          <p>RGB: ${this.getRGB()}</p>
         </div>
       </div>
     `;

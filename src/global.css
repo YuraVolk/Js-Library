@@ -23,16 +23,29 @@ body {
 }
 
 .main {
+  position: relative;
   max-width: calc(100% - 210px - 6rem);
   height: calc(100vh - 50px - 6rem);
   margin: 1rem;
   padding: 2rem;
   flex-grow: 1;
   color: #cacaca;
-  background: rgba(22, 22, 22, 0.525);
   border-radius: 10px;
-  mix-blend-mode: hard-light;
   overflow-y: auto;
+}
+
+.main::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  mix-blend-mode: hard-light;
+  background: rgba(22, 22, 22, 0.525);
+  content: "";
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .heading {
