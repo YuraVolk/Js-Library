@@ -2,9 +2,7 @@ import { LitElement, css, html } from "lit";
 import {
   customElement,
   property,
-  state,
-  query,
-  queryAll,
+  state
 } from "lit/decorators.js";
 import { assertNonUndefinedDevOnly } from "../../utils";
 
