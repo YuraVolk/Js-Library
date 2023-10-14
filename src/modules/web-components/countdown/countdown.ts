@@ -37,7 +37,7 @@ export class CountdownComponent extends LitElement {
     fromAttribute: (string) => new Date(string ?? 'May 6, 2085 11:00:00'),
     toAttribute: (date: Date) => date.toString()
   } })
-  private date = new Date('May 6, 2085 11:00:00');
+  date = new Date('May 6, 2085 11:00:00');
 
   @queryAssignedElements({ selector: '[data-countdown]', flatten: true })
   _countdownItems!: HTMLElement[];
