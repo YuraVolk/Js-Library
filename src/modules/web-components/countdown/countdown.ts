@@ -1,8 +1,7 @@
-import { LitElement, PropertyValueMap, css, html } from "lit";
+import { LitElement, html } from "lit";
 import {
   customElement,
   property,
-  state,
   queryAssignedElements
 } from "lit/decorators.js";
 
