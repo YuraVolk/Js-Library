@@ -25,6 +25,10 @@
       "link": "/lit/countdown"
     },
     {
+      "name": "Custom Select",
+      "link": "/lit/custom-select"
+    },
+    {
       "name": "Menu Carousel",
       "link": "/lit/menu-carousel"
     },
