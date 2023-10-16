@@ -1,11 +1,8 @@
-.list__floating-panel {
-  background-color: #2390bb;
-  position: fixed;
-  top: calc(40vh - 200px);
-  left: calc(95vw - 200px);
+.floating-panel {
   width: 200px;
-  height: 200px;
+  height: 210px;
   z-index: 5;
+  background-color: #2390bb;
   color: #ffffff;
   font-size: 12px;
   line-height: 22px;
@@ -21,6 +18,23 @@
   font-size: 17px;
 }
 
-.list__floating-panel--sticky {
+.floating-panel--sticky {
   position: sticky;
+}
+
+.floating-panel--fixed {
+  position: sticky;
+  position: fixed;
+  top: calc(40vh - 210px);
+  left: calc(98vw - 200px);
+}
+
+.wrap {
+  background: rgba(73, 37, 37, 0.7);
+  border-radius: 10px;
+  height: 300px;
+}
+
+.main > p, li {
+  max-width: 85%;
 }
