@@ -1,0 +1,26 @@
+.list__floating-panel {
+  background-color: #2390bb;
+  position: fixed;
+  top: calc(40vh - 200px);
+  left: calc(95vw - 200px);
+  width: 200px;
+  height: 200px;
+  z-index: 5;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 22px;
+  border: 5px solid #676767;
+  text-align: center;
+  cursor: grab;
+}
+
+.floating-panel__caption {
+  font-weight: bold;
+  padding: 10px;
+  background-color: #00435a;
+  font-size: 17px;
+}
+
+.list__floating-panel--sticky {
+  position: sticky;
+}

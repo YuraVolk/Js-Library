@@ -7,6 +7,7 @@ import "./web-components/color-picker/colorPicker";
 import "./web-components/range-input/rangeInput";
 import "./web-components/countdown/countdown";
 import "./web-components/custom-select/customSelect";
+import "./web-components/floating-panel/floatingPanel";
 
 import "../docs/lit/sidebar";
 import "../docs/lit/header";

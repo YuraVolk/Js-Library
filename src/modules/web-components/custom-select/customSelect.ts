@@ -168,7 +168,6 @@ export class CustomSelectComponent extends LitElement {
 					})}"
 				>
 					${this._internalElements.map((element) => {
-            console.log(element.isSelected);
 						return html`
 							<li
 								class="custom-select-option"
