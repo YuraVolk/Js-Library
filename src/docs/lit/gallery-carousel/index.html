@@ -19,21 +19,40 @@
   <main class="main">
     <h1 class="heading">Gallery Carousel</h1>
     <p>
-      The custom color picker provides enhanced user experience as it can be manually configured to match the
-      overall look of website, providing a seamless user experience through complete control of layout, styling
-      and interaction. Custom color pickers allow you to easily integrate with other JavaScript based libraries,
-      without any compatibility issues, need to convert into different color formats, being the same across all
-      browsers. Such color pickers may have better performance due to not being anyhow dependent on system UI.
-      Here are the attributes for color picker component:
+      The gallery carousel component represents a 2D carousel that allows items to be cycled through the
+      visible area, showing one item at a time by default. This is a classic and most common carousel type,
+      which is commonly seen on websites, and has toggles and arrows to navigate in the carousel.
       <ul>
-        <li>imageUrl, required to load the image from which you can pick the color.</li>
-        <li>width, defines the width of color picker, in pixels.</li>
-        <li>height, defines the height of color picker, in pixels.</li>
-        <li>backgroundColor, a comma-separated list of four values representing the RGBA background color.</li>
-        <li>rgba, a comma-separated list of four values representing the default RGBA color.</li>
+        <li>smoothDiametralTransition: Determines whether the transition between the last item and the
+          first item is smooth. By default, this property is set to false.</li>
+        <li>current: Specifies the index of the current item being displayed in the carousel.</li>
+        <li>frameGap: Defines the gap between each item in the carousel.</li>
+        <li>animationDuration: Sets the duration of the animation when transitioning between items.</li>
+        <li>showArrows: Determines whether the arrows for navigating to the previous or next item are
+          displayed. False by default.</li>
+        <li>showToggles: Specifies whether the toggles for switching between items are shown. False by default.</li>
       </ul>
+      Here is a carousel with all default options:
     </p>
-    <gallery-carousel-component class="gallery-wrap">
+    <gallery-carousel-component class="gallery-wrap" showArrows showToggles smoothDiametralTransition>
+      <img class="gallery-item" src="/src/assets/img/slide1.png" alt="Example Image">
+      <img class="gallery-item" src="/src/assets/img/slide2.png" alt="Example Image">
+      <img class="gallery-item" src="/src/assets/img/slide3.png" alt="Example Image">
+      <img class="gallery-item" src="/src/assets/img/slide4.png" alt="Example Image">
+      <img class="gallery-item" src="/src/assets/img/slide5.png" alt="Example Image">
+      <img class="gallery-item" src="/src/assets/img/slide0.png" alt="Example Image">
+      <img class="gallery-item" src="/src/assets/img/slide1.png" alt="Example Image">
+      <img class="gallery-item" src="/src/assets/img/slide2.png" alt="Example Image">
+      <img class="gallery-item" src="/src/assets/img/slide3.png" alt="Example Image">
+      <img class="gallery-item" src="/src/assets/img/slide4.png" alt="Example Image">
+      <img class="gallery-item" src="/src/assets/img/slide5.png" alt="Example Image">
+      <img class="gallery-item" src="/src/assets/img/slide0.png" alt="Example Image">
+      <img class="gallery-item" src="/src/assets/img/slide1.png" alt="Example Image">
+      <img class="gallery-item" src="/src/assets/img/slide2.png" alt="Example Image">
+      <img class="gallery-item" src="/src/assets/img/slide3.png" alt="Example Image">
+    </gallery-carousel-component>
+    <p>Here you can see a carousel with no toggles and without smooth diametral transition:</p>
+    <gallery-carousel-component showArrows class="gallery-wrap">
       <img class="gallery-item" src="/src/assets/img/slide1.png" alt="Example Image">
       <img class="gallery-item" src="/src/assets/img/slide2.png" alt="Example Image">
       <img class="gallery-item" src="/src/assets/img/slide3.png" alt="Example Image">

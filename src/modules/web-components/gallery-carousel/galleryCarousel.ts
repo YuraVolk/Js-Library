@@ -99,13 +99,17 @@ export class GalleryCarouselComponent extends LitElement {
 	`;
 
 	@property({ type: Boolean })
-	smoothDiametralTransition = true;
+	smoothDiametralTransition = false;
 	@property({ type: Number })
 	current = 1;
 	@property({ type: Number })
 	frameGap = 20;
 	@property({ type: Number })
 	animationDuration = 500;
+  @property({ type: Boolean })
+  showArrows = false;
+  @property({ type: Boolean })
+  showToggles = false;
 
 	@queryAssignedElements({ flatten: true })
 	_carouselItems!: HTMLElement[];
@@ -175,7 +179,7 @@ export class GalleryCarouselComponent extends LitElement {
 					<slot></slot>
 				</ul>
 			</div>
-			<div class="gallery-controls">
+			${this.showArrows ? html`<div class="gallery-controls">
 				<button
 					class="gallery-controls__previous-button"
 					@click="${() => {
@@ -187,9 +191,9 @@ export class GalleryCarouselComponent extends LitElement {
 					@click="${() => {
 						this.changeCurrentSlide(this.current + 1);
 					}}"
-				></button>
+				></button>` : ""}
 			</div>
-			${this._itemsLength !== 0
+			${this._itemsLength !== 0 && this.showToggles
 				? html`<ul class="gallery-toggles">
 						${Array.from(
 							{ length: this._itemsLength },
