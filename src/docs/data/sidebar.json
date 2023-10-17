@@ -33,6 +33,10 @@
       "link": "/lit/floating-panel"
     },
     {
+      "name": "Gallery Carousel",
+      "link": "/lit/gallery-carousel"
+    },
+    {
       "name": "Menu Carousel",
       "link": "/lit/menu-carousel"
     },

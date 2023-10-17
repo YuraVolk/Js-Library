@@ -1,0 +1,12 @@
+.gallery-wrap {
+  display: block;
+  width: 370px;
+  height: 220px;
+  margin: 0 auto;
+}
+
+.gallery-item {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
