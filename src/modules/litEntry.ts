@@ -10,6 +10,7 @@ import "./web-components/custom-select/customSelect";
 import "./web-components/floating-panel/floatingPanel";
 import "./web-components/gallery-carousel/galleryCarousel";
 import "./web-components/image-comparator/imageComparator";
+import "./web-components/magnifier/magnifier";
 
 import "../docs/lit/sidebar";
 import "../docs/lit/header";
