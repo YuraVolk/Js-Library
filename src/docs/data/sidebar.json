@@ -49,6 +49,10 @@
       "link": "/lit/menu-carousel"
     },
     {
+      "name": "One Page Scroll",
+      "link": "/lit/one-page-scroll"
+    },
+    {
       "name": "Custom Range Input",
       "link": "/lit/range-input"
     }
