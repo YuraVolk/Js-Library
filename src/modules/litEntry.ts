@@ -12,6 +12,7 @@ import "./web-components/gallery-carousel/galleryCarousel";
 import "./web-components/image-comparator/imageComparator";
 import "./web-components/magnifier/magnifier";
 import "./web-components/one-page-scroll/onePageScroll";
+import "./web-components/parallax/parallax";
 
 import "../docs/lit/sidebar";
 import "../docs/lit/header";

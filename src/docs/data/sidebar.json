@@ -53,7 +53,11 @@
       "link": "/lit/one-page-scroll"
     },
     {
-      "name": "Custom Range Input",
+      "name": "Parallax",
+      "link": "/lit/parallax"
+    },
+    {
+      "name": "Range Input",
       "link": "/lit/range-input"
     }
   ]
