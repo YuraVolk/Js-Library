@@ -14,6 +14,7 @@ import "./web-components/magnifier/magnifier";
 import "./web-components/one-page-scroll/onePageScroll";
 import "./web-components/parallax/parallax";
 import "./web-components/perspective-carousel/perspectiveCarousel";
+import "./web-components/popup/popup";
 
 import "../docs/lit/sidebar";
 import "../docs/lit/header";

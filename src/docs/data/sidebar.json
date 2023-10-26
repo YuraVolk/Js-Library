@@ -61,6 +61,10 @@
       "link": "/lit/perspective-carousel"
     },
     {
+      "name": "Popup",
+      "link": "/lit/popup"
+    },
+    {
       "name": "Range Input",
       "link": "/lit/range-input"
     }
