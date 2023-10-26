@@ -5,6 +5,7 @@ import {
   state
 } from "lit/decorators.js";
 import { assertNonUndefinedDevOnly } from "../../utils";
+import { carouselControlsStyles } from "../../interfaces/carousel";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -45,36 +46,7 @@ class Item {
 
 @customElement("menu-carousel-component")
 export class MenuCarouselComponent extends LitElement {
-  static styles = css`
-    .carousel-controls {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .carousel-controls__next-button {
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 7.5px 0 7.5px 13px;
-      border-color: transparent transparent transparent #fff;
-      background: none;
-      cursor: pointer;
-    }
-
-    .carousel-controls__previous-button {
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 7.5px 13px 7.5px 0;
-      border-color: transparent #fff transparent transparent;
-      background: none;
-      cursor: pointer;
-    }
-  `;
+  static styles = carouselControlsStyles;
 
   @state()
   _carousel!: HTMLElement;

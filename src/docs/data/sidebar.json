@@ -57,6 +57,10 @@
       "link": "/lit/parallax"
     },
     {
+      "name": "Perspective Carousel",
+      "link": "/lit/perspective-carousel"
+    },
+    {
       "name": "Range Input",
       "link": "/lit/range-input"
     }
