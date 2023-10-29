@@ -2,71 +2,71 @@
   "components": [
     {
       "name": "Accordion",
-      "link": "/lit/accordion"
+      "link": "../accordion"
     },
     {
       "name": "Autocomplete Input",
-      "link": "/lit/autocomplete-list"
+      "link": "../autocomplete-list"
     },
     {
       "name": "Backface Carousel",
-      "link": "/lit/backface-carousel"
+      "link": "../backface-carousel"
     },
     {
       "name": "Ciphering Text",
-      "link": "/lit/ciphering-text"
+      "link": "../ciphering-text"
     },
     {
       "name": "Color Picker",
-      "link": "/lit/color-picker"
+      "link": "../color-picker"
     },
     {
       "name": "Countdown",
-      "link": "/lit/countdown"
+      "link": "../countdown"
     },
     {
       "name": "Custom Select",
-      "link": "/lit/custom-select"
+      "link": "../custom-select"
     },
     {
       "name": "Floating Panel",
-      "link": "/lit/floating-panel"
+      "link": "../floating-panel"
     },
     {
       "name": "Gallery Carousel",
-      "link": "/lit/gallery-carousel"
+      "link": "../gallery-carousel"
     },
     {
       "name": "Image Comparator",
-      "link": "/lit/image-comparator"
+      "link": "../image-comparator"
     },
     {
       "name": "Magnifier",
-      "link": "/lit/magnifier"
+      "link": "../magnifier"
     },
     {
       "name": "Menu Carousel",
-      "link": "/lit/menu-carousel"
+      "link": "../menu-carousel"
     },
     {
       "name": "One Page Scroll",
-      "link": "/lit/one-page-scroll"
+      "link": "../one-page-scroll"
     },
     {
       "name": "Parallax",
-      "link": "/lit/parallax"
+      "link": "../parallax"
     },
     {
       "name": "Perspective Carousel",
-      "link": "/lit/perspective-carousel"
+      "link": "../perspective-carousel"
     },
     {
       "name": "Popup",
-      "link": "/lit/popup"
+      "link": "../popup"
     },
     {
       "name": "Range Input",
-      "link": "/lit/range-input"
+      "link": "../range-input"
     }
   ]
 }
