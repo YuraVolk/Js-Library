@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Carousel Component</title>
+  <link rel="stylesheet" href="/src/global.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <header class="header">
+    <header-component></header-component>
+  </header>
+  <aside class="navigation">
+    <sidebar-component activeLink="Menu Carousel"></sidebar-component>
+  </aside>
+  <main class="main">
+    <h1 class="heading">Menu Carousel</h1>
+    <p>
+      The menu carousel component represents a 3D carousel in which items are rotated around a circular area
+      that can be defined and whose X/Y dimensions can be changed by user. The carousel accepts a variety of
+      configuration options:
+    <ul>
+      <li>xPos, automatically re-calculated on resize by default.</li>
+      <li>yPos, defines Y size of carousel.</li>
+      <li>xRadius, defines inner circle X radius.</li>
+      <li>yRadius, defines inner circle Y radius.</li>
+      <li>farScale, defines the scale between elements, allowing farther elements to appear smaller.</li>
+      <li>speed, defines the animation speed.</li>
+    </ul>
+    Carousel accepts HTML children as images, and requires user to do minimal CSS setup such as position: relative and
+    width/height properties on carousel.
+    </p>
+    <menu-carousel-component farScale="0.6">
+      <div class="carousel">
+        <img class="carousel-item" src="/src/assets/img/slide1.png" alt="Example Image">
+        <img class="carousel-item" src="/src/assets/img/slide0.png" alt="Example Image">
+        <img class="carousel-item" src="/src/assets/img/slide2.png" alt="Example Image">
+        <img class="carousel-item" src="/src/assets/img/slide3.png" alt="Example Image">
+        <img class="carousel-item" src="/src/assets/img/slide4.png" alt="Example Image">
+        <img class="carousel-item" src="/src/assets/img/slide5.png" alt="Example Image">
+        <img class="carousel-item" src="/src/assets/img/slide0.png" alt="Example Image">
+        <img class="carousel-item" src="/src/assets/img/slide1.png" alt="Example Image">
+        <img class="carousel-item" src="/src/assets/img/slide2.png" alt="Example Image">
+        <img class="carousel-item" src="/src/assets/img/slide3.png" alt="Example Image">
+        <img class="carousel-item" src="/src/assets/img/slide4.png" alt="Example Image">
+        <img class="carousel-item" src="/src/assets/img/slide5.png" alt="Example Image">
+      </div>
+    </menu-carousel-component>
+  </main>
+</body>
+
+</html>

@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --open"
+    "build:lit": "webpack --mode production --config webpack/webpack.config.lit.js",
+    "build": "npm run build:lit",
+    "start:lit": "webpack-dev-server --mode development --open --config webpack/webpack.config.lit.js"
   },
   "author": "Yuri Volkovskiy",
   "devDependencies": {
@@ -19,12 +20,18 @@
     "mini-css-extract-plugin": "^2.7.6",
     "style-loader": "^3.3.3",
     "terser-webpack-plugin": "^5.3.9",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.2.2",
+    "typescript-plugin-css-modules": "^5.0.1",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
     "@babel/polyfill": "^7.11.5",
-    "babel-core": "^7.0.0-bridge.0"
+    "babel-core": "^7.0.0-bridge.0",
+    "lit": "^2.8.0",
+    "react": "^18.2.0",
+    "vue": "^3.3.4"
   }
 }

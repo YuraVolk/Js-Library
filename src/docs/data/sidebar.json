@@ -1,0 +1,72 @@
+{
+  "components": [
+    {
+      "name": "Accordion",
+      "link": "/lit/accordion"
+    },
+    {
+      "name": "Autocomplete Input",
+      "link": "/lit/autocomplete-list"
+    },
+    {
+      "name": "Backface Carousel",
+      "link": "/lit/backface-carousel"
+    },
+    {
+      "name": "Ciphering Text",
+      "link": "/lit/ciphering-text"
+    },
+    {
+      "name": "Color Picker",
+      "link": "/lit/color-picker"
+    },
+    {
+      "name": "Countdown",
+      "link": "/lit/countdown"
+    },
+    {
+      "name": "Custom Select",
+      "link": "/lit/custom-select"
+    },
+    {
+      "name": "Floating Panel",
+      "link": "/lit/floating-panel"
+    },
+    {
+      "name": "Gallery Carousel",
+      "link": "/lit/gallery-carousel"
+    },
+    {
+      "name": "Image Comparator",
+      "link": "/lit/image-comparator"
+    },
+    {
+      "name": "Magnifier",
+      "link": "/lit/magnifier"
+    },
+    {
+      "name": "Menu Carousel",
+      "link": "/lit/menu-carousel"
+    },
+    {
+      "name": "One Page Scroll",
+      "link": "/lit/one-page-scroll"
+    },
+    {
+      "name": "Parallax",
+      "link": "/lit/parallax"
+    },
+    {
+      "name": "Perspective Carousel",
+      "link": "/lit/perspective-carousel"
+    },
+    {
+      "name": "Popup",
+      "link": "/lit/popup"
+    },
+    {
+      "name": "Range Input",
+      "link": "/lit/range-input"
+    }
+  ]
+}
