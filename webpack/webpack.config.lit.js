@@ -16,7 +16,7 @@ module.exports = {
   mode: 'development',
   entry: ['./src/modules/litEntry.ts'],
   output: {
-    path: path.resolve(__dirname, 'docs'),
+    path: path.resolve(__dirname, '../docs'),
     filename: 'js/bundle.js'
   },
   plugins: [
