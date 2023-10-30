@@ -67,6 +67,10 @@
     {
       "name": "Range Input",
       "link": "../range-input"
+    },
+    {
+      "name": "Rebuilding Text",
+      "link": "../rebuilding-text"
     }
   ]
 }

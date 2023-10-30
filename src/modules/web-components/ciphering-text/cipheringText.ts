@@ -1,5 +1,5 @@
-import { LitElement, css, html } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
+import { SelfModifyingText } from "../../interfaces/selfModifyingText";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -8,18 +8,7 @@ declare global {
 }
 
 @customElement("ciphering-text-component")
-export class CipheringTextComponent extends LitElement {
-  private static validateElement(element: HTMLElement) {
-    return !element.firstElementChild && element.textContent;
-  }
-
-  @property({ type: Array, converter: {
-    fromAttribute: (string): string[] => string?.split(";") ?? [],
-    toAttribute: (strings: string[]): string => strings.join(";")
-  } })
-  strings: string[] = [];
-  @property({ type: Number })
-  repetitions = 1;
+export class CipheringTextComponent extends SelfModifyingText {
   @property({ type: Number })
   interval = 3000;
   @property({ type: Number })
@@ -32,27 +21,7 @@ export class CipheringTextComponent extends LitElement {
   } })
   characters: string[] = ['!', '"', '#', '$', '%', '*', '0', '1', ':', ';', '?', '@', '[', ']', '\\', '~', "'", '/', '{', '}', '|', '&', '(', ')', '-', '<', '>'];
 
-  get _elements() {
-    return Array.from(this.querySelectorAll('pre')).filter(CipheringTextComponent.validateElement);
-  }
-
-  private windowInterval?: number;
-
-  private *generateNextStrings(startingString: string): Generator<[string, string], [string, string], [string, string]> {
-    const newStrings = [...this.strings];
-    let index = 1, repeated = 0, previousValue = startingString;
-    while (repeated < this.repetitions) {
-      repeated++;
-      yield [previousValue, newStrings[index]];
-      previousValue = newStrings[index];
-      index = (index + 1) % newStrings.length;
-    }
-
-    return [previousValue, previousValue];
-  }
-  protected generator!: ReturnType<typeof this.generateNextStrings>;
-
-  protected splitText(newString?: string) {
+  splitText(newString?: string) {
     for (const element of this._elements) {
       const oldContent = element.textContent ?? "";
       element.textContent = "";
@@ -90,7 +59,7 @@ export class CipheringTextComponent extends LitElement {
     return changeNumber * speed + speed;
   }
 
-  protected cipherText(fromText: string, toText: string) {
+  triggerTextAnimation(fromText: string, toText: string) {
     const newElements = Array.from(this.querySelectorAll('pre'));
     for (const element of newElements) element.textContent = fromText;
     this.splitText(toText);
@@ -104,31 +73,5 @@ export class CipheringTextComponent extends LitElement {
       });
     }
     setTimeout(() => { this.onInterval(); }, Math.max(...speeds) + this.interval);
-  }
-
-  protected onInterval() {
-    const { done, value } = this.generator.next();
-    if (done) {
-      window.clearTimeout(this.windowInterval);
-      this.windowInterval = undefined;
-    } else this.cipherText(...value);
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    const result = this._elements[0].textContent ?? "";
-    this.splitText();
-    this.generator = this.generateNextStrings(result);
-    this.windowInterval = window.setTimeout(() => { this.onInterval(); }, this.interval);
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.generator.return(["", ""]);
-    clearInterval(this.windowInterval);
-  }
-
-  render() {
-    return html`<slot></slot>`;
   }
 }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rebuilding Text Component</title>
+    <link rel="stylesheet" href="/src/global.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <header class="header">
+        <header-component></header-component>
+    </header>
+    <aside class="navigation">
+        <sidebar-component activeLink="Rebuilding Text"></sidebar-component>
+    </aside>
+    <main class="main">
+        <h1 class="heading">Rebuilding Text</h1>
+        <p>
+            The Rebuilding Text Component is a custom element that allows you to display text in a rebuilding manner.
+            It takes an array of strings and displays them one by one, with each string being rebuilt and revealed
+            gradually.
+            This component adds an interesting visual effect to your web application or website. You could think of the
+            core logic
+            of this effect to bridge the gap in difference between the two words through swapping the letters, bridging
+            the middle gap
+            between two words.
+        <ol>
+            <li>Custom Element Definition: The RebuildingTextComponent class is defined as a custom element using the
+                @customElement decorator.</li>
+            <li>Property Declarations: The class defines several properties using the @property decorator. These
+                properties
+                define the behavior and configuration of the Rebuilding Text Component. They include strings,
+                repetitions,
+                interval and typingSpeed.</li>
+            <li>Render Method: The render method is implemented to define the HTML template for the custom element. In
+                this
+                case, it simply renders a slot element, which allows you to insert content into the component.</li>
+        </ol>
+        </p>
+        <rebuilding-text-component strings="Test text;The new resulting text;Small" repetitions="9999">
+            <pre class="rebuilding-text">Test text</pre>
+        </rebuilding-text-component>
+        <p>
+        <h3>Basic Usage:</h3>
+        <rebuilding-text-component strings="Hello;World" repetitions="9999" interval="3000" typingSpeed="45">
+            <pre class="rebuilding-text">Hello</pre>
+        </rebuilding-text-component>
+        In this example, the Rebuilding Text Component is used to display the strings "Hello" and "World" in a swapped
+        manner. The strings will be repeated twice with an interval of 3 seconds between repetitions. The typing speed
+        is set to 45 characters per second. The pre element is used as the target element for displaying the rebuilt text.
+        Here you can closely observe how the algorithm works:
+        <rebuilding-text-component strings="Test text;The new resulting text;Small" repetitions="9999" typingSpeed="300">
+            <pre class="rebuilding-text">Test text</pre>
+        </rebuilding-text-component>
+    </main>
+</body>
+
+</html>
