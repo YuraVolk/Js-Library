@@ -71,6 +71,10 @@
     {
       "name": "Rebuilding Text",
       "link": "../rebuilding-text"
+    },
+    {
+      "name": "Sticky Header",
+      "link": "../sticky-header"
     }
   ]
 }

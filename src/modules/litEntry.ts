@@ -16,6 +16,7 @@ import "./web-components/parallax/parallax";
 import "./web-components/perspective-carousel/perspectiveCarousel";
 import "./web-components/popup/popup";
 import "./web-components/rebuilding-text/rebuildingText";
+import "./web-components/sticky-header/stickyHeader";
 
 import "../docs/lit/sidebar";
 import "../docs/lit/header";
