@@ -1,0 +1,39 @@
+.table-wrap {
+	display: block;
+	width: 400px;
+}
+
+.table {
+	width: 100%;
+}
+
+.table-head {
+	background-color: #e2e2e2;
+	color: #333;
+	cursor: pointer;
+}
+
+.table-head__heading::after {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	margin-left: 5px;
+	background-image: url("./img/filter-icon.svg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	transform: translateY(12.5%);
+	content: "";
+}
+
+.table-body-row:nth-child(even) {
+	background-color: #e6e6e6;
+	color: #333;
+}
+
+.table-body-row:nth-child(odd) {
+	background-color: #555;
+}
+
+.table-body-row__cell {
+	text-align: center;
+}

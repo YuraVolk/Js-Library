@@ -17,6 +17,7 @@ import "./web-components/perspective-carousel/perspectiveCarousel";
 import "./web-components/popup/popup";
 import "./web-components/rebuilding-text/rebuildingText";
 import "./web-components/sticky-header/stickyHeader";
+import "./web-components/table-filtering/tableFiltering";
 
 import "../docs/lit/sidebar";
 import "../docs/lit/header";

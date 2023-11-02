@@ -75,6 +75,10 @@
     {
       "name": "Sticky Header",
       "link": "../sticky-header"
+    },
+    {
+      "name": "Table Filtering",
+      "link": ".../table-filtering"
     }
   ]
 }
