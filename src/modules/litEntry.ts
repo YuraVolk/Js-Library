@@ -18,6 +18,7 @@ import "./web-components/popup/popup";
 import "./web-components/rebuilding-text/rebuildingText";
 import "./web-components/sticky-header/stickyHeader";
 import "./web-components/table-filtering/tableFiltering";
+import "./web-components/tabs/tabs";
 
 import "../docs/lit/sidebar";
 import "../docs/lit/header";
