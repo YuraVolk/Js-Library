@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toast Component</title>
+    <link rel="stylesheet" href="/src/global.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <header class="header">
+        <header-component></header-component>
+    </header>
+    <aside class="navigation">
+        <sidebar-component activeLink="Toast"></sidebar-component>
+    </aside>
+    <main class="main">
+        <h1 class="heading">Toast</h1>
+        <p>
+            The toast component which represents a panel that smoothly transitions in and then smoothly transitions out
+            is commonly used and has many applications: notifications, cookie requests, and et cetera. This is a very
+            simplistic,
+            basic component that closes the toast whenever any button is pressed in it if closeOnButtonClick attribute
+            is passed,
+            and just gives the necessary attributes to quickly setup a smooth animation. The basic configuration is to
+            insert all
+            required HTML inside the component. This component accepts the following attributes:
+        </p>
+        <ul>
+            <li>animationDelay, specifies the CSS animation length, defaults to 300.</li>
+            <li>autoCloseDelay, a feature by default disabled that automatically closes the toast after the milliseconds
+                passed to this attribute.</li>
+            <li>inactiveClass, a class name for the toast when it gets closed, defaults to "disabled".</li>
+            <li>closeOnButtonClick, a boolean value disabled by default that allows to close toast when any button is
+                clicked without any more logic whatsoever.</li>
+        </ul>
+        <p>In the bottom of a page you can see a toast with external CSS styling:</p>
+        <toast-component class="toast-wrap" closeOnButtonClick animationDelay="800">
+            <div class="toast">
+                <div class="toast-content">
+                    <span>Some Toast Content Here</span>
+                    <div class="toast-buttons">
+                        <button class="toast-button">OK</button>
+                        <button class="toast-button">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </toast-component>
+    </main>
+</body>
+
+</html>

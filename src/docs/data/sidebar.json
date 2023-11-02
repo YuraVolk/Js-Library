@@ -83,6 +83,10 @@
     {
       "name": "Tabs",
       "link": "../tabs"
+    },
+    {
+      "name": "Toast",
+      "link": "../toast"
     }
   ]
 }

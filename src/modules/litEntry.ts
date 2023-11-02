@@ -19,6 +19,7 @@ import "./web-components/rebuilding-text/rebuildingText";
 import "./web-components/sticky-header/stickyHeader";
 import "./web-components/table-filtering/tableFiltering";
 import "./web-components/tabs/tabs";
+import "./web-components/toast/toast";
 
 import "../docs/lit/sidebar";
 import "../docs/lit/header";
