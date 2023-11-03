@@ -22,16 +22,7 @@ export class CipheringTextComponent extends SelfModifyingText {
   characters: string[] = ['!', '"', '#', '$', '%', '*', '0', '1', ':', ';', '?', '@', '[', ']', '\\', '~', "'", '/', '{', '}', '|', '&', '(', ')', '-', '<', '>'];
 
   splitText(newString?: string) {
-    for (const element of this._elements) {
-      const oldContent = element.textContent ?? "";
-      element.textContent = "";
-      for (const char of oldContent) element.insertAdjacentHTML("beforeend", `<span>${char}</span>`);
-      if (newString && newString.length > oldContent.length) {
-        for (let i = 0; i < newString.length - oldContent.length; i++) {
-          element.insertAdjacentElement("beforeend", document.createElement("span"));
-        }
-      }
-    }
+    super.splitTextAlgorithm(newString);
   }
 
   protected cipherLetter(properties: { element: Element, newLetter: string, delayed: boolean, i: number }) {

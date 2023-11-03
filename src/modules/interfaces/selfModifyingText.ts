@@ -28,7 +28,7 @@ export function* nextStringsGenerator(
 
 export abstract class SelfModifyingText extends LitElement implements SelfModifyingTextInterface {
 	private static validateElement(element: HTMLElement) {
-		return !element.firstElementChild && element.textContent;
+		return Number(Array.from(element.childNodes).some((node) => node.nodeType === Node.TEXT_NODE)) ^ Number(element.childElementCount > 0);
 	}
 
 	@property({
@@ -41,7 +41,7 @@ export abstract class SelfModifyingText extends LitElement implements SelfModify
 	strings: string[] = [];
 	@property({ type: Number })
 	repetitions = 1;
-	
+
 	abstract interval: number;
 	abstract typingSpeed: number;
 
@@ -54,8 +54,21 @@ export abstract class SelfModifyingText extends LitElement implements SelfModify
 	protected generator!: ReturnType<typeof this.generateNextStrings>;
 	protected windowInterval?: number;
 
+	protected splitTextAlgorithm(newString?: string) {
+		for (const element of this._elements) {
+			const oldContent = element.textContent ?? "";
+			element.textContent = "";
+			for (const char of oldContent) element.insertAdjacentHTML("beforeend", `<span>${char}</span>`);
+			if (newString && newString.length > oldContent.length) {
+				for (let i = 0; i < newString.length - oldContent.length; i++) {
+					element.insertAdjacentElement("beforeend", document.createElement("span"));
+				}
+			}
+		}
+	}
+
 	splitText?(newString?: string): void;
-	abstract triggerTextAnimation(fromText: string, toText: string): void;
+	abstract triggerTextAnimation(fromText: string, toText: string): void | Promise<void>;
 
 	onInterval() {
 		const { done, value } = this.generator.next();

@@ -87,6 +87,10 @@
     {
       "name": "Toast",
       "link": "../toast"
+    },
+    {
+      "name": "Typing Text",
+      "link": "../typing-text"
     }
   ]
 }
