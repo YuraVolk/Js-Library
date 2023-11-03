@@ -3,6 +3,7 @@ import { customElement, property, state, queryAsync } from "lit/decorators.js";
 import { assertDevOnly } from "../../utils";
 import { styleMap } from 'lit/directives/style-map.js';
 import { defaultActiveColor, defaultHoverColor, thumbStyles } from "./styles";
+import { when } from "lit/directives/when.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -131,6 +132,8 @@ export class RangeInputComponent extends LitElement {
   activeColor = defaultActiveColor;
   @property({ type: String })
   valueSize = "25px";
+  @property({ type: Boolean })
+  hideValue = false;
 
   @state()
   _value = 0;
@@ -156,6 +159,12 @@ export class RangeInputComponent extends LitElement {
     this._value = Number(event.target.value);
     this.setGradientStyle();
     this._onUpdateListener?.(this._value);
+  }
+
+  changeValue(newValue: number) {
+    this._value = newValue;
+    this.rangeSlider.then((range) => range.value = String(newValue));
+    this.setGradientStyle();
   }
 
   connectedCallback(): void {
@@ -198,7 +207,7 @@ export class RangeInputComponent extends LitElement {
             </ul>
           ` : ""}
         </div>
-        <span class="value">${this._value}</span>
+        ${when(!this.hideValue, () => html`<span class="value">${this._value}</span>`)}
       </div>
     `;
   }

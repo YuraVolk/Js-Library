@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Video Component</title>
+  <link rel="stylesheet" href="/src/global.css">
+</head>
+
+<body>
+  <header class="header">
+    <header-component></header-component>
+  </header>
+  <aside class="navigation">
+    <sidebar-component activeLink="Custom Video"></sidebar-component>
+  </aside>
+  <main class="main">
+    <h1 class="heading">Custom Video</h1>
+    <custom-video-component>
+        <video>
+            <source src="../../../assets/video/sample-mp4-file-small.mp4" type="video/mp4">
+        </video>
+    </custom-video-component>
+  </main>
+</body>
+
+</html>

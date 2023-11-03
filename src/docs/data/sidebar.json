@@ -29,6 +29,10 @@
       "link": "../custom-select"
     },
     {
+      "name": "Custom Video",
+      "link": "../custom-video"
+    },
+    {
       "name": "Floating Panel",
       "link": "../floating-panel"
     },

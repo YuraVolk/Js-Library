@@ -1,4 +1,9 @@
-declare module "*.module.less" {
-	const classes: Record<string, string>;
-	export default classes;
+declare module "*.png" {
+	const pathName: string;
+	export default pathName;
+}
+
+declare module "*.jpg" {
+	const pathName: string;
+	export default pathName;
 }
