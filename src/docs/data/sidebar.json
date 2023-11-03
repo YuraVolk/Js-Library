@@ -73,6 +73,10 @@
       "link": "../rebuilding-text"
     },
     {
+      "name": "Scrolling Ad",
+      "link": "../scrolling-ad"
+    },
+    {
       "name": "Sticky Header",
       "link": "../sticky-header"
     },

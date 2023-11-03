@@ -56,7 +56,7 @@ export class SidebarComponent extends LitElement {
       flex-direction: column;
       gap: 0.5rem;
       margin: 0;
-      padding: 2rem 0 0 2rem;
+      padding: 2rem 0 1.5rem 2rem;
       list-style-type: none;
     }
 

@@ -1,5 +1,6 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
+import { getFirstScrollableParent } from "../../interfaces/domUtils";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -33,23 +34,9 @@ export class ParallaxComponent extends LitElement {
 	private scrollListener!: EventListener;
 	private resizeListener!: EventListener;
 
-	private getFirstScrollableParent(): HTMLElement | Window {
-		const getFirstScrollableParent = (node: HTMLElement): HTMLElement | Window => {
-			if (node.parentElement == null) return window;
-			const { overflowX, overflowY, overflow } = window.getComputedStyle(node.parentElement);
-			console.log(overflowX, overflowY, overflow);
-			const regex = /auto|scroll/;
-			if (regex.test(overflow) || (this.isHorizontal && regex.test(overflowX)) || (!this.isHorizontal && regex.test(overflowY)))
-				return node.parentElement;
-			return getFirstScrollableParent(node.parentElement);
-		};
-
-		return getFirstScrollableParent(this);
-	}
-
 	protected rerender() {
 		const wrap = this._wrapper;
-		const parent = this.getFirstScrollableParent();
+		const parent = getFirstScrollableParent(this, this.isHorizontal);
 		parent.removeEventListener("scroll", this.scrollListener);
 		const getScrollPoint = () => {
 			if (parent instanceof HTMLElement) {
