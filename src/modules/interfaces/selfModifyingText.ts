@@ -27,9 +27,9 @@ export function* nextStringsGenerator(
 }
 
 export abstract class SelfModifyingText extends LitElement implements SelfModifyingTextInterface {
-	private static validateElement(element: HTMLElement) {
+	private static validateElement = (element: HTMLElement) => {
 		return Number(Array.from(element.childNodes).some((node) => node.nodeType === Node.TEXT_NODE)) ^ Number(element.childElementCount > 0);
-	}
+	};
 
 	@property({
 		type: Array,
@@ -75,7 +75,7 @@ export abstract class SelfModifyingText extends LitElement implements SelfModify
 		if (done) {
 			window.clearTimeout(this.windowInterval);
 			this.windowInterval = undefined;
-		} else this.triggerTextAnimation(...value);
+		} else void this.triggerTextAnimation(...value);
 	}
 
 	get _elements() {

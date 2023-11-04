@@ -1,5 +1,5 @@
 export function assertNonUndefined<T>(value: T): asserts value is NonNullable<T> {
-  if (value == null) throw new Error(`The value ${value} is nullable, but it must not be`);
+  if (value == null) throw new Error(`The value ${String(value)} is nullable, but it must not be`);
 }
 
 export function assertNonUndefinedDevOnly<T>(value: T): asserts value is NonNullable<T> {

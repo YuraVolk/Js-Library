@@ -61,7 +61,7 @@ export class CountdownComponent extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback();
-    this.intervalId = window.setInterval(() => this.renderTexts(), 1000);
+    this.intervalId = window.setInterval(() => { this.renderTexts(); }, 1000);
   }
 
   disconnectedCallback(): void {

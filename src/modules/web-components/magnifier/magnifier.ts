@@ -1,5 +1,5 @@
 import { LitElement, html } from "lit";
-import { customElement, property, queryAssignedElements, state } from "lit/decorators.js";
+import { customElement, property, queryAssignedElements } from "lit/decorators.js";
 import { assertNonUndefined } from "../../utils";
 
 declare global {

@@ -146,7 +146,7 @@ export class AccordionComponent extends LitElement {
             return html`<li class="accordion" style=${styleMap(styles)}>
               <header
                 class="accordion__heading"
-                @click=${{ handleEvent: () => this._clickAccordion(i) }}
+                @click=${{ handleEvent: () => { this._clickAccordion(i); } }}
               >
                 ${firstChild}
               </header>

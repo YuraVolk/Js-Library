@@ -99,6 +99,10 @@
     {
       "name": "Typing Text",
       "link": "../typing-text"
+    },
+    {
+      "name": "Zooming Image",
+      "link": "../zooming-image"
     }
   ]
 }

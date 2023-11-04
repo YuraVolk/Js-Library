@@ -172,7 +172,7 @@ export class RangeInputComponent extends LitElement {
 
   changeValue(newValue: number) {
     this._value = newValue;
-    this.rangeSlider.then((range) => range.value = String(newValue));
+    this.rangeSlider.then((range) => range.value = String(newValue)).catch(e => { console.error(e); });
     this.setGradientStyle();
   }
 
@@ -183,13 +183,13 @@ export class RangeInputComponent extends LitElement {
     this.rangeSlider.then((result) => {
       this.setGradientStyle();
       result.addEventListener("input", this.boundEventListener);
-    });
+    }).catch(e => { console.error(e); });
   }
 
   disconnectedCallback(): void {
     this.rangeSlider.then((result) => {
       result.removeEventListener("input", this.boundEventListener);
-    });
+    }).catch(e => { console.error(e); });
     super.disconnectedCallback();
   }
 
@@ -197,7 +197,7 @@ export class RangeInputComponent extends LitElement {
     const variableKeys =
       ["thumbSize", "trackColor", "thumbColor", "hoverColor", "activeColor", "valueSize"] as const satisfies ReadonlyArray<keyof this>;
     return html`
-      <div class="wrap" style="${variableKeys.map(key => `--${String(key)}: ${this[key]}`).join("; ")}">
+      <div class="wrap" style="${variableKeys.map(key => `--${String(key)}: ${String(this[key])}`).join("; ")}">
         <div class="range-slider ${classMap({ "range-slider--one-lined": this.allSameLine })}">
           <label class="range-slider__label" for="${this.uiRangeID}">${this.label}</label>
           <input

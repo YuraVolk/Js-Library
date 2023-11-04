@@ -174,17 +174,17 @@ export class BackfaceCarouselComponent extends LitElement {
         <div class="carousel-controls">
           <button
             class="carousel-controls__previous-button"
-            @click="${this.previousSlide}"
+            @click="${() => { this.previousSlide(); }}"
           ></button>
           <button
             class="carousel-controls__perspective-button"
-            @click="${this.switchPerspective}"
+            @click="${() => { this.switchPerspective(); }}"
           >
             switch
           </button>
           <button
             class="carousel-controls__next-button"
-            @click="${this.nextSlide}"
+            @click="${() => { this.nextSlide(); }}"
           ></button>
         </div>
       </div>

@@ -139,7 +139,7 @@ export class CustomVideoComponent extends LitElement {
 
 	startVideo({ video }: VideoControlData = this.getWorkingData()) {
 		if (this._isVideoPlaying) return;
-		video.play();
+		video.play().catch(e => { console.debug(e); });
 	}
 
 	stopVideo({ video }: VideoControlData = this.getWorkingData()) {
@@ -192,8 +192,8 @@ export class CustomVideoComponent extends LitElement {
 			video.removeAttribute("controls");
 			timeRange.maximum = video.duration;
 
-			video.addEventListener("ended", () => this.onVideoEnded());
-			video.addEventListener("playing", () => this.onVideoPlaying({ video, volumeRange, timeRange }));
+			video.addEventListener("ended", () => { this.onVideoEnded(); });
+			video.addEventListener("playing", () => { this.onVideoPlaying({ video, volumeRange, timeRange }); });
 			timeRange._onUpdateListener = (seconds) => {
 				this.setVideoSecond(seconds);
 			};
@@ -220,7 +220,7 @@ export class CustomVideoComponent extends LitElement {
 				<ul class="controls-buttons">
 					<li
 						class="controls-button"
-						@click="${() => this.startVideo()}"
+						@click="${() => { this.startVideo(); }}"
 						style=${styleMap({ display: this._isVideoPlaying ? "none" : "block" })}
 					>
 						<button class="controls-button__clickable-button">
@@ -229,19 +229,19 @@ export class CustomVideoComponent extends LitElement {
 					</li>
 					<li
 						class="controls-button"
-						@click="${() => this.stopVideo()}"
+						@click="${() => { this.stopVideo(); }}"
 						style=${styleMap({ display: this._isVideoPlaying ? "block" : "none" })}
 					>
 						<button class="controls-button__clickable-button">
 							<img alt="Pause" src="${pauseButton}" class="controls-button__image" />
 						</button>
 					</li>
-					<li class="controls-button" @click="${() => this.resetVideo()}">
+					<li class="controls-button" @click="${() => { this.resetVideo(); }}">
 						<button class="controls-button__clickable-button">
 							<img alt="Reset" src="${resetButton}" class="controls-button__image" />
 						</button>
 					</li>
-					<li class="controls-button" @click="${() => this.toggleMute()}">
+					<li class="controls-button" @click="${() => { this.toggleMute(); }}">
 						<button class="controls-button__clickable-button">
 							<img alt="Mute" src="${muteButton}" class="controls-button__image" />
 						</button>

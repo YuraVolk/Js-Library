@@ -45,7 +45,7 @@ export class OnePageScrollComponent extends LitElement {
 	@state()
 	_isScrolling = false;
 
-	private scrollEventListener!: (event: WheelEvent) => void;
+	private scrollEventListener?: (event: WheelEvent) => void;
 
 	@queryAssignedElements()
 	_onePageScrollElements!: HTMLElement[];
@@ -116,7 +116,7 @@ export class OnePageScrollComponent extends LitElement {
 	}
 
 	disconnectedCallback(): void {
-		this._wrapElement.removeEventListener("wheel", this.scrollEventListener);
+		if (this.scrollEventListener) this._wrapElement.removeEventListener("wheel", this.scrollEventListener);
 		super.disconnectedCallback();
 	}
 

@@ -1,5 +1,5 @@
 import { LitElement, css, html } from "lit";
-import { customElement, property, queryAssignedElements, queryAsync, state } from "lit/decorators.js";
+import { customElement, property, queryAssignedElements, queryAsync } from "lit/decorators.js";
 import { when } from "lit/directives/when.js";
 
 declare global {
@@ -48,12 +48,12 @@ export class PopupComponent extends LitElement {
 			)
 		);
 		popup.addEventListener("click", this.clickEventListener = (event) => {
-			if (event.target && targetElements.includes(event.target)) this.closePopup();
+			if (event.target && targetElements.includes(event.target)) this.closePopup().catch(e => { console.error(e); });
 		});
 
 		if (this.autoClosingTime) {
 			await new Promise((resolve) => setTimeout(resolve, this.autoClosingTime ?? 0 * 1000));
-			if (this.open) this.closePopup();
+			await this.closePopup();
 		}
 	}
 
@@ -68,7 +68,7 @@ export class PopupComponent extends LitElement {
 		return html`${when(
 			this.displayOpenButton,
 			() =>
-				html`<div @click="${this.openPopup}">
+				html`<div @click="${() => this.openPopup()}">
 					<slot name="popup-open-button"></slot>
 				</div>`
 		)}

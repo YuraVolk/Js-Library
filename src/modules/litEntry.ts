@@ -23,6 +23,7 @@ import "./web-components/tabs/tabs";
 import "./web-components/toast/toast";
 import "./web-components/typing-text/typingText";
 import "./web-components/scrolling-ad/scrollingAd";
+import "./web-components/zoomingImage/zoomingImage";
 
 import "../docs/lit/sidebar";
 import "../docs/lit/header";
