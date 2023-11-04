@@ -4,6 +4,7 @@ import { assertDevOnly } from "../../utils";
 import { styleMap } from 'lit/directives/style-map.js';
 import { defaultActiveColor, defaultHoverColor, thumbStyles } from "./styles";
 import { when } from "lit/directives/when.js";
+import { classMap } from "lit/directives/class-map.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -65,7 +66,7 @@ export class RangeInputComponent extends LitElement {
       align-items: center;
       gap: 1rem;
       width: 100%;
-      padding: 2rem 10px;
+      height: 100%;
       box-sizing: border-box;
     }
 
@@ -82,6 +83,12 @@ export class RangeInputComponent extends LitElement {
 
     .range-slider {
       flex-grow: 1;
+      height: 100%;
+    }
+
+    .range-slider--one-lined {
+      display: flex;
+      align-items: center;
     }
 
     .range-slider-ticks {
@@ -134,6 +141,8 @@ export class RangeInputComponent extends LitElement {
   valueSize = "25px";
   @property({ type: Boolean })
   hideValue = false;
+  @property({ type: Boolean })
+  allSameLine = false;
 
   @state()
   _value = 0;
@@ -189,7 +198,7 @@ export class RangeInputComponent extends LitElement {
       ["thumbSize", "trackColor", "thumbColor", "hoverColor", "activeColor", "valueSize"] as const satisfies ReadonlyArray<keyof this>;
     return html`
       <div class="wrap" style="${variableKeys.map(key => `--${String(key)}: ${this[key]}`).join("; ")}">
-        <div class="range-slider">
+        <div class="range-slider ${classMap({ "range-slider--one-lined": this.allSameLine })}">
           <label class="range-slider__label" for="${this.uiRangeID}">${this.label}</label>
           <input
             type="range"

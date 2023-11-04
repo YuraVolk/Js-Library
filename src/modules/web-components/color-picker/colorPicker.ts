@@ -63,6 +63,11 @@ export class ColorPickerComponent extends LitElement {
     p {
       margin: 3px 0;
     }
+
+    #opacity-range {
+      display: block;
+      padding: 2rem 0;
+    }
   `;
 
   @property({ type: String })

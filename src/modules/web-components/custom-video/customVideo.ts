@@ -6,6 +6,7 @@ import pauseButton from "../../../assets/img/pause.png";
 import resetButton from "../../../assets/img/reset.png";
 import muteButton from "../../../assets/img/volume.png";
 import { assertDevOnly } from "../../utils";
+import { styleMap } from "lit/directives/style-map.js";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -21,6 +22,77 @@ export interface VideoControlData {
 
 @customElement("custom-video-component")
 export class CustomVideoComponent extends LitElement {
+	static styles = css`
+		.wrap {
+			position: relative;
+			width: 100%;
+			height: 100%;
+		}
+
+		.video {
+			width: inherit;
+			height: inherit;
+		}
+
+		.controls {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 1;
+			background-color: #e2e2e2;
+			display: flex;
+			flex-direction: row-reverse;
+			justify-content: space-around;
+			height: 12.5%;
+			padding: 4px;
+			box-sizing: border-box;
+		}
+
+		.controls-buttons {
+			display: flex;
+			list-style-type: none;
+			padding: 0;
+			margin: 0;
+			gap: 5%;
+		}
+
+		.control-button {
+			display: block;
+			height: 100%;
+			cursor: pointer;
+		}
+
+		.controls-button__clickable-button {
+			width: inherit;
+			height: 100%;
+			padding: 0;
+			margin: 0;
+			border: none;
+			background: none;
+			cursor: pointer;
+		}
+
+		.controls-button__image {
+			width: inherit;
+			height: inherit;
+			cursor: pointer;
+		}
+
+		range-input-component {
+			display: block;
+		}
+
+		#time-range-input {
+			margin-left: 15px;
+			color: #000;
+		}
+
+		#volume-range-input {
+			width: 33px;
+		}
+	`;
+
 	@state()
 	_isVideoPlaying = false;
 	@state()
@@ -41,7 +113,7 @@ export class CustomVideoComponent extends LitElement {
 		const hours = Math.floor(time / 3600),
 			minutes = Math.floor((time - hours * 3600) / 60),
 			seconds = Math.floor(time - hours * 3600 - minutes * 60);
-		return `Time: ${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+		return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 	}
 
 	onVideoEnded() {
@@ -102,7 +174,7 @@ export class CustomVideoComponent extends LitElement {
 			video.volume = 0;
 		}
 
-        this._volumeRangeInput.changeValue(video.volume);
+		this._volumeRangeInput.changeValue(video.volume);
 	}
 
 	protected getWorkingData(): VideoControlData {
@@ -125,10 +197,10 @@ export class CustomVideoComponent extends LitElement {
 			timeRange._onUpdateListener = (seconds) => {
 				this.setVideoSecond(seconds);
 			};
-            volumeRange._onUpdateListener = (volume) => {
-                volumeRange.changeValue(volume);
-                video.volume = volume;
-            };
+			volumeRange._onUpdateListener = (volume) => {
+				volumeRange.changeValue(volume);
+				video.volume = volume;
+			};
 		};
 	}
 
@@ -143,22 +215,23 @@ export class CustomVideoComponent extends LitElement {
 				<slot></slot>
 			</div>
 			<div class="controls">
-				<range-input-component id="time-range-input" step="0.01" label="Time: 00:00" hideValue></range-input-component>
-				<range-input-component
-					id="volume-range-input"
-					step="0.01"
-					defaultValue="1"
-					maximum="1"
-					label="Volume:"
-					hideValue
-				></range-input-component>
+				<range-input-component id="volume-range-input" step="0.01" defaultValue="1" maximum="1" hideValue></range-input-component>
+				<range-input-component id="time-range-input" step="0.01" label="00:00" hideValue allSameLine></range-input-component>
 				<ul class="controls-buttons">
-					<li class="controls-button" @click="${() => this.startVideo()}">
+					<li
+						class="controls-button"
+						@click="${() => this.startVideo()}"
+						style=${styleMap({ display: this._isVideoPlaying ? "none" : "block" })}
+					>
 						<button class="controls-button__clickable-button">
 							<img alt="Play" src="${playButton}" class="controls-button__image" />
 						</button>
 					</li>
-					<li class="controls-button" @click="${() => this.stopVideo()}">
+					<li
+						class="controls-button"
+						@click="${() => this.stopVideo()}"
+						style=${styleMap({ display: this._isVideoPlaying ? "block" : "none" })}
+					>
 						<button class="controls-button__clickable-button">
 							<img alt="Pause" src="${pauseButton}" class="controls-button__image" />
 						</button>
