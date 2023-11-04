@@ -1,4 +1,4 @@
-import { LitElement, PropertyValueMap, css, html } from "lit";
+import { LitElement, css, html } from "lit";
 import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -121,7 +121,7 @@ export class TableFilteringComponent extends LitElement {
 		};
 	}
 
-	protected updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+	protected updated(_changedProperties: Map<PropertyKey, unknown>): void {
 		if (!_changedProperties.has("tabularData")) return;
 		for (const row of this.tabularData.rows) {
 			const parent = row[0].parentElement;
@@ -154,9 +154,9 @@ export class TableFilteringComponent extends LitElement {
 							assertNonUndefined(this.openSelect);
 							return html`<div
 								class="wrap-select__option ${classMap({
-									"wrap-select__option--crossed": this.tabularData.excludedCriteria[this.openSelect?.index ?? 0].includes(option)
+									"wrap-select__option--crossed": this.tabularData.excludedCriteria[this.openSelect.index].includes(option)
 								})}"
-								@click="${() => this.toggleCriterion(option)}"
+								@click="${() => { this.toggleCriterion(option); }}"
 							>
 								${option}
 							</div>`;

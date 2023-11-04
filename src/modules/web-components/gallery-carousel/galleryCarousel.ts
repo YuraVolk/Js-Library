@@ -1,7 +1,6 @@
-import { LitElement, PropertyValueMap, css, html } from "lit";
+import { LitElement, css, html } from "lit";
 import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { styleMap } from "lit/directives/style-map.js";
 
 declare global {
 	interface HTMLElementTagNameMap {

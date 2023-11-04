@@ -50,6 +50,6 @@ export class TypingTextComponent extends SelfModifyingText {
 			);
 		}
 
-		setTimeout(() => this.onInterval(), this.interval);
+		setTimeout(() => { this.onInterval(); }, this.interval);
 	}
 }

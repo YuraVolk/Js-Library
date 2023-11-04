@@ -1,4 +1,4 @@
-import { LitElement, css, html } from "lit";
+import { LitElement, html } from "lit";
 import {
   customElement,
   property,
@@ -35,7 +35,7 @@ class Item {
       this.x = x;
       this.y = y;
       this.scale = scale;
-      var style = this.image.style;
+      const style = this.image.style;
       style.width = this.width + "px";
       style.left = x + "px";
       style.top = y + "px";
@@ -102,7 +102,7 @@ export class MenuCarouselComponent extends LitElement {
   }
 
   protected scheduleNextFrame() {
-    this._frameTimer = window.setTimeout(() => this.playFrame(), 32);
+    this._frameTimer = window.setTimeout(() => { this.playFrame(); }, 32);
   }
 
   protected playFrame() {
@@ -137,9 +137,9 @@ export class MenuCarouselComponent extends LitElement {
     }
 
     this.xPos ??= this._carousel.offsetWidth * 0.5;
-    this.yPos ??= this._carousel.offsetHeight * 0.1;
+    this.yPos = this._carousel.offsetHeight * 0.1;
     this.xRadius ??= this._carousel.offsetWidth / 2.3;
-    this.yRadius ??= this._carousel.offsetHeight / 6;
+    this.yRadius = this._carousel.offsetHeight / 6;
     this._items = this._images.map((item) => new Item(item));
     this.carouselRender();
   }
@@ -172,11 +172,11 @@ export class MenuCarouselComponent extends LitElement {
       <div class="carousel-controls">
         <button
           class="carousel-controls__previous-button"
-          @click="${this.goBack}"
+          @click="${() => { this.goBack(); }}"
         ></button>
         <button
           class="carousel-controls__next-button"
-          @click="${this.goForward}"
+          @click="${() => { this.goForward(); }}"
         ></button>
       </div>
     `;

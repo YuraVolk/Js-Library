@@ -26,11 +26,11 @@ document.querySelector(`.${data.ZOOM_WRAP}`).addEventListener('mousemove', funct
 
   if (x > (.01 * imgWidth)) {
     xMove += (.15 * xMove);
-  };
+  }
 
   if (y >= (.01 * imgHeight)) {
     yMove += (.15 * yMove);
-  };
+  }
 
   style.backgroundPositionX = (xMove - 9) + '%';
   style.backgroundPositionY = (yMove - 9) + '%';

@@ -51,7 +51,7 @@ export class StickyHeaderComponent extends LitElement {
 			}
 		);
 
-		this.intersectionObserver?.observe(this);
+		this.intersectionObserver.observe(this);
 	}
 
 	disconnectedCallback(): void {

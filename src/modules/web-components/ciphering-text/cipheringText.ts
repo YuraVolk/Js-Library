@@ -27,7 +27,7 @@ export class CipheringTextComponent extends SelfModifyingText {
 
   protected cipherLetter(properties: { element: Element, newLetter: string, delayed: boolean, i: number }) {
     const { element, newLetter, delayed, i } = properties;
-    let changeNumber = Math.round(Math.random() * ((delayed ? 44 : 14) - 6) + 6);
+    const changeNumber = Math.round(Math.random() * ((delayed ? 44 : 14) - 6) + 6);
     let isDone = false, index = 0;
 
     const definedRandom = (Math.random() * 1000) + (delayed ? this.typingSpeed * i : 0), speed = 65;

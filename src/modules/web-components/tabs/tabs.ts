@@ -26,12 +26,12 @@ export class TabsComponent extends LitElement {
 	@queryAssignedElements({ slot: "tabs" })
 	_tabs!: HTMLElement[];
 
-    private animationTimeout?: number;;
+    private animationTimeout?: number;
 
 	protected firstUpdated() {
 		this.switchToTab();
 		for (const header of this._headers) {
-			Array.from(header.children).forEach((header, i) => header.addEventListener("click", () => this.switchToTab(i)));
+			Array.from(header.children).forEach((header, i) => { header.addEventListener("click", () => { this.switchToTab(i); }); });
 		}
 	}
 

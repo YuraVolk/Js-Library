@@ -228,7 +228,7 @@ export class PerspectiveCarouselComponent extends LitElement {
 		} else return;
 	}
 
-	protected movingToCenter(_?: HTMLElement) {
+	protected movingToCenter() {
 		/* no-op */
 	}
 
@@ -345,11 +345,11 @@ export class PerspectiveCarouselComponent extends LitElement {
 
 	connectedCallback(): void {
 		super.connectedCallback();
-		this.parent.then((parent) => this.initCarousel(parent));
+		this.parent.then((parent) => { this.initCarousel(parent); }).catch(e => { console.error(e); });
 		window.addEventListener(
 			"resize",
-			(this.windowResizeListener = async () => {
-				this.initCarousel(await this.parent);
+			(this.windowResizeListener = () => {
+				this.parent.then((p) => { this.initCarousel(p); }).catch(e => { console.log(e) });
 			})
 		);
 	}
@@ -365,11 +365,11 @@ export class PerspectiveCarouselComponent extends LitElement {
 				<slot></slot>
 			</div>
 			<div class="carousel-controls">
-				<button class="carousel-controls__previous-button" @click="${this.previousItem}"></button>
+				<button class="carousel-controls__previous-button" @click="${() => { this.previousItem(); }}"></button>
 				${this.allowSwitchingOrientation
-					? html`<button class="carousel-controls__perspective-button" @click="${this.switchOrientation}">Switch</button>`
+					? html`<button class="carousel-controls__perspective-button" @click="${() => { this.switchOrientation(); }}">Switch</button>`
 					: ""}
-				<button class="carousel-controls__next-button" @click="${this.nextItem}"></button>
+				<button class="carousel-controls__next-button" @click="${() => { this.nextItem(); }}"></button>
 			</div>
 		</div>`;
 	}

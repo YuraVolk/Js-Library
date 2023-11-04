@@ -28,7 +28,7 @@ export class FloatingPanelComponent extends LitElement {
       };
 
       panel.addEventListener("mousemove", changePosition, false);
-      window.addEventListener("mouseup", () => panel.removeEventListener("mousemove", changePosition, false));
+      window.addEventListener("mouseup", () => { panel.removeEventListener("mousemove", changePosition, false); });
     });
   }
 

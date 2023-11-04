@@ -110,11 +110,11 @@ export class ColorPickerComponent extends LitElement {
       assertNonUndefined(ctx);
       const image = new Image(this.width, this.height);
       image.src = this.imageUrl;
-      image.onload = () => ctx.drawImage(image, 0, 0, image.width, image.height);
+      image.onload = () => { ctx.drawImage(image, 0, 0, image.width, image.height); };
       canvas.addEventListener("mousedown", (e) => {
         this.rgba = [...ctx.getImageData(e.offsetX, e.offsetY, 1, 1).data.slice(0, -1), this.rgba[3]];
       });
-    });
+    }).catch(e => { console.log(e); });
   }
 
   connectedCallback(): void {
@@ -122,7 +122,7 @@ export class ColorPickerComponent extends LitElement {
     this.initColorPicker();
     this.opacityRange.then(range => range._onUpdateListener = (value) => {
       this.rgba = [...this.rgba.slice(0, -1), value];
-    });
+    }).catch(e => { console.log(e); });
   }
 
   render() {

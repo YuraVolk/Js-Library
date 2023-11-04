@@ -1,5 +1,5 @@
 import { LitElement, html } from "lit";
-import { customElement, property, queryAssignedElements, state } from "lit/decorators.js";
+import { customElement, property, queryAssignedElements } from "lit/decorators.js";
 import { assertNonUndefined } from "../../utils";
 
 declare global {
@@ -48,7 +48,7 @@ export class ToastComponent extends LitElement {
 
     connectedCallback(): void {
         super.connectedCallback();
-        if (this.autoCloseDelay) this.timeoutId = window.setTimeout(() => this.closeToast(), this.autoCloseDelay);
+        if (this.autoCloseDelay) this.timeoutId = window.setTimeout(() => { this.closeToast(); }, this.autoCloseDelay);
     }
 
     disconnectedCallback(): void {
