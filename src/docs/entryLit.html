@@ -52,72 +52,6 @@
     </style>
   </noscript>
 
-  <a id="VideosetonJS"></a>
-  <section class="block">
-    <h1 class="block__caption">Videoset on JS</h1>
-    <p class="block__info">
-      Simple as it seems, hard to implement.
-      Useful only for designing videos
-      on websites.<br>
-      <br>
-      USAGE: <br>
-      1. Change everything linked to video to
-      needer class names. !important<br>
-      2. Add more buttons.<br>
-      3. Everything other at point. <br>
-    </p>
-
-    <div class="videoset">
-      <video class="videoset__video">
-        <source src="../assets/video/sample-mp4-file-small.mp4" type="video/mp4">
-      </video>
-      <div class="videoset__controls">
-        <label class="videoset__controls_time">
-          <span class="videoset__current-time-label">Time: </span>
-          <span class="videoset__time-range">
-            <input type="range" class="time-range__track" />
-            <input type="range" class="time-range__thumb" />
-          </span>
-          <span class="videoset__current-time">00:06</span>
-        </label>
-        <label class="videoset__controls_volume">
-          <span class="vidoset__volume-label">Volume: </span>
-          <span class="videoset__volume-range">
-            <input type="range" class="volume-range__track" />
-            <input type="range" class="volume-range__thumb" />
-          </span>
-        </label>
-        <ul class="videoset__controls_buttons">
-          <li class="videoset__controls-button">
-            <button class="videoset__button videoset__button--play">
-              <img alt="Play" src="../assets/img/play.png" loading="lazy">
-            </button>
-          </li>
-          <li class="videoset__controls-button">
-            <button class="videoset__button videoset__button--stop">
-              <img alt="Pause" src="../assets/img/pause.png" loading="lazy">
-            </button>
-          </li>
-          <li class="videoset__controls-button">
-            <button class="videoset__button videoset__button--reset">
-              <img alt="Reset" src="../assets/img/reset.png" loading="lazy">
-            </button>
-          </li>
-          <li class="videoset__controls-button">
-            <button class="videoset__button videoset__button--mute">
-              <img alt="Mute" src="../assets/img/volume.png" loading="lazy">
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="copy-buttons">
-      <button class="btn copy-html__btn copy-html__btn--3">Copy HTML</button>
-      <button class="btn copy-css__btn copy-css__btn--3">Copy CSS</button>
-      <button class="btn copy-js__btn copy-js__btn--3">Copy JS</button>
-    </div>
-  </section>
-
   <a id="ImageZoomonJS"></a>
   <section class="block">
     <h1 class="block__caption">Image Zoom on JS</h1>
@@ -141,48 +75,6 @@
       <button class="btn copy-html__btn copy-html__btn--15">Copy HTML</button>
       <button class="btn copy-css__btn copy-css__btn--15">Copy CSS</button>
       <button class="btn copy-js__btn copy-js__btn--15">Copy JS</button>
-    </div>
-  </section>
-
-  <a id="AdvancedPasswordValidationonJS"></a>
-  <section class="block">
-    <h1 class="block__caption">Advanced Password Validation on JS</h1>
-    <p class="block__info">
-      Password validation is used
-      in almost every single registration.
-      It prevents user from typing
-      too easy and uncomplicated
-      password. It is mostly based
-      on iteration and regex-es. <br>
-      <br>
-      USAGE: <br>
-      1. Change classes !important <br>
-      2. Delete unused tests <br>
-      3. Change test requirements <br>
-      4. Add another tests (if needed)
-    </p>
-    <form autocomplete="false" class="password-validation">
-      <label class="validation__password">
-        <span>Enter your password: </span>
-        <input class="password__input" type="text" placeholder="Your password...">
-      </label>
-      <div class="validation__tests">
-        <p class="validation__test validation__test--wrong">Has at least 6 symbols</p>
-        <p class="validation__test validation__test--wrong">Contains special character (_, %, ^, et.c.)</p>
-        <p class="validation__test validation__test--wrong">Has both numbers and letters</p>
-        <p class="validation__test validation__test--wrong">Doesn't use common pattern (Qwerty, et.c)</p>
-        <p class="validation__test validation__test--wrong">Has at least 2 upper case letters</p>
-      </div>
-      <label class="validation__password-check validation__test--wrong">
-        <span>Reenter your password: </span>
-        <input class="password-check__input" type="text" placeholder="Your password...">
-      </label>
-      <input type="submit" class="validation__submit-btn" disabled>
-    </form>
-    <div class="copy-buttons">
-      <button class="btn copy-html__btn copy-html__btn--29">Copy HTML</button>
-      <button class="btn copy-css__btn copy-css__btn--29">Copy CSS</button>
-      <button class="btn copy-js__btn copy-js__btn--29">Copy JS</button>
     </div>
   </section>
 </body>
