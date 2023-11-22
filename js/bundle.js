@@ -52,43 +52,43 @@
             </li>`})).filter(Boolean)}
       </ul>
     `}};var At;Ct([ut(),kt("design:type",Array)],Ot.prototype,"_elements",void 0),Ct([ut(),kt("design:type",Array)],Ot.prototype,"_headerHeights",void 0),Ct([ut(),kt("design:type",Array)],Ot.prototype,"_widths",void 0),Ct([ht({type:Array,converter:{fromAttribute:t=>{if(null===t)return[];const e=t.split(",").map((t=>"true"===t||"1"===t));return e},toAttribute:t=>t.join(",")}}),kt("design:type",Array)],Ot.prototype,"opened",void 0),Ct([ht({type:Boolean}),kt("design:type",Object)],Ot.prototype,"multiple",void 0),Ot=Ct([ct("accordion-component")],Ot),function(t){t[t.BACKWARDS=-1]="BACKWARDS",t[t.STILL=0]="STILL",t[t.FORWARDS=1]="FORWARDS"}(At||(At={}));const Rt=r`
-  .carousel-controls {
-	position: relative;
-	z-index: 1;
-	display: flex;
-	gap: 1rem;
-	align-items: center;
-	justify-content: center;
-  }
+	.carousel-controls {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		gap: 1rem;
+		align-items: center;
+		justify-content: center;
+	}
 
-  .carousel-controls__next-button {
-	width: 0;
-	height: 0;
-	border-style: solid;
-	border-width: 7.5px 0 7.5px 13px;
-	border-color: transparent transparent transparent #fff;
-	background: none;
-	cursor: pointer;
-  }
+	.carousel-controls__next-button {
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 7.5px 0 7.5px 13px;
+		border-color: transparent transparent transparent #fff;
+		background: none;
+		cursor: pointer;
+	}
 
-  .carousel-controls__previous-button {
-	width: 0;
-	height: 0;
-	border-style: solid;
-	border-width: 7.5px 13px 7.5px 0;
-	border-color: transparent #fff transparent transparent;
-	background: none;
-	cursor: pointer;
-  }
+	.carousel-controls__previous-button {
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 7.5px 13px 7.5px 0;
+		border-color: transparent #fff transparent transparent;
+		background: none;
+		cursor: pointer;
+	}
 
-  .carousel-controls__perspective-button {
-	border: none;
-	background-color: #000;
-	padding: 0.5rem;
-	color: #fff;
-	text-transform: uppercase;
-	cursor: pointer;
-  }
+	.carousel-controls__perspective-button {
+		border: none;
+		background-color: #000;
+		padding: 0.5rem;
+		color: #fff;
+		text-transform: uppercase;
+		cursor: pointer;
+	}
 `;var jt=function(t,e,i,o){var s,n=arguments.length,r=n<3?e:null===o?o=Object.getOwnPropertyDescriptor(e,i):o;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)r=Reflect.decorate(t,e,i,o);else for(var a=t.length-1;a>=0;a--)(s=t[a])&&(r=(n<3?s(r):n>3?s(e,i,r):s(e,i))||r);return n>3&&r&&Object.defineProperty(e,i,r),r},Et=function(t,e){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(t,e)};let Lt=class extends at{constructor(){super(...arguments),this._elements=[],this._currentItem=0,this.isHorizontal=!0}static{this.styles=r`
     .carousel {
       display: flex;
