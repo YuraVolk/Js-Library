@@ -1,6 +1,6 @@
 import { LitElement, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { getFirstScrollableParent } from "../../interfaces/domUtils";
+import { getFirstScrollableParent } from "src/modules/interfaces/generic/domUtils/domUtils";
 
 declare global {
 	interface HTMLElementTagNameMap {

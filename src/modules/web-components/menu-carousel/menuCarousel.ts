@@ -5,7 +5,7 @@ import {
   state
 } from "lit/decorators.js";
 import { assertNonUndefinedDevOnly } from "../../utils";
-import { carouselControlsStyles } from "../../interfaces/carousel";
+import { carouselControlsStyles } from "src/modules/interfaces/generic/carousel/carousel.lit";
 
 declare global {
   interface HTMLElementTagNameMap {

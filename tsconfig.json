@@ -5,7 +5,7 @@
         "name": "typescript-plugin-css-modules"
       }
     ],
-    "baseUrl": ".",
+    "baseUrl": "./",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "lib": ["DOM"],

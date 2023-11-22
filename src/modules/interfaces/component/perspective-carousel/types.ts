@@ -1,4 +1,4 @@
-import { CarouselDirection } from "../../interfaces/carousel";
+import { CarouselDirection } from "src/modules/interfaces/generic/carousel/carousel";
 
 export interface InternalPerspectiveCarouselState {
 	totalItems: number;

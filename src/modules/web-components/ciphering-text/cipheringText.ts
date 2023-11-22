@@ -1,5 +1,5 @@
 import { customElement, property } from "lit/decorators.js";
-import { SelfModifyingText } from "../../interfaces/selfModifyingText";
+import { SelfModifyingText } from "src/modules/interfaces/generic/selfModifyingText/selfModifyingText.lit";
 
 declare global {
   interface HTMLElementTagNameMap {

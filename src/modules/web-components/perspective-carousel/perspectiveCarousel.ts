@@ -1,10 +1,10 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property, queryAssignedElements, queryAsync, state } from "lit/decorators.js";
-import { resetInternalState } from "./types";
-import { CarouselDirection } from "../../interfaces/carousel";
+import { resetInternalState } from "../../interfaces/component/perspective-carousel/types";
 import { styleMap } from "lit/directives/style-map.js";
 import { assertDevOnly } from "../../utils";
-import { carouselControlsStyles } from "../../interfaces/carousel";
+import { CarouselDirection } from "src/modules/interfaces/generic/carousel/carousel";
+import { carouselControlsStyles } from "src/modules/interfaces/generic/carousel/carousel.lit";
 
 declare global {
 	interface HTMLElementTagNameMap {
