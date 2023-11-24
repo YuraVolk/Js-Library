@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, watch, computed } from "vue";
+import { ref, watch, computed } from "vue";
 
 const props = defineProps({
     options: {
@@ -33,6 +33,7 @@ const inputValue = computed(() => props.inputValue);
 
 watch(inputValue, () => {
     const value = inputValue.value.toLowerCase().trim();
+    if (!value.length) return;
     const newFilteredOptions = props.options.filter((option) => {
         const lowerOption = option.toLowerCase();
         return lowerOption !== value && lowerOption.startsWith(value);
