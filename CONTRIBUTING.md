@@ -12,7 +12,7 @@ create pull requests and add
 Community Expectations are written
 in Code of Conduct.
 
-## Collaborator Guildelines
+## Collaborator Guidelines
 In order to make notable changes, 
 here are some quick tips:
 - Label the issues correctly. Create a new issue for every problem. Give issues short names.
@@ -23,4 +23,4 @@ here are some quick tips:
 - Consider following:
     * Issue templates
     * Pull request template
-    * Security vulnerabilty format (in security policy)
+    * Security vulnerability format (in security policy)

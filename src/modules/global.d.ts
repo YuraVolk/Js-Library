@@ -7,3 +7,9 @@ declare module "*.jpg" {
 	const pathName: string;
 	export default pathName;
 }
+
+declare module "*.vue" {
+	import type { DefineComponent } from "vue";
+	const component: DefineComponent<object, object, unknown>;
+	export default component;
+}

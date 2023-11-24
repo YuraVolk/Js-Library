@@ -18,5 +18,7 @@
       "src/modules/global.d.ts"
     ],
     "useDefineForClassFields": false
-  }
+  },
+  "include": ["src/**/*.ts", "src/**/*.vue", "src/modules/vueEntry.ts"],
+  "exclude": ["node_modules"]
 }
