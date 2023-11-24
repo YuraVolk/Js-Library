@@ -43,6 +43,13 @@ module.exports = {
                 loader: 'vue-loader',
             },
             {
+                test: /\.css$/,
+                use: [
+                    'vue-style-loader',
+                    'css-loader'
+                ]
+            },
+            {
                 test: /\.ts$/,
                 exclude: /node_modules/,
                 use: {

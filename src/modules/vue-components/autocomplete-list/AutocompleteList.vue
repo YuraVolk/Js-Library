@@ -8,68 +8,75 @@
         </ul>
     </div>
 </template>
-  
-<script>
-import { ref, onMounted, onUnmounted } from 'vue';
 
-export default {
-    name: 'AutocompleteListComponent',
-    props: {
-        options: {
-            type: Array,
-            default: () => [],
-        },
+<script setup lang="ts">
+import { ref, defineProps, watch, computed } from "vue";
+
+const props = defineProps({
+    options: {
+        type: Array as () => string[],
+        default: () => []
     },
-    setup(props) {
-        const isListOpened = ref(false);
-        const filteredOptions = ref([]);
+    inputValue: {
+        type: String,
+        default: ""
+    }
+});
 
-        const onInputHandler = (event) => {
-            const value = event.target.value.toLowerCase().trim();
-            const newFilteredOptions = props.options.filter((option) => {
-                const lowerOption = option.toLowerCase();
-                return lowerOption !== value && lowerOption.startsWith(value);
-            });
+const emit = defineEmits<{
+    (e: "changeInputValue", value: string): void;
+}>();
 
-            if (newFilteredOptions.length) {
-                isListOpened.value = true;
-                filteredOptions.value = newFilteredOptions;
-            } else {
-                isListOpened.value = false;
-                filteredOptions.value = [];
-            }
-        };
+const isListOpened = ref(false);
+const filteredOptions = ref<string[]>([]);
+const inputValue = computed(() => props.inputValue);
 
-        const setInputValue = (newValue) => {
-            const input = document.querySelector('input');
-            if (input) {
-                input.value = newValue;
-                isListOpened.value = false;
-                filteredOptions.value = [];
-            }
-        };
+watch(inputValue, () => {
+    const value = inputValue.value.toLowerCase().trim();
+    const newFilteredOptions = props.options.filter((option) => {
+        const lowerOption = option.toLowerCase();
+        return lowerOption !== value && lowerOption.startsWith(value);
+    });
 
-        onMounted(() => {
-            const input = document.querySelector('input');
-            if (input) {
-                input.addEventListener('input', onInputHandler);
-            }
-        });
+    if (newFilteredOptions.length) {
+        isListOpened.value = true;
+        filteredOptions.value = newFilteredOptions;
+    } else {
+        isListOpened.value = false;
+        filteredOptions.value = [];
+    }
+});
 
-        onUnmounted(() => {
-            const input = document.querySelector('input');
-            if (input) {
-                input.removeEventListener('input', onInputHandler);
-            }
-        });
-
-        return {
-            isListOpened,
-            filteredOptions,
-            onInputHandler,
-            setInputValue,
-        };
-    },
+const setInputValue = (newValue: string) => {
+    isListOpened.value = false;
+    filteredOptions.value = [];
+    emit("changeInputValue", newValue);
 };
 </script>
-  
+
+<style>
+.autocomplete-items {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    overflow-y: scroll;
+    width: 100%;
+    max-height: 200px;
+    padding-left: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.autocomplete-item {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #ffffff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-wrap {
+    position: relative;
+}
+</style>
