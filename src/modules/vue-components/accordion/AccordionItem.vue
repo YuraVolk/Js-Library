@@ -1,0 +1,84 @@
+<template>
+    <li class="accordion">
+        <button @click="toggleContent" class="accordion__heading">
+            <slot name="title"></slot>
+        </button>
+        <div :class="['accordion__content', isExpanded && 'accordion__content--open']">
+            <slot name="content"></slot>
+        </div>
+    </li>
+</template>
+
+<script lang="ts" setup>
+import { uid } from "src/modules/utils";
+import { ref, inject, onMounted, onUpdated, watch } from "vue";
+
+const props = defineProps<{
+    isOpen?: boolean
+}>();
+const id = ref(uid());
+const isExpanded = ref(props.isOpen ?? false);
+const allowMultiple = inject<boolean>("multiple") ?? false;
+const selectedIndex = inject<{ value: string[] }>("selectedIndex") ?? { value: [] };
+const expandedIndex = inject<{ value: string[] | string }>("expandedIndex") ?? { value: allowMultiple ? [] : "" };
+
+const expand = () => {
+    if (allowMultiple) {
+        if (isExpanded.value) {
+            expandedIndex.value = [...selectedIndex.value, id.value];
+        } else expandedIndex.value = selectedIndex.value.filter(i => i !== id.value);
+    } else expandedIndex.value = id.value;
+};
+
+const toggleContent = () => {
+    isExpanded.value = !isExpanded.value;
+};
+
+onMounted(expand);
+onUpdated(expand);
+
+watch(
+    () => expandedIndex.value,
+    () => {
+        if (Array.isArray(expandedIndex.value)) {
+            isExpanded.value = expandedIndex.value.includes(id.value);
+        } else isExpanded.value = expandedIndex.value === id.value;
+    }
+);
+</script>
+
+<style>
+.accordion {
+    width: 100%;
+    overflow: hidden;
+    background-color: #000000;
+    border-radius: .4rem;
+    -webkit-transition: max-height 0.4s linear;
+    transition: max-height 0.4s linear;
+}
+
+.accordion:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.accordion__content {
+    color: #fff;
+    font-size: 15px;
+    padding: 2rem;
+    -webkit-transition: max-height 0.2s linear forwards;
+    transition: max-height 0.2s linear forwards;
+}
+
+.accordion__heading {
+    position: relative;
+    z-index: 1;
+    display: block;
+    font-size: 1.6rem;
+    color: rgba(255, 255, 255, .8);
+    text-decoration: none;
+    background-color: #000000;
+    padding: 0.25rem 1rem;
+    text-transform: uppercase;
+    font-family: Segoe UI;
+}
+</style>

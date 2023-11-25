@@ -12,17 +12,10 @@
 <script setup lang="ts">
 import { ref, watch, computed } from "vue";
 
-const props = defineProps({
-    options: {
-        type: Array as () => string[],
-        default: () => []
-    },
-    inputValue: {
-        type: String,
-        default: ""
-    }
-});
-
+const props = defineProps<{
+    inputValue: string,
+    options: string[]
+}>();
 const emit = defineEmits<{
     (e: "changeInputValue", value: string): void;
 }>();

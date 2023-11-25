@@ -2,6 +2,7 @@ import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { assertNonUndefined } from "../../utils";
+import { AccordionListConfiguration } from "src/modules/interfaces/component/accordion/types";
 
 interface AccordionHTMLCollection extends HTMLCollection {
   [index: number]: HTMLElement;
@@ -19,7 +20,7 @@ declare global {
 }
 
 @customElement("accordion-component")
-export class AccordionComponent extends LitElement {
+export class AccordionComponent extends LitElement implements AccordionListConfiguration {
   static styles = css`
     .accordions {
       margin: 0;

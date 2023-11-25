@@ -14,9 +14,8 @@
                     <div class="list-sublist-wrap">
                         <ul class="list-sublist">
                             <li v-for="link in linkList[1]"
-                                :class="`list-sublist__item ${(link as Record<string, string>).name === $props.activeLink ? 'list-sublist__item--active' : ''}`">
-                                <a class="list-sublist__item-link" :href="(link as Record<string, string>).link">{{ (link as
-                                    Record<string, string>).name }}</a>
+                                :class="`list-sublist__item ${link.name === $props.activeLink ? 'list-sublist__item--active' : ''}`">
+                                <a class="list-sublist__item-link" :href="link.link" v-text="link.name"></a>
                             </li>
                         </ul>
                     </div>
@@ -46,8 +45,8 @@ defineProps({
 });
 </script>
 
-<style>
-#sidebar-navigation {
+<style scoped>
+.navigation {
     position: relative;
     z-index: 2;
     width: 230px;
@@ -56,13 +55,13 @@ defineProps({
 }
 
 @media (max-width: 800px) {
-    #sidebar-navigation {
+    .navigation {
         width: 100%;
         height: 25vh;
     }
 }
 
-#sidebar-navigation .wrap {
+.wrap {
     mask-image: linear-gradient(to top,
             transparent 0%,
             rgb(0, 0, 0) 10%,
@@ -83,28 +82,28 @@ defineProps({
 }
 
 @media (max-width: 800px) {
-    #sidebar-navigation .wrap {
+    .wrap {
         flex-direction: row;
     }
 }
 
-#sidebar-navigation * {
+* {
     transition: all 0.1s ease-in;
 }
 
-#sidebar-navigation *:hover {
+*:hover {
     color: #57c9e5;
 }
 
-#sidebar-navigation details:not([open]) svg {
+details:not([open]) svg {
     transform: rotate(-90deg);
 }
 
-#sidebar-navigation .wrap::-webkit-scrollbar {
+.wrap::-webkit-scrollbar {
     display: none;
 }
 
-#sidebar-navigation .list {
+.list {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -113,14 +112,14 @@ defineProps({
     list-style-type: none;
 }
 
-#sidebar-navigation .list-item {
+.list-item {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     cursor: pointer;
 }
 
-#sidebar-navigation .list__heading {
+.list__heading {
     display: flex;
     font-size: 16px;
     color: rgb(236, 237, 238);
@@ -129,7 +128,7 @@ defineProps({
     text-transform: uppercase;
 }
 
-#sidebar-navigation .list-sublist {
+.list-sublist {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -139,11 +138,11 @@ defineProps({
     list-style-type: none;
 }
 
-#sidebar-navigation .list-sublist__item {
+.list-sublist__item {
     margin-left: 2.25rem;
 }
 
-#sidebar-navigation .list-sublist__item-link {
+.list-sublist__item-link {
     position: relative;
     color: rgba(236, 237, 238);
     text-decoration: none;
@@ -151,7 +150,7 @@ defineProps({
     opacity: 0.6;
 }
 
-#sidebar-navigation .list-sublist__item--active {
+.list-sublist__item--active {
     width: 100%;
     margin-left: 0;
     padding-left: 2.25rem;
@@ -160,11 +159,11 @@ defineProps({
     background-color: #ff2a5130;
 }
 
-#sidebar-navigation .list-sublist__item--active .list-sublist__item-link::before {
+.list-sublist__item--active .list-sublist__item-link::before {
     content: none;
 }
 
-#sidebar-navigation .list-sublist__item-link::before {
+.list-sublist__item-link::before {
     position: absolute;
     left: -1.25rem;
     top: 50%;
@@ -177,7 +176,7 @@ defineProps({
     content: "";
 }
 
-#sidebar-navigation .list-sublist__item-link:hover {
+.list-sublist__item-link:hover {
     opacity: 0.75;
 }
 </style>
