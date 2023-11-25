@@ -56,6 +56,13 @@ module.exports = {
 				options: {
 					presets: ["@babel/preset-env", "babel-preset-typescript-vue3", "@babel/preset-typescript"]
 				}
+			},
+			{
+			  test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
+			  type: 'asset/resource',
+			  generator: {
+				filename: 'img/[name][ext]'
+			  }
 			}
 		]
 	},
