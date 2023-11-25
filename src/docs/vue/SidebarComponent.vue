@@ -1,5 +1,5 @@
 <template>
-    <aside id="sidebar-navigation">
+    <aside class="navigation">
         <nav class="wrap">
             <div class="list" v-for="linkList in Object.entries(links)">
                 <details class="list-item" open>

@@ -1,3 +1,3 @@
 export interface AccordionListConfiguration {
-    multiple: boolean;
+    multiple?: boolean;
 }
