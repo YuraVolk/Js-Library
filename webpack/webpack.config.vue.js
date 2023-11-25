@@ -4,9 +4,12 @@ const glob = require("glob");
 const { VueLoaderPlugin } = require("vue-loader");
 
 const vueHtmlPlugins = glob.sync("./src/docs/vue/**/*.html").map((file) => {
+	const entryName = file.replace(/^\.\/src\/docs\/vue\//, "").replace(/index\.html$/, "");
 	return new HtmlWebpackPlugin({
 		template: file,
-		filename: file.replace(/^\.\/src\/docs\/vue\//, "vue/")
+		filename: `vue/${entryName}/index.html`,
+		chunks: [`vue/${entryName}`],
+		inject: false
 	});
 });
 
@@ -23,9 +26,9 @@ module.exports = {
 		filename: "[name].js"
 	},
 	plugins: [
-        new VueLoaderPlugin(),
-        ...vueHtmlPlugins
-    ],
+		new VueLoaderPlugin(), 
+		...vueHtmlPlugins
+	],
 	module: {
 		rules: [
 			{
@@ -47,17 +50,11 @@ module.exports = {
 				use: ["vue-style-loader", "css-loader"]
 			},
 			{
-				test: /\.html$/i,
-				loader: "html-loader"
-			},
-			{
 				test: /\.ts$/,
 				exclude: /node_modules/,
-				use: {
-					loader: "ts-loader",
-					options: {
-						appendTsSuffixTo: [/\.vue$/]
-					}
+				loader: "babel-loader",
+				options: {
+					presets: ["@babel/preset-env", "babel-preset-typescript-vue3", "@babel/preset-typescript"]
 				}
 			}
 		]
