@@ -34,7 +34,6 @@ const rotateCarousel = (newCurrentImage: number) => {
 };
 
 const setupCarousel = () => {
-    console.log("yay");
     const items = Object.values(elements.value);
     const length = items.length,
         theta = (2 * Math.PI) / length,
