@@ -19,7 +19,7 @@
                 maximum.</li>
             <li>label, a label for the range input, empty string by default.</li>
             <li>thumbSize, trackColor, thumbColor, hoverColor, activeColor and valueSize. Colors to give range styles: all
-                of these are strings and have default vaues.</li>
+                of these are strings and have default values.</li>
         </ul>
         <p>Here is an example of basic usage with default value of 50 and step 5:</p>
         <range-input-component :default-value="50" :step="5"></range-input-component>
