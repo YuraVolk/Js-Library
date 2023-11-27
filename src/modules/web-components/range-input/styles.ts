@@ -1,4 +1,5 @@
 import { css } from "lit";
+import { defaultActiveColor, defaultHoverColor } from "src/modules/interfaces/component/range-input/types";
 
 export const thumbStyles = css`
   width: var(--thumbSize, 15px);
@@ -9,5 +10,4 @@ export const thumbStyles = css`
   transition: 0.35s ease-in-out;
 `;
 
-export const defaultActiveColor = css`rgba(255,85,0, .6)`;
-export const defaultHoverColor = css`rgba(255,85,0, .3)`;
+export { defaultActiveColor, defaultHoverColor };

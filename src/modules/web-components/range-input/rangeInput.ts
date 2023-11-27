@@ -5,6 +5,7 @@ import { styleMap } from 'lit/directives/style-map.js';
 import { defaultActiveColor, defaultHoverColor, thumbStyles } from "./styles";
 import { when } from "lit/directives/when.js";
 import { classMap } from "lit/directives/class-map.js";
+import { RangeInputConfiguration } from "src/modules/interfaces/component/range-input/types";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -13,7 +14,7 @@ declare global {
 }
 
 @customElement("range-input-component")
-export class RangeInputComponent extends LitElement {
+export class RangeInputComponent extends LitElement implements RangeInputConfiguration {
   private uiRangeID = crypto.randomUUID();
   static styles = css`
     .range-slider__input {
@@ -38,27 +39,27 @@ export class RangeInputComponent extends LitElement {
     }
 
     .range-slider__input::-webkit-slider-thumb:hover {
-      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 3)) var(--hoverColor, ${defaultHoverColor});
+      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 3)) var(--hoverColor, ${css`defaultHoverColor`});
     }
 
     .range-slider__input::-moz-range-thumb:hover {
-      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 3)) var(--hoverColor, ${defaultHoverColor});
+      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 3)) var(--hoverColor, ${css`defaultHoverColor`});
     }
 
     .range-slider__input:active::-webkit-slider-thumb {
-      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 6)) var(--activeColor, ${defaultActiveColor});
+      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 6)) var(--activeColor, ${css`defaultActiveColor`});
     }
 
     .range-slider__input:active::-moz-range-thumb {
-      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 6)) var(--activeColor, ${defaultActiveColor});
+      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 6)) var(--activeColor, ${css`defaultActiveColor`});
     }
 
     .range-slider__input:focus::-webkit-slider-thumb {
-      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 6)) var(--activeColor, ${defaultActiveColor});
+      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 6)) var(--activeColor, ${css`defaultActiveColor`});
     }
 
     .range-slider__input:focus::-moz-range-thumb {
-      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 6)) var(--activeColor, ${defaultActiveColor});
+      box-shadow: 0 0 0 calc(var(--thumbSize, 15px) - (var(--thumbSize, 15px) / 6)) var(--activeColor, ${css`defaultActiveColor`});
     }
 
     .wrap {
