@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <div class="range-input">
         <div class="wrap">
             <div :class="['range-slider', allSameLine && 'range-slider--one-lined']">
                 <label class="range-slider__label" :for="uniqueID">{{ label }}</label>
                 <input type="range" :min="minimum ?? 0" :max="maximum ?? 100" :value="currentValue" :id="uniqueID"
-                    :step="step ?? 1" class="range-slider__input" :style="gradientStyles" />
+                    :step="step ?? 1" class="range-slider__input" :style="gradientStyles" @input="onValueChange" />
                 <ul class="range-slider-ticks" v-if="ticks?.length">
-                    <li v-for="tick in ticks" :style="`--value: ${tick}%`">{{ tick }}</li>
+                    <li v-for="tick in ticks" :style="`--value: ${tick}%`" class="range-slider-ticks__tick">{{ tick }}</li>
                 </ul>
             </div>
             <span class="value" v-if="!hideValue">{{ currentValue }}</span>
@@ -15,14 +15,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, CSSProperties, computed } from "vue";
-import { uid } from "../../utils";
+import { ref, CSSProperties, computed } from "vue";
+import { assertDevOnly, uid } from "../../utils";
 import { RangeInputConfiguration, defaultActiveColor, defaultHoverColor } from "src/modules/interfaces/component/range-input/types";
 
 const uniqueID = ref(uid());
-const gradientStyles = reactive<CSSProperties>({});
+const gradientStyles = ref<CSSProperties>({});
 const props = defineProps<Partial<RangeInputConfiguration>>();
 const currentValue = ref(props.defaultValue ?? 0);
+const emit = defineEmits<{
+    (e: 'change', value: number): void
+}>();
 
 const styles = computed(() => {
     const thumbSize = props.thumbSize ?? "15px";
@@ -37,6 +40,20 @@ const styles = computed(() => {
         valueSize: props.valueSize ?? "25px"
     };
 });
+
+const setGradientStyle = () => {
+    const progress = (currentValue.value / (props.maximum ?? 100)) * 100;
+    gradientStyles.value = {
+		background: `linear-gradient(to right, ${styles.value.thumbColor} ${progress}%, ${styles.value.trackColor} ${progress}%)`
+	};
+};
+
+const onValueChange = (event: Event) => {
+    assertDevOnly(event.target instanceof HTMLInputElement);
+    currentValue.value = Number(event.target.value);
+    setGradientStyle();
+    emit("change", currentValue.value);
+};
 </script>
 
 <style scoped>
@@ -138,7 +155,7 @@ const styles = computed(() => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    left: calc(v-bind(currentValue) + v-bind("styles.valueSize") / 4);
+    left: calc(var(--value) + v-bind("styles.valueSize") / 4);
     width: 1px;
     height: calc(v-bind("styles.thumbSize") - (v-bind("styles.thumbSize") / 3));
     background: v-bind("styles.trackColor");
