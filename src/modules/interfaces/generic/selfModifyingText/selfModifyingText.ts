@@ -1,8 +1,13 @@
-export interface SelfModifyingTextInterface {
+export interface ModifyingTextConfiguration {
 	strings: string[];
-	repetitions: number;
-	interval: number;
-	typingSpeed: number;
+	repetitions?: number;
+	interval?: number;
+	typingSpeed?: number;
+}
+
+export interface SelfModifyingTextInterface extends Required<ModifyingTextConfiguration> {
+	splitText?(newString?: string): void;
+	triggerTextAnimation(fromText: string, toText: string): void | Promise<void>;
 }
 
 export function* nextStringsGenerator(
