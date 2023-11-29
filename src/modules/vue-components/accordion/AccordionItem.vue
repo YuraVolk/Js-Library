@@ -64,7 +64,7 @@ watch(
 );
 </script>
 
-<style>
+<style scoped>
 .accordion {
     width: 100%;
     overflow: hidden;

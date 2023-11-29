@@ -85,7 +85,7 @@ onUnmounted(() => {
 provide(INJECTED_ELEMENTS_NAME, elements);
 </script>
 
-<style>
+<style scoped>
 .carousel {
     display: flex;
     width: auto;
