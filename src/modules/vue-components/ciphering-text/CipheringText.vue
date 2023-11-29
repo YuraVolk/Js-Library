@@ -72,7 +72,7 @@ function triggerTextAnimation(_: string, toText: string) {
 }
 </script>
 
-<style>
+<style scoped>
 pre {
     white-space: normal;
 }

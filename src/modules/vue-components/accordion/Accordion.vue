@@ -26,7 +26,7 @@ provide("selectedIndex", selectedIndex);
 provide("expandedIndex", expandedIndex);
 </script>
 
-<style>
+<style scoped>
 .accordions {
     margin: 0;
     padding-left: 0;

@@ -3,6 +3,8 @@ import { customElement, property, queryAsync } from "lit/decorators.js";
 import { assertNonUndefined } from "../../utils";
 import { RangeInputComponent } from "../range-input/rangeInput";
 import { styleMap } from "lit/directives/style-map.js";
+import { ColorPickerConfiguration } from "src/modules/interfaces/component/color-picker/types";
+import { RGBAColor, verifyValidRGBAColor } from "src/modules/interfaces/generic/colors";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -11,7 +13,7 @@ declare global {
 }
 
 @customElement("color-picker-component")
-export class ColorPickerComponent extends LitElement {
+export class ColorPickerComponent extends LitElement implements ColorPickerConfiguration {
   private static rgbaConverter = {
     fromAttribute: (string: string | null) => {
       const array = string?.split(",");
@@ -77,9 +79,9 @@ export class ColorPickerComponent extends LitElement {
   @property({ type: Number })
   height = 245;
   @property({ converter: ColorPickerComponent.rgbaConverter })
-  backgroundColor = [0, 0, 0, 1];
+  backgroundColor: RGBAColor = [0, 0, 0, 1];
   @property({ converter: ColorPickerComponent.rgbaConverter })
-  rgba = [0, 0, 0, 1];
+  rgba: RGBAColor = [0, 0, 0, 1];
 
   private convertOpacityToBackground() {
     const alpha = 1 - this.rgba[3] / 100, baseAlpha = this.rgba[3] / 100;
@@ -112,7 +114,8 @@ export class ColorPickerComponent extends LitElement {
       image.src = this.imageUrl;
       image.onload = () => { ctx.drawImage(image, 0, 0, image.width, image.height); };
       canvas.addEventListener("mousedown", (e) => {
-        this.rgba = [...ctx.getImageData(e.offsetX, e.offsetY, 1, 1).data.slice(0, -1), this.rgba[3]];
+        const color = [...ctx.getImageData(e.offsetX, e.offsetY, 1, 1).data.slice(0, -1), this.rgba[3]];
+        if (verifyValidRGBAColor(color)) this.rgba = color;
       });
     }).catch(e => { console.log(e); });
   }
@@ -121,7 +124,8 @@ export class ColorPickerComponent extends LitElement {
     super.connectedCallback();
     this.initColorPicker();
     this.opacityRange.then(range => range._onUpdateListener = (value) => {
-      this.rgba = [...this.rgba.slice(0, -1), value];
+      const color = [...this.rgba.slice(0, -1), value];
+      if (verifyValidRGBAColor(color)) this.rgba = color;
     }).catch(e => { console.log(e); });
   }
 

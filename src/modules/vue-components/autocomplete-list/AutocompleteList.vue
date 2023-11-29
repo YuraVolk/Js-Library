@@ -48,7 +48,7 @@ const setInputValue = (newValue: string) => {
 };
 </script>
 
-<style>
+<style scoped>
 .autocomplete-items {
     position: absolute;
     top: 100%;
