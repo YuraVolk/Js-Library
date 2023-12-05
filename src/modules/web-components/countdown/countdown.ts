@@ -4,6 +4,7 @@ import {
   property,
   queryAssignedElements
 } from "lit/decorators.js";
+import { defaultTimeUnits, reduceTimeUnits } from "src/modules/interfaces/component/countdown/types";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -18,19 +19,7 @@ export interface TimeUnit {
 
 @customElement("countdown-component")
 export class CountdownComponent extends LitElement {
-  static reduceTimeUnits(units: TimeUnit[]) {
-    return units
-      .map((unit, i) => ({ ...unit, timeFactor: units.slice(0, i + 1).reduce((factor, unit) => factor * unit.timeFactor, 1) }))
-      .reverse();
-  }
-
-  private static units: TimeUnit[] = CountdownComponent.reduceTimeUnits([
-    { name: "second", timeFactor: 1000 },
-    { name: "minute", timeFactor: 60 },
-    { name: "hour", timeFactor: 60 },
-    { name: "day", timeFactor: 24 },
-    { name: "year", timeFactor: 356 }
-  ]);
+  private static units: TimeUnit[] = reduceTimeUnits(defaultTimeUnits);
 
   @property({ converter: {
     fromAttribute: (string) => new Date(string ?? 'May 6, 2085 11:00:00'),
