@@ -80,6 +80,7 @@ onMounted(() => {
 });
 onUnmounted(() => {
     window.removeEventListener("resize", setupCarousel);
+    window.clearInterval(interval.value);
 });
 
 provide(INJECTED_ELEMENTS_NAME, elements);
