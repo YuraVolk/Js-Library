@@ -1,13 +1,15 @@
 # Js-Library
 
 This is my JavaScript library of common scripts.
-Every script may be used in project. All scripts
-were created to speed up development process
-without losing quality. Main aim of this
-library is in providing high-quality solutions
-for problems written in libraries (jQuery, loDash, et.c.).
-All solutions are created with pure (vanilla) JavaScript.
-
+The basic idea behind such a library is that a lot of scripts
+that are impossible to implement without JS are highly unrelated
+in implementations and libraries, which makes usage of numerous such
+scripts in consistent. This library aims to provide a more consistent,
+customizable solution that allows for extensive and easy component styling,
+as well as a performant way of solving an issue.
+All solutions are currently implemented in the following libraries and frameworks:
+1. Lit, currently having all main scripts finished.
+2. Vue, currently being a work-in-progress.
 
 ## Code of Conduct
 [Code of Conduct](https://github.com/YuraVolk/Js-Library/blob/master/CODE_OF_CONDUCT.md) for this library.
