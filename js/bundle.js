@@ -482,7 +482,7 @@
 			background-color: rgba(0, 0, 0, 0.1);
 		}
 
-    .custom-select-options .custom-select-option[data-disabled="true"] {
+		.custom-select-options .custom-select-option[data-disabled="true"] {
 			background-color: rgba(0, 0, 0, 0.33);
 		}
 
