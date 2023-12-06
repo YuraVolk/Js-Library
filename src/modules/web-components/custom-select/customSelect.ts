@@ -2,18 +2,12 @@ import { LitElement, css, html } from "lit";
 import { customElement, state, queryAssignedElements } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { classMap } from "lit/directives/class-map.js";
+import { SelectInternalItem } from "src/modules/interfaces/component/custom-select/types";
 
 declare global {
 	interface HTMLElementTagNameMap {
 		"custom-select-component": CustomSelectComponent;
 	}
-}
-
-export interface SelectInternalItem {
-	innerContent: string;
-	value: string;
-	isSelected: boolean;
-	isDisabled: boolean;
 }
 
 @customElement("custom-select-component")
@@ -92,7 +86,7 @@ export class CustomSelectComponent extends LitElement {
 			background-color: rgba(0, 0, 0, 0.1);
 		}
 
-    .custom-select-options .custom-select-option[data-disabled="true"] {
+		.custom-select-options .custom-select-option[data-disabled="true"] {
 			background-color: rgba(0, 0, 0, 0.33);
 		}
 
@@ -114,9 +108,7 @@ export class CustomSelectComponent extends LitElement {
 	protected onItemSelected(element: SelectInternalItem) {
 		this._isOpened = false;
 		if (element.isDisabled) return;
-    this._internalElements.forEach((el) =>
-      el === element ? (el.isSelected = true) : (el.isSelected = false)
-		);
+		this._internalElements.forEach((el) => (el === element ? (el.isSelected = true) : (el.isSelected = false)));
 		this._selectElement.forEach((select) => (select.value = element.value));
 	}
 
