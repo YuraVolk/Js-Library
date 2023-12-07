@@ -1,8 +1,8 @@
 <template>
     <header-component />
-    <sidebar-component active-link="Countdown" />
+    <sidebar-component active-link="Custom Select" />
     <main class="main">
-        <h1 class="heading">Countdown</h1>
+        <h1 class="heading">Custom Select</h1>
         <p>
             The custom select component represents a styled select element. Since normally select element cannot be styled
             across all browsers in the same way, it may be required to use a Vue solution to achieve single design.

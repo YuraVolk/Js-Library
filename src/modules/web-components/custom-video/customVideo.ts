@@ -7,6 +7,7 @@ import resetButton from "../../../assets/img/reset.png";
 import muteButton from "../../../assets/img/volume.png";
 import { assertDevOnly } from "../../utils";
 import { styleMap } from "lit/directives/style-map.js";
+import { toMinutesSeconds } from "src/modules/interfaces/component/custom-video/types";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -109,13 +110,6 @@ export class CustomVideoComponent extends LitElement {
 
 	private videoCheckInterval?: number;
 
-	toMinutesSeconds(time: number) {
-		const hours = Math.floor(time / 3600),
-			minutes = Math.floor((time - hours * 3600) / 60),
-			seconds = Math.floor(time - hours * 3600 - minutes * 60);
-		return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-	}
-
 	onVideoEnded() {
 		this._isVideoPlaying = false;
 	}
@@ -124,7 +118,7 @@ export class CustomVideoComponent extends LitElement {
 		if (this._isVideoPlaying) return;
 		this._isVideoPlaying = true;
 		this.videoCheckInterval ??= window.setInterval(() => {
-			timeRange.label = this.toMinutesSeconds(video.currentTime);
+			timeRange.label = toMinutesSeconds(video.currentTime);
 			timeRange.changeValue(video.currentTime);
 		}, 50);
 	}
@@ -152,7 +146,7 @@ export class CustomVideoComponent extends LitElement {
 
 	resetVideo(data: VideoControlData = this.getWorkingData()) {
 		data.timeRange.changeValue(0);
-		data.timeRange.label = this.toMinutesSeconds(0);
+		data.timeRange.label = toMinutesSeconds(0);
 		data.video.currentTime = 0;
 		this.stopVideo(data);
 	}
@@ -160,7 +154,7 @@ export class CustomVideoComponent extends LitElement {
 	setVideoSecond(seconds: number) {
 		const { video, timeRange } = this.getWorkingData();
 		timeRange._value = seconds;
-		timeRange.label = this.toMinutesSeconds(seconds);
+		timeRange.label = toMinutesSeconds(seconds);
 		video.currentTime = seconds;
 	}
 

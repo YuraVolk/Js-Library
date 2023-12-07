@@ -8,6 +8,11 @@ declare module "*.jpg" {
 	export default pathName;
 }
 
+declare module "*.mp4" {
+	const pathName: string;
+	export default pathName;
+}
+
 declare module "*.vue" {
 	import type { DefineComponent } from "vue";
 	const component: DefineComponent<object, object, unknown>;

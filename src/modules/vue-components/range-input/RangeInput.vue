@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, CSSProperties, computed } from "vue";
+import { ref, CSSProperties, computed, onMounted, watch } from "vue";
 import { assertDevOnly, uid } from "../../utils";
 import { RangeInputConfiguration, defaultActiveColor, defaultHoverColor } from "src/modules/interfaces/component/range-input/types";
 
@@ -23,9 +23,18 @@ const uniqueID = ref(uid());
 const gradientStyles = ref<CSSProperties>({});
 const props = defineProps<Partial<RangeInputConfiguration>>();
 const currentValue = ref(props.defaultValue ?? 0);
+const propsValue = computed(() => props.value ?? 0);
 const emit = defineEmits<{
     (e: 'change', value: number): void
 }>();
+
+watch(
+    propsValue,
+    (newValue) => {
+        currentValue.value = Number(newValue);
+        setGradientStyle();
+    }
+);
 
 const styles = computed(() => {
     const thumbSize = props.thumbSize ?? "15px";
@@ -54,6 +63,10 @@ const onValueChange = (event: Event) => {
     setGradientStyle();
     emit("change", currentValue.value);
 };
+
+onMounted(() => {
+    setGradientStyle();
+});
 </script>
 
 <style scoped>
