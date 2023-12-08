@@ -655,8 +655,8 @@
 		}
 
 		.gallery-toggles {
-      position: relative;
-      z-index: 2;
+			position: relative;
+			z-index: 2;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -715,21 +715,22 @@
 				</ul>
 			</div>
 			${this.showArrows?W`<div class="gallery-controls">
-				<button
-					class="gallery-controls__previous-button"
-					@click="${()=>{this.changeCurrentSlide(this.current-1)}}"
-				></button>
-				<button
-					class="gallery-controls__next-button"
-					@click="${()=>{this.changeCurrentSlide(this.current+1)}}"
-				></button>`:""}
+							<button
+								class="gallery-controls__previous-button"
+								@click="${()=>{this.changeCurrentSlide(this.current-1)}}"
+							></button>
+							<button
+								class="gallery-controls__next-button"
+								@click="${()=>{this.changeCurrentSlide(this.current+1)}}"
+							></button>
+					  </div>`:""}
 			</div>
 			${0!==this._itemsLength&&this.showToggles?W`<ul class="gallery-toggles">
-						${Array.from({length:this._itemsLength},((t,e)=>W`<li
-									class="gallery-toggle ${Zt({"gallery-toggle--active":this.current-1===e})}"
-									@click="${()=>{this.changeCurrentSlide(e+1)}}"
-								></li>`))}
-				  </ul>`:""}
+							${Array.from({length:this._itemsLength},((t,e)=>W`<li
+										class="gallery-toggle ${Zt({"gallery-toggle--active":this.current-1===e})}"
+										@click="${()=>{this.changeCurrentSlide(e+1)}}"
+									></li>`))}
+					  </ul>`:""}
 		</div>`}};xe([ht({type:Boolean}),Se("design:type",Object)],$e.prototype,"smoothDiametralTransition",void 0),xe([ht({type:Number}),Se("design:type",Object)],$e.prototype,"current",void 0),xe([ht({type:Number}),Se("design:type",Object)],$e.prototype,"frameGap",void 0),xe([ht({type:Number}),Se("design:type",Object)],$e.prototype,"animationDuration",void 0),xe([ht({type:Boolean}),Se("design:type",Object)],$e.prototype,"showArrows",void 0),xe([ht({type:Boolean}),Se("design:type",Object)],$e.prototype,"showToggles",void 0),xe([vt({flatten:!0}),Se("design:type",Array)],$e.prototype,"_carouselItems",void 0),xe([gt(".gallery-list"),Se("design:type",HTMLElement)],$e.prototype,"_galleryList",void 0),xe([gt(".gallery"),Se("design:type",HTMLElement)],$e.prototype,"_galleryWrap",void 0),xe([ut(),Se("design:type",Object)],$e.prototype,"_itemsLength",void 0),xe([ut(),Se("design:type",Object)],$e.prototype,"_isAnimating",void 0),$e=xe([ct("gallery-carousel-component")],$e);var Ce=function(t,e,i,o){var s,n=arguments.length,r=n<3?e:null===o?o=Object.getOwnPropertyDescriptor(e,i):o;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)r=Reflect.decorate(t,e,i,o);else for(var a=t.length-1;a>=0;a--)(s=t[a])&&(r=(n<3?s(r):n>3?s(e,i,r):s(e,i))||r);return n>3&&r&&Object.defineProperty(e,i,r),r},ke=function(t,e){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(t,e)};let Oe=class extends at{constructor(){super(...arguments),this.windowListeners=[]}static{this.styles=r`
     .wrap {
       position: relative;
