@@ -1,6 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { GalleryCarouselConfiguration } from "src/modules/interfaces/component/gallery-carousel/types";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -9,7 +10,7 @@ declare global {
 }
 
 @customElement("gallery-carousel-component")
-export class GalleryCarouselComponent extends LitElement {
+export class GalleryCarouselComponent extends LitElement implements GalleryCarouselConfiguration {
 	static styles = css`
 		.wrap {
 			position: relative;
@@ -42,8 +43,8 @@ export class GalleryCarouselComponent extends LitElement {
 		}
 
 		.gallery-toggles {
-      position: relative;
-      z-index: 2;
+			position: relative;
+			z-index: 2;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -105,10 +106,10 @@ export class GalleryCarouselComponent extends LitElement {
 	frameGap = 20;
 	@property({ type: Number })
 	animationDuration = 500;
-  @property({ type: Boolean })
-  showArrows = false;
-  @property({ type: Boolean })
-  showToggles = false;
+	@property({ type: Boolean })
+	showArrows = false;
+	@property({ type: Boolean })
+	showToggles = false;
 
 	@queryAssignedElements({ flatten: true })
 	_carouselItems!: HTMLElement[];
@@ -134,7 +135,7 @@ export class GalleryCarouselComponent extends LitElement {
 
 	protected checkCurrentSlide(value: number) {
 		if (value === 0 || value > this._itemsLength) return value === 0 ? this._itemsLength : 1;
-    return value;
+		return value;
 	}
 
 	protected slideTo(position: number, newPosition: number) {
@@ -144,24 +145,23 @@ export class GalleryCarouselComponent extends LitElement {
 		this.interval = window.setInterval(() => {
 			let progress = (new Date().getTime() - start.getTime()) / this.animationDuration;
 			if (progress > 1) progress = 1;
-			galleryList.style.left =
-				position + Math.abs(newPosition - position) * progress ** 2 * (position > newPosition ? -1 : 1) + "%";
+			galleryList.style.left = position + Math.abs(newPosition - position) * progress ** 2 * (position > newPosition ? -1 : 1) + "%";
 			if (progress === 1) {
 				clearInterval(this.interval);
 				this._isAnimating = false;
 				this.current = this.checkCurrentSlide(this.current);
-        this._galleryList.style.left = this.current * -100 + "%";
+				this._galleryList.style.left = this.current * -100 + "%";
 			}
 		}, this.frameGap);
 	}
 
 	protected changeCurrentSlide(slide: number) {
-    if (this._itemsLength <= 1) return;
-    if (!this.smoothDiametralTransition) slide = this.checkCurrentSlide(slide);
+		if (this._itemsLength <= 1) return;
+		if (!this.smoothDiametralTransition) slide = this.checkCurrentSlide(slide);
 		const position = parseInt(this._galleryList.style.left, 10) || 0;
 		const newPosition = slide * -100;
 		if (!this._isAnimating && position !== newPosition) {
-      this.current = slide;
+			this.current = slide;
 			this.slideTo(position, newPosition);
 		}
 	}
@@ -178,34 +178,41 @@ export class GalleryCarouselComponent extends LitElement {
 					<slot></slot>
 				</ul>
 			</div>
-			${this.showArrows ? html`<div class="gallery-controls">
-				<button
-					class="gallery-controls__previous-button"
-					@click="${() => {
-						this.changeCurrentSlide(this.current - 1);
-					}}"
-				></button>
-				<button
-					class="gallery-controls__next-button"
-					@click="${() => {
-						this.changeCurrentSlide(this.current + 1);
-					}}"
-				></button>` : ""}
+			${
+				this.showArrows
+					? html`<div class="gallery-controls">
+							<button
+								class="gallery-controls__previous-button"
+								@click="${() => {
+									this.changeCurrentSlide(this.current - 1);
+								}}"
+							></button>
+							<button
+								class="gallery-controls__next-button"
+								@click="${() => {
+									this.changeCurrentSlide(this.current + 1);
+								}}"
+							></button>
+					  </div>`
+					: ""
+			}
 			</div>
-			${this._itemsLength !== 0 && this.showToggles
-				? html`<ul class="gallery-toggles">
-						${Array.from(
-							{ length: this._itemsLength },
-							(_, i) =>
-								html`<li
-									class="gallery-toggle ${classMap({ "gallery-toggle--active": this.current - 1 === i })}"
-									@click="${() => {
-										this.changeCurrentSlide(i + 1);
-									}}"
-								></li>`
-						)}
-				  </ul>`
-				: ""}
+			${
+				this._itemsLength !== 0 && this.showToggles
+					? html`<ul class="gallery-toggles">
+							${Array.from(
+								{ length: this._itemsLength },
+								(_, i) =>
+									html`<li
+										class="gallery-toggle ${classMap({ "gallery-toggle--active": this.current - 1 === i })}"
+										@click="${() => {
+											this.changeCurrentSlide(i + 1);
+										}}"
+									></li>`
+							)}
+					  </ul>`
+					: ""
+			}
 		</div>`;
 	}
 }
