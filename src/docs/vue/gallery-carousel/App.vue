@@ -57,6 +57,11 @@
           In order to customize the class, you need to directly pass it as fallthrough attribute, such as class directly
           on the component.
         </p>
+        <p>
+          In order for the carousel to track amount of items correctly and as such work correctly it must use
+          carousel item components to automatically provide and inject all the element information, as such the only
+          valid slot children are carousel item components.
+        </p>
     </main>
 </template>
   
