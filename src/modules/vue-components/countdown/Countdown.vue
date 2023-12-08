@@ -4,21 +4,20 @@
 
 <script setup lang="ts">
 import { useInterval } from "../../interfaces/generic/hooks/useInterval.vue";
-import { onMounted, ref, computed } from 'vue';
+import { onMounted, ref } from 'vue';
 import { defaultTimeUnits, reduceTimeUnits, TimeUnit } from 'src/modules/interfaces/component/countdown/types';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
     units?: TimeUnit[];
     date?: Date;
-}>();
+}>(), {
+    units: () => reduceTimeUnits(defaultTimeUnits),
+    date: () => new Date('May 6, 2085 11:00:00')
+});
 const text = ref<string>("");
 
-const defaultedProps = computed(() => ({
-    units: props.units ?? reduceTimeUnits(defaultTimeUnits),
-    date: props.date ?? new Date('May 6, 2085 11:00:00')
-}));
 const renderTexts = (units: TimeUnit[]) => {
-    let timeString = "", distance = defaultedProps.value.date.getTime() - new Date().getTime();
+    let timeString = "", distance = props.date.getTime() - new Date().getTime();
     for (const { timeFactor, name } of units) {
         const value = Math.floor(distance / timeFactor);
         timeString += value <= 0 ? '' : `${value} ${String(value).slice(-1) === '1' ? name : name + 's'} `;
@@ -29,11 +28,11 @@ const renderTexts = (units: TimeUnit[]) => {
 };
 
 useInterval(() => {
-    renderTexts(defaultedProps.value.units);
+    renderTexts(props.units);
 }, 1000);
 
 onMounted(() => {
-    renderTexts(defaultedProps.value.units);
+    renderTexts(props.units);
 });
 </script>
 

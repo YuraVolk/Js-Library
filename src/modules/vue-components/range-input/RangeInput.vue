@@ -3,8 +3,8 @@
         <div class="wrap">
             <div :class="['range-slider', allSameLine && 'range-slider--one-lined']">
                 <label class="range-slider__label" :for="uniqueID">{{ label }}</label>
-                <input type="range" :min="minimum ?? 0" :max="maximum ?? 100" :value="currentValue" :id="uniqueID"
-                    :step="step ?? 1" class="range-slider__input" :style="gradientStyles" @input="onValueChange" />
+                <input type="range" :min="minimum" :max="maximum" :value="currentValue" :id="uniqueID"
+                    :step="step" class="range-slider__input" :style="gradientStyles" @input="onValueChange" />
                 <ul class="range-slider-ticks" v-if="ticks?.length">
                     <li v-for="tick in ticks" :style="`--value: ${tick}%`" class="range-slider-ticks__tick">{{ tick }}</li>
                 </ul>
@@ -21,7 +21,22 @@ import { RangeInputConfiguration, defaultActiveColor, defaultHoverColor } from "
 
 const uniqueID = ref(uid());
 const gradientStyles = ref<CSSProperties>({});
-const props = defineProps<Partial<RangeInputConfiguration>>();
+const props = withDefaults(defineProps<Partial<RangeInputConfiguration>>(), {
+    minimum: 0,
+    maximum: 100,
+    defaultValue: 0,
+    step: 1,
+    ticks: () => [],
+    label: "",
+    thumbSize: "15px",
+    trackColor: "#ccc",
+    thumbColor: "#f50",
+    hoverColor: defaultHoverColor,
+    activeColor: defaultActiveColor,
+    valueSize: "25px",
+    hideValue: false,
+    allSameLine: false
+});
 const currentValue = ref(props.defaultValue ?? 0);
 const propsValue = computed(() => props.value ?? 0);
 const emit = defineEmits<{
@@ -37,21 +52,21 @@ watch(
 );
 
 const styles = computed(() => {
-    const thumbSize = props.thumbSize ?? "15px";
-    const hoverColor = props.hoverColor ?? defaultHoverColor;
-    const activeColor = props.activeColor ?? defaultActiveColor;
+    const thumbSize = props.thumbSize;
+    const hoverColor = props.hoverColor;
+    const activeColor = props.activeColor;
     return {
-        trackColor: props.trackColor ?? "#ccc",
+        trackColor: props.trackColor,
         thumbSize,
-        thumbColor: props.thumbColor ?? "#f50",
+        thumbColor: props.thumbColor,
         boxShadowFirst: `0 0 0 calc(${thumbSize} - (${thumbSize} / 3)) ${hoverColor}`,
         boxShadowSecond: `0 0 0 calc(${thumbSize} - (${thumbSize} / 6)) ${activeColor}`,
-        valueSize: props.valueSize ?? "25px"
+        valueSize: props.valueSize
     };
 });
 
 const setGradientStyle = () => {
-    const progress = (currentValue.value / (props.maximum ?? 100)) * 100;
+    const progress = (currentValue.value / props.maximum) * 100;
     gradientStyles.value = {
 		background: `linear-gradient(to right, ${styles.value.thumbColor} ${progress}%, ${styles.value.trackColor} ${progress}%)`
 	};
