@@ -1,5 +1,6 @@
 import { LitElement, html } from "lit";
 import { customElement, queryAssignedElements, property } from "lit/decorators.js";
+import { FloatingPanelConfiguration } from "src/modules/interfaces/component/floating-panel/types";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -8,7 +9,7 @@ declare global {
 }
 
 @customElement("floating-panel-component")
-export class FloatingPanelComponent extends LitElement {
+export class FloatingPanelComponent extends LitElement implements FloatingPanelConfiguration {
   @property({ type: Boolean })
   isOpen = false;
 
