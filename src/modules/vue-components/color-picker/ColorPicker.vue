@@ -33,10 +33,16 @@ interface ColorPickerInterface extends Partial<ColorPickerConfiguration> {
     imageHeight?: number;
 }
 
-const props = defineProps<ColorPickerInterface>();
+const props = withDefaults(defineProps<ColorPickerInterface>(), {
+    rgba: () => [0, 0, 0, 1],
+    width: 245,
+    height: 245,
+    imageWidth: 245,
+    imageHeight: 245
+});
 const rgba = ref([...props.rgba ?? [0, 0, 0, 1]]);
 const canvas = ref<HTMLCanvasElement | null>(null);
-const DEFAULT_SIZE = 245;
+
 const colorInfo = computed(() => {
     const backgroundColor = props.backgroundColor ?? [0, 0, 0, 1];
     const alpha = 1 - rgba.value[3] / 100, baseAlpha = rgba.value[3] / 100;
@@ -45,12 +51,12 @@ const colorInfo = computed(() => {
         hex: "#" + opacityBackground.slice(0, -1).map(color => Number(color).toString(16).padStart(2, "0")).join(""),
         rgb: `rgb(${opacityBackground.slice(0, -1).join(", ")})`,
         rgba: `rgba(${rgba.value.join(", ")})`,
-        width: `${props.width ?? DEFAULT_SIZE}px`,
-        height: `${props.height ?? DEFAULT_SIZE}px`,
-        canvasWidth: props.width ?? DEFAULT_SIZE,
-        canvasHeight: props.height ?? DEFAULT_SIZE,
-        halfWidth: `${(props.width ?? DEFAULT_SIZE) / 2}px`,
-        halfHeight: `${(props.height ?? DEFAULT_SIZE) / 2}px`
+        width: `${props.width}px`,
+        height: `${props.height}px`,
+        canvasWidth: props.width,
+        canvasHeight: props.height,
+        halfWidth: `${props.width / 2}px`,
+        halfHeight: `${props.height / 2}px`
     };
 });
 
@@ -71,7 +77,7 @@ const onInputChange = (value: number) => {
 onMounted(() => {
     const ctx = canvas.value?.getContext("2d");
     if (!ctx) return;
-    const image = new Image(props.width ?? props.imageWidth ?? DEFAULT_SIZE, props.height ?? props.imageHeight ?? DEFAULT_SIZE);
+    const image = new Image(props.imageWidth, props.imageHeight);
     image.src = props.imageUrl;
     image.onload = () => {
         ctx.drawImage(image, 0, 0, image.width, image.height);
