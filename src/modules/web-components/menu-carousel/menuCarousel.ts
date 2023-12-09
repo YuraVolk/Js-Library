@@ -6,6 +6,7 @@ import {
 } from "lit/decorators.js";
 import { assertNonUndefinedDevOnly } from "../../utils";
 import { carouselControlsStyles } from "src/modules/interfaces/generic/carousel/carousel.lit";
+import { MenuCarouselConfiguration, MenuCarouselInternalItem } from "src/modules/interfaces/component/menu-carousel/types";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -13,39 +14,23 @@ declare global {
   }
 }
 
-class Item {
-  image: HTMLElement;
-  fullWidth: number;
-  fullHeight: number;
-  width?: number;
-  height?: number;
-  x?: number;
-  y?: number;
-  scale?: number;
-  moveTo: (x: number, y: number, scale: number) => void;
+class Item extends MenuCarouselInternalItem {
+  initStyles() {
+    this.image.style.position = "absolute";
+    return this;
+  }
 
-  constructor(image: HTMLElement) {
-    this.image = image;
-    this.fullWidth = image.clientWidth;
-    this.fullHeight = image.clientHeight;
-    image.style.position = "absolute";
-    this.moveTo = function (x, y, scale) {
-      this.width = this.fullWidth * scale;
-      this.height = this.fullHeight * scale;
-      this.x = x;
-      this.y = y;
-      this.scale = scale;
-      const style = this.image.style;
-      style.width = this.width + "px";
-      style.left = x + "px";
-      style.top = y + "px";
-      style.zIndex = String((scale * 100) | 0);
-    };
+  setMovingStyle(x: number, y: number, scale: number) {
+    const style = this.image.style;
+    style.width = this.width + "px";
+    style.left = x + "px";
+    style.top = y + "px";
+    style.zIndex = String((scale * 100) | 0);
   }
 }
 
 @customElement("menu-carousel-component")
-export class MenuCarouselComponent extends LitElement {
+export class MenuCarouselComponent extends LitElement implements MenuCarouselConfiguration {
   static styles = carouselControlsStyles;
 
   @state()
@@ -140,7 +125,7 @@ export class MenuCarouselComponent extends LitElement {
     this.yPos = this._carousel.offsetHeight * 0.1;
     this.xRadius ??= this._carousel.offsetWidth / 2.3;
     this.yRadius = this._carousel.offsetHeight / 6;
-    this._items = this._images.map((item) => new Item(item));
+    this._items = this._images.map((item) => new Item(item).initStyles());
     this.carouselRender();
   }
 
