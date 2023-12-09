@@ -20,7 +20,7 @@
 				this a different value from original image, i.e. image increased in quality.
 			</li>
 		</ul>
-    <p>Here is an example of correctly set up component:</p>
+		<p>Here is an example of correctly set up component:</p>
 		<image-magnifier-component class="magnifier" ref="magnifier" :image-source="image1">
 			<template #image>
 				<img :src="image1" alt="Example Image" />
@@ -30,19 +30,19 @@
 				</image-magnifier-glass-component>
 			</template>
 		</image-magnifier-component>
-    <p>
-      After this default configuration, you're able to fully customize the magnifier glass mouse coordinates, shifts, and 
-      you are able to give any CSS styles to the components. You should use fallthrough attributes on the image magnifier
-      and image magnifier glass components to achieve full styling control.
-    </p>
-    <p>
-      Next, you may see a very similar implementation that is called Zooming Image, with a lot of aspects being shared
-      with this implementation. However, there are important algorithmic differences between the two: this implementation
-      is overall less robust and works better when magnifying glass does not appear when not hovered. The other implementation
-      provides a fallback effect that shows an empty background when near to edge or moving from edge, while this implementation
-      may not give such accurate results for edges. This implementation on the other hand is much better for non-rectangular glass
-      shapes, and is overall a perfect implementation for statically visible non-rectangular glass.
-    </p>
+		<p>
+			After this default configuration, you're able to fully customize the magnifier glass mouse coordinates, shifts, and you are able to
+			give any CSS styles to the components. You should use fallthrough attributes on the image magnifier and image magnifier glass
+			components to achieve full styling control.
+		</p>
+		<p>
+			Next, you may see a very similar implementation that is called Zooming Image, with a lot of aspects being shared with this
+			implementation. However, there are important algorithmic differences between the two: this implementation is overall less robust and
+			works better when magnifying glass does not appear when not hovered. The other implementation provides a fallback effect that shows an
+			empty background when near to edge or moving from edge, while this implementation may not give such accurate results for edges. This
+			implementation on the other hand is much better for non-rectangular glass shapes, and is overall a perfect implementation for
+			statically visible non-rectangular glass.
+		</p>
 	</main>
 </template>
 

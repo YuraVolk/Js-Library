@@ -6,6 +6,7 @@ type LinkedVueItems = Record<string, {
     element: HTMLElement;
     styles: Partial<CSSStyleDeclaration>;
 }>;
+export type LinkedVueItem = LinkedVueItems[string];
 
 export function useLinkedItem(generateId: () => string, item: Ref<HTMLElement | null>) {
     const id = ref(generateId());
