@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div :class="['carousel', !isHorizontal && 'carousel--vertical']">
-            <ul class="carousel-items" :style="carouselStyles">
+        <div :class="['backface-carousel', !isHorizontal && 'backface-carousel--vertical']">
+            <ul class="backface-carousel-items" :style="carouselStyles">
                 <slot></slot>
             </ul>
         </div>
@@ -86,8 +86,8 @@ onUnmounted(() => {
 provide(INJECTED_ELEMENTS_NAME, elements);
 </script>
 
-<style scoped>
-.carousel {
+<style>
+.backface-carousel {
     display: flex;
     width: auto;
     height: 100%;
@@ -98,18 +98,18 @@ provide(INJECTED_ELEMENTS_NAME, elements);
     padding: 20px;
 }
 
-.carousel--vertical {
+.backface-carousel--vertical {
     margin-top: 10%;
     height: 33vw;
     overflow: visible;
 }
 
-.carousel * {
+.backface-carousel * {
     margin: 0 auto;
     flex: 0 0 auto;
 }
 
-.carousel-items {
+.backface-carousel-items {
     width: 40%;
     margin: 0;
     transform-style: preserve-3d;
@@ -118,7 +118,7 @@ provide(INJECTED_ELEMENTS_NAME, elements);
     list-style-type: none;
 }
 
-.carousel-item {
+.backface-carousel-items > * {
     position: relative;
     width: 100%;
     height: auto;
@@ -127,7 +127,7 @@ provide(INJECTED_ELEMENTS_NAME, elements);
     backface-visibility: hidden;
 }
 
-.carousel-item:not(:first-of-type) {
+.backface-carousel-items > *:not(:first-of-type) {
     position: absolute;
     left: 0;
     top: 0;
@@ -135,7 +135,7 @@ provide(INJECTED_ELEMENTS_NAME, elements);
     padding: 0 auto;
 }
 
-.carousel-item>* {
+.backface-carousel-items > * > * {
     width: 100%;
     height: 100%;
 }
