@@ -25,8 +25,8 @@
 
 <script setup lang="ts">
 import { GalleryCarouselConfiguration } from 'src/modules/interfaces/component/gallery-carousel/types';
-import { CarouselItems, INJECTED_ELEMENTS_NAME } from 'src/modules/interfaces/generic/carousel/carousel.vue';
-import { computed, provide, ref, createVNode, VNode, onUnmounted, CSSProperties } from 'vue';
+import { useInjectedLinkedItems } from 'src/modules/interfaces/generic/hooks/useLinkedItem.vue';
+import { computed, ref, createVNode, VNode, onUnmounted, CSSProperties } from 'vue';
 
 const props = withDefaults(defineProps<Partial<GalleryCarouselConfiguration>>(), {
     smoothDiametralTransition: true,
@@ -53,7 +53,7 @@ const lastElement = () => {
 };
 
 const currentSlide = ref(props.current);
-const elements = ref<CarouselItems>({});
+const elements = useInjectedLinkedItems();
 const isAnimating = ref(false);
 const interval = ref<number | undefined>();
 
@@ -99,8 +99,6 @@ const changeCurrentSlide = (newSlide: number) => {
 onUnmounted(() => {
     window.clearInterval(interval.value);
 });
-
-provide(INJECTED_ELEMENTS_NAME, elements);
 </script>
 
 <style scoped>

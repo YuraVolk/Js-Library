@@ -15,22 +15,23 @@
             customization only through experimenting with CSS properties.
         </p>
         <image-comparator-component class="comparator">
-            <carousel-item-component class="comparator-element">
+            <carousel-item-component>
                 <img :src="image1" alt="Example Image" class="comparator-element__image">
             </carousel-item-component>
-            <carousel-item-component class="comparator-element">
+            <carousel-item-component>
                 <img :src="image2" alt="Example Image" class="comparator-element__image">
             </carousel-item-component>
-            <carousel-item-component class="comparator-element">
+            <carousel-item-component>
                 <img :src="image3" alt="Example Image" class="comparator-element__image">
             </carousel-item-component>
-            <carousel-item-component class="comparator-element">
+            <carousel-item-component>
                 <img :src="image4" alt="Example Image" class="comparator-element__image">
             </carousel-item-component>
         </image-comparator-component>
         <p>
             This component requires you use special carousel item components as children to automatically provide and inject
-            all the element data.
+            all the element data. In order to get default styling and configuration out of the box, it is suggested you use
+            the specific to this component ImageComparatorItem that comes in with pre-bundled styles to work correctly.
         </p>
     </main>
 </template>
@@ -39,7 +40,7 @@
 import HeaderComponent from "../HeaderComponent.vue";
 import SidebarComponent from "../SidebarComponent.vue";
 import ImageComparatorComponent from "../../../modules/vue-components/image-comparator/ImageComparator.vue";
-import CarouselItemComponent from "../../../modules/interfaces/generic/carousel/CarouselItem.vue";
+import CarouselItemComponent from "../../../modules/vue-components/image-comparator/ImageComparatorItem.vue";
 
 import image1 from "../../../assets/img/slide0.png";
 import image2 from "../../../assets/img/slide1.png";
@@ -57,13 +58,6 @@ defineExpose({ image1, image2, image3, image4 });
   border: 4px solid #333;
   background-size: cover;
   background-repeat: no-repeat;
-}
-
-.comparator-element {
-  position: absolute;
-  width: auto;
-  height: auto;
-  overflow: hidden;
 }
 
 .comparator-element__image {

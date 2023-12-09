@@ -12,8 +12,8 @@
 </template>
 
 <script setup lang="ts">
-import { CarouselItems, INJECTED_ELEMENTS_NAME } from 'src/modules/interfaces/generic/carousel/carousel.vue';
-import { onMounted, provide, ref, onUnmounted, reactive, computed, CSSProperties } from 'vue';
+import { useInjectedLinkedItems } from '../../interfaces/generic/hooks/useLinkedItem.vue';
+import { onMounted, onUnmounted, reactive, computed, CSSProperties } from 'vue';
 
 interface ImageComparisonData {
     isClicked: boolean;
@@ -21,7 +21,7 @@ interface ImageComparisonData {
     style: CSSProperties;
 }
 
-const elements = ref<CarouselItems>({});
+const elements = useInjectedLinkedItems();
 const imageData = reactive<Record<string, ImageComparisonData>>({});
 const clickedElement = computed(() => Object.keys(elements.value).find((key) => imageData[key].isClicked));
 
@@ -77,8 +77,6 @@ onUnmounted(() => {
     window.removeEventListener("mousemove", onMouseMove);
     window.removeEventListener("pointermove", onMouseMove);
 });
-
-provide(INJECTED_ELEMENTS_NAME, elements);
 </script>
 
 <style scoped>

@@ -5,25 +5,10 @@
 </template>
 
 <script setup lang="ts">
-import { inject, ref, onMounted, watch } from 'vue';
-import { assertNonUndefined, uid } from "../../../utils";
-import { INJECTED_ELEMENTS_NAME, CarouselItems } from './carousel.vue';
+import { uid } from 'src/modules/utils';
+import { useLinkedItem } from '../hooks/useLinkedItem.vue';
+import { ref } from 'vue';
 
-const id = ref(uid());
 const item = ref<HTMLElement | null>(null);
-const elements = inject<{ value: CarouselItems }>(INJECTED_ELEMENTS_NAME) ?? { value: {} };
-onMounted(() => {
-    assertNonUndefined(item.value);
-    elements.value[id.value] = {
-        element: item.value,
-        styles: {}
-    };
-});
-
-watch(
-    () => elements.value[id.value]?.styles,
-    () => {
-        if (item.value) Object.assign(item.value.style, elements.value[id.value].styles)
-    }
-);
+useLinkedItem(uid, item);
 </script>

@@ -14,13 +14,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, provide, onMounted, onUnmounted, reactive, CSSProperties } from "vue";
-import { INJECTED_ELEMENTS_NAME, CarouselItems } from "../../interfaces/generic/carousel/carousel.vue";
+import { ref, onMounted, onUnmounted, reactive, CSSProperties } from "vue";
 import "../../interfaces/generic/carousel/carouselControlStyles.css";
+import { useInjectedLinkedItems } from "src/modules/interfaces/generic/hooks/useLinkedItem.vue";
 
 const props = defineProps<{ isVertical?: boolean }>();
 const isHorizontal = ref(!props.isVertical ?? false);
-const elements = ref<CarouselItems>({});
+const elements = useInjectedLinkedItems();
 const carouselStyles = reactive<CSSProperties>({});
 const currentItem = ref(0);
 const interval = ref<number | undefined>(undefined);
@@ -78,15 +78,14 @@ onMounted(() => {
     }, 250);
     window.addEventListener("resize", setupCarousel);
 });
+
 onUnmounted(() => {
     window.removeEventListener("resize", setupCarousel);
     window.clearInterval(interval.value);
 });
-
-provide(INJECTED_ELEMENTS_NAME, elements);
 </script>
 
-<style>
+<style scoped>
 .backface-carousel {
     display: flex;
     width: auto;
@@ -116,27 +115,5 @@ provide(INJECTED_ELEMENTS_NAME, elements);
     transition: all 0.5s;
     padding: 0;
     list-style-type: none;
-}
-
-.backface-carousel-items > * {
-    position: relative;
-    width: 100%;
-    height: auto;
-    padding: 0;
-    opacity: 0.9999;
-    backface-visibility: hidden;
-}
-
-.backface-carousel-items > *:not(:first-of-type) {
-    position: absolute;
-    left: 0;
-    top: 0;
-    margin: 0 auto;
-    padding: 0 auto;
-}
-
-.backface-carousel-items > * > * {
-    width: 100%;
-    height: 100%;
 }
 </style>
