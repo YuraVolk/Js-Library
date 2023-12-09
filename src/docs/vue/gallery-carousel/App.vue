@@ -77,8 +77,6 @@ import image3 from "../../../assets/img/slide2.png";
 import image4 from "../../../assets/img/slide3.png";
 import image5 from "../../../assets/img/slide4.png";
 import image6 from "../../../assets/img/slide5.png";
-
-defineExpose({ image1, image2, image3, image4, image5, image6 });
 </script>
   
 <style scoped>

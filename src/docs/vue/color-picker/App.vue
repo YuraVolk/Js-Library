@@ -37,7 +37,6 @@ import SidebarComponent from "../SidebarComponent.vue";
 import ColorPickerComponent from "../../../modules/vue-components/color-picker/ColorPicker.vue";
 
 import colorPickerImage from "../../../assets/img/picker.jpg";
-defineExpose({ colorPickerImage });
 </script>
 
 <style scoped>

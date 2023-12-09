@@ -145,8 +145,6 @@ onMounted(() => {
         rangeInputSettings.duration = video.value.duration;
 	};
 });
-
-defineExpose({ playButton, pauseButton, resetButton, muteButton });
 </script>
 
 <style scoped>
