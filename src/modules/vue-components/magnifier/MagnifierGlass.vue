@@ -1,5 +1,10 @@
 <template>
-    <div class="magnifier-glass" ref="glass" @mousemove="(e) => emit('glassMove', e)">
+    <div
+        class="magnifier-glass"
+        ref="glass"
+        @pointermove="(e) => emit('glassMove', e)"
+        @mousemove="(e) => emit('glassMove', e)"
+    >
         <slot></slot>
     </div>
 </template>
