@@ -46,8 +46,6 @@ import image1 from "../../../assets/img/slide0.png";
 import image2 from "../../../assets/img/slide1.png";
 import image3 from "../../../assets/img/slide2.png";
 import image4 from "../../../assets/img/slide3.png";
-
-defineExpose({ image1, image2, image3, image4 });
 </script>
 
 <style scoped>

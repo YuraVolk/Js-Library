@@ -36,7 +36,6 @@ interface Links {
 }
 
 const links: Links = importedLinks;
-defineExpose({ links });
 defineProps({
     activeLink: {
         type: String,

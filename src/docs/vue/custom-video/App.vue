@@ -36,8 +36,6 @@ import HeaderComponent from "../HeaderComponent.vue";
 import SidebarComponent from "../SidebarComponent.vue";
 import CustomVideoComponent from "../../../modules/vue-components/custom-video/CustomVideo.vue";
 import videoLink from "../../../assets/video/sample-mp4-file-small.mp4";
-
-defineExpose({ videoLink });
 </script>
 
 <style scoped>

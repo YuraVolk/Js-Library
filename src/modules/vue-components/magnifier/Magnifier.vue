@@ -1,23 +1,25 @@
 <template>
     <div class="magnifier">
         <slot name="image"></slot>
-        <div class="magnifier__glass">
-            <slot name="glass"></slot>
-        </div>
+        <slot name="glass" ></slot>
     </div>
 </template>
 
 <script setup lang="ts">
+import { useInjectedLinkedItems } from "src/modules/interfaces/generic/hooks/useLinkedItem.vue";
 
+const elements = useInjectedLinkedItems();
+
+const onMouseMove = (event: MouseEvent) => {
+  
+};
+
+defineExpose({ onMouseMove });
 </script>
 
 <style scoped>
 .magnifier {
   position: relative;
-  display: block;
-  border: 3px solid #333333;
-  width: 370px;
-  height: 220px;
 }
 
 .magnifier__glass {
