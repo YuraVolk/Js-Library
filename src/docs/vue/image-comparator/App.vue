@@ -3,6 +3,17 @@
     <sidebar-component active-link="Image Comparator" />
     <main class="main">
         <h1 class="heading">Image Comparator</h1>
+        <p>
+            The purpose of the image comparator component is to create a visual comparison between two images.
+            The current implementation supports comparing an arbitrary amount of images as demonstrated in the widget below.
+            The base requirement to compare images is to make images absolute positioned and occupy auto width and height.
+            The component allows users to slide a comparison slider horizontally to reveal different portions of the two
+            images. The component is built using. It includes CSS styles for positioning and styling the comparison
+            slider. The component dynamically adjusts the width of the images and the position of the slider based on user
+            interaction. It also handles mouse and pointer events for smooth sliding functionality. The component only gives
+            basic styling, such as a relative wrapper element and required interactions. Other than that, you can achieve full
+            customization only through experimenting with CSS properties.
+        </p>
         <image-comparator-component class="comparator">
             <carousel-item-component class="comparator-element">
                 <img :src="image1" alt="Example Image" class="comparator-element__image">
@@ -17,6 +28,10 @@
                 <img :src="image4" alt="Example Image" class="comparator-element__image">
             </carousel-item-component>
         </image-comparator-component>
+        <p>
+            This component requires you use special carousel item components as children to automatically provide and inject
+            all the element data.
+        </p>
     </main>
 </template>
   
