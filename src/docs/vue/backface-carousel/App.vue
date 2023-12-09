@@ -11,10 +11,9 @@
             directly into the carousel as children nodes without any configuration. The carousel exposes methods to be
             easily controllable, and
             supports both vertical and horizontal placement. The insertion of children is done through the wrapping all
-            images in an automatically
-            configured carousel-item-component. You're required to use these two components in a combination:
-            backface-carousel-component as the
-            wrapper and carousel-item-component as child items.
+            images in an automatically carousel item component. For usage with this concrete carousel, it is highly recommended
+            you use the predefined BackfaceCarouselItem component that gives default styling required for this type of carousel,
+            and give width and height set to 100% for all inner items of the backface carousel item components.
         </p>
         <backface-carousel-component>
             <carousel-item-component>
@@ -88,7 +87,7 @@
 
 <script setup lang="ts">
 import BackfaceCarouselComponent from "../../../modules/vue-components/backface-carousel/BackfaceCarousel.vue";
-import CarouselItemComponent from "../../../modules/interfaces/generic/carousel/CarouselItem.vue";
+import CarouselItemComponent from "../../../modules/vue-components/backface-carousel/BackfaceCarouselItem.vue";
 import HeaderComponent from "../HeaderComponent.vue";
 import SidebarComponent from "../SidebarComponent.vue";
 
@@ -101,3 +100,10 @@ import image6 from "../../../assets/img/slide5.png";
 
 defineExpose({ image1, image2, image3, image4, image5, image6 });
 </script>
+
+<style scoped>
+img {
+    width: 100%;
+    height: 100%;
+}
+</style>

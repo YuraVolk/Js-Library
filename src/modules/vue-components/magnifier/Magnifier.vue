@@ -1,0 +1,34 @@
+<template>
+    <div class="magnifier">
+        <slot name="image"></slot>
+        <div class="magnifier__glass">
+            <slot name="glass"></slot>
+        </div>
+    </div>
+</template>
+
+<script setup lang="ts">
+
+</script>
+
+<style scoped>
+.magnifier {
+  position: relative;
+  display: block;
+  border: 3px solid #333333;
+  width: 370px;
+  height: 220px;
+}
+
+.magnifier__glass {
+  position: absolute;
+  top: -25px;
+  left: -25px;
+  width: 70px;
+  height: 70px;
+  border: 2px solid #222;
+  border-radius: 50%;
+  cursor: zoom-in;
+  background-repeat: no-repeat;
+}
+</style>
