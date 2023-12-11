@@ -108,7 +108,7 @@ export class ColorPickerComponent extends LitElement implements ColorPickerConfi
 
   protected initColorPicker() {
     this.canvasElement.then(canvas => {
-      const ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
       assertNonUndefined(ctx);
       const image = new Image(this.width, this.height);
       image.src = this.imageUrl;

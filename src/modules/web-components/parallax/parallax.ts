@@ -1,5 +1,6 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
+import { ParallaxConfiguration } from "src/modules/interfaces/component/parallax/types";
 import { getFirstScrollableParent } from "src/modules/interfaces/generic/domUtils/domUtils";
 
 declare global {
@@ -9,7 +10,7 @@ declare global {
 }
 
 @customElement("parallax-component")
-export class ParallaxComponent extends LitElement {
+export class ParallaxComponent extends LitElement implements ParallaxConfiguration {
 	static styles = css`
 		.wrap {
 			position: relative;

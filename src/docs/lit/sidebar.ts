@@ -4,7 +4,7 @@ import { customElement, property } from "lit/decorators.js";
 import { isLocalhostEnvironment } from "src/modules/interfaces/sidebar";
 
 const isLocalhost = isLocalhostEnvironment();
-
+console.log(isLocalhost);
 @customElement("sidebar-component")
 export class SidebarComponent extends LitElement {
 	static styles = css`
@@ -146,7 +146,7 @@ export class SidebarComponent extends LitElement {
 									<ul class="list-sublist">
 										${links.map(({ name, link }) => {
 											return html`<li class="list-sublist__item ${name === this.activeLink ? "list-sublist__item--active" : ""}">
-												<a class="list-sublist__item-link" href="${isLocalhost ? link.replace(/\.\.\/g/, "./") : link}">${name}</a>
+												<a class="list-sublist__item-link" href="${isLocalhost ? link.replace(/\.\.\//g, "./") : link}">${name}</a>
 											</li>`;
 										})}
 									</ul>

@@ -61,21 +61,21 @@ const colorInfo = computed(() => {
 });
 
 const onMouseDown = (event: MouseEvent) => {
-    const ctx = canvas.value?.getContext("2d");
+    const ctx = canvas.value?.getContext("2d", { willReadFrequently: true });
     if (!ctx) return;
     const color = [...ctx.getImageData(event.offsetX, event.offsetY, 1, 1).data.slice(0, -1), rgba.value[3]];
     if (verifyValidRGBAColor(color)) rgba.value = color;
 };
 
 const onInputChange = (value: number) => {
-    const ctx = canvas.value?.getContext("2d");
+    const ctx = canvas.value?.getContext("2d", { willReadFrequently: true });
     if (!ctx) return;
     const color = [...rgba.value.slice(0, -1), value];
     if (verifyValidRGBAColor(color)) rgba.value = color;
 };
 
 onMounted(() => {
-    const ctx = canvas.value?.getContext("2d");
+    const ctx = canvas.value?.getContext("2d", { willReadFrequently: true });
     if (!ctx) return;
     const image = new Image(props.imageWidth, props.imageHeight);
     image.src = props.imageUrl;
