@@ -1,6 +1,8 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { OnePageScrollConfiguration } from "src/modules/interfaces/component/one-page-scroll/types";
+import { CarouselDirection } from "src/modules/interfaces/generic/carousel/carousel";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -9,7 +11,7 @@ declare global {
 }
 
 @customElement("one-page-scroll-component")
-export class OnePageScrollComponent extends LitElement {
+export class OnePageScrollComponent extends LitElement implements OnePageScrollConfiguration {
 	static styles = css`
 		.wrap {
 			width: 100%;
@@ -84,7 +86,7 @@ export class OnePageScrollComponent extends LitElement {
 		animateScroll();
 	}
 
-	protected scrollSlide(direction: -1 | 1) {
+	protected scrollSlide(direction: CarouselDirection.BACKWARDS | CarouselDirection.FORWARDS) {
 		if (this._isScrolling) return;
         this._selectedItem += direction;
 		this.smoothScrollTo(this._onePageScrollElements[this._selectedItem].offsetHeight * this._selectedItem);    
@@ -98,7 +100,7 @@ export class OnePageScrollComponent extends LitElement {
 				if (event.deltaY > 0) {
 					if (this._selectedItem >= items.length - 1) {
 						if (!this._isScrolling) this.smoothScrollTo(this._selectedItem = 0);
-					} else this.scrollSlide(1);
+					} else this.scrollSlide(CarouselDirection.FORWARDS);
 				} else {
 					if (this._selectedItem === 0) {
 						if (!this._isScrolling) {
@@ -108,7 +110,7 @@ export class OnePageScrollComponent extends LitElement {
 									(this.isHorizontal ? items[0].offsetWidth : items[0].offsetHeight)
 							);
 						}
-					} else this.scrollSlide(-1);
+					} else this.scrollSlide(CarouselDirection.BACKWARDS);
 				}
 			}),
             { passive: true }

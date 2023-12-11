@@ -57,7 +57,7 @@ const elements = useInjectedLinkedItems();
 const isAnimating = ref(false);
 const interval = ref<number | undefined>();
 
-const itemsLength = computed(() => Object.keys(elements.value).length);
+const itemsLength = computed(() => Object.keys(elements).length);
 const galleryLeft = ref(currentSlide.value * -100);
 const galleryListStyle = computed<CSSProperties>(() => ({
     left: `${galleryLeft.value}%`

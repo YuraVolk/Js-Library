@@ -10,7 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import { uid } from 'src/modules/utils';
 import { useLinkedItem } from '../../interfaces/generic/hooks/useLinkedItem.vue';
 import { ref } from 'vue';
 

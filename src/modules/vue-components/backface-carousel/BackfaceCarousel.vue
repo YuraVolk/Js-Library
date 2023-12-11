@@ -26,7 +26,7 @@ const currentItem = ref(0);
 const interval = ref<number | undefined>(undefined);
 
 const rotateCarousel = (newCurrentImage: number) => {
-    const items = Object.values(elements.value);
+    const items = Object.values(elements);
     const length = items.length,
         theta = (2 * Math.PI) / length;
     carouselStyles.transform = `rotate${isHorizontal.value ? "Y" : "X"}(${newCurrentImage * -theta}rad)`;
@@ -34,7 +34,7 @@ const rotateCarousel = (newCurrentImage: number) => {
 };
 
 const setupCarousel = () => {
-    const items = Object.values(elements.value);
+    const items = Object.values(elements);
     const length = items.length,
         theta = (2 * Math.PI) / length,
         size = parseFloat(getComputedStyle(items[0].element)[isHorizontal.value ? "width" : "height"]);
