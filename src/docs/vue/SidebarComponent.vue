@@ -17,7 +17,7 @@
                                 :class="`list-sublist__item ${link.name === $props.activeLink ? 'list-sublist__item--active' : ''}`">
                                 <a
                                     class="list-sublist__item-link"
-                                    :href="isLocalhost ? link.link.replace(/\.\.\/g/, "./") : link.link"
+                                    :href="isLocalhost ? link.link.replace(/\.\.\/g/, './') : link.link"
                                     v-text="link.name"
                                 ></a>
                             </li>
