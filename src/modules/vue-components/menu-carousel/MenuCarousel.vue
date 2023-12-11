@@ -111,7 +111,7 @@ const setupCarousel = () => {
     xRadius.value ??= carousel.value.offsetWidth / 2.3;
     yRadius.value = carousel.value.offsetHeight / 6;
     items.splice(0, items.length);
-    for (const image of Object.values(elements.value)) {
+    for (const image of Object.values(elements)) {
         image.element.removeAttribute("style");
         items.push(new Item(image).initStyles());
     }

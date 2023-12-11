@@ -24,7 +24,7 @@ const image = ref<HTMLElement | null>(null);
 
 const moveMagnifier = (x: number, y: number) => {
   if (!image.value) return;
-  const glass = elements.value["magnifier-glass"];
+  const glass = elements["magnifier-glass"];
   const width = glass.element.offsetWidth / 2,
     height = glass.element.offsetHeight / 2;
   if (x > image.value.offsetWidth) {
@@ -51,7 +51,7 @@ const onMouseMove = (event: MouseEvent) => {
 
 onMounted(() => {
   if (!image.value) return;
-  const glass = elements.value["magnifier-glass"];
+  const glass = elements["magnifier-glass"];
   glass.styles = {
     backgroundImage: `url("${props.imageSource}")`,
     backgroundSize: `${image.value.offsetWidth * props.zoomScale}px ${image.value.offsetHeight * props.zoomScale}px`

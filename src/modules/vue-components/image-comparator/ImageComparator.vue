@@ -23,10 +23,10 @@ interface ImageComparisonData {
 
 const elements = useInjectedLinkedItems();
 const imageData = reactive<Record<string, ImageComparisonData>>({});
-const clickedElement = computed(() => Object.keys(elements.value).find((key) => imageData[key].isClicked));
+const clickedElement = computed(() => Object.keys(elements).find((key) => imageData[key].isClicked));
 
 const slide = (elementKey: string, difference: number) => {
-    const element = elements.value[elementKey];
+    const element = elements[elementKey];
     const imageComparisonData = imageData[elementKey];
     element.styles = {
         width: difference + "px"
@@ -41,7 +41,7 @@ const onMouseStart = (event: Event, elementKey: string) => {
 
 const onMouseMove = (event: MouseEvent | PointerEvent) => {
     if (!clickedElement.value) return;
-    const { element, styles } = elements.value[clickedElement.value];
+    const { element, styles } = elements[clickedElement.value];
     styles.left = "0";
     let pos = event.pageX - element.getBoundingClientRect().left - window.scrollX;
     if (pos < 0) pos = 0;
@@ -57,7 +57,7 @@ const onMouseUp = () => {
 };
 
 onMounted(() => {
-    Object.entries(elements.value).forEach(([key, { element: { offsetWidth } }], index, arr) => {
+    Object.entries(elements).forEach(([key, { element: { offsetWidth } }], index, arr) => {
         imageData[key] = {
             isClicked: false,
             offsetWidth,
