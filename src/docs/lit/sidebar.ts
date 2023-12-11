@@ -146,7 +146,7 @@ export class SidebarComponent extends LitElement {
 									<ul class="list-sublist">
 										${links.map(({ name, link }) => {
 											return html`<li class="list-sublist__item ${name === this.activeLink ? "list-sublist__item--active" : ""}">
-												<a class="list-sublist__item-link" href="${isLocalhost ? link.replace("../", "./") : link}">${name}</a>
+												<a class="list-sublist__item-link" href="${isLocalhost ? link.replace(/\.\.\/g/, "./") : link}">${name}</a>
 											</li>`;
 										})}
 									</ul>
