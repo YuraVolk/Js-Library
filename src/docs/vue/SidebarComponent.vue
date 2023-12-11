@@ -15,7 +15,11 @@
                         <ul class="list-sublist">
                             <li v-for="link in linkList[1]"
                                 :class="`list-sublist__item ${link.name === $props.activeLink ? 'list-sublist__item--active' : ''}`">
-                                <a class="list-sublist__item-link" :href="link.link" v-text="link.name"></a>
+                                <a
+                                    class="list-sublist__item-link"
+                                    :href="isLocalhost ? link.link.replace('../', './') : link.link"
+                                    v-text="link.name"
+                                ></a>
                             </li>
                         </ul>
                     </div>
@@ -26,6 +30,7 @@
 </template>
 
 <script setup lang="ts">
+import { isLocalhostEnvironment } from "src/modules/interfaces/sidebar";
 import importedLinks from "../data/sidebar.json";
 
 interface Links {
@@ -35,6 +40,7 @@ interface Links {
     }[];
 }
 
+const isLocalhost = isLocalhostEnvironment();
 const links: Links = importedLinks;
 defineProps({
     activeLink: {
