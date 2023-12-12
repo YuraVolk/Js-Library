@@ -1,6 +1,6 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property, queryAssignedElements, queryAsync, state } from "lit/decorators.js";
-import { resetInternalState } from "../../interfaces/component/perspective-carousel/types";
+import { PerspectiveCarouselConfiguration, resetInternalState } from "../../interfaces/component/perspective-carousel/types";
 import { styleMap } from "lit/directives/style-map.js";
 import { assertDevOnly } from "../../utils";
 import { CarouselDirection } from "src/modules/interfaces/generic/carousel/carousel";
@@ -13,7 +13,7 @@ declare global {
 }
 
 @customElement("perspective-carousel-component")
-export class PerspectiveCarouselComponent extends LitElement {
+export class PerspectiveCarouselComponent extends LitElement implements PerspectiveCarouselConfiguration  {
 	static styles = css`
 		.wrap {
 			position: relative;

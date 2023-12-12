@@ -39,3 +39,29 @@ export const resetInternalState = (): InternalPerspectiveCarouselState => ({
 	rightItemsCount: 0,
 	performingSetup: true
 });
+
+export interface PerspectiveCarouselConfiguration {
+	imageSize: string;
+	margin: string;
+	startingItem: number;
+	separation: number;
+	separationMultiplier: number;
+	horizonOffset: number;
+	horizonOffsetMultiplier: number;
+	sizeMultiplier: number;
+	opacityMultiplier: number;
+	horizon: number;
+	flankingItems: number;
+	isVertical: boolean;
+	preloadImages: boolean;
+	forcedImageWidth: number;
+	forcedImageHeight: number;
+	animationLength: number;
+	centralItemClassName: string;
+	allowSwitchingOrientation: boolean;
+}
+
+export interface PerspectiveCarouselItemState {
+	originalWidth: number;
+	originalHeight: number;
+}
