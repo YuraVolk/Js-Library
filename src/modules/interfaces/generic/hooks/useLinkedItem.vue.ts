@@ -1,10 +1,10 @@
-import { inject, ref, onMounted, watch, provide, Ref, reactive } from 'vue';
+import { inject, ref, onMounted, watch, provide, Ref, reactive, CSSProperties } from 'vue';
 import { assertNonUndefined } from "../../../utils";
 
 const INJECTED_ELEMENTS_NAME = "libraryLinkedItemsRegistry";
 type LinkedVueItems = Record<string, {
     element: HTMLElement;
-    styles: Partial<CSSStyleDeclaration>;
+    styles: Partial<CSSProperties>;
 }>;
 export type LinkedVueItem = LinkedVueItems[string];
 
