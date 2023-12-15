@@ -341,7 +341,9 @@ const setupStarterRotation = async () => {
 const initCarousel = async () => {
 	if (!parent.value) return;
 	state.value = resetInternalState();
-	for (const key of elementsAccessors.value.keys) elementsState.value[key] = {};
+	for (const key of elementsAccessors.value.keys) elementsState.value[key] ??= {};
+	await nextTick();
+	
 	initializeCarouselData(parent.value);
 	await forceImageDimensionsIfEnabled();
 	await preload();
