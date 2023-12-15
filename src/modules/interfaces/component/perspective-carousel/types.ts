@@ -1,11 +1,11 @@
 import { CarouselDirection } from "src/modules/interfaces/generic/carousel/carousel";
 
-export interface InternalPerspectiveCarouselState {
+export interface InternalPerspectiveCarouselState<T> {
 	totalItems: number;
 	containerDimensions: [width: number, height: number];
-	currentCenterItem?: HTMLElement;
-	previousCenterItem?: HTMLElement;
-	items: HTMLElement[];
+	currentCenterItem?: T;
+	previousCenterItem?: T;
+	items: T[];
 	calculations: Array<{
 		distance: number;
 		opacity: number;
@@ -20,7 +20,7 @@ export interface InternalPerspectiveCarouselState {
 	performingSetup: boolean;
 }
 
-export const resetInternalState = (): InternalPerspectiveCarouselState => ({
+export const resetInternalState = <T>(): InternalPerspectiveCarouselState<T> => ({
 	totalItems: 0,
 	containerDimensions: [0, 0],
 	items: [],
@@ -64,4 +64,12 @@ export interface PerspectiveCarouselConfiguration {
 export interface PerspectiveCarouselItemState {
 	originalWidth: number;
 	originalHeight: number;
+	left: number;
+	width: number;
+	height: number;
+	top: number;
+	opacity: number;
+	currentPosition: number;
+	oldPosition: number;
+	depth: number;
 }

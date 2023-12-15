@@ -77,7 +77,7 @@ export class PerspectiveCarouselComponent extends LitElement implements Perspect
 	images!: HTMLElement[];
 
 	@state()
-	_internalState = resetInternalState();
+	_internalState = resetInternalState<HTMLElement>();
 
 	private windowResizeListener!: EventListener;
 
@@ -170,9 +170,9 @@ export class PerspectiveCarouselComponent extends LitElement implements Perspect
 				visibility: "visible",
 				position: "absolute",
 				"z-index": 0,
-				opacity: 0
+				opacity: 0,
+				display: ""
 			});
-			item.style.display = "";
 		}
 	}
 
@@ -201,7 +201,7 @@ export class PerspectiveCarouselComponent extends LitElement implements Perspect
 		item.dataset.height = String(newHeight);
 		item.dataset.top = String(top);
 		item.dataset.left = String(left);
-		item.dataset.oldPosition = item.dataset.currentPosition || "0";
+		item.dataset.oldPosition ||= "0";
 		item.dataset.depth = String(this.flankingItems + 2 - newDistanceFromCenter);
 		item.dataset.opacity = String(newPosition ? calculations.opacity : 1);
 	}
@@ -301,12 +301,11 @@ export class PerspectiveCarouselComponent extends LitElement implements Perspect
 	private moveOnce(direction: CarouselDirection) {
 		if (this._internalState.currentlyMoving) return;
 		this._internalState.previousCenterItem = this._internalState.currentCenterItem;
-		this.movingFromCenter(this._internalState.currentCenterItem);
 		if (direction === CarouselDirection.BACKWARDS) {
 			this.movingFromCenter(this._internalState.currentCenterItem?.previousElementSibling ?? undefined);
 		} else if (direction === CarouselDirection.FORWARDS) {
 			this.movingFromCenter(this._internalState.currentCenterItem?.nextElementSibling ?? undefined);
-		}
+		} else this.movingFromCenter(this._internalState.currentCenterItem);
 		this._internalState.currentDirection = direction;
 	}
 
