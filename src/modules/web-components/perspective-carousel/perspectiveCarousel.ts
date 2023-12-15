@@ -238,6 +238,7 @@ export class PerspectiveCarouselComponent extends LitElement implements Perspect
 
 	protected moveItem(item: HTMLElement, newPosition: number) {
 		const assignToItem = () => {
+			console.log(item.dataset.width);
 			Object.assign(item.style, {
 				left: `${item.dataset.left}px`,
 				width: `${item.dataset.width}px`,

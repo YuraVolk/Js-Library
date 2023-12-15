@@ -166,6 +166,7 @@ const moveItem = async (elementIndex: number, newPosition: number) => {
 	const itemState = elementsState.value[elementsAccessors.value.keys[elementIndex]];
 
 	const assignToItem = () => {
+		console.log(itemState.width);
 		item.styles = {
 			...item.styles,
 			left: `${itemState.left}px`,
@@ -194,6 +195,7 @@ const moveItem = async (elementIndex: number, newPosition: number) => {
 		if (!itemState.oldPosition) {
 			await nextTick();
 			performCalculations(elementIndex, newPosition);
+			assignToItem();
 		}
 	}
 };
@@ -318,23 +320,23 @@ const setupStarterRotation = async () => {
 	await nextTick();
 
 	let itemIndex = startingItem.value - 1;
-	const moveToIndex = (pos: number) => {
+	const moveToIndex = async (pos: number) => {
 		elementsAccessors.value.values[itemIndex].styles = {
 			...elementsAccessors.value.values[itemIndex].styles,
 			opacity: 1
 		};
-		moveItem(itemIndex, pos);
+		await moveItem(itemIndex, pos);
 	};
-	moveToIndex(0);
+	await moveToIndex(0);
 
 	for (let pos = 1; pos <= state.value.rightItemsCount; pos++) {
 		itemIndex < state.value.totalItems - 1 ? itemIndex++ : (itemIndex = 0);
-		moveToIndex(pos);
+		await moveToIndex(pos);
 	}
 	itemIndex = startingItem.value - 1;
 	for (let pos = -1; pos >= -state.value.leftItemsCount; pos--) {
 		itemIndex > 0 ? itemIndex-- : (itemIndex = state.value.totalItems - 1);
-		moveToIndex(pos);
+		await moveToIndex(pos);
 	}
 };
 
@@ -343,7 +345,7 @@ const initCarousel = async () => {
 	state.value = resetInternalState();
 	for (const key of elementsAccessors.value.keys) elementsState.value[key] ??= {};
 	await nextTick();
-	
+
 	initializeCarouselData(parent.value);
 	await forceImageDimensionsIfEnabled();
 	await preload();
