@@ -5,7 +5,9 @@
 		</ul>
 		<div class="carousel-controls">
 			<button class="carousel-controls__previous-button" @click="previousItem"></button>
-			<button v-if="props.allowSwitchingOrientation" class="carousel-controls__perspective-button" @click="switchOrientation"></button>
+			<button v-if="props.allowSwitchingOrientation" class="carousel-controls__perspective-button" @click="switchOrientation">
+				Switch
+			</button>
 			<button class="carousel-controls__next-button" @click="nextItem"></button>
 		</div>
 	</div>
@@ -35,7 +37,6 @@ const props = withDefaults(defineProps<Partial<PerspectiveCarouselConfiguration>
 	horizon: 0,
 	flankingItems: 3,
 	isVertical: false,
-	preloadImages: false,
 	forcedImageWidth: 0,
 	forcedImageHeight: 0,
 	animationLength: 300,
@@ -48,9 +49,9 @@ const imagesStyles = computed<CSSProperties>(() => ({
 }));
 
 const emit = defineEmits<{
-	(e: "movingToCenter"): void,
-	(e: "movedToCenter"): void,
-	(e: "movingFromCenter", elementIndex?: number): void
+	(e: "movingToCenter"): void;
+	(e: "movedToCenter"): void;
+	(e: "movingFromCenter", elementIndex?: number): void;
 }>();
 
 const state = ref(resetInternalState<number>());
@@ -64,6 +65,7 @@ const parent = ref<HTMLElement | null>(null);
 const elementsState = ref<Record<string, Partial<PerspectiveCarouselItemState>>>({});
 const horizon = ref(props.horizon);
 const startingItem = ref(props.startingItem);
+const isVertical = ref(props.isVertical);
 
 const calculatePositionProperties = async () => {
 	let horizonOffset = props.horizonOffset;
@@ -103,9 +105,9 @@ const performCalculations = (elementIndex: number, newPosition: number) => {
 	const newHeight = distanceFactor * Number(itemState.originalHeight);
 	const newDistance = newPosition < 0 ? -calculations.distance : calculations.distance;
 
-	const center = state.value.containerDimensions[Number(props.isVertical)] / 2;
+	const center = state.value.containerDimensions[Number(isVertical.value)] / 2;
 	let top: number, left: number;
-	if (props.isVertical) {
+	if (isVertical.value) {
 		left = horizon.value - calculations.offset - newWidth / 2;
 		top = center + newDistance - newHeight / 2;
 	} else {
@@ -124,7 +126,6 @@ const performCalculations = (elementIndex: number, newPosition: number) => {
 
 const rotateCarousel = async () => {
 	if (state.value.currentlyMoving) return;
-	// TODO allow removing central item class name
 	state.value.currentlyMoving = true;
 	state.value.itemsAnimating = 0;
 	state.value.carouselRotationsLeft++;
@@ -153,7 +154,6 @@ const itemAnimationComplete = async (elementIndex: number, newPosition: number) 
 
 	await nextTick();
 	if (--state.value.carouselRotationsLeft <= 0) {
-		// TODO allow adding central item class name
 		if (!state.value.performingSetup) {
 			emit("movingToCenter");
 			emit("movedToCenter");
@@ -202,7 +202,6 @@ const moveItem = async (elementIndex: number, newPosition: number) => {
 
 const moveOnce = (direction: CarouselDirection) => {
 	if (state.value.currentlyMoving) return;
-	// TODO allow to add central item class
 	if (direction === CarouselDirection.BACKWARDS && state.value.currentCenterItem !== undefined) {
 		emit("movingFromCenter", state.value.currentCenterItem - 1 < 0 ? undefined : state.value.currentCenterItem - 1);
 	} else if (direction === CarouselDirection.FORWARDS && state.value.currentCenterItem !== undefined) {
@@ -219,6 +218,8 @@ const previousItem = () => {
 
 const switchOrientation = () => {
 	if (!props.allowSwitchingOrientation) return;
+	isVertical.value = !isVertical.value;
+	rotateCarousel();
 };
 
 const nextItem = () => {
@@ -246,23 +247,6 @@ const forceImageDimensionsIfEnabled = async () => {
 	await nextTick();
 };
 
-const preload = async () => {
-	if (!props.preloadImages) return;
-
-	let loadedImages = 0;
-	return new Promise<void>((resolve) => {
-		for (const image of elementsAccessors.value.values) {
-			image.element.addEventListener("load", () => {
-				image.styles = {
-					...image.styles,
-					display: ""
-				};
-				if (++loadedImages === elementsAccessors.value.values.length) resolve();
-			});
-		}
-	});
-};
-
 const setOriginalItemDimensions = async () => {
 	for (const [key, image] of elementsAccessors.value.entries) {
 		const state = elementsState.value[key];
@@ -283,13 +267,13 @@ const setOriginalItemDimensions = async () => {
 };
 
 const setupCarousel = async () => {
-	if (horizon.value === 0) horizon.value = state.value.containerDimensions[Number(!props.isVertical)] / 2;
+	if (horizon.value === 0) horizon.value = state.value.containerDimensions[Number(!isVertical.value)] / 2;
 	await nextTick();
 
 	for (const [key, item] of elementsAccessors.value.entries) {
 		const itemState = elementsState.value[key];
 		let left, top;
-		if (props.isVertical) {
+		if (isVertical.value) {
 			left = horizon.value - Number(itemState.originalWidth) / 2;
 			top = state.value.containerDimensions[1] / 2 - Number(itemState.originalHeight) / 2;
 		} else {
@@ -348,7 +332,6 @@ const initCarousel = async () => {
 
 	initializeCarouselData(parent.value);
 	await forceImageDimensionsIfEnabled();
-	await preload();
 	await setOriginalItemDimensions();
 	await calculatePositionProperties();
 	await setupCarousel();

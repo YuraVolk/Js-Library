@@ -1,10 +1,11 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property, queryAssignedElements, queryAsync, state } from "lit/decorators.js";
-import { PerspectiveCarouselConfiguration, resetInternalState } from "../../interfaces/component/perspective-carousel/types";
+import { PerspectiveCarouselConfiguration } from "../../interfaces/component/perspective-carousel/types";
 import { styleMap } from "lit/directives/style-map.js";
 import { assertDevOnly } from "../../utils";
 import { CarouselDirection } from "src/modules/interfaces/generic/carousel/carousel";
 import { carouselControlsStyles } from "src/modules/interfaces/generic/carousel/carousel.lit";
+import { resetInternalLitState } from "src/modules/interfaces/component/perspective-carousel/types.lit";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -77,7 +78,7 @@ export class PerspectiveCarouselComponent extends LitElement implements Perspect
 	images!: HTMLElement[];
 
 	@state()
-	_internalState = resetInternalState<HTMLElement>();
+	_internalState = resetInternalLitState<HTMLElement>();
 
 	private windowResizeListener!: EventListener;
 
@@ -288,7 +289,7 @@ export class PerspectiveCarouselComponent extends LitElement implements Perspect
 	}
 
 	initCarousel(parent: HTMLElement) {
-		this._internalState = resetInternalState();
+		this._internalState = resetInternalLitState();
 		this.initializeCarouselData(parent);
 		this.forceImageDimensionIfEnabled();
 		this.preload(() => {
