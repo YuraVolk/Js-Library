@@ -5,7 +5,6 @@ export interface InternalPerspectiveCarouselState<T> {
 	containerDimensions: [width: number, height: number];
 	currentCenterItem?: T;
 	previousCenterItem?: T;
-	items: T[];
 	calculations: Array<{
 		distance: number;
 		opacity: number;
@@ -23,7 +22,6 @@ export interface InternalPerspectiveCarouselState<T> {
 export const resetInternalState = <T>(): InternalPerspectiveCarouselState<T> => ({
 	totalItems: 0,
 	containerDimensions: [0, 0],
-	items: [],
 	calculations: [
 		{
 			opacity: 1,
@@ -53,7 +51,6 @@ export interface PerspectiveCarouselConfiguration {
 	horizon: number;
 	flankingItems: number;
 	isVertical: boolean;
-	preloadImages: boolean;
 	forcedImageWidth: number;
 	forcedImageHeight: number;
 	animationLength: number;
