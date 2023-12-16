@@ -3,6 +3,7 @@ import { customElement, property, query, queryAssignedElements, state } from "li
 import { styleMap } from "lit/directives/style-map.js";
 import { classMap } from "lit/directives/class-map.js";
 import { assertNonUndefined } from "../../utils";
+import { TableSelectInformation } from "src/modules/interfaces/component/table-filtering/types";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -10,19 +11,10 @@ declare global {
 	}
 }
 
-export interface TabularData {
+interface TabularData {
 	headers: HTMLTableCellElement[];
 	rows: HTMLTableCellElement[][];
 	excludedCriteria: Array<string | null>[];
-}
-
-export interface OpenSelectInformation {
-	index: number;
-	options: string[];
-	top: number;
-	left: number;
-	width: number;
-	height: number;
 }
 
 @customElement("table-filtering-component")
@@ -64,7 +56,7 @@ export class TableFilteringComponent extends LitElement {
 	@state()
 	protected tabularData: TabularData = { headers: [], rows: [], excludedCriteria: [] };
 	@state()
-	private openSelect?: OpenSelectInformation;
+	private openSelect?: TableSelectInformation;
 
 	private clickListener!: EventListener;
 
