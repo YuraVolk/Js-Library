@@ -27,4 +27,3 @@ export function* nextStringsGenerator(
 
 	return [previousValue, previousValue];
 }
-
