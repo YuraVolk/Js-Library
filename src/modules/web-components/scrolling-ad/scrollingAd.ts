@@ -1,5 +1,6 @@
 import { LitElement, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { ScrollingAdConfiguration, generateThreshold } from "src/modules/interfaces/component/scrolling-ad/types";
 import { getFirstScrollableParent } from "src/modules/interfaces/generic/domUtils/domUtils";
 
 declare global {
@@ -9,7 +10,7 @@ declare global {
 }
 
 @customElement("scrolling-ad-component")
-export class ScrollingAdComponent extends LitElement {
+export class ScrollingAdComponent extends LitElement implements ScrollingAdConfiguration {
 	@property({ type: Number })
 	rootMargin = 0;
     @property({ type: Number })
@@ -29,7 +30,7 @@ export class ScrollingAdComponent extends LitElement {
             }
         }, {
             rootMargin: `${this.rootMargin}px`,
-            threshold: [0, ...Array.from({ length: Math.ceil(1 * 100) }, (_, index) => index / 100), 1]
+            threshold: generateThreshold()
         });
         this.interval = window.setInterval(() => {
             const top = scrollableParent instanceof HTMLElement 
