@@ -1,6 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, queryAssignedElements, queryAsync } from "lit/decorators.js";
 import { when } from "lit/directives/when.js";
+import { PopupLitConfiguration } from "src/modules/interfaces/component/popup/types.lit";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -9,7 +10,7 @@ declare global {
 }
 
 @customElement("popup-component")
-export class PopupComponent extends LitElement {
+export class PopupComponent extends LitElement implements PopupLitConfiguration {
 	static styles = css`
 		.popup {
 			position: fixed;
@@ -52,7 +53,7 @@ export class PopupComponent extends LitElement {
 		});
 
 		if (this.autoClosingTime) {
-			await new Promise((resolve) => setTimeout(resolve, this.autoClosingTime ?? 0 * 1000));
+			await new Promise((resolve) => setTimeout(resolve, this.autoClosingTime ?? 0));
 			await this.closePopup();
 		}
 	}
