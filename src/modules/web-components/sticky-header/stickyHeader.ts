@@ -1,5 +1,7 @@
 import { LitElement, html } from "lit";
 import { customElement, property, queryAssignedElements } from "lit/decorators.js";
+import { StickyHeaderConfiguration } from "src/modules/interfaces/component/sticky-header/types";
+import { generateThreshold } from "src/modules/interfaces/generic/intersectionObserved";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -8,7 +10,7 @@ declare global {
 }
 
 @customElement("sticky-header-component")
-export class StickyHeaderComponent extends LitElement {
+export class StickyHeaderComponent extends LitElement implements StickyHeaderConfiguration {
 	@property()
 	rootMargin = "0px";
 	@property({ type: Number })
@@ -47,7 +49,7 @@ export class StickyHeaderComponent extends LitElement {
 			},
 			{
 				rootMargin: this.rootMargin,
-				threshold: [0, ...Array.from({ length: Math.ceil(1 * 100) }, (_, index) => index / 100), 1]
+				threshold: generateThreshold()
 			}
 		);
 

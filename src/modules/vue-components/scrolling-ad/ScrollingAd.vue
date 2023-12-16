@@ -7,8 +7,9 @@
 <script setup lang="ts">
 import { CSSProperties, onMounted, onUnmounted, reactive, ref } from "vue";
 import { useInterval } from "../../interfaces/generic/hooks/useInterval.vue";
-import { ScrollingAdConfiguration, generateThreshold } from "../../interfaces/component/scrolling-ad/types";
+import { ScrollingAdConfiguration } from "../../interfaces/component/scrolling-ad/types";
 import { getFirstScrollableParent } from "src/modules/interfaces/generic/domUtils/domUtils";
+import { generateThreshold } from "src/modules/interfaces/generic/intersectionObserved";
 
 const props = withDefaults(defineProps<Partial<ScrollingAdConfiguration>>(), {
 	rootMargin: 0,

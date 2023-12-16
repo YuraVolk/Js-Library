@@ -1,7 +1,8 @@
 import { LitElement, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { ScrollingAdConfiguration, generateThreshold } from "src/modules/interfaces/component/scrolling-ad/types";
+import { ScrollingAdConfiguration } from "src/modules/interfaces/component/scrolling-ad/types";
 import { getFirstScrollableParent } from "src/modules/interfaces/generic/domUtils/domUtils";
+import { generateThreshold } from "src/modules/interfaces/generic/intersectionObserved";
 
 declare global {
 	interface HTMLElementTagNameMap {
