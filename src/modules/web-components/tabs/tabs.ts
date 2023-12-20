@@ -1,6 +1,7 @@
 import { LitElement, html } from "lit";
 import { customElement, property, queryAssignedElements } from "lit/decorators.js";
 import { assertDevOnly } from "../../utils";
+import { TabsLitConfiguration } from "src/modules/interfaces/component/tabs/types.lit";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -9,7 +10,7 @@ declare global {
 }
 
 @customElement("tabs-component")
-export class TabsComponent extends LitElement {
+export class TabsComponent extends LitElement implements TabsLitConfiguration {
 	@property({ type: Number })
 	currentTab = 0;
 	@property({ type: Number })
