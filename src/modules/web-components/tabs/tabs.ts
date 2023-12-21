@@ -1,7 +1,7 @@
 import { LitElement, html } from "lit";
 import { customElement, property, queryAssignedElements } from "lit/decorators.js";
 import { assertDevOnly } from "../../utils";
-import { TabsLitConfiguration } from "src/modules/interfaces/component/tabs/types.lit";
+import { TabsLitConfiguration } from "src/modules/interfaces/component/tabs/types-lit";
 
 declare global {
 	interface HTMLElementTagNameMap {

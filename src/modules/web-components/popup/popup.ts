@@ -1,7 +1,7 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, queryAssignedElements, queryAsync } from "lit/decorators.js";
 import { when } from "lit/directives/when.js";
-import { PopupLitConfiguration } from "src/modules/interfaces/component/popup/types.lit";
+import { PopupLitConfiguration } from "src/modules/interfaces/component/popup/types-lit";
 
 declare global {
 	interface HTMLElementTagNameMap {

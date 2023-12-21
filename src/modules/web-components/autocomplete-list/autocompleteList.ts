@@ -1,5 +1,6 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+import { AutocompleteListConfiguration } from "src/modules/interfaces/component/autocomplete-list/types";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -8,7 +9,7 @@ declare global {
 }
 
 @customElement("autocomplete-list-component")
-export class AutocompleteListComponent extends LitElement {
+export class AutocompleteListComponent extends LitElement implements AutocompleteListConfiguration {
   static styles = css`
     .autocomplete-items {
       position: absolute;

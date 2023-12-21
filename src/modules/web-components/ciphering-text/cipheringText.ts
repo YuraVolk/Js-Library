@@ -1,4 +1,5 @@
 import { customElement, property } from "lit/decorators.js";
+import { CipheringTextConfiguration } from "src/modules/interfaces/component/ciphering-text/types";
 import { SelfModifyingText } from "src/modules/interfaces/generic/selfModifyingText/selfModifyingText.lit";
 
 declare global {
@@ -8,7 +9,7 @@ declare global {
 }
 
 @customElement("ciphering-text-component")
-export class CipheringTextComponent extends SelfModifyingText {
+export class CipheringTextComponent extends SelfModifyingText implements CipheringTextConfiguration {
   @property({ type: Number })
   interval = 3000;
   @property({ type: Number })

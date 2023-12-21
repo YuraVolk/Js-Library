@@ -11,11 +11,9 @@
 
 <script setup lang="ts">
 import { ref, watch, computed } from "vue";
+import { AutocompleteListVueConfiguration } from "../../interfaces/component/autocomplete-list/types-vue";
 
-const props = defineProps<{
-    inputValue: string,
-    options: string[]
-}>();
+const props = defineProps<AutocompleteListVueConfiguration>();
 const emit = defineEmits<{
     (e: "changeInputValue", value: string): void;
 }>();

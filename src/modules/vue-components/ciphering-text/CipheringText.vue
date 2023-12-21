@@ -5,22 +5,25 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
-import { ModifyingTextConfiguration } from 'src/modules/interfaces/generic/selfModifyingText/selfModifyingText';
+import { ref } from 'vue';
 import { useSelfModifyingText, splitTextAlgorithm } from 'src/modules/interfaces/generic/selfModifyingText/selfModifyingText.vue';
+import { CipheringTextConfiguration } from 'src/modules/interfaces/component/ciphering-text/types';
 
-interface CipheringTextConfiguration extends ModifyingTextConfiguration {
-    characters?: string[];
-}
-
-const props = defineProps<CipheringTextConfiguration>();
+const props = withDefaults(
+    defineProps<CipheringTextConfiguration>(),
+    {
+        characters: () => ['!', '"', '#', '$', '%', '*', '0', '1', ':', ';', '?', '@', '[', ']', '\\', '~', "'", '/', '{', '}', '|', '&', '(', ')', '-', '<', '>'],
+        repetitions: 1,
+        interval: 3000,
+        typingSpeed: 45
+    }
+);
 const element = ref<HTMLElement | null>(null);
-const characters = computed(() => props.characters ?? ['!', '"', '#', '$', '%', '*', '0', '1', ':', ';', '?', '@', '[', ']', '\\', '~', "'", '/', '{', '}', '|', '&', '(', ')', '-', '<', '>']);
 const settings = useSelfModifyingText({
     strings: props.strings,
-    repetitions: props.repetitions ?? 1,
-    interval: props.interval ?? 3000,
-    typingSpeed: props.typingSpeed ?? 45,
+    repetitions: props.repetitions,
+    interval: props.interval,
+    typingSpeed: props.typingSpeed,
     triggerTextAnimation,
     splitText
 });
@@ -35,7 +38,7 @@ const cipherLetter = (properties: { newLetter?: string, delayed: boolean, i: num
             (function (index) {
                 setTimeout(() => {
                     let newValue: string | undefined;
-                    if (!isDone) newValue = characters.value[Math.floor(Math.random() * characters.value.length)];
+                    if (!isDone) newValue = props.characters[Math.floor(Math.random() * props.characters.length)];
                     if (index >= changeNumber) {
                         isDone = true;
                         newValue = newLetter ?? "";
