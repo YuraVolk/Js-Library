@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-const litUrl = window.location.href.replace(/\/vue\//g, "/lit/>");
+const litUrl = window.location.href.replace(/\/vue\//g, "/lit/");
 </script>
 
 <style>
