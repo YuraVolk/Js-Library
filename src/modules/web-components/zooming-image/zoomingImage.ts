@@ -1,5 +1,6 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
+import { ZoomingImageLitConfiguration } from "src/modules/interfaces/component/zooming-image/types.lit";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -8,7 +9,7 @@ declare global {
 }
 
 @customElement("zooming-image-component")
-export class ZoomComponent extends LitElement {
+export class ZoomComponent extends LitElement implements ZoomingImageLitConfiguration {
 	static styles = css`
 		.wrap {
 			position: relative;
@@ -73,6 +74,7 @@ export class ZoomComponent extends LitElement {
 
 	disconnectedCallback(): void {
 		this._wrapElement.removeEventListener("mousemove", this.mouseMoveListener);
+		this._wrapElement.removeEventListener("pointermove", this.mouseMoveListener);
 		super.disconnectedCallback();
 	}
 
