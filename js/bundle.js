@@ -1051,7 +1051,7 @@
           <a href="#" class="navigation-link">Components</a>
           <a href="#" class="navigation-link">About</a>
           <a href="#" class="navigation-link">React Version</a>
-          <a href="${window.location.href.replace(/\/lit\//g,"/vue/>")}" class="navigation-link">Vue Version</a>
+          <a href="${window.location.href.replace(/\/lit\//g,"/vue/")}" class="navigation-link">Vue Version</a>
         </ul>
         <a class="navigation-icon" href="#">
           <svg
