@@ -1,4 +1,5 @@
 import { customElement, property } from "lit/decorators.js";
+import { TypingTextLitConfiguration } from "src/modules/interfaces/component/typing-text/types.lit";
 import { SelfModifyingText } from "src/modules/interfaces/generic/selfModifyingText/selfModifyingText.lit";
 
 declare global {
@@ -8,7 +9,7 @@ declare global {
 }
 
 @customElement("typing-text-component")
-export class TypingTextComponent extends SelfModifyingText {
+export class TypingTextComponent extends SelfModifyingText implements TypingTextLitConfiguration {
 	@property({ type: Number })
 	interval = 4500;
 	@property({ type: Number })
