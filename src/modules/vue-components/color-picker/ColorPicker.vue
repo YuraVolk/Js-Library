@@ -22,18 +22,12 @@
 </template>
 
 <script setup lang="ts">
-import { ColorPickerConfiguration } from 'src/modules/interfaces/component/color-picker/types';
 import { computed, ref, onMounted } from 'vue';
 import RangeInputComponent from "../../vue-components/range-input/RangeInput.vue";
 import { verifyValidRGBAColor } from 'src/modules/interfaces/generic/colors';
+import { ColorPickerVueConfiguration } from 'src/modules/interfaces/component/color-picker/types-vue';
 
-interface ColorPickerInterface extends Partial<ColorPickerConfiguration> {
-    imageUrl: string;
-    imageWidth?: number;
-    imageHeight?: number;
-}
-
-const props = withDefaults(defineProps<ColorPickerInterface>(), {
+const props = withDefaults(defineProps<ColorPickerVueConfiguration>(), {
     rgba: () => [0, 0, 0, 1],
     width: 245,
     height: 245,

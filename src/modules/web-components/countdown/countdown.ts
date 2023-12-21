@@ -4,7 +4,7 @@ import {
   property,
   queryAssignedElements
 } from "lit/decorators.js";
-import { defaultTimeUnits, reduceTimeUnits } from "src/modules/interfaces/component/countdown/types";
+import { CountdownConfiguration, defaultTimeUnits, reduceTimeUnits } from "src/modules/interfaces/component/countdown/types";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -18,7 +18,7 @@ export interface TimeUnit {
 }
 
 @customElement("countdown-component")
-export class CountdownComponent extends LitElement {
+export class CountdownComponent extends LitElement implements CountdownConfiguration {
   private static units: TimeUnit[] = reduceTimeUnits(defaultTimeUnits);
 
   @property({ converter: {

@@ -5,7 +5,7 @@ import { styleMap } from "lit/directives/style-map.js";
 import { assertDevOnly } from "../../utils";
 import { CarouselDirection } from "src/modules/interfaces/generic/carousel/carousel";
 import { carouselControlsStyles } from "src/modules/interfaces/generic/carousel/carousel.lit";
-import { resetInternalLitState } from "src/modules/interfaces/component/perspective-carousel/types.lit";
+import { resetInternalLitState } from "src/modules/interfaces/component/perspective-carousel/types-lit";
 
 declare global {
 	interface HTMLElementTagNameMap {

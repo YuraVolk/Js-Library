@@ -1,7 +1,7 @@
 import { LitElement, html } from "lit";
 import { customElement, property, queryAssignedElements } from "lit/decorators.js";
 import { assertNonUndefined } from "../../utils";
-import { ToastLitConfiguration } from "src/modules/interfaces/component/toast/types.lit";
+import { ToastLitConfiguration } from "src/modules/interfaces/component/toast/types-lit";
 
 declare global {
 	interface HTMLElementTagNameMap {
