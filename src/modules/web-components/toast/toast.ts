@@ -1,6 +1,7 @@
 import { LitElement, html } from "lit";
 import { customElement, property, queryAssignedElements } from "lit/decorators.js";
 import { assertNonUndefined } from "../../utils";
+import { ToastLitConfiguration } from "src/modules/interfaces/component/toast/types.lit";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -9,7 +10,7 @@ declare global {
 }
 
 @customElement("toast-component")
-export class ToastComponent extends LitElement {
+export class ToastComponent extends LitElement implements ToastLitConfiguration {
     @property({ type: Number })
     animationDelay = 500;
     @property({ type: Number })
