@@ -6,7 +6,7 @@
                 <a href="#" class="navigation-link">Components</a>
                 <a href="#" class="navigation-link">About</a>
                 <a href="#" class="navigation-link">React Version</a>
-                <a href="#" class="navigation-link">Lit Version</a>
+                <a :href="litUrl" class="navigation-link">Lit Version</a>
             </ul>
             <a class="navigation-icon" href="#">
                 <svg height="24" viewBox="0 0 24 24" width="24">
@@ -18,6 +18,10 @@
         </nav>
     </header>
 </template>
+
+<script setup lang="ts">
+const litUrl = window.location.href.replace(/\/vue\//g, "/lit/>");
+</script>
 
 <style>
 body {
