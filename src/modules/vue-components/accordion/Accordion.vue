@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import { AccordionListConfiguration } from "src/modules/interfaces/component/accordion/types";
+import { expandedIndexKey, multiplePropKey, selectedIndexKey } from "src/modules/interfaces/component/accordion/types-vue";
 import { provide, ref, computed } from "vue";
 
 const props = defineProps<AccordionListConfiguration>();
@@ -21,9 +22,9 @@ const selectedIndex = computed({
    }
 });
 
-provide("multiple", props.multiple);
-provide("selectedIndex", selectedIndex);
-provide("expandedIndex", expandedIndex);
+provide(multiplePropKey, props.multiple);
+provide(selectedIndexKey, selectedIndex);
+provide(expandedIndexKey, expandedIndex);
 </script>
 
 <style scoped>

@@ -12,6 +12,7 @@
 <script lang="ts" setup>
 import { uid } from "src/modules/utils";
 import { ref, inject, onMounted, watch } from "vue";
+import { expandedIndexKey, multiplePropKey, selectedIndexKey } from "src/modules/interfaces/component/accordion/types-vue";
 
 const props = defineProps<{
     isOpen?: boolean
@@ -21,9 +22,9 @@ const isExpanded = ref(props.isOpen ?? false);
 const header = ref<HTMLButtonElement | null>(null);
 const content = ref<HTMLDivElement | null>(null);
 const accordion = ref<HTMLLIElement | null>(null);
-const allowMultiple = inject<boolean>("multiple") ?? false;
-const selectedIndex = inject<{ value: string[] }>("selectedIndex") ?? { value: [] };
-const expandedIndex = inject<{ value: string[] | string }>("expandedIndex") ?? { value: allowMultiple ? [] : "" };
+const allowMultiple = inject<boolean>(multiplePropKey) ?? false;
+const selectedIndex = inject<{ value: string[] }>(selectedIndexKey) ?? { value: [] };
+const expandedIndex = inject<{ value: string[] | string }>(expandedIndexKey) ?? { value: allowMultiple ? [] : "" };
 
 const expand = (firstInit = false) => {
     if (allowMultiple) {

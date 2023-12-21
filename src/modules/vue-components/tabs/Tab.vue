@@ -5,6 +5,7 @@
 </template>
 
 <script setup lang="ts">
+import { activeTabKey } from 'src/modules/interfaces/component/tabs/types-vue';
 import { inject, computed } from 'vue';
 
 const props = defineProps<{
@@ -12,6 +13,6 @@ const props = defineProps<{
     transitionName: string;
 }>();
 
-const activeTab = inject<{ value: number }>("activeTab") ?? { value: 0 };
+const activeTab = inject<{ value: number }>(activeTabKey) ?? { value: 0 };
 const isOpen = computed(() => props.tabId === activeTab.value);
 </script>
