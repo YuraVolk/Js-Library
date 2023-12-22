@@ -35,6 +35,27 @@ module.exports = {
 				}
 			},
 			{
+				test: /\.module\.css$/,
+				use: [
+					"style-loader",
+					{
+						loader: "css-loader",
+						options: {
+							importLoaders: 1,
+							modules: true
+						}
+					}
+				]
+			},
+			{
+				test: /\.css$/,
+				exclude: /\.module\.css$/,
+				use: [
+					"style-loader",
+					"css-loader"
+				]
+			},
+			{
 			  test: /\.(png|svg|jpg|jpeg|gif|webp|mp4)$/i,
 			  type: 'asset/resource',
 			  generator: {
@@ -42,5 +63,11 @@ module.exports = {
 			  }
 			}
         ]
-    }
+    },
+	resolve: {
+		extensions: ['.js', '.jsx', '.ts', '.tsx', '.css'],
+		alias: {
+			src: path.resolve(__dirname, '../src')
+		}
+	}
 };

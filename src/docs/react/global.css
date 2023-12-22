@@ -1,0 +1,26 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+#app {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0;
+	background: linear-gradient(161deg, rgb(6, 5, 5) 14%, rgb(23, 15, 41) 79%);
+	background-size: cover;
+	background-repeat: no-repeat;
+	min-height: 100vh;
+	font-family: Helvetica, Segoe UI, Arial, sans-serif;
+}
+
+*::-webkit-scrollbar {
+	width: 8px;
+	border-radius: 10px;
+	background-color: #222;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: rgb(164, 123, 203);
+	border-radius: 10px;
+}
