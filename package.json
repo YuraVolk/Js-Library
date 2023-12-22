@@ -10,9 +10,11 @@
   "scripts": {
     "build:lit": "webpack --mode production --config webpack/webpack.config.lit.js",
     "build:vue": "webpack --mode production --config webpack/webpack.config.vue.js",
-    "build": "npm run build:lit && npm run build:vue",
+    "build:react": "webpack --mode production --config webpack/webpack.config.react.js",
+    "build": "npm run build:lit && npm run build:vue && npm run build:react",
     "start:lit": "webpack-dev-server --mode development --open --config webpack/webpack.config.lit.js",
     "start:vue": "webpack-dev-server --mode development --open --config webpack/webpack.config.vue.js",
+    "start:react": "webpack-dev-server --mode development --open --config webpack/webpack.config.react.js",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix"
   },
@@ -20,7 +22,10 @@
   "devDependencies": {
     "@babel/core": "^7.23.6",
     "@babel/preset-env": "^7.23.6",
+    "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
     "@vue/compiler-sfc": "^3.3.11",
@@ -52,6 +57,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "lit": "^3.1.0",
     "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "vue": "^3.3.11"
   }
 }
