@@ -1,12 +1,12 @@
 import links from "../data/sidebar.json";
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { isLocalhostEnvironment } from "src/modules/interfaces/sidebar";
+import { isLocalhostEnvironment, SidebarConfiguration } from "src/modules/interfaces/sidebar";
 
 const isLocalhost = isLocalhostEnvironment();
 console.log(isLocalhost);
 @customElement("sidebar-component")
-export class SidebarComponent extends LitElement {
+export class SidebarComponent extends LitElement implements SidebarConfiguration {
 	static styles = css`
 		.wrap {
 			mask-image: linear-gradient(to top, transparent 0%, rgb(0, 0, 0) 10%, rgb(0, 0, 0) 100%, transparent 100%);

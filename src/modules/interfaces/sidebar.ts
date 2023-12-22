@@ -5,3 +5,8 @@ export const isLocalhostEnvironment = () => {
 
     return false;
 };
+
+
+export interface SidebarConfiguration {
+    activeLink: string;
+}
