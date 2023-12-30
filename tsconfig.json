@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "jsx": "react",
     "plugins": [
       {
         "name": "typescript-plugin-css-modules"
@@ -11,20 +10,21 @@
     "emitDecoratorMetadata": true,
     "lib": ["DOM"],
     "target": "ESNext",
+    "module": "ES2020",
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "strict": true,
     "esModuleInterop": true,
     "typeRoots": [
       "./node_modules/@types",
-      "./src/modules/global.d.ts"
+      "./global.d.ts"
     ],
     "useDefineForClassFields": false
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.vue",
-    "src/**/*.tsx"
+    "**/*.ts",
+    "**/*.vue",
+    "**/*.tsx"
   ],
   "exclude": ["node_modules"]
 }

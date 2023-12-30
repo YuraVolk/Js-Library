@@ -6,10 +6,10 @@ module.exports = {
         'node_modules',
         '/docs/',
         '/.eslintrc.cjs',
-        '/webpack/',
-        'hooks/'
+        'webpack.config.js',
+        'hooks/',
     ],
     parserOptions: {
-        project: "./tsconfig.json"
+        project: ["./tsconfig.json"],
     }
 };
