@@ -8,6 +8,7 @@ module.exports = {
         '/.eslintrc.cjs',
         'webpack.config.js',
         'hooks/',
+        "global.d.ts"
     ],
     parserOptions: {
         project: ["./tsconfig.json"],

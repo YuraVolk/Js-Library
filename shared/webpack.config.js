@@ -2,15 +2,15 @@ const { ModuleFederationPlugin } = require('webpack').container;
 const path = require('path');
 const glob = require('glob');
 
-const syncedInterfaceFiles = glob.sync("./**/*.ts").map(p => p.replace(/\\/g, "/"));
+const syncedInterfaceFiles = glob.sync("./**/*.ts")
+    .map(p => p.replace(/\\/g, "/"))
+    .filter(p => !p.includes("node_modules"));
 const exposedInterfaceEntries = syncedInterfaceFiles.reduce((p, n) => ({
     ...p,
     ["./" + n.replace(/\.ts$/, "")]: "./" + n }
 ), {});
-const interfaceEntries = glob.sync("./**/*.ts").reduce((entry, file) => {
-    const entryName = file
-        .replace(/\\/g, "/")
-        .replace(/\.ts$/, "");
+const interfaceEntries = syncedInterfaceFiles.reduce((entry, file) => {
+    const entryName = file.replace(/\.ts$/, "");
     return { ...entry, [`${entryName}/index`]: "./" + file };
 }, {});
 

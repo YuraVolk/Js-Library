@@ -3,19 +3,17 @@
   "private": true,
   "version": "1.0.0",
   "description": "A library of JavaScript-based components built with Lit, React and Vue.",
-  "workspaces": {
-    "packages": [
-      "lit",
-      "vue",
-      "shared"
-    ]
-  },
   "scripts": {
     "start": "lerna run --parallel start",
-    "build": "lerna run build"
+    "build": "lerna run build",
+    "build:ci": "npm run setup && npm run build",
+    "setup": "lerna run setup"
   },
   "author": "Yuriy Volkovskiy",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+		"@typescript-eslint/parser": "^6.14.0",
+    "eslint": "^8.55.0",
     "lerna": "^8.0.1",
     "typescript": "^5.3.3"
   }
