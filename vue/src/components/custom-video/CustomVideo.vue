@@ -53,10 +53,10 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, reactive } from "vue";
-import playButton from "../../assets/img/play.png";
-import pauseButton from "../../assets/img/pause.png";
-import resetButton from "../../assets/img/reset.png";
-import muteButton from "../../assets/img/volume.png";
+import playButton from "../../../../assets/img/play.png";
+import pauseButton from "../../../../assets/img/pause.png";
+import resetButton from "../../../../assets/img/reset.png";
+import muteButton from "../../../../assets/img/volume.png";
 import RangeInputComponent from "../range-input/RangeInput.vue";
 import { assertNonUndefined } from "shared/utils/utils";
 import { VideoConfigurationProps, toMinutesSeconds } from "shared/component/customVideo";

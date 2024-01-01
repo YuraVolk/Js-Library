@@ -73,12 +73,12 @@ const SidebarComponent = defineAsyncComponent(() => import("../SidebarComponent.
 const GalleryCarouselComponent = defineAsyncComponent(() => import("../../../components/gallery-carousel/GalleryCarousel.vue"));
 const CarouselItemComponent = defineAsyncComponent(() => import("../../../interfaces/generic/carousel/CarouselItem.vue"));
 
-import image1 from "../../../assets/img/slide0.png";
-import image2 from "../../../assets/img/slide1.png";
-import image3 from "../../../assets/img/slide2.png";
-import image4 from "../../../assets/img/slide3.png";
-import image5 from "../../../assets/img/slide4.png";
-import image6 from "../../../assets/img/slide5.png";
+import image1 from "../../../../../assets/img/slide0.png";
+import image2 from "../../../../../assets/img/slide1.png";
+import image3 from "../../../../../assets/img/slide2.png";
+import image4 from "../../../../../assets/img/slide3.png";
+import image5 from "../../../../../assets/img/slide4.png";
+import image6 from "../../../../../assets/img/slide5.png";
 </script>
   
 <style scoped>

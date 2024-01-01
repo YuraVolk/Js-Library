@@ -70,7 +70,7 @@ import TableFilteringComponent from "../../../components/table-filtering/TableFi
 import TableFilteringHeaderComponent from "../../../components/table-filtering/TableFilteringHeader.vue";
 import TableFilteringRowComponent from "../../../components/table-filtering/TableFilteringRow.vue";
 
-import filterIcon from "../../../assets/svg/filter-icon.svg";
+import filterIcon from "../../../../../assets/svg/filter-icon.svg";
 const filterIconUrl = `url("${filterIcon}")`;
 
 const table = ref<InstanceType<typeof TableFilteringComponent> | null>(null);

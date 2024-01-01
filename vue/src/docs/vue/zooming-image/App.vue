@@ -40,7 +40,7 @@ const SidebarComponent = defineAsyncComponent(() => import("../SidebarComponent.
 const ZoomingImageComponent = defineAsyncComponent(() => import("../../../components/zooming-image/ZoomingImage.vue"));
 const ZoomingImageGlassComponent = defineAsyncComponent(() => import("../../../components/zooming-image/ZoomingImageGlass.vue"));
 
-import image1 from "../../../assets/img/slide0.png";
+import image1 from "../../../../../assets/img/slide0.png";
 const zoomingImageUrl = `url("${image1}")`;
 
 const zoomingImage = ref<InstanceType<typeof ZoomingImageComponent> | null>(null);

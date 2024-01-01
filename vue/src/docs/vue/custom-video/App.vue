@@ -37,7 +37,7 @@ import { defineAsyncComponent } from "vue";
 const HeaderComponent = defineAsyncComponent(() => import("../HeaderComponent.vue"));
 const SidebarComponent = defineAsyncComponent(() => import("../SidebarComponent.vue"));
 const CustomVideoComponent = defineAsyncComponent(() => import("../../../components/custom-video/CustomVideo.vue"));
-import videoLink from "../../../assets/video/sample-mp4-file-small.mp4";
+import videoLink from "../../../../../assets/video/sample-mp4-file-small.mp4";
 </script>
 
 <style scoped>
