@@ -44,10 +44,10 @@ const SidebarComponent = defineAsyncComponent(() => import("../SidebarComponent.
 import ImageComparatorComponent from "../../../components/image-comparator/ImageComparator.vue";
 import CarouselItemComponent from "../../../components/image-comparator/ImageComparatorItem.vue";
 
-import image1 from "../../../assets/img/slide0.png";
-import image2 from "../../../assets/img/slide1.png";
-import image3 from "../../../assets/img/slide2.png";
-import image4 from "../../../assets/img/slide3.png";
+import image1 from "../../../../../assets/img/slide0.png";
+import image2 from "../../../../../assets/img/slide1.png";
+import image3 from "../../../../../assets/img/slide2.png";
+import image4 from "../../../../../assets/img/slide3.png";
 </script>
 
 <style scoped>

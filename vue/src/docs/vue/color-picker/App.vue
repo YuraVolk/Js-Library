@@ -38,7 +38,7 @@ const HeaderComponent = defineAsyncComponent(() => import("../HeaderComponent.vu
 const SidebarComponent = defineAsyncComponent(() => import("../SidebarComponent.vue"));
 const ColorPickerComponent = defineAsyncComponent(() => import("../../../components/color-picker/ColorPicker.vue"));
 
-import colorPickerImage from "../../../assets/img/picker.jpg";
+import colorPickerImage from "../../../../../assets/img/picker.jpg";
 </script>
 
 <style scoped>

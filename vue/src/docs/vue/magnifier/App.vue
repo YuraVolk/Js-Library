@@ -54,7 +54,7 @@ import ImageMagnifierGlassComponent from "../../../components/magnifier/Magnifie
 const HeaderComponent = defineAsyncComponent(() => import("../HeaderComponent.vue"));
 const SidebarComponent = defineAsyncComponent(() => import("../SidebarComponent.vue"));
 
-import image1 from "../../../assets/img/slide0.png";
+import image1 from "../../../../../assets/img/slide0.png";
 
 const magnifier = ref<InstanceType<typeof ImageMagnifierComponent> | null>(null);
 </script>

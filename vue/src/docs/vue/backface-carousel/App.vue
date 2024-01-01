@@ -93,12 +93,12 @@ import CarouselItemComponent from "../../../components/backface-carousel/Backfac
 const HeaderComponent = defineAsyncComponent(() => import("../HeaderComponent.vue"));
 const SidebarComponent = defineAsyncComponent(() => import("../SidebarComponent.vue"));
 
-import image1 from "../../../assets/img/slide0.png";
-import image2 from "../../../assets/img/slide1.png";
-import image3 from "../../../assets/img/slide2.png";
-import image4 from "../../../assets/img/slide3.png";
-import image5 from "../../../assets/img/slide4.png";
-import image6 from "../../../assets/img/slide5.png";
+import image1 from "../../../../../assets/img/slide0.png";
+import image2 from "../../../../../assets/img/slide1.png";
+import image3 from "../../../../../assets/img/slide2.png";
+import image4 from "../../../../../assets/img/slide3.png";
+import image5 from "../../../../../assets/img/slide4.png";
+import image6 from "../../../../../assets/img/slide5.png";
 </script>
 
 <style scoped>

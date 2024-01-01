@@ -49,7 +49,7 @@
 
 <script setup lang="ts">
 import { ref, defineAsyncComponent } from "vue";
-import closeImage from "../../../assets/img/close.png";
+import closeImage from "../../../../../assets/img/close.png";
 
 const PopupComponent = defineAsyncComponent(() => import("../../../components/popup/Popup.vue"));
 const HeaderComponent = defineAsyncComponent(() => import("../HeaderComponent.vue"));

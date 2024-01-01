@@ -1,10 +1,10 @@
 import { LitElement, css, html } from "lit";
 import { customElement, query, queryAssignedElements, state } from "lit/decorators.js";
 import { RangeInputComponent } from "../range-input/rangeInput";
-import playButton from "../../assets/img/play.png";
-import pauseButton from "../../assets/img/pause.png";
-import resetButton from "../../assets/img/reset.png";
-import muteButton from "../../assets/img/volume.png";
+import playButton from "src/../assets/img/play.png";
+import pauseButton from "src/../assets/img/pause.png";
+import resetButton from "src/../assets/img/reset.png";
+import muteButton from "src/../assets/img/volume.png";
 import { assertDevOnly } from "shared/utils/utils";
 import { styleMap } from "lit/directives/style-map.js";
 import { toMinutesSeconds } from "shared/component/customVideo";
