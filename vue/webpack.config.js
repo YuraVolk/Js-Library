@@ -8,7 +8,7 @@ const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const vueHtmlPlugins = glob.sync("./src/docs/vue/**/*.html").map((file) => {
 	const entryName = file
 		.replace(/\\/g, "/")
-		.replace(/^src\/docs\/vue\//, "")
+		.replace(/src\/docs\/vue\//, "")
 		.replace(/index\.html$/, "");
 	return new HtmlWebpackPlugin({
 		template: file,
@@ -21,7 +21,7 @@ const vueHtmlPlugins = glob.sync("./src/docs/vue/**/*.html").map((file) => {
 const vueAppEntry = glob.sync("./src/docs/vue/**/app.ts").reduce((entry, file) => {
 	const entryName = file
 		.replace(/\\/g, "/")
-		.replace(/^src\/docs\/vue\//, "")
+		.replace(/src\/docs\/vue\//, "")
 		.replace(/\/app\.ts$/, "");
 	return { ...entry, [`vue/${entryName}/index`]: "./" + file };
 }, {});

@@ -9,7 +9,7 @@ const glob = require('glob');
 const litHtmlPlugins = glob.sync('./src/docs/lit/**/*.html').map((file) => {
   return new HtmlWebpackPlugin({
     template: file,
-    filename: file.replace(/\\/g, "/").replace(/^src\/docs\/lit\//, 'lit/'),
+    filename: file.replace(/\\/g, "/").replace(/src\/docs\/lit\//, 'lit/'),
   });
 });
 
