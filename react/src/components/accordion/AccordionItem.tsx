@@ -36,7 +36,6 @@ export const AccordionItem = (props: AccordionItemProps) => {
     }, [expand, updateHeight]);
 
     useEffect(() => {
-        console.log("yay");
         if (!isFirstOpen.current) expand(true);
         updateHeight();
         isFirstOpen.current = true;
