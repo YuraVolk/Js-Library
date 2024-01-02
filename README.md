@@ -4,9 +4,9 @@ This is my JavaScript library of common scripts.
 The basic idea behind such a library is that a lot of scripts
 that are impossible to implement without JS are highly unrelated
 in implementations and libraries, which makes usage of numerous such
-scripts in consistent. This library aims to provide a more consistent,
+scripts inconsistent. This library aims to provide a more consistent,
 customizable solution that allows for extensive and easy component styling,
-as well as a performant way of solving an issue.
+as well as a performant way of solving an issue. 
 All solutions are currently implemented in the following libraries and frameworks:
 1. Lit, currently having all main scripts finished.
 2. Vue, currently having all main scripts finished.
