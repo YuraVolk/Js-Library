@@ -4,6 +4,7 @@
 	"packages": [
 		"lit",
 		"vue",
+		"react",
 		"shared"
 	]
 }

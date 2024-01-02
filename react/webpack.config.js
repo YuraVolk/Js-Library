@@ -1,5 +1,7 @@
 const path = require("path");
 const glob = require("glob");
+const { ModuleFederationPlugin } = require("webpack").container;
+const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const reactHtmlPlugins = glob.sync("./src/docs/react/**/*.html").map((file) => {
@@ -18,12 +20,29 @@ const reactAppEntry = glob.sync("./src/docs/react/**/App.tsx").reduce((entry, fi
 }, {});
 
 module.exports = {
+	mode: "development",
 	output: {
 		path: path.resolve(__dirname, "../docs"),
 		filename: "[name].js"
 	},
-	entry: reactAppEntry,
-    plugins: reactHtmlPlugins,
+	devServer: {
+		static: path.join(__dirname, "dist"),
+		port: 3004
+	},
+	entry: {
+		interfacesEntry: "./src/components/reactEntry.ts",
+		...reactAppEntry
+	},
+    plugins: [
+		new ModuleFederationPlugin({
+			name: "react",
+			remotes: {
+				shared: "shared@[sharedInterfacesUrl]/remoteEntry.js"
+			}
+		}),
+		new ExternalTemplateRemotesPlugin(),
+		...reactHtmlPlugins
+	],
     module: {
         rules: [
             {
