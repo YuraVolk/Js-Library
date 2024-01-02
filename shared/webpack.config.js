@@ -7,7 +7,7 @@ const syncedInterfaceFiles = glob.sync("./**/*.ts")
     .filter(p => !p.includes("node_modules"));
 const exposedInterfaceEntries = syncedInterfaceFiles.reduce((p, n) => ({
     ...p,
-    ["./" + n.replace(/\.ts$/, "")]: "./" + n }
+    [n.replace(/\.ts$/, "")]: "./" + n }
 ), {});
 const interfaceEntries = syncedInterfaceFiles.reduce((entry, file) => {
     const entryName = file.replace(/\.ts$/, "");

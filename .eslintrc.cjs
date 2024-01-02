@@ -11,6 +11,11 @@ module.exports = {
         "global.d.ts"
     ],
     parserOptions: {
-        project: ["./tsconfig.json"],
+        project: [
+            "./lit/tsconfig.json",
+            "./vue/tsconfig.json",
+            "./react/tsconfig.json",
+            "./shared/tsconfig.json"
+        ],
     }
 };
