@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkjs_components_library_interfaces=self.webpackChunkjs_components_library_interfaces||[]).push([[5676,1429],{676:function(e,n,r){r.r(n),r.d(n,{defaultActiveColor:function(){return t},defaultHoverColor:function(){return o}});const t="rgba(255,85,0, .6)",o="rgba(255,85,0, .3)"}}]);
