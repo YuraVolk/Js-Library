@@ -1,0 +1,108 @@
+{
+	"components": [
+		{
+			"name": "Accordion",
+			"link": "../accordion"
+		},
+		{
+			"name": "Autocomplete Input",
+			"link": "../autocomplete-list"
+		},
+		{
+			"name": "Backface Carousel",
+			"link": "../backface-carousel"
+		},
+		{
+			"name": "Ciphering Text",
+			"link": "../ciphering-text"
+		},
+		{
+			"name": "Color Picker",
+			"link": "../color-picker"
+		},
+		{
+			"name": "Countdown",
+			"link": "../countdown"
+		},
+		{
+			"name": "Custom Select",
+			"link": "../custom-select"
+		},
+		{
+			"name": "Custom Video",
+			"link": "../custom-video"
+		},
+		{
+			"name": "Floating Panel",
+			"link": "../floating-panel"
+		},
+		{
+			"name": "Gallery Carousel",
+			"link": "../gallery-carousel"
+		},
+		{
+			"name": "Image Comparator",
+			"link": "../image-comparator"
+		},
+		{
+			"name": "Magnifier",
+			"link": "../magnifier"
+		},
+		{
+			"name": "Menu Carousel",
+			"link": "../menu-carousel"
+		},
+		{
+			"name": "One Page Scroll",
+			"link": "../one-page-scroll"
+		},
+		{
+			"name": "Parallax",
+			"link": "../parallax"
+		},
+		{
+			"name": "Perspective Carousel",
+			"link": "../perspective-carousel"
+		},
+		{
+			"name": "Popup",
+			"link": "../popup"
+		},
+		{
+			"name": "Range Input",
+			"link": "../range-input"
+		},
+		{
+			"name": "Rebuilding Text",
+			"link": "../rebuilding-text"
+		},
+		{
+			"name": "Scrolling Ad",
+			"link": "../scrolling-ad"
+		},
+		{
+			"name": "Sticky Header",
+			"link": "../sticky-header"
+		},
+		{
+			"name": "Table Filtering",
+			"link": "../table-filtering"
+		},
+		{
+			"name": "Tabs",
+			"link": "../tabs"
+		},
+		{
+			"name": "Toast",
+			"link": "../toast"
+		},
+		{
+			"name": "Typing Text",
+			"link": "../typing-text"
+		},
+		{
+			"name": "Zooming Image",
+			"link": "../zooming-image"
+		}
+	]
+}
