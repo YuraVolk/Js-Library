@@ -40,10 +40,10 @@
         </p>
         <form autocomplete="off">
             <label class="autocomplete-label">
-                <autocomplete-list-component :options="`10,20,30,40,50,60,70,80,90,100+`.split(',')" :input-value="inputAge"
-                    @change-input-value="changeInputAgeValue">
+                <autocomplete-list-component :options="`10,20,30,40,50,60,70,80,90,100+`.split(',')" :input-value="inputNumber"
+                    @change-input-value="changeInputNumberValue">
                     <input class="autocomplete-input" type="text" placeholder="Amount of pet projects you've completed:"
-                        autocomplete="off" v-model="inputAge" />
+                        autocomplete="off" v-model="inputNumber" />
                 </autocomplete-list-component>
             </label>
             <label class="autocomplete-label">
@@ -76,9 +76,9 @@ const inputCountry = ref("");
 const changeCountryInputValue = (newValue: string) => {
     inputCountry.value = newValue;
 };
-const inputAge = ref("");
-const changeInputAgeValue = (newValue: string) => {
-    inputAge.value = newValue;
+const inputNumber = ref("");
+const changeInputNumberValue = (newValue: string) => {
+    inputNumber.value = newValue;
 };
 const inputProfession = ref("");
 const changeInputProfessionValue = (newValue: string) => {

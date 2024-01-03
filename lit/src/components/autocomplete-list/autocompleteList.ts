@@ -64,7 +64,6 @@ export class AutocompleteListComponent extends LitElement implements Autocomplet
     const newFilteredOptions = [];
     for (const option of this.options) {
       const lowerOption = option.toLowerCase();
-      console.log(lowerOption.startsWith(value));
       if (lowerOption === value || !lowerOption.startsWith(value)) continue;
       newFilteredOptions.push(option);
     }
@@ -87,7 +86,6 @@ export class AutocompleteListComponent extends LitElement implements Autocomplet
   connectedCallback() {
     super.connectedCallback();
     this.boundInputEventListener = ({ target }) => { if (target) this.onInputHandler(target); };
-    console.log(this.querySelector("input"));
     this.querySelector<HTMLInputElement>("input")?.addEventListener("input", this.boundInputEventListener);
   }
 
