@@ -1,5 +1,5 @@
 import React from "react";
-import { AutocompleteListReactConfiguration } from "react/src/interfaces/autocompleteList";
+import { AutocompleteListReactConfiguration } from "../../../src/interfaces/component/autocompleteList";
 import styles from "./AutocompleteList.module.css";
 
 export const AutocompleteList = (props: AutocompleteListReactConfiguration) => {

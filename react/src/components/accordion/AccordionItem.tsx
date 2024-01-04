@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
-import { AccordionItemProps } from "../../../src/interfaces/accordion";
+import { AccordionItemProps } from "../../../src/interfaces/component/accordion";
 import styles from "./Accordion.module.css";
 import { AccordionContext } from "./context";
 import { uid } from "shared/utils/utils";
