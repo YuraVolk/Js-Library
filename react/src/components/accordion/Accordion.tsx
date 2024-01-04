@@ -3,7 +3,7 @@ import { AccordionListConfiguration } from "shared/component/accordion";
 import styles from "./Accordion.module.css";
 import { WithChildren } from "../../../src/utils/utils";
 import { AccordionContext } from "./context";
-import { AccordionContextInterface } from "react/src/interfaces/accordion";
+import { AccordionContextInterface } from "../../../src/interfaces/component/accordion";
 
 export const Accordion = (props: WithChildren<AccordionListConfiguration>) => {
     const [expandedIndex, setExpandedIndex] = useState<string | string[]>(props.multiple ? [] : "");

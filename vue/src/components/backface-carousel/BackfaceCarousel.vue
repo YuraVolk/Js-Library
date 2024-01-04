@@ -18,7 +18,7 @@ import { ref, onMounted, onUnmounted, reactive, CSSProperties } from "vue";
 import { useInjectedLinkedItems } from "../../interfaces/hooks/useLinkedItem";
 
 const props = defineProps<{ isVertical?: boolean }>();
-const isHorizontal = ref(!props.isVertical ?? false);
+const isHorizontal = ref(!props.isVertical);
 const elements = useInjectedLinkedItems();
 const carouselStyles = reactive<CSSProperties>({});
 const currentItem = ref(0);

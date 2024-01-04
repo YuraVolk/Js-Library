@@ -1,11 +1,9 @@
 import { inject, ref, onMounted, watch, provide, Ref, reactive, CSSProperties } from 'vue';
 import { assertNonUndefined } from "shared/utils/utils";
+import { LinkedRegistryRecord } from "shared/hooks/useLinkedItem";
 
 export const injectedElementsRegistryKey = Symbol();
-type LinkedVueItems = Record<string, {
-    element: HTMLElement;
-    styles: Partial<CSSProperties>;
-}>;
+type LinkedVueItems = LinkedRegistryRecord<keyof CSSProperties, CSSProperties>;
 export type LinkedVueItem = LinkedVueItems[string];
 
 export function useLinkedItem(generateId: () => string, item: Ref<HTMLElement | null>) {
