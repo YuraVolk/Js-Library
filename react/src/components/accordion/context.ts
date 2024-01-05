@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { AccordionContextInterface } from "react/src/interfaces/accordion";
+import { AccordionContextInterface } from "../../interfaces/component/accordion";
 
 export const AccordionContext = createContext<AccordionContextInterface>({
     expandedIndex: "",

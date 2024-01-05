@@ -6,8 +6,13 @@ export interface ModifyingTextConfiguration {
 }
 
 export interface SelfModifyingTextInterface extends Required<ModifyingTextConfiguration> {
-	splitText?(newString?: string): void;
+	splitText?(newString?: string): void | Promise<void>;
 	triggerTextAnimation(fromText: string, toText: string): void | Promise<void>;
+}
+
+export interface LetterSettings {
+    letter: string;
+    classes: string[];
 }
 
 export function* nextStringsGenerator(
@@ -27,3 +32,9 @@ export function* nextStringsGenerator(
 
 	return [previousValue, previousValue];
 }
+
+export const splitTextAlgorithm = (currentString: LetterSettings[], newString: string): LetterSettings[] => {
+    return [...currentString.map(({ letter }) => letter).filter(Boolean), 
+        ...newString.split("").slice(currentString.length).fill(" ")]
+        .map(letter => ({ letter, classes: [] }));
+};

@@ -13,7 +13,7 @@ root.render(
             <Header />
         </Suspense>
         <Suspense>
-            <Sidebar activeLink="Autocomplete Input" />
+            <Sidebar activeLink="Ciphering Text" />
         </Suspense>
 		<Suspense>
 			<Page />
