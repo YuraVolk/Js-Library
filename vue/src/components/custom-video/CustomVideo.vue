@@ -12,8 +12,7 @@
 				:maximum="1"
 				hide-value
 				@change="setVolume"
-                :default-value="1"
-				:value="rangeInputSettings.volume"
+                :default-value="rangeInputSettings.volume"
 			></range-input-component>
 			<range-input-component
 				id="time-range-input"
@@ -23,7 +22,7 @@
 				hide-value
 				all-same-line
 				@change="setVideoSecond"
-				:value="rangeInputSettings.current"
+				:default-value="rangeInputSettings.current"
 			></range-input-component>
 			<ul class="controls-buttons">
 				<li class="controls-button" :style="{ display: isVideoPlaying ? 'none' : 'block' }" @click="startVideo">
