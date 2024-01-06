@@ -31,7 +31,7 @@ export class CipheringTextComponent extends SelfModifyingText implements Cipheri
     const changeNumber = Math.round(Math.random() * ((delayed ? 44 : 14) - 6) + 6);
     let isDone = false, index = 0;
 
-    const definedRandom = (Math.random() * 1000) + (delayed ? this.typingSpeed * i : 0), speed = 65;
+    const definedRandom = (Math.random() * 1000) + (delayed ? this.typingSpeed * i : 0), speed = this.typingSpeed;
     setTimeout(() => {
       while (index <= changeNumber) {
         const characters = this.characters;
