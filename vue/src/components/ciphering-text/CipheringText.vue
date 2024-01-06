@@ -32,7 +32,7 @@ const cipherLetter = (properties: { newLetter?: string, delayed: boolean, i: num
     const { newLetter, delayed, i } = properties;
     const changeNumber = Math.round(Math.random() * ((delayed ? 44 : 14) - 6) + 6);
     let isDone = false, index = 0;
-    const definedRandom = (Math.random() * 1000) + (delayed ? settings.settings.typingSpeed * i : 0), speed = 65;
+    const definedRandom = (Math.random() * 1000) + (delayed ? settings.settings.typingSpeed * i : 0), speed = props.typingSpeed;
     setTimeout(() => {
         while (index <= changeNumber) {
             (function (index) {

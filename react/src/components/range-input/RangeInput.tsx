@@ -76,7 +76,7 @@ export const RangeInput = ({
 								"--value": tick + "%"
 							};
 							return (
-								<li className={styles["range-slider-ticks__tick"]} style={tickStyles}>
+								<li className={styles["range-slider-ticks__tick"]} style={tickStyles} key={tick}>
 									{tick}
 								</li>
 							);

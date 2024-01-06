@@ -46,4 +46,5 @@ import colorPickerImage from "../../../../../assets/img/picker.jpg";
     position: relative;
     z-index: 2;
     max-width: 670px;
-}</style>
+}
+</style>
