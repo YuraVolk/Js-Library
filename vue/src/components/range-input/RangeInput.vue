@@ -38,7 +38,7 @@ const props = withDefaults(defineProps<Partial<RangeInputConfiguration>>(), {
     allSameLine: false
 });
 const currentValue = ref(props.defaultValue ?? 0);
-const propsValue = computed(() => props.value ?? 0);
+const propsValue = computed(() => props.defaultValue ?? 0);
 const emit = defineEmits<{
     (e: 'change', value: number): void
 }>();

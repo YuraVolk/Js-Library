@@ -13,7 +13,6 @@ export interface RangeInputConfiguration {
     valueSize: string;
     hideValue: boolean;
     allSameLine: boolean;
-    value?: number;
 }
 
 export const defaultActiveColor = `rgba(255,85,0, .6)`;
