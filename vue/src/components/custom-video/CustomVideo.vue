@@ -1,7 +1,7 @@
 <template>
 	<div class="wrap">
 		<div class="video">
-			<video ref="video" v-bind="videoPassedProps" @timeupdate="updateTrackInfo">
+			<video ref="video" v-bind="videoPassedProps" @timeupdate="updateTrackInfo" @ended="stopVideo">
 				<slot></slot>
 			</video>
 		</div>
