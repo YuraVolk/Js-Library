@@ -24,7 +24,7 @@
             The Vue version of this component is working with emitted events of range input components,
             and is using an approach to bind time update event handler and work with the video. Here, the Vue
             props are all almost fully delegated to the inner video component, so you can specify all video
-            element props on the component itself. AS the slot content, you only need to pass the sources
+            element props on the component itself. As the slot content, you only need to pass the sources
             for thee video for it to work. Through this scheme, the video is configured to be highly customizable
             and easy to style.
         </p>
