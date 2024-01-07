@@ -1,6 +1,6 @@
 <template>
 	<select :value="selectedItem?.value ?? ''" :name="selectName">
-		<option v-for="option in items" :value="option.value" :disabled="option.isDisabled" :selected="option.isSelected">
+		<option v-for="option in internalItems" :value="option.value" :disabled="option.isDisabled" :selected="option.isSelected">
 			{{ option.innerContent }}
 		</option>
 	</select>
@@ -15,10 +15,14 @@
 				:data-disabled="element.isDisabled"
 				:data-selected="element.isSelected"
 				:value="element.value"
-                @click="() => { onItemSelected(element); }"
+				@click="
+					() => {
+						onItemSelected(element);
+					}
+				"
 			>
-                {{ element.innerContent }}
-            </li>
+				{{ element.innerContent }}
+			</li>
 		</ul>
 	</div>
 </template>
@@ -30,7 +34,7 @@ import { CustomSelectVueConfiguration } from "../../interfaces/component/customS
 
 const props = defineProps<CustomSelectVueConfiguration>();
 const emit = defineEmits<{
-    (e: "change", element: SelectInternalItem): void;
+	(e: "change", element: SelectInternalItem): void;
 }>();
 const internalItems = reactive([...props.items]);
 const isOpened = ref(false);
@@ -39,31 +43,31 @@ const wrapElement = ref<HTMLElement | null>(null);
 const selectedItem = computed(() => internalItems.find((item) => item.isSelected));
 
 const toggleOpened = () => {
-    isOpened.value = !isOpened.value;
+	isOpened.value = !isOpened.value;
 };
 
 const onItemSelected = (element: SelectInternalItem) => {
-    isOpened.value = false;
-    if (element.isDisabled) return;
-    for (const el of internalItems) {
-        if (el === element) {
-            el.isSelected = true;
+	isOpened.value = false;
+	if (element.isDisabled) return;
+	for (const el of internalItems) {
+		if (el === element) {
+			el.isSelected = true;
 			emit("change", el);
-        } else el.isSelected = false;
-    }
+		} else el.isSelected = false;
+	}
 };
 
 onMounted(() => {
-    const documentListener: EventListener = (event) => {
-        if (!event.composedPath().some((e) => e === wrapElement.value)) isOpened.value = false;
-    };
-    boundDocumentListener.value = documentListener;
-    document.addEventListener("click", documentListener);
+	const documentListener: EventListener = (event) => {
+		if (!event.composedPath().some((e) => e === wrapElement.value)) isOpened.value = false;
+	};
+	boundDocumentListener.value = documentListener;
+	document.addEventListener("click", documentListener);
 });
 
 onUnmounted(() => {
-    if (!boundDocumentListener.value) return;
-    document.removeEventListener("click", boundDocumentListener.value);
+	if (!boundDocumentListener.value) return;
+	document.removeEventListener("click", boundDocumentListener.value);
 });
 </script>
 
