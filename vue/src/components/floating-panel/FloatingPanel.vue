@@ -6,11 +6,11 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, reactive, CSSProperties } from "vue";
-import { FloatingPanelConfiguration } from "shared/component/floatingPanel";
+import { FloatingPanelConfiguration, FloatingPanelInternalSettings } from "shared/component/floatingPanel";
 
 const props = defineProps<FloatingPanelConfiguration>();
 const panel = ref<HTMLDivElement | null>(null);
-const panelProperties = reactive({
+const panelProperties = reactive<FloatingPanelInternalSettings>({
     panelX: panel.value?.offsetLeft ?? 0,
     panelY: panel.value?.offsetTop ?? 0,
     clientX: 0,
