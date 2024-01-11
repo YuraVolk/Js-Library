@@ -4,6 +4,7 @@
         <div
             v-for="elementKey in Object.keys(elements).slice(1)"
             class="comparison-slider"
+            :key="elementKey"
             :style="imageData[elementKey].style"
             @mousedown="(e) => onMouseStart(e, elementKey)"
             @pointerdown="(e) => onMouseStart(e, elementKey)"
@@ -14,15 +15,10 @@
 <script setup lang="ts">
 import { useInjectedLinkedItems } from '../../interfaces/hooks/useLinkedItem';
 import { onMounted, onUnmounted, reactive, computed, CSSProperties } from 'vue';
-
-interface ImageComparisonData {
-    isClicked: boolean;
-    offsetWidth: number;
-    style: CSSProperties;
-}
+import { ImageComparisonData } from "shared/component/imageComparator";
 
 const elements = useInjectedLinkedItems();
-const imageData = reactive<Record<string, ImageComparisonData>>({});
+const imageData = reactive<Record<string, ImageComparisonData<CSSProperties>>>({});
 const clickedElement = computed(() => Object.keys(elements).find((key) => imageData[key].isClicked));
 
 const slide = (elementKey: string, difference: number) => {
