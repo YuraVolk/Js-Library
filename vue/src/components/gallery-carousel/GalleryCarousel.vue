@@ -78,7 +78,6 @@ const slideTo = (position: number, newPosition: number) => {
         if (progress === 1) {
             window.clearInterval(interval.value);
             isAnimating.value = false;
-            console.log(currentSlide.value);
             const newSlide = checkCurrentSlide(currentSlide.value);
             currentSlide.value = newSlide;
             galleryLeft.value = newSlide * -100;
