@@ -56,7 +56,7 @@ export interface ExposedContextFunctions {
 interface ExposedContextProps {
 	children: ReactNode;
 	innerChildren: ReactNode;
-	onAllElementsLoaded(): void;
+	onAllElementsLoaded?(): void;
 }
 
 const ContextLinkedItems = forwardRef<ExposedContextFunctions, ExposedContextProps>((props, ref) => {
@@ -74,7 +74,7 @@ const ContextLinkedItems = forwardRef<ExposedContextFunctions, ExposedContextPro
 		if (wasSetupPerformed.current || !Array.isArray(props.innerChildren)) return;
 		if (Object.keys(elements).length === props.innerChildren.length) {
 			wasSetupPerformed.current = true;
-			props.onAllElementsLoaded();
+			props.onAllElementsLoaded?.();
 		}
 	}, [elements]);
 
