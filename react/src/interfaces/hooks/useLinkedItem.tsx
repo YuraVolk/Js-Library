@@ -49,7 +49,7 @@ export function useLinkedItem(generateId: () => string, item: MutableRefObject<H
 
 export interface ExposedContextFunctions {
 	getState(): LinkedReactItems;
-	updateState(items: LinkedReactItems): void;
+	updateState: React.Dispatch<React.SetStateAction<LinkedReactItems>>;
 	wasSetupPerformed(): boolean;
 }
 
