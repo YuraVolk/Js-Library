@@ -1,0 +1,14 @@
+.magnifier {
+	border: 3px solid #333333;
+	width: 370px;
+	height: 220px;
+}
+
+.magnifier-glass {
+	top: -25px;
+	left: -25px;
+	width: 70px;
+	height: 70px;
+	border: 2px solid #222;
+	cursor: zoom-in;
+}
