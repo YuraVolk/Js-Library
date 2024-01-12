@@ -10,11 +10,7 @@
 <script setup lang="ts">
 import { useInjectedLinkedItems } from "../../interfaces/hooks/useLinkedItem";
 import { onMounted, ref } from "vue";
-
-interface MagnifierConfiguration {
-  imageSource: string;
-  zoomScale?: number;
-}
+import { MagnifierConfiguration } from "shared/component/magnifier";
 
 const props = withDefaults(defineProps<MagnifierConfiguration>(), {
   zoomScale: 2

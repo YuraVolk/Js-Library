@@ -1,5 +1,6 @@
 import React, {
 	CSSProperties,
+	Children,
 	MutableRefObject,
 	ReactNode,
 	createContext,
@@ -71,8 +72,7 @@ const ContextLinkedItems = forwardRef<ExposedContextFunctions, ExposedContextPro
 	);
 
 	useEffect(() => {
-		if (wasSetupPerformed.current || !Array.isArray(props.innerChildren)) return;
-		if (Object.keys(elements).length === props.innerChildren.length) {
+		if (!wasSetupPerformed.current && Object.keys(elements).length === Children.toArray(props.innerChildren).length) {
 			wasSetupPerformed.current = true;
 			props.onAllElementsLoaded?.();
 		}
