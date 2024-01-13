@@ -11,7 +11,6 @@ import { OnePageScrollConfiguration, easeInOutQuad } from "shared/component/oneP
 import { useInjectedLinkedItems } from "../../interfaces/hooks/useLinkedItem";
 import { computed, onUnmounted, ref } from "vue";
 import { CarouselDirection } from "shared/interfaces/carousel";
-import { ECarouselDirection } from '../../interfaces/generic/carousel/carousel';
 
 const props = withDefaults(defineProps<Partial<OnePageScrollConfiguration>>(), {
 	isHorizontal: false,
@@ -67,7 +66,7 @@ const onWheel = (event: WheelEvent) => {
 			if (isScrolling.value) return;
 			selectedItem.value = 0;
 			smoothScrollTo(0);
-		} else scrollSlide(ECarouselDirection.FORWARDS);
+		} else scrollSlide(CarouselDirection.FORWARDS);
 	} else {
 		if (selectedItem.value === 0) {
 			if (isScrolling.value || !wrap.value) return;
@@ -76,7 +75,7 @@ const onWheel = (event: WheelEvent) => {
 				(props.isHorizontal ? wrap.value.scrollWidth : wrap.value.scrollHeight) -
 					(props.isHorizontal ? firstElement.value.offsetWidth : firstElement.value.offsetHeight)
 			);
-		} else scrollSlide(ECarouselDirection.BACKWARDS);
+		} else scrollSlide(CarouselDirection.BACKWARDS);
 	}
 };
 

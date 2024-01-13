@@ -13,7 +13,7 @@ import { MenuCarouselConfiguration, MenuCarouselInternalItem } from 'shared/comp
 import { useInjectedLinkedItems, LinkedVueItem } from '../../interfaces/hooks/useLinkedItem';
 import { assertNonUndefinedDevOnly } from "shared/utils/utils";
 import { onMounted, onUnmounted, reactive, ref } from 'vue';
-import { ECarouselDirection } from '../../interfaces/generic/carousel/carousel';
+import { CarouselDirection } from 'shared/interfaces/carousel';
 
 const props = withDefaults(defineProps<Partial<MenuCarouselConfiguration>>(), {
     yPos: 112,
@@ -125,11 +125,11 @@ const onResize = () => {
 };
 
 const goBack = () => {
-    go(ECarouselDirection.BACKWARDS);
+    go(CarouselDirection.BACKWARDS);
 };
 
 const goForward = () => {
-    go(ECarouselDirection.FORWARDS);
+    go(CarouselDirection.FORWARDS);
 };
 
 onMounted(() => {
