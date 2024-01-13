@@ -77,7 +77,7 @@
           ></button>
         </div>
       </div>
-    `}};n([(0,s.SB)(),a("design:type",Array)],l.prototype,"_elements",void 0),n([(0,s.SB)(),a("design:type",Object)],l.prototype,"_currentItem",void 0),n([(0,s.IO)(".carousel-items"),a("design:type",HTMLElement)],l.prototype,"_carouselWrap",void 0),n([(0,s.Kt)(".carousel-item"),a("design:type",Array)],l.prototype,"_carouselItem",void 0),n([(0,s.Cb)({type:Boolean,converter:{fromAttribute:t=>Boolean(Number(t)),toAttribute:t=>String(t)}}),a("design:type",Object)],l.prototype,"isHorizontal",void 0),l=n([(0,s.Mo)("backface-carousel-component")],l)},8116:function(t,e,r){r.d(e,{I:function(){return o}});const o=r(1293).iv`
+    `}};n([(0,s.SB)(),a("design:type",Array)],l.prototype,"_elements",void 0),n([(0,s.SB)(),a("design:type",Object)],l.prototype,"_currentItem",void 0),n([(0,s.IO)(".carousel-items"),a("design:type",HTMLElement)],l.prototype,"_carouselWrap",void 0),n([(0,s.Kt)(".carousel-item"),a("design:type",Array)],l.prototype,"_carouselItem",void 0),n([(0,s.Cb)({type:Boolean,converter:{fromAttribute:t=>Boolean(Number(t)),toAttribute:t=>String(t)}}),a("design:type",Object)],l.prototype,"isHorizontal",void 0),l=n([(0,s.Mo)("backface-carousel-component")],l)},8116:function(t,e,r){r.d(e,{I:function(){return s}});var o=r(1293);r(8956);const s=o.iv`
 	.carousel-controls {
 		position: relative;
 		z-index: 1;
