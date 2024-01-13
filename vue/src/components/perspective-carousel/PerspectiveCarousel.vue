@@ -18,7 +18,6 @@ import { PerspectiveCarouselConfiguration, PerspectiveCarouselItemState, resetIn
 import { CSSProperties, computed, onMounted, onUnmounted, ref, nextTick } from "vue";
 import { useInjectedLinkedItems } from "../../interfaces/hooks/useLinkedItem";
 import { CarouselDirection } from "shared/interfaces/carousel";
-import { ECarouselDirection } from '../../interfaces/generic/carousel/carousel';
 
 const props = withDefaults(defineProps<Partial<PerspectiveCarouselConfiguration>>(), {
 	imageSize: "300px",
@@ -198,9 +197,9 @@ const moveItem = async (elementIndex: number, newPosition: number) => {
 
 const moveOnce = (direction: CarouselDirection) => {
 	if (state.value.currentlyMoving) return;
-	if (direction === ECarouselDirection.BACKWARDS && state.value.currentCenterItem !== undefined) {
+	if (direction === CarouselDirection.BACKWARDS && state.value.currentCenterItem !== undefined) {
 		emit("movingFromCenter", state.value.currentCenterItem - 1 < 0 ? undefined : state.value.currentCenterItem - 1);
-	} else if (direction === ECarouselDirection.FORWARDS && state.value.currentCenterItem !== undefined) {
+	} else if (direction === CarouselDirection.FORWARDS && state.value.currentCenterItem !== undefined) {
 		emit("movingFromCenter", state.value.currentCenterItem + 1 > state.value.totalItems ? undefined : state.value.currentCenterItem + 1);
 	} else emit("movingFromCenter", state.value.currentCenterItem);
 
@@ -208,7 +207,7 @@ const moveOnce = (direction: CarouselDirection) => {
 };
 
 const previousItem = () => {
-	moveOnce(ECarouselDirection.BACKWARDS);
+	moveOnce(CarouselDirection.BACKWARDS);
 	rotateCarousel();
 };
 
@@ -219,7 +218,7 @@ const switchOrientation = () => {
 };
 
 const nextItem = () => {
-	moveOnce(ECarouselDirection.FORWARDS);
+	moveOnce(CarouselDirection.FORWARDS);
 	rotateCarousel();
 };
 

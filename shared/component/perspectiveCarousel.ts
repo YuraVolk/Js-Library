@@ -19,6 +19,7 @@ export interface InternalPerspectiveCarouselState<T> {
 	performingSetup: boolean;
 }
 
+const STILL_DIRECTION: typeof CarouselDirection["STILL"] = 0;
 export const resetInternalState = <T>(): InternalPerspectiveCarouselState<T> => ({
 	totalItems: 0,
 	containerDimensions: [0, 0],
@@ -32,7 +33,7 @@ export const resetInternalState = <T>(): InternalPerspectiveCarouselState<T> => 
 	carouselRotationsLeft: 0,
 	currentlyMoving: false,
 	itemsAnimating: 0,
-	currentDirection: CarouselDirection.STILL,
+	currentDirection: STILL_DIRECTION,
 	leftItemsCount: 0,
 	rightItemsCount: 0,
 	performingSetup: true
