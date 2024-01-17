@@ -7,24 +7,18 @@
 <script setup lang="ts">
 import { onUnmounted, ref } from "vue";
 import { TypingTextConfiguration } from "shared/component/typingText";
-import { useSelfModifyingText } from "../../interfaces/hooks/useSelfModifyingText";
+import { ModifyingTextContext, useSelfModifyingText } from "../../interfaces/hooks/useSelfModifyingText";
+import { TriggerTextAnimationCallback } from "shared/interfaces/selfModifyingText";
 
 const props = withDefaults(defineProps<TypingTextConfiguration>(), {
 	repetitions: 1,
 	interval: 4500,
 	typingSpeed: 35
 });
-const settings = useSelfModifyingText({
-	strings: props.strings,
-	repetitions: props.repetitions,
-	interval: props.interval,
-	typingSpeed: props.typingSpeed,
-	triggerTextAnimation
-});
 
 const timeout = ref<number | undefined>();
 
-async function triggerTextAnimation(fromText: string, toText: string) {
+const triggerTextAnimation: TriggerTextAnimationCallback<ModifyingTextContext> = async ({ context, toText, fromText }) => {
 	const fromArray = fromText.split("").map((letter) => ({ letter, classes: [] }));
 	const toArray = toText.split("").map((letter) => ({ letter, classes: [] }));
 
@@ -32,7 +26,7 @@ async function triggerTextAnimation(fromText: string, toText: string) {
 		await new Promise<void>(
 			(resolve) =>
 				(timeout.value = window.setTimeout(() => {
-					settings.currentTextValue.value = fromArray.slice(0, -i);
+					context.currentTextValue.value = fromArray.slice(0, -i);
 					resolve();
 				}, props.unTypingSpeed ?? props.typingSpeed))
 		);
@@ -42,7 +36,7 @@ async function triggerTextAnimation(fromText: string, toText: string) {
 		await new Promise<void>(
 			(resolve) =>
 				(timeout.value = window.setTimeout(() => {
-					settings.currentTextValue.value = toArray.slice(0, i);
+					context.currentTextValue.value = toArray.slice(0, i);
 					resolve();
 				}, props.unTypingSpeed ?? props.typingSpeed))
 		);
@@ -50,9 +44,17 @@ async function triggerTextAnimation(fromText: string, toText: string) {
 
 	setTimeout(() => {
 		clearTimeout(timeout.value);
-		settings.onInterval();
+		context.onInterval();
 	}, props.interval);
-}
+};
+
+const settings = useSelfModifyingText({
+	strings: props.strings,
+	repetitions: props.repetitions,
+	interval: props.interval,
+	typingSpeed: props.typingSpeed,
+	triggerTextAnimation
+});
 
 onUnmounted(() => {
 	clearTimeout(timeout.value);

@@ -1,6 +1,6 @@
 import { customElement, property } from "lit/decorators.js";
 import { CipheringTextConfiguration } from "shared/component/cipheringText";
-import { SelfModifyingText } from "../../interfaces/generic/selfModifyingText";
+import { SelfModifyingText, SplitTextParams, TriggerTextParams } from "../../interfaces/generic/selfModifyingText";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -22,8 +22,8 @@ export class CipheringTextComponent extends SelfModifyingText implements Cipheri
   } })
   characters: string[] = ['!', '"', '#', '$', '%', '*', '0', '1', ':', ';', '?', '@', '[', ']', '\\', '~', "'", '/', '{', '}', '|', '&', '(', ')', '-', '<', '>'];
 
-  splitText(newString?: string) {
-    super.splitTextAlgorithm(newString);
+  splitText({ toText }: SplitTextParams) {
+    super.splitTextAlgorithm(toText);
   }
 
   protected cipherLetter(properties: { element: Element, newLetter: string, delayed: boolean, i: number }) {
@@ -51,10 +51,10 @@ export class CipheringTextComponent extends SelfModifyingText implements Cipheri
     return changeNumber * speed + speed;
   }
 
-  triggerTextAnimation(fromText: string, toText: string) {
+  triggerTextAnimation({ context, toText, fromText }: TriggerTextParams) {
     const newElements = Array.from(this.querySelectorAll('pre'));
     for (const element of newElements) element.textContent = fromText;
-    this.splitText(toText);
+    this.splitText({ context, toText });
 
     const speeds: number[] = [];
     for (const element of newElements) {
@@ -65,9 +65,7 @@ export class CipheringTextComponent extends SelfModifyingText implements Cipheri
       });
     }
     setTimeout(() => { 
-      this.onInterval().catch((e) => {
-        console.trace(e);
-      }); 
+      context.onInterval();
     }, Math.max(...speeds) + this.interval);
   }
 }

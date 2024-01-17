@@ -5,19 +5,34 @@ export interface ModifyingTextConfiguration {
 	typingSpeed?: number;
 }
 
-export interface SelfModifyingTextInterface extends Required<ModifyingTextConfiguration> {
-	splitText?(newString?: string): void | Promise<void>;
-	triggerTextAnimation(fromText: string, toText: string): void | Promise<void>;
+export interface ModifyingTextContext {
+	onInterval: () => void;
+}
+
+export type TriggerTextAnimationCallback<T extends ModifyingTextContext> = (parameters: {
+	context: T;
+	fromText: string;
+	toText: string;
+}) => void | Promise<void>;
+export type SplitTextCallback<T extends ModifyingTextContext> = (parameters: {
+	context: T;
+	toText?: string;
+	fromText?: string;
+}) => void | Promise<void>;
+
+export interface SelfModifyingTextInterface<T extends ModifyingTextContext> extends Required<ModifyingTextConfiguration> {
+	splitText?: SplitTextCallback<T>;
+	triggerTextAnimation: TriggerTextAnimationCallback<T>;
 }
 
 export interface LetterSettings {
-    letter: string;
-    classes: string[];
+	letter: string;
+	classes: string[];
 }
 
-export function* nextStringsGenerator(
+export function* nextStringsGenerator<T extends ModifyingTextContext>(
 	startingString: string,
-	options: SelfModifyingTextInterface
+	options: SelfModifyingTextInterface<T>
 ): Generator<[string, string], [string, string], [string, string]> {
 	const newStrings = [...options.strings];
 	let index = 1,
@@ -34,7 +49,7 @@ export function* nextStringsGenerator(
 }
 
 export const splitTextAlgorithm = (currentString: LetterSettings[], newString: string): LetterSettings[] => {
-    return [...currentString.map(({ letter }) => letter).filter(Boolean), 
-        ...newString.split("").slice(currentString.length).fill(" ")]
-        .map(letter => ({ letter, classes: [] }));
+	return [...currentString.map(({ letter }) => letter).filter(Boolean), ...newString.split("").slice(currentString.length).fill(" ")].map(
+		(letter) => ({ letter, classes: [] })
+	);
 };

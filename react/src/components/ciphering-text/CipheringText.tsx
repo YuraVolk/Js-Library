@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
-import { SelfModifyingTextReactReturnType, useSelfModifyingText } from "../../interfaces/hooks/useSelfModifyingText";
-import { splitTextAlgorithm } from "shared/interfaces/selfModifyingText";
+import React, { useCallback, useRef } from "react";
+import { ModifyingTextContext, useSelfModifyingText } from "../../interfaces/hooks/useSelfModifyingText";
+import { SplitTextCallback, TriggerTextAnimationCallback, splitTextAlgorithm } from "shared/interfaces/selfModifyingText";
 import { ReactCipheringTextConfiguration } from "../../interfaces/component/cipheringText";
 
 const defaultCharacters = [
@@ -42,74 +42,80 @@ export const CipheringText = ({
 }: ReactCipheringTextConfiguration) => {
 	const element = useRef<HTMLPreElement | null>(null);
 
-	async function cipherLetter(this: SelfModifyingTextReactReturnType, properties: { newLetter?: string; delayed: boolean; i: number }) {
-		const { newLetter, delayed, i } = properties;
-		const changeNumber = Math.round(Math.random() * ((delayed ? 44 : 14) - 6) + 6);
-		let isDone = false;
-		const definedRandom = Math.random() * 1000 + (delayed ? this.settings.typingSpeed * i : 0),
-			speed = typingSpeed;
+	const cipherLetter = useCallback(
+		async (context: ModifyingTextContext, properties: { newLetter?: string; delayed: boolean; i: number }) => {
+			const { newLetter, delayed, i } = properties;
+			const changeNumber = Math.round(Math.random() * ((delayed ? 44 : 14) - 6) + 6);
+			let isDone = false;
+			const definedRandom = Math.random() * 1000 + (delayed ? typingSpeed * i : 0),
+				speed = typingSpeed;
 
-		await new Promise((resolve) => {
-			setTimeout(resolve, definedRandom);
-		});
-
-		for (let index = 0; index <= changeNumber; index++) {
 			await new Promise((resolve) => {
-				setTimeout(resolve, speed);
+				setTimeout(resolve, definedRandom);
 			});
 
-			let newValue: string | undefined;
-			if (!isDone) newValue = characters[Math.floor(Math.random() * characters.length)];
-			if (index >= changeNumber) {
-				isDone = true;
-				newValue = newLetter ?? "";
-			}
+			for (let index = 0; index <= changeNumber; index++) {
+				await new Promise((resolve) => {
+					setTimeout(resolve, speed);
+				});
 
-			this.setCurrentTextValue((current) => {
-				const newCurrentText = [...current];
-				if (newValue !== undefined) {
-					newCurrentText[i] = {
-						letter: newValue,
-						classes: isDone ? [] : ["active"]
-					};
+				let newValue: string | undefined;
+				if (!isDone) newValue = characters[Math.floor(Math.random() * characters.length)];
+				if (index >= changeNumber) {
+					isDone = true;
+					newValue = newLetter ?? "";
 				}
 
-				return newCurrentText;
-			});
-		}
-	}
+				context.setCurrentTextValue((current) => {
+					const newCurrentText = [...current];
+					if (newValue !== undefined) {
+						newCurrentText[i] = {
+							letter: newValue,
+							classes: isDone ? [] : ["active"]
+						};
+					}
 
-	function splitText(this: SelfModifyingTextReactReturnType, newString: string, fromText?: string) {
-		if (newString && fromText) {
-			this.setCurrentTextValue(
+					return newCurrentText;
+				});
+			}
+		},
+		[characters, typingSpeed]
+	);
+
+	const splitText = useCallback<SplitTextCallback<ModifyingTextContext>>(({ context, toText, fromText }) => {
+		if (toText && fromText) {
+			context.setCurrentTextValue(
 				splitTextAlgorithm(
 					fromText.split("").map((letter) => ({ letter, classes: [] })),
-					newString
+					toText
 				)
 			);
 		}
-	}
+	}, []);
 
-	async function triggerTextAnimation(this: SelfModifyingTextReactReturnType, fromText: string, toText: string) {
-		splitText.call(this, toText, fromText);
-		const promises = splitTextAlgorithm(
-			fromText.split("").map((letter) => ({ letter, classes: [] })),
-			toText
-		)
-			.map((character, i) => {
-				if (character.letter === toText[i]) return;
-				return cipherLetter.call(this, { newLetter: toText[i], i, delayed: element.current?.textContent?.length === 0 });
-			})
-			.filter(Boolean);
-		await Promise.all(promises);
+	const triggerTextAnimation = useCallback<TriggerTextAnimationCallback<ModifyingTextContext>>(
+		async ({ context, fromText, toText }) => {
+			void splitText({ context, toText, fromText });
+			const promises = splitTextAlgorithm(
+				fromText.split("").map((letter) => ({ letter, classes: [] })),
+				toText
+			)
+				.map((character, i) => {
+					if (character.letter === toText[i]) return;
+					return cipherLetter(context, { newLetter: toText[i], i, delayed: element.current?.textContent?.length === 0 });
+				})
+				.filter(Boolean);
+			await Promise.all(promises);
 
-		this.setCurrentTextValue(toText.split("").map((letter) => ({ letter, classes: [] })));
-		await new Promise((resolve) => {
-			setTimeout(resolve, this.settings.interval);
-		});
+			context.setCurrentTextValue(toText.split("").map((letter) => ({ letter, classes: [] })));
+			await new Promise((resolve) => {
+				setTimeout(resolve, interval);
+			});
 
-		this.onInterval();
-	}
+			context.onInterval();
+		},
+		[cipherLetter, interval, splitText]
+	);
 
 	const currentTextValue = useSelfModifyingText({
 		strings: props.strings,
