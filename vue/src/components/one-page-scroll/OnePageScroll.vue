@@ -43,12 +43,13 @@ const smoothScrollTo = (to: number) => {
 		} else wrap.value[property] = quad;
 
 		if (currentTime < props.duration) {
-			setTimeout(animateScroll, props.increment);
+			animationTimeout.value = window.setTimeout(animateScroll, props.increment);
 		} else if (currentTime >= props.duration) {
 			wrap.value[property] = to;
 			isScrolling.value = false;
 		}
 	};
+
 	animateScroll();
 };
 
