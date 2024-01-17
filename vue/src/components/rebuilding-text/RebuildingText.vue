@@ -6,23 +6,20 @@
 
 <script setup lang="ts">
 import { createRebuildingTextSteps } from "shared/component/rebuildingText";
-import { ModifyingTextConfiguration } from "shared/interfaces/selfModifyingText";
-import { useSelfModifyingText } from "../../interfaces/hooks/useSelfModifyingText";
+import { ModifyingTextConfiguration, TriggerTextAnimationCallback } from "shared/interfaces/selfModifyingText";
+import { ModifyingTextContext, useSelfModifyingText } from "../../interfaces/hooks/useSelfModifyingText";
 
-const props = defineProps<ModifyingTextConfiguration>();
-const settings = useSelfModifyingText({
-	strings: props.strings,
-	repetitions: props.repetitions ?? 1,
-	interval: props.interval ?? 2500,
-	typingSpeed: props.typingSpeed ?? 75,
-	triggerTextAnimation
+const props = withDefaults(defineProps<ModifyingTextConfiguration>(), {
+	repetitions: 1,
+	interval: 2500,
+	typingSpeed: 75
 });
 
-function triggerTextAnimation(fromText: string, toText: string) {
+const triggerTextAnimation: TriggerTextAnimationCallback<ModifyingTextContext> = ({ context, fromText, toText }) => {
 	const steps = createRebuildingTextSteps(fromText, toText);
 	for (let i = 0; i < steps.length; i++) {
 		setTimeout(() => {
-			settings.currentTextValue.value = steps[i]
+			context.currentTextValue.value = steps[i]
 				.filter<string>((s): s is string => Boolean(s))
 				.map((letter) => ({
 					letter,
@@ -31,10 +28,18 @@ function triggerTextAnimation(fromText: string, toText: string) {
 
 			if (i === steps.length - 1) {
 				setTimeout(() => {
-					settings.onInterval();
-				}, settings.settings.interval);
+					context.onInterval();
+				}, props.interval);
 			}
-		}, settings.settings.typingSpeed * i);
+		}, props.typingSpeed * i);
 	}
-}
+};
+
+const settings = useSelfModifyingText({
+	strings: props.strings,
+	repetitions: props.repetitions,
+	interval: props.interval,
+	typingSpeed: props.typingSpeed,
+	triggerTextAnimation
+});
 </script>

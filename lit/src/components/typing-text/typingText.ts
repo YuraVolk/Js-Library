@@ -1,6 +1,6 @@
 import { customElement, property } from "lit/decorators.js";
 import { TypingTextLitConfiguration } from "../../interfaces/component/typingText";
-import { SelfModifyingText } from "../../interfaces/generic/selfModifyingText";
+import { SelfModifyingText, SplitTextParams, TriggerTextParams } from "../../interfaces/generic/selfModifyingText";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -19,11 +19,11 @@ export class TypingTextComponent extends SelfModifyingText implements TypingText
 	@property({ type: Boolean })
 	eachLetterAsSpan = false;
 
-	splitText(newString?: string) {
-        if (this.eachLetterAsSpan) super.splitTextAlgorithm(newString);
+	splitText({ toText }: SplitTextParams) {
+        if (this.eachLetterAsSpan) super.splitTextAlgorithm(toText);
 	}
 
-	async triggerTextAnimation(fromText: string, toText: string) {
+	async triggerTextAnimation({ context, fromText, toText }: TriggerTextParams) {
 		const elements = this._elements;
 		for (let i = 1; i < fromText.length + 1; i++) {
 			await new Promise<void>((resolve) =>
@@ -52,9 +52,7 @@ export class TypingTextComponent extends SelfModifyingText implements TypingText
 		}
 
 		setTimeout(() => { 
-			this.onInterval().catch((e) => {
-				console.log(e);
-			});
+			context.onInterval();
 		}, this.interval);
 	}
 }

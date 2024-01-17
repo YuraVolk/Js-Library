@@ -6,8 +6,9 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { useSelfModifyingText, splitTextAlgorithm } from '../../interfaces/hooks/useSelfModifyingText';
+import { useSelfModifyingText, splitTextAlgorithm, ModifyingTextContext } from '../../interfaces/hooks/useSelfModifyingText';
 import { CipheringTextConfiguration } from 'shared/component/cipheringText';
+import { SplitTextCallback, TriggerTextAnimationCallback } from 'shared/interfaces/selfModifyingText';
 
 const props = withDefaults(
     defineProps<CipheringTextConfiguration>(),
@@ -19,20 +20,12 @@ const props = withDefaults(
     }
 );
 const element = ref<HTMLElement | null>(null);
-const settings = useSelfModifyingText({
-    strings: props.strings,
-    repetitions: props.repetitions,
-    interval: props.interval,
-    typingSpeed: props.typingSpeed,
-    triggerTextAnimation,
-    splitText
-});
 
-const cipherLetter = (properties: { newLetter?: string, delayed: boolean, i: number }) => {
+const cipherLetter = (context: ModifyingTextContext, properties: { newLetter?: string, delayed: boolean, i: number }) => {
     const { newLetter, delayed, i } = properties;
     const changeNumber = Math.round(Math.random() * ((delayed ? 44 : 14) - 6) + 6);
     let isDone = false, index = 0;
-    const definedRandom = (Math.random() * 1000) + (delayed ? settings.settings.typingSpeed * i : 0), speed = props.typingSpeed;
+    const definedRandom = (Math.random() * 1000) + (delayed ? props.typingSpeed * i : 0), speed = props.typingSpeed;
     setTimeout(() => {
         while (index <= changeNumber) {
             (function (index) {
@@ -44,7 +37,7 @@ const cipherLetter = (properties: { newLetter?: string, delayed: boolean, i: num
                         newValue = newLetter ?? "";
                     }
 
-                    if (newValue !== undefined) settings.currentTextValue.value[i] = {
+                    if (newValue !== undefined) context.currentTextValue.value[i] = {
                         letter: newValue,
                         classes: isDone ? [] : ["active"]
                     };
@@ -56,23 +49,32 @@ const cipherLetter = (properties: { newLetter?: string, delayed: boolean, i: num
     return changeNumber * speed + speed;
 };
 
-function splitText(newString?: string) {
-    if (newString) settings.currentTextValue.value = splitTextAlgorithm(settings.currentTextValue.value, newString);
-}
+const splitText: SplitTextCallback<ModifyingTextContext> = ({ context, newString }) => {
+    if (newString) context.currentTextValue.value = splitTextAlgorithm(context.currentTextValue.value, newString);
+};
 
-function triggerTextAnimation(_: string, toText: string) {
-    splitText(toText);
+const triggerTextAnimation: TriggerTextAnimationCallback<ModifyingTextContext> = ({ context, toText }) => {
+    splitText({ context, newString: toText });
     const speeds: number[] = [];
-    settings.currentTextValue.value.forEach((character, i) => {
+    context.currentTextValue.value.forEach((character, i) => {
         if (character.letter === toText[i]) return;
-        speeds.push(cipherLetter({ newLetter: toText[i], i, delayed: element.value?.textContent?.length === 0 }));
+        speeds.push(cipherLetter(context, { newLetter: toText[i], i, delayed: element.value?.textContent?.length === 0 }));
     });
 
     setTimeout(() => {
-        settings.currentTextValue.value = settings.currentTextValue.value.filter(v => Boolean(v.letter));
-        settings.onInterval();
-    }, Math.max(...speeds) + settings.settings.interval);
-}
+        context.currentTextValue.value = context.currentTextValue.value.filter(v => Boolean(v.letter));
+        context.onInterval();
+    }, Math.max(...speeds) + props.interval);
+};
+
+const settings = useSelfModifyingText({
+    strings: props.strings,
+    repetitions: props.repetitions,
+    interval: props.interval,
+    typingSpeed: props.typingSpeed,
+    triggerTextAnimation,
+    splitText
+});
 </script>
 
 <style scoped>

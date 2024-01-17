@@ -1,43 +1,48 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { LetterSettings, SelfModifyingTextInterface, nextStringsGenerator } from "shared/interfaces/selfModifyingText";
+import { useRef, useState, useMemo, useEffect } from "react";
+import {
+	ModifyingTextContext as RootTextContext,
+	LetterSettings,
+	SelfModifyingTextInterface,
+	nextStringsGenerator
+} from "shared/interfaces/selfModifyingText";
 
-export interface SelfModifyingTextReactReturnType {
-	onInterval: () => void;
+export interface ModifyingTextContext extends RootTextContext {
 	interval: React.MutableRefObject<number | undefined>;
-	settings: SelfModifyingTextInterface;
 	currentTextValue: LetterSettings[];
 	setCurrentTextValue: React.Dispatch<React.SetStateAction<LetterSettings[]>>;
 }
 
-export function useSelfModifyingText(settings: SelfModifyingTextInterface) {
+export function useSelfModifyingText(settings: SelfModifyingTextInterface<ModifyingTextContext>) {
 	const interval = useRef<number>();
 	const generator = useRef<Generator<[string, string], [string, string], [string, string]>>();
 	const [currentTextValue, setCurrentTextValue] = useState<LetterSettings[]>(() => {
-		return settings.strings[0].split("").map((letter) => ({ letter, classes: [] }))
+		return settings.strings[0].split("").map((letter) => ({ letter, classes: [] }));
 	});
 
-	const onInterval = useCallback(() => {
-		generator.current ??= nextStringsGenerator(settings.strings[0], settings);
+	const { context, onInterval } = useMemo(() => {
+		const context = {
+			interval,
+			currentTextValue,
+			setCurrentTextValue,
+			onInterval
+		};
 
-		const { done, value } = generator.current.next();
-		if (done) {
-			window.clearTimeout(interval.current);
-			interval.current = undefined;
-		} else scheduleUpdate(value);
-	}, [generator, settings.triggerTextAnimation]);
+		const scheduleUpdate = (value: [string, string]) => {
+			void settings.triggerTextAnimation({ context, fromText: value[0], toText: value[1] });
+		};
 
-	function scheduleUpdate(value: [string, string]) {
-		void settings.triggerTextAnimation.call(
-			{
-				interval,
-				settings,
-				currentTextValue,
-				setCurrentTextValue,
-				onInterval
-			} satisfies SelfModifyingTextReactReturnType,
-			...value
-		);
-	}
+		function onInterval() {
+			generator.current ??= nextStringsGenerator(settings.strings[0], settings);
+
+			const { done, value } = generator.current.next();
+			if (done) {
+				window.clearTimeout(interval.current);
+				interval.current = undefined;
+			} else scheduleUpdate(value);
+		}
+
+		return { context, onInterval };
+	}, [currentTextValue, settings]);
 
 	useEffect(() => {
 		return () => {
@@ -45,10 +50,10 @@ export function useSelfModifyingText(settings: SelfModifyingTextInterface) {
 			generator.current = nextStringsGenerator(settings.strings[0], settings);
 			window.clearTimeout(interval.current);
 		};
-	}, [settings.interval]);
+	}, [settings.strings]);
 
 	useEffect(() => {
-		settings.splitText?.();
+		void settings.splitText?.({ context });
 		interval.current = window.setTimeout(() => {
 			onInterval();
 		}, settings.interval);
