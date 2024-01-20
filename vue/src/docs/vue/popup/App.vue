@@ -110,4 +110,5 @@ const closePopup = () => {
     color: #e2e2e2;
     font-size: 17px;
     cursor: pointer;
-}</style>
+}
+</style>
