@@ -13,10 +13,11 @@
 		>
 			<div
 				v-for="option in openSelect.options"
+				:key="option"
 				class="wrap-select__option"
 				:class="{
-                    'wrap-select__option--crossed' :excludedCriteria[openSelect.index].includes(option)
-                }"
+					'wrap-select__option--crossed': excludedCriteria[openSelect.index].includes(option)
+				}"
 				@click="() => toggleCriterion(option)"
 				v-text="option"
 			></div>
@@ -48,29 +49,29 @@ const openSelect = ref<TableSelectInformation | undefined>();
 const excludedCriteria = ref<Array<string | null>[]>([]);
 
 const toggleCriterion = (option: string) => {
-    assertNonUndefined(openSelect.value);
-    const index = openSelect.value.index;
-    const newExcludedCriteria = [...excludedCriteria.value];
-    if (newExcludedCriteria[index].includes(option)) {
+	assertNonUndefined(openSelect.value);
+	const index = openSelect.value.index;
+	const newExcludedCriteria = [...excludedCriteria.value];
+	if (newExcludedCriteria[index].includes(option)) {
 		newExcludedCriteria[index].splice(newExcludedCriteria[index].indexOf(option), 1);
 	} else newExcludedCriteria[index].push(option);
 
-    excludedCriteria.value = newExcludedCriteria;
-    updateExcludedRows();
+	excludedCriteria.value = newExcludedCriteria;
+	updateExcludedRows();
 };
 
 const updateExcludedRows = () => {
-    for (const row of elementsAccessors.value.rows) {
-        if (Array.from(row.element.children).some((element, i) => excludedCriteria.value[i].includes(element.textContent ?? ""))) {
-            row.styles = {
-                display: "none"
-            };
-        } else {
-            row.styles = {
-                display: "revert"
-            };
-        }
-    }
+	for (const row of elementsAccessors.value.rows) {
+		if (Array.from(row.element.children).some((element, i) => excludedCriteria.value[i].includes(element.textContent ?? ""))) {
+			row.styles = {
+				display: "none"
+			};
+		} else {
+			row.styles = {
+				display: "revert"
+			};
+		}
+	}
 };
 
 const onHeaderClicked = (index: number) => {
@@ -91,11 +92,11 @@ const onHeaderClicked = (index: number) => {
 };
 
 const closeSelect = () => {
-    openSelect.value = undefined;
+	openSelect.value = undefined;
 };
 
 onMounted(() => {
-    excludedCriteria.value =  Array.from({ length: elementsAccessors.value.headers.length }, () => []);
+	excludedCriteria.value = Array.from({ length: elementsAccessors.value.headers.length }, () => []);
 });
 
 defineExpose({ onHeaderClicked, closeSelect });

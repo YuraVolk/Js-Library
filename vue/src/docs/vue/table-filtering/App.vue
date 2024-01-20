@@ -19,15 +19,17 @@
 		<table-filtering-component class="table-wrap" ref="table">
 			<table class="table">
 				<thead class="table-head">
-					<table-filtering-header-component class="table-head__heading" @click="() => onHeaderClicked(0)"
-						>Name</table-filtering-header-component
-					>
-					<table-filtering-header-component class="table-head__heading" @click="() => onHeaderClicked(1)"
-						>Country</table-filtering-header-component
-					>
-					<table-filtering-header-component class="table-head__heading" @click="() => onHeaderClicked(2)"
-						>Specialty</table-filtering-header-component
-					>
+					<tr>
+						<table-filtering-header-component class="table-head__heading" @click="() => onHeaderClicked(0)"
+							>Name</table-filtering-header-component
+						>
+						<table-filtering-header-component class="table-head__heading" @click="() => onHeaderClicked(1)"
+							>Country</table-filtering-header-component
+						>
+						<table-filtering-header-component class="table-head__heading" @click="() => onHeaderClicked(2)"
+							>Specialty</table-filtering-header-component
+						>
+					</tr>
 				</thead>
 				<tbody class="table-body" @click="onTableBodyClicked">
 					<table-filtering-row-component class="table-body-row">
