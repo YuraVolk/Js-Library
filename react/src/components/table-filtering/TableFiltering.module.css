@@ -1,0 +1,17 @@
+.wrap {
+	position: relative;
+}
+
+.wrap-select {
+	position: absolute;
+}
+
+.wrap-select__option {
+	background-color: #333;
+	height: inherit;
+	cursor: pointer;
+}
+
+.wrap-select__option--crossed {
+	text-decoration: line-through;
+}
