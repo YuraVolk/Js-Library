@@ -1,0 +1,10 @@
+.carousel-item {
+	width: 370px;
+	height: 220px;
+    transition: 0.3s linear left, 0.3s linear width, 0.3s linear height, 0.3s linear top, 0.3s linear opacity;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+}
