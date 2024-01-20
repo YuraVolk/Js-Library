@@ -380,7 +380,7 @@ export const PerspectiveCarousel = ({
 
 	return (
 		<ContextLinkedItems ref={linkedItemsContext} innerChildren={props.children} onAllElementsLoaded={initCarousel}>
-			<div className={styles.wrap}>
+			<div className={`${styles.wrap} ${props.className ?? ""}`}>
 				<ul className={styles.images} style={imageStyles} ref={parent}>
 					{props.children}
 				</ul>
