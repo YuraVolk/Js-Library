@@ -161,7 +161,6 @@ const moveItem = async (elementIndex: number, newPosition: number) => {
 	const itemState = elementsState.value[elementsAccessors.value.keys[elementIndex]];
 
 	const assignToItem = () => {
-		console.log(itemState.width);
 		item.styles = {
 			...item.styles,
 			left: `${itemState.left}px`,
