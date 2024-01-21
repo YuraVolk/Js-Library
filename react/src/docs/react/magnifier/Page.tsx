@@ -2,11 +2,11 @@ import React, { useRef } from "react";
 import image from "../../../../../assets/img/slide0.png";
 import { Magnifier } from "../../../components/magnifier/Magnifier";
 import styles from "./Page.module.css";
-import { MagnifierExposedFunctions } from "../../../interfaces/component/magnifier";
 import { MagnifierGlass } from "../../../components/magnifier/MagnifierGlass";
+import { MagnifiersExposedFunctions } from "../../../interfaces/generic/magnifiers";
 
 const Page = () => {
-	const magnifier = useRef<MagnifierExposedFunctions>(null);
+	const magnifier = useRef<MagnifiersExposedFunctions>(null);
 
 	return (
 		<main className="main">

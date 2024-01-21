@@ -20,7 +20,7 @@
             <li>positionShift: Shifts the x, y coordinates of the glass to top left, defaults to 34.</li>
         </ul>
         <p>Here is a basic usage of the component with CSS opacity animation:</p>
-		<zooming-image-component class="zoom-wrap" ref="zoomingImage" :image-source="image1">
+		<zooming-image-component class="zoom-wrap" ref="zoomingImage">
 			<template #image>
 				<img class="zoom-image" :src="image1" alt="Example Image" />
 			</template>

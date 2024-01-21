@@ -1,0 +1,10 @@
+.wrap {
+	position: relative;
+}
+
+.zooming-image-glass {
+    position: absolute;
+    z-index: 99;
+    overflow: hidden;
+    display: block;
+}
