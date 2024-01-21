@@ -1,17 +1,17 @@
 import React, { useRef } from "react";
 import { useLinkedItem } from "../../../src/interfaces/hooks/useLinkedItem";
-import styles from "./Magnifier.module.css";
+import styles from "./ZoomingImage.module.css";
 import { MagnifiersGlassConfiguration } from "../../interfaces/generic/magnifiers";
 
-export const MagnifierGlass = (props: MagnifiersGlassConfiguration) => {
+export const ZoomingImageGlass = (props: MagnifiersGlassConfiguration) => {
 	const item = useRef<HTMLDivElement>(null);
-	const styleObject = useLinkedItem(() => "magnifier-glass", item);
+	const styleObject = useLinkedItem(() => "zooming-image-glass", item);
 
 	return (
 		<div
 			ref={item}
 			style={styleObject}
-			className={`${styles["magnifier-glass"]} ${props.className ?? ""}`}
+			className={`${styles["zooming-image-glass"]} ${props.className ?? ""}`}
 			onPointerMove={(e) => {
 				props.onGlassMove(e);
 			}}

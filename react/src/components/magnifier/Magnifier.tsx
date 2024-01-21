@@ -1,11 +1,12 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useRef } from "react";
-import { MagnifierConfiguration, MagnifierExposedFunctions } from "../../interfaces/component/magnifier";
 import { ContextLinkedItems, ExposedContextFunctions } from "../../interfaces/hooks/useLinkedItem";
 import { assertNonUndefined } from "shared/utils/utils";
 import styles from "./Magnifier.module.css";
+import { MagnifiersExposedFunctions, MagnifiersConfiguration } from "../../interfaces/generic/magnifiers";
+import { MagnifierConfiguration } from "shared/component/magnifier";
 
-const Magnifier = forwardRef<MagnifierExposedFunctions, MagnifierConfiguration>(
-	({ zoomScale = 2, ...props }: MagnifierConfiguration, ref) => {
+const Magnifier = forwardRef<MagnifiersExposedFunctions, MagnifiersConfiguration<MagnifierConfiguration>>(
+	({ zoomScale = 2, ...props }, ref) => {
 		const linkedItemsContext = useRef<ExposedContextFunctions | null>(null);
 		const image = useRef<HTMLDivElement>(null);
 
