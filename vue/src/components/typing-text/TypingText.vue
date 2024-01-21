@@ -42,8 +42,8 @@ const triggerTextAnimation: TriggerTextAnimationCallback<ModifyingTextContext> =
 		);
 	}
 
-	setTimeout(() => {
-		clearTimeout(timeout.value);
+	timeout.value = window.setTimeout(() => {
+		timeout.value = undefined;
 		context.onInterval();
 	}, props.interval);
 };
