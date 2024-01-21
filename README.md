@@ -10,7 +10,7 @@ as well as a performant way of solving an issue.
 All solutions are currently implemented in the following libraries and frameworks:
 1. Lit, currently having all main scripts finished.
 2. Vue, currently having all main scripts finished.
-3. React, currently being a work-in-progress.
+3. React, currently having all main scripts finished.
 
 ## Code of Conduct
 [Code of Conduct](https://github.com/YuraVolk/Js-Library/blob/master/CODE_OF_CONDUCT.md) for this library.
