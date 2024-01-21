@@ -7,8 +7,6 @@
             The toast component which represents a panel that smoothly transitions in and then smoothly transitions out
             is commonly used and has many applications: notifications, cookie requests, and et cetera. This is a very
             simplistic,
-            basic component that closes the toast whenever any button is pressed in it if closeOnButtonClick attribute
-            is passed,
             and just gives the necessary attributes to quickly setup a smooth animation. The basic configuration is to
             insert all
             required content inside the component. This component accepts the following props:
