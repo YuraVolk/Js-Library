@@ -12,7 +12,7 @@
             Additionally this component may accept the following props:
 		</p>
 		<ul>
-            <li>currentTab, a number that specifies the default visible tab index, defaults to 0. Use this prop to change the visible t</li>
+            <li>currentTab, a number that specifies the default visible tab index, defaults to 0. Use this prop to change the visible tab.</li>
 		</ul>
 		<p>Here you can see an example of default component settings with external CSS styling:</p>
 		<tabs-component class="tabs-wrap" :current-tab="openTab">
