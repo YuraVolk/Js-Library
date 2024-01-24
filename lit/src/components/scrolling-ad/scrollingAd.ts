@@ -1,16 +1,9 @@
 import { LitElement, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { ScrollingAdConfiguration } from "shared/component/scrollingAd";
 import { getFirstScrollableParent } from "shared/utils/domUtils";
 import { generateThreshold } from "shared/interfaces/intersectionObserved";
 
-declare global {
-	interface HTMLElementTagNameMap {
-		"scrolling-ad-component": ScrollingAdComponent;
-	}
-}
-
-@customElement("scrolling-ad-component")
 export class ScrollingAdComponent extends LitElement implements ScrollingAdConfiguration {
 	@property({ type: Number })
 	rootMargin = 0;

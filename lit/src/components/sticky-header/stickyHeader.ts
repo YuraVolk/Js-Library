@@ -1,15 +1,8 @@
 import { LitElement, html } from "lit";
-import { customElement, property, queryAssignedElements } from "lit/decorators.js";
+import { property, queryAssignedElements } from "lit/decorators.js";
 import { StickyHeaderConfiguration } from "shared/component/stickyHeader";
 import { generateThreshold } from "shared/interfaces/intersectionObserved";
 
-declare global {
-	interface HTMLElementTagNameMap {
-		"sticky-header-component": StickyHeaderComponent;
-	}
-}
-
-@customElement("sticky-header-component")
 export class StickyHeaderComponent extends LitElement implements StickyHeaderConfiguration {
 	@property()
 	rootMargin = "0px";

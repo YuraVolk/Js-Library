@@ -1,15 +1,8 @@
 import { LitElement, html } from "lit";
-import { customElement, property, queryAssignedElements } from "lit/decorators.js";
+import { property, queryAssignedElements } from "lit/decorators.js";
 import { assertDevOnly } from "shared/utils/utils";
 import { TabsLitConfiguration } from "../../interfaces/component/tabs";
 
-declare global {
-	interface HTMLElementTagNameMap {
-		"tabs-component": TabsComponent;
-	}
-}
-
-@customElement("tabs-component")
 export class TabsComponent extends LitElement implements TabsLitConfiguration {
 	@property({ type: Number })
 	currentTab = 0;

@@ -1,15 +1,8 @@
 import { LitElement, css, html } from "lit";
-import { customElement, property, queryAssignedElements, queryAsync } from "lit/decorators.js";
+import { property, queryAssignedElements, queryAsync } from "lit/decorators.js";
 import { when } from "lit/directives/when.js";
 import { PopupLitConfiguration } from "../../interfaces/component/popup";
 
-declare global {
-	interface HTMLElementTagNameMap {
-		"popup-component": PopupComponent;
-	}
-}
-
-@customElement("popup-component")
 export class PopupComponent extends LitElement implements PopupLitConfiguration {
 	static styles = css`
 		.popup {

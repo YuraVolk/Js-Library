@@ -1,5 +1,5 @@
 import { LitElement, css, html } from "lit";
-import { customElement, property, state, queryAsync } from "lit/decorators.js";
+import { property, state, queryAsync } from "lit/decorators.js";
 import { assertDevOnly } from "shared/utils/utils";
 import { styleMap } from "lit/directives/style-map.js";
 import { defaultActiveColor, defaultHoverColor, thumbStyles } from "./styles";
@@ -7,13 +7,6 @@ import { when } from "lit/directives/when.js";
 import { classMap } from "lit/directives/class-map.js";
 import { RangeInputConfiguration } from "shared/component/rangeInput";
 
-declare global {
-	interface HTMLElementTagNameMap {
-		"range-input-component": RangeInputComponent;
-	}
-}
-
-@customElement("range-input-component")
 export class RangeInputComponent extends LitElement implements RangeInputConfiguration {
 	private uiRangeID = crypto.randomUUID();
 

@@ -1,13 +1,6 @@
 import { LitElement, css, html } from "lit";
-import { customElement, queryAssignedElements, query } from "lit/decorators.js";
+import { queryAssignedElements, query } from "lit/decorators.js";
 
-declare global {
-  interface HTMLElementTagNameMap {
-    "image-comparator-component": ImageComparatorComponent;
-  }
-}
-
-@customElement("image-comparator-component")
 export class ImageComparatorComponent extends LitElement {
   static styles = css`
     .wrap {

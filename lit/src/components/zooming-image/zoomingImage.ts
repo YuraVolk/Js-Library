@@ -1,14 +1,7 @@
 import { LitElement, css, html } from "lit";
-import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
+import { property, query, queryAssignedElements } from "lit/decorators.js";
 import { ZoomingImageLitConfiguration } from "../../interfaces/component/zoomingImage";
 
-declare global {
-	interface HTMLElementTagNameMap {
-		"zooming-image-component": ZoomComponent;
-	}
-}
-
-@customElement("zooming-image-component")
 export class ZoomComponent extends LitElement implements ZoomingImageLitConfiguration {
 	static styles = css`
 		.wrap {

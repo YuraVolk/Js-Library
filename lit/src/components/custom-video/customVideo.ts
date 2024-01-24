@@ -1,5 +1,5 @@
 import { LitElement, css, html } from "lit";
-import { customElement, query, queryAssignedElements, state } from "lit/decorators.js";
+import { query, queryAssignedElements, state } from "lit/decorators.js";
 import { RangeInputComponent } from "../range-input/rangeInput";
 import playButton from "src/../assets/img/play.png";
 import pauseButton from "src/../assets/img/pause.png";
@@ -9,11 +9,7 @@ import { assertDevOnly } from "shared/utils/utils";
 import { styleMap } from "lit/directives/style-map.js";
 import { toMinutesSeconds } from "shared/component/customVideo";
 
-declare global {
-	interface HTMLElementTagNameMap {
-		"custom-video-component": CustomVideoComponent;
-	}
-}
+window.customElements.define("range-input-component", RangeInputComponent);
 
 export interface VideoControlData {
 	video: HTMLVideoElement;
@@ -21,7 +17,6 @@ export interface VideoControlData {
 	volumeRange: RangeInputComponent;
 }
 
-@customElement("custom-video-component")
 export class CustomVideoComponent extends LitElement {
 	static styles = css`
 		.wrap {

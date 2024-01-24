@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zooming Image Component</title>
-    <link rel="stylesheet" href="/src/global.css">
-    <link rel="stylesheet" href="./style.css">
+    <script defer src="./index.js"></script>
+	<script defer src="./zooming-image/index.js"></script>
 </head>
 
 <body>
@@ -37,10 +37,7 @@
                 the source of the zooming glass based on the image's source. The default value is false.</li>
         </ul>
         <p>Here is a basic usage of the component with CSS opacity animation:</p>
-        <zooming-image-component class="zoom-wrap" autoConfigureGlassSource>
-            <img src="../../../../../assets/img/slide0.png" alt="Zoom Image" class="zoom-image" slot="image">
-            <div class="zoom-glass" slot="glass"></div>
-        </zooming-image-component>
+        <zooming-image-application-example-1></zooming-image-application-example-1>
     </main>
 </body>
 

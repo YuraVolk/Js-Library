@@ -1,15 +1,8 @@
 import { LitElement, css, html } from "lit";
-import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { GalleryCarouselConfiguration } from "shared/component/galleryCarousel";
 
-declare global {
-	interface HTMLElementTagNameMap {
-		"gallery-carousel-component": GalleryCarouselComponent;
-	}
-}
-
-@customElement("gallery-carousel-component")
 export class GalleryCarouselComponent extends LitElement implements GalleryCarouselConfiguration {
 	static styles = css`
 		.wrap {

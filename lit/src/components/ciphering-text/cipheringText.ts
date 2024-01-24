@@ -1,14 +1,7 @@
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { CipheringTextConfiguration } from "shared/component/cipheringText";
 import { SelfModifyingText, SplitTextParams, TriggerTextParams } from "../../interfaces/generic/selfModifyingText";
 
-declare global {
-  interface HTMLElementTagNameMap {
-    "ciphering-text-component": CipheringTextComponent;
-  }
-}
-
-@customElement("ciphering-text-component")
 export class CipheringTextComponent extends SelfModifyingText implements CipheringTextConfiguration {
   @property({ type: Number })
   interval = 3000;

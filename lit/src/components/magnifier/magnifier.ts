@@ -1,14 +1,7 @@
 import { LitElement, html } from "lit";
-import { customElement, property, queryAssignedElements } from "lit/decorators.js";
+import { property, queryAssignedElements } from "lit/decorators.js";
 import { assertNonUndefined } from "shared/utils/utils";
 
-declare global {
-	interface HTMLElementTagNameMap {
-		"image-magnifier-component": ImageMagnifierComponent;
-	}
-}
-
-@customElement("image-magnifier-component")
 export class ImageMagnifierComponent extends LitElement {
 	@property({ type: Number })
 	zoomScale = 2;

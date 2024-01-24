@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Table Filtering Component</title>
     <link rel="preload" as="image" href="../../../../../assets/svg/filter-icon.svg">
-    <link rel="stylesheet" href="/src/global.css">
-    <link rel="stylesheet" href="./style.css">
+    <script defer src="./index.js"></script>
+	<script defer src="./table-filtering/index.js"></script>
 </head>
 
 <body>
@@ -32,42 +32,7 @@
             <li>filterableHeaders, a comma separated list of numbers representing the filterable headers, empty by default.</li>
         </ul>
         <p>Here you can see an example of this component with filtering for all headers enabled:</p>
-        <table-filtering-component class="table-wrap" filterableHeaders="1,2,3">
-            <table class="table">
-                <thead class="table-head">
-                    <th class="table-head__heading">Name</th>
-                    <th class="table-head__heading">Country</th>
-                    <th class="table-head__heading">Specialty</th>
-                </thead>
-                <tbody class="table-body">
-                    <tr class="table-body-row">
-                        <td class="table-body-row__cell">John</td>
-                        <td class="table-body-row__cell">Austria</td>
-                        <td class="table-body-row__cell">Designer</td>
-                    </tr>
-                    <tr class="table-body-row">
-                        <td class="table-body-row__cell">Mary</td>
-                        <td class="table-body-row__cell">Ireland</td>
-                        <td class="table-body-row__cell">Architect</td>
-                    </tr>
-                    <tr class="table-body-row">
-                        <td class="table-body-row__cell">Jane</td>
-                        <td class="table-body-row__cell">Australia</td>
-                        <td class="table-body-row__cell">QA Tester</td>
-                    </tr>
-                    <tr class="table-body-row">
-                        <td class="table-body-row__cell">Mark</td>
-                        <td class="table-body-row__cell">Russia</td>
-                        <td class="table-body-row__cell">Game Developer</td>
-                    </tr>
-                    <tr class="table-body-row">
-                        <td class="table-body-row__cell">Paul</td>
-                        <td class="table-body-row__cell">France</td>
-                        <td class="table-body-row__cell">Backend Developer</td>
-                    </tr>
-                </tbody>
-            </table>
-        </table-filtering-component>
+        <table-filtering-application-example-1></table-filtering-application-example-1>
     </main>
 </body>
 

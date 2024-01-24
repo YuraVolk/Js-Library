@@ -1,16 +1,9 @@
 import { LitElement, css, html } from "lit";
-import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { OnePageScrollConfiguration, easeInOutQuad } from "shared/component/onePageScroll";
 import { CarouselDirection } from "shared/interfaces/carousel";
 
-declare global {
-	interface HTMLElementTagNameMap {
-		"one-page-scroll-component": OnePageScrollComponent;
-	}
-}
-
-@customElement("one-page-scroll-component")
 export class OnePageScrollComponent extends LitElement implements OnePageScrollConfiguration {
 	static styles = css`
 		.wrap {

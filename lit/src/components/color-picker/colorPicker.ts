@@ -1,18 +1,13 @@
 import { LitElement, css, html } from "lit";
-import { customElement, property, queryAsync } from "lit/decorators.js";
+import { property, queryAsync } from "lit/decorators.js";
 import { assertNonUndefined } from "shared/utils/utils";
 import { RangeInputComponent } from "../range-input/rangeInput";
 import { styleMap } from "lit/directives/style-map.js";
 import { ColorPickerConfiguration } from "shared/component/colorPicker";
 import { RGBAColor, verifyValidRGBAColor } from "shared/interfaces/colors";
 
-declare global {
-  interface HTMLElementTagNameMap {
-    "color-picker-component": ColorPickerComponent;
-  }
-}
+window.customElements.define("range-input-component", RangeInputComponent);
 
-@customElement("color-picker-component")
 export class ColorPickerComponent extends LitElement implements ColorPickerConfiguration {
   private static rgbaConverter = {
     fromAttribute: (string: string | null) => {

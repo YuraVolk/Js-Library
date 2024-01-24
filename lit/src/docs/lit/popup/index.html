@@ -1,50 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Popup Component</title>
-		<link rel="stylesheet" href="/src/global.css" />
-		<link rel="stylesheet" href="./style.css" />
-	</head>
 
-	<body>
-		<header class="header">
-			<header-component></header-component>
-		</header>
-		<aside class="navigation">
-			<sidebar-component activeLink="Popup"></sidebar-component>
-		</aside>
-		<main class="main">
-			<h1 class="heading">Popup</h1>
-			<p>
-				A popup component is a user interface element that appears on top of the main content to display additional information or
-				functionality. Interface blocking popups are a very common feature in user interfaces that prevent the appearance of pop-up windows
-				or dialogs. These popups are typically used to display additional information, request user input, or show notifications. This popup
-				component accepts two slotted children at user's configuration: slot with name popup, containing the by default hidden popup window,
-				and slot with name popup-open-button, which acts as a button to open the popup. This popup accepts the following attributes:
-			</p>
-			<ul>
-				<li>open, A boolean property that determines whether the popup is open or closed. Defaults to false.</li>
-				<li>displayOpenButton, A boolean property that determines whether to display the open button for the popup. Defaults to false.</li>
-				<li>
-					autoClosingTime, an optional number property that specifies the time in milliseconds after which the popup should automatically close.
-				</li>
-				<li>
-					closeButtonSelector, a string property that specifies the CSS selector for the close button elements within the popup. Defaults to
-					[data-popup-close-button]
-				</li>
-			</ul>
-			<p>Here is a simple popup with an open button:</p>
-			<popup-component displayOpenButton>
-				<button class="popup-open-button" slot="popup-open-button">Open Popup</button>
-				<div class="popup-wrap" slot="popup">
-					<div class="popup">
-						<img class="popup__close-button" data-popup-close-button src="../../../../../assets/img/close.webp" alt="Close Button" />
-						<p>Sample popup. This is a template for making different popups.</p>
-					</div>
-				</div>
-			</popup-component>
-		</main>
-	</body>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Popup Component</title>
+	<script defer src="./index.js"></script>
+	<script defer src="./popup/index.js"></script>
+</head>
+
+<body>
+	<header class="header">
+		<header-component></header-component>
+	</header>
+	<aside class="navigation">
+		<sidebar-component activeLink="Popup"></sidebar-component>
+	</aside>
+	<main class="main">
+		<h1 class="heading">Popup</h1>
+		<p>
+			A popup component is a user interface element that appears on top of the main content to display additional
+			information or
+			functionality. Interface blocking popups are a very common feature in user interfaces that prevent the
+			appearance of pop-up windows
+			or dialogs. These popups are typically used to display additional information, request user input, or show
+			notifications. This popup
+			component accepts two slotted children at user's configuration: slot with name popup, containing the by
+			default hidden popup window,
+			and slot with name popup-open-button, which acts as a button to open the popup. This popup accepts the
+			following attributes:
+		</p>
+		<ul>
+			<li>open, A boolean property that determines whether the popup is open or closed. Defaults to false.</li>
+			<li>displayOpenButton, A boolean property that determines whether to display the open button for the popup.
+				Defaults to false.</li>
+			<li>
+				autoClosingTime, an optional number property that specifies the time in milliseconds after which the
+				popup should automatically
+				close.
+			</li>
+			<li>
+				closeButtonSelector, a string property that specifies the CSS selector for the close button elements
+				within the popup. Defaults to
+				[data-popup-close-button]
+			</li>
+		</ul>
+		<p>Here is a simple popup with an open button:</p>
+		<popup-application-example-1></popup-application-example-1>
+	</main>
+</body>
+
 </html>

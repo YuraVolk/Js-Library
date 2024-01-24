@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Image Comparator Component</title>
-  <link rel="stylesheet" href="/src/global.css">
-  <link rel="stylesheet" href="./style.css">
+  <script defer src="./index.js"></script>
+  <script defer src="./image-comparator/index.js"></script>
 </head>
 
 <body>
@@ -29,32 +29,7 @@
       basic styling, such as a relative wrapper element and required interactions. Other than that, you can achieve full
       customization only through experimenting with CSS properties.
     </p>
-    <image-comparator-component class="comparator">
-      <div class="comparator-element">
-        <picture class="comparator-element__image">
-          <source type="image/webp" srcset="../../../../../assets/img/slide0.webp">
-          <img class="comparator-element__image" src="../../../../../assets/img/slide0.png" alt="Comparison Slide">
-        </picture>
-      </div>
-      <div class="comparator-element">
-        <picture class="comparator-element__image">
-          <source type="image/webp" srcset="../../../../../assets/img/slide1.webp">
-          <img class="comparator-element__image" src="../../../../../assets/img/slide0.png" alt="Comparison Slide">
-        </picture>
-      </div>
-      <div class="comparator-element">
-        <picture class="comparator-element__image">
-          <source type="image/webp" srcset="../../../../../assets/img/slide2.webp">
-          <img class="comparator-element__image" src="../../../../../assets/img/slide0.png" alt="Comparison Slide">
-        </picture>
-      </div>
-      <div class="comparator-element">
-        <picture class="comparator-element__image">
-          <source type="image/webp" srcset="../../../../../assets/img/slide3.webp">
-          <img class="comparator-element__image" src="../../../../../assets/img/slide0.png" alt="Comparison Slide">
-        </picture>
-      </div>
-    </image-comparator-component>
+    <image-comparator-application-example-1></image-comparator-application-example-1>
   </main>
 </body>
 
