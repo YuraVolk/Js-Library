@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Magnifier Component</title>
-  <link rel="stylesheet" href="/src/global.css">
-  <link rel="stylesheet" href="./style.css">
+  <script defer src="./index.js"></script>
+  <script defer src="./magnifier/index.js"></script>
 </head>
 
 <body>
@@ -30,13 +30,7 @@
     </ul>
     In order to magnify multiple images, you can create multiple image magnifier components. Here's an example usage:
     </p>
-    <image-magnifier-component class="magnifier" autoConfigureGlassSource>
-      <picture>
-        <source type="image/webp" srcset="../../../../../assets/img/slide0.webp">
-        <img data-magnifier-content src="../../../../../assets/img/slide0.webp" alt="Image Example">
-      </picture>
-      <div class="magnifier__glass" data-magnifier-glass></div>
-    </image-magnifier-component>
+    <magnifier-application-example-1></magnifier-application-example-1>
     <p>
       Next, you may see a very similar implementation that is called Zooming Image, with a lot of aspects being shared
       with this implementation. However, there are important algorithmic differences between the two: this implementation

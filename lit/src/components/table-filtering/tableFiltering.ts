@@ -1,15 +1,9 @@
 import { LitElement, css, html } from "lit";
-import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { classMap } from "lit/directives/class-map.js";
 import { assertNonUndefined } from "shared/utils/utils";
 import { TableSelectInformation } from "shared/component/tableFiltering";
-
-declare global {
-	interface HTMLElementTagNameMap {
-		"table-filtering-component": TableFilteringComponent;
-	}
-}
 
 interface TabularData {
 	headers: HTMLTableCellElement[];
@@ -17,7 +11,6 @@ interface TabularData {
 	excludedCriteria: Array<string | null>[];
 }
 
-@customElement("table-filtering-component")
 export class TableFilteringComponent extends LitElement {
 	static styles = css`
 		.wrap {

@@ -1,16 +1,9 @@
 import { LitElement, css, html } from "lit";
-import { customElement, state, queryAssignedElements } from "lit/decorators.js";
+import { state, queryAssignedElements } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { classMap } from "lit/directives/class-map.js";
 import { SelectInternalItem } from "shared/component/customSelect";
 
-declare global {
-	interface HTMLElementTagNameMap {
-		"custom-select-component": CustomSelectComponent;
-	}
-}
-
-@customElement("custom-select-component")
 export class CustomSelectComponent extends LitElement {
 	static styles = css`
 		.wrap {

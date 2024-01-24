@@ -1,15 +1,8 @@
 import { LitElement, html, css } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { ParallaxConfiguration } from "shared/component/parallax";
 import { getFirstScrollableParent } from "shared/utils/domUtils";
 
-declare global {
-	interface HTMLElementTagNameMap {
-		"parallax-component": ParallaxComponent;
-	}
-}
-
-@customElement("parallax-component")
 export class ParallaxComponent extends LitElement implements ParallaxConfiguration {
 	static styles = css`
 		.wrap {

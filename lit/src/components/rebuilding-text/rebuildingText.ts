@@ -1,14 +1,7 @@
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { SelfModifyingText, TriggerTextParams } from "../../interfaces/generic/selfModifyingText";
 const RebuildingTextModule = import("shared/component/rebuildingText");
 
-declare global {
-	interface HTMLElementTagNameMap {
-		"rebuilding-text-component": RebuildingTextComponent;
-	}
-}
-
-@customElement("rebuilding-text-component")
 export class RebuildingTextComponent extends SelfModifyingText {
 	@property({ type: Number })
 	interval = 2500;

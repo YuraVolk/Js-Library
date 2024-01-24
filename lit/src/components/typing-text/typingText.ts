@@ -1,14 +1,7 @@
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { TypingTextLitConfiguration } from "../../interfaces/component/typingText";
 import { SelfModifyingText, SplitTextParams, TriggerTextParams } from "../../interfaces/generic/selfModifyingText";
 
-declare global {
-	interface HTMLElementTagNameMap {
-		"typing-text-component": TypingTextComponent;
-	}
-}
-
-@customElement("typing-text-component")
 export class TypingTextComponent extends SelfModifyingText implements TypingTextLitConfiguration {
 	@property({ type: Number })
 	interval = 4500;

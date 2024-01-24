@@ -1,5 +1,5 @@
 import { LitElement, css, html } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { assertNonUndefined } from "shared/utils/utils";
 import { AccordionListConfiguration } from "shared/component/accordion";
@@ -13,13 +13,6 @@ interface AccordionSection extends HTMLLIElement {
   children: AccordionHTMLCollection;
 }
 
-declare global {
-  interface HTMLElementTagNameMap {
-    "accordion-component": AccordionComponent;
-  }
-}
-
-@customElement("accordion-component")
 export class AccordionComponent extends LitElement implements AccordionListConfiguration {
   static styles = css`
     .accordions {
