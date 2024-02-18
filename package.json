@@ -7,7 +7,8 @@
     "start": "lerna run --parallel start",
     "build": "lerna run build",
     "build:ci": "npm run setup && npm run build",
-    "setup": "lerna run setup"
+    "setup": "lerna run setup",
+    "lint": "eslint **/*.ts"
   },
   "author": "Yuriy Volkovskiy",
   "devDependencies": {

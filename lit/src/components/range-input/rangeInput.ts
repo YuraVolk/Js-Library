@@ -1,4 +1,4 @@
-import { LitElement, css, html } from "lit";
+import { LitElement, css, html, unsafeCSS } from "lit";
 import { property, state, queryAsync } from "lit/decorators.js";
 import { assertDevOnly } from "shared/utils/utils";
 import { styleMap } from "lit/directives/style-map.js";
@@ -159,11 +159,11 @@ export class RangeInputComponent extends LitElement implements RangeInputConfigu
 		.range-slider__input::-webkit-slider-thumb {
 			-webkit-appearance: none;
 			appearance: none;
-			${thumbStyles}
+			${unsafeCSS(thumbStyles)};
 		}
 
 		.range-slider__input::-moz-range-thumb {
-			${thumbStyles}
+			${unsafeCSS(thumbStyles)};
 		}
 
 		.range-slider__input::-webkit-slider-thumb:hover {

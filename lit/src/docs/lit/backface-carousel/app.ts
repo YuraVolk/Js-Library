@@ -45,7 +45,7 @@ class BackfaceCarouselApplicationExample1 extends LitElement {
 @customElement("backface-carousel-application-example-2")
 class BackfaceCarouselApplicationExample2 extends LitElement {
 	render() {
-		return html`<backface-carousel-component isHorizontal=${false}>
+		return html`<backface-carousel-component ?ishorizontal=${false}>
 			<img src=${slide1} alt="Example Image" />
 			<img src=${slide0} alt="Example Image" />
 			<img src=${slide2} alt="Example Image" />

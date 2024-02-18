@@ -56,7 +56,7 @@ export class MagnifierApplicationExample1 extends LitElement {
 
 declare global {
 	interface HTMLElementTagNameMap {
-		"magnifier-component": ImageMagnifierComponent;
+		"image-magnifier-component": ImageMagnifierComponent;
 		"magnifier-application-example-1": MagnifierApplicationExample1;
 	}
 }

@@ -62,7 +62,7 @@ export class TableFilteringApplicationExample1 extends LitElement {
 
 	render() {
 		return html`
-			<table-filtering-component class="table-wrap" filterableHeaders="1,2,3">
+			<table-filtering-component class="table-wrap" .filterableHeaders=${[1,2,3]}>
 				<table class="table" style="--filteringIcon: url(${tableFilteringIcon})">
 					<thead class="table-head">
 						<th class="table-head__heading">Name</th>
