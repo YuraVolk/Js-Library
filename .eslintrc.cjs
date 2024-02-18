@@ -21,5 +21,11 @@ module.exports = {
             "./react/tsconfig.json",
             "./shared/tsconfig.json"
         ],
-    }
+    },
+    overrides: [{
+        files: ["./lit/interfaces/hooks/**/*"],
+        rules: {
+            "@typescript-eslint/no-dynamic-delete": "off"
+        }
+    }]
 };

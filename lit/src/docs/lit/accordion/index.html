@@ -1,157 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Accordion Component</title>
+		<script defer src="./index.js"></script>
+		<script defer src="./accordion/index.js"></script>
+	</head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accordion Component</title>
-  <script defer src="./index.js"></script>
-  <script defer src="./accordion/index.js"></script>
-</head>
-
-<body>
-  <header class="header">
-    <header-component></header-component>
-  </header>
-  <aside class="navigation">
-    <sidebar-component activeLink="Accordion"></sidebar-component>
-  </aside>
-  <main class="main">
-    <h1 class="heading">Accordion</h1>
-    <p>
-      The accordion component represents multiple options that user may pick to read more about, initially being able
-      to see only headings. The architecture subsumes that the user passes down any HTML elements and then inherits from
-      AccordionComponent to create additional styles. Accordion is configured to automatically detect height for both
-      header and all the content, and detects so precisely. This component requires no writing your own JS code except
-      for adding styles to configuration to use even in most advanced use cases.
-    </p>
-    <accordion-component>
-      <li class="accordion">
-        <span class="accordion__heading">Accordion 1</span>
-        <div class="accordion__content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-        </div>
-      </li>
-      <li class="accordion">
-        <span class="accordion__heading">Accordion 2</span>
-        <div class="accordion__content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-        </div>
-      </li>
-      <li class="accordion">
-        <span class="accordion__heading">Accordion 3</span>
-        <div class="accordion__content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-        </div>
-      </li>
-      <li class="accordion">
-        <span class="accordion__heading">Accordion 4</span>
-        <div class="accordion__content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-        </div>
-      </li>
-    </accordion-component>
-    <p>You can also create accordions with multiple possible select options. In addition, you can open some accordion
-      tabs by default.</p>
-    <accordion-component multiple opened="0,1,1,0">
-      <li class="accordion">
-        <span class="accordion__heading">Accordion 1</span>
-        <div class="accordion__content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-        </div>
-      </li>
-      <li class="accordion">
-        <span class="accordion__heading">Accordion 2</span>
-        <div class="accordion__content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-        </div>
-      </li>
-      <li class="accordion">
-        <span class="accordion__heading">Accordion 3</span>
-        <div class="accordion__content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-        </div>
-      </li>
-      <li class="accordion">
-        <span class="accordion__heading">Accordion 4</span>
-        <div class="accordion__content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-        </div>
-      </li>
-    </accordion-component>
-  </main>
-</body>
-
+	<body>
+		<header class="header">
+			<header-component></header-component>
+		</header>
+		<aside class="navigation">
+			<sidebar-component activeLink="Accordion"></sidebar-component>
+		</aside>
+		<main class="main">
+			<h1 class="heading">Accordion</h1>
+			<p>
+				The accordion component represents multiple options that user may pick to read more about, initially being able to see only
+				headings. This accordion works only with two components working in tandem: accordion-component and accordion-item-component. These
+				two components through a context communicate with each other and track the updated index, with the parent component holding the
+				current selected index(es). Through this, the accordion items can fully isolate max height and animation logic. Here you can see an
+				example of this component:
+			</p>
+			<accordion-component>
+				<accordion-item-component class="accordion">
+					<span class="accordion__heading" slot="heading">Accordion 1</span>
+					<div class="accordion__content" slot="body">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+						enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit
+						amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur
+						adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+						laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+						incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+						ex ea commodo consequat.
+					</div>
+				</accordion-item-component>
+				<accordion-item-component class="accordion">
+					<span class="accordion__heading" slot="heading">Accordion 2</span>
+					<div class="accordion__content" slot="body">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+						enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</div>
+				</accordion-item-component>
+				<accordion-item-component class="accordion">
+					<span class="accordion__heading" slot="heading">Accordion 3</span>
+					<div class="accordion__content" slot="body">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+						enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</div>
+				</accordion-item-component>
+				<accordion-item-component class="accordion">
+					<span class="accordion__heading" slot="heading">Accordion 4</span>
+					<div class="accordion__content" slot="body">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+						enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</div>
+				</accordion-item-component>
+			</accordion-component>
+			<p>
+				You can also create accordions with multiple possible select options through multiple attribute on accordion-component. In addition,
+				you can open some accordion tabs by default: for this, you need to pass isOpen attribute to an accordion-item-component.
+			</p>
+			<accordion-component multiple>
+				<accordion-item-component class="accordion">
+					<span class="accordion__heading" slot="heading">Accordion 1</span>
+					<div class="accordion__content" slot="body">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+						enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit
+						amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur
+						adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+						laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+						incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+						ex ea commodo consequat.
+					</div>
+				</accordion-item-component>
+				<accordion-item-component class="accordion" isOpen>
+					<span class="accordion__heading" slot="heading">Accordion 2</span>
+					<div class="accordion__content" slot="body">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+						enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</div>
+				</accordion-item-component>
+				<accordion-item-component class="accordion" isOpen>
+					<span class="accordion__heading" slot="heading">Accordion 3</span>
+					<div class="accordion__content" slot="body">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+						enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</div>
+				</accordion-item-component>
+				<accordion-item-component class="accordion">
+					<span class="accordion__heading" slot="heading">Accordion 4</span>
+					<div class="accordion__content" slot="body">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+						enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</div>
+				</accordion-item-component>
+			</accordion-component>
+		</main>
+	</body>
 </html>

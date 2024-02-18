@@ -9,7 +9,7 @@ export const Accordion = (props: WithChildren<AccordionListConfiguration>) => {
     const [expandedIndex, setExpandedIndex] = useState<string | string[]>(props.multiple ? [] : "");
 
     const expandIndex = useCallback((newIndex: string) => {
-        if (typeof newIndex === "string" && !props.multiple) {
+        if (!props.multiple) {
             setExpandedIndex((expandedIndex) => {
                 return expandedIndex === newIndex ? "" : newIndex;
             });

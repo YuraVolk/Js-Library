@@ -140,7 +140,7 @@ export class ColorPickerComponent extends LitElement implements ColorPickerConfi
             id="opacity-range"
             maximum="1"
             step="0.01"
-            ticks="0,100"
+            .ticks=${[0,100]}
             label="Opacity:"
             defaultValue="1"
           ></range-input-component>
