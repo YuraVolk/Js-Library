@@ -1,9 +1,8 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { AccordionListConfiguration } from "shared/component/accordion";
 import styles from "./Accordion.module.css";
 import { WithChildren } from "../../../src/utils/utils";
 import { AccordionContext } from "./context";
-import { AccordionContextInterface } from "../../../src/interfaces/component/accordion";
 
 export const Accordion = (props: WithChildren<AccordionListConfiguration>) => {
     const [expandedIndex, setExpandedIndex] = useState<string | string[]>(props.multiple ? [] : "");
@@ -23,11 +22,12 @@ export const Accordion = (props: WithChildren<AccordionListConfiguration>) => {
         }
     }, [props.multiple]);
 
-    const accordionContextState: AccordionContextInterface = {
+    const context = useMemo(() => ({
         expandedIndex,
         expandIndex
-    };
-    return <AccordionContext.Provider value={accordionContextState}>
+    }), [expandIndex, expandedIndex]);
+
+    return <AccordionContext.Provider value={context}>
         <ul className={styles.accordions}>
             {props.children}
         </ul>

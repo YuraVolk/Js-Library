@@ -13,10 +13,9 @@
 import { uid } from "shared/utils/utils";
 import { ref, inject, onMounted, watch } from "vue";
 import { multiplePropKey, selectedIndexKey, expandedIndexKey } from "../../interfaces/component/accordion";
+import { AccordionListItemConfiguration } from "shared/component/accordion";
 
-const props = defineProps<{
-    isOpen?: boolean
-}>();
+const props = defineProps<AccordionListItemConfiguration>();
 const id = ref(uid());
 const isExpanded = ref(props.isOpen ?? false);
 const header = ref<HTMLButtonElement | null>(null);
