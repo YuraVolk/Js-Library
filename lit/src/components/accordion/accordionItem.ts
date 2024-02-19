@@ -5,8 +5,9 @@ import { AccordionContext, accordionContext } from "./context";
 import { uid } from "shared/utils/utils";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import { styleMap } from "lit/directives/style-map.js";
+import { AccordionListItemConfiguration } from "shared/component/accordion";
 
-export class AccordionItemComponent extends LitElement {
+export class AccordionItemComponent extends LitElement implements AccordionListItemConfiguration {
     static styles = css`
         :host {
             display: block;

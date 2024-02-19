@@ -1,12 +1,14 @@
-import { AccordionListConfiguration } from "shared/component/accordion";
+import {
+	AccordionListConfiguration as RootListConfiguration,
+	AccordionListItemConfiguration as RootListItemConfiguration
+} from "shared/component/accordion";
 
-export interface AccordionContextInterface extends AccordionListConfiguration {
-    expandedIndex: string | string[];
-    expandIndex(index: string): void;
+export interface AccordionListConfiguration extends RootListConfiguration {
+	expandedIndex: string | string[];
+	expandIndex(index: string): void;
 }
 
-export interface AccordionItemProps {
-    isOpen?: boolean;
-    header: React.ReactNode;
-    content: React.ReactNode;
+export interface AccordionListItemConfiguration extends RootListItemConfiguration {
+	header: React.ReactNode;
+	content: React.ReactNode;
 }

@@ -1,10 +1,10 @@
 import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
-import { AccordionItemProps } from "../../../src/interfaces/component/accordion";
+import { AccordionListItemConfiguration } from "../../../src/interfaces/component/accordion";
 import styles from "./Accordion.module.css";
 import { AccordionContext } from "./context";
 import { uid } from "shared/utils/utils";
 
-export const AccordionItem = (props: AccordionItemProps) => {
+export const AccordionItem = (props: AccordionListItemConfiguration) => {
     const [id] = useState(uid());
     const isFirstOpen = useRef(false);
     const context = useContext(AccordionContext);
