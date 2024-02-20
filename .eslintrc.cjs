@@ -22,6 +22,9 @@ module.exports = {
             "./shared/tsconfig.json"
         ],
     },
+    rules: {
+        "no-mixed-spaces-and-tabs": "off"
+    },
     overrides: [{
         files: ["./lit/interfaces/hooks/**/*"],
         rules: {
