@@ -9,7 +9,7 @@ export class RebuildingTextComponent extends SelfModifyingText {
 	typingSpeed = 75;
 
 	async triggerTextAnimation({ context, fromText, toText }: TriggerTextParams) {
-		const { createRebuildingTextSteps } = await RebuildingTextModule;
+		/*const { createRebuildingTextSteps } = await RebuildingTextModule;
 		const steps = createRebuildingTextSteps(fromText, toText);
 
 		for (let i = 0; i < steps.length; i++) {
@@ -23,6 +23,6 @@ export class RebuildingTextComponent extends SelfModifyingText {
 					}, this.interval);
 				}
 			}, this.typingSpeed * i);
-		}
+		}*/
 	}
 }
