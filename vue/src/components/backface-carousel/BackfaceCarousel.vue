@@ -103,13 +103,9 @@ onUnmounted(() => {
     overflow: visible;
 }
 
-.backface-carousel * {
-    margin: 0 auto;
-    flex: 0 0 auto;
-}
-
 .backface-carousel-items {
     width: 40%;
+    flex: 0 0 auto;
     margin: 0;
     transform-style: preserve-3d;
     transition: all 0.5s;
