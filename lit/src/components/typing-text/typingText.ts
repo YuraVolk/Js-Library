@@ -13,11 +13,11 @@ export class TypingTextComponent extends SelfModifyingText implements TypingText
 	eachLetterAsSpan = false;
 
 	splitText({ toText }: SplitTextParams) {
-        if (this.eachLetterAsSpan) super.splitTextAlgorithm(toText);
+        // if (this.eachLetterAsSpan) super.splitTextAlgorithm(toText);
 	}
 
 	async triggerTextAnimation({ context, fromText, toText }: TriggerTextParams) {
-		const elements = this._elements;
+		/*const elements = this._elements;
 		for (let i = 1; i < fromText.length + 1; i++) {
 			await new Promise<void>((resolve) =>
 				setTimeout(() => {
@@ -46,6 +46,6 @@ export class TypingTextComponent extends SelfModifyingText implements TypingText
 
 		setTimeout(() => { 
 			context.onInterval();
-		}, this.interval);
+		}, this.interval);*/
 	}
 }

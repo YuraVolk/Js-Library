@@ -1,100 +1,73 @@
-import { LitElement, html } from "lit";
-import { property } from "lit/decorators.js";
+import { LitElement, html, css, CSSResult } from "lit";
+import { property, state } from "lit/decorators.js";
+import { map } from "lit/directives/map.js";
 import {
+	LetterSettings,
 	ModifyingTextContext,
 	SelfModifyingTextInterface,
 	SplitTextCallback,
-	TriggerTextAnimationCallback
+	TriggerTextAnimationCallback,
+	nextStringsGenerator
 } from "shared/interfaces/selfModifyingText";
-const SelfModifyingTextModule = import("shared/interfaces/selfModifyingText");
 
 export type TriggerTextParams = Parameters<TriggerTextAnimationCallback<ModifyingTextContext>>[0];
 export type SplitTextParams = Parameters<SplitTextCallback<ModifyingTextContext>>[0];
 
 export abstract class SelfModifyingText extends LitElement implements SelfModifyingTextInterface<ModifyingTextContext> {
-	private static validateElement = (element: HTMLElement) => {
-		return Number(Array.from(element.childNodes).some((node) => node.nodeType === Node.TEXT_NODE)) ^ Number(element.childElementCount > 0);
-	};
-
-	@property({
-		type: Array,
-		converter: {
-			fromAttribute: (string): string[] => string?.split(";") ?? [],
-			toAttribute: (strings: string[]): string => strings.join(";")
+	static styles: CSSResult | CSSResult[] = css`
+		:host {
+			display: block;
+			font-family: monospace;
+			unicode-bidi: isolate;
+			font-size: 24px;
+			line-height: 54px;
 		}
-	})
+	`;
+
+	@property({ type: Array })
 	strings: string[] = [];
 	@property({ type: Number })
-	repetitions = 1;
+	repetitions = Infinity;
 
 	abstract interval: number;
 	abstract typingSpeed: number;
 
-	protected async *generateNextStrings(startingString: string): AsyncGenerator<[string, string], [string, string], [string, string]> {
-		const { nextStringsGenerator } = await SelfModifyingTextModule;
-		const stringsGenerator = nextStringsGenerator(startingString, this);
-		yield* stringsGenerator;
-		return ["", ""];
-	}
+	splitText?(...parameters: Parameters<SplitTextCallback<ModifyingTextContext>>): Promise<void> | void;
+	abstract triggerTextAnimation(...parameters: Parameters<TriggerTextAnimationCallback<ModifyingTextContext>>): Promise<void> | void;
 
-	protected generator!: ReturnType<typeof this.generateNextStrings>;
-	protected windowInterval?: number;
+	private _generator = nextStringsGenerator("", this);
 
-	protected splitTextAlgorithm(newString?: string) {
-		for (const element of this._elements) {
-			const oldContent = element.textContent ?? "";
-			element.textContent = "";
-			for (const char of oldContent) element.insertAdjacentHTML("beforeend", `<span>${char}</span>`);
-			if (newString && newString.length > oldContent.length) {
-				for (let i = 0; i < newString.length - oldContent.length; i++) {
-					element.insertAdjacentElement("beforeend", document.createElement("span"));
-				}
-			}
-		}
-	}
+	private intervalCurrent?: number;
+	@state()
+	protected _currentTextValue: LetterSettings[] = [];
 
-	splitText?(...parameters: Parameters<SplitTextCallback<ModifyingTextContext>>): void;
-	abstract triggerTextAnimation(...parameters: Parameters<TriggerTextAnimationCallback<ModifyingTextContext>>): void | Promise<void>;
+	protected firstUpdated(): void {
+		this._generator = nextStringsGenerator(this.strings[0], this);
+		this._currentTextValue = this.strings[0].split("").map((letter) => ({ letter, classes: [] }));
 
-	async onInterval() {
-		const { done, value } = await this.generator.next();
-		if (done) {
-			window.clearTimeout(this.windowInterval);
-			this.windowInterval = undefined;
-		} else {
-			void this.triggerTextAnimation({
-				context: this,
-				fromText: value[0],
-				toText: value[1]
-			});
-		}
-	}
-
-	get _elements() {
-		return Array.from(this.querySelectorAll("pre")).filter(SelfModifyingText.validateElement);
-	}
-
-	connectedCallback() {
-		super.connectedCallback();
-		const result = this._elements[0].textContent ?? "";
-		this.splitText?.({ context: this });
-		this.generator = this.generateNextStrings(result);
-		this.windowInterval = window.setTimeout(() => {
-			this.onInterval().catch((e) => {
-				console.trace(e);
-			});
+		void this.splitText?.({ context: this });
+		this.intervalCurrent = window.setTimeout(() => {
+			this.onInterval();
 		}, this.interval);
 	}
 
-	disconnectedCallback() {
-		super.disconnectedCallback();
-		clearInterval(this.windowInterval);
-		this.generator.return(["", ""]).catch((e) => {
-			console.trace(e);
-		});
+	disconnectedCallback(): void {
+		this._generator.return(["", ""]);
+		window.clearTimeout(this.intervalCurrent);
+	}
+
+	onInterval() {
+		const { done, value } = this._generator.next();
+		if (done) {
+			window.clearTimeout(this.intervalCurrent);
+			this.intervalCurrent = undefined;
+		} else void this.triggerTextAnimation({ context: this, fromText: value[0], toText: value[1] });
 	}
 
 	render() {
-		return html`<slot></slot>`;
+		return html`${map(
+			this._currentTextValue,
+			(letter) => html`<span class=${letter.classes.join(" ")}>${letter.letter}</span>`
+		)}`;
 	}
 }
