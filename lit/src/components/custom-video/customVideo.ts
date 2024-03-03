@@ -183,13 +183,13 @@ export class CustomVideoComponent extends LitElement {
 
 			video.addEventListener("ended", () => { this.onVideoEnded(); });
 			video.addEventListener("playing", () => { this.onVideoPlaying({ video, volumeRange, timeRange }); });
-			timeRange._onUpdateListener = (seconds) => {
+			/*timeRange._onUpdateListener = (seconds) => {
 				this.setVideoSecond(seconds);
 			};
 			volumeRange._onUpdateListener = (volume) => {
 				volumeRange.changeValue(volume);
 				video.volume = volume;
-			};
+			};*/
 		};
 	}
 
