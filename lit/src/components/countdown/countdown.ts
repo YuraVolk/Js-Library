@@ -1,53 +1,37 @@
 import { LitElement, html } from "lit";
-import { property, queryAssignedElements } from "lit/decorators.js";
-import { CountdownConfiguration, TimeUnit, defaultTimeUnits, reduceTimeUnits } from "shared/component/countdown";
+import { property, state } from "lit/decorators.js";
+import { IntervalController } from "../../interfaces/hooks/intervalController";
+import { CountdownConfiguration, defaultTimeUnits, reduceTimeUnits } from "shared/component/countdown";
 
 export class CountdownComponent extends LitElement implements CountdownConfiguration {
-	private static units: TimeUnit[] = reduceTimeUnits(defaultTimeUnits);
-
-	@property({
-		converter: {
-			fromAttribute: (string) => new Date(string ?? "May 6, 2085 11:00:00"),
-			toAttribute: (date: Date) => date.toString()
-		}
-	})
+	@property({ type: Date })
 	date = new Date("May 6, 2085 11:00:00");
+	@property({ type: Array })
+	units = reduceTimeUnits(defaultTimeUnits);
+	@state()
+	_text = "";
 
-	@queryAssignedElements({ selector: "[data-countdown]", flatten: true })
-	_countdownItems!: HTMLElement[];
-
-	private intervalId = 0;
+	protected intervalController = new IntervalController(this, () => {
+		this.renderTexts();
+	}, 1000);
 
 	protected firstUpdated(): void {
 		this.renderTexts();
 	}
 
-	renderTexts(units = CountdownComponent.units) {
+	renderTexts() {
 		let timeString = "",
 			distance = this.date.getTime() - new Date().getTime();
-		units.forEach(({ timeFactor, name }) => {
+		this.units.forEach(({ timeFactor, name }) => {
 			const value = Math.floor(distance / timeFactor);
 			timeString += value <= 0 ? "" : `${value} ${String(value).slice(-1) === "1" ? name : name + "s"} `;
 			distance %= timeFactor;
 		});
-		timeString = timeString ? timeString.trim() : "0 seconds";
 
-		for (const element of this._countdownItems) element.textContent = timeString;
-	}
-
-	connectedCallback(): void {
-		super.connectedCallback();
-		this.intervalId = window.setInterval(() => {
-			this.renderTexts();
-		}, 1000);
-	}
-
-	disconnectedCallback(): void {
-		super.disconnectedCallback();
-		window.clearInterval(this.intervalId);
+		this._text = timeString ? timeString.trim() : "0 seconds";
 	}
 
 	render() {
-		return html`<slot></slot>`;
+		return html`<span>${this._text}</span>`;
 	}
 }
