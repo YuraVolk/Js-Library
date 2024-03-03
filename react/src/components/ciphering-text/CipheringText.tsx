@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from "react";
 import { ModifyingTextContext, useSelfModifyingText } from "../../interfaces/hooks/useSelfModifyingText";
 import { SplitTextCallback, TriggerTextAnimationCallback, splitTextAlgorithm } from "shared/interfaces/selfModifyingText";
-import { ReactCipheringTextConfiguration } from "../../interfaces/component/cipheringText";
+import { CipheringTextConfiguration } from "shared/component/cipheringText";
 
 const defaultCharacters = [
 	"!",
@@ -39,7 +39,7 @@ export const CipheringText = ({
 	interval = 3000,
 	typingSpeed = 45,
 	...props
-}: ReactCipheringTextConfiguration) => {
+}: CipheringTextConfiguration) => {
 	const element = useRef<HTMLPreElement | null>(null);
 
 	const cipherLetter = useCallback(

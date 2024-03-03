@@ -17,4 +17,5 @@ export const reduceTimeUnits = (units: TimeUnit[]) => units
 
 export interface CountdownConfiguration {
 	date: Date;
+	units: TimeUnit[];
 }

@@ -6,9 +6,9 @@
 import { useInterval } from "../../interfaces/hooks/useInterval";
 import { onMounted, ref } from 'vue';
 import { defaultTimeUnits, reduceTimeUnits, TimeUnit } from 'shared/component/countdown';
-import { CountdownVueConfiguration } from "../../interfaces/component/countdown";
+import { CountdownConfiguration } from "shared/component/countdown";
 
-const props = withDefaults(defineProps<Partial<CountdownVueConfiguration>>(), {
+const props = withDefaults(defineProps<Partial<CountdownConfiguration>>(), {
     units: () => reduceTimeUnits(defaultTimeUnits),
     date: () => new Date('May 6, 2085 11:00:00')
 });

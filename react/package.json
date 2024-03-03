@@ -12,7 +12,8 @@
 	"scripts": {
 		"start": "webpack serve",
 		"build": "webpack --mode production",
-		"setup": "npm install"
+		"setup": "npm install",
+		"type-check": "tsc --pretty --noEmit"
 	},
 	"author": "Yuriy Volkovskiy",
 	"devDependencies": {
