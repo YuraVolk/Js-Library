@@ -13,7 +13,7 @@
 		"start": "webpack serve",
 		"build": "webpack --mode production",
 		"setup": "npm install",
-		"lint:lit": "lit-analyzer 'src/**/*.{js,ts}'",
+		"lint:local": "lit-analyzer 'src/**/*.{js,ts}'",
 		"type-check": "tsc --pretty --noEmit"
 	},
 	"author": "Yuriy Volkovskiy",
