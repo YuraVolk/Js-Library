@@ -1,11 +1,17 @@
 import { LitElement, css, html } from "lit";
-import { state, queryAssignedElements } from "lit/decorators.js";
-import { styleMap } from "lit/directives/style-map.js";
+import { state, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { SelectInternalItem } from "shared/component/customSelect";
+import { CustomSelectConfiguration, SelectInternalItem } from "shared/component/customSelect";
+import { ClickAwayController } from "../../interfaces/hooks/clickAwayController";
+import { map } from "lit/directives/map.js";
+import { CustomSelectChangeEvent } from "./events";
 
-export class CustomSelectComponent extends LitElement {
+export class CustomSelectComponent extends LitElement implements CustomSelectConfiguration {
 	static styles = css`
+		select {
+			display: none;
+		}
+
 		.wrap {
 			position: relative;
 			width: 150px;
@@ -75,11 +81,11 @@ export class CustomSelectComponent extends LitElement {
 			background-color: rgba(0, 0, 0, 0.15);
 		}
 
-		.custom-select-options .custom-select-option[data-selected="true"] {
+		.custom-select-options .custom-select-option[data-selected] {
 			background-color: rgba(0, 0, 0, 0.1);
 		}
 
-		.custom-select-options .custom-select-option[data-disabled="true"] {
+		.custom-select-options .custom-select-option[data-disabled] {
 			background-color: rgba(0, 0, 0, 0.33);
 		}
 
@@ -88,85 +94,73 @@ export class CustomSelectComponent extends LitElement {
 		}
 	`;
 
-	@queryAssignedElements({ flatten: true })
-	_selectElement!: HTMLSelectElement[];
-
-	@state()
-	_internalElements: SelectInternalItem[] = [];
+	@property({ type: Array })
+	items: SelectInternalItem[] = [];
+	@property({ type: String })
+	selectName = "";
 	@state()
 	_isOpened = false;
 
-	private boundDocumentClickListener!: (event: Event) => unknown;
-
-	protected onItemSelected(element: SelectInternalItem) {
-		this._isOpened = false;
-		if (element.isDisabled) return;
-		this._internalElements.forEach((el) => (el === element ? (el.isSelected = true) : (el.isSelected = false)));
-		this._selectElement.forEach((select) => (select.value = element.value));
-	}
-
 	connectedCallback(): void {
 		super.connectedCallback();
-		this.boundDocumentClickListener = (event) => {
-			if (!event.composedPath().some((e) => e instanceof CustomSelectComponent)) this._isOpened = false;
-		};
-		document.addEventListener("click", this.boundDocumentClickListener);
+		new ClickAwayController(this, () => {
+			this._isOpened = false;
+		});
 	}
 
-	disconnectedCallback(): void {
-		super.disconnectedCallback();
-		document.removeEventListener("click", this.boundDocumentClickListener);
+	toggledOpened() {
+		this._isOpened = !this._isOpened;
 	}
 
-	protected firstUpdated(): void {
-		for (const select of this._selectElement) {
-			this._internalElements = Array.from(select.children).map((element, i) => ({
-				innerContent: element.textContent ?? "",
-				value: element.getAttribute("value") ?? "",
-				isSelected: select.selectedIndex === i,
-				isDisabled: Boolean(element.getAttribute("disabled"))
-			}));
+	onItemSelected(item: SelectInternalItem) {
+		this._isOpened = false;
+		if (item.isDisabled) return;
+		for (const el of this.items) {
+			if (el === item) {
+				el.isSelected = true;
+				this.dispatchEvent(new CustomSelectChangeEvent(el));
+			} else el.isSelected = false;
 		}
+
+		this.requestUpdate("items");
 	}
 
 	render() {
+		const selectedItem = this.items.find((item) => item.isSelected);
+
 		return html`
-			<slot
-				style=${styleMap({
-					display: this._internalElements.length ? "none" : "revert"
-				})}
-			></slot>
+			<select .value=${selectedItem?.value ?? ""} name=${this.selectName}>
+				${map(
+					this.items,
+					(option) => html`<option value=${option.value} ?disabled=${option.isDisabled} ?selected=${option.isSelected}>
+						${option.innerContent}
+					</option>`
+				)}
+			</select>
 			<div class="wrap">
 				<div
-					class="custom-select-option custom-select-current ${classMap({
-						active: this._isOpened
-					})}"
-					@click="${() => {
-						this._isOpened = !this._isOpened;
-					}}"
+					class="custom-select-option custom-select-current ${classMap({ active: this._isOpened })}"
+					@click=${() => {
+						this.toggledOpened();
+					}}
 				>
-					${this._internalElements.find((item) => item.isSelected)?.innerContent ?? ""}
+					${selectedItem?.innerContent ?? ""}
 				</div>
-				<ul
-					class="custom-select-options ${classMap({
-						hidden: !(this._internalElements.length && this._isOpened)
-					})}"
-				>
-					${this._internalElements.map((element) => {
-						return html`
-							<li
-								class="custom-select-option"
-								data-disabled="${element.isDisabled}"
-								data-selected="${element.isSelected}"
-								value="${element.value}"
-								@click="${() => {
-									this.onItemSelected(element);
-								}}"
-							>
-								${element.innerContent}
-							</li>
-						`;
-					})}
+				<ul class="custom-select-options ${classMap({ hidden: !(this.items.length && this._isOpened) })}">
+					${map(
+						this.items,
+						(item) => html`<li
+							class="custom-select-option"
+							?data-disabled=${item.isDisabled}
+							?data-selected=${item.isSelected}
+							value=${item.value}
+							@click=${() => {
+								this.onItemSelected(item);
+							}}
+						>
+							${item.innerContent}
+						</li>`
+					)}
 				</ul>
 			</div>
 		`;
