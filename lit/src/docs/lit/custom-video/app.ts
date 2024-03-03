@@ -30,9 +30,7 @@ export class CustomVideoApplicationExample1 extends LitElement {
 	render() {
 		return html`
 			<custom-video-component class="video-wrap">
-				<video>
-					<source src=${video} type="video/mp4" />
-				</video>
+				<source src=${video} type="video/mp4" />
 			</custom-video-component>
 		`;
 	}

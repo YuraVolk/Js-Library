@@ -12,7 +12,7 @@
 				:maximum="1"
 				hide-value
 				@change="setVolume"
-                :default-value="rangeInputSettings.volume"
+				:default-value="rangeInputSettings.volume"
 			></range-input-component>
 			<range-input-component
 				id="time-range-input"
@@ -66,7 +66,6 @@ const video = ref<HTMLVideoElement | null>(null);
 const isMuted = ref(props.muted);
 const previousVideoVolume = ref<number | undefined>();
 const isVideoPlaying = ref(props.autoplay ?? false);
-const currentTimeInSeconds = ref(0);
 
 const rangeInputSettings = reactive({
 	duration: video.value?.duration,
@@ -82,50 +81,51 @@ const videoPassedProps = computed(() => {
 });
 
 const updateTrackInfo = () => {
-    if (!video.value) return;
-    rangeInputSettings.currentTimeLabel = toMinutesSeconds(video.value.currentTime);
-    rangeInputSettings.current = video.value.currentTime;
+	if (!video.value) return;
+	rangeInputSettings.currentTimeLabel = toMinutesSeconds(video.value.currentTime);
+	rangeInputSettings.current = video.value.currentTime;
 };
 
 const startVideo = () => {
-    video.value?.play()?.catch(e => { console.debug(e); });
-    isVideoPlaying.value = true; 
+	video.value?.play()?.catch((e) => {
+		console.debug(e);
+	});
+	isVideoPlaying.value = true;
 };
 
 const stopVideo = () => {
-    video.value?.pause();
-    isVideoPlaying.value = false; 
+	video.value?.pause();
+	isVideoPlaying.value = false;
 };
 
 const resetVideo = () => {
-    if (video.value) video.value.currentTime = 0;
-    stopVideo();
+	if (video.value) video.value.currentTime = 0;
+	stopVideo();
 };
 
 const toggleMute = () => {
-    if (!video.value) return;
-    if (isMuted.value && previousVideoVolume.value !== undefined) {
-        isMuted.value = false;
-        video.value.volume = previousVideoVolume.value;
-    } else {
-        isMuted.value = true;
-        previousVideoVolume.value = video.value.volume;
-        video.value.volume = 0;
-    }
+	if (!video.value) return;
+	if (isMuted.value && previousVideoVolume.value !== undefined) {
+		isMuted.value = false;
+		video.value.volume = previousVideoVolume.value;
+	} else {
+		isMuted.value = true;
+		previousVideoVolume.value = video.value.volume;
+		video.value.volume = 0;
+	}
 
-    rangeInputSettings.volume = video.value.volume;
+	rangeInputSettings.volume = video.value.volume;
 };
 
 const setVideoSecond = (seconds: number) => {
 	if (!video.value) return;
-    video.value.currentTime = seconds;
-    currentTimeInSeconds.value = video.value.currentTime;
-    startVideo();
+	video.value.currentTime = seconds;
+	startVideo();
 };
 
 const setVolume = (volume: number) => {
-    if (video.value) video.value.volume = volume;
-    rangeInputSettings.volume = volume;
+	if (video.value) video.value.volume = volume;
+	rangeInputSettings.volume = volume;
 };
 
 onMounted(() => {
@@ -136,12 +136,12 @@ onMounted(() => {
 
 		if (props.muted) {
 			video.value.volume = 0;
-            isMuted.value = true;
-            previousVideoVolume.value = 1;
+			isMuted.value = true;
+			previousVideoVolume.value = 1;
 			if (props.autoplay) startVideo();
 		}
 
-        rangeInputSettings.duration = video.value.duration;
+		rangeInputSettings.duration = video.value.duration;
 	};
 });
 </script>

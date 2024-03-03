@@ -7,11 +7,11 @@ export function toMinutesSeconds(time: number) {
 
 export interface VideoConfigurationProps {
     autoplay?: boolean;
-    crossorigin?: string;
+    crossorigin?: "anonymous" | "use-credentials";
     height?: number;
     muted?: boolean;
     poster?: string;
-    preload?: string;
+    preload?: "none" | "metadata" | "auto";
     src?: string;
     width?: number;
 }
