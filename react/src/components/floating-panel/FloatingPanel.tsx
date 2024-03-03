@@ -1,8 +1,8 @@
 import React, { CSSProperties, useCallback, useEffect, useRef, useState } from "react";
-import { ReactFloatingPanelConfiguration } from "../../interfaces/component/floatingPanel";
-import { FloatingPanelInternalSettings } from "shared/component/floatingPanel";
+import { WithChildren } from "react/src/utils/utils";
+import { FloatingPanelConfiguration, FloatingPanelInternalSettings } from "shared/component/floatingPanel";
 
-export const FloatingPanel = (props: ReactFloatingPanelConfiguration) => {
+export const FloatingPanel = (props: WithChildren<FloatingPanelConfiguration>) => {
 	const panel = useRef<HTMLDivElement>(null);
 	const [panelProperties, setPanelProperties] = useState<FloatingPanelInternalSettings>({
 		panelX: panel.current?.offsetLeft ?? 0,
