@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { CountdownReactConfiguration } from "react/src/interfaces/component/countdown";
 import { useInterval } from "../../interfaces/hooks/useInterval";
-import { TimeUnit, defaultTimeUnits, reduceTimeUnits } from "shared/component/countdown";
+import { CountdownConfiguration, TimeUnit, defaultTimeUnits, reduceTimeUnits } from "shared/component/countdown";
+import { WithGenerics } from "react/src/utils/utils";
 
 export const Countdown = ({
 	units = reduceTimeUnits(defaultTimeUnits),
 	date = new Date("May 6, 2085 11:00:00"),
     ...props
-}: CountdownReactConfiguration) => {
+}: WithGenerics<Partial<CountdownConfiguration>>) => {
 	const [text, setText] = useState("");
 
 	const renderText = useCallback(

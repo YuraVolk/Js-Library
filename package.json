@@ -8,7 +8,8 @@
     "build": "lerna run build",
     "build:ci": "npm run setup && npm run build",
     "setup": "lerna run setup",
-    "lint": "eslint **/*.ts"
+    "lint": "eslint **/*.ts",
+    "type-check": "lerna run --parallel type-check"
   },
   "author": "Yuriy Volkovskiy",
   "devDependencies": {
