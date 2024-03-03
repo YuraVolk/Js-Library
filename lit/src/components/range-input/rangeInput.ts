@@ -1,11 +1,12 @@
 import { LitElement, css, html, unsafeCSS } from "lit";
-import { property, state, queryAsync } from "lit/decorators.js";
+import { property, state, query } from "lit/decorators.js";
 import { assertDevOnly } from "shared/utils/utils";
 import { styleMap } from "lit/directives/style-map.js";
 import { defaultActiveColor, defaultHoverColor, thumbStyles } from "./styles";
 import { when } from "lit/directives/when.js";
 import { classMap } from "lit/directives/class-map.js";
 import { RangeInputConfiguration } from "shared/component/rangeInput";
+import { RangeInputChangeEvent } from "./events";
 
 export class RangeInputComponent extends LitElement implements RangeInputConfiguration {
 	private uiRangeID = crypto.randomUUID();
@@ -18,13 +19,7 @@ export class RangeInputComponent extends LitElement implements RangeInputConfigu
 	defaultValue = 0;
 	@property({ type: Number })
 	step = 1;
-	@property({
-		type: Array,
-		converter: {
-			fromAttribute: (value) => (value ? value.split(",").map(Number) : []),
-			toAttribute: (value: number[]) => value.join(",")
-		}
-	})
+	@property({ type: Array })
 	ticks: number[] = [];
 	@property({ type: String })
 	label = "";
@@ -49,13 +44,9 @@ export class RangeInputComponent extends LitElement implements RangeInputConfigu
 	_value = 0;
 	@state()
 	protected _gradientStyle = {};
-	@state()
-	_onUpdateListener?: (newValue: number) => void;
 
-	@queryAsync(".range-slider__input")
-	rangeSlider!: Promise<HTMLInputElement>;
-
-	private boundEventListener!: (this: Window, ev: Event) => unknown;
+	@query(".range-slider__input")
+	rangeSlider!: HTMLInputElement;
 
 	protected setGradientStyle() {
 		const progress = (this._value / this.maximum) * 100;
@@ -68,44 +59,19 @@ export class RangeInputComponent extends LitElement implements RangeInputConfigu
 		assertDevOnly(event.target instanceof HTMLInputElement);
 		this._value = Number(event.target.value);
 		this.setGradientStyle();
-		this._onUpdateListener?.(this._value);
+		this.dispatchEvent(new RangeInputChangeEvent(this._value));
 	}
 
 	changeValue(newValue: number) {
 		this._value = newValue;
-		this.rangeSlider
-			.then((range) => (range.value = String(newValue)))
-			.catch((e) => {
-				console.error(e);
-			});
+		this.rangeSlider.value = String(newValue);
 		this.setGradientStyle();
 	}
 
 	connectedCallback(): void {
 		super.connectedCallback();
-		this.boundEventListener = (event) => {
-			this.onValueChange(event);
-		};
 		this._value = this.defaultValue;
-		this.rangeSlider
-			.then((result) => {
-				this.setGradientStyle();
-				result.addEventListener("input", this.boundEventListener);
-			})
-			.catch((e) => {
-				console.error(e);
-			});
-	}
-
-	disconnectedCallback(): void {
-		this.rangeSlider
-			.then((result) => {
-				result.removeEventListener("input", this.boundEventListener);
-			})
-			.catch((e) => {
-				console.error(e);
-			});
-		super.disconnectedCallback();
+		this.setGradientStyle();
 	}
 
 	render() {
@@ -130,14 +96,16 @@ export class RangeInputComponent extends LitElement implements RangeInputConfigu
 						step="${this.step}"
 						class="range-slider__input"
 						style=${styleMap(this._gradientStyle)}
+						@input=${(e: Event) => {
+							this.onValueChange(e);
+						}}
 					/>
-					${this.ticks.length
-						? html`
-								<ul class="range-slider-ticks">
-									${this.ticks.map((tick) => html`<li class="range-slider-ticks__tick" style="--value: ${tick}%">${tick}</li>`)}
-								</ul>
-						  `
-						: ""}
+					${when(
+						this.ticks.length,
+						() => html`<ul class="range-slider-ticks">
+							${this.ticks.map((tick) => html`<li class="range-slider-ticks__tick" style="--value: ${tick}%">${tick}</li>`)}
+						</ul>`
+					)}
 				</div>
 				${when(!this.hideValue, () => html`<span class="value">${this._value}</span>`)}
 			</div>
