@@ -45,8 +45,12 @@ export class RangeInputComponent extends LitElement implements RangeInputConfigu
 	@state()
 	protected _gradientStyle = {};
 
+	set dynamicValue(newValue: number) {
+		this.changeValue(newValue);
+	}
+
 	@query(".range-slider__input")
-	rangeSlider!: HTMLInputElement;
+	rangeSlider?: HTMLInputElement;
 
 	protected setGradientStyle() {
 		const progress = (this._value / this.maximum) * 100;
@@ -63,8 +67,10 @@ export class RangeInputComponent extends LitElement implements RangeInputConfigu
 	}
 
 	changeValue(newValue: number) {
+		const rangeSlider = this.rangeSlider;
+		if (!rangeSlider) return;
 		this._value = newValue;
-		this.rangeSlider.value = String(newValue);
+		rangeSlider.value = String(newValue);
 		this.setGradientStyle();
 	}
 
@@ -91,7 +97,7 @@ export class RangeInputComponent extends LitElement implements RangeInputConfigu
 						type="range"
 						min="${this.minimum}"
 						max="${this.maximum}"
-						value="${this._value}"
+						value="${this.defaultValue}"
 						id="${this.uiRangeID}"
 						step="${this.step}"
 						class="range-slider__input"
