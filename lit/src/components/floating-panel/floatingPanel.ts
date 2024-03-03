@@ -1,37 +1,54 @@
-import { LitElement, html } from "lit";
+import { LitElement, css, html } from "lit";
 import { queryAssignedElements, property } from "lit/decorators.js";
 import { FloatingPanelConfiguration } from "shared/component/floatingPanel";
 
 export class FloatingPanelComponent extends LitElement implements FloatingPanelConfiguration {
-  @property({ type: Boolean })
-  isOpen = false;
+	static styles = css`
+		:host {
+			position: absolute;
+			display: block;
+		}
+	`;
 
-  @queryAssignedElements({ flatten: true })
+	@property({ type: Boolean })
+	isOpen = false;
+
+	@queryAssignedElements({ flatten: true })
 	_floatingPanels!: HTMLElement[];
 
-  private listener!: (event: MouseEvent) => void;
+	private _listener!: (event: MouseEvent) => void;
+	private _panelListener!: (event: MouseEvent) => void;
 
-  protected firstUpdated(): void {
-    if (this._floatingPanels.length === 0) return;
-    const [panel] = this._floatingPanels;
-    document.addEventListener("mousedown", this.listener = ({ clientX, clientY }) => {
-      const panelX = panel.offsetLeft, panelY = panel.offsetTop;
-      const changePosition = (event: MouseEvent) => {
-        panel.style.left = panelX + event.clientX - clientX + 'px';
-        panel.style.top = panelY + event.clientY - clientY + 'px';
-      };
+	protected firstUpdated(): void {
+		if (this._floatingPanels.length === 0) return;
+		document.addEventListener(
+			"mousedown",
+			(this._listener = ({ clientX, clientY }) => {
+        this.removeEventListener("mousemove", this._panelListener);
+				const panelX = this.offsetLeft,
+					panelY = this.offsetTop;
+				this._panelListener = (event: MouseEvent) => {
+					this.style.left = panelX + event.clientX - clientX + "px";
+					this.style.top = panelY + event.clientY - clientY + "px";
+				};
 
-      panel.addEventListener("mousemove", changePosition, false);
-      window.addEventListener("mouseup", () => { panel.removeEventListener("mousemove", changePosition, false); });
+				this.addEventListener("mousemove", this._panelListener, false);
+			})
+		);
+
+    window.addEventListener("mouseup", () => {
+      this.removeEventListener("mousemove", this._panelListener);
     });
-  }
+	}
 
-  disconnectedCallback(): void {
-    super.disconnectedCallback();
-    document.removeEventListener("mousedown", this.listener);
-  }
+	disconnectedCallback(): void {
+    this.removeEventListener("mousemove", this._panelListener);
+		super.disconnectedCallback();
+		document.removeEventListener("mousedown", this._listener);
+    window.removeEventListener("mousemove", this._panelListener);
+	}
 
-  render() {
-    return this.isOpen ? html`<slot></slot>` : "";
-  }
+	render() {
+		return this.isOpen ? html`<slot></slot>` : "";
+	}
 }
