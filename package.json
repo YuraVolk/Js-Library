@@ -9,6 +9,7 @@
     "build:ci": "npm run setup && npm run build",
     "setup": "lerna run setup",
     "lint": "eslint **/*.ts",
+    "lint:local": "lerna run lint:local",
     "type-check": "lerna run --parallel type-check"
   },
   "author": "Yuriy Volkovskiy",
