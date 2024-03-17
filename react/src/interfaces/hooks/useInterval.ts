@@ -13,7 +13,7 @@ export function useInterval(callback: () => void, timeout: number) {
     }, [callback, timeout]);
 
     useEffect(() => {
-        restartInterval();
+        startInterval();
 
         return () => {
             abortInterval();

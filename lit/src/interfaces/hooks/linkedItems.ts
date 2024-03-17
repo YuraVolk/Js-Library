@@ -1,5 +1,5 @@
-import { consume, createContext } from "@lit/context";
-import { LitElement, PropertyValueMap } from "lit";
+import { consume, createContext, provide } from "@lit/context";
+import { LitElement } from "lit";
 import { query, state } from "lit/decorators.js";
 import { StyleInfo } from "lit/directives/style-map.js";
 import { LinkedRegistryRecord, CSSProperty } from "shared/hooks/useLinkedItem";
@@ -62,4 +62,36 @@ export const LinkedItemMixin = <T extends Constructor<LitElement>>(superClass: T
 	}
 
 	return Mixin as Constructor<LinkedItemMixinInterface> & T;
+};
+
+export declare class LinkedCarouselMixinInterface {
+	linkedItemsContext: LinkedItems;
+	protected get itemValues(): LinkedItem[];
+	protected get itemKeys(): string[];
+	protected itemEntries: Array<[string, LinkedItem]>;
+}
+
+export const LinkedCarouselMixin = <T extends Constructor<LitElement>>(superClass: T) => {
+	class Mixin extends superClass {
+		@provide({ context: linkedItemsContext })
+		linkedItemsContext: LinkedItems = {};
+
+		protected get itemValues() {
+			return Object.values(this.linkedItemsContext);
+		}
+
+		protected get itemKeys() {
+			return Object.keys(this.linkedItemsContext);
+		}
+
+		protected get itemEntries() {
+			return Object.entries(this.linkedItemsContext);
+		}
+
+		protected set itemEntries(itemEntries: Array<[string, LinkedItem]>) {
+			this.linkedItemsContext = Object.fromEntries(itemEntries);
+		}
+	}
+
+	return Mixin as unknown as Constructor<LinkedCarouselMixinInterface> & T;
 };
