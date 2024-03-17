@@ -139,6 +139,7 @@ export class GalleryCarouselComponent extends LinkedCarouselMixin(LitElement) im
 	}
 
 	protected slideTo(position: number, newPosition: number, currentSlide: number) {
+		
 		this._isAnimating = true;
 		const start = new Date();
 		this._interval = window.setInterval(() => {
