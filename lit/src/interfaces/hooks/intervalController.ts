@@ -20,7 +20,7 @@ export class IntervalController implements ReactiveController {
         this._intervalId = undefined;
     }
 
-    restartInterval() {
+    startInterval() {
         this._intervalId = window.setInterval(this.callback, this.timeout);
     }
 }

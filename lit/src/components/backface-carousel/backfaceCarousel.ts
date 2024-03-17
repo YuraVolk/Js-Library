@@ -2,13 +2,12 @@ import { LitElement, css, html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { carouselControlsStyles } from "../../interfaces/generic/carousel";
 import { StyleInfo, styleMap } from "lit/directives/style-map.js";
-import { provide } from "@lit/context";
-import { LinkedItems, linkedItemsContext } from "../../interfaces/hooks/linkedItems";
+import { LinkedCarouselMixin } from "../../interfaces/hooks/linkedItems";
 import { BackfaceCarouselItem } from "./backfaceCarouselItem";
 import { IntervalController } from "../../interfaces/hooks/intervalController";
 import { ResizeController } from "../../interfaces/hooks/resizeController";
 
-export class BackfaceCarousel extends LitElement {
+export class BackfaceCarousel extends LinkedCarouselMixin(LitElement) {
 	static styles = css`
 		:host {
 			display: block;
@@ -51,9 +50,6 @@ export class BackfaceCarousel extends LitElement {
 	@state()
 	private _currentItem = 0;
 
-	@provide({ context: linkedItemsContext })
-	linkedItemsContext: LinkedItems = {};
-
 	private intervalController = new IntervalController(
 		this,
 		() => {
@@ -61,10 +57,6 @@ export class BackfaceCarousel extends LitElement {
 		},
 		250
 	);
-
-	protected get itemValues() {
-		return Object.values(this.linkedItemsContext);
-	}
 
 	rotateCarousel(newCurrentImage: number) {
 		const theta = (2 * Math.PI) / this.itemValues.length;

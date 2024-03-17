@@ -13,7 +13,7 @@ export function useInterval(callback: () => void, timeout: number) {
     };
 
     onMounted(() => {
-        restartInterval();
+        startInterval();
     });
 
     onUnmounted(() => {

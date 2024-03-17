@@ -1,11 +1,17 @@
 import { LitElement, css, html } from "lit";
-import { property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { GalleryCarouselConfiguration } from "shared/component/galleryCarousel";
+import { LinkedCarouselMixin } from "../../interfaces/hooks/linkedItems";
+import { styleMap } from "lit/directives/style-map.js";
+import { when } from "lit/directives/when.js";
+import { map } from "lit/directives/map.js";
+import { range } from "lit/directives/range.js";
+import { GalleryCarouselItem } from "./galleryCarouselItem";
 
-export class GalleryCarouselComponent extends LitElement implements GalleryCarouselConfiguration {
+export class GalleryCarouselComponent extends LinkedCarouselMixin(LitElement) implements GalleryCarouselConfiguration {
 	static styles = css`
-		.wrap {
+		:host {
 			position: relative;
 		}
 
@@ -104,108 +110,107 @@ export class GalleryCarouselComponent extends LitElement implements GalleryCarou
 	@property({ type: Boolean })
 	showToggles = false;
 
+	@state()
+	protected _galleryLeft = this.current * -100;
+	private _interval?: number;
+	private _isAnimating = false;
+
 	@queryAssignedElements({ flatten: true })
-	_carouselItems!: HTMLElement[];
-	@query(".gallery-list")
-	_galleryList!: HTMLElement;
-	@query(".gallery")
-	_galleryWrap!: HTMLElement;
+	private _assignedElements!: HTMLElement[];
 
-	@state()
-	_itemsLength = 0;
-	@state()
-	_isAnimating = false;
-
-	protected interval?: number;
+	protected get itemsLength() {
+		return this.itemKeys.length;
+	}
 
 	protected firstUpdated(): void {
-		const slides = this._carouselItems;
-		this._itemsLength = slides.length;
-		this._galleryList.style.left = this.current * -100 + "%";
-		slides[0].before(slides[slides.length - 1].cloneNode(true));
-		slides[slides.length - 1].after(slides[0].cloneNode(true));
-	}
-
-	protected checkCurrentSlide(value: number) {
-		if (value === 0 || value > this._itemsLength) return value === 0 ? this._itemsLength : 1;
-		return value;
-	}
-
-	protected slideTo(position: number, newPosition: number) {
-		const galleryList = this._galleryList;
-		this._isAnimating = true;
-		const start = new Date();
-		this.interval = window.setInterval(() => {
-			let progress = (new Date().getTime() - start.getTime()) / this.animationDuration;
-			if (progress > 1) progress = 1;
-			galleryList.style.left = position + Math.abs(newPosition - position) * progress ** 2 * (position > newPosition ? -1 : 1) + "%";
-			if (progress === 1) {
-				clearInterval(this.interval);
-				this._isAnimating = false;
-				this.current = this.checkCurrentSlide(this.current);
-				this._galleryList.style.left = this.current * -100 + "%";
-			}
-		}, this.frameGap);
-	}
-
-	protected changeCurrentSlide(slide: number) {
-		if (this._itemsLength <= 1) return;
-		if (!this.smoothDiametralTransition) slide = this.checkCurrentSlide(slide);
-		const position = parseInt(this._galleryList.style.left, 10) || 0;
-		const newPosition = slide * -100;
-		if (!this._isAnimating && position !== newPosition) {
-			this.current = slide;
-			this.slideTo(position, newPosition);
-		}
+		const slottedElements = this._assignedElements;
+		slottedElements[0].before(slottedElements[slottedElements.length - 1].cloneNode(true));
+		slottedElements[slottedElements.length - 1].after(slottedElements[0].cloneNode(true));
 	}
 
 	disconnectedCallback(): void {
 		super.disconnectedCallback();
-		window.clearInterval(this.interval);
+		window.clearInterval(this._interval);
+	}
+
+	private checkCurrentSlide(value: number) {
+		if (value === 0 || value > this.itemsLength - 2) return value === 0 ? this.itemsLength - 2 : 1;
+		return value;
+	}
+
+	protected slideTo(position: number, newPosition: number, currentSlide: number) {
+		this._isAnimating = true;
+		const start = new Date();
+		this._interval = window.setInterval(() => {
+			const progress = Math.min((new Date().getTime() - start.getTime()) / this.animationDuration, 1);
+			this._galleryLeft = position + Math.abs(newPosition - position) * progress ** 2 * (position > newPosition ? -1 : 1);
+			if (progress === 1) {
+				window.clearInterval(this._interval);
+				this._isAnimating = false;
+				this.current = this.checkCurrentSlide(currentSlide);
+				this._galleryLeft = this.current * -100;
+			}
+		}, this.frameGap);
+	}
+
+	changeCurrentSlide(newSlide: number) {
+		if (this.itemKeys.length <= 1) return;
+		if (!this.smoothDiametralTransition) newSlide = this.checkCurrentSlide(newSlide);
+		const newPosition = newSlide * -100;
+		if (!this._isAnimating && this._galleryLeft !== newPosition) {
+			this.current = newSlide;
+			this.slideTo(this._galleryLeft, newPosition, newSlide);
+		}
 	}
 
 	render() {
-		return html`<div class="wrap">
+		return html`
 			<div class="gallery">
-				<ul class="gallery-list">
+				<ul
+					class="gallery-list"
+					style=${styleMap({
+						left: `${this._galleryLeft}%`
+					})}
+				>
 					<slot></slot>
 				</ul>
 			</div>
-			${
-				this.showArrows
-					? html`<div class="gallery-controls">
-							<button
-								class="gallery-controls__previous-button"
-								@click="${() => {
-									this.changeCurrentSlide(this.current - 1);
-								}}"
-							></button>
-							<button
-								class="gallery-controls__next-button"
-								@click="${() => {
-									this.changeCurrentSlide(this.current + 1);
-								}}"
-							></button>
-					  </div>`
-					: ""
-			}
-			</div>
-			${
-				this._itemsLength !== 0 && this.showToggles
-					? html`<ul class="gallery-toggles">
-							${Array.from(
-								{ length: this._itemsLength },
-								(_, i) =>
-									html`<li
-										class="gallery-toggle ${classMap({ "gallery-toggle--active": this.current - 1 === i })}"
-										@click="${() => {
-											this.changeCurrentSlide(i + 1);
-										}}"
-									></li>`
-							)}
-					  </ul>`
-					: ""
-			}
-		</div>`;
+			${when(
+				this.showArrows,
+				() => html`<div class="gallery-controls">
+					<button
+						@click=${() => {
+							this.changeCurrentSlide(this.current - 1);
+						}}
+						class="gallery-controls__previous-button"
+					></button>
+					<button
+						@click=${() => {
+							this.changeCurrentSlide(this.current + 1);
+						}}
+						class="gallery-controls__next-button"
+					></button>
+				</div>`
+			)}
+			${when(
+				this.showToggles && this.itemsLength,
+				() => html`<ul class="gallery-toggles">
+					${map(
+						range(this._assignedElements.length ? this.itemsLength - 2 : this.itemsLength),
+						(i) =>
+							html`<li
+								@click=${() => {
+									this.changeCurrentSlide(i + 1);
+								}}
+								class="gallery-toggle ${classMap({
+									"gallery-toggle--active": i === this.current - 1
+								})}"
+							></li>`
+					)}
+				</ul>`
+			)}
+		`;
 	}
 }
+
+export { GalleryCarouselItem };
