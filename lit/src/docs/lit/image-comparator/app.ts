@@ -1,4 +1,4 @@
-import type { ImageComparatorComponent } from "lit/src/components/image-comparator/imageComparator";
+import type { ImageComparatorComponent, ImageComparatorItem } from "lit/src/components/image-comparator/imageComparator";
 import "../../../components/litEntry";
 import "../../../global.css";
 import { LitElement, css, html } from "lit";
@@ -16,8 +16,9 @@ import slide3webp from "../../../../../assets/img/slide3.webp";
 import("../header");
 import("../sidebar");
 import("../../../components/image-comparator/imageComparator")
-	.then(({ ImageComparatorComponent }) => {
+	.then(({ ImageComparatorComponent, ImageComparatorItem }) => {
 		window.customElements.define("image-comparator-component", ImageComparatorComponent);
+		window.customElements.define("image-comparator-item-component", ImageComparatorItem);
 	})
 	.catch((e) => {
 		console.trace(e);
@@ -35,13 +36,6 @@ export class ImageComparatorApplicationExample1 extends LitElement {
 			background-repeat: no-repeat;
 		}
 
-		.comparator-element {
-			position: absolute;
-			width: auto;
-			height: auto;
-			overflow: hidden;
-		}
-
 		.comparator-element__image {
 			display: block;
 			width: 350px;
@@ -53,30 +47,30 @@ export class ImageComparatorApplicationExample1 extends LitElement {
 	render() {
 		return html`
 			<image-comparator-component class="comparator">
-				<div class="comparator-element">
+				<image-comparator-item-component class="comparator-element">
 					<picture class="comparator-element__image">
 						<source type="image/webp" srcset=${slide0webp} />
 						<img class="comparator-element__image" src=${slide0} alt="Comparison Slide" />
 					</picture>
-				</div>
-				<div class="comparator-element">
+				</image-comparator-item-component>
+				<image-comparator-item-component class="comparator-element">
 					<picture class="comparator-element__image">
 						<source type="image/webp" srcset=${slide1webp} />
 						<img class="comparator-element__image" src=${slide1} alt="Comparison Slide" />
 					</picture>
-				</div>
-				<div class="comparator-element">
+				</image-comparator-item-component>
+				<image-comparator-item-component class="comparator-element">
 					<picture class="comparator-element__image">
 						<source type="image/webp" srcset=${slide2webp} />
 						<img class="comparator-element__image" src=${slide2} alt="Comparison Slide" />
 					</picture>
-				</div>
-				<div class="comparator-element">
+				</image-comparator-item-component>
+				<image-comparator-item-component class="comparator-element">
 					<picture class="comparator-element__image">
 						<source type="image/webp" srcset=${slide3webp} />
 						<img class="comparator-element__image" src=${slide3} alt="Comparison Slide" />
 					</picture>
-				</div>
+				</image-comparator-item-component>
 			</image-comparator-component>
 		`;
 	}
@@ -85,6 +79,7 @@ export class ImageComparatorApplicationExample1 extends LitElement {
 declare global {
 	interface HTMLElementTagNameMap {
 		"image-comparator-component": ImageComparatorComponent;
+		"image-comparator-item-component": ImageComparatorItem;
 		"image-comparator-application-example-1": ImageComparatorApplicationExample1;
 	}
 }
