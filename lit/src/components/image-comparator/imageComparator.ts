@@ -1,87 +1,163 @@
 import { LitElement, css, html } from "lit";
-import { queryAssignedElements, query } from "lit/decorators.js";
+import { state } from "lit/decorators.js";
+import { ImageComparatorItem } from "./imageComparatorItem";
+import { repeat } from "lit/directives/repeat.js";
+import { LinkedCarouselMixin } from "../../interfaces/hooks/linkedItems";
+import { ImageComparisonData } from "shared/component/imageComparator";
+import { StyleInfo, styleMap } from "lit/directives/style-map.js";
 
-export class ImageComparatorComponent extends LitElement {
-  static styles = css`
-    .wrap {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
+export class ImageComparatorComponent extends LinkedCarouselMixin(LitElement) {
+	static styles = css`
+		.wrap {
+			position: relative;
+			width: 100%;
+			height: 100%;
+		}
 
-    .comparison-slider {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 1;
-      width: 40px;
-      height: 40px;
-      background-color: #333;
-      border-radius: 50%;
-      cursor: ew-resize;
-    }
-  `;
+		.comparison-slider {
+			position: absolute;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 1;
+			width: 40px;
+			height: 40px;
+			background-color: #333;
+			border-radius: 50%;
+			cursor: ew-resize;
+		}
+	`;
 
-  @queryAssignedElements()
-  _comparatorElements!: HTMLElement[];
-  @query(".wrap")
-  _wrapElement!: HTMLDivElement;
+	@state()
+	protected _imageData: Record<string, ImageComparisonData<StyleInfo>> = {};
 
-  private windowListeners: Array<(event: MouseEvent | PointerEvent) => void> = [];
+	protected get clickedElement() {
+		return this.itemKeys.find((key) => this._imageData[key].isClicked);
+	}
 
-  protected initializeImageComparator(index: number) {
-    const elements = this._comparatorElements;
-    const image = elements[index], { offsetWidth } = image;
-    let clicked = false;
-    const slider = document.createElement("div");
-    slider.setAttribute("class", "comparison-slider");
-    this._wrapElement.append(slider);
-    slide(offsetWidth - (offsetWidth / (elements.length) * (index)));
+	protected slide(elementKey: string, difference: number) {
+		const element = this.linkedItemsContext[elementKey];
+		const imageComparisonData = this._imageData[elementKey];
+		element.styles = {
+			width: difference + "px"
+		};
 
-    function slide(difference: number) {
-      image.style.width = difference + "px";
-      slider.style.left = image.offsetWidth - (slider.offsetWidth / 2) + "px";
-    }
+		imageComparisonData.style.left = difference + "px";
+		this._imageData = { ...this._imageData };
+		this.linkedItemsContext = { ...this.linkedItemsContext };
+	}
 
-    const mouseStartListener = (event: Event) => {
-      event.preventDefault();
-      clicked = true;
-    };
-    slider.addEventListener("mousedown", mouseStartListener);
-    slider.addEventListener("pointerdown", mouseStartListener);
+	protected onMouseStart(event: Event, elementKey: string) {
+		event.preventDefault();
+		const newImageData = { ...this._imageData };
+		newImageData[elementKey].isClicked = true;
+		this._imageData = newImageData;
 
-    this.windowListeners.unshift(event => {
-      if (!clicked) return false;
-      image.style.left = "0";
-      let pos = event.pageX - image.getBoundingClientRect().left - window.scrollX;
-      if (pos < 0) pos = 0;
-      if (pos > offsetWidth) pos = offsetWidth;
-      slide(pos);
-    });
-    window.addEventListener("mousemove", this.windowListeners[0], { passive: true });
-    window.addEventListener("pointermove", this.windowListeners[0], { passive: true });
+	}
 
-    this.windowListeners.unshift(() => { clicked = false; });
-    window.addEventListener("mouseup", this.windowListeners[0], { passive: true });
-    window.addEventListener("pointerup", this.windowListeners[0], { passive: true });
+	protected onMouseMove(event: MouseEvent | PointerEvent) {
+		const clickedElement = this.clickedElement;
+		if (!clickedElement) return;
+		const { element, styles } = this.linkedItemsContext[clickedElement];
+		styles.left = "0";
+		let pos = event.pageX - element.getBoundingClientRect().left - window.scrollX;
+		if (pos < 0) pos = 0;
+		if (pos > this._imageData[clickedElement].offsetWidth) {
+			pos = this._imageData[clickedElement].offsetWidth;
+		}
+
+		this.slide(clickedElement, pos);
+	}
+
+	protected onMouseUp() {
+		this._imageData = Object.fromEntries(Object.entries(this._imageData).map(([key, value]) => [
+			key,
+			{
+				...value,
+				isClicked: false
+			}
+		]));
+	}
+
+	private onMouseUpListener?: EventListener;
+	private onMouseMoveListener?: (event: MouseEvent | PointerEvent) => void;
+
+  private updateEntries(slide = false) {
+    this.itemEntries.forEach(([key, { element: { offsetWidth } }], index, arr) => {
+			this._imageData[key] = {
+				isClicked: false,
+				offsetWidth,
+				style: {}
+			};
+
+      if (slide) this.slide(key, offsetWidth - (offsetWidth / arr.length) * index);
+		});
+		
+    if (!slide) this._imageData = { ...this._imageData };
   }
 
-  disconnectedCallback(): void {
-    super.disconnectedCallback();
-    for (const listener of this.windowListeners) {
-      (["mousemove", "pointermove", "mouseup", "pointerup"] as const).forEach((listenerName) => {
-        window.removeEventListener(listenerName, listener);
-      });
+  protected async scheduleUpdate() {
+    const values = this.itemValues.map((value) => value.element);
+    if (!values.every<ImageComparatorItem>((value): value is ImageComparatorItem => value instanceof ImageComparatorItem && !value.hasUpdated)) {
+      return super.scheduleUpdate();
     }
+
+    for (const item of values) await item.updateComplete;
+    this.updateEntries();
+    return super.scheduleUpdate();
   }
 
-  protected firstUpdated(): void {
-    for (let i = 1; i < this._comparatorElements.length; i++) this.initializeImageComparator(i);
+  protected firstUpdated() {
+    this.updateEntries(true);
+		window.addEventListener(
+			"mouseup",
+			(this.onMouseUpListener ??= () => {
+				this.onMouseUp();
+			})
+		);
+		window.addEventListener("pointerup", this.onMouseUpListener);
+		window.addEventListener(
+			"mousemove",
+			(this.onMouseMoveListener ??= (event) => {
+				this.onMouseMove(event);
+			})
+		);
+		window.addEventListener("pointermove", this.onMouseMoveListener);
   }
 
-  render() {
-    return html`<div class="wrap">
-      <slot></slot>
-    </div>`;
-  }
+	disconnectedCallback(): void {
+		super.disconnectedCallback();
+
+		if (this.onMouseMoveListener) {
+			window.removeEventListener("mousemove", this.onMouseMoveListener);
+			window.removeEventListener("pointermove", this.onMouseMoveListener);
+		}
+
+		if (this.onMouseUpListener) {
+			window.removeEventListener("mouseup", this.onMouseUpListener);
+			window.removeEventListener("pointerup", this.onMouseUpListener);
+		}
+	}
+
+	render() {
+		return html`<div class="wrap">
+			<slot></slot>
+			${repeat(
+				this.itemKeys.slice(1),
+				(item) => item,
+				(item) =>
+					html`<div
+						class="comparison-slider"
+						style=${styleMap(this._imageData[item].style)}
+						@mousedown=${(e: MouseEvent) => {
+							this.onMouseStart(e, item);
+						}}
+						@pointerdown=${(e: MouseEvent) => {
+							this.onMouseStart(e, item);
+						}}
+					></div>`
+			)}
+		</div>`;
+	}
 }
+
+export { ImageComparatorItem };
