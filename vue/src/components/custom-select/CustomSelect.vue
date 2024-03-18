@@ -29,10 +29,9 @@
 
 <script setup lang="ts">
 import { reactive, ref, onMounted, onUnmounted, computed } from "vue";
-import { SelectInternalItem } from "shared/component/customSelect";
-import { CustomSelectVueConfiguration } from "../../interfaces/component/customSelect";
+import { CustomSelectConfiguration, SelectInternalItem } from "shared/component/customSelect";
 
-const props = defineProps<CustomSelectVueConfiguration>();
+const props = defineProps<CustomSelectConfiguration>();
 const emit = defineEmits<{
 	(e: "change", element: SelectInternalItem): void;
 }>();
