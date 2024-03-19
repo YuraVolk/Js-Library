@@ -1,58 +1,94 @@
-import { LitElement, html } from "lit";
-import { property, queryAssignedElements } from "lit/decorators.js";
+import { LitElement, css, html } from "lit";
+import { property } from "lit/decorators.js";
+import { Ref, createRef, ref } from "lit/directives/ref.js";
 import { assertNonUndefined } from "shared/utils/utils";
+import { MagnifierConfiguration } from "shared/component/magnifier";
+import { LinkedCarouselMixin } from "../../interfaces/hooks/linkedItems";
+import { ImageMagnifierGlass } from "./magnifierGlass";
 
-export class ImageMagnifierComponent extends LitElement {
+export class ImageMagnifierComponent extends LinkedCarouselMixin(LitElement) implements MagnifierConfiguration {
+	static styles = css`
+		:host {
+			position: relative;
+			display: block;
+		}
+	`;
+
 	@property({ type: Number })
 	zoomScale = 2;
 	@property({ type: Boolean })
 	autoConfigureGlassSource = false;
+	@property({ type: String })
+	imageSource = "";
 
-	@queryAssignedElements({ flatten: true })
-	_image!: HTMLElement[];
-	@queryAssignedElements({ selector: "[data-magnifier-glass]" })
-	_glass!: HTMLElement[];
+	protected _magnifierRef: Ref<HTMLDivElement> = createRef();
+	protected get magnifierImage() {
+		const image = this._magnifierRef.value;
+		assertNonUndefined(image);
+		return image;
+	}
 
-  protected cachedGlass!: HTMLElement;
-  protected cachedImage!: HTMLElement;
-	private moveListener?: (event: MouseEvent) => void;
+	moveMagnifier(x: number, y: number) {
+		const image = this.magnifierImage,
+			glass = this.linkedItemsContext["magnifier-glass"];
 
-  protected moveMagnifier(x: number, y: number) {
-    const image = this.cachedImage, glass = this.cachedGlass;
-    const width = glass.offsetWidth / 2, height = glass.offsetHeight / 2;
-    if (x > image.offsetWidth) {
-      x = image.offsetWidth;
-    } else if (x < 0) x = 0;
-    if (y > image.offsetHeight) {
-      y = image.offsetHeight;
-    } else if (y < 0) y = 0;
+		const width = glass.element.offsetWidth / 2,
+			height = glass.element.offsetHeight / 2;
+		if (x > image.offsetWidth) {
+			x = image.offsetWidth;
+		} else if (x < 0) x = 0;
+		if (y > image.offsetHeight) {
+			y = image.offsetHeight;
+		} else if (y < 0) y = 0;
 
-    glass.style.left = `${x - width}px`;
-    glass.style.top = `${y - height}px`;
-    glass.style.backgroundPosition = "-" + (x * this.zoomScale - width) + "px -" + (y * this.zoomScale - height) + "px";
-  }
+		glass.styles = {
+			...glass.styles,
+			left: `${x - width}px`,
+			top: `${y - height}px`,
+			backgroundPosition: "-" + (x * this.zoomScale - width) + "px -" + (y * this.zoomScale - height) + "px"
+		};
+		this.linkedItemsContext = { ...this.linkedItemsContext };
+	}
 
+	protected onMouseMove(event: MouseEvent) {
+		event.preventDefault();
+		const rect = this.magnifierImage.getBoundingClientRect();
+		this.moveMagnifier(event.pageX - rect.left - window.scrollX, event.pageY - rect.top - window.scrollY);
+	}
+
+	private mouseMoveListener?: (event: MouseEvent) => void;
 	protected firstUpdated(): void {
-		const image = this._image[0].querySelector<HTMLElement>("[data-magnifier-content]"), [glass] = this._glass;
-    assertNonUndefined(image);
-		if (this.autoConfigureGlassSource && image.hasAttribute("src")) {
-			glass.style.backgroundImage = `url("${image.getAttribute("src") ?? ""}")`;
-		}
-		glass.style.backgroundSize = `${image.offsetWidth * this.zoomScale}px ${image.offsetHeight * this.zoomScale}px`;
-    this.cachedImage = image, this.cachedGlass = glass;
+		const glass = this.linkedItemsContext["magnifier-glass"];
 
-    this.moveListener = (event) => {
-      event.preventDefault();
-      const rect = image.getBoundingClientRect();
-      this.moveMagnifier(event.pageX - rect.left - window.scrollX, event.pageY - rect.top - window.scrollY);
-    };
-    image.addEventListener("mousemove", this.moveListener);
-    glass.addEventListener("mousemove", this.moveListener);
-    image.addEventListener("pointermove", this.moveListener);
-    image.addEventListener("pointermove", this.moveListener);
+		glass.element.addEventListener(
+			"mousemove",
+			(this.mouseMoveListener ??= (e) => {
+				this.onMouseMove(e);
+			})
+		);
+		glass.element.addEventListener("pointermove", this.mouseMoveListener);
+
+		glass.styles = {
+			backgroundImage: `url("${this.imageSource}")`,
+			backgroundSize: `${this.magnifierImage.offsetWidth * this.zoomScale}px ${this.magnifierImage.offsetHeight * this.zoomScale}px`
+		};
+		this.linkedItemsContext = { ...this.linkedItemsContext };
 	}
 
 	render() {
-		return html`<slot></slot>`;
+		return html`<div class="magnifier">
+			<div
+				class="magnifier__image"
+				@mousemove=${(event: MouseEvent) => {
+					this.onMouseMove(event);
+				}}
+				${ref(this._magnifierRef)}
+			>
+				<slot name="image"></slot>
+			</div>
+			<slot name="glass"></slot>
+		</div>`;
 	}
 }
+
+export { ImageMagnifierGlass };

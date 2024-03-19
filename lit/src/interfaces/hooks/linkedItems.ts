@@ -23,14 +23,25 @@ export declare class LinkedItemMixinInterface {
 	readonly linkedUid: string;
 	linkedItemsContext: LinkedItems;
 	linkedItemStyles: StyleInfo;
+	protected getUid(): string;
 }
 
 export const LinkedItemMixin = <T extends Constructor<LitElement>>(superClass: T) => {
 	class Mixin extends superClass {
+		readonly linkedUid: string;
+
+		protected getUid() {
+			return uid();
+		}
+
+		constructor(...args: any[]) {
+			super(...args);
+			this.linkedUid = this.getUid();
+		}
+
 		@query("*")
 		_rootElement?: HTMLElement;
 
-		readonly linkedUid = uid();
 		@consume({ context: linkedItemsContext, subscribe: true })
 		linkedItemsContext!: LinkedItems;
 	
@@ -61,7 +72,7 @@ export const LinkedItemMixin = <T extends Constructor<LitElement>>(superClass: T
 		}
 	}
 
-	return Mixin as Constructor<LinkedItemMixinInterface> & T;
+	return Mixin as unknown as Constructor<LinkedItemMixinInterface> & T;
 };
 
 export declare class LinkedCarouselMixinInterface {
