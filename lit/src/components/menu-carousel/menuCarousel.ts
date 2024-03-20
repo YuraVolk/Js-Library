@@ -3,38 +3,33 @@ import { property, state } from "lit/decorators.js";
 import { assertNonUndefinedDevOnly } from "shared/utils/utils";
 import { carouselControlsStyles } from "../../interfaces/generic/carousel";
 import { MenuCarouselConfiguration, MenuCarouselInternalItem } from "shared/component/menuCarousel";
+import { LinkedCarouselMixin, LinkedItem } from "../../interfaces/hooks/linkedItems";
+import { CarouselItem } from "../../interfaces/hooks/linkedItems";
 
 class Item extends MenuCarouselInternalItem {
+	constructor(private elementData: LinkedItem) {
+		super(elementData.element);
+	}
+
 	initStyles() {
-		this.image.style.position = "absolute";
+		this.elementData.styles = {
+			position: "absolute"
+		};
 		return this;
 	}
 
 	setMovingStyle(x: number, y: number, scale: number) {
-		const style = this.image.style;
-		style.width = this.width + "px";
-		style.left = x + "px";
-		style.top = y + "px";
-		style.zIndex = String((scale * 100) | 0);
+		this.elementData.styles = {
+			width: this.width + "px",
+			left: x + "px",
+			top: y + "px",
+			zIndex: String((scale * 100) | 0)
+		};
 	}
 }
 
-export class MenuCarouselComponent extends LitElement implements MenuCarouselConfiguration {
+export class MenuCarouselComponent extends LinkedCarouselMixin(LitElement) implements MenuCarouselConfiguration {
 	static styles = carouselControlsStyles;
-
-	@state()
-	_carousel!: HTMLElement;
-	@state()
-	_images!: HTMLElement[];
-
-	@state()
-	_rotation = Math.PI / 2;
-	@state()
-	_destRotation = Math.PI / 2;
-	@state()
-	_frameTimer = 0;
-	@state()
-	_items!: Item[];
 
 	@property({ type: Number })
 	xPos?: number;
@@ -49,96 +44,16 @@ export class MenuCarouselComponent extends LitElement implements MenuCarouselCon
 	@property({ type: Number })
 	speed = 0.11;
 
-	private boundEventListener!: (this: Window, ev: UIEvent) => unknown;
+	private _items: Item[] = [];
 
-	protected rotateItem(itemIndex: number, rotation: number) {
-		const item = this._items[itemIndex];
-		const sin = Math.sin(rotation);
-		const scale = this.farScale + (1 - this.farScale) * (sin + 1) * 0.5;
-		assertNonUndefinedDevOnly(this.xPos);
-		assertNonUndefinedDevOnly(this.xRadius);
-		item.moveTo(
-			this.xPos + scale * (Math.cos(rotation) * this.xRadius - item.fullWidth / 2),
-			this.yPos + scale * sin * this.yRadius,
-			scale
-		);
-	}
+	goBack() {}
 
-	protected carouselRender() {
-		const count = this._items.length;
-		const spacing = (2 * Math.PI) / count;
-		let radians = this._rotation;
-		for (let i = 0; i < count; i++) {
-			this.rotateItem(i, radians);
-			radians += spacing;
-		}
-	}
-
-	protected scheduleNextFrame() {
-		this._frameTimer = window.setTimeout(() => {
-			this.playFrame();
-		}, 32);
-	}
-
-	protected playFrame() {
-		const change = this._destRotation - this._rotation;
-		if (Math.abs(change) <= 0) {
-			this._rotation = this._destRotation;
-			window.clearTimeout(this._frameTimer);
-			this._frameTimer = 0;
-		} else {
-			this._rotation += change * this.speed;
-			this.scheduleNextFrame();
-		}
-		this.carouselRender();
-	}
-
-	protected go(count: number) {
-		this._destRotation += ((2 * Math.PI) / this._items.length) * count;
-		if (this._frameTimer === 0) this.scheduleNextFrame();
-	}
+	goForward() {}
 
 	protected firstUpdated() {
-		this.setupCarousel();
-	}
-
-	setupCarousel() {
-		const carousel = this.querySelector<HTMLElement>(".carousel");
-		if (!carousel) return;
-		this._carousel = carousel;
-		this._images = Array.from(this.querySelectorAll(".carousel-item"));
-		for (const image of this._images) {
-			image.removeAttribute("style");
+		for (const value of this.itemValues) {
+			this._items.push(new Item(value).initStyles());
 		}
-
-		this.xPos ??= this._carousel.offsetWidth * 0.5;
-		this.yPos = this._carousel.offsetHeight * 0.1;
-		this.xRadius ??= this._carousel.offsetWidth / 2.3;
-		this.yRadius = this._carousel.offsetHeight / 6;
-		this._items = this._images.map((item) => new Item(item).initStyles());
-		this.carouselRender();
-	}
-
-	connectedCallback() {
-		super.connectedCallback();
-		this.boundEventListener = () => {
-			this.xRadius = this.xPos = undefined;
-			this.setupCarousel();
-		};
-		window.addEventListener("resize", this.boundEventListener);
-	}
-
-	disconnectedCallback() {
-		super.disconnectedCallback();
-		window.removeEventListener("resize", this.boundEventListener);
-	}
-
-	protected goBack() {
-		this.go(-1);
-	}
-
-	protected goForward() {
-		this.go(1);
 	}
 
 	render() {
@@ -161,3 +76,5 @@ export class MenuCarouselComponent extends LitElement implements MenuCarouselCon
 		`;
 	}
 }
+
+export { CarouselItem };

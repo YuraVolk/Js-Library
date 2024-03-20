@@ -73,20 +73,18 @@ export class BackfaceCarousel extends LinkedCarouselMixin(LitElement) {
 		this._carouselStyles.transformOrigin = `50% 50% ${-apothem}px`;
 
 		for (let i = 0; i < length; i++) {
-			items[i].styles = {};
-			items[i].styles.padding = "0";
-			if (i === 0) continue;
-			items[i].styles.transformOrigin = `50% 50% ${-apothem}px`;
-			items[i].styles.transform = `rotate${this.isVertical ? "X" : "Y"}(${i * theta}rad)`;
+			const newStyles: StyleInfo = {};
+			newStyles.padding = "0";
+			if (i === 0) {
+				items[i].styles = newStyles;
+				continue;
+			}
+
+			newStyles.transformOrigin = `50% 50% ${-apothem}px`;
+			newStyles.transform = `rotate${this.isVertical ? "X" : "Y"}(${i * theta}rad)`;
+			items[i].styles = newStyles;
 		}
 
-		this.linkedItemsContext = Object.keys(this.linkedItemsContext).reduce(
-			(obj, key, i) => ({
-				...obj,
-				[key]: items[i]
-			}),
-			{}
-		);
 		this.rotateCarousel(this._currentItem);
 	}
 

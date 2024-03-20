@@ -1,4 +1,4 @@
-import type { MenuCarouselComponent } from "lit/src/components/menu-carousel/menuCarousel";
+import type { CarouselItem, MenuCarouselComponent } from "lit/src/components/menu-carousel/menuCarousel";
 import "../../../components/litEntry";
 import "../../../global.css";
 import { LitElement, css, html } from "lit";
@@ -14,8 +14,9 @@ import slide5 from "../../../../../assets/img/slide5.png";
 import("../header");
 import("../sidebar");
 import("../../../components/menu-carousel/menuCarousel")
-	.then(({ MenuCarouselComponent }) => {
+	.then(({ MenuCarouselComponent, CarouselItem }) => {
 		window.customElements.define("menu-carousel-component", MenuCarouselComponent);
+		window.customElements.define("carousel-item-component", CarouselItem);
 	})
 	.catch((e) => {
 		console.trace(e);
@@ -41,20 +42,42 @@ export class MenuCarouselApplicationExample1 extends LitElement {
 	render() {
 		return html`
 			<menu-carousel-component farScale="0.6">
-				<div class="carousel">
-					<img class="carousel-item" src=${slide1} alt="Example Image" />
+				<carousel-item-component>
 					<img class="carousel-item" src=${slide0} alt="Example Image" />
-					<img class="carousel-item" src=${slide2} alt="Example Image" />
-					<img class="carousel-item" src=${slide3} alt="Example Image" />
-					<img class="carousel-item" src=${slide4} alt="Example Image" />
-					<img class="carousel-item" src=${slide5} alt="Example Image" />
-					<img class="carousel-item" src=${slide0} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component>
 					<img class="carousel-item" src=${slide1} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component>
 					<img class="carousel-item" src=${slide2} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component>
 					<img class="carousel-item" src=${slide3} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component>
 					<img class="carousel-item" src=${slide4} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component>
 					<img class="carousel-item" src=${slide5} alt="Example Image" />
-				</div>
+				</carousel-item-component>
+				<carousel-item-component>
+					<img class="carousel-item" src=${slide0} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component>
+					<img class="carousel-item" src=${slide1} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component>
+					<img class="carousel-item" src=${slide2} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component>
+					<img class="carousel-item" src=${slide3} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component>
+					<img class="carousel-item" src=${slide4} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component>
+					<img class="carousel-item" src=${slide5} alt="Example Image" />
+				</carousel-item-component>
 			</menu-carousel-component>
 		`;
 	}
@@ -63,6 +86,7 @@ export class MenuCarouselApplicationExample1 extends LitElement {
 declare global {
 	interface HTMLElementTagNameMap {
 		"menu-carousel-component": MenuCarouselComponent;
+		"carousel-item-component": CarouselItem;
 		"menu-carousel-application-example-1": MenuCarouselApplicationExample1;
 	}
 }

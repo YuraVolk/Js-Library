@@ -47,7 +47,6 @@ export class ImageMagnifierComponent extends LinkedCarouselMixin(LitElement) imp
 			top: `${y - height}px`,
 			backgroundPosition: "-" + (x * this.zoomScale - width) + "px -" + (y * this.zoomScale - height) + "px"
 		};
-		this.linkedItemsContext = { ...this.linkedItemsContext };
 	}
 
 	protected onMouseMove(event: MouseEvent) {
@@ -72,7 +71,6 @@ export class ImageMagnifierComponent extends LinkedCarouselMixin(LitElement) imp
 			backgroundImage: `url("${this.imageSource}")`,
 			backgroundSize: `${this.magnifierImage.offsetWidth * this.zoomScale}px ${this.magnifierImage.offsetHeight * this.zoomScale}px`
 		};
-		this.linkedItemsContext = { ...this.linkedItemsContext };
 	}
 
 	render() {
