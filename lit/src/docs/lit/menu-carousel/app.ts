@@ -28,20 +28,21 @@ export class MenuCarouselApplicationExample1 extends LitElement {
 		.carousel {
 			width: 100%;
 			height: 60vh;
-			position: relative;
-			overflow: hidden;
-			padding-left: 0;
-			list-style-type: none;
+		}
+
+		carousel-item-component {
+			width: 18vw;
 		}
 
 		.carousel-item {
-			width: 18vw;
+			width: 100%;
+			height: 100%;
 		}
 	`;
 
 	render() {
 		return html`
-			<menu-carousel-component farScale="0.6">
+			<menu-carousel-component farScale="0.6" class="carousel">
 				<carousel-item-component>
 					<img class="carousel-item" src=${slide0} alt="Example Image" />
 				</carousel-item-component>
