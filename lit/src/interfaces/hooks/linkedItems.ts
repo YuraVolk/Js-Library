@@ -1,7 +1,7 @@
 import { consume, createContext, provide } from "@lit/context";
-import { LitElement } from "lit";
+import { LitElement, css, html } from "lit";
 import { query, state } from "lit/decorators.js";
-import { StyleInfo } from "lit/directives/style-map.js";
+import { StyleInfo, styleMap } from "lit/directives/style-map.js";
 import { LinkedRegistryRecord, CSSProperty } from "shared/hooks/useLinkedItem";
 import { uid } from "shared/utils/utils";
 
@@ -44,7 +44,7 @@ export const LinkedItemMixin = <T extends Constructor<LitElement>>(superClass: T
 
 		@consume({ context: linkedItemsContext, subscribe: true })
 		linkedItemsContext!: LinkedItems;
-	
+
 		get linkedItemStyles() {
 			return this.linkedItemsContext[this.linkedUid].styles;
 		}
@@ -85,7 +85,33 @@ export declare class LinkedCarouselMixinInterface {
 export const LinkedCarouselMixin = <T extends Constructor<LitElement>>(superClass: T) => {
 	class Mixin extends superClass {
 		@provide({ context: linkedItemsContext })
-		linkedItemsContext: LinkedItems = {};
+		linkedItemsContext: LinkedItems = new Proxy<LinkedItems>({}, {
+			set: (target, p, newValue: LinkedItem, receiver) => {		
+				let styles = newValue.styles,
+					element = newValue.element;
+
+				const self = this;
+				return Reflect.set(target, p, {
+					get styles() {
+						return styles;
+					},
+					set styles(newStyles: Partial<FilteredCSSStyleDeclaration>) {
+						self.scheduleContextUpdate();
+						styles = newStyles;
+					},
+					get element() {
+						return element;
+					},
+					set element(newElement: HTMLElement) {
+						element = newElement;
+					}
+				}, receiver);
+			},
+		});
+
+		private async scheduleContextUpdate() {
+			this.linkedItemsContext = { ...this.linkedItemsContext };
+		}
 
 		protected get itemValues() {
 			return Object.values(this.linkedItemsContext);
@@ -106,3 +132,19 @@ export const LinkedCarouselMixin = <T extends Constructor<LitElement>>(superClas
 
 	return Mixin as unknown as Constructor<LinkedCarouselMixinInterface> & T;
 };
+
+export class CarouselItem extends LinkedItemMixin(LitElement) {
+	static styles = [
+		css`
+			:host {
+				display: contents;
+			}
+		`
+	];
+
+	render() {
+		return html`<div class="carousel-item" style=${styleMap(this.linkedItemStyles)}>
+			<slot></slot>
+		</div>`;
+	}
+}

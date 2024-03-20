@@ -43,7 +43,6 @@ export class ImageComparatorComponent extends LinkedCarouselMixin(LitElement) {
 
 		imageComparisonData.style.left = difference + "px";
 		this._imageData = { ...this._imageData };
-		this.linkedItemsContext = { ...this.linkedItemsContext };
 	}
 
 	protected onMouseStart(event: Event, elementKey: string) {
@@ -51,15 +50,17 @@ export class ImageComparatorComponent extends LinkedCarouselMixin(LitElement) {
 		const newImageData = { ...this._imageData };
 		newImageData[elementKey].isClicked = true;
 		this._imageData = newImageData;
-
 	}
 
 	protected onMouseMove(event: MouseEvent | PointerEvent) {
 		const clickedElement = this.clickedElement;
 		if (!clickedElement) return;
-		const { element, styles } = this.linkedItemsContext[clickedElement];
-		styles.left = "0";
-		let pos = event.pageX - element.getBoundingClientRect().left - window.scrollX;
+		const element = this.linkedItemsContext[clickedElement];
+		element.styles = {
+			left: "0"
+		};
+
+		let pos = event.pageX - element.element.getBoundingClientRect().left - window.scrollX;
 		if (pos < 0) pos = 0;
 		if (pos > this._imageData[clickedElement].offsetWidth) {
 			pos = this._imageData[clickedElement].offsetWidth;
@@ -69,45 +70,60 @@ export class ImageComparatorComponent extends LinkedCarouselMixin(LitElement) {
 	}
 
 	protected onMouseUp() {
-		this._imageData = Object.fromEntries(Object.entries(this._imageData).map(([key, value]) => [
-			key,
-			{
-				...value,
-				isClicked: false
-			}
-		]));
+		this._imageData = Object.fromEntries(
+			Object.entries(this._imageData).map(([key, value]) => [
+				key,
+				{
+					...value,
+					isClicked: false
+				}
+			])
+		);
 	}
 
 	private onMouseUpListener?: EventListener;
 	private onMouseMoveListener?: (event: MouseEvent | PointerEvent) => void;
 
-  private updateEntries(slide = false) {
-    this.itemEntries.forEach(([key, { element: { offsetWidth } }], index, arr) => {
-			this._imageData[key] = {
-				isClicked: false,
-				offsetWidth,
-				style: {}
-			};
+	private updateEntries(slide = false) {
+		this.itemEntries.forEach(
+			(
+				[
+					key,
+					{
+						element: { offsetWidth }
+					}
+				],
+				index,
+				arr
+			) => {
+				this._imageData[key] = {
+					isClicked: false,
+					offsetWidth,
+					style: {}
+				};
 
-      if (slide) this.slide(key, offsetWidth - (offsetWidth / arr.length) * index);
-		});
-		
-    if (!slide) this._imageData = { ...this._imageData };
-  }
+				if (slide) this.slide(key, offsetWidth - (offsetWidth / arr.length) * index);
+			}
+		);
 
-  protected async scheduleUpdate() {
-    const values = this.itemValues.map((value) => value.element);
-    if (!values.every<ImageComparatorItem>((value): value is ImageComparatorItem => value instanceof ImageComparatorItem && !value.hasUpdated)) {
-      return super.scheduleUpdate();
-    }
+		if (!slide) this._imageData = { ...this._imageData };
+	}
 
-    for (const item of values) await item.updateComplete;
-    this.updateEntries();
-    return super.scheduleUpdate();
-  }
+	protected async scheduleUpdate() {
+		const values = this.itemValues.map((value) => value.element);
+		if (
+			!values.every<ImageComparatorItem>((value): value is ImageComparatorItem => value instanceof ImageComparatorItem && !value.hasUpdated)
+		) {
+			return super.scheduleUpdate();
+		}
 
-  protected firstUpdated() {
-    this.updateEntries(true);
+		for (const item of values) await item.updateComplete;
+		this.updateEntries();
+		return super.scheduleUpdate();
+	}
+
+	protected firstUpdated() {
+		this.updateEntries(true);
 		window.addEventListener(
 			"mouseup",
 			(this.onMouseUpListener ??= () => {
@@ -122,7 +138,7 @@ export class ImageComparatorComponent extends LinkedCarouselMixin(LitElement) {
 			})
 		);
 		window.addEventListener("pointermove", this.onMouseMoveListener);
-  }
+	}
 
 	disconnectedCallback(): void {
 		super.disconnectedCallback();
