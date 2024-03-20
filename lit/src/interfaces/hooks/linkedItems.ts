@@ -137,7 +137,7 @@ export class CarouselItem extends LinkedItemMixin(LitElement) {
 	static styles = [
 		css`
 			:host {
-				display: contents;
+				display: flex;
 			}
 		`
 	];
