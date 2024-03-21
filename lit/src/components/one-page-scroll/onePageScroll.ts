@@ -1,5 +1,5 @@
 import { LitElement, css, html } from "lit";
-import { property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { property, query, queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { OnePageScrollConfiguration, easeInOutQuad } from "shared/component/onePageScroll";
 import { CarouselDirection } from "shared/interfaces/carousel";
@@ -24,6 +24,12 @@ export class OnePageScrollComponent extends LitElement implements OnePageScrollC
 		.wrap--no-scrollbar {
 			overflow: hidden;
 		}
+
+		::slotted(*) {
+			display: block;
+			flex: 1 0 0;
+			box-sizing: border-box;
+		}
 	`;
 
 	@property({ type: Boolean })
@@ -35,12 +41,8 @@ export class OnePageScrollComponent extends LitElement implements OnePageScrollC
 	@property({ type: Boolean })
 	noScrollbar = false;
 
-	@state()
-	_selectedItem = 0;
-	@state()
-	_isScrolling = false;
-
-	private scrollEventListener?: (event: WheelEvent) => void;
+	private _selectedItem = 0;
+	private _isScrolling = false;
 
 	@queryAssignedElements()
 	_onePageScrollElements!: HTMLElement[];
@@ -56,7 +58,6 @@ export class OnePageScrollComponent extends LitElement implements OnePageScrollC
 		const property = this.isHorizontal ? "scrollLeft" : "scrollTop";
 
 		const animateScroll = () => {
-			if (!this.scrollEventListener) return;
 			currentTime += this.increment;
 			const quad = easeInOutQuad(currentTime, start, change, this.duration);
 			if (quad > this.increment) {
@@ -80,38 +81,35 @@ export class OnePageScrollComponent extends LitElement implements OnePageScrollC
 		);
 	}
 
-	protected firstUpdated() {
+	private onWheel(event: WheelEvent) {
 		const items = this._onePageScrollElements;
-		this._wrapElement.addEventListener(
-			"wheel",
-			(this.scrollEventListener = (event) => {
-				if (event.deltaY > 0) {
-					if (this._selectedItem >= items.length - 1) {
-						if (!this._isScrolling) this.smoothScrollTo((this._selectedItem = 0));
-					} else this.scrollSlide(CarouselDirection.FORWARDS);
-				} else {
-					if (this._selectedItem === 0) {
-						if (!this._isScrolling) {
-							this._selectedItem = items.length - 1;
-							this.smoothScrollTo(
-								(this.isHorizontal ? this._wrapElement.scrollWidth : this._wrapElement.scrollHeight) -
-									(this.isHorizontal ? items[0].offsetWidth : items[0].offsetHeight)
-							);
-						}
-					} else this.scrollSlide(CarouselDirection.BACKWARDS);
+		if (event.deltaY > 0) {
+			if (this._selectedItem >= items.length - 1) {
+				if (!this._isScrolling) this.smoothScrollTo((this._selectedItem = 0));
+			} else this.scrollSlide(CarouselDirection.FORWARDS);
+		} else {
+			if (this._selectedItem === 0) {
+				if (!this._isScrolling) {
+					this._selectedItem = items.length - 1;
+					this.smoothScrollTo(
+						(this.isHorizontal ? this._wrapElement.scrollWidth : this._wrapElement.scrollHeight) -
+							(this.isHorizontal ? items[0].offsetWidth : items[0].offsetHeight)
+					);
 				}
-			}),
-			{ passive: true }
-		);
-	}
-
-	disconnectedCallback(): void {
-		if (this.scrollEventListener) this._wrapElement.removeEventListener("wheel", this.scrollEventListener);
-		super.disconnectedCallback();
+			} else this.scrollSlide(CarouselDirection.BACKWARDS);
+		}
 	}
 
 	render() {
-		return html`<div class="wrap ${classMap({ "wrap--horizontal": this.isHorizontal, "wrap--no-scrollbar": this.noScrollbar })}">
+		return html`<div
+			class="wrap ${classMap({ "wrap--horizontal": this.isHorizontal, "wrap--no-scrollbar": this.noScrollbar })}"
+			@wheel=${{
+				handleEvent: (e: WheelEvent) => {
+					this.onWheel(e);
+				},
+				passive: true
+			}}
+		>
 			<slot></slot>
 		</div>`;
 	}
