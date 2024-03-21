@@ -1,7 +1,7 @@
 import { ReactiveController, ReactiveControllerHost } from "lit";
 
 export class ResizeController implements ReactiveController {
-	constructor(host: ReactiveControllerHost, readonly callback: () => void) {
+	constructor(host: ReactiveControllerHost, readonly callback: () => Promise<void> | void) {
 		host.addController(this);
 	}
 
