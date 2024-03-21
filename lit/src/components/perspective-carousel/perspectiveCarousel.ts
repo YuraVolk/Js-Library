@@ -1,13 +1,15 @@
 import { LitElement, html, css } from "lit";
-import { property, queryAssignedElements, queryAsync, state } from "lit/decorators.js";
-import { PerspectiveCarouselConfiguration } from "shared/component/perspectiveCarousel";
+import { property, query } from "lit/decorators.js";
+import { PerspectiveCarouselConfiguration, PerspectiveCarouselItemState } from "shared/component/perspectiveCarousel";
 import { styleMap } from "lit/directives/style-map.js";
-import { assertDevOnly } from "shared/utils/utils";
 import { CarouselDirection } from "shared/interfaces/carousel";
 import { carouselControlsStyles } from "../../interfaces/generic/carousel";
 import { resetInternalLitState } from "../../interfaces/component/perspectiveCarousel";
+import { CarouselItem, LinkedCarouselMixin } from "../../interfaces/hooks/linkedItems";
+import { MovedToCenterEvent, MovingFromCenterEvent, MovingToCenterEvent } from "./events";
+import { ResizeController } from "../../interfaces/hooks/resizeController";
 
-export class PerspectiveCarouselComponent extends LitElement implements PerspectiveCarouselConfiguration  {
+export class PerspectiveCarouselComponent extends LinkedCarouselMixin(LitElement) implements PerspectiveCarouselConfiguration {
 	static styles = css`
 		.wrap {
 			position: relative;
@@ -15,6 +17,9 @@ export class PerspectiveCarouselComponent extends LitElement implements Perspect
 
 		.images {
 			width: 80%;
+			padding: 0;
+			margin: 0;
+			list-style-type: none;
 		}
 
 		${carouselControlsStyles}
@@ -65,71 +70,60 @@ export class PerspectiveCarouselComponent extends LitElement implements Perspect
 	@property({ type: Boolean })
 	allowSwitchingOrientation = false;
 
-	@queryAsync(".images")
-	parent!: Promise<HTMLElement>;
-	@queryAssignedElements({ flatten: true })
-	images!: HTMLElement[];
+	protected _internalState = resetInternalLitState<number>();
+	protected _elementsState: Record<string, Partial<PerspectiveCarouselItemState>> = {};
 
-	@state()
-	_internalState = resetInternalLitState<HTMLElement>();
+	@query(".images")
+	protected _parentElement!: HTMLDivElement;
 
-	private windowResizeListener!: EventListener;
-
-	private initializeCarouselData(parent: HTMLElement) {
-		const parentStyle = window.getComputedStyle(parent);
-		this._internalState.totalItems = this.images.length;
+	protected initializeCarouselData() {
+		const parentStyle = window.getComputedStyle(this._parentElement);
+		this._internalState.totalItems = this.itemValues.length;
 		this._internalState.containerDimensions = [parseInt(parentStyle.width, 10), parseInt(parentStyle.height, 10)];
 	}
 
-	private forceImageDimensionIfEnabled() {
-		this.images.forEach((el) => (el.style.display = "none"));
-		if (!this.forcedImageWidth || !this.forcedImageHeight) return;
-		this.images.forEach((image) => {
-			image.style.width = `${this.forcedImageWidth}px`;
-			image.style.height = `${this.forcedImageHeight}px`;
-		});
-	}
-
-	private preload(callback: () => void) {
-		if (!this.preloadImages) {
-			callback();
-			return;
+	protected async forceImageDimensionsIfEnabled() {
+		for (const image of this.itemValues) {
+			image.styles = { display: "none" };
+			if (!this.forcedImageWidth || !this.forcedImageHeight) continue;
+			image.styles = {
+				...image.styles,
+				width: `${this.forcedImageWidth}px`,
+				height: `${this.forcedImageHeight}px`
+			};
 		}
 
-		const images = this.images;
-		let loadedImages = 0;
-		for (const image of images) {
-			image.setAttribute("src", image.getAttribute("src") ?? "");
-			image.addEventListener("load", () => {
-				image.style.display = "";
-				if (++loadedImages === images.length) callback();
-			});
+		await this.updateComplete;
+	}
+
+	protected async setOriginalItemDimensions() {
+		for (const [key, image] of this.itemEntries) {
+			const state = this._elementsState[key];
+			if ((!state.originalWidth && !state.originalHeight) || this.forcedImageWidth > 0 || this.forcedImageHeight > 0) {
+				image.styles = {
+					...image.styles,
+					display: ""
+				};
+				await this.updateComplete;
+				if (!state.originalWidth || this.forcedImageWidth > 0) state.originalWidth = image.element.clientWidth;
+				if (!state.originalHeight || this.forcedImageHeight > 0) state.originalHeight = image.element.clientHeight;
+				image.styles = {
+					...image.styles,
+					display: "none"
+				};
+			}
 		}
 	}
 
-	private setOriginalItemDimensions() {
-		this.images.forEach((element) => {
-			if (!element.dataset.originalWidth || this.forcedImageWidth > 0) {
-				element.style.display = "";
-				element.dataset.originalWidth = String(element.clientWidth);
-				element.style.display = "none";
-			}
-			if (!element.dataset.originalHeight || this.forcedImageHeight > 0) {
-				element.style.display = "";
-				element.dataset.originalHeight = String(element.clientHeight);
-				element.style.display = "none";
-			}
-		});
-	}
-
-	private calculatePositionProperties() {
-		let horizonOffset = this.horizonOffset;
-		let separation = this.separation;
+	protected calculatePositionProperties() {
+		let horizonOffset = this.horizonOffset,
+			separation = this.separation;
 		for (let i = 1; i <= this.flankingItems + 2; i++) {
 			if (i > 1) {
 				horizonOffset *= this.horizonOffsetMultiplier;
 				separation *= this.separationMultiplier;
 			}
+
 			const { distance, offset, opacity } = this._internalState.calculations[i - 1];
 			this._internalState.calculations[i] = {
 				distance: distance + separation,
@@ -145,40 +139,46 @@ export class PerspectiveCarouselComponent extends LitElement implements Perspect
 		};
 	}
 
-	private setupCarousel() {
-		this._internalState.items = this.images;
-		if (this.horizon === 0) this.horizon = this._internalState.containerDimensions[Number(!this.isVertical)] / 2;
-		for (const item of this._internalState.items) {
+	protected async setupCarousel() {
+		this.horizon ||= this._internalState.containerDimensions[Number(!this.isVertical)] / 2;
+
+		for (const [key, item] of this.itemEntries) {
+			const itemState = this._elementsState[key];
 			let left, top;
 			if (this.isVertical) {
-				left = this.horizon - Number(item.dataset.originalWidth) / 2;
-				top = this._internalState.containerDimensions[1] / 2 - Number(item.dataset.originalHeight) / 2;
+				left = this.horizon - Number(itemState.originalWidth) / 2;
+				top = this._internalState.containerDimensions[1] / 2 - Number(itemState.originalHeight) / 2;
 			} else {
-				left = this._internalState.containerDimensions[0] / 2 - Number(item.dataset.originalWidth) / 2;
-				top = this.horizon - Number(item.dataset.originalHeight) / 2;
+				left = this._internalState.containerDimensions[0] / 2 - Number(itemState.originalWidth) / 2;
+				top = this.horizon - Number(itemState.originalHeight) / 2;
 			}
 
-			Object.assign(item.style, {
+			item.styles = {
+				...item.styles,
 				left: `${left}px`,
 				top: `${top}px`,
 				visibility: "visible",
 				position: "absolute",
-				"z-index": 0,
-				opacity: 0,
+				zIndex: "0",
+				opacity: "0",
 				display: ""
-			});
+			};
 		}
+
+		await this.updateComplete;
 	}
 
-	private performCalculations(item: HTMLElement, newPosition: number) {
+	protected performCalculations(elementIndex: number, newPosition: number) {
+		const itemState = this._elementsState[this.itemKeys[elementIndex]];
+
 		const newDistanceFromCenter = Math.abs(newPosition);
 		const calculations =
 			newDistanceFromCenter < this.flankingItems + 1
 				? this._internalState.calculations[newDistanceFromCenter]
 				: this._internalState.calculations[this.flankingItems + 1];
 		const distanceFactor = this.sizeMultiplier ** newDistanceFromCenter;
-		const newWidth = distanceFactor * Number(item.dataset.originalWidth);
-		const newHeight = distanceFactor * Number(item.dataset.originalHeight);
+		const newWidth = distanceFactor * Number(itemState.originalWidth);
+		const newHeight = distanceFactor * Number(itemState.originalHeight);
 		const newDistance = newPosition < 0 ? -calculations.distance : calculations.distance;
 
 		const center = this._internalState.containerDimensions[Number(this.isVertical)] / 2;
@@ -191,135 +191,161 @@ export class PerspectiveCarouselComponent extends LitElement implements Perspect
 			top = this.horizon - calculations.offset - newHeight / 2;
 		}
 
-		item.dataset.width = String(newWidth);
-		item.dataset.height = String(newHeight);
-		item.dataset.top = String(top);
-		item.dataset.left = String(left);
-		item.dataset.oldPosition ||= "0";
-		item.dataset.depth = String(this.flankingItems + 2 - newDistanceFromCenter);
-		item.dataset.opacity = String(newPosition ? calculations.opacity : 1);
+		itemState.width = newWidth;
+		itemState.height = newHeight;
+		itemState.top = top;
+		itemState.left = left;
+		itemState.oldPosition ??= 0;
+		itemState.depth = this.flankingItems + 2 - newDistanceFromCenter;
+		itemState.opacity = newPosition ? calculations.opacity : 1;
 	}
 
-	private itemAnimationComplete(item: HTMLElement, newPosition: number) {
-		this._internalState.itemsAnimating--;
-		item.dataset.currentPosition = String(newPosition);
-		if (newPosition === 0) this._internalState.currentCenterItem = item;
-		if (this._internalState.itemsAnimating) return;
-		this._internalState.currentlyMoving = false;
-		if (--this._internalState.carouselRotationsLeft <= 0) {
-			this._internalState.currentCenterItem?.classList.add(this.centralItemClassName);
-			if (!this._internalState.performingSetup) {
-				this.movingToCenter();
-				this.movedToCenter();
-			} else this._internalState.performingSetup = false;
-		} else this.rotateCarousel();
-	}
-
-	protected movingFromCenter(element?: Element) {
-		if (element) {
-			assertDevOnly(element instanceof HTMLElement);
-			return element;
-		} else return;
-	}
-
-	protected movingToCenter() {
-		/* no-op */
-	}
-
-	protected movedToCenter() {
-		/* no-op */
-	}
-
-	protected moveItem(item: HTMLElement, newPosition: number) {
-		const assignToItem = () => {
-			console.log(item.dataset.width);
-			Object.assign(item.style, {
-				left: `${item.dataset.left}px`,
-				width: `${item.dataset.width}px`,
-				height: `${item.dataset.height}px`,
-				top: `${item.dataset.top}px`,
-				opacity: String(item.dataset.opacity)
-			});
-		};
-
-		if (Math.abs(newPosition) <= this.flankingItems + 1) {
-			this.performCalculations(item, newPosition);
-			this._internalState.itemsAnimating++;
-			item.style.zIndex = item.dataset.depth ?? "";
-			assignToItem();
-			setTimeout(() => {
-				this.itemAnimationComplete(item, newPosition);
-			}, this.animationLength);
-		} else {
-			item.dataset.currentPosition = String(newPosition);
-			if (item.dataset.oldPosition === "0" || !item.dataset.oldPosition) {
-				this.performCalculations(item, newPosition);
-				assignToItem();
-			}
-		}
-	}
-
-	private setupStarterRotation() {
-		this.startingItem ||= Math.round(this._internalState.totalItems / 2);
-		this._internalState.rightItemsCount = Math.ceil((this._internalState.totalItems - 1) / 2);
-		this._internalState.leftItemsCount = Math.floor((this._internalState.totalItems - 1) / 2);
-		this._internalState.carouselRotationsLeft = 1;
-		let itemIndex = this.startingItem - 1;
-		this.moveItem(this._internalState.items[itemIndex], 0);
-		this._internalState.items[itemIndex].style.opacity = "1";
-
-		for (let pos = 1; pos <= this._internalState.rightItemsCount; pos++) {
-			itemIndex < this._internalState.totalItems - 1 ? itemIndex++ : (itemIndex = 0);
-			this._internalState.items[itemIndex].style.opacity = "1";
-			this.moveItem(this._internalState.items[itemIndex], pos);
-		}
-		itemIndex = this.startingItem - 1;
-		for (let pos = -1; pos >= -this._internalState.leftItemsCount; pos--) {
-			itemIndex > 0 ? itemIndex-- : (itemIndex = this._internalState.totalItems - 1);
-			this._internalState.items[itemIndex].style.opacity = "1";
-			this.moveItem(this._internalState.items[itemIndex], pos);
-		}
-	}
-
-	initCarousel(parent: HTMLElement) {
-		this._internalState = resetInternalLitState();
-		this.initializeCarouselData(parent);
-		this.forceImageDimensionIfEnabled();
-		this.preload(() => {
-			this.setOriginalItemDimensions();
-			this.calculatePositionProperties();
-			this.setupCarousel();
-			this.setupStarterRotation();
-		});
-	}
-
-	private moveOnce(direction: CarouselDirection) {
+	protected rotateCarousel() {
 		if (this._internalState.currentlyMoving) return;
-		this._internalState.previousCenterItem = this._internalState.currentCenterItem;
-		if (direction === CarouselDirection.BACKWARDS) {
-			this.movingFromCenter(this._internalState.currentCenterItem?.previousElementSibling ?? undefined);
-		} else if (direction === CarouselDirection.FORWARDS) {
-			this.movingFromCenter(this._internalState.currentCenterItem?.nextElementSibling ?? undefined);
-		} else this.movingFromCenter(this._internalState.currentCenterItem);
-		this._internalState.currentDirection = direction;
-	}
-
-	private rotateCarousel() {
-		if (this._internalState.currentlyMoving) return;
-		this._internalState.currentCenterItem?.classList.remove(this.centralItemClassName);
 		this._internalState.currentlyMoving = true;
 		this._internalState.itemsAnimating = 0;
 		this._internalState.carouselRotationsLeft++;
-		for (const item of this._internalState.items) {
-			const currentPosition = parseInt(item.dataset.currentPosition ?? "", 10);
+
+		this.itemKeys.forEach((key, i) => {
+			const currentPosition = this._elementsState[key].currentPosition ?? NaN;
 			let newPosition = currentPosition + -Number(this._internalState.currentDirection);
 			if (Math.abs(newPosition) > this._internalState[newPosition > 0 ? "rightItemsCount" : "leftItemsCount"]) {
 				newPosition = -currentPosition;
 				if (this._internalState.totalItems % 2 === 0) newPosition++;
 			}
 
-			this.moveItem(item, newPosition);
+			this.moveItem(i, newPosition);
+		});
+	}
+
+	protected itemAnimationComplete(elementIndex: number, newPosition: number) {
+		const itemState = this._elementsState[this.itemKeys[elementIndex]];
+
+		this._internalState.itemsAnimating--;
+		itemState.currentPosition = newPosition;
+		if (newPosition === 0) this._internalState.currentCenterItem = elementIndex;
+		if (this._internalState.itemsAnimating) return;
+		this._internalState.currentlyMoving = false;
+
+		if (--this._internalState.carouselRotationsLeft <= 0) {
+			if (!this._internalState.performingSetup) {
+				this.dispatchEvent(new MovingToCenterEvent());
+				this.dispatchEvent(new MovedToCenterEvent());
+			} else this._internalState.performingSetup = false;
+		} else this.rotateCarousel();
+	}
+
+	protected moveItem(elementIndex: number, newPosition: number) {
+		const item = this.itemValues[elementIndex];
+		const itemState = this._elementsState[this.itemKeys[elementIndex]];
+
+		const assignToItem = () => {
+			item.styles = {
+				...item.styles,
+				left: `${itemState.left}px`,
+				width: `${itemState.width}px`,
+				height: `${itemState.height}px`,
+				top: `${itemState.top}px`,
+				opacity: String(itemState.opacity)
+			};
+		};
+
+		if (Math.abs(newPosition) <= this.flankingItems + 1) {
+			this.performCalculations(elementIndex, newPosition);
+			this._internalState.itemsAnimating++;
+
+			item.styles = {
+				...item.styles,
+				zIndex: String(itemState.depth ?? "")
+			};
+			assignToItem();
+			setTimeout(() => {
+				this.itemAnimationComplete(elementIndex, newPosition);
+			}, this.animationLength);
+		} else {
+			itemState.currentPosition = newPosition;
+			if (!itemState.oldPosition) {
+				this.performCalculations(elementIndex, newPosition);
+				assignToItem();
+			}
 		}
+	}
+
+	protected setupStarterRotation() {
+		this.startingItem ||= Math.round(this._internalState.totalItems / 2);
+		this._internalState.rightItemsCount = Math.ceil((this._internalState.totalItems - 1) / 2);
+		this._internalState.leftItemsCount = Math.floor((this._internalState.totalItems - 1) / 2);
+		this._internalState.carouselRotationsLeft = 1;
+
+		let itemIndex = this.startingItem - 1;
+		const itemValues = this.itemValues;
+		const moveToIndex = (pos: number) => {
+			itemValues[itemIndex].styles = {
+				...itemValues[itemIndex].styles,
+				opacity: "1"
+			};
+
+			this.moveItem(itemIndex, pos);
+		};
+		moveToIndex(0);
+
+		for (let pos = 1; pos <= this._internalState.rightItemsCount; pos++) {
+			itemIndex < this._internalState.totalItems - 1 ? itemIndex++ : (itemIndex = 0);
+			moveToIndex(pos);
+		}
+		itemIndex = this.startingItem - 1;
+		for (let pos = -1; pos >= -this._internalState.leftItemsCount; pos--) {
+			itemIndex > 0 ? itemIndex-- : (itemIndex = this._internalState.totalItems - 1);
+			moveToIndex(pos);
+		}
+	}
+
+	async initCarousel() {
+		this._internalState = resetInternalLitState();
+		for (const key of this.itemKeys) {
+			if (!(key in this._elementsState)) this._elementsState[key] = {};
+		}
+
+		this.initializeCarouselData();
+		await this.forceImageDimensionsIfEnabled();
+		await this.setOriginalItemDimensions();
+		this.calculatePositionProperties();
+		await this.setupCarousel();
+		this.setupStarterRotation();
+	}
+
+	protected async scheduleUpdate() {
+		const values = this.itemValues.map((value) => value.element);
+		if (!values.every<CarouselItem>((value): value is CarouselItem => value instanceof CarouselItem && !value.hasUpdated)) {
+			return super.scheduleUpdate();
+		}
+
+		for (const item of values) await item.updateComplete;
+		return super.scheduleUpdate();
+	}
+
+	protected firstUpdated(): void {
+		new ResizeController(this, this.initCarousel.bind(this));
+		this.initCarousel().catch((e) => {
+			console.trace(e);
+		});
+	}
+
+	moveOnce(direction: CarouselDirection) {
+		if (this._internalState.currentlyMoving) return;
+		if (direction === CarouselDirection.BACKWARDS && this._internalState.currentCenterItem !== undefined) {
+			this.dispatchEvent(
+				new MovingFromCenterEvent(this._internalState.currentCenterItem - 1 < 0 ? undefined : this._internalState.currentCenterItem - 1)
+			);
+		} else if (direction === CarouselDirection.FORWARDS && this._internalState.currentCenterItem !== undefined) {
+			this.dispatchEvent(
+				new MovingFromCenterEvent(
+					this._internalState.currentCenterItem + 1 > this._internalState.totalItems ? undefined : this._internalState.currentCenterItem + 1
+				)
+			);
+		} else this.dispatchEvent(new MovingFromCenterEvent(this._internalState.currentCenterItem));
+
+		this._internalState.currentDirection = direction;
 	}
 
 	nextItem() {
@@ -333,24 +359,9 @@ export class PerspectiveCarouselComponent extends LitElement implements Perspect
 	}
 
 	switchOrientation() {
+		if (!this.allowSwitchingOrientation) return;
 		this.isVertical = !this.isVertical;
 		this.rotateCarousel();
-	}
-
-	connectedCallback(): void {
-		super.connectedCallback();
-		this.parent.then((parent) => { this.initCarousel(parent); }).catch(e => { console.error(e); });
-		window.addEventListener(
-			"resize",
-			(this.windowResizeListener = () => {
-				this.parent.then((p) => { this.initCarousel(p); }).catch(e => { console.log(e) });
-			})
-		);
-	}
-
-	disconnectedCallback(): void {
-		super.disconnectedCallback();
-		window.removeEventListener("resize", this.windowResizeListener);
 	}
 
 	render() {
@@ -359,12 +370,31 @@ export class PerspectiveCarouselComponent extends LitElement implements Perspect
 				<slot></slot>
 			</div>
 			<div class="carousel-controls">
-				<button class="carousel-controls__previous-button" @click="${() => { this.previousItem(); }}"></button>
+				<button
+					class="carousel-controls__previous-button"
+					@click="${() => {
+						this.previousItem();
+					}}"
+				></button>
 				${this.allowSwitchingOrientation
-					? html`<button class="carousel-controls__perspective-button" @click="${() => { this.switchOrientation(); }}">Switch</button>`
+					? html`<button
+							class="carousel-controls__perspective-button"
+							@click="${() => {
+								this.switchOrientation();
+							}}"
+					  >
+							Switch
+					  </button>`
 					: ""}
-				<button class="carousel-controls__next-button" @click="${() => { this.nextItem(); }}"></button>
+				<button
+					class="carousel-controls__next-button"
+					@click="${() => {
+						this.nextItem();
+					}}"
+				></button>
 			</div>
 		</div>`;
 	}
 }
+
+export { CarouselItem };

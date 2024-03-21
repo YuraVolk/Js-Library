@@ -1,6 +1,7 @@
 import { consume, createContext, provide } from "@lit/context";
 import { LitElement, css, html } from "lit";
-import { query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { StyleInfo, styleMap } from "lit/directives/style-map.js";
 import { LinkedRegistryRecord, CSSProperty } from "shared/hooks/useLinkedItem";
 import { uid } from "shared/utils/utils";
@@ -139,11 +140,23 @@ export class CarouselItem extends LinkedItemMixin(LitElement) {
 			:host {
 				display: flex;
 			}
+
+			::slotted(*) {
+				width: 100%;
+				height: 100%;
+			}
+
+			.with-transition {
+				transition: 0.3s linear left, 0.3s linear width, 0.3s linear height, 0.3s linear top, 0.3s linear opacity;
+			}
 		`
 	];
 
+	@property({ type: Boolean })
+	hasTransition = false;
+
 	render() {
-		return html`<div class="carousel-item" style=${styleMap(this.linkedItemStyles)}>
+		return html`<div class=${ifDefined(this.hasTransition ? "with-transition" : undefined)} style=${styleMap(this.linkedItemStyles)}>
 			<slot></slot>
 		</div>`;
 	}

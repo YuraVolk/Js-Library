@@ -1,7 +1,7 @@
-import type { PerspectiveCarouselComponent } from "lit/src/components/perspective-carousel/perspectiveCarousel";
+import type { PerspectiveCarouselComponent, CarouselItem } from "lit/src/components/perspective-carousel/perspectiveCarousel";
 import "../../../components/litEntry";
 import "../../../global.css";
-import { LitElement, css, html } from "lit";
+import { LitElement, html } from "lit";
 import { customElement } from "lit/decorators.js";
 
 import slide0 from "../../../../../assets/img/slide0.png";
@@ -14,8 +14,9 @@ import slide5 from "../../../../../assets/img/slide5.png";
 import("../header");
 import("../sidebar");
 import("../../../components/perspective-carousel/perspectiveCarousel")
-	.then(({ PerspectiveCarouselComponent }) => {
+	.then(({ PerspectiveCarouselComponent, CarouselItem }) => {
 		window.customElements.define("perspective-carousel-component", PerspectiveCarouselComponent);
+		window.customElements.define("carousel-item-component", CarouselItem);
 	})
 	.catch((e) => {
 		console.trace(e);
@@ -23,27 +24,45 @@ import("../../../components/perspective-carousel/perspectiveCarousel")
 
 @customElement("perspective-carousel-application-example-1")
 export class PerspectiveCarouselApplicationExample1 extends LitElement {
-	static styles = css`
-		.carousel-item {
-			transition: 0.3s linear left, 0.3s linear width, 0.3s linear height, 0.3s linear top, 0.3s linear opacity;
-		}
-	`;
-
 	render() {
 		return html`
 			<perspective-carousel-component allowSwitchingOrientation>
-				<img class="carousel-item" src=${slide1} alt="Example Image" />
-				<img class="carousel-item" src=${slide0} alt="Example Image" />
-				<img class="carousel-item" src=${slide2} alt="Example Image" />
-				<img class="carousel-item" src=${slide3} alt="Example Image" />
-				<img class="carousel-item" src=${slide4} alt="Example Image" />
-				<img class="carousel-item" src=${slide5} alt="Example Image" />
-				<img class="carousel-item" src=${slide0} alt="Example Image" />
-				<img class="carousel-item" src=${slide1} alt="Example Image" />
-				<img class="carousel-item" src=${slide2} alt="Example Image" />
-				<img class="carousel-item" src=${slide3} alt="Example Image" />
-				<img class="carousel-item" src=${slide4} alt="Example Image" />
-				<img class="carousel-item" src=${slide5} alt="Example Image" />
+				<carousel-item-component hasTransition>
+					<img class="carousel-item" src=${slide0} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component hasTransition>
+					<img class="carousel-item" src=${slide1} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component hasTransition>
+					<img class="carousel-item" src=${slide2} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component hasTransition>
+					<img class="carousel-item" src=${slide3} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component hasTransition>
+					<img class="carousel-item" src=${slide4} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component hasTransition>
+					<img class="carousel-item" src=${slide5} alt="Example Image" />
+				</carousel-item-component hasTransition>
+				<carousel-item-component hasTransition>
+					<img class="carousel-item" src=${slide0} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component hasTransition>
+					<img class="carousel-item" src=${slide1} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component hasTransition>
+					<img class="carousel-item" src=${slide2} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component hasTransition>
+					<img class="carousel-item" src=${slide3} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component hasTransition>
+					<img class="carousel-item" src=${slide4} alt="Example Image" />
+				</carousel-item-component>
+				<carousel-item-component hasTransition>
+					<img class="carousel-item" src=${slide5} alt="Example Image" />
+				</carousel-item-component>
 			</perspective-carousel-component>
 		`;
 	}
@@ -52,6 +71,7 @@ export class PerspectiveCarouselApplicationExample1 extends LitElement {
 declare global {
 	interface HTMLElementTagNameMap {
 		"perspective-carousel-component": PerspectiveCarouselComponent;
+		"carousel-item-component": CarouselItem;
 		"perspective-carousel-application-example-1": PerspectiveCarouselApplicationExample1;
 	}
 }
