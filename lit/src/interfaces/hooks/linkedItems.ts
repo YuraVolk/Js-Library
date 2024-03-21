@@ -1,6 +1,6 @@
 import { consume, createContext, provide } from "@lit/context";
 import { LitElement, css, html } from "lit";
-import { query, state } from "lit/decorators.js";
+import { query } from "lit/decorators.js";
 import { StyleInfo, styleMap } from "lit/directives/style-map.js";
 import { LinkedRegistryRecord, CSSProperty } from "shared/hooks/useLinkedItem";
 import { uid } from "shared/utils/utils";
