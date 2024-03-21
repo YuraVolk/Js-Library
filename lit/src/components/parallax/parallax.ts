@@ -1,5 +1,6 @@
 import { LitElement, html, css } from "lit";
 import { property, query } from "lit/decorators.js";
+import { ResizeController } from "../../interfaces/hooks/resizeController";
 import { ParallaxConfiguration } from "shared/component/parallax";
 import { getFirstScrollableParent } from "shared/utils/domUtils";
 
@@ -26,7 +27,6 @@ export class ParallaxComponent extends LitElement implements ParallaxConfigurati
 	_wrapper!: HTMLElement;
 
 	private scrollListener!: EventListener;
-	private resizeListener!: EventListener;
 
 	protected rerender() {
 		const wrap = this._wrapper;
@@ -63,17 +63,7 @@ export class ParallaxComponent extends LitElement implements ParallaxConfigurati
 
 	protected firstUpdated() {
 		this.rerender();
-		window.addEventListener(
-			"resize",
-			(this.resizeListener = () => {
-				this.rerender();
-			})
-		);
-	}
-
-	disconnectedCallback(): void {
-		super.disconnectedCallback();
-		window.removeEventListener("resize", this.resizeListener);
+		new ResizeController(this, this.rerender.bind(this));
 	}
 
 	render() {
