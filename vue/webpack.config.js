@@ -38,7 +38,8 @@ module.exports = {
 	},
 	output: {
 		path: path.resolve(__dirname, "../docs"),
-		filename: "[name].js"
+		filename: "[name].js",
+		chunkFilename: "[id]-vue.js"
 	},
 	plugins: [
 		new ModuleFederationPlugin({

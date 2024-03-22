@@ -37,6 +37,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '../docs'),
+    chunkFilename: "[id]-lit.js"
   },
   plugins: [
     new ModuleFederationPlugin({
