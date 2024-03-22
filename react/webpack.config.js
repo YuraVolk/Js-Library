@@ -23,7 +23,8 @@ module.exports = {
 	mode: "development",
 	output: {
 		path: path.resolve(__dirname, "../docs"),
-		filename: "[name].js"
+		filename: "[name].js",
+		chunkFilename: "[id]-react.js"
 	},
 	devServer: {
 		static: path.join(__dirname, "dist"),
