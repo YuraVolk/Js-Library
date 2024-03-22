@@ -7,7 +7,10 @@ const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const glob = require('glob');
 
 const litHtmlPlugins = glob.sync('./src/docs/lit/**/*.html').map((file) => {
-  const entryName = file.replace(/^\.\/src\/docs\/lit\//, '').replace(/index\.html$/, "");
+  const entryName = file
+    .replace(/\\/g, "/")
+    .replace(/^\.?\/?src\/docs\/lit\//, '')
+    .replace(/index\.html$/, "");
 
   return new HtmlWebpackPlugin({
     template: file,

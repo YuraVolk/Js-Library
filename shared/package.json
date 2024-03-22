@@ -5,11 +5,7 @@
 	"main": "index.js",
 	"license": "MIT",
 	"description": "A library of JavaScript-based components built with Lit, React and Vue.",
-	"browserslist": [
-		"> 1%",
-		"last 2 versions",
-		"not dead"
-	],
+	"browserslist": "fully supports async-functions",
 	"scripts": {
 		"start": "webpack serve",
 		"build": "webpack --mode production",
@@ -19,9 +15,9 @@
 	"author": "Yuriy Volkovskiy",
 	"devDependencies": {
 		"ts-loader": "^9.5.1",
-		"typescript": "^5.0.4",
-		"webpack": "^5.89.0",
+		"typescript": "^5.4.3",
+		"webpack": "^5.91.0",
 		"webpack-cli": "^5.1.4",
-		"webpack-dev-server": "^4.15.1"
+		"webpack-dev-server": "^5.0.4"
 	}
 }

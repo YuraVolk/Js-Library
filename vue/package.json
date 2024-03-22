@@ -2,11 +2,7 @@
 	"name": "js-vue-components-library",
 	"version": "1.0.0",
 	"description": "A library of JavaScript-based components built with Lit, React and Vue.",
-	"browserslist": [
-		"> 1%",
-		"last 2 versions",
-		"not dead"
-	],
+	"browserslist": "fully supports async-functions",
 	"scripts": {
 		"start": "webpack serve",
 		"build": "webpack --mode production",
@@ -15,26 +11,26 @@
 	},
 	"author": "Yuriy Volkovskiy",
 	"devDependencies": {
-		"@babel/core": "^7.23.6",
-		"@babel/preset-env": "^7.23.6",
-		"@babel/preset-typescript": "^7.23.3",
-		"@vue/compiler-sfc": "^3.3.11",
+		"@babel/core": "^7.24.3",
+		"@babel/preset-env": "^7.24.3",
+		"@babel/preset-typescript": "^7.24.1",
+		"@vue/compiler-sfc": "^3.4.21",
 		"babel-loader": "^9.1.3",
 		"babel-preset-typescript-vue3": "^2.0.17",
-		"css-loader": "^6.8.1",
+		"css-loader": "^6.10.0",
 		"external-remotes-plugin": "^1.0.0",
-		"html-webpack-plugin": "^5.5.4",
+		"html-webpack-plugin": "^5.6.0",
 		"ts-loader": "^9.5.1",
-		"typescript": "^5.3.3",
-		"vue-loader": "^17.3.1",
+		"typescript": "^5.4.3",
+		"vue-loader": "^17.4.2",
 		"vue-style-loader": "^4.1.3",
-		"webpack": "^5.89.0",
+		"webpack": "^5.91.0",
 		"webpack-cli": "^5.1.4",
-		"webpack-dev-server": "^4.15.1"
+		"webpack-dev-server": "^5.0.4"
 	},
 	"dependencies": {
 		"@babel/polyfill": "^7.11.5",
 		"babel-core": "^7.0.0-bridge.0",
-		"vue": "^3.3.11"
+		"vue": "^3.4.21"
 	}
 }
