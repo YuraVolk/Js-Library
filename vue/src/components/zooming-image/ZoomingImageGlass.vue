@@ -1,12 +1,12 @@
 <template>
-    <div
-        class="zooming-image-glass"
-        ref="glass"
-        @pointermove="(e) => emit('glassMove', e)"
-        @mousemove="(e) => emit('glassMove', e)"
-    >
-        <slot></slot>
-    </div>
+  <div
+    ref="glass"
+    class="zooming-image-glass"
+    @pointermove="(e) => emit('glassMove', e)"
+    @mousemove="(e) => emit('glassMove', e)"
+  >
+    <slot />
+  </div>
 </template>
 
 <script setup lang="ts">

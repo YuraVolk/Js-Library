@@ -1,5 +1,5 @@
 <template>
-    <span class="countdown">{{ text }}</span>
+  <span class="countdown">{{ text }}</span>
 </template>
 
 <script setup lang="ts">

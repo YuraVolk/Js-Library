@@ -1,26 +1,40 @@
 <template>
-    <div class="wrap">
-        <div class="gallery">
-            <ul class="gallery-list" :style="galleryListStyle">
-                <first-element />
-                <slot></slot>
-                <last-element />
-            </ul>
-        </div>
-        <div class="gallery-controls" v-if="props.showArrows">
-            <button class="gallery-controls__previous-button"
-                @click="() => { changeCurrentSlide(currentSlide - 1); }"></button>
-            <button class="gallery-controls__next-button" @click="() => { changeCurrentSlide(currentSlide + 1); }"></button>
-        </div>
-        <ul class="gallery-toggles" v-if="props.showToggles && itemsLength > 1">
-            <li
-                v-for="i in itemsLength - 2"
-                class="gallery-toggle"
-                :class="{ 'gallery-toggle--active': currentSlide - 1 === i - 1 }"
-                @click="() => { changeCurrentSlide(i); }"
-            ></li>
-        </ul>
+  <div class="wrap">
+    <div class="gallery">
+      <ul
+        class="gallery-list"
+        :style="galleryListStyle"
+      >
+        <first-element />
+        <slot />
+        <last-element />
+      </ul>
     </div>
+    <div
+      v-if="props.showArrows"
+      class="gallery-controls"
+    >
+      <button
+        class="gallery-controls__previous-button"
+        @click="() => { changeCurrentSlide(currentSlide - 1); }"
+      />
+      <button
+        class="gallery-controls__next-button"
+        @click="() => { changeCurrentSlide(currentSlide + 1); }"
+      />
+    </div>
+    <ul
+      v-if="props.showToggles && itemsLength > 1"
+      class="gallery-toggles"
+    >
+      <li
+        v-for="i in itemsLength - 2"
+        class="gallery-toggle"
+        :class="{ 'gallery-toggle--active': currentSlide - 1 === i - 1 }"
+        @click="() => { changeCurrentSlide(i); }"
+      />
+    </ul>
+  </div>
 </template>
 
 <script setup lang="ts">

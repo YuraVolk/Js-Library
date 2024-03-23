@@ -1,16 +1,30 @@
 <template>
-    <div>
-        <div :class="['backface-carousel', !isHorizontal && 'backface-carousel--vertical']">
-            <ul class="backface-carousel-items" :style="carouselStyles">
-                <slot></slot>
-            </ul>
-        </div>
-        <div class="carousel-controls">
-            <button class="carousel-controls__previous-button" @click="previousSlide"></button>
-            <button class="carousel-controls__perspective-button" @click="switchPerspective">Switch</button>
-            <button class="carousel-controls__next-button" @click="nextSlide"></button>
-        </div>
+  <div>
+    <div :class="['backface-carousel', !isHorizontal && 'backface-carousel--vertical']">
+      <ul
+        class="backface-carousel-items"
+        :style="carouselStyles"
+      >
+        <slot />
+      </ul>
     </div>
+    <div class="carousel-controls">
+      <button
+        class="carousel-controls__previous-button"
+        @click="previousSlide"
+      />
+      <button
+        class="carousel-controls__perspective-button"
+        @click="switchPerspective"
+      >
+        Switch
+      </button>
+      <button
+        class="carousel-controls__next-button"
+        @click="nextSlide"
+      />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">

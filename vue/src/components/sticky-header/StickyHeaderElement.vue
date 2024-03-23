@@ -1,7 +1,7 @@
 <template>
-    <div ref="header">
-        <slot></slot>
-    </div>
+  <div ref="header">
+    <slot />
+  </div>
 </template>
 
 <script setup lang="ts">

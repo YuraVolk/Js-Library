@@ -1,50 +1,64 @@
 <template>
-    <header-component />
-    <sidebar-component active-link="Popup" />
-    <main class="main">
-        <h1 class="heading">Popup</h1>
-        <p>
-            A popup component is a user interface element that appears on top of the main content to display additional
-            information or
-            functionality. Interface blocking popups are a very common feature in user interfaces that prevent the
-            appearance of pop-up windows or
-            dialogs. These popups are typically used to display additional information, request user input, or show
-            notifications. This popup
-            component accepts two slotted children at user's configuration: slot with name popup, containing the by default
-            hidden popup window,
-            and slot with name popup-open-button, which acts as a button to open the popup. This popup accepts the following
-            props:
-        </p>
-        <ul>
-            <li>open, A boolean property that determines whether the popup is open or closed. Defaults to false.</li>
-            <li>displayOpenButton, A boolean property that determines whether to display the open button for the popup.
-                Defaults to false.</li>
-            <li>
-                autoClosingTime, an optional number property that specifies the time in milliseconds after which the popup
-                should automatically
-                close.
-            </li>
-        </ul>
-        <p>Here is a simple popup with an open button:</p>
-        <popup-component display-open-button ref="popup">
-            <template #popup-open-button>
-                <button class="popup-open-button">Open Popup</button>
-            </template>
-            <template #popup>
-                <div class="popup-wrap">
-                    <div class="popup">
-                        <img class="popup__close-button" :src="closeImage" alt="Close Button" @click="closePopup" />
-                        <p>Sample popup. This is a template for making different popups.</p>
-                    </div>
-                </div>
-            </template>
-        </popup-component>
-        <p>
-            In order to work correctly in all environments, this popup component uses a teleport to the body element to make
-            sure the popup would
-            be working correctly.
-        </p>
-    </main>
+  <header-component />
+  <sidebar-component active-link="Popup" />
+  <main class="main">
+    <h1 class="heading">
+      Popup
+    </h1>
+    <p>
+      A popup component is a user interface element that appears on top of the main content to display additional
+      information or
+      functionality. Interface blocking popups are a very common feature in user interfaces that prevent the
+      appearance of pop-up windows or
+      dialogs. These popups are typically used to display additional information, request user input, or show
+      notifications. This popup
+      component accepts two slotted children at user's configuration: slot with name popup, containing the by default
+      hidden popup window,
+      and slot with name popup-open-button, which acts as a button to open the popup. This popup accepts the following
+      props:
+    </p>
+    <ul>
+      <li>open, A boolean property that determines whether the popup is open or closed. Defaults to false.</li>
+      <li>
+        displayOpenButton, A boolean property that determines whether to display the open button for the popup.
+        Defaults to false.
+      </li>
+      <li>
+        autoClosingTime, an optional number property that specifies the time in milliseconds after which the popup
+        should automatically
+        close.
+      </li>
+    </ul>
+    <p>Here is a simple popup with an open button:</p>
+    <popup-component
+      ref="popup"
+      display-open-button
+    >
+      <template #popup-open-button>
+        <button class="popup-open-button">
+          Open Popup
+        </button>
+      </template>
+      <template #popup>
+        <div class="popup-wrap">
+          <div class="popup">
+            <img
+              class="popup__close-button"
+              :src="closeImage"
+              alt="Close Button"
+              @click="closePopup"
+            >
+            <p>Sample popup. This is a template for making different popups.</p>
+          </div>
+        </div>
+      </template>
+    </popup-component>
+    <p>
+      In order to work correctly in all environments, this popup component uses a teleport to the body element to make
+      sure the popup would
+      be working correctly.
+    </p>
+  </main>
 </template>
 
 <script setup lang="ts">

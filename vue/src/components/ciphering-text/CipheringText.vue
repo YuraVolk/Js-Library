@@ -1,6 +1,10 @@
 <template>
-	<pre ref="element">
-        <span v-for="letter in settings.currentTextValue.value" v-text="letter.letter" :class="letter.classes.join('')"></span>
+  <pre ref="element">
+        <span
+v-for="letter in settings.currentTextValue.value"
+:class="letter.classes.join('')"
+v-text="letter.letter"
+/>
     </pre>
 </template>
 

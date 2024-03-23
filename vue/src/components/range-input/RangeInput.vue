@@ -1,17 +1,41 @@
 <template>
-    <div class="range-input">
-        <div class="wrap">
-            <div :class="['range-slider', allSameLine && 'range-slider--one-lined']">
-                <label class="range-slider__label" :for="uniqueID">{{ label }}</label>
-                <input type="range" :min="minimum" :max="maximum" :value="currentValue" :id="uniqueID"
-                    :step="step" class="range-slider__input" :style="gradientStyles" @input="onValueChange" />
-                <ul class="range-slider-ticks" v-if="ticks?.length">
-                    <li v-for="tick in ticks" :style="`--value: ${tick}%`" class="range-slider-ticks__tick">{{ tick }}</li>
-                </ul>
-            </div>
-            <span class="value" v-if="!hideValue">{{ currentValue }}</span>
-        </div>
+  <div class="range-input">
+    <div class="wrap">
+      <div :class="['range-slider', allSameLine && 'range-slider--one-lined']">
+        <label
+          class="range-slider__label"
+          :for="uniqueID"
+        >{{ label }}</label>
+        <input
+          :id="uniqueID"
+          type="range"
+          :min="minimum"
+          :max="maximum"
+          :value="currentValue"
+          :step="step"
+          class="range-slider__input"
+          :style="gradientStyles"
+          @input="onValueChange"
+        >
+        <ul
+          v-if="ticks?.length"
+          class="range-slider-ticks"
+        >
+          <li
+            v-for="tick in ticks"
+            :style="`--value: ${tick}%`"
+            class="range-slider-ticks__tick"
+          >
+            {{ tick }}
+          </li>
+        </ul>
+      </div>
+      <span
+        v-if="!hideValue"
+        class="value"
+      >{{ currentValue }}</span>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">

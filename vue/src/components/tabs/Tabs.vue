@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <slot name="headers"></slot>
-        <slot name="tabs"></slot>
-    </div>
+  <div>
+    <slot name="headers" />
+    <slot name="tabs" />
+  </div>
 </template>
 
 <script setup lang="ts">

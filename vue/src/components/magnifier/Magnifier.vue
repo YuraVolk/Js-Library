@@ -1,9 +1,13 @@
 <template>
   <div class="magnifier">
-    <div class="magnifier__image" @mousemove="onMouseMove" ref="image">
-      <slot name="image"></slot>
+    <div
+      ref="image"
+      class="magnifier__image"
+      @mousemove="onMouseMove"
+    >
+      <slot name="image" />
     </div>
-    <slot name="glass"></slot>
+    <slot name="glass" />
   </div>
 </template>
 

@@ -1,15 +1,15 @@
 <template>
-    <ul class="wrap">
-        <slot></slot>
-        <div
-            v-for="elementKey in Object.keys(elements).slice(1)"
-            class="comparison-slider"
-            :key="elementKey"
-            :style="imageData[elementKey].style"
-            @mousedown="(e) => onMouseStart(e, elementKey)"
-            @pointerdown="(e) => onMouseStart(e, elementKey)"
-        ></div>
-    </ul>
+  <ul class="wrap">
+    <slot />
+    <div
+      v-for="elementKey in Object.keys(elements).slice(1)"
+      :key="elementKey"
+      class="comparison-slider"
+      :style="imageData[elementKey].style"
+      @mousedown="(e) => onMouseStart(e, elementKey)"
+      @pointerdown="(e) => onMouseStart(e, elementKey)"
+    />
+  </ul>
 </template>
 
 <script setup lang="ts">

@@ -1,28 +1,31 @@
 <template>
-	<div class="wrap" ref="wrap">
-		<slot></slot>
-		<div
-			class="wrap-select"
-			v-if="openSelect"
-			:style="{
-				top: `${openSelect.top}px`,
-				left: `${openSelect.left}px`,
-				width: `${openSelect.width}px`,
-				height: `${openSelect.height}px`
-			}"
-		>
-			<div
-				v-for="option in openSelect.options"
-				:key="option"
-				class="wrap-select__option"
-				:class="{
-					'wrap-select__option--crossed': excludedCriteria[openSelect.index].includes(option)
-				}"
-				@click="() => toggleCriterion(option)"
-				v-text="option"
-			></div>
-		</div>
-	</div>
+  <div
+    ref="wrap"
+    class="wrap"
+  >
+    <slot />
+    <div
+      v-if="openSelect"
+      class="wrap-select"
+      :style="{
+        top: `${openSelect.top}px`,
+        left: `${openSelect.left}px`,
+        width: `${openSelect.width}px`,
+        height: `${openSelect.height}px`
+      }"
+    >
+      <div
+        v-for="option in openSelect.options"
+        :key="option"
+        class="wrap-select__option"
+        :class="{
+          'wrap-select__option--crossed': excludedCriteria[openSelect.index].includes(option)
+        }"
+        @click="() => toggleCriterion(option)"
+        v-text="option"
+      />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">

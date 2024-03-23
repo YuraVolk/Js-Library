@@ -1,7 +1,10 @@
 <template>
-    <li class="backface-carousel-item" ref="item">
-        <slot></slot>
-    </li>
+  <li
+    ref="item"
+    class="backface-carousel-item"
+  >
+    <slot />
+  </li>
 </template>
 
 <script setup lang="ts">
