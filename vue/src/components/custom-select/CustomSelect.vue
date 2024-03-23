@@ -5,6 +5,7 @@
   >
     <option
       v-for="option in internalItems"
+      :key="option.value"
       :value="option.value"
       :disabled="option.isDisabled"
       :selected="option.isSelected"
@@ -29,6 +30,7 @@
     >
       <li
         v-for="element in internalItems"
+        :key="element.value"
         class="custom-select-option"
         :data-disabled="element.isDisabled"
         :data-selected="element.isSelected"

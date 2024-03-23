@@ -1,10 +1,11 @@
 <template>
   <pre ref="element">
         <span
-v-for="letter in settings.currentTextValue.value"
-:class="letter.classes.join('')"
-v-text="letter.letter"
-/>
+			v-for="letter, i in settings.currentTextValue.value"
+			:key="i"
+			:class="letter.classes.join('')"
+			v-text="letter.letter"
+		/>
     </pre>
 </template>
 
@@ -73,7 +74,7 @@ const cipherLetter = (context: ModifyingTextContext, properties: { newLetter?: s
 							letter: newValue,
 							classes: isDone ? [] : ["active"]
 						};
-                    }
+					}
 				}, speed * index);
 			})(index++);
 		}
@@ -87,7 +88,7 @@ const splitText: SplitTextCallback<ModifyingTextContext> = ({ context, toText })
 };
 
 const triggerTextAnimation: TriggerTextAnimationCallback<ModifyingTextContext> = ({ context, toText }) => {
-	splitText({ context, toText });
+	void splitText({ context, toText });
 	const speeds: number[] = [];
 	context.currentTextValue.value.forEach((character, i) => {
 		if (character.letter === toText[i]) return;

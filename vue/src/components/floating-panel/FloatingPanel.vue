@@ -27,8 +27,8 @@ const panelStyles = reactive<CSSProperties>({});
 
 const changePosition = ({ clientX, clientY }: MouseEvent) => {
     if (!panelProperties.dragging || !props.isOpen) return;
-    panelStyles.left = panelProperties.panelX + clientX - panelProperties.clientX + "px";
-    panelStyles.top = panelProperties.panelY + clientY - panelProperties.clientY + "px";
+    panelStyles.left = String(panelProperties.panelX + clientX - panelProperties.clientX) + "px";
+    panelStyles.top = String(panelProperties.panelY + clientY - panelProperties.clientY) + "px";
 };
 
 const onMouseDown = ({ clientX, clientY }: MouseEvent) => {

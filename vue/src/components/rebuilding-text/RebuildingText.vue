@@ -1,10 +1,11 @@
 <template>
   <pre>
         <span
-v-for="letter in settings.currentTextValue.value"
-:class="letter.classes.join('')"
-v-text="letter.letter"
-/>
+			v-for="letter, i in settings.currentTextValue.value"
+			:key="i"
+			:class="letter.classes.join('')"
+			v-text="letter.letter"
+			/>
     </pre>
 </template>
 

@@ -100,7 +100,7 @@ const props = defineProps<VideoConfigurationProps>();
 const video = ref<HTMLVideoElement | null>(null);
 const isMuted = ref(props.muted);
 const previousVideoVolume = ref<number | undefined>();
-const isVideoPlaying = ref(props.autoplay ?? false);
+const isVideoPlaying = ref(props.autoplay);
 
 const rangeInputSettings = reactive({
 	duration: video.value?.duration,

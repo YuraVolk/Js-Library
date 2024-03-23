@@ -25,9 +25,9 @@ const slide = (elementKey: string, difference: number) => {
     const element = elements[elementKey];
     const imageComparisonData = imageData[elementKey];
     element.styles = {
-        width: difference + "px"
+        width: String(difference) + "px"
     };
-    imageComparisonData.style.left = difference + "px";
+    imageComparisonData.style.left = String(difference) + "px";
 };
 
 const onMouseStart = (event: Event, elementKey: string) => {

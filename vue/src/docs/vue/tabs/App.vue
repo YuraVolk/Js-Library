@@ -25,6 +25,7 @@
         <div class="tabs-headers">
           <div
             v-for="i in 3"
+            :key="i"
             class="tab-header"
             :class="{
               active: openTab === i - 1
@@ -90,8 +91,8 @@ import { ref, defineAsyncComponent } from "vue";
 
 const HeaderComponent = defineAsyncComponent(() => import("../HeaderComponent.vue"));
 const SidebarComponent = defineAsyncComponent(() => import("../SidebarComponent.vue"));
-const TabsComponent = defineAsyncComponent(() => import("../../../components/tabs/Tabs.vue"));
-const TabComponent = defineAsyncComponent(() => import("../../../components/tabs/Tab.vue"));
+const TabsComponent = defineAsyncComponent(() => import("../../../components/tabs/TabsComponent.vue"));
+const TabComponent = defineAsyncComponent(() => import("../../../components/tabs/TabComponent.vue"));
 
 const openTab = ref(0);
 </script>

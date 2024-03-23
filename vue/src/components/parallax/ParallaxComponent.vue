@@ -50,7 +50,7 @@ const rerender = () => {
 		const scrollPoint = getScrollPoint(getFirstScrollableParent(wrap.value, props.isHorizontal));
 		if (scrollPoint > animationOffset - innerHeight * 2 && scrollPoint < animationOffset + innerHeight) {
 			const point = (scrollPoint - (animationOffset - innerHeight)) / props.speed - props.margin;
-			styles.transform = `translate${props.isHorizontalTranslation ? "X" : "Y"}(${point}px)`;
+			styles.transform = `translate${props.isHorizontalTranslation ? "X" : "Y"}(${String(point)}px)`;
 		}
 	};
 

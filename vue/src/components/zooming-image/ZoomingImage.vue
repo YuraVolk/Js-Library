@@ -36,10 +36,10 @@ const onMouseMove = (event: MouseEvent) => {
 	if (y >= 0.01 * offsetHeight) yMove += props.moveRatio * yMove;
 
 	glass.value.styles = {
-		backgroundPositionX: `${xMove - props.backgroundShift}%`,
-		backgroundPositionY: `${yMove - props.backgroundShift}%`,
-		left: `${x - props.positionShift}px`,
-		top: `${y - props.positionShift}px`
+		backgroundPositionX: `${String(xMove - props.backgroundShift)}%`,
+		backgroundPositionY: `${String(yMove - props.backgroundShift)}%`,
+		left: `${String(x - props.positionShift)}px`,
+		top: `${String(y - props.positionShift)}px`
 	};
 };
 

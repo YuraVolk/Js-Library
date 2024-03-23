@@ -49,7 +49,7 @@ const props = withDefaults(defineProps<ColorPickerVueConfiguration>(), {
     imageWidth: 245,
     imageHeight: 245
 });
-const rgba = ref([...props.rgba ?? [0, 0, 0, 1]]);
+const rgba = ref([...props.rgba]);
 const canvas = ref<HTMLCanvasElement | null>(null);
 
 const colorInfo = computed(() => {
@@ -60,12 +60,12 @@ const colorInfo = computed(() => {
         hex: "#" + opacityBackground.slice(0, -1).map(color => Number(color).toString(16).padStart(2, "0")).join(""),
         rgb: `rgb(${opacityBackground.slice(0, -1).join(", ")})`,
         rgba: `rgba(${rgba.value.join(", ")})`,
-        width: `${props.width}px`,
-        height: `${props.height}px`,
+        width: `${String(props.width)}px`,
+        height: `${String(props.height)}px`,
         canvasWidth: props.width,
         canvasHeight: props.height,
-        halfWidth: `${props.width / 2}px`,
-        halfHeight: `${props.height / 2}px`
+        halfWidth: `${String(props.width / 2)}px`,
+        halfHeight: `${String(props.height / 2)}px`
     };
 });
 
