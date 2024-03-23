@@ -43,7 +43,7 @@ export class AutocompleteListComponent extends LitElement implements Autocomplet
 			? this.options.filter((option) => {
 					const lowerOption = option.toLowerCase();
 					return lowerOption !== value && lowerOption.startsWith(value);
-			  })
+				})
 			: [];
 		const isListOpened = filteredOptions.length > 0;
 
@@ -51,18 +51,19 @@ export class AutocompleteListComponent extends LitElement implements Autocomplet
 			<slot></slot>
 			${when(
 				isListOpened,
-				() => html`<ul class="autocomplete-items">
-					${filteredOptions.map((option) => {
-						return html`<li
-							class="autocomplete-item"
-							@click="${() => {
-								this.dispatchEvent(new AutocompleteListChangeEvent(option));
-							}}"
-						>
-							${option}
-						</li>`;
-					})}
-				</ul>`
+				() =>
+					html`<ul class="autocomplete-items">
+						${filteredOptions.map((option) => {
+							return html`<li
+								class="autocomplete-item"
+								@click="${() => {
+									this.dispatchEvent(new AutocompleteListChangeEvent(option));
+								}}"
+							>
+								${option}
+							</li>`;
+						})}
+					</ul>`
 			)}
 		`;
 	}

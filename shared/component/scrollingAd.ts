@@ -1,4 +1,4 @@
 export interface ScrollingAdConfiguration {
-    rootMargin: number;
-    checkInterval: number;
+	rootMargin: number;
+	checkInterval: number;
 }

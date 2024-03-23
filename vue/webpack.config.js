@@ -45,7 +45,7 @@ module.exports = {
 		new ModuleFederationPlugin({
 			name: "vue",
 			remotes: {
-			  shared: "shared@[sharedInterfacesUrl]/remoteEntry.js"
+				shared: "shared@[sharedInterfacesUrl]/remoteEntry.js"
 			}
 		}),
 		new ExternalTemplateRemotesPlugin(),
@@ -81,11 +81,11 @@ module.exports = {
 				}
 			},
 			{
-			  test: /\.(png|svg|jpg|jpeg|gif|webp|mp4)$/i,
-			  type: 'asset/resource',
-			  generator: {
-				filename: 'img/[name][ext]'
-			  }
+				test: /\.(png|svg|jpg|jpeg|gif|webp|mp4)$/i,
+				type: "asset/resource",
+				generator: {
+					filename: "img/[name][ext]"
+				}
 			}
 		]
 	},

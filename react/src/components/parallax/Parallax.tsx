@@ -32,8 +32,8 @@ export const Parallax = ({
 					? parent.clientWidth
 					: parent.clientHeight
 				: isHorizontal
-				? parent.innerWidth
-				: parent.innerHeight) / effect;
+					? parent.innerWidth
+					: parent.innerHeight) / effect;
 
 		const scrollEventListener = () => {
 			if (!wrap.current) return;

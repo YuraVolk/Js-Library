@@ -4,4 +4,4 @@ export const CarouselDirection = {
 	FORWARDS: 1
 } as const;
 
-export type CarouselDirection = typeof CarouselDirection[keyof typeof CarouselDirection];
+export type CarouselDirection = (typeof CarouselDirection)[keyof typeof CarouselDirection];

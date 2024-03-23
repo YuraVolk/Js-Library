@@ -11,9 +11,13 @@ export class CountdownComponent extends LitElement implements CountdownConfigura
 	@state()
 	_text = "";
 
-	protected intervalController = new IntervalController(this, () => {
-		this.renderTexts();
-	}, 1000);
+	protected intervalController = new IntervalController(
+		this,
+		() => {
+			this.renderTexts();
+		},
+		1000
+	);
 
 	protected firstUpdated(): void {
 		this.renderTexts();

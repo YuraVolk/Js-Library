@@ -13,7 +13,7 @@ export class TypingTextComponent extends SelfModifyingText implements TypingText
 	eachLetterAsSpan = false;
 
 	splitText({ toText }: SplitTextParams) {
-        // if (this.eachLetterAsSpan) super.splitTextAlgorithm(toText);
+		// if (this.eachLetterAsSpan) super.splitTextAlgorithm(toText);
 	}
 
 	async triggerTextAnimation({ context, fromText, toText }: TriggerTextParams) {

@@ -3,26 +3,26 @@ import { styleMap } from "lit/directives/style-map.js";
 import { LinkedItemMixin } from "../../interfaces/hooks/linkedItems";
 
 export class GalleryCarouselItem extends LinkedItemMixin(LitElement) {
-    static styles = css`
-        :host {
-            display: contents;
-        }
+	static styles = css`
+		:host {
+			display: contents;
+		}
 
-        .gallery-carousel-item {
-            display: inline-block;
-            width: 100%;
-            height: 100%;
-        }
+		.gallery-carousel-item {
+			display: inline-block;
+			width: 100%;
+			height: 100%;
+		}
 
-        ::slotted(*) {
-            width: 100%;
-            height: 100%;
-        }
-    `;
+		::slotted(*) {
+			width: 100%;
+			height: 100%;
+		}
+	`;
 
-    render() {
-        return html`<li class="gallery-carousel-item" style=${styleMap(this.linkedItemStyles)}>
-            <slot></slot>
-        </li>`;
-    }
+	render() {
+		return html`<li class="gallery-carousel-item" style=${styleMap(this.linkedItemStyles)}>
+			<slot></slot>
+		</li>`;
+	}
 }

@@ -86,9 +86,9 @@ export const GalleryCarousel = ({
 		<ContextLinkedItems ref={linkedItemsContext} innerChildren={children}>
 			<div className={`${styles.wrap} ${props.className ?? ""}`}>
 				<div className={styles.gallery}>
-                    <ul className={styles["gallery-list"]} style={galleryListStyle}>
-                        {children}
-                    </ul>
+					<ul className={styles["gallery-list"]} style={galleryListStyle}>
+						{children}
+					</ul>
 				</div>
 				{showArrows && (
 					<div className={styles["gallery-controls"]}>

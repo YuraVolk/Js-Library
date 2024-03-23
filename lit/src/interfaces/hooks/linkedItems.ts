@@ -86,29 +86,37 @@ export declare class LinkedCarouselMixinInterface {
 export const LinkedCarouselMixin = <T extends Constructor<LitElement>>(superClass: T) => {
 	class Mixin extends superClass {
 		@provide({ context: linkedItemsContext })
-		linkedItemsContext: LinkedItems = new Proxy<LinkedItems>({}, {
-			set: (target, p, newValue: LinkedItem, receiver) => {		
-				let styles = newValue.styles,
-					element = newValue.element;
+		linkedItemsContext: LinkedItems = new Proxy<LinkedItems>(
+			{},
+			{
+				set: (target, p, newValue: LinkedItem, receiver) => {
+					let styles = newValue.styles,
+						element = newValue.element;
 
-				const self = this;
-				return Reflect.set(target, p, {
-					get styles() {
-						return styles;
-					},
-					set styles(newStyles: Partial<FilteredCSSStyleDeclaration>) {
-						self.scheduleContextUpdate();
-						styles = newStyles;
-					},
-					get element() {
-						return element;
-					},
-					set element(newElement: HTMLElement) {
-						element = newElement;
-					}
-				}, receiver);
-			},
-		});
+					const self = this;
+					return Reflect.set(
+						target,
+						p,
+						{
+							get styles() {
+								return styles;
+							},
+							set styles(newStyles: Partial<FilteredCSSStyleDeclaration>) {
+								self.scheduleContextUpdate();
+								styles = newStyles;
+							},
+							get element() {
+								return element;
+							},
+							set element(newElement: HTMLElement) {
+								element = newElement;
+							}
+						},
+						receiver
+					);
+				}
+			}
+		);
 
 		private async scheduleContextUpdate() {
 			this.linkedItemsContext = { ...this.linkedItemsContext };
@@ -147,7 +155,12 @@ export class CarouselItem extends LinkedItemMixin(LitElement) {
 			}
 
 			.with-transition {
-				transition: 0.3s linear left, 0.3s linear width, 0.3s linear height, 0.3s linear top, 0.3s linear opacity;
+				transition:
+					0.3s linear left,
+					0.3s linear width,
+					0.3s linear height,
+					0.3s linear top,
+					0.3s linear opacity;
 			}
 		`
 	];

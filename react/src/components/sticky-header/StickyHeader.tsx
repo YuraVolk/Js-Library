@@ -63,9 +63,9 @@ export const StickyHeader = ({
 								top: "",
 								left: "",
 								right: "",
-                                width: "",
-                                height: "",
-                                zIndex: "",
+								width: "",
+								height: "",
+								zIndex: ""
 							}
 						}
 					});

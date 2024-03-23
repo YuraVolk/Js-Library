@@ -6,7 +6,7 @@ import { WithGenerics } from "react/src/utils/utils";
 export const Countdown = ({
 	units = reduceTimeUnits(defaultTimeUnits),
 	date = new Date("May 6, 2085 11:00:00"),
-    ...props
+	...props
 }: WithGenerics<Partial<CountdownConfiguration>>) => {
 	const [text, setText] = useState("");
 
@@ -33,5 +33,5 @@ export const Countdown = ({
 		renderText(units);
 	}, [renderText, units]);
 
-    return <span className={props.className ?? ""}>{text}</span>
+	return <span className={props.className ?? ""}>{text}</span>;
 };

@@ -3,5 +3,5 @@ import { GenericReactComponentProps } from "../generic/classNameFallthrough";
 import { ReactNode } from "react";
 
 export interface OnePageScrollConfiguration extends Partial<RootConfiguration>, GenericReactComponentProps {
-    children: ReactNode;
+	children: ReactNode;
 }

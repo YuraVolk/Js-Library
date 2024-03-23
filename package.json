@@ -1,24 +1,26 @@
 {
-  "name": "js-components-library",
-  "private": true,
-  "version": "1.0.0",
-  "description": "A library of JavaScript-based components built with Lit, React and Vue.",
-  "scripts": {
-    "start": "lerna run --parallel start",
-    "build": "lerna run build",
-    "build:ci": "npm run setup && npm run build",
-    "setup": "lerna run setup",
-    "lint": "lerna run --parallel lint",
-    "type-check": "lerna run --parallel type-check"
-  },
-  "author": "Yuriy Volkovskiy",
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.3.1",
-    "@typescript-eslint/parser": "^7.3.1",
-    "eslint": "^8.57.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-vue": "^9.23.0",
-    "lerna": "^8.1.2",
-    "typescript": "^5.4.3"
-  }
+	"name": "js-components-library",
+	"private": true,
+	"version": "1.0.0",
+	"description": "A library of JavaScript-based components built with Lit, React and Vue.",
+	"scripts": {
+		"start": "lerna run --parallel start",
+		"build": "lerna run build",
+		"build:ci": "npm run setup && npm run build",
+		"setup": "lerna run setup",
+		"lint": "lerna run --parallel lint",
+		"type-check": "lerna run --parallel type-check",
+		"format": "prettier . --write"
+	},
+	"author": "Yuriy Volkovskiy",
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^7.3.1",
+		"@typescript-eslint/parser": "^7.3.1",
+		"eslint": "^8.57.0",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"eslint-plugin-vue": "^9.23.0",
+		"lerna": "^8.1.2",
+		"prettier": "^3.2.5",
+		"typescript": "^5.4.3"
+	}
 }

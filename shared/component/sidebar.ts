@@ -1,12 +1,11 @@
 export const isLocalhostEnvironment = () => {
-    if (process.env.NODE_ENV === "development") {
-        return window.location.hostname === "localhost";
-    }
+	if (process.env.NODE_ENV === "development") {
+		return window.location.hostname === "localhost";
+	}
 
-    return false;
+	return false;
 };
 
-
 export interface SidebarConfiguration {
-    activeLink: string;
+	activeLink: string;
 }

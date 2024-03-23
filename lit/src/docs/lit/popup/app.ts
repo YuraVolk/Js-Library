@@ -25,7 +25,9 @@ export class PopupApplicationExample1 extends LitElement {
 			left: 0;
 			right: 0;
 			bottom: 0;
-			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			box-shadow:
+				0 4px 8px 0 rgba(0, 0, 0, 0.2),
+				0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			background-color: rgba(0, 0, 0, 0.4);
 		}
 
@@ -42,7 +44,9 @@ export class PopupApplicationExample1 extends LitElement {
 			left: 50%;
 			transform: translate(-50%, -50%);
 			font-size: 24px;
-			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			box-shadow:
+				0 4px 8px 0 rgba(0, 0, 0, 0.2),
+				0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			text-align: center;
 			color: #bfbfbf;
 			background-color: #676767;

@@ -6,5 +6,5 @@ export interface InternalLitPerspectiveCarouselState<T> extends InternalPerspect
 
 export const resetInternalLitState = <T>(): InternalLitPerspectiveCarouselState<T> => ({
 	...resetInternalState(),
-	items: [],
+	items: []
 });

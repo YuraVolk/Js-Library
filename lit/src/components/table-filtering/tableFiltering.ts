@@ -87,7 +87,7 @@ export class TableFilteringComponent extends LitElement {
 					this.displaySelect(event.target, Array.from(event.target.parentNode.children).indexOf(event.target));
 				} else if (!(event.target instanceof HTMLDivElement && event.target.classList.contains("wrap-select__option"))) {
 					this.openSelect = undefined;
-				} 
+				}
 			})
 		);
 	}
@@ -134,19 +134,21 @@ export class TableFilteringComponent extends LitElement {
 							width: `${String(this.openSelect.width)}px`,
 							height: `${String(this.openSelect.height)}px`
 						})}
-				  >
+					>
 						${this.openSelect.options.map((option) => {
 							assertNonUndefined(this.openSelect);
 							return html`<div
 								class="wrap-select__option ${classMap({
 									"wrap-select__option--crossed": this.tabularData.excludedCriteria[this.openSelect.index].includes(option)
 								})}"
-								@click="${() => { this.toggleCriterion(option); }}"
+								@click="${() => {
+									this.toggleCriterion(option);
+								}}"
 							>
 								${option}
 							</div>`;
 						})}
-				  </div>`
+					</div>`
 				: ""}
 		</div>`;
 	}

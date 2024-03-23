@@ -108,9 +108,10 @@ export class RangeInputComponent extends LitElement implements RangeInputConfigu
 					/>
 					${when(
 						this.ticks.length,
-						() => html`<ul class="range-slider-ticks">
-							${this.ticks.map((tick) => html`<li class="range-slider-ticks__tick" style="--value: ${tick}%">${tick}</li>`)}
-						</ul>`
+						() =>
+							html`<ul class="range-slider-ticks">
+								${this.ticks.map((tick) => html`<li class="range-slider-ticks__tick" style="--value: ${tick}%">${tick}</li>`)}
+							</ul>`
 					)}
 				</div>
 				${when(!this.hideValue, () => html`<span class="value">${this._value}</span>`)}

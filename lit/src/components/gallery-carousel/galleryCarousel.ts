@@ -177,37 +177,39 @@ export class GalleryCarouselComponent extends LinkedCarouselMixin(LitElement) im
 			</div>
 			${when(
 				this.showArrows,
-				() => html`<div class="gallery-controls">
-					<button
-						@click=${() => {
-							this.changeCurrentSlide(this.current - 1);
-						}}
-						class="gallery-controls__previous-button"
-					></button>
-					<button
-						@click=${() => {
-							this.changeCurrentSlide(this.current + 1);
-						}}
-						class="gallery-controls__next-button"
-					></button>
-				</div>`
+				() =>
+					html`<div class="gallery-controls">
+						<button
+							@click=${() => {
+								this.changeCurrentSlide(this.current - 1);
+							}}
+							class="gallery-controls__previous-button"
+						></button>
+						<button
+							@click=${() => {
+								this.changeCurrentSlide(this.current + 1);
+							}}
+							class="gallery-controls__next-button"
+						></button>
+					</div>`
 			)}
 			${when(
 				this.showToggles && this.itemsLength,
-				() => html`<ul class="gallery-toggles">
-					${map(
-						range(this._assignedElements.length ? this.itemsLength - 2 : this.itemsLength),
-						(i) =>
-							html`<li
-								@click=${() => {
-									this.changeCurrentSlide(i + 1);
-								}}
-								class="gallery-toggle ${classMap({
-									"gallery-toggle--active": i === this.current - 1
-								})}"
-							></li>`
-					)}
-				</ul>`
+				() =>
+					html`<ul class="gallery-toggles">
+						${map(
+							range(this._assignedElements.length ? this.itemsLength - 2 : this.itemsLength),
+							(i) =>
+								html`<li
+									@click=${() => {
+										this.changeCurrentSlide(i + 1);
+									}}
+									class="gallery-toggle ${classMap({
+										"gallery-toggle--active": i === this.current - 1
+									})}"
+								></li>`
+						)}
+					</ul>`
 			)}
 		`;
 	}

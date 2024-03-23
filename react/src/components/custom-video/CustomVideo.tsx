@@ -26,14 +26,14 @@ function customVideoStateReducer(state: CustomVideoState, action: CustomVideoSta
 				...state,
 				isVideoPlaying: false
 			};
-        case "resetVideo": {
-            return {
-                ...state,
-                isVideoPlaying: false,
-                current: 0,
-                currentTimeLabel: toMinutesSeconds(0)
-            };
-        }
+		case "resetVideo": {
+			return {
+				...state,
+				isVideoPlaying: false,
+				current: 0,
+				currentTimeLabel: toMinutesSeconds(0)
+			};
+		}
 		case "toggleMute":
 			if (state.isMuted && state.previousVideoVolume !== undefined) {
 				return {
@@ -113,31 +113,33 @@ export const CustomVideo = (props: WithChildren<VideoConfigurationProps>) => {
 	);
 
 	const startVideo = useCallback(() => {
-        if (!video.current) return;
-        video.current.play().catch((e: unknown) => { console.debug(e); });
-        dispatch({ type: "startVideo" });
-    }, [video]);
+		if (!video.current) return;
+		video.current.play().catch((e: unknown) => {
+			console.debug(e);
+		});
+		dispatch({ type: "startVideo" });
+	}, [video]);
 
 	const stopVideo = useCallback(() => {
-        video.current?.pause();
-        dispatch({ type: "stopVideo" });
-    }, [video]);
+		video.current?.pause();
+		dispatch({ type: "stopVideo" });
+	}, [video]);
 
 	const resetVideo = useCallback(() => {
-        if (!video.current) return;
-        video.current.currentTime = 0;
-        video.current.pause();
-        dispatch({ type: "resetVideo" });
-    }, [video]);
+		if (!video.current) return;
+		video.current.currentTime = 0;
+		video.current.pause();
+		dispatch({ type: "resetVideo" });
+	}, [video]);
 
 	const muteVideo = useCallback(() => {
-        if (!video.current) return;
-        dispatch({ type: "toggleMute" });
+		if (!video.current) return;
+		dispatch({ type: "toggleMute" });
 
-        if (videoState.isMuted && videoState.previousVideoVolume !== undefined) {
-            video.current.volume = videoState.previousVideoVolume;
-        } else video.current.volume = 0;
-    }, [video, videoState.isMuted, videoState.previousVideoVolume]);
+		if (videoState.isMuted && videoState.previousVideoVolume !== undefined) {
+			video.current.volume = videoState.previousVideoVolume;
+		} else video.current.volume = 0;
+	}, [video, videoState.isMuted, videoState.previousVideoVolume]);
 
 	const setupVideo = useCallback(() => {
 		if (!video.current || (!props.children && !props.src)) return;
@@ -176,34 +178,26 @@ export const CustomVideo = (props: WithChildren<VideoConfigurationProps>) => {
 					defaultValue={videoState.current}
 				/>
 				<ul className={styles["controls-buttons"]}>
-					<li
-						className={styles["control-button"]}
-						style={{ display: videoState.isVideoPlaying ? "none" : "block" }}
-						onClick={startVideo}
-					>
-                        <button className={styles["controls-button__clickable-button"]}>
-                            <img alt="Play" src={playButton} className={styles["controls-button__image"]} />
-                        </button>
-                    </li>
-                    <li
-						className={styles["control-button"]}
-						style={{ display: videoState.isVideoPlaying ? "block" : "none" }}
-						onClick={stopVideo}
-					>
-                        <button className={styles["controls-button__clickable-button"]}>
-                            <img alt="Pause" src={pauseButton} className={styles["controls-button__image"]} />
-                        </button>
-                    </li>
-                    <li className={styles["control-button"]} onClick={resetVideo}>
-                        <button className={styles["controls-button__clickable-button"]}>
-                            <img alt="Reset" src={resetButton} className={styles["controls-button__image"]} />
-                        </button>
-                    </li>
-                    <li className={styles["control-button"]} onClick={muteVideo}>
-                        <button className={styles["controls-button__clickable-button"]}>
-                            <img alt="Mute" src={muteButton} className={styles["controls-button__image"]} />
-                        </button>
-                    </li>
+					<li className={styles["control-button"]} style={{ display: videoState.isVideoPlaying ? "none" : "block" }} onClick={startVideo}>
+						<button className={styles["controls-button__clickable-button"]}>
+							<img alt="Play" src={playButton} className={styles["controls-button__image"]} />
+						</button>
+					</li>
+					<li className={styles["control-button"]} style={{ display: videoState.isVideoPlaying ? "block" : "none" }} onClick={stopVideo}>
+						<button className={styles["controls-button__clickable-button"]}>
+							<img alt="Pause" src={pauseButton} className={styles["controls-button__image"]} />
+						</button>
+					</li>
+					<li className={styles["control-button"]} onClick={resetVideo}>
+						<button className={styles["controls-button__clickable-button"]}>
+							<img alt="Reset" src={resetButton} className={styles["controls-button__image"]} />
+						</button>
+					</li>
+					<li className={styles["control-button"]} onClick={muteVideo}>
+						<button className={styles["controls-button__clickable-button"]}>
+							<img alt="Mute" src={muteButton} className={styles["controls-button__image"]} />
+						</button>
+					</li>
 				</ul>
 			</div>
 		</div>

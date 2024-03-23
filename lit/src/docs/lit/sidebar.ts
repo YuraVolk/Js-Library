@@ -17,7 +17,11 @@ export class SidebarComponent extends LitElement implements SidebarConfiguration
 			display: flex;
 			flex-direction: column;
 			gap: 2vh;
-			font-family: Helvetica, Segoe UI, Arial, system-ui;
+			font-family:
+				Helvetica,
+				Segoe UI,
+				Arial,
+				system-ui;
 		}
 
 		@media (max-width: 800px) {

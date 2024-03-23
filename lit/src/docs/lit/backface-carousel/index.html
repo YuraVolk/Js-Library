@@ -1,36 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Backface Carousel Component</title>
+		<script defer src="./index.js"></script>
+		<script defer src="./backface-carousel/index.js"></script>
+	</head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Backface Carousel Component</title>
-  <script defer src="./index.js"></script>
-  <script defer src="./backface-carousel/index.js"></script>
-</head>
-
-<body>
-  <header class="header">
-    <header-component></header-component>
-  </header>
-  <aside class="navigation">
-    <sidebar-component activeLink="Backface Carousel"></sidebar-component>
-  </aside>
-  <main class="main">
-    <h1 class="heading">Backface Carousel</h1>
-    <p>
-      The backface carousel component represents a 3D-style carousel that appears as a 3D shape with its contents being
-      equal-size items. Any item can be of any content within the carousel, ranging from simple images to complex HTML
-      structures. The items are inserted directly into the carousel as children nodes without any configuration. The carousel
-      exposes methods to be easily controllable, and supports both vertical and horizontal placement.
-    </p>
-    <backface-carousel-application-example-1></backface-carousel-application-example-1>
-    <p>
-     It is possible to set vertical placement to be the default placement:
-    </p>
-    <br>
-    <backface-carousel-application-example-2></backface-carousel-application-example-2>
-  </main>
-</body>
-
+	<body>
+		<header class="header">
+			<header-component></header-component>
+		</header>
+		<aside class="navigation">
+			<sidebar-component activeLink="Backface Carousel"></sidebar-component>
+		</aside>
+		<main class="main">
+			<h1 class="heading">Backface Carousel</h1>
+			<p>
+				The backface carousel component represents a 3D-style carousel that appears as a 3D shape with its contents being equal-size items.
+				Any item can be of any content within the carousel, ranging from simple images to complex HTML structures. The items are inserted
+				directly into the carousel as children nodes without any configuration. The carousel exposes methods to be easily controllable, and
+				supports both vertical and horizontal placement.
+			</p>
+			<backface-carousel-application-example-1></backface-carousel-application-example-1>
+			<p>It is possible to set vertical placement to be the default placement:</p>
+			<br />
+			<backface-carousel-application-example-2></backface-carousel-application-example-2>
+		</main>
+	</body>
 </html>

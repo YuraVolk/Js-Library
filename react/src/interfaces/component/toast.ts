@@ -3,8 +3,8 @@ import { WithChildren } from "react/src/utils/utils";
 import { ToastConfiguration as RootConfiguration } from "shared/component/toast";
 
 export interface ToastConfiguration extends WithChildren<RootConfiguration> {
-    animationDuration: number;
-    isOpen: boolean;
-    classes: CSSTransitionClassNames;
-    closeToast?(): void;
+	animationDuration: number;
+	isOpen: boolean;
+	classes: CSSTransitionClassNames;
+	closeToast?(): void;
 }

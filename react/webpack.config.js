@@ -34,7 +34,7 @@ module.exports = {
 		interfacesEntry: "./src/components/reactEntry.ts",
 		...reactAppEntry
 	},
-    plugins: [
+	plugins: [
 		new ModuleFederationPlugin({
 			name: "react",
 			remotes: {
@@ -44,9 +44,9 @@ module.exports = {
 		new ExternalTemplateRemotesPlugin(),
 		...reactHtmlPlugins
 	],
-    module: {
-        rules: [
-            {
+	module: {
+		rules: [
+			{
 				test: /\.tsx?$/,
 				exclude: /node_modules/,
 				loader: "babel-loader",
@@ -70,24 +70,21 @@ module.exports = {
 			{
 				test: /\.css$/,
 				exclude: /\.module\.css$/,
-				use: [
-					"style-loader",
-					"css-loader"
-				]
+				use: ["style-loader", "css-loader"]
 			},
 			{
-			  test: /\.(png|svg|jpg|jpeg|gif|webp|mp4)$/i,
-			  type: 'asset/resource',
-			  generator: {
-				filename: 'img/[name][ext]'
-			  }
+				test: /\.(png|svg|jpg|jpeg|gif|webp|mp4)$/i,
+				type: "asset/resource",
+				generator: {
+					filename: "img/[name][ext]"
+				}
 			}
-        ]
-    },
+		]
+	},
 	resolve: {
-		extensions: ['.js', '.jsx', '.ts', '.tsx', '.css'],
+		extensions: [".js", ".jsx", ".ts", ".tsx", ".css"],
 		alias: {
-			src: path.resolve(__dirname, '../src')
+			src: path.resolve(__dirname, "../src")
 		}
 	}
 };

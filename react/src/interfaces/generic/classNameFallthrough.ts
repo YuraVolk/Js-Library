@@ -1,3 +1,3 @@
 export interface GenericReactComponentProps {
-    className?: string;
+	className?: string;
 }

@@ -18,32 +18,35 @@ export const OnePageScroll = ({
 	const selectedItem = useRef(0);
 	const isScrolling = useRef(false);
 
-	const smoothScrollTo = useCallback((to: number) => {
-		if (!wrap.current) return;
-		isScrolling.current = true;
-		const property = isHorizontal ? "scrollLeft" : "scrollTop";
-		const start = wrap.current[property],
-			change = to - start;
-		let currentTime = 0;
+	const smoothScrollTo = useCallback(
+		(to: number) => {
+			if (!wrap.current) return;
+			isScrolling.current = true;
+			const property = isHorizontal ? "scrollLeft" : "scrollTop";
+			const start = wrap.current[property],
+				change = to - start;
+			let currentTime = 0;
 
-        const animateScroll = () => {
-            if (!wrap.current) return;
-            currentTime += increment;
-            const quad = easeInOutQuad(currentTime, start, change, duration);
-            if (quad > increment) {
-                wrap.current[property] = quad - increment / 2;
-            } else wrap.current[property] = quad;
-    
-            if (currentTime < duration) {
-                animationTimeout.current.timer = window.setTimeout(animateScroll, increment);
-            } else if (currentTime >= duration) {
-                wrap.current[property] = to;
-                isScrolling.current = false;
-            }
-        };
-        
-        animateScroll();    
-	}, [duration, increment, isHorizontal]);
+			const animateScroll = () => {
+				if (!wrap.current) return;
+				currentTime += increment;
+				const quad = easeInOutQuad(currentTime, start, change, duration);
+				if (quad > increment) {
+					wrap.current[property] = quad - increment / 2;
+				} else wrap.current[property] = quad;
+
+				if (currentTime < duration) {
+					animationTimeout.current.timer = window.setTimeout(animateScroll, increment);
+				} else if (currentTime >= duration) {
+					wrap.current[property] = to;
+					isScrolling.current = false;
+				}
+			};
+
+			animateScroll();
+		},
+		[duration, increment, isHorizontal]
+	);
 
 	const scrollSlide = useCallback(
 		(direction: CarouselDirection) => {

@@ -1,5 +1,5 @@
 export interface PopupConfiguration {
-    open: boolean;
-    displayOpenButton: boolean;
-    autoClosingTime?: number;
+	open: boolean;
+	displayOpenButton: boolean;
+	autoClosingTime?: number;
 }

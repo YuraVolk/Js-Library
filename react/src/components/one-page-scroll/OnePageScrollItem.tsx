@@ -6,10 +6,12 @@ import styles from "./OnePageScroll.module.css";
 import { GenericReactComponentProps } from "../../interfaces/generic/classNameFallthrough";
 
 export const OnePageScrollItem = (props: WithChildren<object> & GenericReactComponentProps) => {
-    const item = useRef<HTMLDivElement | null>(null);
-    const styleObject = useLinkedItem(uid, item);
+	const item = useRef<HTMLDivElement | null>(null);
+	const styleObject = useLinkedItem(uid, item);
 
-    return <div ref={item} className={`${styles["one-page-scroll-item"]} ${props.className ?? ""}`} style={styleObject}>
-        {props.children}
-    </div>
+	return (
+		<div ref={item} className={`${styles["one-page-scroll-item"]} ${props.className ?? ""}`} style={styleObject}>
+			{props.children}
+		</div>
+	);
 };

@@ -4,10 +4,12 @@ import styles from "./AutocompleteList.module.css";
 
 export const AutocompleteList = (props: AutocompleteListReactConfiguration) => {
 	const value = props.inputValue.toLowerCase().trim();
-	const filteredOptions = value.length ? props.options.filter((option) => {
-		const lowerOption = option.toLowerCase();
-		return lowerOption !== value && lowerOption.startsWith(value);
-	}) : [];
+	const filteredOptions = value.length
+		? props.options.filter((option) => {
+				const lowerOption = option.toLowerCase();
+				return lowerOption !== value && lowerOption.startsWith(value);
+			})
+		: [];
 	const isListOpened = filteredOptions.length > 0;
 
 	return (

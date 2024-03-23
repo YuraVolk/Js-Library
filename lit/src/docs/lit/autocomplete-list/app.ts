@@ -104,7 +104,7 @@ class AutocompleteListApplicationExample2 extends LitElement {
 						}}
 					/>
 				</autocomplete-list-component>
-			</label> 
+			</label>
 			<label class="autocomplete-label">
 				<autocomplete-list-component
 					.options=${professions}

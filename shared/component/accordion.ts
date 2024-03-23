@@ -1,7 +1,7 @@
 export interface AccordionListConfiguration {
-    multiple?: boolean;
+	multiple?: boolean;
 }
 
 export interface AccordionListItemConfiguration {
-    isOpen?: boolean;
+	isOpen?: boolean;
 }

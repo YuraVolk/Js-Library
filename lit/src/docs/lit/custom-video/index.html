@@ -1,37 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Custom Video Component</title>
+		<script defer src="./index.js"></script>
+		<script defer src="./custom-video/index.js"></script>
+	</head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Custom Video Component</title>
-  <script defer src="./index.js"></script>
-  <script defer src="./custom-video/index.js"></script>
-</head>
-
-<body>
-  <header class="header">
-    <header-component></header-component>
-  </header>
-  <aside class="navigation">
-    <sidebar-component activeLink="Custom Video"></sidebar-component>
-  </aside>
-  <main class="main">
-    <h1 class="heading">Custom Video</h1>
-    <p>
-      Making your own custom video component is an important and required foundation if you
-      want to extend default browser's video settings with your own settings and give the design
-      you like. This approach requires a custom JS-implemented behavior, and as such this component
-      provides the basics to work with, as it automatically configures the vital video settings,
-      like pausing and playing, muting, changing volume, resetting video, changing current video time,
-      and overall smooth animations.
-    </p>
-    <p>
-      This component is configurable through inheriting from it and adding functionality atop,
-      here is a default configuration example, with only width and height set:
-    </p>
-    <custom-video-application-example-1></custom-video-application-example-1>
-  </main>
-</body>
-
+	<body>
+		<header class="header">
+			<header-component></header-component>
+		</header>
+		<aside class="navigation">
+			<sidebar-component activeLink="Custom Video"></sidebar-component>
+		</aside>
+		<main class="main">
+			<h1 class="heading">Custom Video</h1>
+			<p>
+				Making your own custom video component is an important and required foundation if you want to extend default browser's video
+				settings with your own settings and give the design you like. This approach requires a custom JS-implemented behavior, and as such
+				this component provides the basics to work with, as it automatically configures the vital video settings, like pausing and playing,
+				muting, changing volume, resetting video, changing current video time, and overall smooth animations.
+			</p>
+			<p>
+				This component is configurable through inheriting from it and adding functionality atop, here is a default configuration example,
+				with only width and height set:
+			</p>
+			<custom-video-application-example-1></custom-video-application-example-1>
+		</main>
+	</body>
 </html>

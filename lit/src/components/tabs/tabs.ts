@@ -20,20 +20,24 @@ export class TabsComponent extends LitElement implements TabsLitConfiguration {
 	@queryAssignedElements({ slot: "tabs" })
 	_tabs!: HTMLElement[];
 
-    private animationTimeout?: number;
+	private animationTimeout?: number;
 
 	protected firstUpdated() {
 		this.switchToTab();
 		for (const header of this._headers) {
-			Array.from(header.children).forEach((header, i) => { header.addEventListener("click", () => { this.switchToTab(i); }); });
+			Array.from(header.children).forEach((header, i) => {
+				header.addEventListener("click", () => {
+					this.switchToTab(i);
+				});
+			});
 		}
 	}
 
 	switchToTab(newTab?: number) {
-        window.clearTimeout(this.animationTimeout);
-        this.animationTimeout = undefined;
-        
-        const previousTab = this.currentTab;
+		window.clearTimeout(this.animationTimeout);
+		this.animationTimeout = undefined;
+
+		const previousTab = this.currentTab;
 		if (newTab !== undefined) this.currentTab = newTab;
 		for (const header of this._headers) {
 			Array.from(header.children).forEach((header, i) => {
@@ -47,14 +51,14 @@ export class TabsComponent extends LitElement implements TabsLitConfiguration {
 				if (i === this.currentTab) {
 					tab.style.removeProperty("display");
 				} else if (previousTab === i) {
-                    tab.classList.add(this.leaveTabClassName);
-                    this.animationTimeout = window.setTimeout(() => {
-                        tab.classList.remove(this.leaveTabClassName);
-                        tab.style.display = "none";
-                    }, this.transitionTime);
-                } else if (newTab === undefined) {
-                    tab.style.display = "none";
-                } else tab.classList.remove(this.inactiveTabClassName);
+					tab.classList.add(this.leaveTabClassName);
+					this.animationTimeout = window.setTimeout(() => {
+						tab.classList.remove(this.leaveTabClassName);
+						tab.style.display = "none";
+					}, this.transitionTime);
+				} else if (newTab === undefined) {
+					tab.style.display = "none";
+				} else tab.classList.remove(this.inactiveTabClassName);
 			});
 		}
 	}

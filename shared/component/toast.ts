@@ -1,3 +1,3 @@
 export interface ToastConfiguration {
-    autoCloseDelay?: number;
+	autoCloseDelay?: number;
 }

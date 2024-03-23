@@ -1,24 +1,24 @@
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from "vue";
 
 export function useInterval(callback: () => void, timeout: number) {
-    const interval = ref<number | undefined>();
+	const interval = ref<number | undefined>();
 
-    const abortInterval = () => {
-        window.clearInterval(interval.value);
-        interval.value = undefined;
-    };
+	const abortInterval = () => {
+		window.clearInterval(interval.value);
+		interval.value = undefined;
+	};
 
-    const restartInterval = () => {
-        interval.value = window.setInterval(callback, timeout);
-    };
+	const restartInterval = () => {
+		interval.value = window.setInterval(callback, timeout);
+	};
 
-    onMounted(() => {
-        restartInterval();
-    });
+	onMounted(() => {
+		restartInterval();
+	});
 
-    onUnmounted(() => {
-        abortInterval();
-    });
+	onUnmounted(() => {
+		abortInterval();
+	});
 
-    return { abortInterval, restartInterval };
+	return { abortInterval, restartInterval };
 }

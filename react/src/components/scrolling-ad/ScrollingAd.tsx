@@ -45,12 +45,12 @@ export const ScrollingAd = ({
 				threshold: generateThreshold()
 			}
 		);
-        intersectionObserverInstance.observe(wrap.current);
-        intersectionObserver.current = intersectionObserverInstance;
+		intersectionObserverInstance.observe(wrap.current);
+		intersectionObserver.current = intersectionObserverInstance;
 
-        return () => {
-            intersectionObserverInstance.disconnect();
-        };
+		return () => {
+			intersectionObserverInstance.disconnect();
+		};
 	}, [rootMargin]);
 
 	return (

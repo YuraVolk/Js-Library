@@ -15,20 +15,14 @@ const Sidebar = (props: SidebarConfiguration) => {
 							<summary className={styles.list__heading}>
 								<span>{heading}</span>
 								<svg aria-hidden="true" fill="none" focusable="false" height="1em" role="presentation" viewBox="0 0 24 24" width="1em">
-									<path
-										d="M15.5 19l-7-7 7-7"
-										stroke="currentColor"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth="1.5"
-									></path>
+									<path d="M15.5 19l-7-7 7-7" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"></path>
 								</svg>
 							</summary>
 							<div className={styles["list-sublist-wrap"]}>
 								<ul className={styles["list-sublist"]}>
 									{linkList.map((link) => (
 										<li
-                                            key={link.name}
+											key={link.name}
 											className={`${styles["list-sublist__item"]} ${
 												link.name === props.activeLink ? styles["list-sublist__item--active"] : ""
 											}`}

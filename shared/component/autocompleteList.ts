@@ -1,4 +1,4 @@
 export interface AutocompleteListConfiguration {
-    options: string[];
-    inputValue: string;
+	options: string[];
+	inputValue: string;
 }

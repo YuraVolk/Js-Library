@@ -1,3 +1,3 @@
 export interface TabsConfiguration {
-    currentTab: number;
+	currentTab: number;
 }

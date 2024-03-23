@@ -11,7 +11,7 @@ you should give vulnerable element.
 Any screenshots, if applicable.
 If issue is happenning only
 with specific type of input,
-attach this input here. 
+attach this input here.
 
 All security issues will
 be fixed as fast as possible.
@@ -25,29 +25,35 @@ advisories will be priority 1.
 ## Format
 
 ### Type of issue
+
 Check one of these.
+
 - [ ] DoS
 - [ ] DDoS
 - [ ] XSS
 - [ ] Other (write type of issue below)
 
 ### How to exploit vulnerability
+
 Give a video, screenshots
 of how to exploit vulnerability,
 and what vulnerable element is.
 
 ### Workarounds
+
 If there are workarounds,
 write them here.
 
 ## Excluded
+
 These are packages that were
-fixed manually: 
+fixed manually:
+
 - [x] serialize-javascript
 - [x] compression-webpack-plugin
 - [x] less-loader
 - [x] clean-css
 
-No need to worry than 
+No need to worry than
 there are outdated versions
 of these packages.
