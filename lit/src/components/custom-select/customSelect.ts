@@ -132,9 +132,10 @@ export class CustomSelectComponent extends LitElement implements CustomSelectCon
 			<select .value=${selectedItem?.value ?? ""} name=${this.selectName}>
 				${map(
 					this.items,
-					(option) => html`<option value=${option.value} ?disabled=${option.isDisabled} ?selected=${option.isSelected}>
-						${option.innerContent}
-					</option>`
+					(option) =>
+						html`<option value=${option.value} ?disabled=${option.isDisabled} ?selected=${option.isSelected}>
+							${option.innerContent}
+						</option>`
 				)}
 			</select>
 			<div class="wrap">
@@ -149,17 +150,18 @@ export class CustomSelectComponent extends LitElement implements CustomSelectCon
 				<ul class="custom-select-options ${classMap({ hidden: !(this.items.length && this._isOpened) })}">
 					${map(
 						this.items,
-						(item) => html`<li
-							class="custom-select-option"
-							?data-disabled=${item.isDisabled}
-							?data-selected=${item.isSelected}
-							value=${item.value}
-							@click=${() => {
-								this.onItemSelected(item);
-							}}
-						>
-							${item.innerContent}
-						</li>`
+						(item) =>
+							html`<li
+								class="custom-select-option"
+								?data-disabled=${item.isDisabled}
+								?data-selected=${item.isSelected}
+								value=${item.value}
+								@click=${() => {
+									this.onItemSelected(item);
+								}}
+							>
+								${item.innerContent}
+							</li>`
 					)}
 				</ul>
 			</div>

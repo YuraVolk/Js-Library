@@ -1,40 +1,41 @@
 .floating-panel {
-  width: 200px;
-  height: 210px;
-  z-index: 5;
-  background-color: #2390bb;
-  color: #ffffff;
-  font-size: 12px;
-  line-height: 22px;
-  border: 5px solid #676767;
-  text-align: center;
-  cursor: grab;
+	width: 200px;
+	height: 210px;
+	z-index: 5;
+	background-color: #2390bb;
+	color: #ffffff;
+	font-size: 12px;
+	line-height: 22px;
+	border: 5px solid #676767;
+	text-align: center;
+	cursor: grab;
 }
 
 .floating-panel__caption {
-  font-weight: bold;
-  padding: 10px;
-  background-color: #00435a;
-  font-size: 17px;
+	font-weight: bold;
+	padding: 10px;
+	background-color: #00435a;
+	font-size: 17px;
 }
 
 .floating-panel--sticky {
-  position: sticky;
+	position: sticky;
 }
 
 .floating-panel--fixed {
-  position: sticky;
-  position: fixed;
-  top: calc(40vh - 210px);
-  left: calc(98vw - 200px);
+	position: sticky;
+	position: fixed;
+	top: calc(40vh - 210px);
+	left: calc(98vw - 200px);
 }
 
 .wrap {
-  background: rgba(73, 37, 37, 0.7);
-  border-radius: 10px;
-  height: 300px;
+	background: rgba(73, 37, 37, 0.7);
+	border-radius: 10px;
+	height: 300px;
 }
 
-.main > p, li {
-  max-width: 85%;
+.main > p,
+li {
+	max-width: 85%;
 }

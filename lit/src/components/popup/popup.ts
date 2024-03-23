@@ -36,14 +36,17 @@ export class PopupComponent extends LitElement implements PopupLitConfiguration 
 		this.open = true;
 		const popup = await this._popup;
 		const targetElements: unknown[] = Array.from(
-			this._assignedElements.reduce<Element[]>(
-				(list, b) => [...list, ...Array.from(b.querySelectorAll(this.closeButtonSelector))],
-				[]
-			)
+			this._assignedElements.reduce<Element[]>((list, b) => [...list, ...Array.from(b.querySelectorAll(this.closeButtonSelector))], [])
 		);
-		popup.addEventListener("click", this.clickEventListener = (event) => {
-			if (event.target && targetElements.includes(event.target)) this.closePopup().catch((e: unknown) => { console.error(e); });
-		});
+		popup.addEventListener(
+			"click",
+			(this.clickEventListener = (event) => {
+				if (event.target && targetElements.includes(event.target))
+					this.closePopup().catch((e: unknown) => {
+						console.error(e);
+					});
+			})
+		);
 
 		if (this.autoClosingTime) {
 			await new Promise((resolve) => setTimeout(resolve, this.autoClosingTime ?? 0));
@@ -68,9 +71,10 @@ export class PopupComponent extends LitElement implements PopupLitConfiguration 
 		)}
 		${when(
 			this.open,
-			() => html`<div class="popup">
-				<slot name="popup"></slot>
-			</div>`
+			() =>
+				html`<div class="popup">
+					<slot name="popup"></slot>
+				</div>`
 		)}`;
 	}
 }

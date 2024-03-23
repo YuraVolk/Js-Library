@@ -10,41 +10,47 @@ const Magnifier = forwardRef<MagnifiersExposedFunctions, MagnifiersConfiguration
 		const linkedItemsContext = useRef<ExposedContextFunctions | null>(null);
 		const image = useRef<HTMLDivElement>(null);
 
-		const moveMagnifier = useCallback((x: number, y: number) => {
-			if (!image.current) return;
-			const glass = linkedItemsContext.current?.getState()["magnifier-glass"];
-			assertNonUndefined(glass);
-			const element = glass.element.current;
-			assertNonUndefined(element);
+		const moveMagnifier = useCallback(
+			(x: number, y: number) => {
+				if (!image.current) return;
+				const glass = linkedItemsContext.current?.getState()["magnifier-glass"];
+				assertNonUndefined(glass);
+				const element = glass.element.current;
+				assertNonUndefined(element);
 
-			const width = element.offsetWidth / 2,
-				height = element.offsetHeight / 2;
-			if (x > image.current.offsetWidth) {
-				x = image.current.offsetWidth;
-			} else if (x < 0) x = 0;
-			if (y > image.current.offsetHeight) {
-				y = image.current.offsetHeight;
-			} else if (y < 0) y = 0;
+				const width = element.offsetWidth / 2,
+					height = element.offsetHeight / 2;
+				if (x > image.current.offsetWidth) {
+					x = image.current.offsetWidth;
+				} else if (x < 0) x = 0;
+				if (y > image.current.offsetHeight) {
+					y = image.current.offsetHeight;
+				} else if (y < 0) y = 0;
 
-			linkedItemsContext.current?.updateState({
-				"magnifier-glass": {
-					...glass,
-					styles: {
-						...glass.styles,
-						left: `${String(x - width)}px`,
-						top: `${String(y - height)}px`,
-						backgroundPosition: "-" + String(x * zoomScale - width) + "px -" + String(y * zoomScale - height) + "px"
+				linkedItemsContext.current?.updateState({
+					"magnifier-glass": {
+						...glass,
+						styles: {
+							...glass.styles,
+							left: `${String(x - width)}px`,
+							top: `${String(y - height)}px`,
+							backgroundPosition: "-" + String(x * zoomScale - width) + "px -" + String(y * zoomScale - height) + "px"
+						}
 					}
-				}
-			});
-		}, [zoomScale]);
+				});
+			},
+			[zoomScale]
+		);
 
-		const onMouseMove = useCallback((event: React.MouseEvent) => {
-            if (!image.current) return;
-            event.preventDefault();
-            const rect = image.current.getBoundingClientRect();
-            moveMagnifier(event.pageX - rect.left - window.scrollX, event.pageY - rect.top - window.scrollY);
-        }, [moveMagnifier]);
+		const onMouseMove = useCallback(
+			(event: React.MouseEvent) => {
+				if (!image.current) return;
+				event.preventDefault();
+				const rect = image.current.getBoundingClientRect();
+				moveMagnifier(event.pageX - rect.left - window.scrollX, event.pageY - rect.top - window.scrollY);
+			},
+			[moveMagnifier]
+		);
 
 		const setup = useCallback(() => {
 			if (!image.current) return;

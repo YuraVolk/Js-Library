@@ -1,19 +1,19 @@
 .one-page-scroll {
-  display: block;
-  width: 500px;
-  height: 500px;
-  border: 3px solid #333;
+	display: block;
+	width: 500px;
+	height: 500px;
+	border: 3px solid #333;
 }
 
 .one-page-scroll-slide {
-  min-width: 500px;
-  height: 500px;
-  border: 3px solid #2390bb;
-  background-color: #62626253;
+	min-width: 500px;
+	height: 500px;
+	border: 3px solid #2390bb;
+	background-color: #62626253;
 }
 
 .one-page-scroll-slide__heading {
-  margin: 0;
-  font-size: 32px;
-  line-height: 54px;
+	margin: 0;
+	font-size: 32px;
+	line-height: 54px;
 }

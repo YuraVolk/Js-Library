@@ -1,33 +1,24 @@
 {
-  "compilerOptions": {
-    "plugins": [
-      {
-        "name": "typescript-plugin-css-modules"
-      }
-    ],
-    "baseUrl": "../",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "lib": ["DOM"],
-    "target": "ESNext",
-    "module": "ES2020",
-    "moduleResolution": "Bundler",
-    "resolveJsonModule": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "typeRoots": [
-      "./node_modules/@types",
-      "./react/node_modules/@types",
-      "../global.d.ts",
-      "./global.d.ts",
-    ],
-    "useDefineForClassFields": false,
-    "jsx": "react"
-  },
-  "include": [
-    "**/*.ts",
-    "**/*.vue",
-    "**/*.tsx"
-  ],
-  "exclude": ["node_modules"]
+	"compilerOptions": {
+		"plugins": [
+			{
+				"name": "typescript-plugin-css-modules"
+			}
+		],
+		"baseUrl": "../",
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"lib": ["DOM"],
+		"target": "ESNext",
+		"module": "ES2020",
+		"moduleResolution": "Bundler",
+		"resolveJsonModule": true,
+		"strict": true,
+		"esModuleInterop": true,
+		"typeRoots": ["./node_modules/@types", "./react/node_modules/@types", "../global.d.ts", "./global.d.ts"],
+		"useDefineForClassFields": false,
+		"jsx": "react"
+	},
+	"include": ["**/*.ts", "**/*.vue", "**/*.tsx"],
+	"exclude": ["node_modules"]
 }

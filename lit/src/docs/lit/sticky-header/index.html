@@ -1,94 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Sticky Header Component</title>
+		<script defer src="./index.js"></script>
+		<script defer src="./sticky-header/index.js"></script>
+	</head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sticky Header Component</title>
-    <script defer src="./index.js"></script>
-	<script defer src="./sticky-header/index.js"></script>
-</head>
-
-<body>
-    <header class="header">
-        <header-component></header-component>
-    </header>
-    <aside class="navigation">
-        <sidebar-component activeLink="Sticky Header"></sidebar-component>
-    </aside>
-    <main class="main">
-        <h1 class="heading">Sticky Header</h1>
-        <p>
-            The sticky header component is a component that makes use of the IntersectionObserver API and wrapper custom
-            component to keep track of when intersection changes and quickly keep track of which state the header should
-            be in.
-            The custom component represents the scrolling point, and its first nested element is the sticky header. As
-            soon
-            as header is not fully visible as specified by user, the sticky header is then automatically re-updated.
-            Another feature of this component is the smooth animation from the non-sticky state to the fixed state.
-            This component accepts the following properties:
-        </p>
-        <ul>
-            <li>rootMargin, a string that is passed to the IntersectionObserver as the root margin.</li>
-            <li>ratio, a number in range of 0 to 1 that specifies which ratio of the component should be fully visible
-                for state to change. The default value is 0.25.</li>
-            <li>fixedClassName, specifies the default fixed class name state, by default being "fixed".</li>
-        </ul>
-        <p>Here you can see an example of this component with default settings:</p>
-        <sticky-header-component class="sticky-header-wrap">
-            <p class="sticky-header">Sticky Header</p>
-        </sticky-header-component>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore
-            ratione autem praesentium asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur
-            error fuga dicta esse facilis.
-        </p>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore
-            ratione autem praesentium asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur
-            error fuga dicta esse facilis.
-        </p>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore
-            ratione autem praesentium asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur
-            error fuga dicta esse facilis.
-        </p>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore
-            ratione autem praesentium asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur
-            error fuga dicta esse facilis.
-        </p>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore
-            ratione autem praesentium asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur
-            error fuga dicta esse facilis.
-        </p>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore
-            ratione autem praesentium asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur
-            error fuga dicta esse facilis.
-        </p>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore
-            ratione autem praesentium asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur
-            error fuga dicta esse facilis.
-        </p>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore
-            ratione autem praesentium asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur
-            error fuga dicta esse facilis.
-        </p>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore
-            ratione autem praesentium asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur
-            error fuga dicta esse facilis.
-        </p>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore
-            ratione autem praesentium asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur
-            error fuga dicta esse facilis.
-        </p>
-    </main>
-</body>
-
+	<body>
+		<header class="header">
+			<header-component></header-component>
+		</header>
+		<aside class="navigation">
+			<sidebar-component activeLink="Sticky Header"></sidebar-component>
+		</aside>
+		<main class="main">
+			<h1 class="heading">Sticky Header</h1>
+			<p>
+				The sticky header component is a component that makes use of the IntersectionObserver API and wrapper custom component to keep track
+				of when intersection changes and quickly keep track of which state the header should be in. The custom component represents the
+				scrolling point, and its first nested element is the sticky header. As soon as header is not fully visible as specified by user, the
+				sticky header is then automatically re-updated. Another feature of this component is the smooth animation from the non-sticky state
+				to the fixed state. This component accepts the following properties:
+			</p>
+			<ul>
+				<li>rootMargin, a string that is passed to the IntersectionObserver as the root margin.</li>
+				<li>
+					ratio, a number in range of 0 to 1 that specifies which ratio of the component should be fully visible for state to change. The
+					default value is 0.25.
+				</li>
+				<li>fixedClassName, specifies the default fixed class name state, by default being "fixed".</li>
+			</ul>
+			<p>Here you can see an example of this component with default settings:</p>
+			<sticky-header-component class="sticky-header-wrap">
+				<p class="sticky-header">Sticky Header</p>
+			</sticky-header-component>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore ratione autem praesentium
+				asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur error fuga dicta esse facilis.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore ratione autem praesentium
+				asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur error fuga dicta esse facilis.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore ratione autem praesentium
+				asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur error fuga dicta esse facilis.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore ratione autem praesentium
+				asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur error fuga dicta esse facilis.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore ratione autem praesentium
+				asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur error fuga dicta esse facilis.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore ratione autem praesentium
+				asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur error fuga dicta esse facilis.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore ratione autem praesentium
+				asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur error fuga dicta esse facilis.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore ratione autem praesentium
+				asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur error fuga dicta esse facilis.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore ratione autem praesentium
+				asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur error fuga dicta esse facilis.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, veritatis soluta eligendi inventore ratione autem praesentium
+				asperiores accusamus recusandae, alias quos deserunt adipisci voluptate pariatur error fuga dicta esse facilis.
+			</p>
+		</main>
+	</body>
 </html>

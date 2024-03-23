@@ -1,16 +1,16 @@
 .autocomplete-input {
-    width: 100%;
-    height: 40px;
-    background-color: #ffffff;
-    border: 2px solid #333333;
-    color: #222;
-    padding: 7px;
-    box-sizing: border-box;
+	width: 100%;
+	height: 40px;
+	background-color: #ffffff;
+	border: 2px solid #333333;
+	color: #222;
+	padding: 7px;
+	box-sizing: border-box;
 }
 
 .autocomplete-label {
-    position: relative;
-    display: block;
-    width: 260px;
-    height: 40px;
+	position: relative;
+	display: block;
+	width: 260px;
+	height: 40px;
 }

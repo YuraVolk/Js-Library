@@ -2,5 +2,5 @@ import { CustomSelectConfiguration, SelectInternalItem } from "shared/component/
 import { GenericReactComponentProps } from "../generic/classNameFallthrough";
 
 export interface CustomSelectReactConfiguration extends CustomSelectConfiguration, GenericReactComponentProps {
-    onChange?(element: SelectInternalItem): void;
+	onChange?(element: SelectInternalItem): void;
 }

@@ -1,97 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Scrolling Ad Component</title>
+		<script defer src="./index.js"></script>
+		<script defer src="./scrolling-ad/index.js"></script>
+	</head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scrolling Ad Component</title>
-  <script defer src="./index.js"></script>
-	<script defer src="./scrolling-ad/index.js"></script>
-</head>
-
-<body>
-  <header class="header">
-    <header-component></header-component>
-  </header>
-  <aside class="navigation">
-    <sidebar-component activeLink="Scrolling Ad"></sidebar-component>
-  </aside>
-  <main class="main">
-    <h1 class="heading">Scrolling Ad</h1>
-    <p>
-      The scrolling ad component is without a doubt one of the most annoying components there are,
-      but nonetheless this component is maximally automated to work autonomously, and has two main
-      mechanisms that allow it to be maximally performant to scroll into user's view: intersection observer
-      and an interval timer to check its current scroll point within the closest scroll parent.
-      This component accepts children elements as the content and the following attributes:
-    </p>
-    <ul>
-      <li>rootMargin, a number in pixels that specifies the top margin of the component that is applied through CSS.
-        Defaults to 0.</li>
-      <li>checkInterval, a number that specifies the milliseconds of automatic scroll window check. Defaults to 500.
-      </li>
-    </ul>
-    <p>Here is an example component with default settings:</p>
-    <div class="scrollable-container">
-      <scrolling-ad-component class="scrolling-ad-wrap">
-        <div class="scrolling-ad">
-          <p>This message scrolls to the user, even if you scroll away from it.</p>
-        </div>
-      </scrolling-ad-component>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Condimentum mattis pellentesque id nibh
-        tortor. Lacinia at quis risus sed vulputate odio ut. Eget
-        mi proin sed libero enim sed. A scelerisque purus semper
-        eget duis at tellus.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Condimentum mattis pellentesque id nibh
-        tortor. Lacinia at quis risus sed vulputate odio ut. Eget
-        mi proin sed libero enim sed. A scelerisque purus semper
-        eget duis at tellus.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Condimentum mattis pellentesque id nibh
-        tortor. Lacinia at quis risus sed vulputate odio ut. Eget
-        mi proin sed libero enim sed. A scelerisque purus semper
-        eget duis at tellus.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Condimentum mattis pellentesque id nibh
-        tortor. Lacinia at quis risus sed vulputate odio ut. Eget
-        mi proin sed libero enim sed. A scelerisque purus semper
-        eget duis at tellus.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Condimentum mattis pellentesque id nibh
-        tortor. Lacinia at quis risus sed vulputate odio ut. Eget
-        mi proin sed libero enim sed. A scelerisque purus semper
-        eget duis at tellus.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Condimentum mattis pellentesque id nibh
-        tortor. Lacinia at quis risus sed vulputate odio ut. Eget
-        mi proin sed libero enim sed. A scelerisque purus semper
-        eget duis at tellus.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Condimentum mattis pellentesque id nibh
-        tortor. Lacinia at quis risus sed vulputate odio ut. Eget
-        mi proin sed libero enim sed. A scelerisque purus semper
-        eget duis at tellus.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Condimentum mattis pellentesque id nibh
-        tortor. Lacinia at quis risus sed vulputate odio ut. Eget
-        mi proin sed libero enim sed. A scelerisque purus semper
-        eget duis at tellus.
-      </p>
-    </div>
-  </main>
-</body>
-
+	<body>
+		<header class="header">
+			<header-component></header-component>
+		</header>
+		<aside class="navigation">
+			<sidebar-component activeLink="Scrolling Ad"></sidebar-component>
+		</aside>
+		<main class="main">
+			<h1 class="heading">Scrolling Ad</h1>
+			<p>
+				The scrolling ad component is without a doubt one of the most annoying components there are, but nonetheless this component is
+				maximally automated to work autonomously, and has two main mechanisms that allow it to be maximally performant to scroll into user's
+				view: intersection observer and an interval timer to check its current scroll point within the closest scroll parent. This component
+				accepts children elements as the content and the following attributes:
+			</p>
+			<ul>
+				<li>rootMargin, a number in pixels that specifies the top margin of the component that is applied through CSS. Defaults to 0.</li>
+				<li>checkInterval, a number that specifies the milliseconds of automatic scroll window check. Defaults to 500.</li>
+			</ul>
+			<p>Here is an example component with default settings:</p>
+			<div class="scrollable-container">
+				<scrolling-ad-component class="scrolling-ad-wrap">
+					<div class="scrolling-ad">
+						<p>This message scrolls to the user, even if you scroll away from it.</p>
+					</div>
+				</scrolling-ad-component>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					Condimentum mattis pellentesque id nibh tortor. Lacinia at quis risus sed vulputate odio ut. Eget mi proin sed libero enim sed. A
+					scelerisque purus semper eget duis at tellus. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+					incididunt ut labore et dolore magna aliqua. Condimentum mattis pellentesque id nibh tortor. Lacinia at quis risus sed vulputate
+					odio ut. Eget mi proin sed libero enim sed. A scelerisque purus semper eget duis at tellus. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum mattis pellentesque id
+					nibh tortor. Lacinia at quis risus sed vulputate odio ut. Eget mi proin sed libero enim sed. A scelerisque purus semper eget duis
+					at tellus. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+					aliqua. Condimentum mattis pellentesque id nibh tortor. Lacinia at quis risus sed vulputate odio ut. Eget mi proin sed libero enim
+					sed. A scelerisque purus semper eget duis at tellus.
+				</p>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					Condimentum mattis pellentesque id nibh tortor. Lacinia at quis risus sed vulputate odio ut. Eget mi proin sed libero enim sed. A
+					scelerisque purus semper eget duis at tellus. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+					incididunt ut labore et dolore magna aliqua. Condimentum mattis pellentesque id nibh tortor. Lacinia at quis risus sed vulputate
+					odio ut. Eget mi proin sed libero enim sed. A scelerisque purus semper eget duis at tellus. Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum mattis pellentesque id
+					nibh tortor. Lacinia at quis risus sed vulputate odio ut. Eget mi proin sed libero enim sed. A scelerisque purus semper eget duis
+					at tellus. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+					aliqua. Condimentum mattis pellentesque id nibh tortor. Lacinia at quis risus sed vulputate odio ut. Eget mi proin sed libero enim
+					sed. A scelerisque purus semper eget duis at tellus.
+				</p>
+			</div>
+		</main>
+	</body>
 </html>

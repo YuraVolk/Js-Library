@@ -382,9 +382,9 @@ export class PerspectiveCarouselComponent extends LinkedCarouselMixin(LitElement
 							@click="${() => {
 								this.switchOrientation();
 							}}"
-					  >
+						>
 							Switch
-					  </button>`
+						</button>`
 					: ""}
 				<button
 					class="carousel-controls__next-button"

@@ -1,21 +1,14 @@
 {
-  "compilerOptions": {
-    "baseUrl": "../",
-    "lib": ["DOM"],
-    "target": "ESNext",
-    "module": "ES2020",
-    "moduleResolution": "Bundler",
-    "resolveJsonModule": true,
-    "strict": true,
-    "typeRoots": [
-      "./node_modules/@types",
-      "./shared/node_modules/@types"
-    ]
-  },
-  "include": [
-    "**/*.ts",
-    "**/*.vue",
-    "**/*.tsx"
-  ],
-  "exclude": ["node_modules"],
+	"compilerOptions": {
+		"baseUrl": "../",
+		"lib": ["DOM"],
+		"target": "ESNext",
+		"module": "ES2020",
+		"moduleResolution": "Bundler",
+		"resolveJsonModule": true,
+		"strict": true,
+		"typeRoots": ["./node_modules/@types", "./shared/node_modules/@types"]
+	},
+	"include": ["**/*.ts", "**/*.vue", "**/*.tsx"],
+	"exclude": ["node_modules"]
 }

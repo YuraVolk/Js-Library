@@ -15,14 +15,14 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: '20.9.0'
-  
+          node-version: "20.9.0"
+
       - name: Install all dependencies
         run: npm install
 
       - name: Build
         run: npm run build:ci
-    
+
       - name: Push
         uses: s0/git-publish-subdir-action@develop
         env:

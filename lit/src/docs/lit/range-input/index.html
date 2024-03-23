@@ -1,62 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Custom Range Input Component</title>
+		<script defer src="./index.js"></script>
+		<script defer src="./range-input/index.js"></script>
+	</head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Custom Range Input Component</title>
-  <script defer src="./index.js"></script>
-	<script defer src="./range-input/index.js"></script>
-</head>
+	<body>
+		<header class="header">
+			<header-component></header-component>
+		</header>
+		<aside class="navigation">
+			<sidebar-component activeLink="Range Input"></sidebar-component>
+		</aside>
+		<main class="main">
+			<h1 class="heading">Custom Range Input</h1>
+			<p>
+				The range input component provides a customizable range input slider with various features such as ticks, labels, and styling
+				options. This component allows users to select a value within a specified range.
+			</p>
 
-<body>
-  <header class="header">
-    <header-component></header-component>
-  </header>
-  <aside class="navigation">
-    <sidebar-component activeLink="Range Input"></sidebar-component>
-  </aside>
-  <main class="main">
-    <h1 class="heading">Custom Range Input</h1>
-    <p>
-      The range input component provides a
-      customizable range input slider with various features such as ticks, labels, and styling options. This component
-      allows users to select a value within a specified range.
-    <ul>
-      <li>minimum, number as the minimum value.</li>
-      <li>maximum, number as the maximum value.</li>
-      <li>defaultValue, defines the default range value.</li>
-      <li>step, defines the range step.</li>
-      <li>ticks, a comma-separated array to define breakpoints displayed as visual ticks.</li>
-      <li>label, a label for the range input.</li>
-      <li>thumbSize, trackColor, thumbColor, hoverColor, activeColor and valueSize. Colors to give range styles.</li>
-    </ul>
+			<ul>
+				<li>minimum, number as the minimum value.</li>
+				<li>maximum, number as the maximum value.</li>
+				<li>defaultValue, defines the default range value.</li>
+				<li>step, defines the range step.</li>
+				<li>ticks, a comma-separated array to define breakpoints displayed as visual ticks.</li>
+				<li>label, a label for the range input.</li>
+				<li>thumbSize, trackColor, thumbColor, hoverColor, activeColor and valueSize. Colors to give range styles.</li>
+			</ul>
 
-    <h2>Code Examples</h2>
-    <p>Here are some examples of how to use the range input component:</p>
-    <h3>Basic Usage:</h3>
-    <range-input-component></range-input-component>
-    <h3>Customizing the Range:</h3>
-    <range-input-component
-      minimum="0"
-      maximum="100"
-      defaultValue="50"
-      step="5"
-    ></range-input-component>
-    <h3>Adding Ticks:</h3>
-    <range-input-component
-      ticks="0,25,50,75,100"
-    ></range-input-component>
-    <h3>Custom Styling:</h3>
-    <range-input-component
-      thumbSize="20px"
-      trackColor="#ddd"
-      thumbColor="#0f0"
-      hoverColor="#ff0"
-      activeColor="#f00"
-      valueSize="30px"
-    ></range-input-component>
-  </main>
-</body>
-
+			<h2>Code Examples</h2>
+			<p>Here are some examples of how to use the range input component:</p>
+			<h3>Basic Usage:</h3>
+			<range-input-component></range-input-component>
+			<h3>Customizing the Range:</h3>
+			<range-input-component minimum="0" maximum="100" defaultValue="50" step="5"></range-input-component>
+			<h3>Adding Ticks:</h3>
+			<range-input-component ticks="0,25,50,75,100"></range-input-component>
+			<h3>Custom Styling:</h3>
+			<range-input-component
+				thumbSize="20px"
+				trackColor="#ddd"
+				thumbColor="#0f0"
+				hoverColor="#ff0"
+				activeColor="#f00"
+				valueSize="30px"
+			></range-input-component>
+		</main>
+	</body>
 </html>

@@ -8,19 +8,22 @@ import("../header");
 import("../sidebar");
 import("../../../components/ciphering-text/cipheringText")
 	.then(({ CipheringTextComponent }) => {
-		window.customElements.define("ciphering-text-component", class extends CipheringTextComponent {
-			static styles = css`
-				${CipheringTextComponent.styles}
+		window.customElements.define(
+			"ciphering-text-component",
+			class extends CipheringTextComponent {
+				static styles = css`
+					${CipheringTextComponent.styles}
 
-				span {
-					transition: all 50ms ease-in-out;
-				}
+					span {
+						transition: all 50ms ease-in-out;
+					}
 
-				.active {
-					color: #e3caca;
-				}
-			`;
-		});
+					.active {
+						color: #e3caca;
+					}
+				`;
+			}
+		);
 	})
 	.catch((e: unknown) => {
 		console.trace(e);

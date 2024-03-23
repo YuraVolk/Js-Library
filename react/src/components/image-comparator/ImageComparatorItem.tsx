@@ -6,10 +6,12 @@ import { GenericReactComponentProps } from "../../interfaces/generic/classNameFa
 import styles from "./ImageComparator.module.css";
 
 export const ImageComparatorItem = (props: WithChildren<object> & GenericReactComponentProps) => {
-    const item = useRef<HTMLLIElement | null>(null);
-    const styleObject = useLinkedItem(uid, item);
+	const item = useRef<HTMLLIElement | null>(null);
+	const styleObject = useLinkedItem(uid, item);
 
-    return <li ref={item} style={styleObject} className={`${styles["image-comparator-item"]} ${props.className ?? ""}`}>
-        {props.children}
-    </li>
+	return (
+		<li ref={item} style={styleObject} className={`${styles["image-comparator-item"]} ${props.className ?? ""}`}>
+			{props.children}
+		</li>
+	);
 };

@@ -9,12 +9,12 @@ const Sidebar = React.lazy(() => import("../Sidebar"));
 const root = createRoot(document.getElementById("app") ?? document.documentElement);
 root.render(
 	<React.StrictMode>
-        <Suspense>
-            <Header />
-        </Suspense>
-        <Suspense>
-            <Sidebar activeLink="Menu Carousel" />
-        </Suspense>
+		<Suspense>
+			<Header />
+		</Suspense>
+		<Suspense>
+			<Sidebar activeLink="Menu Carousel" />
+		</Suspense>
 		<Suspense>
 			<Page />
 		</Suspense>

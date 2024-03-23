@@ -1,39 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Table Filtering Component</title>
+		<link rel="preload" as="image" href="../../../../../assets/svg/filter-icon.svg" />
+		<script defer src="./index.js"></script>
+		<script defer src="./table-filtering/index.js"></script>
+	</head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Table Filtering Component</title>
-    <link rel="preload" as="image" href="../../../../../assets/svg/filter-icon.svg">
-    <script defer src="./index.js"></script>
-	<script defer src="./table-filtering/index.js"></script>
-</head>
-
-<body>
-    <header class="header">
-        <header-component></header-component>
-    </header>
-    <aside class="navigation">
-        <sidebar-component activeLink="Table Filtering"></sidebar-component>
-    </aside>
-    <main class="main">
-        <h1 class="heading">Table Filtering</h1>
-        <p>
-            The table filtering component is a component that allows you to add filters to a table, through
-            getting all unique values in a table column and allowing the user to cross out certain values.
-            While this is rarely needed, it is still a useful widget to have when you're displaying real
-            tabular data, as this component allows you to easily customize the table filtering process,
-            making it very easy to setup and configure: you only need to pass in the valid table element
-            as a component's child and specify the header indices (starting from 1) of which table headers
-            to enable filtering for.
-        </p>
-        <ul>
-            <li>filterableHeaders, a comma separated list of numbers representing the filterable headers, empty by default.</li>
-        </ul>
-        <p>Here you can see an example of this component with filtering for all headers enabled:</p>
-        <table-filtering-application-example-1></table-filtering-application-example-1>
-    </main>
-</body>
-
+	<body>
+		<header class="header">
+			<header-component></header-component>
+		</header>
+		<aside class="navigation">
+			<sidebar-component activeLink="Table Filtering"></sidebar-component>
+		</aside>
+		<main class="main">
+			<h1 class="heading">Table Filtering</h1>
+			<p>
+				The table filtering component is a component that allows you to add filters to a table, through getting all unique values in a table
+				column and allowing the user to cross out certain values. While this is rarely needed, it is still a useful widget to have when
+				you're displaying real tabular data, as this component allows you to easily customize the table filtering process, making it very
+				easy to setup and configure: you only need to pass in the valid table element as a component's child and specify the header indices
+				(starting from 1) of which table headers to enable filtering for.
+			</p>
+			<ul>
+				<li>filterableHeaders, a comma separated list of numbers representing the filterable headers, empty by default.</li>
+			</ul>
+			<p>Here you can see an example of this component with filtering for all headers enabled:</p>
+			<table-filtering-application-example-1></table-filtering-application-example-1>
+		</main>
+	</body>
 </html>

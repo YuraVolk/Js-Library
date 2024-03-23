@@ -107,7 +107,7 @@ const TableFiltering = forwardRef<TableFilteringExposedFunctions, TableFiltering
 								onClick={() => {
 									toggleCriterion(option);
 								}}
-                                key={option}
+								key={option}
 								className={`${styles["wrap-select__option"]} ${
 									excludedCriteria[openSelect.index].includes(option) ? styles["wrap-select__option--crossed"] : ""
 								}`}

@@ -5,20 +5,20 @@ import { TabsConfiguration as RootConfiguration } from "shared/component/tabs";
 import { GenericReactComponentProps } from "../generic/classNameFallthrough";
 
 export interface TabsConfiguration extends RootConfiguration, GenericReactComponentProps {
-    headerChildren: ReactNode;
-    tabsChildren: ReactNode;
+	headerChildren: ReactNode;
+	tabsChildren: ReactNode;
 }
 
 export interface TabConfiguration extends WithChildren<GenericReactComponentProps> {
-    tabId: number;
-    classes: CSSTransitionClassNames;
-    animationDuration: number;
+	tabId: number;
+	classes: CSSTransitionClassNames;
+	animationDuration: number;
 }
 
 export interface TabsContext {
-    currentTab: number;
+	currentTab: number;
 }
 
 export const TabsContext = createContext<TabsContext>({
-    currentTab: 0
+	currentTab: 0
 });

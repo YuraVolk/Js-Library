@@ -36,7 +36,7 @@ const Page = () => {
 							>
 								OK
 							</button>
-                            <button
+							<button
 								className={styles["toast-button"]}
 								onClick={() => {
 									setOpen(false);

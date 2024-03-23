@@ -1,11 +1,11 @@
 export interface FloatingPanelConfiguration {
-    isOpen: boolean;
+	isOpen: boolean;
 }
 
 export interface FloatingPanelInternalSettings {
-    panelX: number;
-    panelY: number;
-    clientX: number;
-    clientY: number;
-    dragging: boolean;
+	panelX: number;
+	panelY: number;
+	clientX: number;
+	clientY: number;
+	dragging: boolean;
 }

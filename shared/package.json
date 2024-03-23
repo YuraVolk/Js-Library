@@ -1,6 +1,6 @@
 {
 	"name": "js-components-library-interfaces",
-    "private": true,
+	"private": true,
 	"version": "1.0.0",
 	"main": "index.js",
 	"license": "MIT",

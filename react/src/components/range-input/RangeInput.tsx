@@ -1,7 +1,11 @@
 import React, { CSSProperties, useCallback, useEffect, useId, useMemo, useState } from "react";
 import { defaultActiveColor, defaultHoverColor } from "shared/component/rangeInput";
 import styles from "./RangeInput.module.css";
-import { RangeInputCSSVariableKeys, RangeInputReactConfiguration, RangeInputTickCSSVariableKeys } from "../../interfaces/component/rangeInput";
+import {
+	RangeInputCSSVariableKeys,
+	RangeInputReactConfiguration,
+	RangeInputTickCSSVariableKeys
+} from "../../interfaces/component/rangeInput";
 
 export const RangeInput = ({
 	minimum = 0,
@@ -18,8 +22,8 @@ export const RangeInput = ({
 	valueSize = "25px",
 	hideValue = false,
 	allSameLine = false,
-    onUpdate,
-    ...props
+	onUpdate,
+	...props
 }: Partial<RangeInputReactConfiguration>) => {
 	const uniqueId = useId();
 	const [value, setValue] = useState(0);
@@ -42,15 +46,18 @@ export const RangeInput = ({
 		};
 	}, [maximum, thumbColor, trackColor, value]);
 
-    const onInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-        const newValue = Number(event.target.value);
-        setValue(newValue);
-        onUpdate?.(newValue);
-    }, [onUpdate]);
+	const onInputChange = useCallback(
+		(event: React.ChangeEvent<HTMLInputElement>) => {
+			const newValue = Number(event.target.value);
+			setValue(newValue);
+			onUpdate?.(newValue);
+		},
+		[onUpdate]
+	);
 
-    useEffect(() => {
-        setValue(defaultValue);
-    }, [defaultValue]);
+	useEffect(() => {
+		setValue(defaultValue);
+	}, [defaultValue]);
 
 	return (
 		<div className={`${styles.wrap} ${props.className ?? ""}`} style={rangeInputVariables}>
@@ -67,7 +74,7 @@ export const RangeInput = ({
 					step={step}
 					className={styles["range-slider__input"]}
 					style={gradientStyle}
-                    onInput={onInputChange}
+					onInput={onInputChange}
 				/>
 				{ticks.length > 0 && (
 					<ul className={styles["range-slider-ticks"]}>
@@ -84,7 +91,7 @@ export const RangeInput = ({
 					</ul>
 				)}
 			</div>
-            {!hideValue && <span className={styles.value}>{value}</span>}
+			{!hideValue && <span className={styles.value}>{value}</span>}
 		</div>
 	);
 };

@@ -8,7 +8,7 @@ export class ParallaxComponent extends LitElement implements ParallaxConfigurati
 	static styles = css`
 		.wrap {
 			position: relative;
-            transition: 0.1s;
+			transition: 0.1s;
 		}
 	`;
 
@@ -45,8 +45,8 @@ export class ParallaxComponent extends LitElement implements ParallaxConfigurati
 					? parent.clientWidth
 					: parent.clientHeight
 				: this.isHorizontal
-				? parent.innerWidth
-				: parent.innerHeight) / this.effect;
+					? parent.innerWidth
+					: parent.innerHeight) / this.effect;
 		parent.addEventListener(
 			"scroll",
 			(this.scrollListener = () => {

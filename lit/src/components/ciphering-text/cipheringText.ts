@@ -62,13 +62,13 @@ export class CipheringTextComponent extends SelfModifyingText implements Cipheri
 						}
 
 						if (newValue !== undefined) {
-              this._currentTextValue[i] = {
+							this._currentTextValue[i] = {
 								letter: newValue,
 								classes: isDone ? [] : ["active"]
 							};
-            }
+						}
 
-            this._currentTextValue = [...this._currentTextValue];
+						this._currentTextValue = [...this._currentTextValue];
 					}, speed * index);
 				})(index++);
 			}
@@ -85,9 +85,12 @@ export class CipheringTextComponent extends SelfModifyingText implements Cipheri
 			speeds.push(this.cipherLetter({ newLetter: toText[i], i, delayed: false }));
 		});
 
-    setTimeout(() => {
-      this._currentTextValue = this._currentTextValue.filter(v => Boolean(v.letter));
-      this.onInterval();
-    }, Math.max(...speeds) + this.interval);
+		setTimeout(
+			() => {
+				this._currentTextValue = this._currentTextValue.filter((v) => Boolean(v.letter));
+				this.onInterval();
+			},
+			Math.max(...speeds) + this.interval
+		);
 	}
 }

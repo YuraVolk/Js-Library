@@ -98,12 +98,12 @@ export class ColorPickerComponent extends LitElement implements ColorPickerConfi
 		return `rgba(${this.rgba.join(", ")})`;
 	}
 
-  protected get context() {
-    assertNonUndefined(this._canvasRef.value);
+	protected get context() {
+		assertNonUndefined(this._canvasRef.value);
 		const ctx = this._canvasRef.value.getContext("2d", { willReadFrequently: true });
 		assertNonUndefined(ctx);
-    return ctx;
-  }
+		return ctx;
+	}
 
 	protected onOpacityChange(newValue: number) {
 		const color = [...this.rgba.slice(0, -1), newValue];
@@ -115,13 +115,13 @@ export class ColorPickerComponent extends LitElement implements ColorPickerConfi
 		if (verifyValidRGBAColor(color)) this.rgba = color;
 	}
 
-  protected firstUpdated(): void {
-    const image = new Image(this.width, this.height);
-    image.src = this.imageUrl;
-    image.onload = () => {
-      this.context.drawImage(image, 0, 0, image.width, image.height);
-    };
-  }
+	protected firstUpdated(): void {
+		const image = new Image(this.width, this.height);
+		image.src = this.imageUrl;
+		image.onload = () => {
+			this.context.drawImage(image, 0, 0, image.width, image.height);
+		};
+	}
 
 	render() {
 		return html`

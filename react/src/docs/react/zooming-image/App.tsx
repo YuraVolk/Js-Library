@@ -1,4 +1,3 @@
-
 import React, { Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import "../../../components/reactEntry";
@@ -10,12 +9,12 @@ const Sidebar = React.lazy(() => import("../Sidebar"));
 const root = createRoot(document.getElementById("app") ?? document.documentElement);
 root.render(
 	<React.StrictMode>
-        <Suspense>
-            <Header />
-        </Suspense>
-        <Suspense>
-            <Sidebar activeLink="Zooming Image" />
-        </Suspense>
+		<Suspense>
+			<Header />
+		</Suspense>
+		<Suspense>
+			<Sidebar activeLink="Zooming Image" />
+		</Suspense>
 		<Suspense>
 			<Page />
 		</Suspense>

@@ -3,7 +3,11 @@ import { ReactiveController, ReactiveControllerHost } from "lit";
 export class IntervalController implements ReactiveController {
 	private _intervalId?: number;
 
-	constructor(host: ReactiveControllerHost, readonly callback: () => void, readonly timeout: number) {
+	constructor(
+		host: ReactiveControllerHost,
+		readonly callback: () => void,
+		readonly timeout: number
+	) {
 		host.addController(this);
 	}
 
@@ -11,16 +15,16 @@ export class IntervalController implements ReactiveController {
 		this._intervalId = window.setInterval(this.callback, this.timeout);
 	}
 
-    hostDisconnected(): void {
-        this.abortInterval();
-    }
+	hostDisconnected(): void {
+		this.abortInterval();
+	}
 
-    abortInterval() {
-        window.clearInterval(this._intervalId);
-        this._intervalId = undefined;
-    }
+	abortInterval() {
+		window.clearInterval(this._intervalId);
+		this._intervalId = undefined;
+	}
 
-    startInterval() {
-        this._intervalId = window.setInterval(this.callback, this.timeout);
-    }
+	startInterval() {
+		this._intervalId = window.setInterval(this.callback, this.timeout);
+	}
 }

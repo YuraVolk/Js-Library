@@ -65,9 +65,12 @@ export const BackfaceCarousel = (props: { children: React.ReactNode; isVertical?
 		rotateCarousel(currentItem);
 	}, [currentItem, isHorizontal, rotateCarousel]);
 
-	const { abortInterval } = useInterval(useCallback(() => {
-		setup();
-	}, [setup]), 250);
+	const { abortInterval } = useInterval(
+		useCallback(() => {
+			setup();
+		}, [setup]),
+		250
+	);
 
 	const nextSlide = useCallback(() => {
 		abortInterval();
@@ -89,7 +92,7 @@ export const BackfaceCarousel = (props: { children: React.ReactNode; isVertical?
 	}, [isHorizontal, setup]);
 
 	useResizeListener(setup);
-	
+
 	return (
 		<ContextLinkedItems ref={linkedItemsContext} onAllElementsLoaded={setup} innerChildren={props.children}>
 			<div>

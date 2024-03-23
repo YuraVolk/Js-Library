@@ -65,9 +65,6 @@ export abstract class SelfModifyingText extends LitElement implements SelfModify
 	}
 
 	render() {
-		return html`${map(
-			this._currentTextValue,
-			(letter) => html`<span class=${letter.classes.join(" ")}>${letter.letter}</span>`
-		)}`;
+		return html`${map(this._currentTextValue, (letter) => html`<span class=${letter.classes.join(" ")}>${letter.letter}</span>`)}`;
 	}
 }

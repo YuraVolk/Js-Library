@@ -25,9 +25,9 @@ const Page = () => {
 				The color picker uses range input component to listen for the opacity value changes, and as such allows for easy styling. Here's an
 				example of the component:
 			</p>
-            <div className={styles["color-picker"]}>
-                <ColorPicker imageUrl={colorPickerImage} />
-            </div>
+			<div className={styles["color-picker"]}>
+				<ColorPicker imageUrl={colorPickerImage} />
+			</div>
 		</main>
 	);
 };

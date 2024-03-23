@@ -24,7 +24,7 @@ export class FloatingPanelComponent extends LitElement implements FloatingPanelC
 		document.addEventListener(
 			"mousedown",
 			(this._listener = ({ clientX, clientY }) => {
-        this.removeEventListener("mousemove", this._panelListener);
+				this.removeEventListener("mousemove", this._panelListener);
 				const panelX = this.offsetLeft,
 					panelY = this.offsetTop;
 				this._panelListener = (event: MouseEvent) => {
@@ -36,16 +36,16 @@ export class FloatingPanelComponent extends LitElement implements FloatingPanelC
 			})
 		);
 
-    window.addEventListener("mouseup", () => {
-      this.removeEventListener("mousemove", this._panelListener);
-    });
+		window.addEventListener("mouseup", () => {
+			this.removeEventListener("mousemove", this._panelListener);
+		});
 	}
 
 	disconnectedCallback(): void {
-    this.removeEventListener("mousemove", this._panelListener);
+		this.removeEventListener("mousemove", this._panelListener);
 		super.disconnectedCallback();
 		document.removeEventListener("mousedown", this._listener);
-    window.removeEventListener("mousemove", this._panelListener);
+		window.removeEventListener("mousemove", this._panelListener);
 	}
 
 	render() {
