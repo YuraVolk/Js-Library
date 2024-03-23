@@ -38,7 +38,7 @@ export const RangeInput = ({
 	const gradientStyle = useMemo<CSSProperties>(() => {
 		const progress = (value / maximum) * 100;
 		return {
-			background: `linear-gradient(to right, ${thumbColor} ${progress}%, ${trackColor} ${progress}%)`
+			background: `linear-gradient(to right, ${thumbColor} ${String(progress)}%, ${trackColor} ${String(progress)}%)`
 		};
 	}, [maximum, thumbColor, trackColor, value]);
 
@@ -73,7 +73,7 @@ export const RangeInput = ({
 					<ul className={styles["range-slider-ticks"]}>
 						{ticks.map((tick) => {
 							const tickStyles: RangeInputTickCSSVariableKeys = {
-								"--value": tick + "%"
+								"--value": String(tick) + "%"
 							};
 							return (
 								<li className={styles["range-slider-ticks__tick"]} style={tickStyles} key={tick}>

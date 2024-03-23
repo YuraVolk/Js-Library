@@ -69,8 +69,8 @@ export const PerspectiveCarousel = ({
 			if (!forcedImageWidth || !forcedImageHeight) continue;
 			image.styles = {
 				...image.styles,
-				width: `${forcedImageWidth}px`,
-				height: `${forcedImageHeight}px`
+				width: `${String(forcedImageWidth)}px`,
+				height: `${String(forcedImageHeight)}px`
 			};
 		}
 
@@ -142,8 +142,8 @@ export const PerspectiveCarousel = ({
 
 			item.styles = {
 				...item.styles,
-				left: `${left}px`,
-				top: `${top}px`,
+				left: `${String(left)}px`,
+				top: `${String(top)}px`,
 				visibility: "visible",
 				position: "absolute",
 				zIndex: 0,
@@ -239,10 +239,10 @@ export const PerspectiveCarousel = ({
 				const assignToItem = () => {
 					item.styles = {
 						...item.styles,
-						left: `${itemState.left}px`,
-						width: `${itemState.width}px`,
-						height: `${itemState.height}px`,
-						top: `${itemState.top}px`,
+						left: `${String(itemState.left)}px`,
+						width: `${String(itemState.width)}px`,
+						height: `${String(itemState.height)}px`,
+						top: `${String(itemState.top)}px`,
 						opacity: String(itemState.opacity)
 					};
 				};

@@ -26,8 +26,8 @@ export const AccordionItem = (props: AccordionListItemConfiguration) => {
         const headerHeight = header.current.offsetHeight;
         if (isExpanded) {
             const contentHeight = content.current.offsetHeight;
-            setMaxHeight(`${headerHeight + contentHeight}px`);
-        } else setMaxHeight(`${headerHeight}px`);
+            setMaxHeight(`${String(headerHeight + contentHeight)}px`);
+        } else setMaxHeight(`${String(headerHeight)}px`);
     }, [context.expandedIndex, id]);
 
     const toggleContent = useCallback(() => {

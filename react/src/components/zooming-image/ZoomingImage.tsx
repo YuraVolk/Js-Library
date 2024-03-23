@@ -28,10 +28,10 @@ const ZoomingImage = forwardRef<MagnifiersExposedFunctions, MagnifiersConfigurat
 					"zooming-image-glass": {
 						...zoomingImage,
 						styles: {
-							backgroundPositionX: `${xMove - backgroundShift}%`,
-							backgroundPositionY: `${yMove - backgroundShift}%`,
-							left: `${x - positionShift}px`,
-							top: `${y - positionShift}px`
+							backgroundPositionX: `${String(xMove - backgroundShift)}%`,
+							backgroundPositionY: `${String(yMove - backgroundShift)}%`,
+							left: `${String(x - positionShift)}px`,
+							top: `${String(y - positionShift)}px`
 						}
 					}
 				});

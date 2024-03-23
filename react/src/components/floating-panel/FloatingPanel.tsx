@@ -17,8 +17,8 @@ export const FloatingPanel = (props: WithChildren<FloatingPanelConfiguration>) =
 		({ clientX, clientY }: MouseEvent) => {
 			if (!panelProperties.dragging || !props.isOpen) return;
 			setPanelStyles({
-				left: panelProperties.panelX + clientX - panelProperties.clientX + "px",
-				top: panelProperties.panelY + clientY - panelProperties.clientY + "px"
+				left: String(panelProperties.panelX + clientX - panelProperties.clientX) + "px",
+				top: String(panelProperties.panelY + clientY - panelProperties.clientY) + "px"
 			});
 		},
 		[

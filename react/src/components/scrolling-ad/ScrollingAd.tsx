@@ -21,7 +21,7 @@ export const ScrollingAd = ({
 		const scrollableParent = getFirstScrollableParent(wrap.current, false);
 		const top = scrollableParent instanceof HTMLElement ? scrollableParent.scrollTop : scrollableParent.scrollY;
 		setStyles({
-			top: `${top + wrap.current.offsetHeight + rootMargin}px`
+			top: `${String(top + wrap.current.offsetHeight + rootMargin)}px`
 		});
 	}, checkInterval);
 
@@ -36,12 +36,12 @@ export const ScrollingAd = ({
 				if (entry.intersectionRatio < 1) {
 					const top = scrollableParent instanceof HTMLElement ? scrollableParent.scrollTop : scrollableParent.scrollY;
 					setStyles({
-						top: `${top + wrap.current.offsetHeight + rootMargin}px`
+						top: `${String(top + wrap.current.offsetHeight + rootMargin)}px`
 					});
 				}
 			},
 			{
-				rootMargin: `${rootMargin}px`,
+				rootMargin: `${String(rootMargin)}px`,
 				threshold: generateThreshold()
 			}
 		);

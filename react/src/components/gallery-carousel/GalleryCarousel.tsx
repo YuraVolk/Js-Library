@@ -30,7 +30,7 @@ export const GalleryCarousel = ({
 	const [galleryLeft, setGalleryLeft] = useState(currentSlide * -100);
 	const galleryListStyle = useMemo<CSSProperties>(
 		() => ({
-			left: `${galleryLeft}%`
+			left: `${String(galleryLeft)}%`
 		}),
 		[galleryLeft]
 	);

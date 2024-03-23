@@ -114,7 +114,7 @@ export const CustomVideo = (props: WithChildren<VideoConfigurationProps>) => {
 
 	const startVideo = useCallback(() => {
         if (!video.current) return;
-        video.current.play().catch(e => { console.debug(e); });
+        video.current.play().catch((e: unknown) => { console.debug(e); });
         dispatch({ type: "startVideo" });
     }, [video]);
 

@@ -96,10 +96,10 @@ const TableFiltering = forwardRef<TableFilteringExposedFunctions, TableFiltering
 					<div
 						className={styles["wrap-select"]}
 						style={{
-							top: `${openSelect.top}px`,
-							left: `${openSelect.left}px`,
-							width: `${openSelect.width}px`,
-							height: `${openSelect.height}px`
+							top: `${String(openSelect.top)}px`,
+							left: `${String(openSelect.left)}px`,
+							width: `${String(openSelect.width)}px`,
+							height: `${String(openSelect.height)}px`
 						}}
 					>
 						{openSelect.options.map((option) => (

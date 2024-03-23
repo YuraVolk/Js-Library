@@ -40,7 +40,7 @@ export const Parallax = ({
 			const scrollPoint = getScrollPoint(getFirstScrollableParent(wrap.current, isHorizontal));
 			if (scrollPoint > animationOffset - innerHeight * 2 && scrollPoint < animationOffset + innerHeight) {
 				const point = (scrollPoint - (animationOffset - innerHeight)) / speed - margin;
-				setStyles({ transform: `translate${isHorizontalTranslation ? "X" : "Y"}(${point}px)` });
+				setStyles({ transform: `translate${isHorizontalTranslation ? "X" : "Y"}(${String(point)}px)` });
 			}
 		};
 
