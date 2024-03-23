@@ -1,32 +1,52 @@
 <template>
-    <aside class="navigation">
-        <nav class="wrap">
-            <div class="list" v-for="linkList in Object.entries(links)">
-                <details class="list-item" open>
-                    <summary class="list__heading">
-                        <span>{{ linkList[0] }}</span>
-                        <svg ariaHidden="true" fill="none" focusable="false" height="1em" role="presentation"
-                            viewBox="0 0 24 24" width="1em">
-                            <path d="M15.5 19l-7-7 7-7" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
-                                strokeWidth="1.5"></path>
-                        </svg>
-                    </summary>
-                    <div class="list-sublist-wrap">
-                        <ul class="list-sublist">
-                            <li v-for="link in linkList[1]"
-                                :class="`list-sublist__item ${link.name === $props.activeLink ? 'list-sublist__item--active' : ''}`">
-                                <a
-                                    class="list-sublist__item-link"
-                                    :href="isLocalhost ? link.link.replace(/\.\.\//g, './') : link.link"
-                                    v-text="link.name"
-                                ></a>
-                            </li>
-                        </ul>
-                    </div>
-                </details>
-            </div>
-        </nav>
-    </aside>
+  <aside class="navigation">
+    <nav class="wrap">
+      <div
+        v-for="linkList in Object.entries(links)"
+        class="list"
+      >
+        <details
+          class="list-item"
+          open
+        >
+          <summary class="list__heading">
+            <span>{{ linkList[0] }}</span>
+            <svg
+              ariaHidden="true"
+              fill="none"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 24 24"
+              width="1em"
+            >
+              <path
+                d="M15.5 19l-7-7 7-7"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+            </svg>
+          </summary>
+          <div class="list-sublist-wrap">
+            <ul class="list-sublist">
+              <li
+                v-for="link in linkList[1]"
+                :class="`list-sublist__item ${link.name === $props.activeLink ? 'list-sublist__item--active' : ''}`"
+              >
+                <a
+                  class="list-sublist__item-link"
+                  :href="isLocalhost ? link.link.replace(/\.\.\//g, './') : link.link"
+                  v-text="link.name"
+                />
+              </li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </nav>
+  </aside>
 </template>
 
 <script setup lang="ts">

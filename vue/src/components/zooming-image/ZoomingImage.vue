@@ -1,8 +1,13 @@
 <template>
-	<div class="wrap" ref="wrap" @mousemove="onMouseMove" @pointermove="onMouseMove">
-		<slot name="image"></slot>
-		<slot name="glass"></slot>
-	</div>
+  <div
+    ref="wrap"
+    class="wrap"
+    @mousemove="onMouseMove"
+    @pointermove="onMouseMove"
+  >
+    <slot name="image" />
+    <slot name="glass" />
+  </div>
 </template>
 
 <script setup lang="ts">

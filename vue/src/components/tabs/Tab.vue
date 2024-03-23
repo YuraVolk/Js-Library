@@ -1,7 +1,7 @@
 <template>
-    <Transition :name="transitionName">
-        <slot v-if="isOpen"></slot>
-    </Transition>
+  <Transition :name="transitionName">
+    <slot v-if="isOpen" />
+  </Transition>
 </template>
 
 <script setup lang="ts">

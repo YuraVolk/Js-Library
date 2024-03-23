@@ -1,11 +1,17 @@
 <template>
-    <ul ref="carousel">
-        <slot></slot>
-        <li class="carousel-controls">
-            <button class="carousel-controls__previous-button" @click="goBack"></button>
-            <button class="carousel-controls__next-button" @click="goForward"></button>
-        </li>
-    </ul>
+  <ul ref="carousel">
+    <slot />
+    <li class="carousel-controls">
+      <button
+        class="carousel-controls__previous-button"
+        @click="goBack"
+      />
+      <button
+        class="carousel-controls__next-button"
+        @click="goForward"
+      />
+    </li>
+  </ul>
 </template>
 
 <script setup lang="ts">

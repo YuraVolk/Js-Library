@@ -1,35 +1,53 @@
 <template>
-	<header-component />
-	<sidebar-component active-link="Toast" />
-	<main class="main">
-		<h1 class="heading">Toast</h1>
-		<p>
-            The toast component which represents a panel that smoothly transitions in and then smoothly transitions out
-            is commonly used and has many applications: notifications, cookie requests, and et cetera. This is a very
-            simplistic,
-            and just gives the necessary attributes to quickly setup a smooth animation. The basic configuration is to
-            insert all
-            required content inside the component. This component accepts the following props:
-        </p>
-		<ul>
-            <li>isOpen, specifies whether the toast is open.</li>
-            <li>autoCloseDelay, a feature by default disabled that automatically closes the toast after the milliseconds
-                passed to this attribute.</li>
-			<li>transitionName, that specifies the name of Vue transition to use in CSS transitions.</li>
-        </ul>
-		<p>In the bottom of a page you can see a toast with external CSS styling:</p>
-		<toast-component :is-open="isOpen" transition-name="toast" ref="toast">
-			<div class="toast">
-                <div class="toast-content">
-                    <span>Some Toast Content Here</span>
-                    <div class="toast-buttons">
-                        <button class="toast-button" @click="closeToast">OK</button>
-                        <button class="toast-button" @click="closeToast">Cancel</button>
-                    </div>
-                </div>
-            </div>
-		</toast-component>
-	</main>
+  <header-component />
+  <sidebar-component active-link="Toast" />
+  <main class="main">
+    <h1 class="heading">
+      Toast
+    </h1>
+    <p>
+      The toast component which represents a panel that smoothly transitions in and then smoothly transitions out
+      is commonly used and has many applications: notifications, cookie requests, and et cetera. This is a very
+      simplistic,
+      and just gives the necessary attributes to quickly setup a smooth animation. The basic configuration is to
+      insert all
+      required content inside the component. This component accepts the following props:
+    </p>
+    <ul>
+      <li>isOpen, specifies whether the toast is open.</li>
+      <li>
+        autoCloseDelay, a feature by default disabled that automatically closes the toast after the milliseconds
+        passed to this attribute.
+      </li>
+      <li>transitionName, that specifies the name of Vue transition to use in CSS transitions.</li>
+    </ul>
+    <p>In the bottom of a page you can see a toast with external CSS styling:</p>
+    <toast-component
+      ref="toast"
+      :is-open="isOpen"
+      transition-name="toast"
+    >
+      <div class="toast">
+        <div class="toast-content">
+          <span>Some Toast Content Here</span>
+          <div class="toast-buttons">
+            <button
+              class="toast-button"
+              @click="closeToast"
+            >
+              OK
+            </button>
+            <button
+              class="toast-button"
+              @click="closeToast"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </toast-component>
+  </main>
 </template>
 
 <script setup lang="ts">

@@ -9,6 +9,7 @@
 		"start": "webpack serve",
 		"build": "webpack --mode production",
 		"setup": "npm install",
+		"lint": "eslint **/*.{ts,tsx} && npm run lint:local",
 		"lint:local": "lit-analyzer 'src/**/*.{js,ts}'",
 		"type-check": "tsc --pretty --noEmit"
 	},

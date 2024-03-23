@@ -1,12 +1,20 @@
 <template>
-    <div class="autocomplete-wrap">
-        <slot></slot>
-        <ul v-if="isListOpened && filteredOptions.length" class="autocomplete-items">
-            <li v-for="option in filteredOptions" :key="option" class="autocomplete-item" @click="setInputValue(option)">
-                {{ option }}
-            </li>
-        </ul>
-    </div>
+  <div class="autocomplete-wrap">
+    <slot />
+    <ul
+      v-if="isListOpened && filteredOptions.length"
+      class="autocomplete-items"
+    >
+      <li
+        v-for="option in filteredOptions"
+        :key="option"
+        class="autocomplete-item"
+        @click="setInputValue(option)"
+      >
+        {{ option }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script setup lang="ts">

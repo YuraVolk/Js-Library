@@ -1,9 +1,14 @@
 <template>
-	<article>
-		<div class="wrap" :class="{ 'wrap--horizontal': isHorizontal, 'wrap--no-scrollbar': noScrollbar }" @wheel="onWheel" ref="wrap">
-			<slot></slot>
-		</div>
-	</article>
+  <article>
+    <div
+      ref="wrap"
+      class="wrap"
+      :class="{ 'wrap--horizontal': isHorizontal, 'wrap--no-scrollbar': noScrollbar }"
+      @wheel="onWheel"
+    >
+      <slot />
+    </div>
+  </article>
 </template>
 
 <script setup lang="ts">

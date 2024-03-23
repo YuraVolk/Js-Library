@@ -1,7 +1,7 @@
 <template>
-    <div ref="outerWrap">
-        <slot></slot>
-    </div>
+  <div ref="outerWrap">
+    <slot />
+  </div>
 </template>
 
 <script setup lang="ts">

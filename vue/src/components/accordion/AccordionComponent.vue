@@ -1,7 +1,7 @@
 <template>
-    <ul class="accordions">
-        <slot></slot>
-    </ul>
+  <ul class="accordions">
+    <slot />
+  </ul>
 </template>
 
 <script setup lang="ts">

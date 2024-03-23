@@ -1,24 +1,38 @@
 <template>
-    <div class="color-picker-outer">
-        <div class="color-picker-wrap">
-            <div class="color-picker">
-                <canvas class="color-picker__canvas" :width="colorInfo.canvasWidth" :height="colorInfo.canvasHeight" ref="canvas"
-                    @mousedown="onMouseDown"></canvas>
-            </div>
-        </div>
-        <div class="color-picker-info">
-            <div class="color-picker-info__color-wrap">
-                <div class="color-picker-info__color" :style="{ backgroundColor: colorInfo.rgb }"></div>
-            </div>
-            <div class="color-picker-info__opacity-range">
-                <range-input-component :maximum="1" :step="0.01" :ticks="[0, 100]" label="Opacity:" :default-value="1"
-                    @change="onInputChange" />
-            </div>
-            <p>Hex code: {{ colorInfo.hex }}</p>
-            <p>RGBA: {{ colorInfo.rgba }}</p>
-            <p>RGB: {{ colorInfo.rgb }}</p>
-        </div>
+  <div class="color-picker-outer">
+    <div class="color-picker-wrap">
+      <div class="color-picker">
+        <canvas
+          ref="canvas"
+          class="color-picker__canvas"
+          :width="colorInfo.canvasWidth"
+          :height="colorInfo.canvasHeight"
+          @mousedown="onMouseDown"
+        />
+      </div>
     </div>
+    <div class="color-picker-info">
+      <div class="color-picker-info__color-wrap">
+        <div
+          class="color-picker-info__color"
+          :style="{ backgroundColor: colorInfo.rgb }"
+        />
+      </div>
+      <div class="color-picker-info__opacity-range">
+        <range-input-component
+          :maximum="1"
+          :step="0.01"
+          :ticks="[0, 100]"
+          label="Opacity:"
+          :default-value="1"
+          @change="onInputChange"
+        />
+      </div>
+      <p>Hex code: {{ colorInfo.hex }}</p>
+      <p>RGBA: {{ colorInfo.rgba }}</p>
+      <p>RGB: {{ colorInfo.rgb }}</p>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">

@@ -1,16 +1,30 @@
 <template>
-	<div class="wrap">
-		<ul class="images" :style="imagesStyles" ref="parent">
-			<slot></slot>
-		</ul>
-		<div class="carousel-controls">
-			<button class="carousel-controls__previous-button" @click="previousItem"></button>
-			<button v-if="props.allowSwitchingOrientation" class="carousel-controls__perspective-button" @click="switchOrientation">
-				Switch
-			</button>
-			<button class="carousel-controls__next-button" @click="nextItem"></button>
-		</div>
-	</div>
+  <div class="wrap">
+    <ul
+      ref="parent"
+      class="images"
+      :style="imagesStyles"
+    >
+      <slot />
+    </ul>
+    <div class="carousel-controls">
+      <button
+        class="carousel-controls__previous-button"
+        @click="previousItem"
+      />
+      <button
+        v-if="props.allowSwitchingOrientation"
+        class="carousel-controls__perspective-button"
+        @click="switchOrientation"
+      >
+        Switch
+      </button>
+      <button
+        class="carousel-controls__next-button"
+        @click="nextItem"
+      />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">

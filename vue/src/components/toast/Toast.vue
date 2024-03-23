@@ -1,9 +1,9 @@
 <template>
-    <Teleport to="body">
-        <Transition :name="transitionName">
-            <slot v-if="isOpen"></slot>
-        </Transition>
-    </Teleport>
+  <Teleport to="body">
+    <Transition :name="transitionName">
+      <slot v-if="isOpen" />
+    </Transition>
+  </Teleport>
 </template>
 
 <script setup lang="ts">

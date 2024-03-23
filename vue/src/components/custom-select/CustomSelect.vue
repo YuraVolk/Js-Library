@@ -1,30 +1,48 @@
 <template>
-	<select :value="selectedItem?.value ?? ''" :name="selectName">
-		<option v-for="option in internalItems" :value="option.value" :disabled="option.isDisabled" :selected="option.isSelected">
-			{{ option.innerContent }}
-		</option>
-	</select>
-	<div class="wrap" ref="wrapElement">
-		<div class="custom-select-option custom-select-current" :class="{ active: isOpened }" @click="toggleOpened">
-			{{ selectedItem?.innerContent ?? "" }}
-		</div>
-		<ul class="custom-select-options" :class="{ hidden: !(internalItems.length && isOpened) }">
-			<li
-				v-for="element in internalItems"
-				class="custom-select-option"
-				:data-disabled="element.isDisabled"
-				:data-selected="element.isSelected"
-				:value="element.value"
-				@click="
-					() => {
-						onItemSelected(element);
-					}
-				"
-			>
-				{{ element.innerContent }}
-			</li>
-		</ul>
-	</div>
+  <select
+    :value="selectedItem?.value ?? ''"
+    :name="selectName"
+  >
+    <option
+      v-for="option in internalItems"
+      :value="option.value"
+      :disabled="option.isDisabled"
+      :selected="option.isSelected"
+    >
+      {{ option.innerContent }}
+    </option>
+  </select>
+  <div
+    ref="wrapElement"
+    class="wrap"
+  >
+    <div
+      class="custom-select-option custom-select-current"
+      :class="{ active: isOpened }"
+      @click="toggleOpened"
+    >
+      {{ selectedItem?.innerContent ?? "" }}
+    </div>
+    <ul
+      class="custom-select-options"
+      :class="{ hidden: !(internalItems.length && isOpened) }"
+    >
+      <li
+        v-for="element in internalItems"
+        class="custom-select-option"
+        :data-disabled="element.isDisabled"
+        :data-selected="element.isSelected"
+        :value="element.value"
+        @click="
+          () => {
+            onItemSelected(element);
+          }
+        "
+      >
+        {{ element.innerContent }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script setup lang="ts">

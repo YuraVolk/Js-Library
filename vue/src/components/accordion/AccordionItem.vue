@@ -1,12 +1,22 @@
 <template>
-    <li class="accordion" ref="accordion">
-        <button @click="toggleContent" class="accordion__heading" ref="header">
-            <slot name="title"></slot>
-        </button>
-        <div class="accordion__content" ref="content">
-            <slot name="content"></slot>
-        </div>
-    </li>
+  <li
+    ref="accordion"
+    class="accordion"
+  >
+    <button
+      ref="header"
+      class="accordion__heading"
+      @click="toggleContent"
+    >
+      <slot name="title" />
+    </button>
+    <div
+      ref="content"
+      class="accordion__content"
+    >
+      <slot name="content" />
+    </div>
+  </li>
 </template>
 
 <script lang="ts" setup>
@@ -17,7 +27,7 @@ import { AccordionListItemConfiguration } from "shared/component/accordion";
 
 const props = defineProps<AccordionListItemConfiguration>();
 const id = ref(uid());
-const isExpanded = ref(props.isOpen ?? false);
+const isExpanded = ref(props.isOpen);
 const header = ref<HTMLButtonElement | null>(null);
 const content = ref<HTMLDivElement | null>(null);
 const accordion = ref<HTMLLIElement | null>(null);
@@ -44,8 +54,8 @@ const updateHeight = () => {
     const headerHeight = header.value?.offsetHeight ?? 0;
     if (isExpanded.value) {
         const contentHeight = content.value?.offsetHeight ?? 0;
-        accordion.value.style.maxHeight = `${headerHeight + contentHeight}px`;
-    } else accordion.value.style.maxHeight = `${headerHeight}px`;
+        accordion.value.style.maxHeight = `${String(headerHeight + contentHeight)}px`;
+    } else accordion.value.style.maxHeight = `${String(headerHeight)}px`;
 };
 
 onMounted(() => {

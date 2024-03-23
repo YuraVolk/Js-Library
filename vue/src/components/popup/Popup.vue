@@ -1,12 +1,18 @@
 <template>
-    <teleport to="body">
-        <div class="popup" v-if="isOpen">
-            <slot name="popup"></slot>
-        </div>
-    </teleport>
-    <div v-if="displayOpenButton" @click="open">
-        <slot name="popup-open-button"></slot>
+  <teleport to="body">
+    <div
+      v-if="isOpen"
+      class="popup"
+    >
+      <slot name="popup" />
     </div>
+  </teleport>
+  <div
+    v-if="displayOpenButton"
+    @click="open"
+  >
+    <slot name="popup-open-button" />
+  </div>
 </template>
 
 <script setup lang="ts">

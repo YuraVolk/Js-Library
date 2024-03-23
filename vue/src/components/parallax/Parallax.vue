@@ -1,7 +1,11 @@
 <template>
-	<div class="wrap" ref="wrap" :style="styles">
-		<slot></slot>
-	</div>
+  <div
+    ref="wrap"
+    class="wrap"
+    :style="styles"
+  >
+    <slot />
+  </div>
 </template>
 
 <script setup lang="ts">

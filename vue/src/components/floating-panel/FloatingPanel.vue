@@ -1,7 +1,13 @@
 <template>
-    <div class="panel" ref="panel" @mousemove="changePosition" :style="panelStyles" v-if="isOpen">
-        <slot></slot>
-    </div>
+  <div
+    v-if="isOpen"
+    ref="panel"
+    class="panel"
+    :style="panelStyles"
+    @mousemove="changePosition"
+  >
+    <slot />
+  </div>
 </template>
 
 <script setup lang="ts">

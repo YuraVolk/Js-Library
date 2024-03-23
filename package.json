@@ -8,8 +8,7 @@
     "build": "lerna run build",
     "build:ci": "npm run setup && npm run build",
     "setup": "lerna run setup",
-    "lint": "eslint **/*.ts",
-    "lint:local": "lerna run lint:local",
+    "lint": "lerna run --parallel lint",
     "type-check": "lerna run --parallel type-check"
   },
   "author": "Yuriy Volkovskiy",
@@ -18,6 +17,7 @@
     "@typescript-eslint/parser": "^7.3.1",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-vue": "^9.23.0",
     "lerna": "^8.1.2",
     "typescript": "^5.4.3"
   }

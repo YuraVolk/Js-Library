@@ -1,7 +1,10 @@
 <template>
-    <li class="image-comparator-item" ref="item">
-        <slot></slot>
-    </li>
+  <li
+    ref="item"
+    class="image-comparator-item"
+  >
+    <slot />
+  </li>
 </template>
 
 <script setup lang="ts">

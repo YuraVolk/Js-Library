@@ -1,53 +1,88 @@
 <template>
-	<div class="wrap">
-		<div class="video">
-			<video ref="video" v-bind="videoPassedProps" @timeupdate="updateTrackInfo" @ended="stopVideo">
-				<slot></slot>
-			</video>
-		</div>
-		<div class="controls">
-			<range-input-component
-				id="volume-range-input"
-				:step="0.01"
-				:maximum="1"
-				hide-value
-				@change="setVolume"
-				:default-value="rangeInputSettings.volume"
-			></range-input-component>
-			<range-input-component
-				id="time-range-input"
-				:step="0.01"
-				:maximum="rangeInputSettings.duration"
-				:label="rangeInputSettings.currentTimeLabel"
-				hide-value
-				all-same-line
-				@change="setVideoSecond"
-				:default-value="rangeInputSettings.current"
-			></range-input-component>
-			<ul class="controls-buttons">
-				<li class="controls-button" :style="{ display: isVideoPlaying ? 'none' : 'block' }" @click="startVideo">
-					<button class="controls-button__clickable-button">
-						<img alt="Play" :src="playButton" class="controls-button__image" />
-					</button>
-				</li>
-				<li class="controls-button" :style="{ display: isVideoPlaying ? 'block' : 'none' }" @click="stopVideo">
-					<button class="controls-button__clickable-button">
-						<img alt="Pause" :src="pauseButton" class="controls-button__image" />
-					</button>
-				</li>
-				<li class="controls-button" @click="resetVideo">
-					<button class="controls-button__clickable-button">
-						<img alt="Reset" :src="resetButton" class="controls-button__image" />
-					</button>
-				</li>
-				<li class="controls-button" @click="toggleMute">
-					<button class="controls-button__clickable-button">
-						<img alt="Mute" :src="muteButton" class="controls-button__image" />
-					</button>
-				</li>
-			</ul>
-		</div>
-	</div>
+  <div class="wrap">
+    <div class="video">
+      <video
+        ref="video"
+        v-bind="videoPassedProps"
+        @timeupdate="updateTrackInfo"
+        @ended="stopVideo"
+      >
+        <slot />
+      </video>
+    </div>
+    <div class="controls">
+      <range-input-component
+        id="volume-range-input"
+        :step="0.01"
+        :maximum="1"
+        hide-value
+        :default-value="rangeInputSettings.volume"
+        @change="setVolume"
+      />
+      <range-input-component
+        id="time-range-input"
+        :step="0.01"
+        :maximum="rangeInputSettings.duration"
+        :label="rangeInputSettings.currentTimeLabel"
+        hide-value
+        all-same-line
+        :default-value="rangeInputSettings.current"
+        @change="setVideoSecond"
+      />
+      <ul class="controls-buttons">
+        <li
+          class="controls-button"
+          :style="{ display: isVideoPlaying ? 'none' : 'block' }"
+          @click="startVideo"
+        >
+          <button class="controls-button__clickable-button">
+            <img
+              alt="Play"
+              :src="playButton"
+              class="controls-button__image"
+            >
+          </button>
+        </li>
+        <li
+          class="controls-button"
+          :style="{ display: isVideoPlaying ? 'block' : 'none' }"
+          @click="stopVideo"
+        >
+          <button class="controls-button__clickable-button">
+            <img
+              alt="Pause"
+              :src="pauseButton"
+              class="controls-button__image"
+            >
+          </button>
+        </li>
+        <li
+          class="controls-button"
+          @click="resetVideo"
+        >
+          <button class="controls-button__clickable-button">
+            <img
+              alt="Reset"
+              :src="resetButton"
+              class="controls-button__image"
+            >
+          </button>
+        </li>
+        <li
+          class="controls-button"
+          @click="toggleMute"
+        >
+          <button class="controls-button__clickable-button">
+            <img
+              alt="Mute"
+              :src="muteButton"
+              class="controls-button__image"
+            >
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -87,7 +122,7 @@ const updateTrackInfo = () => {
 };
 
 const startVideo = () => {
-	video.value?.play()?.catch((e: unknown) => {
+	video.value?.play().catch((e: unknown) => {
 		console.debug(e);
 	});
 	isVideoPlaying.value = true;

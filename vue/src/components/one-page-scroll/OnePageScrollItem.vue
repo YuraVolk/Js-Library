@@ -1,7 +1,10 @@
 <template>
-    <section class="one-page-scroll-item" ref="item">
-        <slot></slot>
-    </section>
+  <section
+    ref="item"
+    class="one-page-scroll-item"
+  >
+    <slot />
+  </section>
 </template>
 
 <script setup lang="ts">
