@@ -12,7 +12,7 @@ import("../../../components/color-picker/colorPicker")
 	.then(({ ColorPickerComponent }) => {
 		window.customElements.define("color-picker-component", ColorPickerComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

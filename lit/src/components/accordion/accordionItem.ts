@@ -74,8 +74,8 @@ export class AccordionItemComponent extends LitElement implements AccordionListI
         const headerHeight = this.headingRef.value.offsetHeight;
         if (isOpen) {
             const contentHeight = this.contentRef.value.offsetHeight;
-            return `${headerHeight + contentHeight}px`;
-        } else return `${headerHeight}px`;
+            return `${String(headerHeight + contentHeight)}px`;
+        } else return `${String(headerHeight)}px`;
     }
 
     toggleContent() {

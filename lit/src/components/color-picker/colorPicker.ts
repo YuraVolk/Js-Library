@@ -128,8 +128,8 @@ export class ColorPickerComponent extends LitElement implements ColorPickerConfi
 			<div
 				class="wrap"
 				style=${styleMap({
-					"--width": `${this.width}px`,
-					"--height": `${this.height}px`
+					"--width": `${String(this.width)}px`,
+					"--height": `${String(this.height)}px`
 				})}
 			>
 				<div class="color-picker-wrap">

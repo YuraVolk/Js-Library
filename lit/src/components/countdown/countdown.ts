@@ -24,7 +24,7 @@ export class CountdownComponent extends LitElement implements CountdownConfigura
 			distance = this.date.getTime() - new Date().getTime();
 		this.units.forEach(({ timeFactor, name }) => {
 			const value = Math.floor(distance / timeFactor);
-			timeString += value <= 0 ? "" : `${value} ${String(value).slice(-1) === "1" ? name : name + "s"} `;
+			timeString += value <= 0 ? "" : `${String(value)} ${String(value).slice(-1) === "1" ? name : name + "s"} `;
 			distance %= timeFactor;
 		});
 

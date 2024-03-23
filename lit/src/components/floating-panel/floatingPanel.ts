@@ -28,8 +28,8 @@ export class FloatingPanelComponent extends LitElement implements FloatingPanelC
 				const panelX = this.offsetLeft,
 					panelY = this.offsetTop;
 				this._panelListener = (event: MouseEvent) => {
-					this.style.left = panelX + event.clientX - clientX + "px";
-					this.style.top = panelY + event.clientY - clientY + "px";
+					this.style.left = String(panelX + event.clientX - clientX) + "px";
+					this.style.top = String(panelY + event.clientY - clientY) + "px";
 				};
 
 				this.addEventListener("mousemove", this._panelListener, false);

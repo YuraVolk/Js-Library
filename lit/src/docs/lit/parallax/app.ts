@@ -9,7 +9,7 @@ import("../../../components/parallax/parallax")
 	.then(({ ParallaxComponent }) => {
 		window.customElements.define("parallax-component", ParallaxComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

@@ -55,10 +55,10 @@ export class ZoomComponent extends LitElement implements ZoomingImageLitConfigur
 				if (y >= 0.01 * offsetHeight) yMove += this.moveRatio * yMove;
 
 				Object.assign(glass.style, {
-					backgroundPositionX: `${xMove - this.backgroundShift}%`,
-					backgroundPositionY: `${yMove - this.backgroundShift}%`,
-					left: `${x - this.positionShift}px`,
-					top: `${y - this.positionShift}px`
+					backgroundPositionX: `${String(xMove - this.backgroundShift)}%`,
+					backgroundPositionY: `${String(yMove - this.backgroundShift)}%`,
+					left: `${String(x - this.positionShift)}px`,
+					top: `${String(y - this.positionShift)}px`
 				});
 			}),
 			{ passive: true }

@@ -7,6 +7,6 @@ export const thumbStyles = `
   border-radius: 50%;
   border: none;
   transition: 0.35s ease-in-out;
-` as const;
+`;
 
 export { defaultActiveColor, defaultHoverColor };

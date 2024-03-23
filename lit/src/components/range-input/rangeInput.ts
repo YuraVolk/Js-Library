@@ -55,7 +55,7 @@ export class RangeInputComponent extends LitElement implements RangeInputConfigu
 	protected setGradientStyle() {
 		const progress = (this._value / this.maximum) * 100;
 		this._gradientStyle = {
-			background: `linear-gradient(to right, ${this.thumbColor} ${progress}%, ${this.trackColor} ${progress}%)`
+			background: `linear-gradient(to right, ${this.thumbColor} ${String(progress)}%, ${this.trackColor} ${String(progress)}%)`
 		};
 	}
 

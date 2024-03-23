@@ -9,7 +9,7 @@ import("../../../components/sticky-header/stickyHeader")
 	.then(({ StickyHeaderComponent }) => {
 		window.customElements.define("sticky-header-component", StickyHeaderComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

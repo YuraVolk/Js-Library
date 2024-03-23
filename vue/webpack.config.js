@@ -49,7 +49,7 @@ module.exports = {
 			}
 		}),
 		new ExternalTemplateRemotesPlugin(),
-		new VueLoaderPlugin(), 
+		new VueLoaderPlugin(),
 		...vueHtmlPlugins
 	],
 	module: {

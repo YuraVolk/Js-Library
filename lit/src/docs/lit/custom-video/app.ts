@@ -13,7 +13,7 @@ import("../../../components/custom-video/customVideo")
 	.then(({ CustomVideoComponent }) => {
 		window.customElements.define("custom-video-component", CustomVideoComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

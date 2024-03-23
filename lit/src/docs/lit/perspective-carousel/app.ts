@@ -18,7 +18,7 @@ import("../../../components/perspective-carousel/perspectiveCarousel")
 		window.customElements.define("perspective-carousel-component", PerspectiveCarouselComponent);
 		window.customElements.define("carousel-item-component", CarouselItem);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

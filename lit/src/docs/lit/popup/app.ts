@@ -12,7 +12,7 @@ import("../../../components/popup/popup")
 	.then(({ PopupComponent }) => {
 		window.customElements.define("popup-component", PopupComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

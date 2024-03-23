@@ -9,7 +9,7 @@ import("../../../components/rebuilding-text/rebuildingText")
 	.then(({ RebuildingTextComponent }) => {
 		window.customElements.define("rebuilding-text-component", RebuildingTextComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

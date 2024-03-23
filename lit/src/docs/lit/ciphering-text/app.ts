@@ -22,7 +22,7 @@ import("../../../components/ciphering-text/cipheringText")
 			`;
 		});
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

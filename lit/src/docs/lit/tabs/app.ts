@@ -9,7 +9,7 @@ import("../../../components/tabs/tabs")
 	.then(({ TabsComponent }) => {
 		window.customElements.define("tabs-component", TabsComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

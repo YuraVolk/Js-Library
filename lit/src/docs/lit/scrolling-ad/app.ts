@@ -9,7 +9,7 @@ import("../../../components/scrolling-ad/scrollingAd")
 	.then(({ ScrollingAdComponent }) => {
 		window.customElements.define("scrolling-ad-component", ScrollingAdComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

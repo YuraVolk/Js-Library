@@ -12,7 +12,7 @@ import("../../../components/table-filtering/tableFiltering")
 	.then(({ TableFilteringComponent }) => {
 		window.customElements.define("table-filtering-component", TableFilteringComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

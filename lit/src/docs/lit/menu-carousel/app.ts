@@ -18,7 +18,7 @@ import("../../../components/menu-carousel/menuCarousel")
 		window.customElements.define("menu-carousel-component", MenuCarouselComponent);
 		window.customElements.define("carousel-item-component", CarouselItem);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

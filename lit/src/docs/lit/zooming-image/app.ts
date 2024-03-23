@@ -12,7 +12,7 @@ import("../../../components/zooming-image/zoomingImage")
 	.then(({ ZoomComponent }) => {
 		window.customElements.define("zooming-image-component", ZoomComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

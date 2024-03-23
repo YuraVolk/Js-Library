@@ -25,8 +25,8 @@ export class StickyHeaderComponent extends LitElement implements StickyHeaderCon
 					const { top, left } = header.getBoundingClientRect();
 					Object.assign(header.style, {
 						position: "fixed",
-						top: `${top}px`,
-						left: `${left}px`
+						top: `${String(top)}px`,
+						left: `${String(left)}px`
 					});
 					header.getBoundingClientRect();
 					Object.assign(header.style, { top: "0", left: "0", right: "0" });

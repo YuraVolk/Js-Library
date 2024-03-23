@@ -20,7 +20,7 @@ import("../../../components/backface-carousel/backfaceCarousel")
 		window.customElements.define("backface-carousel-component", BackfaceCarousel);
 		window.customElements.define("backface-carousel-item-component", BackfaceCarouselItem);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

@@ -42,7 +42,7 @@ export class PopupComponent extends LitElement implements PopupLitConfiguration 
 			)
 		);
 		popup.addEventListener("click", this.clickEventListener = (event) => {
-			if (event.target && targetElements.includes(event.target)) this.closePopup().catch(e => { console.error(e); });
+			if (event.target && targetElements.includes(event.target)) this.closePopup().catch((e: unknown) => { console.error(e); });
 		});
 
 		if (this.autoClosingTime) {

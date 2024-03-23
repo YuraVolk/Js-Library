@@ -20,17 +20,17 @@ export class ScrollingAdComponent extends LitElement implements ScrollingAdConfi
                 const top = scrollableParent instanceof HTMLElement 
                     ? scrollableParent.scrollTop
                     : scrollableParent.scrollY;
-                this.style.top = `${top + this.offsetHeight + this.rootMargin}px`;
+                this.style.top = `${String(top + this.offsetHeight + this.rootMargin)}px`;
             }
         }, {
-            rootMargin: `${this.rootMargin}px`,
+            rootMargin: `${String(this.rootMargin)}px`,
             threshold: generateThreshold()
         });
         this.interval = window.setInterval(() => {
             const top = scrollableParent instanceof HTMLElement 
                 ? scrollableParent.scrollTop
                 : scrollableParent.scrollY;
-            this.style.top = `${top + this.offsetHeight + this.rootMargin}px`;
+            this.style.top = `${String(top + this.offsetHeight + this.rootMargin)}px`;
         }, this.interval);
 
         this.intersectionObserver.observe(this);

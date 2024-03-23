@@ -9,7 +9,7 @@ import("../../../components/toast/toast")
 	.then(({ ToastComponent }) => {
 		window.customElements.define("toast-component", ToastComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

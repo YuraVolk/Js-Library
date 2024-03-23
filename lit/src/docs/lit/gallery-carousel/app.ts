@@ -18,7 +18,7 @@ import("../../../components/gallery-carousel/galleryCarousel")
 		window.customElements.define("gallery-carousel-component", GalleryCarouselComponent);
 		window.customElements.define("gallery-carousel-item-component", GalleryCarouselItem);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 
