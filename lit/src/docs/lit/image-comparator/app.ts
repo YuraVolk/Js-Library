@@ -20,7 +20,7 @@ import("../../../components/image-comparator/imageComparator")
 		window.customElements.define("image-comparator-component", ImageComparatorComponent);
 		window.customElements.define("image-comparator-item-component", ImageComparatorItem);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

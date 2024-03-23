@@ -9,7 +9,7 @@ import("../../../components/floating-panel/floatingPanel")
 	.then(({ FloatingPanelComponent }) => {
 		window.customElements.define("floating-panel-component", FloatingPanelComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

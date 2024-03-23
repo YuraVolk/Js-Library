@@ -9,7 +9,7 @@ import("../../../components/range-input/rangeInput")
 	.then(({ RangeInputComponent }) => {
 		window.customElements.define("range-input-component", RangeInputComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

@@ -87,7 +87,7 @@ const updateTrackInfo = () => {
 };
 
 const startVideo = () => {
-	video.value?.play()?.catch((e) => {
+	video.value?.play()?.catch((e: unknown) => {
 		console.debug(e);
 	});
 	isVideoPlaying.value = true;

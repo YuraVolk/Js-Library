@@ -38,10 +38,10 @@ export class ImageComparatorComponent extends LinkedCarouselMixin(LitElement) {
 		const element = this.linkedItemsContext[elementKey];
 		const imageComparisonData = this._imageData[elementKey];
 		element.styles = {
-			width: difference + "px"
+			width: String(difference) + "px"
 		};
 
-		imageComparisonData.style.left = difference + "px";
+		imageComparisonData.style.left = String(difference) + "px";
 		this._imageData = { ...this._imageData };
 	}
 

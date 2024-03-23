@@ -22,9 +22,9 @@ class Item extends MenuCarouselInternalItem {
 	setMovingStyle(x: number, y: number, scale: number) {
 		this.elementData.styles = {
 			...this.elementData.styles,
-			width: this.width + "px",
-			left: x + "px",
-			top: y + "px",
+			width: String(this.width) + "px",
+			left: String(x) + "px",
+			top: String(y) + "px",
 			zIndex: String((scale * 100) | 0)
 		};
 	}

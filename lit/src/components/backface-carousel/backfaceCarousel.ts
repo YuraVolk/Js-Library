@@ -60,7 +60,7 @@ export class BackfaceCarousel extends LinkedCarouselMixin(LitElement) {
 
 	rotateCarousel(newCurrentImage: number) {
 		const theta = (2 * Math.PI) / this.itemValues.length;
-		this._carouselStyles.transform = `rotate${this.isVertical ? "X" : "Y"}(${newCurrentImage * -theta}rad)`;
+		this._carouselStyles.transform = `rotate${this.isVertical ? "X" : "Y"}(${String(newCurrentImage * -theta)}rad)`;
 		this._currentItem = newCurrentImage;
 	}
 
@@ -70,7 +70,7 @@ export class BackfaceCarousel extends LinkedCarouselMixin(LitElement) {
 			theta = (2 * Math.PI) / length,
 			size = items[0].element[this.isVertical ? "offsetHeight" : "offsetWidth"];
 		const apothem = size / (2 * Math.tan(Math.PI / length));
-		this._carouselStyles.transformOrigin = `50% 50% ${-apothem}px`;
+		this._carouselStyles.transformOrigin = `50% 50% ${String(-apothem)}px`;
 
 		for (let i = 0; i < length; i++) {
 			const newStyles: StyleInfo = {};
@@ -80,8 +80,8 @@ export class BackfaceCarousel extends LinkedCarouselMixin(LitElement) {
 				continue;
 			}
 
-			newStyles.transformOrigin = `50% 50% ${-apothem}px`;
-			newStyles.transform = `rotate${this.isVertical ? "X" : "Y"}(${i * theta}rad)`;
+			newStyles.transformOrigin = `50% 50% ${String(-apothem)}px`;
+			newStyles.transform = `rotate${this.isVertical ? "X" : "Y"}(${String(i * theta)}rad)`;
 			items[i].styles = newStyles;
 		}
 

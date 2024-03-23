@@ -11,7 +11,7 @@ import("../../../components/autocomplete-list/autocompleteList")
 	.then(({ AutocompleteListComponent }) => {
 		window.customElements.define("autocomplete-list-component", AutocompleteListComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

@@ -10,7 +10,7 @@ import("../../../components/custom-select/customSelect")
 	.then(({ CustomSelectComponent }) => {
 		window.customElements.define("custom-select-component", CustomSelectComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

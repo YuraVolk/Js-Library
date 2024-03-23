@@ -169,7 +169,7 @@ export class GalleryCarouselComponent extends LinkedCarouselMixin(LitElement) im
 				<ul
 					class="gallery-list"
 					style=${styleMap({
-						left: `${this._galleryLeft}%`
+						left: `${String(this._galleryLeft)}%`
 					})}
 				>
 					<slot></slot>

@@ -130,10 +130,10 @@ export class CustomVideoComponent extends LitElement implements VideoConfigurati
 	startVideo() {
 		this._videoRef.value
 			?.play()
-			?.then(() => {
+			.then(() => {
 				this._isVideoPlaying = true;
 			})
-			?.catch((e) => {
+			.catch((e: unknown) => {
 				console.debug(e);
 			});
 	}

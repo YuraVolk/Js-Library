@@ -9,7 +9,7 @@ import("../../../components/typing-text/typingText")
 	.then(({ TypingTextComponent }) => {
 		window.customElements.define("typing-text-component", TypingTextComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

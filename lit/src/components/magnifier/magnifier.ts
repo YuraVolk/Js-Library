@@ -43,9 +43,9 @@ export class ImageMagnifierComponent extends LinkedCarouselMixin(LitElement) imp
 
 		glass.styles = {
 			...glass.styles,
-			left: `${x - width}px`,
-			top: `${y - height}px`,
-			backgroundPosition: "-" + (x * this.zoomScale - width) + "px -" + (y * this.zoomScale - height) + "px"
+			left: `${String(x - width)}px`,
+			top: `${String(y - height)}px`,
+			backgroundPosition: "-" + String(x * this.zoomScale - width) + "px -" + String(y * this.zoomScale - height) + "px"
 		};
 	}
 
@@ -69,7 +69,7 @@ export class ImageMagnifierComponent extends LinkedCarouselMixin(LitElement) imp
 
 		glass.styles = {
 			backgroundImage: `url("${this.imageSource}")`,
-			backgroundSize: `${this.magnifierImage.offsetWidth * this.zoomScale}px ${this.magnifierImage.offsetHeight * this.zoomScale}px`
+			backgroundSize: `${String(this.magnifierImage.offsetWidth * this.zoomScale)}px ${String(this.magnifierImage.offsetHeight * this.zoomScale)}px`
 		};
 	}
 

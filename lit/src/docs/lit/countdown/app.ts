@@ -9,7 +9,7 @@ import("../../../components/countdown/countdown")
 	.then(({ CountdownComponent }) => {
 		window.customElements.define("countdown-component", CountdownComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

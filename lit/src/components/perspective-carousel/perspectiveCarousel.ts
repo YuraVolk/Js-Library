@@ -88,8 +88,8 @@ export class PerspectiveCarouselComponent extends LinkedCarouselMixin(LitElement
 			if (!this.forcedImageWidth || !this.forcedImageHeight) continue;
 			image.styles = {
 				...image.styles,
-				width: `${this.forcedImageWidth}px`,
-				height: `${this.forcedImageHeight}px`
+				width: `${String(this.forcedImageWidth)}px`,
+				height: `${String(this.forcedImageHeight)}px`
 			};
 		}
 
@@ -155,8 +155,8 @@ export class PerspectiveCarouselComponent extends LinkedCarouselMixin(LitElement
 
 			item.styles = {
 				...item.styles,
-				left: `${left}px`,
-				top: `${top}px`,
+				left: `${String(left)}px`,
+				top: `${String(top)}px`,
 				visibility: "visible",
 				position: "absolute",
 				zIndex: "0",
@@ -242,10 +242,10 @@ export class PerspectiveCarouselComponent extends LinkedCarouselMixin(LitElement
 		const assignToItem = () => {
 			item.styles = {
 				...item.styles,
-				left: `${itemState.left}px`,
-				width: `${itemState.width}px`,
-				height: `${itemState.height}px`,
-				top: `${itemState.top}px`,
+				left: `${String(itemState.left)}px`,
+				width: `${String(itemState.width)}px`,
+				height: `${String(itemState.height)}px`,
+				top: `${String(itemState.top)}px`,
 				opacity: String(itemState.opacity)
 			};
 		};
@@ -326,7 +326,7 @@ export class PerspectiveCarouselComponent extends LinkedCarouselMixin(LitElement
 
 	protected firstUpdated(): void {
 		new ResizeController(this, this.initCarousel.bind(this));
-		this.initCarousel().catch((e) => {
+		this.initCarousel().catch((e: unknown) => {
 			console.trace(e);
 		});
 	}

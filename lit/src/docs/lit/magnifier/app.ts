@@ -31,7 +31,7 @@ import("../../../components/magnifier/magnifier")
 			}
 		);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

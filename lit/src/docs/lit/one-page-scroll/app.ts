@@ -9,7 +9,7 @@ import("../../../components/one-page-scroll/onePageScroll")
 	.then(({ OnePageScrollComponent }) => {
 		window.customElements.define("one-page-scroll-component", OnePageScrollComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 

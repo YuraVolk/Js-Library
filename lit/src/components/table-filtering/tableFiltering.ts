@@ -129,10 +129,10 @@ export class TableFilteringComponent extends LitElement {
 				? html`<div
 						class="wrap-select"
 						style=${styleMap({
-							top: `${this.openSelect.top}px`,
-							left: `${this.openSelect.left}px`,
-							width: `${this.openSelect.width}px`,
-							height: `${this.openSelect.height}px`
+							top: `${String(this.openSelect.top)}px`,
+							left: `${String(this.openSelect.left)}px`,
+							width: `${String(this.openSelect.width)}px`,
+							height: `${String(this.openSelect.height)}px`
 						})}
 				  >
 						${this.openSelect.options.map((option) => {

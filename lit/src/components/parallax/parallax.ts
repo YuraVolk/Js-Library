@@ -53,7 +53,7 @@ export class ParallaxComponent extends LitElement implements ParallaxConfigurati
 				const scrollPoint = getScrollPoint();
 				if (scrollPoint > animationOffset - innerHeight * 2 && scrollPoint < animationOffset + innerHeight) {
 					const point = (scrollPoint - (animationOffset - innerHeight)) / this.speed - this.margin;
-					wrap.style.transform = `translate${this.isHorizontalTranslation ? "X" : "Y"}(${point}px)`;
+					wrap.style.transform = `translate${this.isHorizontalTranslation ? "X" : "Y"}(${String(point)}px)`;
 				}
 			}),
 			{ passive: true }

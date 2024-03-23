@@ -11,7 +11,7 @@ import("../../../components/accordion/accordion")
 		window.customElements.define("accordion-component", AccordionComponent);
 		window.customElements.define("accordion-item-component", AccordionItemComponent);
 	})
-	.catch((e) => {
+	.catch((e: unknown) => {
 		console.trace(e);
 	});
 
