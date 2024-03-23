@@ -23,6 +23,7 @@
         >
           <li
             v-for="tick in ticks"
+            :key="tick"
             :style="`--value: ${tick}%`"
             class="range-slider-ticks__tick"
           >
@@ -61,8 +62,8 @@ const props = withDefaults(defineProps<Partial<RangeInputConfiguration>>(), {
     hideValue: false,
     allSameLine: false
 });
-const currentValue = ref(props.defaultValue ?? 0);
-const propsValue = computed(() => props.defaultValue ?? 0);
+const currentValue = ref(props.defaultValue);
+const propsValue = computed(() => props.defaultValue);
 const emit = defineEmits<{
     (e: 'change', value: number): void
 }>();
@@ -92,7 +93,7 @@ const styles = computed(() => {
 const setGradientStyle = () => {
     const progress = (currentValue.value / props.maximum) * 100;
     gradientStyles.value = {
-		background: `linear-gradient(to right, ${styles.value.thumbColor} ${progress}%, ${styles.value.trackColor} ${progress}%)`
+		background: `linear-gradient(to right, ${styles.value.thumbColor} ${String(progress)}%, ${styles.value.trackColor} ${String(progress)}%)`
 	};
 };
 

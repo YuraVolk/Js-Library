@@ -42,7 +42,7 @@ const rotateCarousel = (newCurrentImage: number) => {
     const items = Object.values(elements);
     const length = items.length,
         theta = (2 * Math.PI) / length;
-    carouselStyles.transform = `rotate${isHorizontal.value ? "Y" : "X"}(${newCurrentImage * -theta}rad)`;
+    carouselStyles.transform = `rotate${isHorizontal.value ? "Y" : "X"}(${String(newCurrentImage * -theta)}rad)`;
     currentItem.value = newCurrentImage;
 };
 
@@ -52,14 +52,14 @@ const setupCarousel = () => {
         theta = (2 * Math.PI) / length,
         size = parseFloat(getComputedStyle(items[0].element)[isHorizontal.value ? "width" : "height"]);
     const apothem = size / (2 * Math.tan(Math.PI / length));
-    carouselStyles.transformOrigin = `50% 50% ${-apothem}px`;
+    carouselStyles.transformOrigin = `50% 50% ${String(-apothem)}px`;
 
     for (let i = 0; i < length; i++) {
         items[i].styles = {};
         items[i].styles.padding = "0";
         if (i === 0) continue;
-        items[i].styles.transformOrigin = `50% 50% ${-apothem}px`;
-        items[i].styles.transform = `rotate${isHorizontal.value ? "Y" : "X"}(${i * theta}rad)`;
+        items[i].styles.transformOrigin = `50% 50% ${String(-apothem)}px`;
+        items[i].styles.transform = `rotate${isHorizontal.value ? "Y" : "X"}(${String(i * theta)}rad)`;
     }
 
     rotateCarousel(currentItem.value);

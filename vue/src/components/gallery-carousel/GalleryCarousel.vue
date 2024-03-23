@@ -29,6 +29,7 @@
     >
       <li
         v-for="i in itemsLength - 2"
+        :key="i"
         class="gallery-toggle"
         :class="{ 'gallery-toggle--active': currentSlide - 1 === i - 1 }"
         @click="() => { changeCurrentSlide(i); }"
@@ -74,7 +75,7 @@ const interval = ref<number | undefined>();
 const itemsLength = computed(() => Object.keys(elements).length);
 const galleryLeft = ref(currentSlide.value * -100);
 const galleryListStyle = computed<CSSProperties>(() => ({
-    left: `${galleryLeft.value}%`
+    left: `${String(galleryLeft.value)}%`
 }));
 
 const checkCurrentSlide = (value: number) => {

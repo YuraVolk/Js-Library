@@ -66,7 +66,7 @@
 <script setup lang="ts">
 import { defineAsyncComponent } from "vue";
 
-const ParallaxComponent = defineAsyncComponent(() => import("../../../components/parallax/Parallax.vue"));
+const ParallaxComponent = defineAsyncComponent(() => import("../../../components/parallax/ParallaxComponent.vue"));
 const HeaderComponent = defineAsyncComponent(() => import("../HeaderComponent.vue"));
 const SidebarComponent = defineAsyncComponent(() => import("../SidebarComponent.vue"));
 </script>

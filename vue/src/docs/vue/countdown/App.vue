@@ -26,7 +26,7 @@ import { defineAsyncComponent } from "vue";
 
 const HeaderComponent = defineAsyncComponent(() => import("../HeaderComponent.vue"));
 const SidebarComponent = defineAsyncComponent(() => import("../SidebarComponent.vue"));
-const CountdownComponent = defineAsyncComponent(() => import("../../../components/countdown/Countdown.vue"));
+const CountdownComponent = defineAsyncComponent(() => import("../../../components/countdown/CountdownComponent.vue"));
 </script>
 
 <style scoped>

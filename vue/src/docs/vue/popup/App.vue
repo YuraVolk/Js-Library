@@ -65,7 +65,7 @@
 import { ref, defineAsyncComponent } from "vue";
 import closeImage from "../../../../../assets/img/close.png";
 
-const PopupComponent = defineAsyncComponent(() => import("../../../components/popup/Popup.vue"));
+const PopupComponent = defineAsyncComponent(() => import("../../../components/popup/PopupComponent.vue"));
 const HeaderComponent = defineAsyncComponent(() => import("../HeaderComponent.vue"));
 const SidebarComponent = defineAsyncComponent(() => import("../SidebarComponent.vue"));
 

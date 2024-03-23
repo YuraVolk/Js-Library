@@ -22,49 +22,53 @@ const isFixed = ref(false);
 const intersectionObserver = ref<IntersectionObserver | undefined>();
 
 onMounted(() => {
-    const wrap = headerElements["sticky-header"];
-	if (!wrap || !outerWrap.value) return;
+	const wrap = headerElements["sticky-header"];
+	if (!outerWrap.value) return;
 
 	const intersectionObserverInstance = new IntersectionObserver(
-		async ([entry]) => {
-			if (!outerWrap.value) return;
+		([entry]) => {
+			(async () => {
+				if (!outerWrap.value) return;
 
-			if (entry.intersectionRatio <= props.ratio && !isFixed.value) {
-				isFixed.value = true;
-				const { top, left, width, height } = wrap.element.getBoundingClientRect();
-                wrap.styles = {
-                    ...wrap.styles,
-                    position: "fixed",
-                    top: `${top}px`,
-                    left: `${left}px`,
-                    width: `${width}px`,
-                    height: `${height}px`,
-                    zIndex: 9999
-                };
+				if (entry.intersectionRatio <= props.ratio && !isFixed.value) {
+					isFixed.value = true;
+					const { top, left, width, height } = wrap.element.getBoundingClientRect();
+					wrap.styles = {
+						...wrap.styles,
+						position: "fixed",
+						top: `${String(top)}px`,
+						left: `${String(left)}px`,
+						width: `${String(width)}px`,
+						height: `${String(height)}px`,
+						zIndex: 9999
+					};
 
-				await nextTick();
-				wrap.element.getBoundingClientRect();
-				
-                setTimeout(() => {
-                    wrap.styles = {
-                        ...wrap.styles,
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        width: "auto",
-                        height: "auto"
-                    };
-                }, 1);
-			} else if (entry.intersectionRatio > props.ratio && isFixed.value) {
-				isFixed.value = false;
-                wrap.styles = {
-                    ...wrap.styles,
-                    position: "static",
-                    top: "0",
-                    left: "0",
-                    right: "0"
-                };
-			}
+					await nextTick();
+					wrap.element.getBoundingClientRect();
+
+					setTimeout(() => {
+						wrap.styles = {
+							...wrap.styles,
+							top: 0,
+							left: 0,
+							right: 0,
+							width: "auto",
+							height: "auto"
+						};
+					}, 1);
+				} else if (entry.intersectionRatio > props.ratio && isFixed.value) {
+					isFixed.value = false;
+					wrap.styles = {
+						...wrap.styles,
+						position: "static",
+						top: "0",
+						left: "0",
+						right: "0"
+					};
+				}
+			})().catch((e: unknown) => {
+				console.trace(e);
+			});
 		},
 		{
 			rootMargin: props.rootMargin,

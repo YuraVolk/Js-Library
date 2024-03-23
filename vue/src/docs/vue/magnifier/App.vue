@@ -60,7 +60,7 @@
 <script setup lang="ts">
 import { ref, defineAsyncComponent } from "vue";
 
-import ImageMagnifierComponent from "../../../components/magnifier/Magnifier.vue";
+import ImageMagnifierComponent from "../../../components/magnifier/MagnifierComponent.vue";
 import ImageMagnifierGlassComponent from "../../../components/magnifier/MagnifierGlass.vue";
 const HeaderComponent = defineAsyncComponent(() => import("../HeaderComponent.vue"));
 const SidebarComponent = defineAsyncComponent(() => import("../SidebarComponent.vue"));

@@ -36,9 +36,9 @@ const moveMagnifier = (x: number, y: number) => {
 
   glass.styles = {
     ...glass.styles,
-    left: `${x - width}px`,
-    top: `${y - height}px`,
-    backgroundPosition: "-" + (x * props.zoomScale - width) + "px -" + (y * props.zoomScale - height) + "px"
+    left: `${String(x - width)}px`,
+    top: `${String(y - height)}px`,
+    backgroundPosition: "-" + String(x * props.zoomScale - width) + "px -" + String(y * props.zoomScale - height) + "px"
   };
 };
 
@@ -54,7 +54,7 @@ onMounted(() => {
   const glass = elements["magnifier-glass"];
   glass.styles = {
     backgroundImage: `url("${props.imageSource}")`,
-    backgroundSize: `${image.value.offsetWidth * props.zoomScale}px ${image.value.offsetHeight * props.zoomScale}px`
+    backgroundSize: `${String(image.value.offsetWidth * props.zoomScale)}px ${String(image.value.offsetHeight * props.zoomScale)}px`
   };
 });
 

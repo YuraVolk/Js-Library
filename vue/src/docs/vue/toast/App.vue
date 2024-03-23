@@ -55,7 +55,7 @@ import { ref, defineAsyncComponent } from "vue";
 
 const HeaderComponent = defineAsyncComponent(() => import("../HeaderComponent.vue"));
 const SidebarComponent = defineAsyncComponent(() => import("../SidebarComponent.vue"));
-const ToastComponent = defineAsyncComponent(() => import("../../../components/toast/Toast.vue"));
+const ToastComponent = defineAsyncComponent(() => import("../../../components/toast/ToastComponent.vue"));
 
 const isOpen = ref(true);
 const closeToast = () => {

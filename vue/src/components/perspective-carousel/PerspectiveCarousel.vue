@@ -59,7 +59,6 @@ const imagesStyles = computed<CSSProperties>(() => ({
 
 const emit = defineEmits<{
 	(e: "movingToCenter"): void;
-	(e: "movedToCenter"): void;
 	(e: "movingFromCenter", elementIndex?: number): void;
 }>();
 
@@ -148,7 +147,9 @@ const rotateCarousel = async () => {
 			if (state.value.totalItems % 2 === 0) newPosition++;
 		}
 
-		moveItem(i, newPosition);
+		moveItem(i, newPosition).catch((e: unknown) => { 
+			console.trace(e);
+		});
 	});
 };
 
@@ -165,7 +166,6 @@ const itemAnimationComplete = async (elementIndex: number, newPosition: number) 
 	if (--state.value.carouselRotationsLeft <= 0) {
 		if (!state.value.performingSetup) {
 			emit("movingToCenter");
-			emit("movedToCenter");
 		} else state.value.performingSetup = false;
 	} else await rotateCarousel();
 };
@@ -177,10 +177,10 @@ const moveItem = async (elementIndex: number, newPosition: number) => {
 	const assignToItem = () => {
 		item.styles = {
 			...item.styles,
-			left: `${itemState.left}px`,
-			width: `${itemState.width}px`,
-			height: `${itemState.height}px`,
-			top: `${itemState.top}px`,
+			left: `${String(itemState.left)}px`,
+			width: `${String(itemState.width)}px`,
+			height: `${String(itemState.height)}px`,
+			top: `${String(itemState.top)}px`,
 			opacity: String(itemState.opacity)
 		};
 	};
@@ -196,7 +196,9 @@ const moveItem = async (elementIndex: number, newPosition: number) => {
 		};
 		assignToItem();
 		setTimeout(() => {
-			itemAnimationComplete(elementIndex, newPosition);
+			itemAnimationComplete(elementIndex, newPosition).catch((e: unknown) => {
+				console.trace(e);
+			});
 		}, props.animationLength);
 	} else {
 		itemState.currentPosition = newPosition;
@@ -221,18 +223,24 @@ const moveOnce = (direction: CarouselDirection) => {
 
 const previousItem = () => {
 	moveOnce(CarouselDirection.BACKWARDS);
-	rotateCarousel();
+	rotateCarousel().catch((e: unknown) => { 
+		console.trace(e);
+	});
 };
 
 const switchOrientation = () => {
 	if (!props.allowSwitchingOrientation) return;
 	isVertical.value = !isVertical.value;
-	rotateCarousel();
+	rotateCarousel().catch((e: unknown) => { 
+		console.trace(e);
+	});
 };
 
 const nextItem = () => {
 	moveOnce(CarouselDirection.FORWARDS);
-	rotateCarousel();
+	rotateCarousel().catch((e: unknown) => { 
+		console.trace(e);
+	});
 };
 
 const initializeCarouselData = (parent: HTMLElement) => {
@@ -247,8 +255,8 @@ const forceImageDimensionsIfEnabled = async () => {
 		if (!props.forcedImageWidth || !props.forcedImageHeight) continue;
 		image.styles = {
 			...image.styles,
-			width: `${props.forcedImageWidth}px`,
-			height: `${props.forcedImageHeight}px`
+			width: `${String(props.forcedImageWidth)}px`,
+			height: `${String(props.forcedImageHeight)}px`
 		};
 	}
 
@@ -291,8 +299,8 @@ const setupCarousel = async () => {
 
 		item.styles = {
 			...item.styles,
-			left: `${left}px`,
-			top: `${top}px`,
+			left: `${String(left)}px`,
+			top: `${String(top)}px`,
 			visibility: "visible",
 			position: "absolute",
 			"z-index": 0,
@@ -332,18 +340,22 @@ const setupStarterRotation = async () => {
 	}
 };
 
-const initCarousel = async () => {
-	if (!parent.value) return;
-	state.value = resetInternalState();
-	for (const key of elementsAccessors.value.keys) elementsState.value[key] ??= {};
-	await nextTick();
+const initCarousel = () => {
+	(async () => {
+		if (!parent.value) return;
+		state.value = resetInternalState();
+		for (const key of elementsAccessors.value.keys) elementsState.value[key] ??= {};
+		await nextTick();
 
-	initializeCarouselData(parent.value);
-	await forceImageDimensionsIfEnabled();
-	await setOriginalItemDimensions();
-	await calculatePositionProperties();
-	await setupCarousel();
-	await setupStarterRotation();
+		initializeCarouselData(parent.value);
+		await forceImageDimensionsIfEnabled();
+		await setOriginalItemDimensions();
+		await calculatePositionProperties();
+		await setupCarousel();
+		await setupStarterRotation();
+	})().catch((e: unknown) => {
+		console.trace(e);
+	});
 };
 
 onMounted(() => {

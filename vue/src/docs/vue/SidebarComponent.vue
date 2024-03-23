@@ -2,7 +2,8 @@
   <aside class="navigation">
     <nav class="wrap">
       <div
-        v-for="linkList in Object.entries(links)"
+        v-for="linkList, i in Object.entries(links)"
+        :key="i"
         class="list"
       >
         <details
@@ -33,6 +34,7 @@
             <ul class="list-sublist">
               <li
                 v-for="link in linkList[1]"
+                :key="link.name + link.link"
                 :class="`list-sublist__item ${link.name === $props.activeLink ? 'list-sublist__item--active' : ''}`"
               >
                 <a

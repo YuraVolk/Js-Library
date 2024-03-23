@@ -29,7 +29,7 @@ useInterval(() => {
 
 	const scrollableParent = getFirstScrollableParent(wrap.value, false);
 	const top = scrollableParent instanceof HTMLElement ? scrollableParent.scrollTop : scrollableParent.scrollY;
-	styles.top = `${top + wrap.value.offsetHeight + props.rootMargin}px`;
+	styles.top = `${String(top + wrap.value.offsetHeight + props.rootMargin)}px`;
 }, props.checkInterval);
 
 onMounted(() => {
@@ -42,11 +42,11 @@ onMounted(() => {
 			const scrollableParent = getFirstScrollableParent(wrap.value, false);
 			if (entry.intersectionRatio < 1) {
 				const top = scrollableParent instanceof HTMLElement ? scrollableParent.scrollTop : scrollableParent.scrollY;
-				styles.top = `${top + wrap.value.offsetHeight + props.rootMargin}px`;
+				styles.top = `${String(top + wrap.value.offsetHeight + props.rootMargin)}px`;
 			}
 		},
 		{
-			rootMargin: `${props.rootMargin}px`,
+			rootMargin: `${String(props.rootMargin)}px`,
 			threshold: generateThreshold()
 		}
 	);
