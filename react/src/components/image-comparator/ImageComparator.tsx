@@ -17,7 +17,7 @@ export const ImageComparator = (props: WithChildren<object> & GenericReactCompon
 			[elementKey]: {
 				...elements[elementKey],
 				styles: {
-					width: difference + "px"
+					width: String(difference) + "px"
 				}
 			}
 		}));
@@ -27,7 +27,7 @@ export const ImageComparator = (props: WithChildren<object> & GenericReactCompon
 			[elementKey]: {
 				...imageData[elementKey],
 				style: {
-					left: difference + "px"
+					left: String(difference) + "px"
 				}
 			}
 		}));

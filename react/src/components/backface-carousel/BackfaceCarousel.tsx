@@ -21,7 +21,7 @@ export const BackfaceCarousel = (props: { children: React.ReactNode; isVertical?
 				theta = (2 * Math.PI) / length;
 			setCarouselStyles((carouselStyles) => ({
 				...carouselStyles,
-				transform: `rotate${isHorizontal ? "Y" : "X"}(${newCurrentImage * -theta}rad)`
+				transform: `rotate${isHorizontal ? "Y" : "X"}(${String(newCurrentImage * -theta)}rad)`
 			}));
 			setCurrentItem(newCurrentImage);
 		},
@@ -42,15 +42,15 @@ export const BackfaceCarousel = (props: { children: React.ReactNode; isVertical?
 		const apothem = size / (2 * Math.tan(Math.PI / length));
 		setCarouselStyles((carouselStyles) => ({
 			...carouselStyles,
-			transformOrigin: `50% 50% ${-apothem}px`
+			transformOrigin: `50% 50% ${String(-apothem)}px`
 		}));
 
 		for (let i = 0; i < length; i++) {
 			items[i].styles = {};
 			items[i].styles.padding = "0";
 			if (i === 0) continue;
-			items[i].styles.transformOrigin = `50% 50% ${-apothem}px`;
-			items[i].styles.transform = `rotate${isHorizontal ? "Y" : "X"}(${i * theta}rad)`;
+			items[i].styles.transformOrigin = `50% 50% ${String(-apothem)}px`;
+			items[i].styles.transform = `rotate${isHorizontal ? "Y" : "X"}(${String(i * theta)}rad)`;
 		}
 
 		linkedItemsContext.current?.updateState(

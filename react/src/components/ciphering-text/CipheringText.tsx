@@ -129,7 +129,7 @@ export const CipheringText = ({
 	return (
 		<pre ref={element}>
 			{currentTextValue.map((letter, i) => (
-				<span className={letter.classes.join("")} key={`${letter.letter}-${i}`}>
+				<span className={letter.classes.join("")} key={`${letter.letter}-${String(i)}`}>
 					{letter.letter}
 				</span>
 			))}

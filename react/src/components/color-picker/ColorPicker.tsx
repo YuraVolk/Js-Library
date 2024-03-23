@@ -26,8 +26,8 @@ export const ColorPicker = ({
 
 	const colorPickerStyles = useMemo<ColorPickerCSSVariableKeys>(
 		() => ({
-			"--width": `${width}px`,
-			"--height": `${height}px`
+			"--width": `${String(width)}px`,
+			"--height": `${String(height)}px`
 		}),
 		[height, width]
 	);

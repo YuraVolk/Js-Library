@@ -46,7 +46,7 @@ export const RebuildingText = ({
 	return (
 		<pre className={props.className}>
 			{currentTextValue.map((letter, i) => (
-				<span className={letter.classes.join("")} key={`${letter.letter}-${i}`}>
+				<span className={letter.classes.join("")} key={`${letter.letter}-${String(i)}`}>
 					{letter.letter}
 				</span>
 			))}

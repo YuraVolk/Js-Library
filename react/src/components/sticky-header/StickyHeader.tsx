@@ -17,7 +17,7 @@ export const StickyHeader = ({
 	const intersectionObserver = useRef<IntersectionObserver>();
 
 	const setup = useCallback(() => {
-		const wrap = headerElements.current?.getState()?.["sticky-header"];
+		const wrap = headerElements.current?.getState()["sticky-header"];
 		if (!wrap || !outerWrap.current) return;
 
 		const intersectionObserverInstance = new IntersectionObserver(
@@ -31,10 +31,10 @@ export const StickyHeader = ({
 					Object.assign(wrap.element.current.style, {
 						...wrap.styles,
 						position: "fixed",
-						top: `${top}px`,
-						left: `${left}px`,
-						width: `${width}px`,
-						height: `${height}px`,
+						top: `${String(top)}px`,
+						left: `${String(left)}px`,
+						width: `${String(width)}px`,
+						height: `${String(height)}px`,
 						zIndex: 9999
 					});
 

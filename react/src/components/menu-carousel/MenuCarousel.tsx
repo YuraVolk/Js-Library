@@ -41,9 +41,9 @@ class Item extends MenuCarouselInternalItem {
 				...elements[this.configuration.elementKey],
 				styles: {
 					position: "absolute",
-					width: this.width + "px",
-					left: x + "px",
-					top: y + "px",
+					width: String(this.width) + "px",
+					left: String(x) + "px",
+					top: String(y) + "px",
 					zIndex: String((scale * 100) | 0)
 				}
 			}

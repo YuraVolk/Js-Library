@@ -16,7 +16,7 @@ export const Countdown = ({
 				distance = date.getTime() - new Date().getTime();
 			for (const { timeFactor, name } of units) {
 				const value = Math.floor(distance / timeFactor);
-				timeString += value <= 0 ? "" : `${value} ${String(value).slice(-1) === "1" ? name : name + "s"} `;
+				timeString += value <= 0 ? "" : `${String(value)} ${String(value).slice(-1) === "1" ? name : name + "s"} `;
 				distance %= timeFactor;
 			}
 

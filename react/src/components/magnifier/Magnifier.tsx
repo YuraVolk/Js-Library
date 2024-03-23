@@ -12,7 +12,7 @@ const Magnifier = forwardRef<MagnifiersExposedFunctions, MagnifiersConfiguration
 
 		const moveMagnifier = useCallback((x: number, y: number) => {
 			if (!image.current) return;
-			const glass = linkedItemsContext.current?.getState()?.["magnifier-glass"];
+			const glass = linkedItemsContext.current?.getState()["magnifier-glass"];
 			assertNonUndefined(glass);
 			const element = glass.element.current;
 			assertNonUndefined(element);
@@ -31,9 +31,9 @@ const Magnifier = forwardRef<MagnifiersExposedFunctions, MagnifiersConfiguration
 					...glass,
 					styles: {
 						...glass.styles,
-						left: `${x - width}px`,
-						top: `${y - height}px`,
-						backgroundPosition: "-" + (x * zoomScale - width) + "px -" + (y * zoomScale - height) + "px"
+						left: `${String(x - width)}px`,
+						top: `${String(y - height)}px`,
+						backgroundPosition: "-" + String(x * zoomScale - width) + "px -" + String(y * zoomScale - height) + "px"
 					}
 				}
 			});
@@ -55,7 +55,7 @@ const Magnifier = forwardRef<MagnifiersExposedFunctions, MagnifiersConfiguration
 						...elements["magnifier-glass"],
 						styles: {
 							backgroundImage: `url("${props.imageSource}")`,
-							backgroundSize: `${image.current.offsetWidth * zoomScale}px ${image.current.offsetHeight * zoomScale}px`
+							backgroundSize: `${String(image.current.offsetWidth * zoomScale)}px ${String(image.current.offsetHeight * zoomScale)}px`
 						}
 					}
 				};
