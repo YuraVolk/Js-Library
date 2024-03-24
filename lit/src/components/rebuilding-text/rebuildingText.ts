@@ -1,6 +1,6 @@
 import { property } from "lit/decorators.js";
 import { SelfModifyingText, TriggerTextParams } from "../../interfaces/generic/selfModifyingText";
-const RebuildingTextModule = import("shared/component/rebuildingText");
+import { createRebuildingTextSteps } from "shared/component/rebuildingText";
 
 export class RebuildingTextComponent extends SelfModifyingText {
 	@property({ type: Number })
@@ -8,21 +8,21 @@ export class RebuildingTextComponent extends SelfModifyingText {
 	@property({ type: Number })
 	typingSpeed = 75;
 
-	async triggerTextAnimation({ context, fromText, toText }: TriggerTextParams) {
-		/*const { createRebuildingTextSteps } = await RebuildingTextModule;
+	triggerTextAnimation({ context, fromText, toText }: TriggerTextParams) {
 		const steps = createRebuildingTextSteps(fromText, toText);
 
 		for (let i = 0; i < steps.length; i++) {
 			setTimeout(() => {
-				for (const element of this._elements) {
-					element.textContent = steps[i].filter(Boolean).join("");
-					if (i !== steps.length - 1) continue;
+				this._currentTextValue = steps[i].filter(Boolean).map((letter) => ({
+					letter: String(letter),
+					classes: []
+				}));
+				if (i !== steps.length - 1) return;
 
-					setTimeout(() => {
-						context.onInterval();
-					}, this.interval);
-				}
+				setTimeout(() => {
+					context.onInterval();
+				}, this.interval);
 			}, this.typingSpeed * i);
-		}*/
+		}
 	}
 }
