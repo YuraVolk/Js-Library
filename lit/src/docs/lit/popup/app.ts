@@ -2,7 +2,7 @@ import type { PopupComponent } from "lit/src/components/popup/popup";
 import "../../../components/litEntry";
 import "../../../global.css";
 import { LitElement, css, html } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, query } from "lit/decorators.js";
 
 import popupCloseButton from "../../../../../assets/img/close.png";
 
@@ -74,13 +74,24 @@ export class PopupApplicationExample1 extends LitElement {
 		}
 	`;
 
+	@query("popup-component")
+	_popupComponent!: PopupComponent;
+
 	render() {
 		return html`
 			<popup-component displayOpenButton>
 				<button class="popup-open-button" slot="popup-open-button">Open Popup</button>
 				<div class="popup-wrap" slot="popup">
 					<div class="popup">
-						<img class="popup__close-button" data-popup-close-button src=${popupCloseButton} alt="Close Button" />
+						<img
+							class="popup__close-button"
+							data-popup-close-button
+							src=${popupCloseButton}
+							alt="Close Button"
+							@click=${() => {
+								this._popupComponent.closePopup();
+							}}
+						/>
 						<p>Sample popup. This is a template for making different popups.</p>
 					</div>
 				</div>
