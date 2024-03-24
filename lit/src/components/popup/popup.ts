@@ -1,9 +1,9 @@
 import { LitElement, css, html } from "lit";
-import { property, queryAssignedElements, queryAsync } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { when } from "lit/directives/when.js";
-import { PopupLitConfiguration } from "../../interfaces/component/popup";
+import { PopupConfiguration } from "shared/component/popup";
 
-export class PopupComponent extends LitElement implements PopupLitConfiguration {
+export class PopupComponent extends LitElement implements PopupConfiguration {
 	static styles = css`
 		.popup {
 			position: fixed;
@@ -21,43 +21,20 @@ export class PopupComponent extends LitElement implements PopupLitConfiguration 
 	displayOpenButton = false;
 	@property({ type: Number })
 	autoClosingTime?: number;
-	@property()
-	closeButtonSelector = "[data-popup-close-button]";
 
-	@queryAsync(".popup")
-	_popup!: Promise<HTMLDivElement>;
-	@queryAssignedElements({ slot: "popup" })
-	_assignedElements!: HTMLElement[];
-
-	private clickEventListener!: EventListener;
-
-	async openPopup() {
+	openPopup() {
 		if (this.open) return;
 		this.open = true;
-		const popup = await this._popup;
-		const targetElements: unknown[] = Array.from(
-			this._assignedElements.reduce<Element[]>((list, b) => [...list, ...Array.from(b.querySelectorAll(this.closeButtonSelector))], [])
-		);
-		popup.addEventListener(
-			"click",
-			(this.clickEventListener = (event) => {
-				if (event.target && targetElements.includes(event.target))
-					this.closePopup().catch((e: unknown) => {
-						console.error(e);
-					});
-			})
-		);
 
 		if (this.autoClosingTime) {
-			await new Promise((resolve) => setTimeout(resolve, this.autoClosingTime ?? 0));
-			await this.closePopup();
+			setTimeout(() => {
+				this.closePopup();
+			}, this.autoClosingTime ?? 0);
 		}
 	}
 
-	async closePopup() {
+	closePopup() {
 		if (!this.open) return;
-		const popup = await this._popup;
-		popup.removeEventListener("click", this.clickEventListener);
 		this.open = false;
 	}
 
@@ -65,7 +42,11 @@ export class PopupComponent extends LitElement implements PopupLitConfiguration 
 		return html`${when(
 			this.displayOpenButton,
 			() =>
-				html`<div @click="${() => this.openPopup()}">
+				html`<div
+					@click="${() => {
+						this.openPopup();
+					}}"
+				>
 					<slot name="popup-open-button"></slot>
 				</div>`
 		)}
