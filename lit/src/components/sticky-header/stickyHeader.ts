@@ -1,9 +1,11 @@
 import { LitElement, html } from "lit";
-import { property, queryAssignedElements } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
+import { LinkedCarouselMixin } from "../../interfaces/hooks/linkedItems";
 import { StickyHeaderConfiguration } from "shared/component/stickyHeader";
 import { generateThreshold } from "shared/interfaces/intersectionObserved";
+import { StickyHeaderElement } from "./stickyHeaderElement";
 
-export class StickyHeaderComponent extends LitElement implements StickyHeaderConfiguration {
+export class StickyHeaderComponent extends LinkedCarouselMixin(LitElement) implements StickyHeaderConfiguration {
 	@property()
 	rootMargin = "0px";
 	@property({ type: Number })
@@ -11,33 +13,33 @@ export class StickyHeaderComponent extends LitElement implements StickyHeaderCon
 	@property()
 	fixedClassName = "fixed";
 
-	@queryAssignedElements({ flatten: true })
-	_headers!: HTMLElement[];
-
 	protected intersectionObserver?: IntersectionObserver;
 
 	protected firstUpdated() {
-		const header = this._headers[0];
+		const header = this.linkedItemsContext["sticky-header"];
+		let isFixed = false;
+
 		this.intersectionObserver = new IntersectionObserver(
 			([entry]) => {
-				if (entry.intersectionRatio <= this.ratio && !header.classList.contains(this.fixedClassName)) {
-					header.classList.add(this.fixedClassName);
-					const { top, left } = header.getBoundingClientRect();
-					Object.assign(header.style, {
+				if (entry.intersectionRatio <= this.ratio && !isFixed) {
+					isFixed = true;
+					const { top, left } = header.element.getBoundingClientRect();
+					Object.assign(header.element.style, {
 						position: "fixed",
 						top: `${String(top)}px`,
 						left: `${String(left)}px`
 					});
-					header.getBoundingClientRect();
-					Object.assign(header.style, { top: "0", left: "0", right: "0" });
-				} else if (entry.intersectionRatio > this.ratio && header.classList.contains(this.fixedClassName)) {
-					header.classList.remove(this.fixedClassName);
-					Object.assign(header.style, {
-						position: "",
-						top: "",
-						left: "",
-						right: ""
-					});
+					header.element.getBoundingClientRect();
+
+					header.styles = {
+						position: "fixed",
+						top: "0",
+						left: "0",
+						right: "0"
+					};
+				} else if (entry.intersectionRatio > this.ratio && isFixed) {
+					isFixed = false;
+					header.styles = {};
 				}
 			},
 			{
@@ -58,3 +60,5 @@ export class StickyHeaderComponent extends LitElement implements StickyHeaderCon
 		return html`<slot></slot>`;
 	}
 }
+
+export { StickyHeaderElement };
