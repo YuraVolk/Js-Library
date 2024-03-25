@@ -1,8 +1,4 @@
-export interface StickyHeaderMinimalConfiguration {
+export interface StickyHeaderConfiguration {
 	rootMargin: string;
 	ratio: number;
-}
-
-export interface StickyHeaderConfiguration extends StickyHeaderMinimalConfiguration {
-	fixedClassName: string;
 }

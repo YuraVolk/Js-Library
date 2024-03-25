@@ -7,10 +7,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, nextTick } from "vue";
 import { generateThreshold } from "shared/interfaces/intersectionObserved";
-import { StickyHeaderMinimalConfiguration } from "shared/component/stickyHeader";
+import { StickyHeaderConfiguration } from "shared/component/stickyHeader";
 import { useInjectedLinkedItems } from "../../interfaces/hooks/useLinkedItem";
 
-const props = withDefaults(defineProps<Partial<StickyHeaderMinimalConfiguration>>(), {
+const props = withDefaults(defineProps<Partial<StickyHeaderConfiguration>>(), {
 	rootMargin: "0px",
 	ratio: 0.25
 });

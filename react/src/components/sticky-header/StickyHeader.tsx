@@ -2,7 +2,7 @@ import React, { useCallback, useRef } from "react";
 import { GenericReactComponentProps } from "../../interfaces/generic/classNameFallthrough";
 import { ContextLinkedItems, ExposedContextFunctions } from "../../interfaces/hooks/useLinkedItem";
 import { WithChildren } from "../../utils/utils";
-import { StickyHeaderMinimalConfiguration } from "shared/component/stickyHeader";
+import { StickyHeaderConfiguration } from "shared/component/stickyHeader";
 import { generateThreshold } from "shared/interfaces/intersectionObserved";
 import { assertNonUndefined } from "shared/utils/utils";
 
@@ -10,7 +10,7 @@ export const StickyHeader = ({
 	rootMargin = "0px",
 	ratio = 0.25,
 	...props
-}: WithChildren<Partial<StickyHeaderMinimalConfiguration>> & GenericReactComponentProps) => {
+}: WithChildren<Partial<StickyHeaderConfiguration>> & GenericReactComponentProps) => {
 	const headerElements = useRef<ExposedContextFunctions | null>(null);
 	const outerWrap = useRef<HTMLDivElement>(null);
 	const isFixed = useRef(false);
