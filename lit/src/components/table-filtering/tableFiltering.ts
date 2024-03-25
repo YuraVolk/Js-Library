@@ -1,20 +1,20 @@
 import { LitElement, css, html } from "lit";
-import { property, query, queryAssignedElements, state } from "lit/decorators.js";
-import { styleMap } from "lit/directives/style-map.js";
+import { state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { assertNonUndefined } from "shared/utils/utils";
+import { repeat } from "lit/directives/repeat.js";
+import { styleMap } from "lit/directives/style-map.js";
+import { when } from "lit/directives/when.js";
+import { LinkedCarouselMixin, LinkedItem } from "../../interfaces/hooks/linkedItems";
 import { TableSelectInformation } from "shared/component/tableFiltering";
+import { assertNonUndefined } from "shared/utils/utils";
+import { TableFilteringHeader } from "./tableFilteringHeader";
+import { TableFilteringRow } from "./tableFilteringRow";
 
-interface TabularData {
-	headers: HTMLTableCellElement[];
-	rows: HTMLTableCellElement[][];
-	excludedCriteria: Array<string | null>[];
-}
-
-export class TableFilteringComponent extends LitElement {
+export class TableFilteringComponent extends LinkedCarouselMixin(LitElement) {
 	static styles = css`
-		.wrap {
+		:host {
 			position: relative;
+			display: block;
 		}
 
 		.wrap-select {
@@ -30,126 +30,129 @@ export class TableFilteringComponent extends LitElement {
 		.wrap-select__option--crossed {
 			text-decoration: line-through;
 		}
+
+		::slotted(*) {
+			display: table;
+			border-collapse: separate;
+			box-sizing: border-box;
+			text-indent: initial;
+			unicode-bidi: isolate;
+			border-spacing: 2px;
+			border-color: gray;
+		}
 	`;
 
-	@property({
-		type: Array,
-		converter: {
-			fromAttribute: (value) => (value ? value.split(",").map(Number) : []),
-			toAttribute: (value: number[]) => value.join(",")
+	@state()
+	_openSelect?: TableSelectInformation;
+	@state()
+	_excludedCriteria: Array<string | null>[] = [];
+
+	protected get elementAccessors() {
+		const headers: LinkedItem[] = [],
+			rows: LinkedItem[] = [];
+		for (const [key, value] of this.itemEntries) {
+			if (key.startsWith("table-header-")) {
+				headers.push(value);
+			} else if (key.startsWith("table-row")) rows.push(value);
 		}
-	})
-	filterableHeaders: number[] = [];
 
-	@queryAssignedElements({ selector: "table" })
-	_table!: HTMLTableElement[];
-	@query(".wrap")
-	_wrap!: HTMLDivElement;
+		return { headers, rows };
+	}
 
-	@state()
-	protected tabularData: TabularData = { headers: [], rows: [], excludedCriteria: [] };
-	@state()
-	private openSelect?: TableSelectInformation;
+	protected firstUpdated() {
+		this._excludedCriteria = Array.from({ length: this.elementAccessors.headers.length }, () => []);
+	}
 
-	private clickListener!: EventListener;
+	toggleCriterion(option: string) {
+		assertNonUndefined(this._openSelect);
+		const index = this._openSelect.index;
+		const newExcludedCriteria = [...this._excludedCriteria];
+		if (newExcludedCriteria[index].includes(option)) {
+			newExcludedCriteria[index].splice(newExcludedCriteria[index].indexOf(option), 1);
+		} else newExcludedCriteria[index].push(option);
 
-	protected displaySelect(header: HTMLTableCellElement, index: number) {
-		if (!this.filterableHeaders.includes(index + 1)) return;
-		const headerRect = header.getBoundingClientRect(),
-			wrap = this._wrap,
-			wrapRect = wrap.getBoundingClientRect();
+		this._excludedCriteria = newExcludedCriteria;
+		this.updateExcludedRows();
+	}
+
+	private updateExcludedRows() {
+		for (const row of this.elementAccessors.rows) {
+			if (
+				Array.from(row.element.getElementsByTagName("slot")[0].assignedElements()).some((element, i) =>
+					this._excludedCriteria[i].includes((element as HTMLElement).textContent ?? "")
+				)
+			) {
+				row.styles = {
+					display: "none"
+				};
+			} else {
+				row.styles = {};
+			}
+		}
+	}
+
+	onHeaderClicked(index: number) {
+		const elementAccessors = this.elementAccessors;
+		const headerRect = elementAccessors.headers[index].element.getBoundingClientRect();
+		const wrapRect = this.getBoundingClientRect();
 		const top = headerRect.top - wrapRect.top,
 			left = headerRect.left - wrapRect.left;
-		this.openSelect = {
+
+		this._openSelect = {
 			index,
 			top,
 			left,
 			width: headerRect.width,
 			height: headerRect.height,
-			options: [...new Set(this.tabularData.rows.map((row) => row[index].textContent ?? ""))]
+			options: [
+				...new Set(
+					elementAccessors.rows.map(({ element }) => {
+						return element.getElementsByTagName("slot")[0].assignedElements()[index].textContent ?? "";
+					})
+				)
+			]
 		};
 	}
 
-	protected firstUpdated() {
-		const [table] = this._table;
-		Object.assign(this.tabularData, {
-			headers: Array.from(table.querySelectorAll("th")),
-			rows: Array.from(table.querySelectorAll("tbody > tr")).map((row) =>
-				Array.from(row.children).filter<HTMLTableCellElement>((e): e is HTMLTableCellElement => e instanceof HTMLTableCellElement)
-			)
-		});
-		this.tabularData.excludedCriteria = Array.from({ length: this.tabularData.headers.length }, () => []);
-
-		this._wrap.addEventListener(
-			"click",
-			(this.clickListener = (event) => {
-				if (event.target instanceof HTMLTableCellElement && event.target.parentNode && event.target.tagName === "TH") {
-					this.displaySelect(event.target, Array.from(event.target.parentNode.children).indexOf(event.target));
-				} else if (!(event.target instanceof HTMLDivElement && event.target.classList.contains("wrap-select__option"))) {
-					this.openSelect = undefined;
-				}
-			})
-		);
-	}
-
-	toggleCriterion(option: string) {
-		assertNonUndefined(this.openSelect);
-		const { index } = this.openSelect;
-		const newExcludedCriteria = [...this.tabularData.excludedCriteria];
-		if (newExcludedCriteria[index].includes(option)) {
-			newExcludedCriteria[index].splice(newExcludedCriteria[index].indexOf(option), 1);
-		} else newExcludedCriteria[index].push(option);
-
-		this.tabularData = {
-			...this.tabularData,
-			excludedCriteria: newExcludedCriteria
-		};
-	}
-
-	protected updated(_changedProperties: Map<PropertyKey, unknown>): void {
-		if (!_changedProperties.has("tabularData")) return;
-		for (const row of this.tabularData.rows) {
-			const parent = row[0].parentElement;
-			if (!parent) continue;
-			if (row.some((element, i) => this.tabularData.excludedCriteria[i].includes(element.textContent ?? ""))) {
-				parent.style.display = "none";
-			} else parent.style.removeProperty("display");
-		}
-	}
-
-	disconnectedCallback(): void {
-		this._wrap.removeEventListener("click", this.clickListener);
-		super.disconnectedCallback();
+	closeSelect() {
+		this._openSelect = undefined;
 	}
 
 	render() {
-		return html`<div class="wrap">
+		return html`
 			<slot></slot>
-			${this.openSelect
-				? html`<div
-						class="wrap-select"
-						style=${styleMap({
-							top: `${String(this.openSelect.top)}px`,
-							left: `${String(this.openSelect.left)}px`,
-							width: `${String(this.openSelect.width)}px`,
-							height: `${String(this.openSelect.height)}px`
-						})}
-					>
-						${this.openSelect.options.map((option) => {
-							assertNonUndefined(this.openSelect);
+			${when(this._openSelect, () => {
+				assertNonUndefined(this._openSelect);
+				return html`<div
+					class="wrap-select"
+					style=${styleMap({
+						top: `${String(this._openSelect.top)}px`,
+						left: `${String(this._openSelect.left)}px`,
+						width: `${String(this._openSelect.width)}px`,
+						height: `${String(this._openSelect.height)}px`
+					})}
+				>
+					${repeat(
+						this._openSelect.options,
+						(option) => option,
+						(option) => {
+							assertNonUndefined(this._openSelect);
 							return html`<div
 								class="wrap-select__option ${classMap({
-									"wrap-select__option--crossed": this.tabularData.excludedCriteria[this.openSelect.index].includes(option)
+									"wrap-select__option--crossed": this._excludedCriteria[this._openSelect.index].includes(option)
 								})}"
-								@click="${() => {
+								@click=${() => {
 									this.toggleCriterion(option);
-								}}"
+								}}
 							>
 								${option}
 							</div>`;
-						})}
-					</div>`
-				: ""}
-		</div>`;
+						}
+					)}
+				</div>`;
+			})}
+		`;
 	}
 }
+
+export { TableFilteringRow, TableFilteringHeader };
