@@ -43,7 +43,7 @@ const triggerTextAnimation: TriggerTextAnimationCallback<ModifyingTextContext> =
 				(timeout.value = window.setTimeout(() => {
 					context.currentTextValue.value = toArray.slice(0, i);
 					resolve();
-				}, props.unTypingSpeed ?? props.typingSpeed))
+				}, props.typingSpeed))
 		);
 	}
 

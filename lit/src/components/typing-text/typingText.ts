@@ -1,51 +1,49 @@
 import { property } from "lit/decorators.js";
-import { TypingTextLitConfiguration } from "../../interfaces/component/typingText";
-import { SelfModifyingText, SplitTextParams, TriggerTextParams } from "../../interfaces/generic/selfModifyingText";
+import { SelfModifyingText, TriggerTextParams } from "../../interfaces/generic/selfModifyingText";
+import { TypingTextConfiguration } from "shared/component/typingText";
 
-export class TypingTextComponent extends SelfModifyingText implements TypingTextLitConfiguration {
+export class TypingTextComponent extends SelfModifyingText implements TypingTextConfiguration {
 	@property({ type: Number })
 	interval = 4500;
 	@property({ type: Number })
 	typingSpeed = 35;
 	@property({ type: Number })
 	unTypingSpeed?: number;
-	@property({ type: Boolean })
-	eachLetterAsSpan = false;
 
-	splitText({ toText }: SplitTextParams) {
-		// if (this.eachLetterAsSpan) super.splitTextAlgorithm(toText);
-	}
+	private _timeout?: number;
 
 	async triggerTextAnimation({ context, fromText, toText }: TriggerTextParams) {
-		/*const elements = this._elements;
+		const fromArray = fromText.split("").map((letter) => ({ letter, classes: [] }));
+		const toArray = toText.split("").map((letter) => ({ letter, classes: [] }));
+
 		for (let i = 1; i < fromText.length + 1; i++) {
-			await new Promise<void>((resolve) =>
-				setTimeout(() => {
-                    if (this.eachLetterAsSpan) {
-                        for (const element of elements) {
-                            element.lastChild?.remove();
-                        }
-                    } else for (const element of elements) element.textContent = fromText.slice(0, -i);
-					resolve();
-				}, this.unTypingSpeed ?? this.typingSpeed)
+			await new Promise<void>(
+				(resolve) =>
+					(this._timeout = window.setTimeout(() => {
+						this._currentTextValue = fromArray.slice(0, -i);
+						resolve();
+					}, this.unTypingSpeed ?? this.typingSpeed))
 			);
 		}
-
+	
 		for (let i = 1; i < toText.length + 1; i++) {
-			await new Promise<void>((resolve) =>
-				setTimeout(() => {
-                    if (this.eachLetterAsSpan) {
-                        const spanElement = document.createElement("span");
-                        spanElement.textContent = toText[i - 1];
-                        for (const element of elements) element.append(spanElement);
-                    } else for (const element of elements) element.textContent = toText.slice(0, i);
-					resolve();
-				}, this.typingSpeed)
+			await new Promise<void>(
+				(resolve) =>
+					(this._timeout = window.setTimeout(() => {
+						this._currentTextValue = toArray.slice(0, i);
+						resolve();
+					}, this.typingSpeed))
 			);
 		}
-
-		setTimeout(() => { 
+	
+		this._timeout = window.setTimeout(() => {
+			this._timeout = undefined;
 			context.onInterval();
-		}, this.interval);*/
+		}, this.interval);
+	}
+
+	disconnectedCallback(): void {
+		super.disconnectedCallback();
+		window.clearTimeout(this._timeout);
 	}
 }
