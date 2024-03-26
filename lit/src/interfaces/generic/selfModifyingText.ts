@@ -1,4 +1,4 @@
-import { LitElement, html, css, CSSResult } from "lit";
+import { LitElement, html, css } from "lit";
 import { property, state } from "lit/decorators.js";
 import { map } from "lit/directives/map.js";
 import {
@@ -14,15 +14,17 @@ export type TriggerTextParams = Parameters<TriggerTextAnimationCallback<Modifyin
 export type SplitTextParams = Parameters<SplitTextCallback<ModifyingTextContext>>[0];
 
 export abstract class SelfModifyingText extends LitElement implements SelfModifyingTextInterface<ModifyingTextContext> {
-	static styles: CSSResult | CSSResult[] = css`
-		:host {
-			display: block;
-			font-family: monospace;
-			unicode-bidi: isolate;
-			font-size: 24px;
-			line-height: 54px;
-		}
-	`;
+	static styles = [
+		css`
+			:host {
+				display: block;
+				font-family: monospace;
+				unicode-bidi: isolate;
+				font-size: 24px;
+				line-height: 54px;
+			}
+		`
+	];
 
 	@property({ type: Array })
 	strings: string[] = [];

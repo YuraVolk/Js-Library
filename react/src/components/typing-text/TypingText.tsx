@@ -33,7 +33,7 @@ export const TypingText = ({
 						(timeout.current = window.setTimeout(() => {
 							context.setCurrentTextValue(toArray.slice(0, i));
 							resolve();
-						}, props.unTypingSpeed ?? typingSpeed))
+						}, typingSpeed))
 				);
 			}
 

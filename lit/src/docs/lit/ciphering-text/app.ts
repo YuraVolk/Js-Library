@@ -11,17 +11,18 @@ import("../../../components/ciphering-text/cipheringText")
 		window.customElements.define(
 			"ciphering-text-component",
 			class extends CipheringTextComponent {
-				static styles = css`
-					${CipheringTextComponent.styles}
+				static styles = [
+					...CipheringTextComponent.styles,
+					css`
+						span {
+							transition: all 50ms ease-in-out;
+						}
 
-					span {
-						transition: all 50ms ease-in-out;
-					}
-
-					.active {
-						color: #e3caca;
-					}
-				`;
+						.active {
+							color: #e3caca;
+						}
+					`
+				];
 			}
 		);
 	})
