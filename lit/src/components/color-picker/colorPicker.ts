@@ -13,6 +13,7 @@ window.customElements.define("range-input-component", RangeInputComponent);
 export class ColorPickerComponent extends LitElement implements ColorPickerConfiguration {
 	static styles = css`
 		.wrap {
+			all: inherit;
 			max-width: 670px;
 			display: flex;
 			justify-content: space-around;

@@ -11,7 +11,8 @@ import { ResizeController } from "../../interfaces/hooks/resizeController";
 
 export class PerspectiveCarouselComponent extends LinkedCarouselMixin(LitElement) implements PerspectiveCarouselConfiguration {
 	static styles = css`
-		.wrap {
+		:host {
+			display: block;
 			position: relative;
 		}
 
@@ -365,8 +366,7 @@ export class PerspectiveCarouselComponent extends LinkedCarouselMixin(LitElement
 	}
 
 	render() {
-		return html`<div class="wrap">
-			<div class="images" style=${styleMap({ height: this.imageSize, margin: this.margin })}>
+		return html`<div class="images" style=${styleMap({ height: this.imageSize, margin: this.margin })}>
 				<slot></slot>
 			</div>
 			<div class="carousel-controls">
@@ -392,8 +392,7 @@ export class PerspectiveCarouselComponent extends LinkedCarouselMixin(LitElement
 						this.nextItem();
 					}}"
 				></button>
-			</div>
-		</div>`;
+			</div>`;
 	}
 }
 

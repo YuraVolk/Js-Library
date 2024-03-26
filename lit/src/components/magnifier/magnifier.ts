@@ -74,8 +74,7 @@ export class ImageMagnifierComponent extends LinkedCarouselMixin(LitElement) imp
 	}
 
 	render() {
-		return html`<div class="magnifier">
-			<div
+		return html`<div
 				class="magnifier__image"
 				@mousemove=${(event: MouseEvent) => {
 					this.onMouseMove(event);
@@ -84,8 +83,7 @@ export class ImageMagnifierComponent extends LinkedCarouselMixin(LitElement) imp
 			>
 				<slot name="image"></slot>
 			</div>
-			<slot name="glass"></slot>
-		</div>`;
+			<slot name="glass"></slot>`;
 	}
 }
 
