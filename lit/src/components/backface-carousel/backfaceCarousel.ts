@@ -106,6 +106,7 @@ export class BackfaceCarousel extends LinkedCarouselMixin(LitElement) {
 	switchPerspective() {
 		this.intervalController.abortInterval();
 		this.isVertical = !this.isVertical;
+		this.setupCarousel();
 	}
 
 	render() {

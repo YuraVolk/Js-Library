@@ -11,12 +11,11 @@
 	position: absolute;
 	z-index: 1;
 	top: 0;
-	display: block;
 	text-align: center;
 	border: 2px solid #222;
 	padding: 30px 12px;
 	background-color: #e2e2e2;
-	transition: all 0.9s ease-in-out;
+	transition: top 0.9s ease-in-out;
 	color: #222;
 }
 

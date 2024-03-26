@@ -10,6 +10,8 @@ export class ImageMagnifierGlass extends LinkedItemMixin(LitElement) {
 			}
 
 			.magnifier-glass {
+				all: inherit;
+				display: revert;
 				position: absolute;
 				border-radius: 50%;
 				background-repeat: no-repeat;

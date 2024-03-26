@@ -6,7 +6,13 @@ import { getFirstScrollableParent } from "shared/utils/domUtils";
 
 export class ParallaxComponent extends LitElement implements ParallaxConfiguration {
 	static styles = css`
+		:host {
+			display: contents;
+		}
+
 		.wrap {
+			all: inherit;
+			display: revert;
 			position: relative;
 			transition: 0.1s;
 		}

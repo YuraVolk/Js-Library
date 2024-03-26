@@ -120,6 +120,10 @@ export class RangeInputComponent extends LitElement implements RangeInputConfigu
 	}
 
 	static styles = css`
+		:host {
+			display: block;
+		}
+
 		.range-slider__input {
 			-webkit-appearance: none;
 			appearance: none;

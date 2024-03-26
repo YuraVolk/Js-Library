@@ -91,7 +91,7 @@ export class AccordionItemComponent extends LitElement implements AccordionListI
 
 	render() {
 		return html`
-			<li
+			<div
 				class="accordion"
 				style=${styleMap({
 					maxHeight: this.calculateHeight()
@@ -109,7 +109,7 @@ export class AccordionItemComponent extends LitElement implements AccordionListI
 				<div class="accordion__content" ${ref(this.contentRef)}>
 					<slot name="body"></slot>
 				</div>
-			</li>
+			</div>
 		`;
 	}
 }

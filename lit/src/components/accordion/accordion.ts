@@ -7,10 +7,8 @@ import { AccordionContext, accordionContext } from "./context";
 
 export class AccordionComponent extends LitElement implements AccordionListConfiguration {
 	static styles = css`
-		.accordions {
-			margin: 0;
-			padding-left: 0;
-			list-style-type: none;
+		:host {
+			display: block;
 		}
 	`;
 
@@ -35,11 +33,7 @@ export class AccordionComponent extends LitElement implements AccordionListConfi
 	};
 
 	render() {
-		return html`
-			<ul class="accordions">
-				<slot></slot>
-			</ul>
-		`;
+		return html`<slot></slot>`;
 	}
 }
 

@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit";
+import { LitElement } from "lit";
 import { property, state } from "lit/decorators.js";
 import { IntervalController } from "../../interfaces/hooks/intervalController";
 import { CountdownConfiguration, defaultTimeUnits, reduceTimeUnits } from "shared/component/countdown";
@@ -36,6 +36,6 @@ export class CountdownComponent extends LitElement implements CountdownConfigura
 	}
 
 	render() {
-		return html`<span>${this._text}</span>`;
+		return this._text;
 	}
 }

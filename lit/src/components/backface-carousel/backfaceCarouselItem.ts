@@ -9,6 +9,8 @@ export class BackfaceCarouselItem extends LinkedItemMixin(LitElement) {
 		}
 
 		.backface-carousel-item {
+			all: inherit;
+			display: revert;
 			position: relative;
 			width: 100%;
 			height: auto;

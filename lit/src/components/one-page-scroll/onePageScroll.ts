@@ -6,6 +6,10 @@ import { CarouselDirection } from "shared/interfaces/carousel";
 
 export class OnePageScrollComponent extends LitElement implements OnePageScrollConfiguration {
 	static styles = css`
+		:host {
+			display: block;
+		}
+
 		.wrap {
 			width: 100%;
 			height: 100%;

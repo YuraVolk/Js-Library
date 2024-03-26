@@ -9,6 +9,8 @@ export class ImageComparatorItem extends LinkedItemMixin(LitElement) {
 		}
 
 		.image-comparator-item {
+			all: inherit;
+			display: revert;
 			position: absolute;
 			width: auto;
 			height: auto;

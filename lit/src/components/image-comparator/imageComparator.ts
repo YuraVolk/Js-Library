@@ -8,7 +8,7 @@ import { StyleInfo, styleMap } from "lit/directives/style-map.js";
 
 export class ImageComparatorComponent extends LinkedCarouselMixin(LitElement) {
 	static styles = css`
-		.wrap {
+		:host {
 			position: relative;
 			width: 100%;
 			height: 100%;
@@ -155,9 +155,7 @@ export class ImageComparatorComponent extends LinkedCarouselMixin(LitElement) {
 	}
 
 	render() {
-		return html`<div class="wrap">
-			<slot></slot>
-			${repeat(
+		return html`<slot></slot> ${repeat(
 				this.itemKeys.slice(1),
 				(item) => item,
 				(item) =>
@@ -171,8 +169,7 @@ export class ImageComparatorComponent extends LinkedCarouselMixin(LitElement) {
 							this.onMouseStart(e, item);
 						}}
 					></div>`
-			)}
-		</div>`;
+			)}`;
 	}
 }
 
