@@ -1,72 +1,41 @@
-import { LitElement, html } from "lit";
-import { property, queryAssignedElements } from "lit/decorators.js";
-import { assertDevOnly } from "shared/utils/utils";
-import { TabsLitConfiguration } from "../../interfaces/component/tabs";
+import { provide } from "@lit/context";
+import { LitElement, css, html } from "lit";
+import { property } from "lit/decorators.js";
+import { TabsContext, tabsContext } from "../../interfaces/component/tabs";
+import { TabsConfiguration } from "shared/component/tabs";
+import { Tab } from "./tab";
 
-export class TabsComponent extends LitElement implements TabsLitConfiguration {
+export class TabsComponent extends LitElement implements TabsConfiguration {
+	static styles = css`
+		:host {
+			display: block;
+		}
+	`;
+
 	@property({ type: Number })
 	currentTab = 0;
-	@property({ type: Number })
-	transitionTime = 300;
-	@property()
-	activeTabClassName = "active";
-	@property()
-	leaveTabClassName = "leave";
-	@property()
-	inactiveTabClassName = "inactive";
 
-	@queryAssignedElements({ slot: "headers" })
-	_headers!: HTMLElement[];
-	@queryAssignedElements({ slot: "tabs" })
-	_tabs!: HTMLElement[];
+	@provide({ context: tabsContext })
+	tabsContext: TabsContext = {
+		currentTab: this.currentTab
+	};
 
-	private animationTimeout?: number;
-
-	protected firstUpdated() {
-		this.switchToTab();
-		for (const header of this._headers) {
-			Array.from(header.children).forEach((header, i) => {
-				header.addEventListener("click", () => {
-					this.switchToTab(i);
-				});
-			});
-		}
-	}
-
-	switchToTab(newTab?: number) {
-		window.clearTimeout(this.animationTimeout);
-		this.animationTimeout = undefined;
-
-		const previousTab = this.currentTab;
-		if (newTab !== undefined) this.currentTab = newTab;
-		for (const header of this._headers) {
-			Array.from(header.children).forEach((header, i) => {
-				i === this.currentTab ? header.classList.add(this.activeTabClassName) : header.classList.remove(this.activeTabClassName);
-			});
-		}
-
-		for (const tabs of this._tabs) {
-			Array.from(tabs.children).forEach((tab, i) => {
-				assertDevOnly(tab instanceof HTMLElement);
-				if (i === this.currentTab) {
-					tab.style.removeProperty("display");
-				} else if (previousTab === i) {
-					tab.classList.add(this.leaveTabClassName);
-					this.animationTimeout = window.setTimeout(() => {
-						tab.classList.remove(this.leaveTabClassName);
-						tab.style.display = "none";
-					}, this.transitionTime);
-				} else if (newTab === undefined) {
-					tab.style.display = "none";
-				} else tab.classList.remove(this.inactiveTabClassName);
-			});
+	protected updated(_changedProperties: Map<keyof TabsComponent, TabsComponent[keyof TabsComponent]>): void {
+		for (const [key] of _changedProperties) {
+			if (key === "currentTab") {
+				this.tabsContext = {
+					currentTab: this.currentTab
+				};
+			}
 		}
 	}
 
 	render() {
-		return html`<div>
+		return html`
 			<slot name="headers"></slot>
 			<slot name="tabs"></slot>
-		</div>`;
+		`;
 	}
 }
+
+export { Tab };
