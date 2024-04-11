@@ -1,5 +1,7 @@
-import { LitElement, ReactiveController, noChange, nothing } from "lit";
-import { AsyncDirective, Directive, Part, PartInfo, PartType, directive } from "lit/async-directive.js";
+import { ReactiveController, noChange, nothing } from "lit";
+import { Directive, Part, PartInfo, PartType, directive } from "lit/async-directive.js";
+import { until } from "lit/directives/until.js";
+import { Transition } from "../transition";
 
 enum TransitionState {
 	ENTERING,
@@ -13,7 +15,7 @@ interface TransitionDirectiveOptions {
 	transitionState: TransitionState;
 }
 
-class TransitionDirective extends AsyncDirective {
+class TransitionDirective extends Directive {
 	private previousState?: TransitionState;
 
 	constructor(partInfo: PartInfo) {
@@ -83,13 +85,22 @@ class TransitionDisplayDirective extends Directive {
 export class TransitionController implements ReactiveController {
 	transitionState?: TransitionState;
 	private timeoutId?: number;
+	private directivePromiseResolver?: (directive: unknown) => void;
+	private directivePromise?: Promise<unknown>;
 
 	constructor(
-		private readonly host: LitElement,
+		private readonly host: Transition,
 		private readonly duration: number,
 		private readonly isVisible: () => boolean
 	) {
 		host.addController(this);
+		this.initializeDirectivePromise();
+	}
+
+	initializeDirectivePromise() {
+		this.directivePromise = new Promise((resolve) => {
+			this.directivePromiseResolver = resolve;
+		});
 	}
 
 	hostConnected(): void {
@@ -102,39 +113,50 @@ export class TransitionController implements ReactiveController {
 
 	setTransitionState(transitionState: TransitionState) {
 		this.transitionState = transitionState;
-		this.host.requestUpdate();
 	}
 
 	scheduleNextState(transitionState: TransitionState) {
 		this.timeoutId = window.setTimeout(() => {
 			this.setTransitionState(transitionState);
+			this.host.requestTransitionDisplayUpdate();
 		}, this.duration);
 	}
 
-	transitionDirective() {
+	private async transitionDirectivePromise() {
+		await this.directivePromise;
+
 		if (typeof this.transitionState === "undefined") return nothing;
-
-		const isVisible = this.isVisible();
-		if (isVisible && this.transitionState === TransitionState.EXITED) {
-			this.transitionState = TransitionState.ENTERING;
-		} else if (!isVisible && this.transitionState === TransitionState.ENTERED) {
-			this.transitionState = TransitionState.EXITING;
-		}
-
 		return transitionDirective({
 			controller: this,
 			transitionState: this.transitionState
 		});
 	}
 
-	transitionDisplayDirective(template: unknown) {
+	transitionDirective() {
+		return until(this.transitionDirectivePromise(), "");
+	}
+
+	transitionDisplayDirective(template: unknown, isActive: boolean) {
 		if (typeof this.transitionState === "undefined") return nothing;
 
-		return transitionDisplayDirective({
+		if (isActive && (this.transitionState === TransitionState.EXITED || this.transitionState === TransitionState.EXITING)) {
+			this.transitionState = TransitionState.ENTERING;
+		} else if (!isActive && (this.transitionState === TransitionState.ENTERED || this.transitionState === TransitionState.ENTERING)) {
+			this.transitionState = TransitionState.EXITING;
+		}
+
+		const directive = transitionDisplayDirective({
 			controller: this,
 			transitionState: this.transitionState,
 			template
 		});
+
+		if (this.directivePromiseResolver) {
+			this.directivePromiseResolver(directive);
+			this.initializeDirectivePromise();
+		}
+
+		return directive;
 	}
 }
 

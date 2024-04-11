@@ -1,8 +1,6 @@
-import { TabsConfiguration } from "shared/component/tabs";
-
-export interface TabsLitConfiguration extends TabsConfiguration {
-	transitionTime: number;
-	activeTabClassName: string;
-	leaveTabClassName: string;
-	inactiveTabClassName: string;
+import { createContext } from "@lit/context";
+export interface TabsContext {
+	currentTab: number;
 }
+
+export const tabsContext = createContext<TabsContext>(Symbol());
