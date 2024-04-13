@@ -1,62 +1,86 @@
-import { LitElement, html } from "lit";
-import { property, queryAssignedElements } from "lit/decorators.js";
-import { assertNonUndefined } from "shared/utils/utils";
-import { ToastLitConfiguration } from "../../interfaces/component/toast";
+import "../../interfaces/transition";
+import { Transition } from "../../interfaces/transition";
 
-export class ToastComponent extends LitElement implements ToastLitConfiguration {
-	@property({ type: Number })
-	animationDelay = 500;
+import { LitElement, css, html } from "lit";
+import { property } from "lit/decorators.js";
+import { ToastConfiguration } from "shared/component/toast";
+import { createRef, ref } from "lit/directives/ref.js";
+import { assertNonUndefined } from "shared/utils/utils";
+import { cache } from "lit/directives/cache.js";
+
+export class ToastComponent extends LitElement implements ToastConfiguration {
+	static styles = css`
+		:host {
+			display: contents;
+		}
+	`;
+
+	@property({ type: Boolean })
+	isOpen = false;
 	@property({ type: Number })
 	autoCloseDelay?: number;
-	@property()
-	inactiveClass = "disabled";
-	@property({ type: Boolean })
-	closeOnButtonClick = false;
+	@property({ type: Number })
+	transitionDuration = 300;
 
-	@queryAssignedElements()
-	_toast!: HTMLElement[];
+	private _timeoutRef?: number;
+	private _transition = createRef<Transition>();
 
-	private timeoutId?: number;
-	private toastClosingId?: number;
-
-	closeToast() {
-		for (const toast of this._toast) toast.classList.add(this.inactiveClass);
-		this.toastClosingId = window.setTimeout(() => {
-			for (const toast of this._toast) toast.remove();
-		}, this.animationDelay);
-	}
-
-	protected onButtonClicked(_button: HTMLButtonElement) {
-		assertNonUndefined(_button);
-	}
-
-	protected firstUpdated(): void {
-		if (!this.closeOnButtonClick) return;
-		for (const button of this._toast.flatMap((it) => Array.from(it.getElementsByTagName("button")))) {
-			button.addEventListener("click", () => {
-				this.onButtonClicked(button);
-				this.closeToast();
-			});
+	private onOpenValueChange() {
+		if (this.autoCloseDelay && this.isOpen) {
+			this._timeoutRef = window.setTimeout(() => {
+				this.close();
+			}, this.autoCloseDelay);
 		}
+	}
+
+	close() {
+		this.isOpen = false;
+		window.clearTimeout(this._timeoutRef);
+		this._timeoutRef = undefined;
+	}
+
+	protected updated(_changedProperties: Map<PropertyKey, unknown>): void {
+		for (const key of _changedProperties.keys()) {
+			switch (key) {
+				case "isOpen":
+					this.onOpenValueChange();
+					break;
+			}
+		}
+	}
+
+	transitionDirective() {
+		assertNonUndefined(this._transition.value);
+		return this._transition.value.directive();
 	}
 
 	connectedCallback(): void {
 		super.connectedCallback();
-		if (this.autoCloseDelay)
-			this.timeoutId = window.setTimeout(() => {
-				this.closeToast();
-			}, this.autoCloseDelay);
+		this.onOpenValueChange();
 	}
 
 	disconnectedCallback(): void {
-		window.clearTimeout(this.timeoutId);
-		window.clearTimeout(this.toastClosingId);
 		super.disconnectedCallback();
+		window.clearTimeout(this._timeoutRef);
+	}
+
+	protected firstUpdated() {
+		this.requestUpdate();
+		this.dispatchEvent(new CustomEvent("transition-display-directive-init"));
 	}
 
 	render() {
-		return html`<div>
-			<slot></slot>
-		</div>`;
+		return html`
+			<transition-component
+				?isActive=${this.isOpen}
+				.duration=${this.transitionDuration}
+				@transition-display-update-request=${() => {
+					this.requestUpdate();
+				}}
+				${ref(this._transition)}
+			>
+				${this._transition.value?.displayDirective(html`<slot></slot>`, this.isOpen)}
+			</transition-component>
+		`;
 	}
 }
