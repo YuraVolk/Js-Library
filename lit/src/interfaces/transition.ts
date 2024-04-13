@@ -23,10 +23,8 @@ export class Transition extends LitElement {
 
 	protected transitionController: TransitionController = new TransitionController(
 		this,
-		this.duration,
-		() => {
-			return this.isActive;
-		}
+		() => this.duration,
+		() => this.isActive
 	);
 
 	directive() {

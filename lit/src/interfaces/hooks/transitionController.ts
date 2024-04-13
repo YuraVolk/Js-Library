@@ -90,7 +90,7 @@ export class TransitionController implements ReactiveController {
 
 	constructor(
 		private readonly host: Transition,
-		private readonly duration: number,
+		private readonly duration: () => number,
 		private readonly isVisible: () => boolean
 	) {
 		host.addController(this);
@@ -119,7 +119,7 @@ export class TransitionController implements ReactiveController {
 		this.timeoutId = window.setTimeout(() => {
 			this.setTransitionState(transitionState);
 			this.host.requestTransitionDisplayUpdate();
-		}, this.duration);
+		}, this.duration());
 	}
 
 	private async transitionDirectivePromise() {

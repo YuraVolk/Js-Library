@@ -1,11 +1,12 @@
+import "../../interfaces/transition";
+import { Transition } from "../../interfaces/transition";
+
 import { consume } from "@lit/context";
 import { LitElement, css, html } from "lit";
 import { property } from "lit/decorators.js";
 import { TabsContext, tabsContext } from "../../interfaces/component/tabs";
 import { TabConfiguration } from "shared/component/tabs";
-import "../../interfaces/transition";
 import { createRef, ref } from "lit/directives/ref.js";
-import { Transition } from "../../interfaces/transition";
 import { assertNonUndefined } from "shared/utils/utils";
 
 export class Tab extends LitElement implements TabConfiguration {
