@@ -21,6 +21,21 @@ export class Transition extends LitElement {
 	@property({ type: Number })
 	duration = 300;
 
+	private directivePromiseResolver?: (directive: unknown) => void;
+	private directivePromise?: Promise<unknown>;
+
+	initializeDirectivePromise() {
+		this.directivePromise = new Promise((resolve) => {
+			this.directivePromiseResolver = resolve;
+		});
+	}
+
+	async invalidateCache() {
+		this.initializeDirectivePromise();
+		const directive = await this.directivePromise;
+		this.transitionController.invalidatePromise(directive);
+	}
+
 	protected transitionController: TransitionController = new TransitionController(
 		this,
 		() => this.duration,
@@ -28,7 +43,13 @@ export class Transition extends LitElement {
 	);
 
 	directive() {
-		return this.transitionController.transitionDirective();
+		const directive = this.transitionController.transitionDirective();
+		if (this.directivePromiseResolver) {
+			this.directivePromiseResolver(directive);
+			this.initializeDirectivePromise();
+		}
+
+		return directive;
 	}
 
 	displayDirective(template: unknown, isActive: boolean) {
