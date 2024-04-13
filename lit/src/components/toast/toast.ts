@@ -6,7 +6,6 @@ import { property } from "lit/decorators.js";
 import { ToastConfiguration } from "shared/component/toast";
 import { createRef, ref } from "lit/directives/ref.js";
 import { assertNonUndefined } from "shared/utils/utils";
-import { cache } from "lit/directives/cache.js";
 
 export class ToastComponent extends LitElement implements ToastConfiguration {
 	static styles = css`
@@ -37,6 +36,10 @@ export class ToastComponent extends LitElement implements ToastConfiguration {
 		this.isOpen = false;
 		window.clearTimeout(this._timeoutRef);
 		this._timeoutRef = undefined;
+		this.dispatchEvent(new CustomEvent("transition-display-directive-init"));
+		this._transition.value?.invalidateCache().catch((e: unknown) => {
+			console.trace(e);
+		});
 	}
 
 	protected updated(_changedProperties: Map<PropertyKey, unknown>): void {

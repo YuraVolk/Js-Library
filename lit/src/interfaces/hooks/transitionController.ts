@@ -122,6 +122,13 @@ export class TransitionController implements ReactiveController {
 		}, this.duration());
 	}
 
+	invalidatePromise(directive: unknown) {
+		if (this.directivePromiseResolver) {
+			this.directivePromiseResolver(directive);
+			this.initializeDirectivePromise();
+		}
+	}
+
 	private async transitionDirectivePromise() {
 		await this.directivePromise;
 
@@ -151,11 +158,7 @@ export class TransitionController implements ReactiveController {
 			template
 		});
 
-		if (this.directivePromiseResolver) {
-			this.directivePromiseResolver(directive);
-			this.initializeDirectivePromise();
-		}
-
+		this.invalidatePromise(directive);
 		return directive;
 	}
 }
