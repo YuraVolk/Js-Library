@@ -9,6 +9,7 @@
 		"build:ci": "npm run setup && npm run build",
 		"setup": "lerna run setup",
 		"lint": "lerna run --parallel lint",
+		"lint:sarif": "lerna run lint:sarif --concurrency=1",
 		"type-check": "lerna run --parallel type-check",
 		"format": "prettier . --write"
 	},

@@ -11,6 +11,7 @@
 		"build": "webpack --mode production",
 		"setup": "npm install",
 		"lint": "eslint **/*.ts",
+		"lint:sarif": "eslint **/*.ts --format @microsoft/eslint-formatter-sarif --output-file eslint-results-shared.sarif",
 		"type-check": "tsc --pretty --noEmit"
 	},
 	"author": "Yuriy Volkovskiy",
