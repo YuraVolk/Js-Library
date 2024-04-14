@@ -14,6 +14,6 @@ export function assertDevOnly<T>(value: T): asserts value {
 
 export const uid = () => {
 	if (typeof crypto !== "undefined" && typeof crypto.randomUUID !== "undefined") {
-		return crypto.randomUUID() + Date.now().toString(36) + Math.random().toString(36).slice(2);
+		return crypto.randomUUID() + Date.now().toString(36) + String(window.crypto.getRandomValues(new Uint32Array(1))[0]);
 	} else return Date.now().toString(36) + Math.random().toString(36).slice(2);
 };
