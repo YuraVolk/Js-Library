@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkjs_components_library_interfaces=self.webpackChunkjs_components_library_interfaces||[]).push([[5849,4227],{849:function(t,n,r){function o(t){const n=Math.floor(t/3600),r=Math.floor((t-3600*n)/60),o=Math.floor(t-3600*n-60*r);return`${String(r).padStart(2,"0")}:${String(o).padStart(2,"0")}`}r.r(n),r.d(n,{toMinutesSeconds:function(){return o}})}}]);

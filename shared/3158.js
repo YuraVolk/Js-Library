@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkjs_components_library_interfaces=self.webpackChunkjs_components_library_interfaces||[]).push([[3158,9787],{158:function(e,n,r){r.r(n),r.d(n,{generateThreshold:function(){return s}});const s=()=>[0,...Array.from({length:Math.ceil(100)},((e,n)=>n/100)),1]}}]);

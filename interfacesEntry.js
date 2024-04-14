@@ -1,1 +1,1 @@
-location.origin.endsWith(".github.io")?window.sharedInterfacesUrl=`${location.origin}/${location.pathname.slice(1).replace(/\/.+/,"")}/shared`:window.sharedInterfacesUrl=`${location.origin}/shared`;
+location.origin.endsWith(".github.io")?window.sharedInterfacesUrl="".concat(location.origin,"/").concat(location.pathname.slice(1).replace(/\/.+/,""),"/shared"):window.sharedInterfacesUrl="".concat(location.origin,"/shared");
