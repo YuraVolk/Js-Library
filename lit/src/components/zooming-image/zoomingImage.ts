@@ -1,13 +1,14 @@
 import { LitElement, css, html } from "lit";
-import { property, query, queryAssignedElements } from "lit/decorators.js";
-import { ZoomingImageLitConfiguration } from "../../interfaces/component/zoomingImage";
+import { property } from "lit/decorators.js";
+import { LinkedCarouselMixin } from "../../interfaces/hooks/linkedItems";
+import { ZoomingImageConfiguration } from "shared/component/zoomingImage";
+import { ZoomingImageGlass } from "./zoomingImageGlass";
 
-export class ZoomComponent extends LitElement implements ZoomingImageLitConfiguration {
+export class ZoomingImage extends LinkedCarouselMixin(LitElement) implements ZoomingImageConfiguration {
 	static styles = css`
-		.wrap {
+		:host {
 			position: relative;
-			width: 100%;
-			height: 100%;
+			display: block;
 		}
 	`;
 
@@ -17,64 +18,47 @@ export class ZoomComponent extends LitElement implements ZoomingImageLitConfigur
 	backgroundShift = 9;
 	@property({ type: Number })
 	positionShift = 34;
-	@property({ type: Boolean })
-	autoConfigureGlassSource = false;
 
-	@queryAssignedElements({ slot: "image" })
-	_image!: HTMLElement[];
-	@queryAssignedElements({ slot: "glass" })
-	_glass!: HTMLElement[];
-	@query(".wrap")
-	_wrapElement!: HTMLElement;
+	private mouseMoveListener?: (event: MouseEvent) => void;
 
-	private mouseMoveListener!: (event: MouseEvent) => unknown;
+	onMouseMove(event: MouseEvent) {
+		const { top, left } = this.getBoundingClientRect();
+		const x = event.x - left,
+			y = event.pageY - top;
+		const { offsetWidth, offsetHeight } = this;
+		let xMove = (x / offsetWidth) * 100,
+			yMove = (y / offsetHeight) * 100;
+		if (x >= 0.01 * offsetWidth) xMove += this.moveRatio * xMove;
+		if (y >= 0.01 * offsetHeight) yMove += this.moveRatio * yMove;
 
-	protected firstUpdated(): void {
-		const [image] = this._image,
-			[glass] = this._glass,
-			wrap = this._wrapElement;
-		if (this.autoConfigureGlassSource && image.hasAttribute("src")) {
-			glass.style.backgroundImage = `url("${image.getAttribute("src") ?? ""}")`;
-		}
-		Object.assign(glass.style, {
-			overflow: "hidden",
-			display: "block",
-			position: "absolute"
-		});
+		this.linkedItemsContext["zooming-image-glass"].styles = {
+			backgroundPositionX: `${String(xMove - this.backgroundShift)}%`,
+			backgroundPositionY: `${String(yMove - this.backgroundShift)}%`,
+			left: `${String(x - this.positionShift)}px`,
+			top: `${String(y - this.positionShift)}px`
+		};
+	}
 
-		wrap.addEventListener(
-			"pointermove",
-			(this.mouseMoveListener = (event) => {
-				const { top, left } = wrap.getBoundingClientRect();
-				const x = event.x - left,
-					y = event.pageY - top;
-				const { offsetWidth, offsetHeight } = image;
-				let xMove = (x / offsetWidth) * 100,
-					yMove = (y / offsetHeight) * 100;
-				if (x >= 0.01 * offsetWidth) xMove += this.moveRatio * xMove;
-				if (y >= 0.01 * offsetHeight) yMove += this.moveRatio * yMove;
-
-				Object.assign(glass.style, {
-					backgroundPositionX: `${String(xMove - this.backgroundShift)}%`,
-					backgroundPositionY: `${String(yMove - this.backgroundShift)}%`,
-					left: `${String(x - this.positionShift)}px`,
-					top: `${String(y - this.positionShift)}px`
-				});
-			}),
-			{ passive: true }
-		);
+	connectedCallback(): void {
+		super.connectedCallback();
+		this.addEventListener("mousemove", (this.mouseMoveListener ??= this.onMouseMove.bind(this)));
+		this.addEventListener("pointermove", this.mouseMoveListener);
 	}
 
 	disconnectedCallback(): void {
-		this._wrapElement.removeEventListener("mousemove", this.mouseMoveListener);
-		this._wrapElement.removeEventListener("pointermove", this.mouseMoveListener);
 		super.disconnectedCallback();
+		if (this.mouseMoveListener) {
+			this.removeEventListener("mousemove", this.mouseMoveListener);
+			this.removeEventListener("pointermove", this.mouseMoveListener);
+		}
 	}
 
 	render() {
-		return html`<div class="wrap">
+		return html`
 			<slot name="image"></slot>
 			<slot name="glass"></slot>
-		</div>`;
+		`;
 	}
 }
+
+export { ZoomingImageGlass };

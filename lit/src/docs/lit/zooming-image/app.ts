@@ -1,16 +1,19 @@
-import type { ZoomComponent } from "lit/src/components/zooming-image/zoomingImage";
+import type { ZoomingImage, ZoomingImageGlass } from "lit/src/components/zooming-image/zoomingImage";
 import "../../../components/litEntry";
 import "../../../global.css";
-import { LitElement, css, html } from "lit";
+import { LitElement, css, html, unsafeCSS } from "lit";
 import { customElement } from "lit/decorators.js";
 
 import slide0 from "../../../../../assets/img/slide0.png";
+import { createRef, ref } from "lit/directives/ref.js";
+import { GlassMoveEvent } from "lit/src/components/zooming-image/events";
 
 import("../header");
 import("../sidebar");
 import("../../../components/zooming-image/zoomingImage")
-	.then(({ ZoomComponent }) => {
-		window.customElements.define("zooming-image-component", ZoomComponent);
+	.then(({ ZoomingImage, ZoomingImageGlass }) => {
+		window.customElements.define("zooming-image-component", ZoomingImage);
+		window.customElements.define("zooming-image-glass-component", ZoomingImageGlass);
 	})
 	.catch((e: unknown) => {
 		console.trace(e);
@@ -40,6 +43,7 @@ export class ZoomingImageApplicationExample1 extends LitElement {
 			transform: scale(1.5);
 			transition: opacity 0.2s;
 			box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.3);
+			background-image: ${unsafeCSS(`url("${slide0}")`)};
 			opacity: 0;
 		}
 
@@ -48,11 +52,19 @@ export class ZoomingImageApplicationExample1 extends LitElement {
 		}
 	`;
 
+	private _zoomingImage = createRef<ZoomingImage>();
+
 	render() {
 		return html`
-			<zooming-image-component class="zoom-wrap" autoConfigureGlassSource>
-				<img src=${slide0} alt="Zoom Image" class="zoom-image" slot="image" />
-				<div class="zoom-glass" slot="glass"></div>
+			<zooming-image-component class="zoom-wrap" ${ref(this._zoomingImage)}>
+				<img class="zoom-image" src=${slide0} alt="Example image" slot="image" />
+				<zooming-image-glass-component
+					class="zoom-glass"
+					@glass-move=${(e: GlassMoveEvent) => {
+						this._zoomingImage.value?.onMouseMove(e.event);
+					}}
+					slot="glass"
+				></zooming-image-glass-component>
 			</zooming-image-component>
 		`;
 	}
@@ -60,7 +72,8 @@ export class ZoomingImageApplicationExample1 extends LitElement {
 
 declare global {
 	interface HTMLElementTagNameMap {
-		"zooming-image-component": ZoomComponent;
+		"zooming-image-component": ZoomingImage;
+		"zooming-image-glass-component": ZoomingImageGlass;
 		"zooming-image-application-example-1": ZoomingImageApplicationExample1;
 	}
 }
