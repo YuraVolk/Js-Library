@@ -123,7 +123,7 @@ export class TabsApplicationExample1 extends LitElement {
 			</div>
 			<div slot="tabs" class="tabs">
 				<tab-component .tabId=${0}>
-					<div class="tab ${hasTabs ? tabs[0].transitionDirective() : ""}">
+					<div class="tab">
 						<h3>Tab 1</h3>
 						<p>
 							Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad minus maiores eos quidem. Distinctio consequatur repellat,
@@ -132,7 +132,7 @@ export class TabsApplicationExample1 extends LitElement {
 					</div>
 				</tab-component>
 				<tab-component .tabId=${1}>
-					<div class="tab ${hasTabs ? tabs[1].transitionDirective() : ""}">
+					<div class="tab">
 						<h3>Tab 2</h3>
 						<p>
 							Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad minus maiores eos quidem. Distinctio consequatur repellat,
@@ -141,7 +141,7 @@ export class TabsApplicationExample1 extends LitElement {
 					</div>
 				</tab-component>
 				<tab-component .tabId=${2}>
-					<div class="tab ${hasTabs ? tabs[2].transitionDirective() : ""}">
+					<div class="tab">
 						<h3>Tab 3</h3>
 						<p>
 							Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad minus maiores eos quidem. Distinctio consequatur repellat,
