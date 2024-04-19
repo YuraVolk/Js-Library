@@ -1,14 +1,8 @@
 import { ReactiveController, noChange, nothing } from "lit";
 import { Directive, Part, PartInfo, PartType, directive } from "lit/async-directive.js";
 import { until } from "lit/directives/until.js";
-import { Transition } from "../transition";
-
-enum TransitionState {
-	ENTERING,
-	ENTERED,
-	EXITING,
-	EXITED
-}
+import { Transition } from "../transition/refTransition";
+import { TransitionState } from "./enum";
 
 interface TransitionDirectiveOptions {
 	controller: TransitionController;
@@ -25,50 +19,50 @@ class TransitionDirective extends Directive {
 		}
 	}
 
-	render({ transitionState }: TransitionDirectiveOptions) {
+	render({ transitionState }: TransitionDirectiveOptions, classNames: Record<TransitionState, string>) {
 		if (this.previousState === transitionState) {
 			return noChange;
 		}
 
 		switch (transitionState) {
 			case TransitionState.ENTERING:
-				return "enter-active enter";
+				return `${classNames[TransitionState.ENTERING]} ${classNames[TransitionState.ENTERED]}`;
 			case TransitionState.EXITING:
-				return "leave-active leave";
+				return `${classNames[TransitionState.EXITING]} ${classNames[TransitionState.EXITED]}`;
 			case TransitionState.ENTERED:
-				return "enter-done";
+				return classNames[TransitionState.ENTERED];
 			case TransitionState.EXITED:
-				return "leave-done";
+				return classNames[TransitionState.EXITED];
 		}
 	}
 
-	update(_part: Part, [options]: Parameters<typeof this.render>) {
+	update(_part: Part, [options, classNames]: Parameters<typeof this.render>) {
 		const { transitionState, controller } = options;
 		if (_part.type !== PartType.ATTRIBUTE || !(_part.element instanceof HTMLElement)) {
-			return this.render(options);
+			return this.render(options, classNames);
 		}
 
 		const element = _part.element;
 		switch (transitionState) {
 			case TransitionState.ENTERING:
-				element.classList.add("enter-active");
-				element && element.scrollTop;
+				element.classList.add(classNames[TransitionState.ENTERING]);
+				element.scrollTop;
 				controller.scheduleNextState(TransitionState.ENTERED);
 				break;
 			case TransitionState.ENTERED:
-				element.classList.remove("enter-active");
+				element.classList.remove(classNames[TransitionState.ENTERING]);
 				break;
 			case TransitionState.EXITING:
-				element.classList.add("leave-active");
-				element && element.scrollTop;
+				element.classList.add(classNames[TransitionState.EXITING]);
+				element.scrollTop;
 				controller.scheduleNextState(TransitionState.EXITED);
 				break;
 			case TransitionState.EXITED:
-				element.classList.remove("leave-active");
+				element.classList.remove(classNames[TransitionState.EXITING]);
 				break;
 		}
 
-		return this.render(options);
+		return this.render(options, classNames);
 	}
 }
 
@@ -129,18 +123,21 @@ export class TransitionController implements ReactiveController {
 		}
 	}
 
-	private async transitionDirectivePromise() {
+	private async transitionDirectivePromise(classNames: Record<TransitionState, string>) {
 		await this.directivePromise;
 
 		if (typeof this.transitionState === "undefined") return nothing;
-		return transitionDirective({
-			controller: this,
-			transitionState: this.transitionState
-		});
+		return transitionDirective(
+			{
+				controller: this,
+				transitionState: this.transitionState
+			},
+			classNames
+		);
 	}
 
-	transitionDirective() {
-		return until(this.transitionDirectivePromise(), "");
+	transitionDirective(classNames: Record<TransitionState, string>) {
+		return until(this.transitionDirectivePromise(classNames), "");
 	}
 
 	transitionDisplayDirective(template: unknown, isActive: boolean) {

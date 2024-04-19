@@ -1,11 +1,9 @@
-import "../../interfaces/transition";
-import { Transition } from "../../interfaces/transition";
+import "../../interfaces/transition/transition";
 
 import { LitElement, css, html } from "lit";
 import { property } from "lit/decorators.js";
+import { defaultClassNames } from "../../interfaces/transition/interface";
 import { ToastConfiguration } from "shared/component/toast";
-import { createRef, ref } from "lit/directives/ref.js";
-import { assertNonUndefined } from "shared/utils/utils";
 
 export class ToastComponent extends LitElement implements ToastConfiguration {
 	static styles = css`
@@ -20,9 +18,10 @@ export class ToastComponent extends LitElement implements ToastConfiguration {
 	autoCloseDelay?: number;
 	@property({ type: Number })
 	transitionDuration = 300;
+	@property({ type: Object })
+	classNames = defaultClassNames();
 
 	private _timeoutRef?: number;
-	private _transition = createRef<Transition>();
 
 	private onOpenValueChange() {
 		if (this.autoCloseDelay && this.isOpen) {
@@ -36,10 +35,6 @@ export class ToastComponent extends LitElement implements ToastConfiguration {
 		this.isOpen = false;
 		window.clearTimeout(this._timeoutRef);
 		this._timeoutRef = undefined;
-		this.dispatchEvent(new CustomEvent("transition-display-directive-init"));
-		this._transition.value?.invalidateCache().catch((e: unknown) => {
-			console.trace(e);
-		});
 	}
 
 	protected updated(_changedProperties: Map<PropertyKey, unknown>): void {
@@ -52,11 +47,6 @@ export class ToastComponent extends LitElement implements ToastConfiguration {
 		}
 	}
 
-	transitionDirective() {
-		assertNonUndefined(this._transition.value);
-		return this._transition.value.directive();
-	}
-
 	connectedCallback(): void {
 		super.connectedCallback();
 		this.onOpenValueChange();
@@ -67,22 +57,10 @@ export class ToastComponent extends LitElement implements ToastConfiguration {
 		window.clearTimeout(this._timeoutRef);
 	}
 
-	protected firstUpdated() {
-		this.requestUpdate();
-		this.dispatchEvent(new CustomEvent("transition-display-directive-init"));
-	}
-
 	render() {
 		return html`
-			<transition-component
-				?isActive=${this.isOpen}
-				.duration=${this.transitionDuration}
-				@transition-display-update-request=${() => {
-					this.requestUpdate();
-				}}
-				${ref(this._transition)}
-			>
-				${this._transition.value?.displayDirective(html`<slot></slot>`, this.isOpen)}
+			<transition-component ?isActive=${this.isOpen} .duration=${this.transitionDuration} .classNames=${this.classNames}>
+				<slot></slot>
 			</transition-component>
 		`;
 	}
