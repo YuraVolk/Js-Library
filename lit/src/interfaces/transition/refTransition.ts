@@ -1,15 +1,16 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { TransitionController } from "./hooks/transitionController";
+import { TransitionController } from "./refTransitionController";
+import { TransitionConfiguration, defaultClassNames } from "./interface";
 
 declare global {
 	interface HTMLElementTagNameMap {
-		"transition-component": Transition;
+		"ref-transition-component": Transition;
 	}
 }
 
-@customElement("transition-component")
-export class Transition extends LitElement {
+@customElement("ref-transition-component")
+export class Transition extends LitElement implements TransitionConfiguration {
 	static styles = css`
 		:host {
 			display: contents;
@@ -20,6 +21,8 @@ export class Transition extends LitElement {
 	isActive = false;
 	@property({ type: Number })
 	duration = 300;
+	@property({ type: Object })
+	classNames = defaultClassNames();
 
 	private directivePromiseResolver?: (directive: unknown) => void;
 	private directivePromise?: Promise<unknown>;
@@ -43,7 +46,7 @@ export class Transition extends LitElement {
 	);
 
 	directive() {
-		const directive = this.transitionController.transitionDirective();
+		const directive = this.transitionController.transitionDirective(this.classNames);
 		if (this.directivePromiseResolver) {
 			this.directivePromiseResolver(directive);
 			this.initializeDirectivePromise();

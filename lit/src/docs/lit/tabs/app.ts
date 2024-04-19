@@ -101,9 +101,6 @@ export class TabsApplicationExample1 extends LitElement {
 	}
 
 	render() {
-		const tabs = Array.from(this._tabs);
-		const hasTabs = tabs.length > 0 && tabs.every((tab) => "transitionDirective" in tab);
-
 		return html`<tabs-component class="tabs-wrap" currentTab=${this._openTab}>
 			<div class="tabs-headers" slot="headers">
 				${map(

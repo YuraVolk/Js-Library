@@ -3,21 +3,16 @@ import { customElement, property } from "lit/decorators.js";
 import { createRef, ref } from "lit/directives/ref.js";
 import { when } from "lit/directives/when.js";
 import { extractRealSlotContents } from "../../utils/extractRealSlotContents";
+import { TransitionState } from "./enum";
+import { defaultClassNames } from "./interface";
 
 declare global {
 	interface HTMLElementTagNameMap {
-		"transition-element-component": Transition;
+		"transition-component": Transition;
 	}
 }
 
-export enum TransitionState {
-	ENTERING = "ENTERING",
-	ENTERED = "ENTERED",
-	EXITING = "EXITING",
-	EXITED = "EXITED"
-}
-
-@customElement("transition-element-component")
+@customElement("transition-component")
 export class Transition extends LitElement {
 	static styles = css`
 		:host {
@@ -30,12 +25,7 @@ export class Transition extends LitElement {
 	@property({ type: Number })
 	duration = 300;
 	@property({ type: Object })
-	classNames = {
-		[TransitionState.ENTERING]: "enter-active",
-		[TransitionState.EXITING]: "leave-active",
-		[TransitionState.ENTERED]: "enter-done",
-		[TransitionState.EXITED]: "leave-done"
-	};
+	classNames = defaultClassNames();
 
 	protected _transitionState = TransitionState.ENTERED;
 	private timeoutId?: number;
@@ -65,6 +55,7 @@ export class Transition extends LitElement {
 	}
 
 	protected async updateElementStyles() {
+		window.clearTimeout(this.timeoutId);
 		if (!this._didRequestUpdate) {
 			await this.updateComplete;
 		} else this._didRequestUpdate = false;

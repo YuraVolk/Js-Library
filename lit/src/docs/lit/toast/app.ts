@@ -4,8 +4,6 @@ import "../../../global.css";
 import "./style.css";
 import { customElement, state } from "lit/decorators.js";
 import { LitElement, css, html } from "lit";
-import { createRef, ref } from "lit/directives/ref.js";
-import { when } from "lit/directives/when.js";
 
 import("../header");
 import("../sidebar");
@@ -83,48 +81,36 @@ export class ToastApplicationExample1 extends LitElement {
 
 	@state()
 	private _isOpen = true;
-	private _transitionRef = createRef<ToastComponent>();
 
 	private closeToast() {
 		this._isOpen = false;
 	}
 
 	render() {
-		return html`<toast-component
-			?isOpen=${this._isOpen}
-			.transitionDuration=${800}
-			@transition-display-directive-init=${() => {
-				this.requestUpdate();
-			}}
-			${ref(this._transitionRef)}
-		>
-			${when(
-				this._transitionRef.value,
-				() =>
-					html`<div class="toast ${this._transitionRef.value?.transitionDirective() ?? ""}">
-						<div class="toast-content">
-							<span>Some Toast Content Here</span>
-							<div class="toast-buttons">
-								<button
-									class="toast-button"
-									@click=${() => {
-										this.closeToast();
-									}}
-								>
-									OK
-								</button>
-								<button
-									class="toast-button"
-									@click=${() => {
-										this.closeToast();
-									}}
-								>
-									Cancel
-								</button>
-							</div>
-						</div>
-					</div>`
-			)}
+		return html`<toast-component ?isOpen=${this._isOpen} .transitionDuration=${800}>
+			<div class="toast">
+				<div class="toast-content">
+					<span>Some Toast Content Here</span>
+					<div class="toast-buttons">
+						<button
+							class="toast-button"
+							@click=${() => {
+								this.closeToast();
+							}}
+						>
+							OK
+						</button>
+						<button
+							class="toast-button"
+							@click=${() => {
+								this.closeToast();
+							}}
+						>
+							Cancel
+						</button>
+					</div>
+				</div>
+			</div>
 		</toast-component>`;
 	}
 }
