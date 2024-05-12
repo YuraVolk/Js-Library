@@ -21,12 +21,13 @@ import { assertNonUndefinedDevOnly } from "shared/utils/utils";
 import { onMounted, onUnmounted, reactive, ref } from 'vue';
 import { CarouselDirection } from 'shared/interfaces/carousel';
 
-const props = withDefaults(defineProps<Partial<MenuCarouselConfiguration>>(), {
+const props = withDefaults(defineProps<MenuCarouselConfiguration>(), {
     yPos: 112,
     yRadius: 128,
     farScale: 0.9,
     speed: 0.11
 });
+
 const rotation = ref(Math.PI / 2);
 const destRotation = ref(Math.PI / 2);
 const frameTimer = ref<number | undefined>();

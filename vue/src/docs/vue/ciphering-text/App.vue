@@ -31,26 +31,63 @@
       action:
     </p>
     <ciphering-text-component
+      v-slot="{ letters }"
       :strings="['Lorem ipsum dolor', 'sit amet']"
       :repetitions="Infinity"
-    />
+    >
+      <span
+        v-for="letter, i in letters"
+        :key="i"
+        :class="letter.classes"
+        v-text="letter.letter"
+      />
+    </ciphering-text-component>
     <p>Here is another example of it animating Hello and World phrases:</p>
     <ciphering-text-component
+      v-slot="{ letters }"
       :strings="['Hello', 'World']"
       :repetitions="Infinity"
       :interval="2000"
-    />
+    >
+      <span
+        v-for="letter, i in letters"
+        :key="i"
+        :class="letter.classes"
+        v-text="letter.letter"
+      />
+    </ciphering-text-component>
     <p>Here is an example with custom characters:</p>
     <ciphering-text-component
+      v-slot="{ letters }"
       :strings="['Hello', 'World', 'New Text', 'Something else']"
       :repetitions="Infinity"
       :characters="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')"
-    />
+    >
+      <span
+        v-for="letter, i in letters"
+        :key="i"
+        :class="letter.classes"
+        v-text="letter.letter"
+      />
+    </ciphering-text-component>
     <p>
       In this example, the Ciphering Text Component is configured to use custom characters for ciphering the text. The
       characters are set to "ABCDEFGHIJKLMNOPQRSTUVWXYZ", which means the ciphered text will only contain uppercase
-      letters.
+      letters. In addition, this component also supports transition group, and as such you can create more complex transitions through scoped slots:
     </p>
+    <ciphering-text-component
+      v-slot="{ letters }"
+      :strings="['Hello', 'World', 'New Text', 'Something else']"
+      :repetitions="Infinity"
+      :characters="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')"
+      name="list"
+    >
+      <span
+        v-for="letter in letters"
+        :key="letter.letter"
+        v-text="letter.letter"
+      />
+    </ciphering-text-component>
   </main>
 </template>
 
@@ -62,17 +99,32 @@ const SidebarComponent = defineAsyncComponent(() => import("../SidebarComponent.
 const CipheringTextComponent = defineAsyncComponent(() => import("../../../components/ciphering-text/CipheringText.vue"));
 </script>
 
-<style>
+<style scoped>
 pre {
     font-size: 24px;
     line-height: 54px;
 }
 
 pre>span {
-    transition: all 50ms ease-in-out;
+  display: inline-block;
+  overflow: hidden;
+  transition: all 0.1s ease;
+  white-space: preserve;
 }
 
 pre>span.active {
-    color: #e3caca;
+  color: #e3caca;
+}
+
+.list-enter-active,
+.list-leave-active {
+	max-width: 1ch;
+	min-width: 1ch;
+}
+
+.list-enter-from,
+.list-leave-to {
+  max-width: 0;
+  min-width: 0;
 }
 </style>
