@@ -1,16 +1,19 @@
 <template>
-  <pre ref="element">
-        <span
-			v-for="letter, i in settings.currentTextValue.value"
-			:key="i"
-			:class="letter.classes.join('')"
-			v-text="letter.letter"
-		/>
-    </pre>
+  <TransitionGroup
+    tag="pre"
+  >
+    <slot :letters="currentTextValue">
+      <span
+        v-for="letter, i in currentTextValue"
+        :key="i"
+        :class="letter.classes.join('')"
+        v-text="letter.letter"
+      />
+    </slot>
+  </TransitionGroup>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
 import { useSelfModifyingText, splitTextAlgorithm, ModifyingTextContext } from "../../interfaces/hooks/useSelfModifyingText";
 import { CipheringTextConfiguration } from "shared/component/cipheringText";
 import { SplitTextCallback, TriggerTextAnimationCallback } from "shared/interfaces/selfModifyingText";
@@ -46,10 +49,9 @@ const props = withDefaults(defineProps<CipheringTextConfiguration>(), {
 		">"
 	],
 	repetitions: 1,
-	interval: 3000,
+	interval: 5000,
 	typingSpeed: 45
 });
-const element = ref<HTMLElement | null>(null);
 
 const cipherLetter = (context: ModifyingTextContext, properties: { newLetter?: string; delayed: boolean; i: number }) => {
 	const { newLetter, delayed, i } = properties;
@@ -92,7 +94,7 @@ const triggerTextAnimation: TriggerTextAnimationCallback<ModifyingTextContext> =
 	const speeds: number[] = [];
 	context.currentTextValue.value.forEach((character, i) => {
 		if (character.letter === toText[i]) return;
-		speeds.push(cipherLetter(context, { newLetter: toText[i], i, delayed: element.value?.textContent?.length === 0 }));
+		speeds.push(cipherLetter(context, { newLetter: toText[i], i, delayed: false }));
 	});
 
 	setTimeout(() => {
@@ -101,7 +103,7 @@ const triggerTextAnimation: TriggerTextAnimationCallback<ModifyingTextContext> =
 	}, Math.max(...speeds) + props.interval);
 };
 
-const settings = useSelfModifyingText({
+const { currentTextValue } = useSelfModifyingText({
 	strings: props.strings,
 	repetitions: props.repetitions,
 	interval: props.interval,
@@ -114,5 +116,11 @@ const settings = useSelfModifyingText({
 <style scoped>
 pre {
 	white-space: normal;
+}
+
+pre span {
+	display: inline-block;
+	overflow: hidden;
+	white-space: pre;
 }
 </style>
