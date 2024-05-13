@@ -6,7 +6,6 @@
       <span
         v-for="letter, i in currentTextValue"
         :key="i"
-        :class="letter.classes.join('')"
         v-text="letter.letter"
       />
     </slot>
@@ -74,7 +73,7 @@ const cipherLetter = (context: ModifyingTextContext, properties: { newLetter?: s
 					if (newValue !== undefined) {
 						context.currentTextValue.value[i] = {
 							letter: newValue,
-							classes: isDone ? [] : ["active"]
+							letterState: isDone ? 'finished' : 'changing'
 						};
 					}
 				}, speed * index);
