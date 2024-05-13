@@ -1,12 +1,14 @@
 <template>
-  <pre>
-        <span
-			v-for="letter, i in settings.currentTextValue.value"
-			:key="i"
-			:class="letter.classes.join('')"
-			v-text="letter.letter"
-			/>
-    </pre>
+  <TransitionGroup tag="pre">
+    <slot :letters="currentTextValue">
+      <span
+        v-for="letter, i in currentTextValue"
+        :key="i"
+        :class="letter.classes.join('')"
+        v-text="letter.letter"
+      />
+    </slot>
+  </TransitionGroup>
 </template>
 
 <script setup lang="ts">
@@ -40,7 +42,7 @@ const triggerTextAnimation: TriggerTextAnimationCallback<ModifyingTextContext> =
 	}
 };
 
-const settings = useSelfModifyingText({
+const { currentTextValue } = useSelfModifyingText({
 	strings: props.strings,
 	repetitions: props.repetitions,
 	interval: props.interval,

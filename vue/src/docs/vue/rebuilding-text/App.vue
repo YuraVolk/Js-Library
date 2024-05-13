@@ -45,6 +45,21 @@
       :typing-speed="300"
       class="rebuilding-text"
     />
+    <p>In addition, you can use TransitionGroup component in order to create more powerful animations:</p>
+    <rebuilding-text-component
+      v-slot="{ letters }"
+      :strings="['Test text', 'The new resulting text', 'Small']"
+      :repetitions="Infinity"
+      :typing-speed="45"
+      class="rebuilding-text"
+      name="list"
+    >
+      <span
+        v-for="letter, i in letters"
+        :key="letter.letter + String(i)"
+        v-text="letter.letter"
+      />
+    </rebuilding-text-component>
   </main>
 </template>
 
@@ -61,5 +76,24 @@ const RebuildingTextComponent = defineAsyncComponent(() => import("../../../comp
 	font-size: 24px;
 	line-height: 54px;
 	white-space: nowrap;
+}
+
+.rebuilding-text span {
+  display: inline-block;
+  overflow: hidden;
+  transition: all 175ms ease;
+  white-space: preserve;
+}
+
+.list-enter-active,
+.list-leave-active {
+	max-width: 1ch;
+	min-width: 1ch;
+}
+
+.list-enter-from,
+.list-leave-to {
+  max-width: 0;
+  min-width: 0;
 }
 </style>
