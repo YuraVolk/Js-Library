@@ -1,19 +1,20 @@
 <template>
-  <pre>
-    <span
-	  v-for="letter, i in settings.currentTextValue.value"
-	  :key="i"
-	  :class="letter.classes.join('')"
-	  v-text="letter.letter"
-	/>
-  </pre>
+  <TransitionGroup tag="pre">
+    <slot :letters="currentTextValue">
+      <span
+        v-for="letter, i in currentTextValue"
+        :key="i"
+        v-text="letter.letter"
+      />
+    </slot>
+  </TransitionGroup>
 </template>
 
 <script setup lang="ts">
 import { onUnmounted, ref } from "vue";
 import { TypingTextConfiguration } from "shared/component/typingText";
 import { ModifyingTextContext, useSelfModifyingText } from "../../interfaces/hooks/useSelfModifyingText";
-import { TriggerTextAnimationCallback } from "shared/interfaces/selfModifyingText";
+import { LetterSettings, TriggerTextAnimationCallback } from "shared/interfaces/selfModifyingText";
 
 const props = withDefaults(defineProps<TypingTextConfiguration>(), {
 	repetitions: 1,
@@ -24,8 +25,8 @@ const props = withDefaults(defineProps<TypingTextConfiguration>(), {
 const timeout = ref<number | undefined>();
 
 const triggerTextAnimation: TriggerTextAnimationCallback<ModifyingTextContext> = async ({ context, toText, fromText }) => {
-	const fromArray = fromText.split("").map((letter) => ({ letter, classes: [] }));
-	const toArray = toText.split("").map((letter) => ({ letter, classes: [] }));
+	const fromArray = fromText.split("").map<LetterSettings>((letter) => ({ letter, letterState: 'idle' }));
+	const toArray = toText.split("").map<LetterSettings>((letter) => ({ letter, letterState: 'idle' }));
 
 	for (let i = 1; i < fromText.length + 1; i++) {
 		await new Promise<void>(
@@ -53,7 +54,7 @@ const triggerTextAnimation: TriggerTextAnimationCallback<ModifyingTextContext> =
 	}, props.interval);
 };
 
-const settings = useSelfModifyingText({
+const { currentTextValue } = useSelfModifyingText({
 	strings: props.strings,
 	repetitions: props.repetitions,
 	interval: props.interval,

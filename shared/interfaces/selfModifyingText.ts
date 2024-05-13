@@ -25,9 +25,16 @@ export interface SelfModifyingTextInterface<T extends ModifyingTextContext> exte
 	triggerTextAnimation: TriggerTextAnimationCallback<T>;
 }
 
+export type LetterState = (typeof LetterState)[keyof typeof LetterState];
+export const LetterState = {
+	idle: "idle",
+	changing: "changing",
+	finished: "finished"
+} as const;
+
 export interface LetterSettings {
 	letter: string;
-	classes: string[];
+	letterState: LetterState;
 }
 
 export function* nextStringsGenerator<T extends ModifyingTextContext>(
@@ -50,6 +57,6 @@ export function* nextStringsGenerator<T extends ModifyingTextContext>(
 
 export const splitTextAlgorithm = (currentString: LetterSettings[], newString: string): LetterSettings[] => {
 	return [...currentString.map(({ letter }) => letter).filter(Boolean), ...newString.split("").slice(currentString.length).fill(" ")].map(
-		(letter) => ({ letter, classes: [] })
+		(letter) => ({ letter, classes: [], letterState: "idle" })
 	);
 };

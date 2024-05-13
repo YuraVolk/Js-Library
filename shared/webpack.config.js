@@ -44,5 +44,8 @@ module.exports = {
 			filename: "remoteEntry.js",
 			exposes: exposedInterfaceEntries
 		})
-	]
+	],
+	resolve: {
+		extensions: [".ts", ".js"],
+	},
 };

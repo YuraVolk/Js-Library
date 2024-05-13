@@ -4,7 +4,6 @@
       <span
         v-for="letter, i in currentTextValue"
         :key="i"
-        :class="letter.classes.join('')"
         v-text="letter.letter"
       />
     </slot>
@@ -13,7 +12,7 @@
 
 <script setup lang="ts">
 import { createRebuildingTextSteps } from "shared/component/rebuildingText";
-import { ModifyingTextConfiguration, TriggerTextAnimationCallback } from "shared/interfaces/selfModifyingText";
+import { LetterSettings, ModifyingTextConfiguration, TriggerTextAnimationCallback } from "shared/interfaces/selfModifyingText";
 import { ModifyingTextContext, useSelfModifyingText } from "../../interfaces/hooks/useSelfModifyingText";
 
 const props = withDefaults(defineProps<ModifyingTextConfiguration>(), {
@@ -27,12 +26,7 @@ const triggerTextAnimation: TriggerTextAnimationCallback<ModifyingTextContext> =
 	for (let i = 0; i < steps.length; i++) {
 		setTimeout(() => {
 			context.currentTextValue.value = steps[i]
-				.filter<string>((s): s is string => Boolean(s))
-				.map((letter) => ({
-					letter,
-					classes: []
-				}));
-
+				.filter<LetterSettings>((s): s is LetterSettings => Boolean(s));
 			if (i === steps.length - 1) {
 				setTimeout(() => {
 					context.onInterval();

@@ -29,6 +29,7 @@
     />
     <p>And here is an animated version of this text:</p>
     <typing-text-component
+      v-slot="{ letters }"
       class="typing-text typing-text--animated"
       :repetitions="Infinity"
       :un-typing-speed="15"
@@ -37,7 +38,13 @@
         'Nulla facilisi. Cras venenatis nulla non erat luctus ultrices. In facilisis tincidunt tristique. Curabitur lobortis sapien a metus lobortis, et lobortis nunc suscipit. Fusce orci mauris, bibendum et vehicula ac, fringilla at elit.',
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, atque nam! Perferendis non, deleniti tempore soluta magnam expedita nulla? Est repudiandae error rerum dolorum dolor ducimus ex tempore aut temporibus.'
       ]"
-    />
+    >
+      <span
+        v-for="letter, i in letters"
+        :key="i"
+        v-text="letter?.letter"
+      />
+    </typing-text-component>
   </main>
 </template>
 
@@ -49,7 +56,7 @@ const SidebarComponent = defineAsyncComponent(() => import("../SidebarComponent.
 const TypingTextComponent = defineAsyncComponent(() => import("../../../components/typing-text/TypingText.vue"));
 </script>
 
-<style>
+<style scoped>
 .typing-text {
 	display: block;
 	max-width: 50vw;

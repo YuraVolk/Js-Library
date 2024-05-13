@@ -38,7 +38,7 @@
       <span
         v-for="letter, i in letters"
         :key="i"
-        :class="letter.classes"
+        :class="{ active: letter.letterState === 'changing' }"
         v-text="letter.letter"
       />
     </ciphering-text-component>
@@ -52,7 +52,7 @@
       <span
         v-for="letter, i in letters"
         :key="i"
-        :class="letter.classes"
+        :class="{ active: letter.letterState === 'changing' }"
         v-text="letter.letter"
       />
     </ciphering-text-component>
@@ -66,7 +66,7 @@
       <span
         v-for="letter, i in letters"
         :key="i"
-        :class="letter.classes"
+        :class="{ active: letter.letterState === 'changing' }"
         v-text="letter.letter"
       />
     </ciphering-text-component>
@@ -83,9 +83,9 @@
       name="list"
     >
       <span
-        v-for="letter in letters"
-        :key="letter.letter"
-        v-text="letter.letter"
+        v-for="letter, i in letters"
+        :key="letter?.letterState === 'changing' ? letter?.letter + String(i) : i"
+        v-text="letter?.letter"
       />
     </ciphering-text-component>
   </main>

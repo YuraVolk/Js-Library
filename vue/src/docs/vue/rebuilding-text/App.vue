@@ -50,15 +50,16 @@
       v-slot="{ letters }"
       :strings="['Test text', 'The new resulting text', 'Small']"
       :repetitions="Infinity"
-      :typing-speed="45"
+      :typing-speed="75"
       class="rebuilding-text"
       name="list"
     >
       <span
         v-for="letter, i in letters"
-        :key="letter.letter + String(i)"
-        v-text="letter.letter"
-      />
+        :key="letter.letterState === 'idle' ? letter + String(i) : i"
+      >
+        <span>{{ letter.letter }}</span>
+      </span>
     </rebuilding-text-component>
   </main>
 </template>
@@ -85,14 +86,14 @@ const RebuildingTextComponent = defineAsyncComponent(() => import("../../../comp
   white-space: preserve;
 }
 
-.list-enter-active,
-.list-leave-active {
+.list-enter-active > span,
+.list-leave-active > span {
 	max-width: 1ch;
 	min-width: 1ch;
 }
 
-.list-enter-from,
-.list-leave-to {
+.list-enter-from > span,
+.list-leave-to > span {
   max-width: 0;
   min-width: 0;
 }

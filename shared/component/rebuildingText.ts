@@ -1,3 +1,5 @@
+import { LetterSettings, LetterState } from "../interfaces/selfModifyingText";
+
 export const createRebuildingTextSteps = (fromText: string, toText: string) => {
 	const fromTextArray: Array<string | undefined> = fromText.split("");
 	const toTextArray: Array<string | undefined> = toText.split("");
@@ -15,21 +17,42 @@ export const createRebuildingTextSteps = (fromText: string, toText: string) => {
 		}
 	}
 
-	const steps: Array<string | undefined>[] = [fromTextArray];
+	const steps: Array<LetterSettings | undefined>[] = [
+		fromTextArray.map((letter) => (letter !== undefined ? { letter, letterState: LetterState.idle } : letter))
+	];
+
 	const furtherQueue: number[] = [];
 	for (let i = 0; i < fromTextArray.length - 1; i++) {
-		const currentState = [...steps[steps.length - 1]];
+		const currentState = [...steps[steps.length - 1]].map((settings) => (settings ? { ...settings } : settings));
 		if (i % 2 === 0) {
-			[currentState[i], currentState[i + 1]] = [toTextArray[i], currentState[i]];
+			const item = toTextArray[i];
+			if (item !== undefined) {
+				currentState[i] = {
+					letter: item,
+					letterState: currentState[i]?.letter === item ? LetterState.finished : LetterState.changing
+				};
+			} else currentState[i] = item;
+
+			currentState[i + 1] = {
+				letter: currentState[i]?.letter ?? "",
+				letterState: LetterState.changing
+			};
 		} else furtherQueue.push(i);
 		if (furtherQueue.includes(i - 2)) {
 			const index = furtherQueue.shift() ?? 0;
-			currentState[index] = toTextArray[index];
+			const item = toTextArray[index];
+			if (item !== undefined) {
+				currentState[index] = {
+					letter: item,
+					letterState: currentState[index]?.letter === item ? LetterState.finished : LetterState.changing
+				};
+			} else currentState[index] = item;
 		}
 
 		steps.push(currentState);
 	}
-	steps.push(toTextArray);
+
+	steps.push(toTextArray.map((letter) => (letter !== undefined ? { letter, letterState: LetterState.finished } : letter)));
 
 	return steps;
 };
