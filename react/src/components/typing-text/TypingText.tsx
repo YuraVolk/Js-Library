@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { ModifyingTextContext, useSelfModifyingText } from "../../interfaces/hooks/useSelfModifyingText";
 import { TypingTextConfiguration } from "shared/component/typingText";
-import { TriggerTextAnimationCallback } from "shared/interfaces/selfModifyingText";
+import { LetterSettings, LetterState, TriggerTextAnimationCallback } from "shared/interfaces/selfModifyingText";
 import { GenericReactComponentProps } from "react/src/interfaces/generic/classNameFallthrough";
 
 export const TypingText = ({
@@ -14,8 +14,8 @@ export const TypingText = ({
 
 	const triggerTextAnimation = useCallback<TriggerTextAnimationCallback<ModifyingTextContext>>(
 		async ({ context, toText, fromText }) => {
-			const fromArray = fromText.split("").map((letter) => ({ letter, classes: [] }));
-			const toArray = toText.split("").map((letter) => ({ letter, classes: [] }));
+			const fromArray = fromText.split("").map<LetterSettings>((letter) => ({ letter, letterState: LetterState.idle }));
+			const toArray = toText.split("").map<LetterSettings>((letter) => ({ letter, letterState: LetterState.idle }));
 
 			for (let i = 1; i < fromText.length + 1; i++) {
 				await new Promise<void>(
@@ -62,7 +62,7 @@ export const TypingText = ({
 	return (
 		<pre className={props.className}>
 			{currentTextValue.map((letter, i) => (
-				<span className={letter.classes.join("")} key={`${letter.letter}-${String(i)}`}>
+				<span key={`${letter.letter}-${String(i)}`}>
 					{letter.letter}
 				</span>
 			))}

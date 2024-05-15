@@ -3,7 +3,8 @@ import {
 	ModifyingTextContext as RootTextContext,
 	LetterSettings,
 	SelfModifyingTextInterface,
-	nextStringsGenerator
+	nextStringsGenerator,
+	LetterState
 } from "shared/interfaces/selfModifyingText";
 
 export interface ModifyingTextContext extends RootTextContext {
@@ -16,7 +17,7 @@ export function useSelfModifyingText(settings: SelfModifyingTextInterface<Modify
 	const interval = useRef<number>();
 	const generator = useRef<Generator<[string, string], [string, string], [string, string]>>();
 	const [currentTextValue, setCurrentTextValue] = useState<LetterSettings[]>(() => {
-		return settings.strings[0].split("").map((letter) => ({ letter, classes: [] }));
+		return settings.strings[0].split("").map((letter) => ({ letter, letterState: LetterState.idle }));
 	});
 
 	const { context, onInterval } = useMemo(() => {

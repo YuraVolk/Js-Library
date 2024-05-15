@@ -1,6 +1,7 @@
 import { property } from "lit/decorators.js";
 import { SelfModifyingText, TriggerTextParams } from "../../interfaces/generic/selfModifyingText";
 import { TypingTextConfiguration } from "shared/component/typingText";
+import { LetterSettings, LetterState } from "shared/interfaces/selfModifyingText";
 
 export class TypingTextComponent extends SelfModifyingText implements TypingTextConfiguration {
 	@property({ type: Number })
@@ -13,8 +14,8 @@ export class TypingTextComponent extends SelfModifyingText implements TypingText
 	private _timeout?: number;
 
 	async triggerTextAnimation({ context, fromText, toText }: TriggerTextParams) {
-		const fromArray = fromText.split("").map((letter) => ({ letter, classes: [] }));
-		const toArray = toText.split("").map((letter) => ({ letter, classes: [] }));
+		const fromArray = fromText.split("").map<LetterSettings>((letter) => ({ letter, letterState: LetterState.idle }));
+		const toArray = toText.split("").map<LetterSettings>((letter) => ({ letter, letterState: LetterState.idle }));
 
 		for (let i = 1; i < fromText.length + 1; i++) {
 			await new Promise<void>(
@@ -25,7 +26,7 @@ export class TypingTextComponent extends SelfModifyingText implements TypingText
 					}, this.unTypingSpeed ?? this.typingSpeed))
 			);
 		}
-	
+
 		for (let i = 1; i < toText.length + 1; i++) {
 			await new Promise<void>(
 				(resolve) =>
@@ -35,7 +36,7 @@ export class TypingTextComponent extends SelfModifyingText implements TypingText
 					}, this.typingSpeed))
 			);
 		}
-	
+
 		this._timeout = window.setTimeout(() => {
 			this._timeout = undefined;
 			context.onInterval();

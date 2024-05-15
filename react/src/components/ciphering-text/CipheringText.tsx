@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from "react";
 import { ModifyingTextContext, useSelfModifyingText } from "../../interfaces/hooks/useSelfModifyingText";
-import { SplitTextCallback, TriggerTextAnimationCallback, splitTextAlgorithm } from "shared/interfaces/selfModifyingText";
+import { LetterState, SplitTextCallback, TriggerTextAnimationCallback, splitTextAlgorithm } from "shared/interfaces/selfModifyingText";
 import { CipheringTextConfiguration } from "shared/component/cipheringText";
 
 const defaultCharacters = [
@@ -71,7 +71,7 @@ export const CipheringText = ({
 					if (newValue !== undefined) {
 						newCurrentText[i] = {
 							letter: newValue,
-							classes: isDone ? [] : ["active"]
+							letterState: isDone ? LetterState.finished : LetterState.changing
 						};
 					}
 
@@ -86,7 +86,7 @@ export const CipheringText = ({
 		if (toText && fromText) {
 			context.setCurrentTextValue(
 				splitTextAlgorithm(
-					fromText.split("").map((letter) => ({ letter, classes: [] })),
+					fromText.split("").map((letter) => ({ letter, letterState: LetterState.idle })),
 					toText
 				)
 			);
@@ -97,7 +97,7 @@ export const CipheringText = ({
 		async ({ context, fromText, toText }) => {
 			void splitText({ context, toText, fromText });
 			const promises = splitTextAlgorithm(
-				fromText.split("").map((letter) => ({ letter, classes: [] })),
+				fromText.split("").map((letter) => ({ letter, letterState: LetterState.idle })),
 				toText
 			)
 				.map((character, i) => {
@@ -107,7 +107,7 @@ export const CipheringText = ({
 				.filter(Boolean);
 			await Promise.all(promises);
 
-			context.setCurrentTextValue(toText.split("").map((letter) => ({ letter, classes: [] })));
+			context.setCurrentTextValue(toText.split("").map((letter) => ({ letter, letterState: LetterState.finished })));
 			await new Promise((resolve) => {
 				setTimeout(resolve, interval);
 			});
@@ -129,7 +129,7 @@ export const CipheringText = ({
 	return (
 		<pre ref={element}>
 			{currentTextValue.map((letter, i) => (
-				<span className={letter.classes.join("")} key={`${letter.letter}-${String(i)}`}>
+				<span key={`${letter.letter}-${String(i)}`}>
 					{letter.letter}
 				</span>
 			))}

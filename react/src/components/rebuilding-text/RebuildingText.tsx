@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { ModifyingTextConfiguration, TriggerTextAnimationCallback } from "shared/interfaces/selfModifyingText";
+import { LetterSettings, ModifyingTextConfiguration, TriggerTextAnimationCallback } from "shared/interfaces/selfModifyingText";
 import { ModifyingTextContext, useSelfModifyingText } from "../../interfaces/hooks/useSelfModifyingText";
 import { createRebuildingTextSteps } from "shared/component/rebuildingText";
 import { GenericReactComponentProps } from "../../interfaces/generic/classNameFallthrough";
@@ -15,14 +15,7 @@ export const RebuildingText = ({
 			const steps = createRebuildingTextSteps(fromText, toText);
 			for (let i = 0; i < steps.length; i++) {
 				setTimeout(() => {
-					context.setCurrentTextValue(
-						steps[i]
-							.filter<string>((s): s is string => Boolean(s))
-							.map((letter) => ({
-								letter,
-								classes: []
-							}))
-					);
+					context.setCurrentTextValue(steps[i].filter<LetterSettings>((s): s is LetterSettings => Boolean(s)));
 
 					if (i === steps.length - 1) {
 						setTimeout(() => {
@@ -46,7 +39,7 @@ export const RebuildingText = ({
 	return (
 		<pre className={props.className}>
 			{currentTextValue.map((letter, i) => (
-				<span className={letter.classes.join("")} key={`${letter.letter}-${String(i)}`}>
+				<span key={`${letter.letter}-${String(i)}`}>
 					{letter.letter}
 				</span>
 			))}
