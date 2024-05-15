@@ -1,6 +1,7 @@
 import { property } from "lit/decorators.js";
 import { SelfModifyingText, TriggerTextParams } from "../../interfaces/generic/selfModifyingText";
 import { createRebuildingTextSteps } from "shared/component/rebuildingText";
+import { LetterSettings } from "shared/interfaces/selfModifyingText";
 
 export class RebuildingTextComponent extends SelfModifyingText {
 	@property({ type: Number })
@@ -13,10 +14,7 @@ export class RebuildingTextComponent extends SelfModifyingText {
 
 		for (let i = 0; i < steps.length; i++) {
 			setTimeout(() => {
-				this._currentTextValue = steps[i].filter(Boolean).map((letter) => ({
-					letter: String(letter),
-					classes: []
-				}));
+				this._currentTextValue = steps[i].filter<LetterSettings>((s): s is LetterSettings => Boolean(s));
 				if (i !== steps.length - 1) return;
 
 				setTimeout(() => {

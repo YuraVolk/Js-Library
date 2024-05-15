@@ -1,7 +1,7 @@
 import { property } from "lit/decorators.js";
 import { CipheringTextConfiguration } from "shared/component/cipheringText";
 import { SelfModifyingText, SplitTextParams, TriggerTextParams } from "../../interfaces/generic/selfModifyingText";
-import { splitTextAlgorithm } from "shared/interfaces/selfModifyingText";
+import { LetterState, splitTextAlgorithm } from "shared/interfaces/selfModifyingText";
 
 export class CipheringTextComponent extends SelfModifyingText implements CipheringTextConfiguration {
 	@property({ type: Number })
@@ -64,7 +64,7 @@ export class CipheringTextComponent extends SelfModifyingText implements Cipheri
 						if (newValue !== undefined) {
 							this._currentTextValue[i] = {
 								letter: newValue,
-								classes: isDone ? [] : ["active"]
+								letterState: isDone ? LetterState.finished : LetterState.changing
 							};
 						}
 

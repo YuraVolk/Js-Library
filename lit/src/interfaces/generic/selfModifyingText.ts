@@ -3,6 +3,7 @@ import { property, state } from "lit/decorators.js";
 import { map } from "lit/directives/map.js";
 import {
 	LetterSettings,
+	LetterState,
 	ModifyingTextContext,
 	SelfModifyingTextInterface,
 	SplitTextCallback,
@@ -45,7 +46,7 @@ export abstract class SelfModifyingText extends LitElement implements SelfModify
 
 	protected firstUpdated(): void {
 		this._generator = nextStringsGenerator(this.strings[0], this);
-		this._currentTextValue = this.strings[0].split("").map((letter) => ({ letter, classes: [] }));
+		this._currentTextValue = this.strings[0].split("").map((letter) => ({ letter, letterState: LetterState.idle }));
 
 		void this.splitText?.({ context: this });
 		this.intervalCurrent = window.setTimeout(() => {
@@ -67,6 +68,6 @@ export abstract class SelfModifyingText extends LitElement implements SelfModify
 	}
 
 	render() {
-		return html`${map(this._currentTextValue, (letter) => html`<span class=${letter.classes.join(" ")}>${letter.letter}</span>`)}`;
+		return html`${map(this._currentTextValue, (letter) => html`<span>${letter.letter}</span>`)}`;
 	}
 }
