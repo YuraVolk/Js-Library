@@ -48,6 +48,10 @@ export class Transition extends LitElement {
 
 	private scheduleNextState(transitionState: TransitionState) {
 		this.timeoutId = window.setTimeout(() => {
+			if (transitionState === TransitionState.EXITED) {
+				this.dispatchEvent(new CustomEvent('finished'));
+			}
+
 			this._transitionState = transitionState;
 			this._didRequestUpdate = true;
 			this.requestUpdate();
@@ -90,6 +94,7 @@ export class Transition extends LitElement {
 				break;
 			case TransitionState.EXITED:
 				element.classList.add(this.classNames[TransitionState.EXITED]);
+				this.dispatchEvent(new CustomEvent('finished'));
 				break;
 		}
 	}

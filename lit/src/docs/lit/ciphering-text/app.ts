@@ -3,6 +3,7 @@ import "../../../components/litEntry";
 import "../../../global.css";
 import { customElement } from "lit/decorators.js";
 import { LitElement, css, html } from "lit";
+import "../../../interfaces/transition/transitionGroup";
 
 import("../header");
 import("../sidebar");
@@ -33,7 +34,7 @@ import("../../../components/ciphering-text/cipheringText")
 @customElement("ciphering-text-application-example-1")
 export class CipheringTextApplicationExample1 extends LitElement {
 	render() {
-		return html`<ciphering-text-component .strings=${["Carousel Accepts", "Now this is different"]}></ciphering-text-component>`;
+		return html`<ciphering-text-component .repetitions=${3} .strings=${["Carousel Accepts", "Now this is different"]}></ciphering-text-component>`;
 	}
 }
 
