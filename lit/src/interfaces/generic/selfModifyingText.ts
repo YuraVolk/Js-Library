@@ -1,6 +1,5 @@
 import { LitElement, html, css } from "lit";
 import { property, state } from "lit/decorators.js";
-import { map } from "lit/directives/map.js";
 import {
 	LetterSettings,
 	LetterState,
@@ -10,6 +9,9 @@ import {
 	TriggerTextAnimationCallback,
 	nextStringsGenerator
 } from "shared/interfaces/selfModifyingText";
+import "../transition/transitionGroup";
+import "../transition/transition";
+import { TransitionGroupRenderer } from "../transition/transitionGroup";
 
 export type TriggerTextParams = Parameters<TriggerTextAnimationCallback<ModifyingTextContext>>[0];
 export type SplitTextParams = Parameters<SplitTextCallback<ModifyingTextContext>>[0];
@@ -23,6 +25,11 @@ export abstract class SelfModifyingText extends LitElement implements SelfModify
 				unicode-bidi: isolate;
 				font-size: 24px;
 				line-height: 54px;
+			}
+
+			transition-component {
+				display: inline-flex;
+				white-space: pre;
 			}
 		`
 	];
@@ -68,6 +75,20 @@ export abstract class SelfModifyingText extends LitElement implements SelfModify
 	}
 
 	render() {
-		return html`${map(this._currentTextValue, (letter) => html`<span>${letter.letter}</span>`)}`;
+		return html`<transition-group-component
+			.renderElements=${this._currentTextValue
+				.filter((s) => s.letter.length !== 0)
+				.map<TransitionGroupRenderer>((letter, index) => {
+					return {
+						key: letter.letter + String(index),
+						isActive: true,
+						render: ({ isActive, onExited }) =>
+							html`<transition-component @finished=${onExited} ?isActive=${isActive} .duration=${45}>
+								<span>${letter.letter}</span>
+							</transition-component>`,
+						onExited: () => {}
+					};
+				})}
+		></transition-group-component>`;
 	}
 }
