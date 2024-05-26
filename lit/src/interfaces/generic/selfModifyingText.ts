@@ -26,11 +26,6 @@ export abstract class SelfModifyingText extends LitElement implements SelfModify
 				font-size: 24px;
 				line-height: 54px;
 			}
-
-			transition-component {
-				display: inline-flex;
-				white-space: pre;
-			}
 		`
 	];
 
@@ -80,10 +75,10 @@ export abstract class SelfModifyingText extends LitElement implements SelfModify
 				.filter((s) => s.letter.length !== 0)
 				.map<TransitionGroupRenderer>((letter, index) => {
 					return {
-						key: letter.letter + String(index),
+						key: letter.letterState === "changing" ? letter.letter + String(index) : String(index),
 						isActive: true,
 						render: ({ isActive, onExited }) =>
-							html`<transition-component @finished=${onExited} ?isActive=${isActive} .duration=${45}>
+							html`<transition-component @finished=${onExited} ?isActive=${isActive} .duration=${100}>
 								<span>${letter.letter}</span>
 							</transition-component>`,
 						onExited: () => {}

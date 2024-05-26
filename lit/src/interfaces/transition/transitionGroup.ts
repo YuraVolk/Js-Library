@@ -1,10 +1,121 @@
-import { LitElement, PropertyValues, TemplateResult, css, html, render } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { LitElement, PropertyValues, TemplateResult, css, html } from "lit";
+import { customElement, property, state } from "lit/decorators.js";
 import { repeat } from "lit/directives/repeat.js";
+import { assertNonUndefined, assertNonUndefinedDevOnly } from "shared/utils/utils";
 
 declare global {
 	interface HTMLElementTagNameMap {
 		"transition-group-component": TransitionGroup;
+	}
+}
+
+class Node<K, V> {
+	prev?: Node<K, V>;
+	next?: Node<K, V>;
+	constructor(
+		public key: K,
+		public value: V
+	) {}
+}
+
+class LinkedHashMap<K, V> {
+	private map = new Map<K, Node<K, V>>();
+	private head?: Node<K, V>;
+	private tail?: Node<K, V>;
+
+	set(key: K, value: V) {
+		if (this.map.has(key)) {
+			const node = this.map.get(key);
+			assertNonUndefinedDevOnly(node);
+			node.value = value;
+		} else {
+			const newNode = new Node(key, value);
+			if (this.tail) {
+				this.tail.next = newNode;
+				newNode.prev = this.tail;
+				this.tail = newNode;
+			} else this.head = this.tail = newNode;
+
+			this.map.set(key, newNode);
+		}
+	}
+
+	has(key: K): boolean {
+		return this.map.has(key);
+	}
+
+	get(key: K): V {
+		const node = this.map.get(key);
+		assertNonUndefined(node);
+		return node.value;
+	}
+
+	delete(key: K) {
+		if (this.map.has(key)) {
+			const node = this.map.get(key);
+			assertNonUndefinedDevOnly(node);
+			if (node.prev) node.prev.next = node.next;
+			if (node.next) node.next.prev = node.prev;
+			if (node === this.head) this.head = node.next;
+			if (node === this.tail) this.tail = node.prev;
+			this.map.delete(key);
+		}
+	}
+
+	insertAt(index: number, key: K, value: V) {
+		if (index < 0 || index > this.map.size) {
+			throw new Error("Index out ouf bounds");
+		} else if (this.map.has(key)) {
+			throw new Error("Key already exists");
+		}
+
+		const newNode = new Node(key, value);
+		if (index === this.map.size) {
+			if (this.tail) {
+				this.tail.next = newNode;
+				newNode.prev = this.tail;
+				this.tail = newNode;
+			} else this.head = this.tail = newNode;
+		} else {
+			let current = this.head;
+			for (let i = 0; i < index; i++) current = current?.next;
+			assertNonUndefined(current);
+
+			newNode.next = current;
+			newNode.prev = current.prev;
+			if (current.prev) {
+				current.prev.next = newNode;
+			} else this.head = newNode;
+			current.prev = newNode;
+		}
+
+		this.map.set(key, newNode);
+	}
+
+	copy(): LinkedHashMap<K, V> {
+		const newMap = new LinkedHashMap<K, V>();
+		let current = this.head;
+		while (current) {
+			newMap.set(current.key, current.value);
+			current = current.next;
+		}
+
+		return newMap;
+	}
+
+	[Symbol.iterator](): Iterator<[K, V], undefined> {
+		let current = this.head;
+		return {
+			next() {
+				if (current) {
+					const value: [K, V] = [current.key, current.value];
+					current = current.next;
+					return { value, done: false };
+				} else {
+					return { done: true };
+				}
+			}
+		};
 	}
 }
 
@@ -16,22 +127,22 @@ export interface TransitionGroupRenderer {
 	render: (props: Omit<this, "render" | "key">) => TemplateResult<1>;
 }
 
-type ChildMapping = Record<string, TransitionGroupRenderer>;
+type ChildMapping = LinkedHashMap<string, TransitionGroupRenderer>;
 
 const getChildMapping = (children: TransitionGroupRenderer[], factory?: (renderer: TransitionGroupRenderer) => TransitionGroupRenderer) => {
 	const mapper = (renderer: TransitionGroupRenderer) => (factory ? factory(renderer) : renderer);
-	const result: ChildMapping = {};
-	for (const child of children) result[child.key] = mapper(child);
+	const result: ChildMapping = new LinkedHashMap();
+	for (const child of children) result.set(child.key, mapper(child));
 	return result;
 };
 
-const mergeChildMappings = (prev: ChildMapping = {}, next: ChildMapping = {}): ChildMapping => {
-	const getValueForKey = (key: string) => (key in next ? next[key] : prev[key]);
+const mergeChildMappings = (prev: ChildMapping = new LinkedHashMap(), next: ChildMapping = new LinkedHashMap()): ChildMapping => {
+	const getValueForKey = (key: string) => (next.has(key) ? next.get(key) : prev.get(key));
 	const nextKeysPending: Record<string, string[]> = {};
 
 	let pendingKeys: string[] = [];
-	for (const prevKey in prev) {
-		if (prevKey in next) {
+	for (const [prevKey] of prev) {
+		if (next.has(prevKey)) {
 			if (pendingKeys.length) {
 				nextKeysPending[prevKey] = pendingKeys;
 				pendingKeys = [];
@@ -39,19 +150,19 @@ const mergeChildMappings = (prev: ChildMapping = {}, next: ChildMapping = {}): C
 		} else pendingKeys.push(prevKey);
 	}
 
-	const childMapping: ChildMapping = {};
-	for (const nextKey in next) {
+	const childMapping: ChildMapping = new LinkedHashMap();
+	for (const [nextKey] of next) {
 		if (nextKey in nextKeysPending) {
 			for (const nextKeyPending of nextKeysPending[nextKey]) {
-				childMapping[nextKeyPending] = getValueForKey(nextKeyPending);
+				childMapping.set(nextKeyPending, getValueForKey(nextKeyPending));
 			}
 		}
 
-		childMapping[nextKey] = getValueForKey(nextKey);
+		childMapping.set(nextKey, getValueForKey(nextKey));
 	}
 
 	for (const key of pendingKeys) {
-		childMapping[key] = getValueForKey(key);
+		childMapping.set(key, getValueForKey(key));
 	}
 
 	return childMapping;
@@ -69,41 +180,38 @@ const getNextChildMapping = (nextChildren: TransitionGroupRenderer[], prevChildM
 	const nextChildMapping = getChildMapping(nextChildren);
 	const children = mergeChildMappings(prevChildMapping, nextChildMapping);
 
-	Object.keys(children).forEach((key) => {
-		const child = children[key];
-		if (typeof child === "undefined") return;
-
-		const hasPrev = key in prevChildMapping;
-		const hasNext = key in nextChildMapping;
-		const prevChild = prevChildMapping[key];
-		const isLeaving = hasPrev && !prevChild.isActive;
+	for (const [key, child] of children) {
+		const hasPrev = prevChildMapping.has(key);
+		const hasNext = nextChildMapping.has(key);
+		const prevChild = hasPrev ? prevChildMapping.get(key) : undefined;
+		const isLeaving = hasPrev && !prevChild?.isActive;
 
 		if (hasNext && (!hasPrev || isLeaving)) {
-			children[key] = {
+			children.set(key, {
 				...child,
 				isActive: true,
 				onExited: () => {
 					handleExited(child);
 				}
-			};
+			});
 		} else if (!hasNext && hasPrev && !isLeaving) {
-			children[key] = {
+			children.set(key, {
 				...child,
 				isActive: false,
 				onExited: () => {
 					handleExited(child);
 				}
-			};
-		} else {
-			children[key] = {
+			});
+		} else if (prevChild) {
+			children.set(key, {
 				...child,
 				isActive: prevChild.isActive,
 				onExited: () => {
 					handleExited(child);
 				}
-			};
+			});
 		}
-	});
+	}
 
 	return children;
 };
@@ -119,34 +227,23 @@ export class TransitionGroup extends LitElement {
 	@property({ type: Array })
 	renderElements: TransitionGroupRenderer[] = [];
 
+	@state()
+	private _children: ChildMapping = new LinkedHashMap();
 	private _firstRender = true;
-	private _children: ChildMapping = {};
+	private _deletedKeys: string[] = [];
 
 	protected createRenderRoot(): HTMLElement | DocumentFragment {
 		return this;
 	}
 
-	private triggerRerender() {
-		this.requestUpdate();
-		/*render(
-			repeat(
-				values,
-				(_, i) => childrenValues[i].key,
-				(value) => value
-			),
-			this
-		);*/
-	}
-
 	private handleExited(child: TransitionGroupRenderer) {
 		const currentChildMapping = getChildMapping(this.renderElements);
-		if (child.key in currentChildMapping) return;
+		if (currentChildMapping.has(child.key)) return;
 
 		if (this.isConnected) {
-			const children = { ...this._children };
-			delete children[child.key];
-			this._children = children;
-			this.triggerRerender();
+			this._deletedKeys.push(child.key);
+			this._children.delete(child.key);
+			this.requestUpdate();
 		}
 	}
 
@@ -158,26 +255,24 @@ export class TransitionGroup extends LitElement {
 					this._children = getInitialChildMapping(this.renderElements, handleExited);
 					this._firstRender = false;
 				} else {
-					this._children = getNextChildMapping(this.renderElements, { ...this._children }, handleExited);
+					this._children = getNextChildMapping(this.renderElements, this._children.copy(), handleExited);
 				}
 
-				this.triggerRerender();
 				break;
 			}
 		}
 	}
 
-	protected firstUpdated() {
-		this.triggerRerender();
-	}
-
 	protected render(): unknown {
-		const childrenValues = Object.values(this._children);
-		const values = childrenValues.map(({ render, onExited, isActive }) => {
-			return render({ onExited, isActive });
+		const values = [...this._children].map(([, { render, onExited, isActive, key }]) => {
+			return [key, render({ onExited, isActive })] as const;
 		});
 
-		console.log(values.map((value) => value.values[3]).join(""));
-		return values;
+		console.log(values.map((value) => value[1].values[3]).join(""));
+		return html`${repeat(
+			values,
+			([key]) => key,
+			([, value]) => value
+		)}`;
 	}
 }

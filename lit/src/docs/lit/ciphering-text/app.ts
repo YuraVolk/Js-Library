@@ -3,7 +3,6 @@ import "../../../components/litEntry";
 import "../../../global.css";
 import { customElement } from "lit/decorators.js";
 import { LitElement, css, html } from "lit";
-import "../../../interfaces/transition/transitionGroup";
 
 import("../header");
 import("../sidebar");
@@ -16,11 +15,38 @@ import("../../../components/ciphering-text/cipheringText")
 					...CipheringTextComponent.styles,
 					css`
 						span {
-							transition: all 50ms ease-in-out;
+							display: inline-block;
+							overflow: hidden;
+							font-size: 24px;
+							line-height: 56px;
+							white-space: pre;
+							transition: all 0.1s ease;
+							min-width: 0;
+							max-width: 0;
 						}
 
-						.active {
-							color: #e3caca;
+						transition-component {
+							font-size: 0;
+						}
+
+						.leave-active {
+							max-width: 1ch;
+							min-width: 1ch;
+						}
+
+						.leave {
+							max-width: 0;
+							min-width: 0;
+						}
+
+						.enter {
+							max-width: 1ch;
+							min-width: 1ch;
+						}
+
+						.enter-active {
+							max-width: 0;
+							min-width: 0;
 						}
 					`
 				];
@@ -34,7 +60,11 @@ import("../../../components/ciphering-text/cipheringText")
 @customElement("ciphering-text-application-example-1")
 export class CipheringTextApplicationExample1 extends LitElement {
 	render() {
-		return html`<ciphering-text-component .repetitions=${3} .strings=${["Carousel Accepts", "Now this is different"]}></ciphering-text-component>`;
+		return html`<ciphering-text-component
+			.strings=${['Hello', 'World', 'New Text', 'Something else']}
+			.typingSpeed=${45}
+			.characters=${'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')}
+		></ciphering-text-component>`;
 	}
 }
 
