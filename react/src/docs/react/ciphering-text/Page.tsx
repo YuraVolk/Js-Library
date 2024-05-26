@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import "./Page.css";
+import classes from "./Page.module.css";
 import { CipheringText } from "../../../components/ciphering-text/CipheringText";
 
 const Page = () => {
@@ -29,11 +29,43 @@ const Page = () => {
 				<li>characters: an optional configuration prop that is passed as an array of strings. It contains all ciphering characters.</li>
 			</ul>
 			<p>An actively ciphering letter is given the active class. Here you can see a ciphering text with two phrases in action:</p>
-			<CipheringText strings={strings.first} repetitions={Infinity}></CipheringText>
+			<CipheringText className={classes["ciphering-text"]} strings={strings.first} repetitions={Infinity}>
+				{(letter, i) => (
+					<span
+						key={`${letter.letter}-${String(i)}`}
+						className={`${classes["ciphering-text__span"]} ${letter.letterState === "changing" ? classes.active : ""}`}
+					>
+						{letter.letter}
+					</span>
+				)}
+			</CipheringText>
 			<p>Here is another example of it animating Hello and World phrases:</p>
-			<CipheringText strings={strings.second} interval={2000} repetitions={Infinity}></CipheringText>
+			<CipheringText className={classes["ciphering-text"]} strings={strings.second} interval={2000} repetitions={Infinity}>
+				{(letter, i) => (
+					<span
+						key={`${letter.letter}-${String(i)}`}
+						className={`${classes["ciphering-text__span"]} ${letter.letterState === "changing" ? classes.active : ""}`}
+					>
+						{letter.letter}
+					</span>
+				)}
+			</CipheringText>
 			<p>Here is an example with custom characters:</p>
-			<CipheringText strings={strings.third} repetitions={Infinity} characters={"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")}></CipheringText>
+			<CipheringText
+				className={classes["ciphering-text"]}
+				strings={strings.third}
+				repetitions={Infinity}
+				characters={"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")}
+			>
+				{(letter, i) => (
+					<span
+						key={`${letter.letter}-${String(i)}`}
+						className={`${classes["ciphering-text__span"]} ${letter.letterState === "changing" ? classes.active : ""}`}
+					>
+						{letter.letter}
+					</span>
+				)}
+			</CipheringText>
 			<p>
 				In this example, the Ciphering Text Component is configured to use custom characters for ciphering the text. The characters are set
 				to "ABCDEFGHIJKLMNOPQRSTUVWXYZ", which means the ciphered text will only contain uppercase letters.
