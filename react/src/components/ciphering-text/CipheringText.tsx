@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from "react";
-import { ModifyingTextContext, useSelfModifyingText } from "../../interfaces/hooks/useSelfModifyingText";
+import { ModifyingTextContext, SelfModifyingText, SelfModifyingTextProps, useSelfModifyingText } from "../../interfaces/hooks/useSelfModifyingText";
 import { LetterState, SplitTextCallback, TriggerTextAnimationCallback, splitTextAlgorithm } from "shared/interfaces/selfModifyingText";
 import { CipheringTextConfiguration } from "shared/component/cipheringText";
 
@@ -38,8 +38,9 @@ export const CipheringText = ({
 	repetitions = 1,
 	interval = 3000,
 	typingSpeed = 45,
+	strings,
 	...props
-}: CipheringTextConfiguration) => {
+}: CipheringTextConfiguration & SelfModifyingTextProps) => {
 	const element = useRef<HTMLPreElement | null>(null);
 
 	const cipherLetter = useCallback(
@@ -118,7 +119,7 @@ export const CipheringText = ({
 	);
 
 	const currentTextValue = useSelfModifyingText({
-		strings: props.strings,
+		strings,
 		repetitions,
 		interval,
 		typingSpeed,
@@ -126,13 +127,5 @@ export const CipheringText = ({
 		triggerTextAnimation
 	});
 
-	return (
-		<pre ref={element}>
-			{currentTextValue.map((letter, i) => (
-				<span key={`${letter.letter}-${String(i)}`}>
-					{letter.letter}
-				</span>
-			))}
-		</pre>
-	);
+	return <SelfModifyingText ref={element} currentTextValue={currentTextValue} {...props} />;
 };

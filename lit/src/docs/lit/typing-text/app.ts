@@ -62,6 +62,7 @@ export class TypingTextApplicationExample2 extends LitElement {
 			}
 		}
 	`;
+	
 	render() {
 		return html`<typing-text-component
 			class="typing-text"
