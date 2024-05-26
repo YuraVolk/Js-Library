@@ -1,4 +1,4 @@
-import { LitElement, PropertyValues, TemplateResult, css, html } from "lit";
+import { LitElement, PropertyValues, TemplateResult, css, html, render } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { repeat } from "lit/directives/repeat.js";
 import { assertNonUndefined, assertNonUndefinedDevOnly } from "shared/utils/utils";
@@ -232,10 +232,6 @@ export class TransitionGroup extends LitElement {
 	private _firstRender = true;
 	private _deletedKeys: string[] = [];
 
-	protected createRenderRoot(): HTMLElement | DocumentFragment {
-		return this;
-	}
-
 	private handleExited(child: TransitionGroupRenderer) {
 		const currentChildMapping = getChildMapping(this.renderElements);
 		if (currentChildMapping.has(child.key)) return;
@@ -268,11 +264,15 @@ export class TransitionGroup extends LitElement {
 			return [key, render({ onExited, isActive })] as const;
 		});
 
-		console.log(values.map((value) => value[1].values[3]).join(""));
-		return html`${repeat(
-			values,
-			([key]) => key,
-			([, value]) => value
-		)}`;
+		render(
+			repeat(
+				values,
+				([key]) => key,
+				([, value]) => value
+			),
+			this
+		);
+		
+		return html`<slot></slot>`;
 	}
 }

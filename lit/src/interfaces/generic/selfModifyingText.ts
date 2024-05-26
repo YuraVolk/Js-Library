@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html, css, TemplateResult, render } from "lit";
 import { property, state } from "lit/decorators.js";
 import {
 	LetterSettings,
@@ -12,9 +12,18 @@ import {
 import "../transition/transitionGroup";
 import "../transition/transition";
 import { TransitionGroupRenderer } from "../transition/transitionGroup";
+import { assertNonUndefinedDevOnly } from "shared/utils/utils";
+import { map } from "lit/directives/map.js";
 
 export type TriggerTextParams = Parameters<TriggerTextAnimationCallback<ModifyingTextContext>>[0];
 export type SplitTextParams = Parameters<SplitTextCallback<ModifyingTextContext>>[0];
+export type SelfModifyingTextRenderer = (
+	letter: LetterSettings,
+	index: number
+) => {
+	key: string;
+	value: TemplateResult<1>;
+};
 
 export abstract class SelfModifyingText extends LitElement implements SelfModifyingTextInterface<ModifyingTextContext> {
 	static styles = [
@@ -33,6 +42,10 @@ export abstract class SelfModifyingText extends LitElement implements SelfModify
 	strings: string[] = [];
 	@property({ type: Number })
 	repetitions = Infinity;
+	@property({ type: Number })
+	duration?: number;
+	@property({ attribute: false })
+	renderElements?: SelfModifyingTextRenderer;
 
 	abstract interval: number;
 	abstract typingSpeed: number;
@@ -70,20 +83,38 @@ export abstract class SelfModifyingText extends LitElement implements SelfModify
 	}
 
 	render() {
-		return html`<transition-group-component
-			.renderElements=${this._currentTextValue
-				.filter((s) => s.letter.length !== 0)
-				.map<TransitionGroupRenderer>((letter, index) => {
+		if (this.duration && this.renderElements) {
+			const transitionGroup = html`<transition-group-component
+				.renderElements=${this._currentTextValue.map<TransitionGroupRenderer>((letter, index) => {
+					assertNonUndefinedDevOnly(this.renderElements);
+					assertNonUndefinedDevOnly(this.duration);
+					const { key, value } = this.renderElements(letter, index);
+					const duration = this.duration;
+
 					return {
-						key: letter.letterState === "changing" ? letter.letter + String(index) : String(index),
+						key,
 						isActive: true,
 						render: ({ isActive, onExited }) =>
-							html`<transition-component @finished=${onExited} ?isActive=${isActive} .duration=${100}>
-								<span>${letter.letter}</span>
+							html`<transition-component @finished=${onExited} ?isActive=${isActive} .duration=${duration}>
+								${value}
 							</transition-component>`,
 						onExited: () => {}
 					};
 				})}
-		></transition-group-component>`;
+			></transition-group-component>`;
+
+			render(transitionGroup, this);
+			return html`<slot></slot>`;
+		} else if (this.renderElements) {
+			const elements = this._currentTextValue.map((letter, index) => {
+				assertNonUndefinedDevOnly(this.renderElements);
+				return this.renderElements(letter, index).value;
+			});
+
+			render(elements, this);
+			return html`<slot></slot>`;
+		} else {
+			return html`${map(this._currentTextValue, (letter) => html`<span>${letter.letter}</span>`)}`;
+		}
 	}
 }
