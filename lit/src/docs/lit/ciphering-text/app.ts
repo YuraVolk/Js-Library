@@ -9,50 +9,7 @@ import("../header");
 import("../sidebar");
 import("../../../components/ciphering-text/cipheringText")
 	.then(({ CipheringTextComponent }) => {
-		window.customElements.define(
-			"ciphering-text-component",
-			class extends CipheringTextComponent {
-				static styles = [
-					...CipheringTextComponent.styles,
-					css`
-						span {
-							display: inline-block;
-							overflow: hidden;
-							font-size: 24px;
-							line-height: 56px;
-							white-space: pre;
-							transition: all 0.1s ease;
-							min-width: 0;
-							max-width: 0;
-						}
-
-						transition-component {
-							font-size: 0;
-						}
-
-						.leave-active {
-							max-width: 1ch;
-							min-width: 1ch;
-						}
-
-						.leave {
-							max-width: 0;
-							min-width: 0;
-						}
-
-						.enter {
-							max-width: 1ch;
-							min-width: 1ch;
-						}
-
-						.enter-active {
-							max-width: 0;
-							min-width: 0;
-						}
-					`
-				];
-			}
-		);
+		window.customElements.define("ciphering-text-component", CipheringTextComponent);
 	})
 	.catch((e: unknown) => {
 		console.trace(e);
