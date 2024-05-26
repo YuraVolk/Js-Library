@@ -37,7 +37,7 @@ export class Transition extends LitElement {
 		this._transitionState = this.isActive ? TransitionState.ENTERED : TransitionState.EXITED;
 	}
 
-	protected obtainRealElement() {
+	protected obtainRealElement(): Element | undefined {
 		const slot = this._slot.value;
 		if (!slot) {
 			return;
@@ -55,11 +55,11 @@ export class Transition extends LitElement {
 			this._transitionState = transitionState;
 			this._didRequestUpdate = true;
 			this.requestUpdate();
+			this.timeoutId = undefined;
 		}, this.duration);
 	}
 
 	protected async updateElementStyles() {
-		window.clearTimeout(this.timeoutId);
 		if (!this._didRequestUpdate) {
 			await this.updateComplete;
 		} else this._didRequestUpdate = false;
@@ -101,6 +101,10 @@ export class Transition extends LitElement {
 
 	disconnectedCallback(): void {
 		super.disconnectedCallback();
+		if (this.timeoutId !== undefined) {
+			this.dispatchEvent(new CustomEvent('finished'));
+		}
+		
 		window.clearTimeout(this.timeoutId);
 	}
 
