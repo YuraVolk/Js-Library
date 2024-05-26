@@ -1,9 +1,9 @@
 import type { RebuildingTextComponent } from "lit/src/components/rebuilding-text/rebuildingText";
 import "../../../components/litEntry";
 import "../../../global.css";
-import "./style.css";
-import { LitElement, html } from "lit";
+import { LitElement, css, html } from "lit";
 import { customElement } from "lit/decorators.js";
+import type { SelfModifyingTextRenderer } from "lit/src/interfaces/generic/selfModifyingText";
 
 import("../header");
 import("../sidebar");
@@ -41,11 +41,69 @@ export class RebuildingTextApplicationExample3 extends LitElement {
 	}
 }
 
+@customElement("rebuilding-text-application-example-4")
+export class RebuildingTextApplicationExample4 extends LitElement {
+	static styles = css`
+		span {
+			display: inline-block;
+			overflow: hidden;
+			font-size: 24px;
+			line-height: 56px;
+			white-space: nowrap;
+			transition: all 175ms ease;
+		}
+
+		transition-component {
+			font-size: 0;
+		}
+
+		.rebuilding-text > span > span {
+			min-width: 0;
+			max-width: 0;
+		}
+
+		.leave-active > span {
+			max-width: 1ch;
+			min-width: 1ch;
+		}
+
+		.leave > span {
+			max-width: 0;
+			min-width: 0;
+		}
+
+		.enter > span {
+			max-width: 1ch;
+			min-width: 1ch;
+		}
+
+		.enter-active > span {
+			max-width: 0;
+			min-width: 0;
+		}
+	`;
+
+	render() {
+		return html`<rebuilding-text-component
+			class="rebuilding-text"
+			.strings=${["Test text", "The new resulting text", "Small"]}
+			.renderElements=${((letter, index) => ({
+				key: letter.letterState !== "idle" ? letter.letter + String(index) : String(index),
+				value: html`<span class="leave">
+					<span>${letter.letter}</span>
+				</span>`
+			})) satisfies SelfModifyingTextRenderer}
+			.duration=${175}
+		></rebuilding-text-component>`;
+	}
+}
+
 declare global {
 	interface HTMLElementTagNameMap {
 		"rebuilding-text-component": RebuildingTextComponent;
 		"rebuilding-text-application-example-1": RebuildingTextApplicationExample1;
 		"rebuilding-text-application-example-2": RebuildingTextApplicationExample2;
 		"rebuilding-text-application-example-3": RebuildingTextApplicationExample3;
+		"rebuilding-text-application-example-4": RebuildingTextApplicationExample4;
 	}
 }
