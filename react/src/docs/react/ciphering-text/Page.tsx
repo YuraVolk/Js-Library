@@ -70,6 +70,24 @@ const Page = () => {
 				In this example, the Ciphering Text Component is configured to use custom characters for ciphering the text. The characters are set
 				to "ABCDEFGHIJKLMNOPQRSTUVWXYZ", which means the ciphered text will only contain uppercase letters.
 			</p>
+			<CipheringText
+				className={classes["ciphering-text"]}
+				strings={strings.third}
+				repetitions={Infinity}
+				characters={"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")}
+				typingSpeed={45}
+				duration={100}
+				classNames={{ ...classes }}
+			>
+				{(letter, i) => (
+					<span
+						key={letter.letterState === "changing" ? `${letter.letter}-${String(i)}` : String(i)}
+						className={`${classes["ciphering-text__span"]} ${classes["ciphering-text__span--animated"]} ${classes.initial}`}
+					>
+						{letter.letter}
+					</span>
+				)}
+			</CipheringText>
 		</main>
 	);
 };
