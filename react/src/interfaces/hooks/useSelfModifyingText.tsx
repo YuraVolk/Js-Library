@@ -1,4 +1,4 @@
-import { useRef, useState, useMemo, useEffect, forwardRef } from "react";
+import { useRef, useState, useMemo, useEffect, forwardRef, Ref } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import {
 	ModifyingTextContext as RootTextContext,
@@ -70,48 +70,66 @@ export function useSelfModifyingText(settings: SelfModifyingTextInterface<Modify
 
 interface SelfModifyingTextBaseProps extends GenericReactComponentProps {
 	currentTextValue: LetterSettings[];
-	children?(letter: LetterSettings, i: number): JSX.Element;
+	ref: SelfModifyingTextRef;
 }
 
-interface SelfModifyingTextTransitionProps extends Required<SelfModifyingTextBaseProps> {
-	classNames: string | CSSTransitionClassNames | undefined;
+interface SelfModifyingTextRenderProps extends SelfModifyingTextBaseProps {
+	children(letterSettings: LetterSettings, i: number): JSX.Element;
+}
+
+interface SelfModifyingTextTransitionProps extends Required<SelfModifyingTextRenderProps> {
 	duration: number;
+	classNames?: string | CSSTransitionClassNames;
 }
 
-export type SelfModifyingTextProps = Omit<SelfModifyingTextBaseProps | SelfModifyingTextTransitionProps, "currentTextValue">;
-export const SelfModifyingText = forwardRef<HTMLPreElement | null, SelfModifyingTextBaseProps | SelfModifyingTextTransitionProps>(
-	(props, ref) => {
-		if (props.children && "duration" in props) {
-			return (
-				<TransitionGroup component="pre" className={props.className}>
-					{props.currentTextValue.map((letterSettings, i) => {
-						const value = props.children(letterSettings, i);
+const verifyRenderProps = (props: SelfModifyingTextProps): props is SelfModifyingTextRenderProps => "children" && !("duration" in props);
+const verifyTransitionProps = (props: SelfModifyingTextProps): props is SelfModifyingTextTransitionProps =>
+	"children" in props && "duration" in props;
 
-						return (
-							<CSSTransition key={value.key} timeout={props.duration} classNames={props.classNames}>
-								{value}
-							</CSSTransition>
-						);
-					})}
-				</TransitionGroup>
-			);
-		} else if (props.children) {
-			return (
-				<pre className={props.className} ref={ref}>
-					{props.currentTextValue.map((letterSettings, i) => {
-						assertNonUndefinedDevOnly(props.children);
-						return props.children(letterSettings, i);
-					})}
-				</pre>
-			);
-		} else {
-			return (
-				<pre className={props.className} ref={ref}>
-					{props.currentTextValue.map((letterSettings, i) => (
-						<span key={letterSettings.letter + String(i)}>{letterSettings.letter}</span>
-					))}
-				</pre>
-			);
-		}
+export type SelfModifyingTextProps =
+	| Omit<SelfModifyingTextBaseProps, "currentTextValue" | "ref">
+	| Omit<SelfModifyingTextRenderProps, "currentTextValue" | "ref">
+	| Omit<SelfModifyingTextTransitionProps, "currentTextValue" | "ref">;
+type SelfModifyingTextRef = React.LegacyRef<HTMLPreElement> | null;
+function CSelfModifyingText(props: SelfModifyingTextBaseProps, ref: SelfModifyingTextRef): JSX.Element;
+function CSelfModifyingText(props: SelfModifyingTextRenderProps, ref: SelfModifyingTextRef): JSX.Element;
+function CSelfModifyingText(props: SelfModifyingTextTransitionProps, ref: SelfModifyingTextRef): JSX.Element;
+function CSelfModifyingText(
+	props: SelfModifyingTextBaseProps | SelfModifyingTextRenderProps | SelfModifyingTextTransitionProps,
+	ref: SelfModifyingTextRef
+) {
+	if (verifyTransitionProps(props)) {
+		return (
+			<TransitionGroup component="pre" className={props.className}>
+				{props.currentTextValue.map((letterSettings, i) => {
+					const value = props.children(letterSettings, i);
+
+					return (
+						<CSSTransition appear key={value.key} timeout={props.duration} classNames={props.classNames}>
+							{{ ...value, key: null }}
+						</CSSTransition>
+					);
+				})}
+			</TransitionGroup>
+		);
+	} else if (verifyRenderProps(props)) {
+		return (
+			<pre className={props.className} ref={ref}>
+				{props.currentTextValue.map((letterSettings, i) => {
+					assertNonUndefinedDevOnly(props.children);
+					return props.children(letterSettings, i);
+				})}
+			</pre>
+		);
+	} else {
+		return (
+			<pre className={props.className} ref={ref}>
+				{props.currentTextValue.map((letterSettings, i) => (
+					<span key={letterSettings.letter + String(i)}>{letterSettings.letter}</span>
+				))}
+			</pre>
+		);
 	}
-);
+}
+
+export const SelfModifyingText = forwardRef(CSelfModifyingText) as unknown as typeof CSelfModifyingText;
