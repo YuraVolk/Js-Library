@@ -3,3 +3,32 @@
 	line-height: 54px;
 	white-space: nowrap;
 }
+
+.rebuilding-text-span {
+	display: inline-block;
+	overflow: hidden;
+	transition: all 175ms ease;
+	white-space: preserve;
+}
+
+.appear .rebuilding-text-span--direct,
+.enter .rebuilding-text-span--direct {
+	max-width: 0;
+	min-width: 0;
+}
+
+.enterActive .rebuilding-text-span--direct,
+.appearActive .rebuilding-text-span--direct {
+	max-width: 1ch;
+	min-width: 1ch;
+}
+
+.exit .rebuilding-text-span--direct {
+	max-width: 1ch;
+	min-width: 1ch;
+}
+
+.exitActive .rebuilding-text-span--direct {
+	max-width: 0;
+	min-width: 0;
+}

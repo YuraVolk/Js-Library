@@ -1,5 +1,8 @@
 <template>
-  <TransitionGroup tag="pre">
+  <TransitionGroup
+    tag="pre"
+    @before-leave="beforeLeave"
+  >
     <slot :letters="currentTextValue">
       <span
         v-for="letter, i in currentTextValue"
@@ -26,13 +29,22 @@ const triggerTextAnimation: TriggerTextAnimationCallback<ModifyingTextContext> =
 	for (let i = 0; i < steps.length; i++) {
 		setTimeout(() => {
 			context.currentTextValue.value = steps[i]
-				.filter<LetterSettings>((s): s is LetterSettings => Boolean(s));
+				.filter<LetterSettings>((s): s is LetterSettings => Boolean(s?.letter));
 			if (i === steps.length - 1) {
 				setTimeout(() => {
 					context.onInterval();
 				}, props.interval);
 			}
 		}, props.typingSpeed * i);
+	}
+};
+
+const beforeLeave = (el: Element) => {
+	if (el instanceof HTMLElement) {
+		el.style.left = `0`
+		el.style.top = `0`
+		el.style.width = ''
+		el.style.height = ''
 	}
 };
 
