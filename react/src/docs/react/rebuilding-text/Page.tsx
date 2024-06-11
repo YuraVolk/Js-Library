@@ -37,6 +37,21 @@ const Page = () => {
 				typingSpeed={300}
 				className={styles["rebuilding-text"]}
 			/>
+			<p>In addition, you can use Transition Group component in order to create more powerful animations:</p>
+			<RebuildingText
+				strings={["Test text", "The new resulting text", "Small"]}
+				repetitions={Infinity}
+				typingSpeed={75}
+				className={styles["rebuilding-text"]}
+				classNames={styles}
+				duration={175}
+			>
+				{(letterSettings, i) => (
+					<span key={letterSettings.letter !== "idle" ? letterSettings.letter + String(i) : i} className={styles["rebuilding-text-span"]}>
+						<span className={`${styles["rebuilding-text-span"]} ${styles["rebuilding-text-span--direct"]}`}>{letterSettings.letter}</span>
+					</span>
+				)}
+			</RebuildingText>
 		</main>
 	);
 };

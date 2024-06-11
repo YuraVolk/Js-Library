@@ -82,19 +82,27 @@ const RebuildingTextComponent = defineAsyncComponent(() => import("../../../comp
 .rebuilding-text span {
   display: inline-block;
   overflow: hidden;
-  transition: all 175ms ease;
+  transition: all 300ms ease;
   white-space: preserve;
 }
 
-.list-enter-active > span,
+.list-enter-active > span {
+	max-width: 0;
+	min-width: 0;
+}
+
+.list-enter-to > span {
+	max-width: 1ch;
+	min-width: 1ch;
+}
+
 .list-leave-active > span {
 	max-width: 1ch;
 	min-width: 1ch;
 }
 
-.list-enter-from > span,
 .list-leave-to > span {
-  max-width: 0;
-  min-width: 0;
+	max-width: 0;
+	min-width: 0;
 }
 </style>

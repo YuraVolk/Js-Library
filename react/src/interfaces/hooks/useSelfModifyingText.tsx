@@ -82,7 +82,8 @@ interface SelfModifyingTextTransitionProps extends Required<SelfModifyingTextRen
 	classNames?: string | CSSTransitionClassNames;
 }
 
-const verifyRenderProps = (props: SelfModifyingTextProps): props is SelfModifyingTextRenderProps => "children" && !("duration" in props);
+const verifyRenderProps = (props: SelfModifyingTextProps): props is SelfModifyingTextRenderProps =>
+	"children" in props && !("duration" in props);
 const verifyTransitionProps = (props: SelfModifyingTextProps): props is SelfModifyingTextTransitionProps =>
 	"children" in props && "duration" in props;
 

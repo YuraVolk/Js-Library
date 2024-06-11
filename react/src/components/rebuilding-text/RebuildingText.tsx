@@ -1,6 +1,11 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import { LetterSettings, ModifyingTextConfiguration, TriggerTextAnimationCallback } from "shared/interfaces/selfModifyingText";
-import { ModifyingTextContext, useSelfModifyingText } from "../../interfaces/hooks/useSelfModifyingText";
+import {
+	ModifyingTextContext,
+	SelfModifyingText,
+	SelfModifyingTextProps,
+	useSelfModifyingText
+} from "../../interfaces/hooks/useSelfModifyingText";
 import { createRebuildingTextSteps } from "shared/component/rebuildingText";
 import { GenericReactComponentProps } from "../../interfaces/generic/classNameFallthrough";
 
@@ -8,8 +13,9 @@ export const RebuildingText = ({
 	repetitions = 1,
 	interval = 2500,
 	typingSpeed = 75,
+	strings,
 	...props
-}: ModifyingTextConfiguration & GenericReactComponentProps) => {
+}: ModifyingTextConfiguration & GenericReactComponentProps & SelfModifyingTextProps) => {
 	const triggerTextAnimation = useCallback<TriggerTextAnimationCallback<ModifyingTextContext>>(
 		({ context, fromText, toText }) => {
 			const steps = createRebuildingTextSteps(fromText, toText);
@@ -29,20 +35,12 @@ export const RebuildingText = ({
 	);
 
 	const currentTextValue = useSelfModifyingText({
-		strings: props.strings,
+		strings,
 		repetitions,
 		interval,
 		typingSpeed,
 		triggerTextAnimation
 	});
 
-	return (
-		<pre className={props.className}>
-			{currentTextValue.map((letter, i) => (
-				<span key={`${letter.letter}-${String(i)}`}>
-					{letter.letter}
-				</span>
-			))}
-		</pre>
-	);
+	return <SelfModifyingText ref={useRef(null)} currentTextValue={currentTextValue} {...props} />;
 };
