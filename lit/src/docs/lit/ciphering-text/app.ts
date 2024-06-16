@@ -106,6 +106,16 @@ export class CipheringTextApplicationExample4 extends LitElement {
 			min-width: 0;
 		}
 
+		.appear-active {
+			max-width: 0;
+			min-width: 0;
+		}
+
+		.appear {
+			max-width: 1ch;
+			min-width: 1ch;
+		}
+
 		.enter {
 			max-width: 1ch;
 			min-width: 1ch;
