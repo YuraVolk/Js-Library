@@ -67,6 +67,16 @@ export class RebuildingTextApplicationExample4 extends LitElement {
 			min-width: 0;
 		}
 
+		.appear-active > span {
+			max-width: 0;
+			min-width: 0;
+		}
+
+		.appear > span {
+			max-width: 1ch;
+			min-width: 1ch;
+		}
+
 		.enter > span {
 			max-width: 1ch;
 			min-width: 1ch;
@@ -89,7 +99,7 @@ export class RebuildingTextApplicationExample4 extends LitElement {
 				</span>`
 			})) satisfies SelfModifyingTextRenderer}
 			.duration=${175}
-			.typingSpeed=${70}
+			.typingSpeed=${50}
 		></rebuilding-text-component>`;
 	}
 }

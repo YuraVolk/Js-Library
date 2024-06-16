@@ -60,6 +60,7 @@ export class Transition extends LitElement {
 	}
 
 	protected async updateElementStyles() {
+		const hasUpdated = this.hasUpdated;
 		if (!this._didRequestUpdate) {
 			await this.updateComplete;
 		} else this._didRequestUpdate = false;
@@ -75,6 +76,12 @@ export class Transition extends LitElement {
 				.filter(([key]) => key !== state)
 				.map(([, value]) => value)
 		);
+
+		if (!hasUpdated) {
+			element.classList.add("appear-active");
+			element.scrollTop;
+			element.classList.add("appear");
+		}
 
 		switch (this._transitionState) {
 			case TransitionState.ENTERING:

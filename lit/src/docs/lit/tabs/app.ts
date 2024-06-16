@@ -75,8 +75,13 @@ export class TabsApplicationExample1 extends LitElement {
 			text-transform: uppercase;
 		}
 
+		.tab.leave {
+			display: none;
+		}
+
 		.tab.leave-active {
 			position: absolute;
+			display: block;
 			top: 0;
 			bottom: 0;
 			width: 0;

@@ -10,5 +10,7 @@ export const defaultClassNames = () => ({
     [TransitionState.ENTERING]: "enter-active",
     [TransitionState.EXITING]: "leave-active",
     [TransitionState.ENTERED]: "enter",
-    [TransitionState.EXITED]: "leave"
+    [TransitionState.EXITED]: "leave",
+    APPEARING: "appear-active",
+    APPEARED: "appear"
 });
