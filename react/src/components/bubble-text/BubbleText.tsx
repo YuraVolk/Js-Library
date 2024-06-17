@@ -42,7 +42,7 @@ export const BubbleText = ({
 						letterState: toTextArray[i] === undefined || fromTextArray[i] === undefined ? "finished" : "changing"
 					};
 
-					context.setCurrentTextValue([...fromTextArray].filter<LetterSettings>((s): s is LetterSettings => Boolean(s)));
+					context.setCurrentTextValue(fromTextArray.filter<LetterSettings>((s): s is LetterSettings => Boolean(s)));
 
 					if (i === fromTextArray.length - 1) {
 						setTimeout(() => {
