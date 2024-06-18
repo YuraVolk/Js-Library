@@ -13,6 +13,10 @@
 			"link": "../backface-carousel"
 		},
 		{
+			"name": "Bubble Text",
+			"link": "../bubble-text"
+		},
+		{
 			"name": "Ciphering Text",
 			"link": "../ciphering-text"
 		},

@@ -22,6 +22,7 @@
       :repetitions="Infinity"
       :typing-speed="175"
       :duration="175"
+      name="list"
     >
       <span
         v-for="letter, i in letters"
@@ -73,23 +74,15 @@ const BubbleTextComponent = defineAsyncComponent(() => import("../../../componen
 	transition: all 175ms linear;
 }
 
-.list-enter-from {
-    max-width: 0;
-    min-width: 0;
+.list-enter-to,
+.list-leave-from {
+  max-width: 1ch;
+  min-width: 1ch;
 }
 
-.list-enter-active {
-    max-width: 1ch;
-    min-width: 1ch;
-}
-
-.list-exit-from {
-    max-width: 1ch;
-    min-width: 1ch;;
-}
-
-.list-exit-active {
-    max-width: 0;
-    min-width: 0
+.list-enter-from,
+.list-leave-to {
+  max-width: 0;
+  min-width: 0
 }
 </style>
