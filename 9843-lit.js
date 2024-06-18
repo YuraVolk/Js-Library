@@ -1,4 +1,4 @@
-"use strict";(self.webpackChunkjs_lit_components_library=self.webpackChunkjs_lit_components_library||[]).push([[9843],{2224:(e,t,i)=>{i.r(t),i.d(t,{SidebarComponent:()=>o});const n=JSON.parse('{"components":[{"name":"Accordion","link":"../accordion"},{"name":"Autocomplete Input","link":"../autocomplete-list"},{"name":"Backface Carousel","link":"../backface-carousel"},{"name":"Ciphering Text","link":"../ciphering-text"},{"name":"Color Picker","link":"../color-picker"},{"name":"Countdown","link":"../countdown"},{"name":"Custom Select","link":"../custom-select"},{"name":"Custom Video","link":"../custom-video"},{"name":"Floating Panel","link":"../floating-panel"},{"name":"Gallery Carousel","link":"../gallery-carousel"},{"name":"Image Comparator","link":"../image-comparator"},{"name":"Magnifier","link":"../magnifier"},{"name":"Menu Carousel","link":"../menu-carousel"},{"name":"One Page Scroll","link":"../one-page-scroll"},{"name":"Parallax","link":"../parallax"},{"name":"Perspective Carousel","link":"../perspective-carousel"},{"name":"Popup","link":"../popup"},{"name":"Range Input","link":"../range-input"},{"name":"Rebuilding Text","link":"../rebuilding-text"},{"name":"Scrolling Ad","link":"../scrolling-ad"},{"name":"Sticky Header","link":"../sticky-header"},{"name":"Table Filtering","link":"../table-filtering"},{"name":"Tabs","link":"../tabs"},{"name":"Toast","link":"../toast"},{"name":"Typing Text","link":"../typing-text"},{"name":"Zooming Image","link":"../zooming-image"}]}');var a=i(2618),l=i(4791),r=function(e,t,i,n){var a,l=arguments.length,r=l<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,i):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)r=Reflect.decorate(e,t,i,n);else for(var s=e.length-1;s>=0;s--)(a=e[s])&&(r=(l<3?a(r):l>3?a(t,i,r):a(t,i))||r);return l>3&&r&&Object.defineProperty(t,i,r),r};const s=(0,i(1805).isLocalhostEnvironment)();let o=class extends a.WF{constructor(){super(...arguments),this.activeLink=""}static{this.styles=a.AH`
+"use strict";(self.webpackChunkjs_lit_components_library=self.webpackChunkjs_lit_components_library||[]).push([[9843],{2224:(e,t,i)=>{i.r(t),i.d(t,{SidebarComponent:()=>o});const n=JSON.parse('{"components":[{"name":"Accordion","link":"../accordion"},{"name":"Autocomplete Input","link":"../autocomplete-list"},{"name":"Backface Carousel","link":"../backface-carousel"},{"name":"Bubble Text","link":"../bubble-text"},{"name":"Ciphering Text","link":"../ciphering-text"},{"name":"Color Picker","link":"../color-picker"},{"name":"Countdown","link":"../countdown"},{"name":"Custom Select","link":"../custom-select"},{"name":"Custom Video","link":"../custom-video"},{"name":"Floating Panel","link":"../floating-panel"},{"name":"Gallery Carousel","link":"../gallery-carousel"},{"name":"Image Comparator","link":"../image-comparator"},{"name":"Magnifier","link":"../magnifier"},{"name":"Menu Carousel","link":"../menu-carousel"},{"name":"One Page Scroll","link":"../one-page-scroll"},{"name":"Parallax","link":"../parallax"},{"name":"Perspective Carousel","link":"../perspective-carousel"},{"name":"Popup","link":"../popup"},{"name":"Range Input","link":"../range-input"},{"name":"Rebuilding Text","link":"../rebuilding-text"},{"name":"Scrolling Ad","link":"../scrolling-ad"},{"name":"Sticky Header","link":"../sticky-header"},{"name":"Table Filtering","link":"../table-filtering"},{"name":"Tabs","link":"../tabs"},{"name":"Toast","link":"../toast"},{"name":"Typing Text","link":"../typing-text"},{"name":"Zooming Image","link":"../zooming-image"}]}');var l=i(2618),a=i(4791),r=function(e,t,i,n){var l,a=arguments.length,r=a<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,i):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)r=Reflect.decorate(e,t,i,n);else for(var s=e.length-1;s>=0;s--)(l=e[s])&&(r=(a<3?l(r):a>3?l(t,i,r):l(t,i))||r);return a>3&&r&&Object.defineProperty(t,i,r),r};const s=(0,i(1805).isLocalhostEnvironment)();let o=class extends l.WF{constructor(){super(...arguments),this.activeLink=""}static{this.styles=l.AH`
 		.wrap {
 			mask-image: linear-gradient(to top, transparent 0%, rgb(0, 0, 0) 10%, rgb(0, 0, 0) 100%, transparent 100%);
 			-webkit-mask-image: linear-gradient(to top, transparent 0%, rgb(0, 0, 0) 10%, rgb(0, 0, 0) 100%, transparent 100%);
@@ -113,9 +113,9 @@
 		.list-sublist__item-link:hover {
 			opacity: 0.75;
 		}
-	`}render(){return a.qy`
+	`}render(){return l.qy`
 			<nav class="wrap">
-				${Object.entries(n).map((([e,t])=>a.qy`
+				${Object.entries(n).map((([e,t])=>l.qy`
 						<div class="list">
 							<details class="list-item" open>
 								<summary class="list__heading">
@@ -132,7 +132,7 @@
 								</summary>
 								<div class="list-sublist-wrap">
 									<ul class="list-sublist">
-										${t.map((({name:e,link:t})=>a.qy`<li class="list-sublist__item ${e===this.activeLink?"list-sublist__item--active":""}">
+										${t.map((({name:e,link:t})=>l.qy`<li class="list-sublist__item ${e===this.activeLink?"list-sublist__item--active":""}">
 												<a class="list-sublist__item-link" href="${s?t.replace(/\.\.\//g,"./"):t}">${e}</a>
 											</li>`))}
 									</ul>
@@ -141,4 +141,4 @@
 						</div>
 					`))}
 			</nav>
-		`}};r([(0,l.MZ)(),function(e,t){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(e,t)}("design:type",Object)],o.prototype,"activeLink",void 0),o=r([(0,l.EM)("sidebar-component")],o)}}]);
+		`}};r([(0,a.MZ)(),function(e,t){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(e,t)}("design:type",Object)],o.prototype,"activeLink",void 0),o=r([(0,a.EM)("sidebar-component")],o)}}]);
