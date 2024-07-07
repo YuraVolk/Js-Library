@@ -1,20 +1,34 @@
 <template>
   <slot name="filters" />
-  <TransitionGroup>
-    <slot />
+  <TransitionGroup v-bind="$attrs">
+    <slot
+      :active-filter="activeFilter"
+      :filtered-items="filteredItems"
+    />
   </TransitionGroup>
 </template>
 
-<script setup lang="ts" generic="T">
-import { provide, ref } from 'vue';
+<script setup lang="ts" generic="T, V">
+import { computed, provide, toRef, ref } from 'vue';
 import { activeFilterKey } from "../../interfaces/component/filtering"
 
 const props = defineProps<{
-  filters: T[];
-  defaultFilter: T;
+  activeFilter?: T;
+  items: Array<{
+    filter: T;
+    value: V;
+  }>;
 }>();
+const items = toRef(props.items);
+const activeFilter = ref(props.activeFilter);
 
-const activeFilter = ref(props.defaultFilter)
+const filteredItems = computed(() => {
+  if (activeFilter.value === undefined) {
+    return items.value;
+  }
+
+  return items.value.filter((item) => item.filter === activeFilter.value);
+});
 
 provide(activeFilterKey, activeFilter);
 </script>
