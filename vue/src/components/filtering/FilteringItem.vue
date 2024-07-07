@@ -1,14 +1,16 @@
 <template>
-  <slot v-if="filter === activeFilter" />
+  <div v-if="filter === activeFilter || activeFilter === undefined">
+    <slot />
+  </div>
 </template>
 
-<script setup lang="ts">
-import { Ref, inject, toRef } from 'vue';
+<script setup lang="ts" generic="T">
+import { inject } from 'vue';
 import { activeFilterKey } from '../../interfaces/component/filtering';
 
 defineProps<{
-    filter: unknown;
+  filter: T;
 }>();
 
-const activeFilter = toRef(inject<Ref<unknown>>(activeFilterKey));
+const activeFilter = inject<T>(activeFilterKey);
 </script>
