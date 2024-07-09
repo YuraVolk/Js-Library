@@ -1,0 +1,6 @@
+filtering-application-example-1:not(:defined),
+transition-group-component:not(:defined),
+transition-component:not(:defined),
+filtering-wrapper-component:not(:defined) {
+    visibility: hidden;
+}

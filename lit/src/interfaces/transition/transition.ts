@@ -37,7 +37,7 @@ export class Transition extends LitElement {
 		this._transitionState = this.isActive ? TransitionState.ENTERED : TransitionState.EXITED;
 	}
 
-	protected obtainRealElement(): Element | undefined {
+	obtainRealElement(): Element | undefined {
 		const slot = this._slot.value;
 		if (!slot) {
 			return;

@@ -1,7 +1,9 @@
 import { LitElement, PropertyValues, TemplateResult, css, html, render } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { customElement, property, queryAssignedElements, state } from "lit/decorators.js";
 import { repeat } from "lit/directives/repeat.js";
 import { LinkedHashMap } from "../../utils/linkedHashMap";
+import { Transition } from "./transition";
+import { assertNonUndefinedDevOnly } from "shared/utils/utils";
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -114,13 +116,30 @@ export class TransitionGroup extends LitElement {
 		}
 	`;
 
+	private _renderElements: TransitionGroupRenderer[] = [];
+	private previousRenderElements: TransitionGroupRenderer[] = [];
+
 	@property({ type: Array })
-	renderElements: TransitionGroupRenderer[] = [];
+	set renderElements(value: TransitionGroupRenderer[]) {
+		this.previousRenderElements = this._renderElements;
+		this._renderElements = value;
+	}
+
+	get renderElements() {
+		return this._renderElements;
+	}
+
+	@property({ type: Boolean })
+	animateTransform = false;
 
 	@state()
 	private _children: ChildMapping = new LinkedHashMap();
 	private _firstRender = true;
 	private _deletedKeys: string[] = [];
+	private _positionMap = new WeakMap<HTMLElement, DOMRect>();
+
+	@queryAssignedElements()
+	private _assignedElements!: Transition[];
 
 	private handleExited(child: TransitionGroupRenderer) {
 		const currentChildMapping = getChildMapping(this.renderElements);
@@ -149,6 +168,35 @@ export class TransitionGroup extends LitElement {
 		}
 	}
 
+	private async processAssignedElements() {
+		const elements = this._assignedElements
+			.map((transition) => transition.obtainRealElement())
+			.filter<HTMLElement>((element): element is HTMLElement => element instanceof HTMLElement);
+
+		for (const element of elements) {
+			this._positionMap.set(element, element.getBoundingClientRect());
+		}
+
+		await Promise.all(this._assignedElements.map((element) => element.updateComplete));
+
+		for (const element of elements) {
+			const newPosition = element.getBoundingClientRect();
+			const oldPosition = this._positionMap.get(element);
+			assertNonUndefinedDevOnly(oldPosition);
+
+			const dx = oldPosition.left - newPosition.left;
+			const dy = oldPosition.top - newPosition.top;
+			if (dx || dy) {
+				const styles = element.style;
+				styles.transform = `translate(${String(dx)}px,${String(dy)}px)`;
+				styles.transitionDuration = "0s";
+				element.scrollTop;
+				styles.transitionDuration = "";
+				styles.transform = "";
+			}
+		}
+	}
+
 	protected render(): unknown {
 		const values = [...this._children].map(([, { render, onExited, isActive, key }]) => {
 			return [key, render({ onExited, isActive })] as const;
@@ -162,6 +210,12 @@ export class TransitionGroup extends LitElement {
 			),
 			this
 		);
+
+		if (this.hasUpdated && this.animateTransform) {
+			this.processAssignedElements().catch((e: unknown) => {
+				console.error(e);
+			});
+		}
 
 		return html`<slot></slot>`;
 	}
