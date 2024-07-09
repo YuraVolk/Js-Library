@@ -42,7 +42,6 @@
             v-for="item, i in filteredItems"
             :key="item.value + String(i) + activeFilter"
             class="item"
-            :filter="item.value"
           >
             <div
               class="item-inner"
@@ -114,25 +113,20 @@ const items = shuffle(Array.from({ length: 16 }, (_, i) => ({
   position: absolute;
   margin: 0;
   opacity: 0;
-  transform: scale(0.5) translateY(-80px);
+
 }
 
 .item-enter-to {
   position: relative;
   margin: 0.8rem;
   opacity: 1;
-  transform: scale(1) translateY(0);
-}
 
-.item-leave-from {
-  transform: scale(1) translateY(0);
 }
 
 .item-leave-active {
   position: absolute;
   margin: 0;
   opacity: 0;
-  transform: scale(0.5) translateY(-80px);
 }
 
 .buttons {

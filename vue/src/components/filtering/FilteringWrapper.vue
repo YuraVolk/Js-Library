@@ -11,14 +11,9 @@
 <script setup lang="ts" generic="T, V">
 import { computed, provide, toRef, ref } from 'vue';
 import { activeFilterKey } from "../../interfaces/component/filtering"
+import { FilteringWrapperConfiguration } from "shared/component/filtering";
 
-const props = defineProps<{
-  activeFilter?: T;
-  items: Array<{
-    filter: T;
-    value: V;
-  }>;
-}>();
+const props = defineProps<FilteringWrapperConfiguration<T, V>>();
 const items = toRef(props.items);
 const activeFilter = ref(props.activeFilter);
 
