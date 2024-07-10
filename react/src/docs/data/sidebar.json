@@ -37,6 +37,10 @@
 			"link": "../custom-video"
 		},
 		{
+			"name": "Filtering",
+			"link": "../filtering"
+		},
+		{
 			"name": "Floating Panel",
 			"link": "../floating-panel"
 		},
