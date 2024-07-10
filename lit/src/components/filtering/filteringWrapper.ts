@@ -21,7 +21,7 @@ export class FilteringWrapper<T, V extends FilteringWrapperRender> extends LitEl
 	@property({ type: Array })
 	items: Array<{ filter: T; value: V }> = [];
 	@property({ type: Number })
-	duration = 1;
+	duration = 0;
 
 	@provide({ context: filteringContext })
 	_context = {
@@ -43,6 +43,10 @@ export class FilteringWrapper<T, V extends FilteringWrapperRender> extends LitEl
 	}
 
 	protected render(): unknown {
+		if (!this.duration) {
+			return this.getItems().map(({ value }, i, array) => value(array.length, i).value);
+		}
+
 		const transitionGroup = html`<transition-group-component
 			animateTransform
 			.renderElements=${this.getItems().map<TransitionGroupRenderer>((item, index, array) => {
