@@ -17,12 +17,9 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{
-    duration: string;
-    repetitions: number;
-    isPaused: boolean;
-    isReversed: boolean;
-}>(), {
+import { MarqueeCarouselConfiguration } from "shared/component/marqueeCarousel";
+
+withDefaults(defineProps<Required<MarqueeCarouselConfiguration>>(), {
     duration: '15s',
     repetitions: 2,
     isPaused: false,

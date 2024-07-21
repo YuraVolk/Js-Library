@@ -57,6 +57,10 @@
 			"link": "../magnifier"
 		},
 		{
+			"name": "Marquee Carousel",
+			"link": "../marquee-carousel"
+		},
+		{
 			"name": "Menu Carousel",
 			"link": "../menu-carousel"
 		},
