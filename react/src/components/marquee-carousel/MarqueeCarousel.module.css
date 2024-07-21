@@ -1,0 +1,34 @@
+.marquee-wrap {
+    display: block;
+    overflow: hidden;
+}
+
+.marquee {
+    width: 10000vw;
+}
+
+.marquee-text {
+    animation-name: marquee-scroll-animation;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: var(--duration);
+    float: left;
+}
+
+.marquee--paused .marquee-text {
+    animation-play-state: paused;
+}
+
+.marquee-text--reversed {
+    animation-direction: reverse;
+}
+
+@keyframes marquee-scroll-animation {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
