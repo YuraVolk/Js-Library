@@ -1,13 +1,25 @@
-import React, { CSSProperties, useCallback, useEffect, useRef, useState } from "react";
+import React, { Children, CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 import { ContextLinkedItems, ExposedContextFunctions } from "../../../src/interfaces/hooks/useLinkedItem";
 import styles from "./BackfaceCarousel.module.css";
 import carouselControlsStyles from "../../interfaces/generic/CarouselControls.module.css";
 import { useResizeListener } from "../../interfaces/hooks/useResizeListener";
 import { useInterval } from "../../interfaces/hooks/useInterval";
+import { WithChildren } from "../../utils/utils";
+import { CarouselConfiguration } from "shared/interfaces/carousel";
+import { GenericReactComponentProps } from "../../interfaces/generic/classNameFallthrough";
+import { useAutoplay } from "../../interfaces/hooks/useAutoplay";
 
-export const BackfaceCarousel = (props: { children: React.ReactNode; isVertical?: boolean }) => {
+export const BackfaceCarousel = ({
+	isVertical = false,
+	allowSwitchingOrientation = true,
+	noArrows = false,
+	noToggles = true,
+	autoplay,
+	children,
+	...props
+}: WithChildren<CarouselConfiguration> & GenericReactComponentProps) => {
 	const linkedItemsContext = useRef<ExposedContextFunctions | null>(null);
-	const [isHorizontal, setHorizontal] = useState(!props.isVertical);
+	const [isHorizontal, setHorizontal] = useState(!isVertical);
 	const [carouselStyles, setCarouselStyles] = useState<CSSProperties>({});
 	const [currentItem, setCurrentItem] = useState(0);
 
@@ -91,23 +103,50 @@ export const BackfaceCarousel = (props: { children: React.ReactNode; isVertical?
 		if (linkedItemsContext.current?.wasSetupPerformed()) setup();
 	}, [isHorizontal, setup]);
 
+	useAutoplay({ autoplay, nextSlide, previousSlide });
 	useResizeListener(setup);
 
+	const childrenLength = Children.count(children);
+	const realCurrentItem = currentItem % childrenLength;
 	return (
-		<ContextLinkedItems ref={linkedItemsContext} onAllElementsLoaded={setup} innerChildren={props.children}>
-			<div>
+		<ContextLinkedItems ref={linkedItemsContext} onAllElementsLoaded={setup} innerChildren={children}>
+			<div {...props}>
 				<div className={`${styles["backface-carousel"]} ${isHorizontal ? "" : styles["backface-carousel--vertical"]}`}>
 					<ul className={styles["backface-carousel-items"]} style={carouselStyles}>
-						{props.children}
+						{children}
 					</ul>
 				</div>
-				<div className={carouselControlsStyles["carousel-controls"]}>
-					<button className={carouselControlsStyles["carousel-controls__previous-button"]} onClick={previousSlide}></button>
-					<button className={carouselControlsStyles["carousel-controls__perspective-button"]} onClick={switchPerspective}>
-						Switch
-					</button>
-					<button className={carouselControlsStyles["carousel-controls__next-button"]} onClick={nextSlide}></button>
-				</div>
+				{(!noArrows || allowSwitchingOrientation) && (
+					<div className={carouselControlsStyles["carousel-controls"]}>
+						{!noArrows && (
+							<button className={carouselControlsStyles["carousel-controls__previous-button"]} onClick={previousSlide}></button>
+						)}
+						{allowSwitchingOrientation && (
+							<button className={carouselControlsStyles["carousel-controls__perspective-button"]} onClick={switchPerspective}>
+								Switch
+							</button>
+						)}
+						{!noArrows && <button className={carouselControlsStyles["carousel-controls__next-button"]} onClick={nextSlide}></button>}
+					</div>
+				)}
+				{!noToggles && (
+					<ul className={carouselControlsStyles["carousel-controls__toggles"]}>
+						{Array.from({ length: childrenLength }, (_, i) => (
+							<li
+								key={i}
+								className={`${carouselControlsStyles["carousel-controls__toggle"]} ${i === realCurrentItem ? carouselControlsStyles["carousel-controls__toggle--active"] : ""}`}
+								onClick={() => {
+									const currentItemOffset = Math.max(0, currentItem - (childrenLength - 1));
+									if (currentItemOffset && currentItemOffset % childrenLength === 0) {
+										rotateCarousel(Math.floor(currentItemOffset / childrenLength) * childrenLength + i);
+									} else if (currentItemOffset) {
+										rotateCarousel((Math.floor(currentItemOffset / childrenLength) + 1) * childrenLength + i);
+									} else rotateCarousel(i);
+								}}
+							></li>
+						))}
+					</ul>
+				)}
 			</div>
 		</ContextLinkedItems>
 	);
