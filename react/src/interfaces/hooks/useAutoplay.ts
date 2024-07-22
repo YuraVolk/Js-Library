@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { CarouselConfigurationAutoplayOptions, CarouselDirection } from "shared/interfaces/carousel";
 
 export interface UseAutoplayProps {
@@ -10,8 +10,9 @@ export interface UseAutoplayProps {
 export const useAutoplay = ({ autoplay, nextSlide, previousSlide }: UseAutoplayProps) => {
 	const [repetitionsLeft, setRepetitionsLeft] = useState(autoplay?.totalRepetitions ?? 0);
 	const timeout = useRef<number>();
-
-	useEffect(() => {
+	
+	const abortTimeout = useCallback(() => {
+		window.clearTimeout(timeout.current);
 		if (!repetitionsLeft) {
 			return;
 		}
@@ -25,5 +26,14 @@ export const useAutoplay = ({ autoplay, nextSlide, previousSlide }: UseAutoplayP
 
 			setRepetitionsLeft((repetitionsLeft) => repetitionsLeft - 1);
 		}, autoplay?.delay);
-	}, [repetitionsLeft]);
+	}, [repetitionsLeft, autoplay, nextSlide, previousSlide]);
+
+	useEffect(() => {
+		abortTimeout();
+		return () => {
+			window.clearTimeout(timeout.current);
+		};
+	}, [abortTimeout]);
+
+	return { abortTimeout };
 };

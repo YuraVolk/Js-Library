@@ -14,7 +14,7 @@ export interface CarouselConfigurationAutoplayOptions {
 export interface CarouselConfiguration {
 	isVertical?: boolean;
 	allowSwitchingOrientation?: boolean;
-	noArrows?: boolean;
-	noToggles?: boolean;
+	showArrows?: boolean;
+	showToggles?: boolean;
 	autoplay?: CarouselConfigurationAutoplayOptions | undefined; 
 }
