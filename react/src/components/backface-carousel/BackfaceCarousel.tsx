@@ -12,8 +12,8 @@ import { useAutoplay } from "../../interfaces/hooks/useAutoplay";
 export const BackfaceCarousel = ({
 	isVertical = false,
 	allowSwitchingOrientation = true,
-	noArrows = false,
-	noToggles = true,
+	showArrows = true,
+	showToggles = false,
 	autoplay,
 	children,
 	...props
@@ -103,7 +103,7 @@ export const BackfaceCarousel = ({
 		if (linkedItemsContext.current?.wasSetupPerformed()) setup();
 	}, [isHorizontal, setup]);
 
-	useAutoplay({ autoplay, nextSlide, previousSlide });
+	const { abortTimeout } = useAutoplay({ autoplay, nextSlide, previousSlide });
 	useResizeListener(setup);
 
 	const childrenLength = Children.count(children);
@@ -116,26 +116,47 @@ export const BackfaceCarousel = ({
 						{children}
 					</ul>
 				</div>
-				{(!noArrows || allowSwitchingOrientation) && (
+				{(showArrows || allowSwitchingOrientation) && (
 					<div className={carouselControlsStyles["carousel-controls"]}>
-						{!noArrows && (
-							<button className={carouselControlsStyles["carousel-controls__previous-button"]} onClick={previousSlide}></button>
+						{!showArrows && (
+							<button
+								className={carouselControlsStyles["carousel-controls__previous-button"]}
+								onClick={() => {
+									abortTimeout();
+									previousSlide();
+								}}
+							></button>
 						)}
 						{allowSwitchingOrientation && (
-							<button className={carouselControlsStyles["carousel-controls__perspective-button"]} onClick={switchPerspective}>
+							<button
+								className={carouselControlsStyles["carousel-controls__perspective-button"]}
+								onClick={() => {
+									abortTimeout();
+									switchPerspective();
+								}}
+							>
 								Switch
 							</button>
 						)}
-						{!noArrows && <button className={carouselControlsStyles["carousel-controls__next-button"]} onClick={nextSlide}></button>}
+						{!showArrows && (
+							<button
+								className={carouselControlsStyles["carousel-controls__next-button"]}
+								onClick={() => {
+									abortTimeout();
+									switchPerspective();
+								}}
+							></button>
+						)}
 					</div>
 				)}
-				{!noToggles && (
+				{showToggles && (
 					<ul className={carouselControlsStyles["carousel-controls__toggles"]}>
 						{Array.from({ length: childrenLength }, (_, i) => (
 							<li
 								key={i}
 								className={`${carouselControlsStyles["carousel-controls__toggle"]} ${i === realCurrentItem ? carouselControlsStyles["carousel-controls__toggle--active"] : ""}`}
 								onClick={() => {
+									abortTimeout();
 									const currentItemOffset = Math.max(0, currentItem - (childrenLength - 1));
 									if (currentItemOffset && currentItemOffset % childrenLength === 0) {
 										rotateCarousel(Math.floor(currentItemOffset / childrenLength) * childrenLength + i);

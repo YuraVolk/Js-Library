@@ -1,7 +1,9 @@
 import React, { CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ReactGalleryCarouselConfiguration } from "../../interfaces/component/galleryCarousel";
 import styles from "./GalleryCarousel.module.css";
+import carouselControlsStyles from "../../interfaces/generic/CarouselControls.module.css";
 import { ContextLinkedItems, ExposedContextFunctions } from "../../interfaces/hooks/useLinkedItem";
+import { useAutoplay } from "../../interfaces/hooks/useAutoplay";
 
 export const GalleryCarousel = ({
 	smoothDiametralTransition = true,
@@ -10,15 +12,19 @@ export const GalleryCarousel = ({
 	animationDuration = 500,
 	showArrows = true,
 	showToggles = true,
-	...props
+	carouselItems,
+	isVertical,
+	allowSwitchingOrientation,
+	autoplay,
+	className
 }: ReactGalleryCarouselConfiguration) => {
 	const children = useMemo(
 		() => [
-			props.carouselItems[props.carouselItems.length - 1](props.carouselItems.length - 1),
-			...props.carouselItems.map((item, i) => item(i)),
-			props.carouselItems[0](0)
+			carouselItems[carouselItems.length - 1](carouselItems.length - 1),
+			...carouselItems.map((item, i) => item(i)),
+			carouselItems[0](0)
 		],
-		[props.carouselItems]
+		[carouselItems]
 	);
 	const itemsLength = children.length;
 
@@ -26,13 +32,14 @@ export const GalleryCarousel = ({
 	const isAnimating = useRef(false);
 	const interval = useRef<number>();
 
+	const [isOrientationVertical, setOrientationVertical] = useState(isVertical);
 	const [currentSlide, setCurrentSlide] = useState(current);
 	const [galleryLeft, setGalleryLeft] = useState(currentSlide * -100);
 	const galleryListStyle = useMemo<CSSProperties>(
 		() => ({
-			left: `${String(galleryLeft)}%`
+			[isOrientationVertical ? "top" : "left"]: `${String(galleryLeft)}%`
 		}),
-		[galleryLeft]
+		[galleryLeft, isOrientationVertical]
 	);
 
 	const checkCurrentSlide = useCallback(
@@ -76,17 +83,30 @@ export const GalleryCarousel = ({
 		[checkCurrentSlide, galleryLeft, itemsLength, slideTo, smoothDiametralTransition]
 	);
 
+	const nextSlide = useCallback(() => {
+		changeCurrentSlide(currentSlide + 1);
+	}, [currentSlide, changeCurrentSlide]);
+
+	const previousSlide = useCallback(() => {
+		changeCurrentSlide(currentSlide - 1);
+	}, [currentSlide, changeCurrentSlide]);
+
 	useEffect(() => {
 		return () => {
 			window.clearInterval(interval.current);
 		};
 	}, []);
 
+	const { abortTimeout } = useAutoplay({ autoplay, nextSlide, previousSlide });
+
 	return (
 		<ContextLinkedItems ref={linkedItemsContext} innerChildren={children}>
-			<div className={`${styles.wrap} ${props.className ?? ""}`}>
+			<div className={`${styles.wrap} ${className ?? ""}`}>
 				<div className={styles.gallery}>
-					<ul className={styles["gallery-list"]} style={galleryListStyle}>
+					<ul
+						className={`${styles["gallery-list"]} ${isOrientationVertical ? styles["gallery-list--vertical"] : ""}`}
+						style={galleryListStyle}
+					>
 						{children}
 					</ul>
 				</div>
@@ -95,13 +115,15 @@ export const GalleryCarousel = ({
 						<button
 							className={styles["gallery-controls__previous-button"]}
 							onClick={() => {
-								changeCurrentSlide(currentSlide - 1);
+								abortTimeout();
+								previousSlide();
 							}}
 						></button>
 						<button
 							className={styles["gallery-controls__next-button"]}
 							onClick={() => {
-								changeCurrentSlide(currentSlide + 1);
+								abortTimeout();
+								nextSlide();
 							}}
 						></button>
 					</div>
@@ -113,11 +135,25 @@ export const GalleryCarousel = ({
 								key={i}
 								className={`${styles["gallery-toggle"]} ${currentSlide - 1 === i ? styles["gallery-toggle--active"] : ""}`}
 								onClick={() => {
+									abortTimeout();
 									changeCurrentSlide(i + 1);
 								}}
 							></li>
 						))}
 					</ul>
+				)}
+				{allowSwitchingOrientation && (
+					<div className={carouselControlsStyles["carousel-controls"]}>
+						<button
+							className={carouselControlsStyles["carousel-controls__perspective-button"]}
+							onClick={() => {
+								abortTimeout();
+								setOrientationVertical((orientation) => !orientation);
+							}}
+						>
+							Switch
+						</button>
+					</div>
 				)}
 			</div>
 		</ContextLinkedItems>
