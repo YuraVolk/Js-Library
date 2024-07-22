@@ -22,7 +22,7 @@ const Page = () => {
 				BackfaceCarouselItem component that gives default styling required for this type of carousel, and give width and height set to 100%
 				for all inner items of the backface carousel item components.
 			</p>
-			<BackfaceCarousel>
+			<BackfaceCarousel noToggles={false}>
 				<BackfaceCarouselItem>
 					<img className={styles.image} src={image1} alt="Example Image" />
 				</BackfaceCarouselItem>
