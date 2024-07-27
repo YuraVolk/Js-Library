@@ -18,7 +18,7 @@ export function useInterval(callback: () => void, timeout: number) {
 		return () => {
 			abortInterval();
 		};
-	}, [restartInterval]);
+	}, []);
 
 	return { abortInterval, restartInterval };
 }

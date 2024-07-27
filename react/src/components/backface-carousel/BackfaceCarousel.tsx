@@ -1,4 +1,4 @@
-import React, { Children, CSSProperties, useCallback, useEffect, useRef, useState } from "react";
+import React, { CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 import { ContextLinkedItems, ExposedContextFunctions } from "../../../src/interfaces/hooks/useLinkedItem";
 import styles from "./BackfaceCarousel.module.css";
 import carouselControlsStyles from "../../interfaces/generic/CarouselControls.module.css";
@@ -8,6 +8,7 @@ import { WithChildren } from "../../utils/utils";
 import { CarouselConfiguration } from "shared/interfaces/carousel";
 import { GenericReactComponentProps } from "../../interfaces/generic/classNameFallthrough";
 import { useAutoplay } from "../../interfaces/hooks/useAutoplay";
+import { getCurrentItemCallback } from "../../utils/carousel";
 
 export const BackfaceCarousel = ({
 	isVertical = false,
@@ -106,8 +107,7 @@ export const BackfaceCarousel = ({
 	const { abortTimeout } = useAutoplay({ autoplay, nextSlide, previousSlide });
 	useResizeListener(setup);
 
-	const childrenLength = Children.count(children);
-	const realCurrentItem = currentItem % childrenLength;
+	const { realCurrentItem, childrenLength, getCurrentItem } = getCurrentItemCallback({ children, currentItem });
 	return (
 		<ContextLinkedItems ref={linkedItemsContext} onAllElementsLoaded={setup} innerChildren={children}>
 			<div {...props}>
@@ -118,7 +118,7 @@ export const BackfaceCarousel = ({
 				</div>
 				{(showArrows || allowSwitchingOrientation) && (
 					<div className={carouselControlsStyles["carousel-controls"]}>
-						{!showArrows && (
+						{showArrows && (
 							<button
 								className={carouselControlsStyles["carousel-controls__previous-button"]}
 								onClick={() => {
@@ -138,12 +138,12 @@ export const BackfaceCarousel = ({
 								Switch
 							</button>
 						)}
-						{!showArrows && (
+						{showArrows && (
 							<button
 								className={carouselControlsStyles["carousel-controls__next-button"]}
 								onClick={() => {
 									abortTimeout();
-									switchPerspective();
+									nextSlide();
 								}}
 							></button>
 						)}
@@ -157,12 +157,7 @@ export const BackfaceCarousel = ({
 								className={`${carouselControlsStyles["carousel-controls__toggle"]} ${i === realCurrentItem ? carouselControlsStyles["carousel-controls__toggle--active"] : ""}`}
 								onClick={() => {
 									abortTimeout();
-									const currentItemOffset = Math.max(0, currentItem - (childrenLength - 1));
-									if (currentItemOffset && currentItemOffset % childrenLength === 0) {
-										rotateCarousel(Math.floor(currentItemOffset / childrenLength) * childrenLength + i);
-									} else if (currentItemOffset) {
-										rotateCarousel((Math.floor(currentItemOffset / childrenLength) + 1) * childrenLength + i);
-									} else rotateCarousel(i);
+									rotateCarousel(getCurrentItem(i));
 								}}
 							></li>
 						))}

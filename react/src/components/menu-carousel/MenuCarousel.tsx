@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { ContextLinkedItems, ExposedContextFunctions, LinkedReactItem } from "../../interfaces/hooks/useLinkedItem";
 import { MenuCarouselConfiguration, MenuCarouselInternalItem } from "shared/component/menuCarousel";
 import { assertNonUndefined, assertNonUndefinedDevOnly } from "shared/utils/utils";
@@ -6,7 +6,10 @@ import { WithChildren } from "../../utils/utils";
 import { CarouselDirection } from "shared/interfaces/carousel";
 import carouselControlsStyles from "../../interfaces/generic/CarouselControls.module.css";
 import styles from "./MenuCarousel.module.css";
-import { GenericReactComponentProps } from "react/src/interfaces/generic/classNameFallthrough";
+import { GenericReactComponentProps } from "../../interfaces/generic/classNameFallthrough";
+import { useResizeListener } from "../../interfaces/hooks/useResizeListener";
+import { useAutoplay } from "../../interfaces/hooks/useAutoplay";
+import { getCurrentItemCallback } from "../../utils/carousel";
 
 interface MenuItemProperties {
 	elementData: Record<string, LinkedReactItem>;
@@ -52,19 +55,38 @@ class Item extends MenuCarouselInternalItem {
 }
 
 export const MenuCarousel = ({
-	yPos = 112,
-	yRadius = 128,
+	xPos: xPosProp,
+	xRadius: xRadiusProp,
+	yPos: yPosProp = 112,
+	yRadius: yRadiusProp = 128,
 	farScale = 0.9,
 	speed = 0.11,
-	...props
+	showArrows = true,
+	showToggles = false,
+	allowSwitchingOrientation = false,
+	autoplay,
+	isVertical: isVerticalProp = false,
+	children,
+	className
 }: WithChildren<Partial<MenuCarouselConfiguration>> & GenericReactComponentProps) => {
 	const rotation = useRef(Math.PI / 2);
 	const destRotation = useRef(Math.PI / 2);
 	const frameTimer = useRef<number | undefined>();
-	const xRadius = useRef(props.xRadius);
-	const yRadiusRef = useRef(yRadius);
-	const xPos = useRef(props.xPos);
-	const yPosRef = useRef(yPos);
+	const xRadiusRef = useRef(xRadiusProp);
+	const yRadiusRef = useRef(yRadiusProp);
+	const xPosRef = useRef(xPosProp);
+	const yPosRef = useRef(yPosProp);
+	const isVertical = useRef(isVerticalProp);
+	const [currentItem, setCurrentItem] = useState(0);
+
+	const getPositions = () => {
+		return {
+			xPos: xPosRef,
+			yPos: yPosRef,
+			xRadius: isVertical.current ? yRadiusRef : xRadiusRef,
+			yRadius: isVertical.current ? xRadiusRef : yRadiusRef
+		};
+	};
 
 	const carousel = useRef<HTMLUListElement | null>(null);
 	const linkedItemsContext = useRef<ExposedContextFunctions | null>(null);
@@ -75,10 +97,10 @@ export const MenuCarousel = ({
 			const item = items.current[itemIndex];
 			const sin = Math.sin(rotation);
 			const scale = farScale + (1 - farScale) * (sin + 1) * 0.5;
-			assertNonUndefinedDevOnly(xPos.current);
-			assertNonUndefinedDevOnly(xRadius.current);
+			assertNonUndefinedDevOnly(xPosRef.current);
+			assertNonUndefinedDevOnly(xRadiusRef.current);
 			item.moveTo(
-				xPos.current + scale * (Math.cos(rotation) * xRadius.current - item.fullWidth / 2),
+				xPosRef.current + scale * (Math.cos(rotation) * xRadiusRef.current - item.fullWidth / 2),
 				yPosRef.current + scale * sin * yRadiusRef.current + yPosRef.current / 2.3,
 				scale
 			);
@@ -130,10 +152,12 @@ export const MenuCarousel = ({
 
 	const setupCarousel = useCallback(() => {
 		if (!carousel.current) return;
+
+		const { xPos, yPos, xRadius, yRadius } = getPositions();
 		xPos.current ??= carousel.current.offsetWidth * 0.5;
-		yPosRef.current = carousel.current.offsetHeight * 0.1;
+		yPos.current = carousel.current.offsetHeight * 0.1;
 		xRadius.current ??= carousel.current.offsetWidth / 2.3;
-		yRadiusRef.current = carousel.current.offsetHeight / 6;
+		yRadius.current = carousel.current.offsetHeight / 6;
 		items.current = [];
 
 		assertNonUndefined(linkedItemsContext.current);
@@ -150,35 +174,88 @@ export const MenuCarousel = ({
 	}, [carouselRender]);
 
 	const onResize = useCallback(() => {
+		const { xRadius, xPos } = getPositions();
 		xRadius.current = undefined;
 		xPos.current = undefined;
 		setupCarousel();
 	}, [setupCarousel]);
 
-	const goBack = useCallback(() => {
+	const nextSlide = useCallback(() => {
 		go(CarouselDirection.BACKWARDS);
+		setCurrentItem((activeSlide) => activeSlide - 1);
 	}, [go]);
 
-	const goForward = useCallback(() => {
+	const previousSlide = useCallback(() => {
 		go(CarouselDirection.FORWARDS);
+		setCurrentItem((activeSlide) => activeSlide + 1);
 	}, [go]);
 
-	useEffect(() => {
-		window.addEventListener("resize", onResize);
+	const switchOrientation = useCallback(() => {
+		isVertical.current = !isVertical.current;
+		const { xRadius, xPos } = getPositions();
+		xRadius.current = undefined;
+		xPos.current = undefined;
 
-		return () => {
-			window.removeEventListener("resize", onResize);
-		};
-	}, [onResize]);
+		setupCarousel();
+	}, [setupCarousel]);
 
+	useResizeListener(onResize);
+	const { abortTimeout } = useAutoplay({ autoplay, nextSlide, previousSlide });
+
+	const { realCurrentItem, childrenLength, getCurrentItem } = getCurrentItemCallback({ children, currentItem });
 	return (
-		<ContextLinkedItems ref={linkedItemsContext} innerChildren={props.children} onAllElementsLoaded={setupCarousel}>
-			<ul ref={carousel} className={`${styles["carousel"]} ${props.className ?? ""}`}>
-				{props.children}
-				<li className={`${styles["carousel-controls"]} ${carouselControlsStyles["carousel-controls"]}`}>
-					<button className={carouselControlsStyles["carousel-controls__previous-button"]} onClick={goBack}></button>
-					<button className={carouselControlsStyles["carousel-controls__next-button"]} onClick={goForward}></button>
-				</li>
+		<ContextLinkedItems ref={linkedItemsContext} innerChildren={children} onAllElementsLoaded={setupCarousel}>
+			<ul ref={carousel} className={`${styles["carousel"]} ${className ?? ""}`}>
+				{children}
+				{(allowSwitchingOrientation || showArrows) && (
+					<li className={`${styles["carousel-controls"]} ${carouselControlsStyles["carousel-controls"]}`}>
+						{showArrows && (
+							<button
+								className={carouselControlsStyles["carousel-controls__previous-button"]}
+								onClick={() => {
+									abortTimeout();
+									nextSlide();
+								}}
+							></button>
+						)}
+						{allowSwitchingOrientation && (
+							<button
+								className={carouselControlsStyles["carousel-controls__perspective-button"]}
+								onClick={() => {
+									abortTimeout();
+									switchOrientation();
+								}}
+							>
+								Switch
+							</button>
+						)}
+						{showArrows && (
+							<button
+								className={carouselControlsStyles["carousel-controls__next-button"]}
+								onClick={() => {
+									abortTimeout();
+									previousSlide();
+								}}
+							></button>
+						)}
+					</li>
+				)}
+				{showToggles && (
+					<li className={`${styles["carousel-toggles"]} ${carouselControlsStyles["carousel-controls__toggles"]}`}>
+						{Array.from({ length: childrenLength }, (_, i) => (
+							<div
+								key={i}
+								className={`${carouselControlsStyles["carousel-controls__toggle"]} ${i === realCurrentItem ? carouselControlsStyles["carousel-controls__toggle--active"] : ""}`}
+								onClick={() => {
+									abortTimeout();
+									const difference = (getCurrentItem(i) % childrenLength) - (currentItem % childrenLength);
+									go(difference);
+									setCurrentItem((currentItem) => currentItem + difference);
+								}}
+							></div>
+						))}
+					</li>
+				)}
 			</ul>
 		</ContextLinkedItems>
 	);

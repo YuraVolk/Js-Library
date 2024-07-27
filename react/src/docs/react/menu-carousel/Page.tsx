@@ -29,7 +29,7 @@ const Page = () => {
 				The carousel accepts special carousel item components to keep track of all the elements, and automatically detect width and height.
 				Here's an example of the carousel with all default settings except far scale being set to 0.8:
 			</p>
-			<MenuCarousel className={styles["carousel"]} farScale={0.8}>
+			<MenuCarousel className={styles["carousel"]} farScale={0.8} showToggles>
 				<CarouselItem className={styles["carousel-item"]}>
 					<img className={styles.img} src={image1} alt="Example Image" />
 				</CarouselItem>
