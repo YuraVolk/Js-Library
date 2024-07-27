@@ -1,3 +1,5 @@
+import { CarouselConfiguration } from "shared/interfaces/carousel";
+
 export abstract class MenuCarouselInternalItem {
 	image: HTMLElement;
 	fullWidth: number;
@@ -27,7 +29,7 @@ export abstract class MenuCarouselInternalItem {
 	abstract setMovingStyle(x: number, y: number, scale: number): void;
 }
 
-export interface MenuCarouselConfiguration {
+export interface MenuCarouselConfiguration extends CarouselConfiguration {
 	xPos?: number;
 	yPos: number;
 	xRadius?: number;

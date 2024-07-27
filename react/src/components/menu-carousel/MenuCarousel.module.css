@@ -9,3 +9,8 @@
 	z-index: 999;
 	top: 80%;
 }
+
+.carousel-toggles {
+	z-index: 999;
+	top: calc(80% + 40px);
+}
