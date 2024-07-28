@@ -45,7 +45,7 @@ const Page = () => {
 				</OnePageScrollItem>
 			</OnePageScroll>
 			<p>Here is an example of horizontal one-page scroll:</p>
-			<OnePageScroll className={styles["one-page-scroll"]} isHorizontal>
+			<OnePageScroll className={styles["one-page-scroll"]} isVertical={false} showArrows showToggles allowSwitchingOrientation>
 				<OnePageScrollItem className={styles["one-page-scroll-slide"]}>
 					<p className={styles["one-page-scroll-slide__heading"]}>First slide. Scroll down...</p>
 				</OnePageScrollItem>

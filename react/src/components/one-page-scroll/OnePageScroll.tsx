@@ -1,28 +1,41 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { Children, useCallback, useEffect, useRef, useState } from "react";
 import { ExposedContextFunctions, ContextLinkedItems } from "../../interfaces/hooks/useLinkedItem";
 import { easeInOutQuad } from "shared/component/onePageScroll";
 import { OnePageScrollConfiguration } from "../../interfaces/component/onePageScroll";
 import styles from "./OnePageScroll.module.css";
+import carouselControlsStyles from "../../interfaces/generic/CarouselControls.module.css";
 import { CarouselDirection } from "shared/interfaces/carousel";
+import { useAutoplay } from "../../interfaces/hooks/useAutoplay";
+import { useStateWithCallback } from "../../interfaces/hooks/useStateWithCallback";
 
 export const OnePageScroll = ({
-	isHorizontal = false,
 	noScrollbar = true,
 	increment = 6,
 	duration = 500,
+	children,
+	isVertical: isVerticalProp = true,
+	autoplay,
+	allowSwitchingOrientation = false,
+	showArrows = false,
+	showToggles = false,
 	...props
 }: OnePageScrollConfiguration) => {
+	const previousItem = useRef(0);
+	const [isVertical, setVertical] = useStateWithCallback(isVerticalProp, () => {
+		navigateToItem(previousItem.current);
+	});
+	
 	const linkedItemsContext = useRef<ExposedContextFunctions | null>(null);
 	const wrap = useRef<HTMLDivElement | null>(null);
 	const animationTimeout = useRef<{ timer?: number }>({ timer: undefined });
-	const selectedItem = useRef(0);
+	const [currentItem, setCurrentItem] = useState(0);
 	const isScrolling = useRef(false);
 
 	const smoothScrollTo = useCallback(
 		(to: number) => {
 			if (!wrap.current) return;
 			isScrolling.current = true;
-			const property = isHorizontal ? "scrollLeft" : "scrollTop";
+			const property = isVertical ? "scrollTop" : "scrollLeft";
 			const start = wrap.current[property],
 				change = to - start;
 			let currentTime = 0;
@@ -45,46 +58,77 @@ export const OnePageScroll = ({
 
 			animateScroll();
 		},
-		[duration, increment, isHorizontal]
+		[duration, increment, isVertical]
 	);
 
 	const scrollSlide = useCallback(
 		(direction: CarouselDirection) => {
-			const element = Object.values(linkedItemsContext.current?.getState() ?? {})[selectedItem.current]?.element?.current;
+			const element = Object.values(linkedItemsContext.current?.getState() ?? {})[currentItem]?.element?.current;
 			if (isScrolling.current || !element) return;
-			selectedItem.current += direction;
-
-			smoothScrollTo(element[isHorizontal ? "offsetWidth" : "offsetHeight"] * selectedItem.current);
+			const newCurrentItem = currentItem + direction;
+			setCurrentItem(newCurrentItem);
+			smoothScrollTo(element[isVertical ? "offsetHeight" : "offsetWidth"] * newCurrentItem);
 		},
-		[isHorizontal, smoothScrollTo]
+		[currentItem, isVertical, smoothScrollTo]
 	);
+
+	const nextSlide = useCallback(() => {
+		const elements = linkedItemsContext.current?.getState();
+		if (!elements) return;
+		const elementsLength = Object.keys(elements).length;
+
+		if (currentItem >= elementsLength - 1) {
+			if (isScrolling.current) return;
+			setCurrentItem(0);
+			smoothScrollTo(0);
+		} else scrollSlide(CarouselDirection.FORWARDS);
+	}, [currentItem, scrollSlide, smoothScrollTo]);
+
+	const previousSlide = useCallback(() => {
+		const elements = linkedItemsContext.current?.getState();
+		if (!elements) return;
+		const elementsLength = Object.keys(elements).length;
+		const firstElement = Object.values(elements)[0].element.current;
+		if (!firstElement) return;
+
+		if (currentItem === 0) {
+			if (isScrolling.current || !wrap.current) return;
+			setCurrentItem(elementsLength - 1);
+			smoothScrollTo(
+				(isVertical ? wrap.current.scrollHeight : wrap.current.scrollWidth) -
+					(isVertical ? firstElement.offsetHeight : firstElement.offsetWidth)
+			);
+		} else scrollSlide(CarouselDirection.BACKWARDS);
+	}, [currentItem, isVertical, scrollSlide, smoothScrollTo]);
+
+	const { abortTimeout } = useAutoplay({ autoplay, nextSlide, previousSlide });
+	const navigateToItem = useCallback(
+		(item: number) => {
+			const element = Object.values(linkedItemsContext.current?.getState() ?? {})[0]?.element?.current;
+			if (isScrolling.current || !element) return;
+			setCurrentItem(item);
+			smoothScrollTo(element[isVertical ? "offsetHeight" : "offsetWidth"] * item);
+			abortTimeout();
+		},
+		[abortTimeout, isVertical, smoothScrollTo]
+	);
+
+	const switchOrientation = useCallback(() => {
+		if (isScrolling.current || !wrap.current) return;
+		previousItem.current = currentItem;
+		setCurrentItem(0);
+		abortTimeout();
+		setVertical((isVertical) => !isVertical);
+	}, [abortTimeout, currentItem, setVertical]);
 
 	const onWheel = useCallback(
 		(event: React.WheelEvent<HTMLDivElement>) => {
-			const elements = linkedItemsContext.current?.getState();
-			if (!elements) return;
-			const elementsLength = Object.keys(elements).length;
-			const firstElement = Object.values(elements)[0].element.current;
-			if (!firstElement) return;
-
 			if (event.deltaY > 0) {
-				if (selectedItem.current >= elementsLength - 1) {
-					if (isScrolling.current) return;
-					selectedItem.current = 0;
-					smoothScrollTo(0);
-				} else scrollSlide(CarouselDirection.FORWARDS);
-			} else {
-				if (selectedItem.current === 0) {
-					if (isScrolling.current || !wrap.current) return;
-					selectedItem.current = elementsLength - 1;
-					smoothScrollTo(
-						(isHorizontal ? wrap.current.scrollWidth : wrap.current.scrollHeight) -
-							(isHorizontal ? firstElement.offsetWidth : firstElement.offsetHeight)
-					);
-				} else scrollSlide(CarouselDirection.BACKWARDS);
-			}
+				nextSlide();
+			} else previousSlide();
+			abortTimeout();
 		},
-		[isHorizontal, scrollSlide, smoothScrollTo]
+		[abortTimeout, nextSlide, previousSlide]
 	);
 
 	useEffect(() => {
@@ -96,16 +140,62 @@ export const OnePageScroll = ({
 	}, []);
 
 	return (
-		<ContextLinkedItems ref={linkedItemsContext} innerChildren={props.children}>
-			<article className={props.className}>
+		<ContextLinkedItems ref={linkedItemsContext} innerChildren={children}>
+			<article {...props}>
 				<div
 					ref={wrap}
 					onWheel={onWheel}
-					className={`${styles.wrap} ${isHorizontal ? styles["wrap--horizontal"] : ""} ${noScrollbar ? styles["wrap--no-scrollbar"] : ""}`}
+					className={`${styles.wrap} ${isVertical ? "" : styles["wrap--horizontal"]} ${noScrollbar ? styles["wrap--no-scrollbar"] : ""}`}
 				>
-					{props.children}
+					{children}
 				</div>
 			</article>
+			{(allowSwitchingOrientation || showArrows) && (
+				<div className={carouselControlsStyles["carousel-controls"]}>
+					{showArrows && (
+						<button
+							className={carouselControlsStyles["carousel-controls__previous-button"]}
+							onClick={() => {
+								abortTimeout();
+								previousSlide();
+							}}
+						></button>
+					)}
+					{allowSwitchingOrientation && (
+						<button
+							className={carouselControlsStyles["carousel-controls__perspective-button"]}
+							onClick={() => {
+								abortTimeout();
+								switchOrientation();
+							}}
+						>
+							Switch
+						</button>
+					)}
+					{showArrows && (
+						<button
+							className={carouselControlsStyles["carousel-controls__next-button"]}
+							onClick={() => {
+								abortTimeout();
+								nextSlide();
+							}}
+						></button>
+					)}
+				</div>
+			)}
+			{showToggles && (
+				<ul className={carouselControlsStyles["carousel-controls__toggles"]}>
+					{Array.from({ length: Children.count(children) }, (_, i) => (
+						<li
+							key={i}
+							className={`${carouselControlsStyles["carousel-controls__toggle"]} ${i === currentItem ? carouselControlsStyles["carousel-controls__toggle--active"] : ""}`}
+							onClick={() => {
+								navigateToItem(i);
+							}}
+						></li>
+					))}
+				</ul>
+			)}
 		</ContextLinkedItems>
 	);
 };
