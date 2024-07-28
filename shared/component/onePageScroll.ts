@@ -1,5 +1,6 @@
-export interface OnePageScrollConfiguration {
-	isHorizontal: boolean;
+import { CarouselConfiguration } from "shared/interfaces/carousel";
+
+export interface OnePageScrollConfiguration extends CarouselConfiguration {
 	duration: number;
 	increment: number;
 	noScrollbar: boolean;
