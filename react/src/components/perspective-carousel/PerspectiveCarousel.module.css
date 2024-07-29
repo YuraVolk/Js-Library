@@ -12,7 +12,7 @@
 .carousel-controls {
 	position: absolute;
 	left: 40%;
-	transform: translateX(-50%);
-	bottom: -5%;
+	transform: translate(-50%, 100%);
+	bottom: 0;
 	z-index: 99;
 }

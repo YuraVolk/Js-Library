@@ -45,7 +45,6 @@ const Page = () => {
 					animationLength, specifies the transition between items length in milliseconds. The smooth transition is set through CSS property
 					on images. Defaults to 300.
 				</li>
-				<li>centralItemClassName, gives a class name to the central item. Defaults to "active".</li>
 				<li>allowSwitchingOrientation, a boolean value that allows to switch orientation of carousel through button. Defaults to false.</li>
 				<li>
 					movingToCenter, movedToCenter, movingFromCenter: three callbacks that are optional to pass and can be used to react on carousel's
@@ -53,7 +52,7 @@ const Page = () => {
 				</li>
 			</ul>
 			<p>Here is a carousel only with allow switching orientation option:</p>
-			<PerspectiveCarousel allowSwitchingOrientation>
+			<PerspectiveCarousel allowSwitchingOrientation showToggles>
 				<CarouselItem className={styles["carousel-item"]}>
 					<img className={styles.img} src={image1} alt="Example Image" />
 				</CarouselItem>

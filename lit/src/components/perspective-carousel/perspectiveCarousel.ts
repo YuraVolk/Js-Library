@@ -66,8 +66,6 @@ export class PerspectiveCarouselComponent extends LinkedCarouselMixin(LitElement
 	forcedImageHeight = 0;
 	@property({ type: Number })
 	animationLength = 300;
-	@property()
-	centralItemClassName = "active";
 	@property({ type: Boolean })
 	allowSwitchingOrientation = false;
 

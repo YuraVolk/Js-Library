@@ -1,4 +1,4 @@
-import { CarouselDirection } from "../interfaces/carousel";
+import { CarouselConfiguration, CarouselDirection } from "../interfaces/carousel";
 
 export interface InternalPerspectiveCarouselState<T> {
 	totalItems: number;
@@ -39,7 +39,7 @@ export const resetInternalState = <T>(): InternalPerspectiveCarouselState<T> => 
 	performingSetup: true
 });
 
-export interface PerspectiveCarouselConfiguration {
+export interface PerspectiveCarouselConfiguration extends CarouselConfiguration {
 	imageSize: string;
 	margin: string;
 	startingItem: number;
@@ -51,12 +51,9 @@ export interface PerspectiveCarouselConfiguration {
 	opacityMultiplier: number;
 	horizon: number;
 	flankingItems: number;
-	isVertical: boolean;
 	forcedImageWidth: number;
 	forcedImageHeight: number;
 	animationLength: number;
-	centralItemClassName: string;
-	allowSwitchingOrientation: boolean;
 }
 
 export interface PerspectiveCarouselItemState {

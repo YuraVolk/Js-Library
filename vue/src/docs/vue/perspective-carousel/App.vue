@@ -56,7 +56,6 @@
         set through CSS property
         on images. Defaults to 300.
       </li>
-      <li>centralItemClassName, gives a class name to the central item. Defaults to "active".</li>
       <li>
         allowSwitchingOrientation, a boolean value that allows to switch orientation of carousel through button.
         Defaults to false.
