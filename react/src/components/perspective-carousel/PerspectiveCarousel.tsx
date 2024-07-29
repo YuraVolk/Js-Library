@@ -6,6 +6,8 @@ import carouselControlsStyles from "../../interfaces/generic/CarouselControls.mo
 import styles from "./PerspectiveCarousel.module.css";
 import { assertNonUndefined } from "shared/utils/utils";
 import { CarouselDirection } from "shared/interfaces/carousel";
+import { getCurrentItemCallback } from "../../utils/carousel";
+import { useAutoplay } from "../../interfaces/hooks/useAutoplay";
 
 const getDataFromExposedFunctions = (contextObject: React.MutableRefObject<ExposedContextFunctions | null>) => {
 	const linkedItemsContextsState = contextObject.current?.getState();
@@ -38,10 +40,14 @@ export const PerspectiveCarousel = ({
 	forcedImageHeight = 0,
 	animationLength = 300,
 	allowSwitchingOrientation = false,
+	showArrows = true,
+	showToggles = false,
+	autoplay,
 	movingToCenter,
 	movedToCenter,
 	movingFromCenter,
-	...props
+	children,
+	className
 }: Partial<PerspectiveCarouselConfiguration>) => {
 	const imageStyles = useMemo(
 		() => ({
@@ -53,6 +59,10 @@ export const PerspectiveCarousel = ({
 
 	const timeouts = useRef<number[]>();
 	const [isInitializing, setInitializing] = useState(PerspectiveCarouselState.INITIALIZING);
+	const [currentItem, setCurrentItem] = useState(0);
+	const isStateCurrentlyMoving = useRef<Promise<void>>();
+	const resolveStateCurrentlyMoving = useRef<() => void>();
+	const isNavigatingByToggles = useRef(false);
 
 	const linkedItemsContext = useRef<ExposedContextFunctions | null>(null);
 	const state = useRef(resetInternalState<number>());
@@ -197,6 +207,9 @@ export const PerspectiveCarousel = ({
 			state.current.currentlyMoving = true;
 			state.current.itemsAnimating = 0;
 			state.current.carouselRotationsLeft++;
+			isStateCurrentlyMoving.current = new Promise((resolve) => {
+				resolveStateCurrentlyMoving.current = resolve;
+			});
 
 			getDataFromExposedFunctions(linkedItemsContext).keys.forEach((key, i) => {
 				const currentPosition = elementsState.current[key].currentPosition ?? NaN;
@@ -216,7 +229,11 @@ export const PerspectiveCarousel = ({
 			const itemState = elementsState.current[keys[elementIndex]];
 			state.current.itemsAnimating--;
 			itemState.currentPosition = newPosition;
-			if (newPosition === 0) state.current.currentCenterItem = elementIndex;
+			if (newPosition === 0) {
+				state.current.currentCenterItem = elementIndex;
+				setCurrentItem(state.current.currentCenterItem);
+			}
+
 			if (state.current.itemsAnimating) return;
 			state.current.currentlyMoving = false;
 
@@ -225,6 +242,11 @@ export const PerspectiveCarousel = ({
 					movingToCenter?.();
 					movedToCenter?.();
 				} else state.current.performingSetup = false;
+			}
+
+			if (isStateCurrentlyMoving.current && resolveStateCurrentlyMoving.current) {
+				resolveStateCurrentlyMoving.current();
+				resolveStateCurrentlyMoving.current = isStateCurrentlyMoving.current = undefined;
 			}
 		};
 
@@ -256,6 +278,12 @@ export const PerspectiveCarousel = ({
 						zIndex: itemState.depth ?? ""
 					};
 					assignToItem();
+					if (newPosition === 0) {
+						const timeout = window.setTimeout(() => {
+							setCurrentItem(elementIndex);
+						}, 1);
+						timeouts.current?.push(timeout);
+					}
 
 					const timeout = window.setTimeout(() => {
 						itemAnimationComplete(elementIndex, newPosition);
@@ -321,7 +349,7 @@ export const PerspectiveCarousel = ({
 		[movingFromCenter]
 	);
 
-	const previousItem = useCallback(() => {
+	const previousSlide = useCallback(() => {
 		moveOnce(CarouselDirection.BACKWARDS);
 		rotateCarousel();
 	}, [moveOnce, rotateCarousel]);
@@ -329,10 +357,11 @@ export const PerspectiveCarousel = ({
 	const switchOrientation = useCallback(() => {
 		if (!allowSwitchingOrientation) return;
 		isVertical.current = !isVertical.current;
+		state.current.currentDirection = CarouselDirection.STILL;
 		rotateCarousel();
 	}, [allowSwitchingOrientation, rotateCarousel]);
 
-	const nextItem = useCallback(() => {
+	const nextSlide = useCallback(() => {
 		moveOnce(CarouselDirection.FORWARDS);
 		rotateCarousel();
 	}, [moveOnce, rotateCarousel]);
@@ -351,6 +380,29 @@ export const PerspectiveCarousel = ({
 		forceImageDimensionsIfEnabled();
 		setInitializing(PerspectiveCarouselState.AWAITING_LAYOUT_EFFECT);
 	}, [forceImageDimensionsIfEnabled, initializeCarouselData]);
+
+	const { abortTimeout } = useAutoplay({ autoplay, nextSlide, previousSlide });
+	const { realCurrentItem, childrenLength, getCurrentItem } = getCurrentItemCallback({ children, currentItem });
+
+	const navigateByDifference = useCallback(
+		async (difference: number) => {
+			isNavigatingByToggles.current = true;
+			const direction = Math.sign(difference);
+			if (direction === 1 || direction === -1) {
+				state.current.currentDirection = direction;
+			} else {
+				state.current.currentDirection = CarouselDirection.STILL;
+				return;
+			}
+
+			for (let i = 0; i < Math.abs(difference); i++) {
+				rotateCarousel();
+				await isStateCurrentlyMoving.current;
+				abortTimeout();
+			}
+		},
+		[abortTimeout, rotateCarousel]
+	);
 
 	useLayoutEffect(() => {
 		if (isInitializing !== PerspectiveCarouselState.AWAITING_LAYOUT_EFFECT) return;
@@ -379,20 +431,70 @@ export const PerspectiveCarousel = ({
 	}, [initCarousel]);
 
 	return (
-		<ContextLinkedItems ref={linkedItemsContext} innerChildren={props.children} onAllElementsLoaded={initCarousel}>
-			<div className={`${styles.wrap} ${props.className ?? ""}`}>
+		<ContextLinkedItems ref={linkedItemsContext} innerChildren={children} onAllElementsLoaded={initCarousel}>
+			<div className={`${styles.wrap} ${className ?? ""}`}>
 				<ul className={styles.images} style={imageStyles} ref={parent}>
-					{props.children}
+					{children}
 				</ul>
-				<div className={`${styles["carousel-controls"]} ${carouselControlsStyles["carousel-controls"]}`}>
-					<button className={carouselControlsStyles["carousel-controls__previous-button"]} onClick={previousItem}></button>
-					{allowSwitchingOrientation && (
-						<button className={carouselControlsStyles["carousel-controls__perspective-button"]} onClick={switchOrientation}>
-							Switch
-						</button>
-					)}
-					<button className={carouselControlsStyles["carousel-controls__next-button"]} onClick={nextItem}></button>
-				</div>
+				{(allowSwitchingOrientation || showArrows || showToggles) && (
+					<div className={styles["carousel-controls"]}>
+						{(allowSwitchingOrientation || showArrows) && (
+							<div className={carouselControlsStyles["carousel-controls"]}>
+								{showArrows && (
+									<button
+										className={carouselControlsStyles["carousel-controls__previous-button"]}
+										onClick={() => {
+											abortTimeout();
+											previousSlide();
+										}}
+									></button>
+								)}
+								{allowSwitchingOrientation && (
+									<button
+										className={carouselControlsStyles["carousel-controls__perspective-button"]}
+										onClick={() => {
+											abortTimeout();
+											switchOrientation();
+										}}
+									>
+										Switch
+									</button>
+								)}
+								{showArrows && (
+									<button
+										className={carouselControlsStyles["carousel-controls__next-button"]}
+										onClick={() => {
+											abortTimeout();
+											nextSlide();
+										}}
+									></button>
+								)}
+							</div>
+						)}
+						{showToggles && (
+							<ul className={carouselControlsStyles["carousel-controls__toggles"]}>
+								{Array.from({ length: childrenLength }, (_, i) => (
+									<li
+										key={i}
+										className={`${carouselControlsStyles["carousel-controls__toggle"]} ${i === realCurrentItem ? carouselControlsStyles["carousel-controls__toggle--active"] : ""}`}
+										onClick={() => {
+											if (isNavigatingByToggles.current) return;
+											abortTimeout();
+											const difference = (getCurrentItem(i) % childrenLength) - (currentItem % childrenLength);
+											navigateByDifference(difference)
+												.catch((e: unknown) => {
+													console.log(e);
+												})
+												.finally(() => {
+													isNavigatingByToggles.current = false;
+												});
+										}}
+									></li>
+								))}
+							</ul>
+						)}
+					</div>
+				)}
 			</div>
 		</ContextLinkedItems>
 	);

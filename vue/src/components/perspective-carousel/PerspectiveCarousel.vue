@@ -49,7 +49,6 @@ const props = withDefaults(defineProps<Partial<PerspectiveCarouselConfiguration>
 	forcedImageWidth: 0,
 	forcedImageHeight: 0,
 	animationLength: 300,
-	centralItemClassName: "active",
 	allowSwitchingOrientation: false
 });
 const imagesStyles = computed<CSSProperties>(() => ({
