@@ -36,7 +36,7 @@ class BackfaceCarouselApplicationExample1 extends LitElement {
 	static styles = styles;
 
 	render() {
-		return html`<backface-carousel-component>
+		return html`<backface-carousel-component showArrows showToggles allowSwitchingOrientation>
 			<backface-carousel-item-component>
 				<img src=${slide1} alt="Example Image" />
 			</backface-carousel-item-component>
@@ -82,7 +82,7 @@ class BackfaceCarouselApplicationExample2 extends LitElement {
 	static styles = styles;
 
 	render() {
-		return html`<backface-carousel-component isVertical>
+		return html`<backface-carousel-component isVertical showArrows allowSwitchingOrientation>
 			<backface-carousel-item-component>
 				<img src=${slide1} alt="Example Image" />
 			</backface-carousel-item-component>

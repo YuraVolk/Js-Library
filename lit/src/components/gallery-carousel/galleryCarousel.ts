@@ -8,12 +8,17 @@ import { when } from "lit/directives/when.js";
 import { map } from "lit/directives/map.js";
 import { range } from "lit/directives/range.js";
 import { GalleryCarouselItem } from "./galleryCarouselItem";
+import { AutoplayController } from "../../interfaces/hooks/autoplayController";
+import { CarouselConfigurationAutoplayOptions } from "shared/interfaces/carousel";
+import { carouselControlsStyles } from "../../interfaces/generic/carousel";
 
 export class GalleryCarouselComponent extends LinkedCarouselMixin(LitElement) implements GalleryCarouselConfiguration {
 	static styles = css`
 		:host {
 			position: relative;
 		}
+
+		${carouselControlsStyles}
 
 		.gallery {
 			position: relative;
@@ -24,6 +29,7 @@ export class GalleryCarouselComponent extends LinkedCarouselMixin(LitElement) im
 
 		.gallery-list {
 			position: relative;
+			display: flex;
 			width: inherit;
 			height: inherit;
 			margin: 0;
@@ -35,10 +41,8 @@ export class GalleryCarouselComponent extends LinkedCarouselMixin(LitElement) im
 			z-index: 10;
 		}
 
-		.gallery-item {
-			display: inline-block;
-			width: 100%;
-			height: 100%;
+		.gallery-list--vertical {
+			flex-direction: column;
 		}
 
 		.gallery-toggles {
@@ -109,11 +113,18 @@ export class GalleryCarouselComponent extends LinkedCarouselMixin(LitElement) im
 	showArrows = false;
 	@property({ type: Boolean })
 	showToggles = false;
+	@property({ type: Boolean })
+	allowSwitchingOrientation = false;
+	@property({ type: Boolean })
+	isVertical = false;
+	@property({ type: Object })
+	autoplay?: CarouselConfigurationAutoplayOptions;
 
 	@state()
 	protected _galleryLeft = this.current * -100;
 	private _interval?: number;
 	private _isAnimating = false;
+	private _autoplayController!: AutoplayController;
 
 	@queryAssignedElements({ flatten: true })
 	private _assignedElements!: HTMLElement[];
@@ -126,6 +137,12 @@ export class GalleryCarouselComponent extends LinkedCarouselMixin(LitElement) im
 		const slottedElements = this._assignedElements;
 		slottedElements[0].before(slottedElements[slottedElements.length - 1].cloneNode(true));
 		slottedElements[slottedElements.length - 1].after(slottedElements[0].cloneNode(true));
+
+		this._autoplayController = new AutoplayController(this, {
+			autoplay: this.autoplay,
+			nextSlide: this.nextSlide.bind(this),
+			previousSlide: this.previousSlide.bind(this)
+		});
 	}
 
 	disconnectedCallback(): void {
@@ -163,13 +180,23 @@ export class GalleryCarouselComponent extends LinkedCarouselMixin(LitElement) im
 		}
 	}
 
+	nextSlide() {
+		this.changeCurrentSlide(this.current + 1);
+	}
+
+	previousSlide() {
+		this.changeCurrentSlide(this.current - 1);
+	}
+
 	render() {
 		return html`
 			<div class="gallery">
 				<ul
-					class="gallery-list"
+					class="gallery-list ${classMap({
+						"gallery-list--vertical": this.isVertical
+					})}"
 					style=${styleMap({
-						left: `${String(this._galleryLeft)}%`
+						[this.isVertical ? "top" : "left"]: `${String(this._galleryLeft)}%`
 					})}
 				>
 					<slot></slot>
@@ -181,13 +208,15 @@ export class GalleryCarouselComponent extends LinkedCarouselMixin(LitElement) im
 					html`<div class="gallery-controls">
 						<button
 							@click=${() => {
-								this.changeCurrentSlide(this.current - 1);
+								this._autoplayController.abortTimeout();
+								this.previousSlide();
 							}}
 							class="gallery-controls__previous-button"
 						></button>
 						<button
 							@click=${() => {
-								this.changeCurrentSlide(this.current + 1);
+								this._autoplayController.abortTimeout();
+								this.nextSlide();
 							}}
 							class="gallery-controls__next-button"
 						></button>
@@ -210,6 +239,21 @@ export class GalleryCarouselComponent extends LinkedCarouselMixin(LitElement) im
 								></li>`
 						)}
 					</ul>`
+			)}
+			${when(
+				this.allowSwitchingOrientation,
+				() =>
+					html`<div class="carousel-controls">
+						<button
+							class="carousel-controls__perspective-button"
+							@click=${() => {
+								this._autoplayController.abortTimeout();
+								this.isVertical = !this.isVertical;
+							}}
+						>
+							Switch
+						</button>
+					</div>`
 			)}
 		`;
 	}

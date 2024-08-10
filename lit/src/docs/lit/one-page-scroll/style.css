@@ -2,6 +2,11 @@
 	width: 500px;
 	height: 500px;
 	border: 3px solid #333;
+	margin: 0 auto;
+}
+
+.one-page-scroll[allowSwitchingOrientation] {
+	margin-bottom: 80px;
 }
 
 .one-page-scroll-slide {
@@ -18,5 +23,5 @@
 }
 
 one-page-scroll-component:not(:defined) {
-        display: none;
+	display: none;
 }

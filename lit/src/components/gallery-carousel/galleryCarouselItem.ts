@@ -11,7 +11,7 @@ export class GalleryCarouselItem extends LinkedItemMixin(LitElement) {
 		.gallery-carousel-item {
 			all: inherit;
 			display: inline-block;
-			width: 100%;
+			min-width: 100%;
 			height: 100%;
 		}
 
