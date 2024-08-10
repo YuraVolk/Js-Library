@@ -7,22 +7,50 @@
     >
       <slot />
     </ul>
-    <div class="carousel-controls">
-      <button
-        class="carousel-controls__previous-button"
-        @click="previousItem"
-      />
-      <button
-        v-if="props.allowSwitchingOrientation"
-        class="carousel-controls__perspective-button"
-        @click="switchOrientation"
+    <div class="root-carousel-controls">
+      <div
+        v-if="showArrows || allowSwitchingOrientation"
+        class="carousel-controls"
       >
-        Switch
-      </button>
-      <button
-        class="carousel-controls__next-button"
-        @click="nextItem"
-      />
+        <button
+          v-if="showArrows"
+          class="carousel-controls__previous-button"
+          @click="onPreviousSlide"
+        />
+        <button
+          v-if="allowSwitchingOrientation"
+          class="carousel-controls__perspective-button"
+          @click="switchOrientation"
+        >
+          Switch
+        </button>
+        <button
+          v-if="showArrows"
+          class="carousel-controls__next-button"
+          @click="onNextSlide"
+        />
+      </div>
+      <ul
+        v-if="showToggles"
+        class="carousel-controls__toggles"
+      >
+        <li
+          v-for="i in currentItemSettings.childrenLength"
+          :key="i"
+          class="carousel-controls__toggle"
+          :class="{ 'carousel-controls__toggle--active': currentItemSettings.realCurrentItem === i - 1 }"
+          @click="() => {
+            if (isNavigatingByToggles) return;
+            abortTimeout();
+            const difference = (currentItemSettings.getCurrentItem(i - 1) % currentItemSettings.childrenLength) - (currentItem % currentItemSettings.childrenLength);
+            navigateByDifference(difference).catch((e: unknown) => {
+              console.log(e);
+            }).finally(() => {
+              isNavigatingByToggles = false;
+            })
+          }"
+        />
+      </ul>
     </div>
   </div>
 </template>
@@ -32,6 +60,8 @@ import { PerspectiveCarouselConfiguration, PerspectiveCarouselItemState, resetIn
 import { CSSProperties, computed, onMounted, onUnmounted, ref, nextTick } from "vue";
 import { useInjectedLinkedItems } from "../../interfaces/hooks/useLinkedItem";
 import { CarouselDirection } from "shared/interfaces/carousel";
+import { getCurrentItemInfo } from "shared/utils/carousel";
+import { useAutoplay } from "../../interfaces/hooks/useAutoplay";
 
 const props = withDefaults(defineProps<Partial<PerspectiveCarouselConfiguration>>(), {
 	imageSize: "300px",
@@ -49,7 +79,9 @@ const props = withDefaults(defineProps<Partial<PerspectiveCarouselConfiguration>
 	forcedImageWidth: 0,
 	forcedImageHeight: 0,
 	animationLength: 300,
-	allowSwitchingOrientation: false
+	allowSwitchingOrientation: false,
+	showArrows: true,
+	showToggles: false
 });
 const imagesStyles = computed<CSSProperties>(() => ({
 	margin: props.margin,
@@ -68,11 +100,19 @@ const elementsAccessors = computed(() => ({
 	values: Object.values(elements),
 	entries: Object.entries(elements)
 }));
+
 const parent = ref<HTMLElement | null>(null);
 const elementsState = ref<Record<string, Partial<PerspectiveCarouselItemState>>>({});
 const horizon = ref(props.horizon);
 const startingItem = ref(props.startingItem);
 const isVertical = ref(props.isVertical);
+const currentItem = ref(0);
+const isStateCurrentlyMoving = ref<Promise<void>>();
+const resolveStateCurrentlyMoving = ref<() => void>();
+const isNavigatingByToggles = ref(false);	
+const currentItemSettings = computed(() => {
+  return getCurrentItemInfo({ childrenLength: Object.keys(elements).length, currentItem: currentItem.value });
+});
 
 const calculatePositionProperties = async () => {
 	let horizonOffset = props.horizonOffset;
@@ -136,6 +176,9 @@ const rotateCarousel = async () => {
 	state.value.currentlyMoving = true;
 	state.value.itemsAnimating = 0;
 	state.value.carouselRotationsLeft++;
+	isStateCurrentlyMoving.value = new Promise((resolve) => {
+		resolveStateCurrentlyMoving.value = resolve;
+	});
 	await nextTick();
 
 	elementsAccessors.value.keys.forEach((key, i) => {
@@ -157,7 +200,11 @@ const itemAnimationComplete = async (elementIndex: number, newPosition: number) 
 
 	state.value.itemsAnimating--;
 	itemState.currentPosition = newPosition;
-	if (newPosition === 0) state.value.currentCenterItem = elementIndex;
+	if (newPosition === 0) {
+		state.value.currentCenterItem = elementIndex;
+		currentItem.value = state.value.currentCenterItem;
+	}
+
 	if (state.value.itemsAnimating) return;
 	state.value.currentlyMoving = false;
 
@@ -167,6 +214,11 @@ const itemAnimationComplete = async (elementIndex: number, newPosition: number) 
 			emit("movingToCenter");
 		} else state.value.performingSetup = false;
 	} else await rotateCarousel();
+
+	if (isStateCurrentlyMoving.value && resolveStateCurrentlyMoving.value) {
+		resolveStateCurrentlyMoving.value();
+		resolveStateCurrentlyMoving.value = isStateCurrentlyMoving.value = undefined;
+	}
 };
 
 const moveItem = async (elementIndex: number, newPosition: number) => {
@@ -193,7 +245,14 @@ const moveItem = async (elementIndex: number, newPosition: number) => {
 			...item.styles,
 			zIndex: itemState.depth ?? ""
 		};
+		
 		assignToItem();
+		if (newPosition === 0) {
+			window.setTimeout(() => {
+				currentItem.value = elementIndex;
+			}, 1);
+		}
+		
 		setTimeout(() => {
 			itemAnimationComplete(elementIndex, newPosition).catch((e: unknown) => {
 				console.trace(e);
@@ -220,7 +279,7 @@ const moveOnce = (direction: CarouselDirection) => {
 	state.value.currentDirection = direction;
 };
 
-const previousItem = () => {
+const previousSlide = () => {
 	moveOnce(CarouselDirection.BACKWARDS);
 	rotateCarousel().catch((e: unknown) => { 
 		console.trace(e);
@@ -230,16 +289,45 @@ const previousItem = () => {
 const switchOrientation = () => {
 	if (!props.allowSwitchingOrientation) return;
 	isVertical.value = !isVertical.value;
+	state.value.currentDirection = CarouselDirection.STILL;
 	rotateCarousel().catch((e: unknown) => { 
 		console.trace(e);
 	});
 };
 
-const nextItem = () => {
+const nextSlide = () => {
 	moveOnce(CarouselDirection.FORWARDS);
 	rotateCarousel().catch((e: unknown) => { 
 		console.trace(e);
 	});
+};
+
+const { abortTimeout } = useAutoplay({ autoplay: props.autoplay, nextSlide, previousSlide });
+const navigateByDifference = async (difference: number) => {
+	isNavigatingByToggles.value = true;
+	const direction = Math.sign(difference);
+	if (direction === 1 || direction === -1) {
+		state.value.currentDirection = direction;
+	} else {
+		state.value.currentDirection = CarouselDirection.STILL;
+		return;
+	}
+
+	for (let i = 0; i < Math.abs(difference); i++) {
+		await rotateCarousel();
+		await isStateCurrentlyMoving.value;
+		abortTimeout();
+	}
+};
+
+const onNextSlide = () => {
+  abortTimeout();
+  nextSlide();
+};
+
+const onPreviousSlide = () => {
+  abortTimeout();
+  previousSlide();
 };
 
 const initializeCarouselData = (parent: HTMLElement) => {
@@ -380,11 +468,11 @@ onUnmounted(() => {
 	list-style-type: none;
 }
 
-.carousel-controls {
+.root-carousel-controls {
 	position: absolute;
 	left: 40%;
 	transform: translateX(-50%);
-	bottom: -5%;
+	bottom: -20%;
 	z-index: 99;
 }
 </style>

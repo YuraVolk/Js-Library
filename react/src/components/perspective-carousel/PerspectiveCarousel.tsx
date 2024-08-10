@@ -277,6 +277,7 @@ export const PerspectiveCarousel = ({
 						...item.styles,
 						zIndex: itemState.depth ?? ""
 					};
+					
 					assignToItem();
 					if (newPosition === 0) {
 						const timeout = window.setTimeout(() => {
