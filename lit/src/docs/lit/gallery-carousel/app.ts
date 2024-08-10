@@ -27,7 +27,7 @@ const styles = css`
 		display: block;
 		width: 370px;
 		height: 220px;
-		margin: 0 auto 40px;
+		margin: 0 auto 80px;
 	}
 `;
 
@@ -37,7 +37,7 @@ export class GalleryCarouselApplicationExample1 extends LitElement {
 
 	render() {
 		return html`
-			<gallery-carousel-component class="gallery-wrap" showArrows showToggles smoothDiametralTransition>
+			<gallery-carousel-component class="gallery-wrap" showArrows showToggles smoothDiametralTransition allowSwitchingOrientation>
 				<gallery-carousel-item-component>
 					<img class="gallery-item" src=${slide0} alt="Example Image" />
 				</gallery-carousel-item-component>

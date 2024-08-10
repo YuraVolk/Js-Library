@@ -39,6 +39,29 @@ export const carouselControlsStyles = css`
 		text-transform: uppercase;
 		cursor: pointer;
 	}
+
+	.carousel-controls__toggles {
+		position: relative;
+		z-index: 2;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		list-style-type: none;
+		padding: 0;
+		gap: 0.3rem;
+	}
+
+	.carousel-controls__toggle {
+		width: 10px;
+		height: 10px;
+		cursor: pointer;
+		border: 1px solid #e2e2e2;
+		border-radius: 50%;
+	}
+
+	.carousel-controls__toggle--active {
+		background-color: #2390bb;
+	}
 `;
 
 export { CarouselDirection };
