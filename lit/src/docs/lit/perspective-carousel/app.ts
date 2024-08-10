@@ -26,7 +26,7 @@ import("../../../components/perspective-carousel/perspectiveCarousel")
 export class PerspectiveCarouselApplicationExample1 extends LitElement {
 	render() {
 		return html`
-			<perspective-carousel-component allowSwitchingOrientation>
+			<perspective-carousel-component allowSwitchingOrientation showArrows showToggles>
 				<carousel-item-component hasTransition>
 					<img class="carousel-item" src=${slide0} alt="Example Image" />
 				</carousel-item-component>
