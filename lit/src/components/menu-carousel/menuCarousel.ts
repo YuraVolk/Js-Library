@@ -243,7 +243,7 @@ export class MenuCarouselComponent extends LinkedCarouselMixin(LitElement) imple
 				() => html`
 					<ul class="carousel-controls__toggles">
 						${map(
-							range(this.itemKeys.length),
+							range(childrenLength),
 							(i) =>
 								html`<li
 									class="carousel-controls__toggle ${classMap({
