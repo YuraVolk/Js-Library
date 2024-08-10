@@ -62,7 +62,10 @@
       </li>
     </ul>
     <p>Here is a carousel only with allow switching orientation option:</p>
-    <perspective-carousel-component allow-switching-orientation>
+    <perspective-carousel-component
+      allow-switching-orientation
+      show-toggles
+    >
       <carousel-item-component class="carousel-item">
         <img
           :src="image1"
