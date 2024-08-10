@@ -1,13 +1,6 @@
 # Js-Library
 
-This is my JavaScript library of common scripts.
-The basic idea behind such a library is that a lot of scripts
-that are impossible to implement without JS are highly unrelated
-in implementations and libraries, which makes usage of numerous such
-scripts inconsistent. This library aims to provide a more consistent,
-customizable solution that allows for extensive and easy component styling,
-as well as a performant way of solving an issue.
-All solutions are currently implemented in the following libraries and frameworks:
+This is a library of 25+ reusable, highly customizable scripts both in terms of styling options and in terms of the behavior, implemented in Lit, Vue and React each. This library is targeted to allow easy insertion and integration into existing projects. All scripts have maximally unified interfaces, thus allowing one to have the same configuration across frameworks, except for the framework-specific features. 
 
 1. Lit, currently having all main scripts finished.
 2. Vue, currently having all main scripts finished.
