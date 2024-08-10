@@ -25,7 +25,10 @@
       <li>showToggles: Specifies whether the toggles for switching between items are shown. True by default.</li>
     </ul>
     <p>Here is a carousel with all default options:</p>
-    <gallery-carousel-component class="gallery-wrap">
+    <gallery-carousel-component
+      class="gallery-wrap"
+      allow-switching-orientation
+    >
       <carousel-item-component>
         <img
           :src="image1"
@@ -122,7 +125,7 @@ import image6 from "../../../../../assets/img/slide5.png";
   display: block;
   width: 370px;
   height: 220px;
-  margin: 0 auto 40px;
+  margin: 0 auto 80px;
 }
 
 .gallery-item {
