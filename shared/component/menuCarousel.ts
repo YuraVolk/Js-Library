@@ -33,7 +33,7 @@ export interface MenuCarouselConfiguration extends CarouselConfiguration {
 	xPos?: number;
 	yPos: number;
 	xRadius?: number;
-	yRadius: number;
+	yRadius?: number;
 	farScale: number;
 	speed: number;
 }

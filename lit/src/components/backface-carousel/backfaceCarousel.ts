@@ -15,40 +15,41 @@ import { range } from "lit/directives/range.js";
 import { classMap } from "lit/directives/class-map.js";
 
 export class BackfaceCarousel extends LinkedCarouselMixin(LitElement) implements CarouselConfiguration {
-	static styles = css`
-		:host {
-			display: block;
-		}
+	static styles = [
+		css`
+			:host {
+				display: block;
+			}
 
-		.backface-carousel {
-			display: flex;
-			width: auto;
-			height: 100%;
-			flex-direction: column;
-			align-items: center;
-			perspective: 500px;
-			overflow: hidden;
-			padding: 20px;
-		}
+			.backface-carousel {
+				display: flex;
+				width: auto;
+				height: 100%;
+				flex-direction: column;
+				align-items: center;
+				perspective: 500px;
+				overflow: hidden;
+				padding: 20px;
+			}
 
-		.backface-carousel--vertical {
-			margin-top: 10%;
-			height: 33vw;
-			overflow: visible;
-		}
+			.backface-carousel--vertical {
+				margin-top: 10%;
+				height: 33vw;
+				overflow: visible;
+			}
 
-		.backface-carousel-items {
-			width: 40%;
-			transform-style: preserve-3d;
-			transition: all 0.5s;
-			padding: 0;
-			list-style-type: none;
-			margin: 0 auto;
-			flex: 0 0 auto;
-		}
-
-		${carouselControlsStyles}
-	`;
+			.backface-carousel-items {
+				width: 40%;
+				transform-style: preserve-3d;
+				transition: all 0.5s;
+				padding: 0;
+				list-style-type: none;
+				margin: 0 auto;
+				flex: 0 0 auto;
+			}
+		`,
+		carouselControlsStyles
+	];
 
 	@property({ type: Boolean })
 	isVertical = false;
@@ -74,7 +75,7 @@ export class BackfaceCarousel extends LinkedCarouselMixin(LitElement) implements
 		},
 		250
 	);
-	
+
 	rotateCarousel(newCurrentImage: number) {
 		const theta = (2 * Math.PI) / this.itemValues.length;
 		this._carouselStyles.transform = `rotate${this.isVertical ? "X" : "Y"}(${String(newCurrentImage * -theta)}rad)`;

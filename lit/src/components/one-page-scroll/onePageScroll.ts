@@ -10,42 +10,42 @@ import { map } from "lit/directives/map.js";
 import { range } from "lit/directives/range.js";
 
 export class OnePageScrollComponent extends LitElement implements OnePageScrollConfiguration {
-	static styles = css`
-		:host {
-			display: block;
-		}
+	static styles = [
+		carouselControlsStyles,
+		css`
+			:host {
+				display: block;
+			}
+			.wrap {
+				width: 100%;
+				height: 100%;
+				min-height: 100%;
+				max-height: 100%;
+				overflow-x: hidden;
+				overflow-y: scroll;
+			}
 
-		${carouselControlsStyles}
+			.wrap--horizontal {
+				display: flex;
+				overflow-x: scroll;
+				overflow-y: hidden;
+			}
 
-		.wrap {
-			width: 100%;
-			height: 100%;
-			min-height: 100%;
-			max-height: 100%;
-			overflow-x: hidden;
-			overflow-y: scroll;
-		}
+			.wrap--no-scrollbar {
+				overflow: hidden;
+			}
 
-		.wrap--horizontal {
-			display: flex;
-			overflow-x: scroll;
-			overflow-y: hidden;
-		}
+			.carousel-controls {
+				margin-top: 12px;
+			}
 
-		.wrap--no-scrollbar {
-			overflow: hidden;
-		}
-
-		.carousel-controls {
-			margin-top: 12px;
-		}
-
-		::slotted(*) {
-			display: block;
-			flex: 1 0 0;
-			box-sizing: border-box;
-		}
-	`;
+			::slotted(*) {
+				display: block;
+				flex: 1 0 0;
+				box-sizing: border-box;
+			}
+		`
+	];
 
 	@property({ type: Number })
 	duration = 500;
