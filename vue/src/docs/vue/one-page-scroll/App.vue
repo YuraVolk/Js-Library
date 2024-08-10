@@ -12,8 +12,8 @@
     </p>
     <ul>
       <li>
-        isHorizontal: A boolean property that determines whether the scrolling should be horizontal (true) or vertical (false). By default,
-        it is set to false.
+        isVertical: A boolean property that determines whether the scrolling should be horizontal or vertical. By default,
+        it is set to true.
       </li>
       <li>
         duration: A number property that specifies the duration of the smooth scrolling animation in milliseconds. The default value is 500.
