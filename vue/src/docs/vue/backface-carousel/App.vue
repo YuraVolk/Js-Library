@@ -17,7 +17,7 @@
       you use the predefined BackfaceCarouselItem component that gives default styling required for this type of carousel,
       and give width and height set to 100% for all inner items of the backface carousel item components.
     </p>
-    <backface-carousel-component>
+    <backface-carousel-component show-toggles>
       <carousel-item-component>
         <img
           :src="image1"
