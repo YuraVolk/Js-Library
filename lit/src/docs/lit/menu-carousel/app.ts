@@ -42,7 +42,7 @@ export class MenuCarouselApplicationExample1 extends LitElement {
 
 	render() {
 		return html`
-			<menu-carousel-component farScale="0.6" class="carousel">
+			<menu-carousel-component farScale="0.6" class="carousel" showArrows showToggles>
 				<carousel-item-component>
 					<img class="carousel-item" src=${slide0} alt="Example Image" />
 				</carousel-item-component>

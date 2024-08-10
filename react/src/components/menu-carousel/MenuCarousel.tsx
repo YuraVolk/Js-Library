@@ -73,7 +73,7 @@ export const MenuCarousel = ({
 	const destRotation = useRef(Math.PI / 2);
 	const frameTimer = useRef<number | undefined>();
 	const xRadiusRef = useRef(xRadiusProp);
-	const yRadiusRef = useRef(yRadiusProp);
+	const yRadiusRef = useRef<number | undefined>(yRadiusProp);
 	const xPosRef = useRef(xPosProp);
 	const yPosRef = useRef(yPosProp);
 	const isVertical = useRef(isVerticalProp);
@@ -101,7 +101,7 @@ export const MenuCarousel = ({
 			assertNonUndefinedDevOnly(xRadiusRef.current);
 			item.moveTo(
 				xPosRef.current + scale * (Math.cos(rotation) * xRadiusRef.current - item.fullWidth / 2),
-				yPosRef.current + scale * sin * yRadiusRef.current + yPosRef.current / 2.3,
+				yPosRef.current + scale * sin * (yRadiusRef.current ?? 1) + yPosRef.current / 2.3,
 				scale
 			);
 		},
@@ -192,12 +192,8 @@ export const MenuCarousel = ({
 
 	const switchOrientation = useCallback(() => {
 		isVertical.current = !isVertical.current;
-		const { xRadius, xPos } = getPositions();
-		xRadius.current = undefined;
-		xPos.current = undefined;
-
-		setupCarousel();
-	}, [setupCarousel]);
+		onResize();
+	}, [onResize]);
 
 	useResizeListener(onResize);
 	const { abortTimeout } = useAutoplay({ autoplay, nextSlide, previousSlide });
