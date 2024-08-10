@@ -70,7 +70,6 @@ const elements = useInjectedLinkedItems();
 const carouselStyles = reactive<CSSProperties>({});
 const currentItem = ref(0);
 const interval = ref<number | undefined>(undefined);
-
 const currentItemSettings = computed(() => {
   return getCurrentItemInfo({ childrenLength: Object.keys(elements).length, currentItem: currentItem.value });
 });

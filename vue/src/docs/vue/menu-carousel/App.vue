@@ -26,6 +26,7 @@
     <menu-carousel-component
       class="carousel"
       :far-scale="0.8"
+      show-toggles
     >
       <carousel-item-component class="carousel-item">
         <img
