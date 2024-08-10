@@ -26,7 +26,12 @@
         noScrollbar: A boolean property that controls whether the scrollbars should be hidden (true) or visible (false). Enabled by default.
       </li>
     </ul>
-    <one-page-scroll-component class="one-page-scroll">
+    <one-page-scroll-component
+      class="one-page-scroll one-page-scroll--with-controls"
+      show-arrows
+      show-toggles
+      allow-switching-orientation
+    >
       <one-page-scroll-item-component class="one-page-scroll-slide">
         <p class="one-page-scroll-slide__heading">
           First slide. Scroll down...
@@ -51,7 +56,7 @@
     <p>Here is an example of horizontal one-page scroll:</p>
     <one-page-scroll-component
       class="one-page-scroll"
-      is-horizontal
+      :is-vertical="false"
     >
       <one-page-scroll-item-component class="one-page-scroll-slide">
         <p class="one-page-scroll-slide__heading">
@@ -96,6 +101,11 @@ const SidebarComponent = defineAsyncComponent(() => import("../SidebarComponent.
 	width: 500px;
 	height: 500px;
 	border: 3px solid #333;
+  margin: 0 auto;
+}
+
+.one-page-scroll--with-controls {
+  margin-bottom: 80px;
 }
 
 .one-page-scroll-slide {
